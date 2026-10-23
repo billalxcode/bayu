@@ -75,6 +75,23 @@ so the installed system updates from the same place. `bayu.conf` also
 sets the image size, hostname, locale, timezone, the first user and
 whether it logs in automatically.
 
+### Kernel and Android apps
+
+`packaging/kernel/build-kernel.sh` rebuilds the AlmaLinux kernel with
+`packaging/kernel/kernel-local` (binder on, pressure stall information on)
+and adds it to `out/repo`, so images built afterwards boot it. That is what
+[lapis](https://github.com/igos-nusantara/lapis) needs to run Android apps:
+
+```shell
+sudo dnf install ./lapis-*.x86_64.rpm
+sudo install -m644 packaging/lapis/lapis-session.desktop /etc/xdg/autostart/
+sudo systemctl enable --now lapis-control.socket
+sudo lapis init -type GAPPS
+```
+
+The autostart entry starts `lapis-session` at every Bayu login. The rebuilt
+kernel is not signed by AlmaLinux, so it does not boot with Secure Boot on.
+
 ### Running
 
 `builder/run-vm.sh` needs KVM. Bayu needs EGL/GLES2: with `GL=yes` (the

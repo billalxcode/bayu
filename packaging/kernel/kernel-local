@@ -1,0 +1,9 @@
+# Bayu additions to the AlmaLinux kernel config, merged by the kernel spec.
+# Binder, for Android containers such as lapis and Waydroid.
+CONFIG_ANDROID_BINDER_IPC=y
+CONFIG_ANDROID_BINDERFS=y
+CONFIG_ANDROID_BINDER_DEVICES=""
+# CONFIG_ANDROID_BINDER_IPC_SELFTEST is not set
+# Pressure stall information on by default: Android's lmkd needs
+# /proc/pressure, and the container reboots without it.
+# CONFIG_PSI_DEFAULT_DISABLED is not set

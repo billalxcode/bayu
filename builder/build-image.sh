@@ -45,8 +45,12 @@ UUID=$(blkid -s UUID -o value "${LOOP}p2")
 mkdir -p "$MNT" && mount "${LOOP}p2" "$MNT"
 mkdir -p "$MNT"/{dev,proc,sys,etc/kernel}
 mount --bind /dev "$MNT/dev" && mount -t proc proc "$MNT/proc" && mount -t sysfs sys "$MNT/sys"
-CMDLINE="root=UUID=$UUID ro console=tty0 console=ttyS0,115200"
+# psi=1: Android's lmkd (lapis) needs /proc/pressure, which EL kernels keep off.
+CMDLINE="root=UUID=$UUID ro console=tty0 console=ttyS0,115200 psi=1"
 echo "$CMDLINE" > "$MNT/etc/kernel/cmdline"
+# Kernel installs and updates become the boot default.
+mkdir -p "$MNT/etc/sysconfig"
+printf 'UPDATEDEFAULT=yes\nDEFAULTKERNEL=kernel-core\n' > "$MNT/etc/sysconfig/kernel"
 echo "UUID=$UUID / xfs defaults 0 0" > "$MNT/etc/fstab"
 
 # shellcheck disable=SC2086
@@ -93,6 +97,9 @@ EOF
 chr dracut --force --no-hostonly --regenerate-all
 chr grub2-install --target=i386-pc "$LOOP"
 chr grub2-mkconfig -o /boot/grub2/grub.cfg
+# A fresh image has one kernel (dnf picks the highest, Bayu's binder kernel when
+# bayu.repo carries it); make it the saved default, which GRUB_DEFAULT=saved reads.
+chr grubby --set-default "$(ls -v "$MNT"/boot/vmlinuz-* | grep -v rescue | tail -1 | sed "s|^$MNT||")"
 
 # Each boot of a copy of this image gets its own machine-id.
 : > "$MNT/etc/machine-id"
