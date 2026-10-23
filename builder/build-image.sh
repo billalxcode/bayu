@@ -68,6 +68,10 @@ touch "$MNT/.autorelabel"
 chr useradd -m -G wheel "$USER_NAME"
 echo "$USER_NAME:$USER_PASSWORD" | chr chpasswd
 if [[ -n $ROOT_PASSWORD ]]; then echo "root:$ROOT_PASSWORD" | chr chpasswd; else chr passwd -l root; fi
+if [[ ${SUDO_NOPASSWD:-no} == yes ]]; then
+  echo "$USER_NAME ALL=(ALL) NOPASSWD: ALL" > "$MNT/etc/sudoers.d/90-$USER_NAME"
+  chmod 440 "$MNT/etc/sudoers.d/90-$USER_NAME"
+fi
 if [[ $AUTOLOGIN == yes ]]; then
   printf '[Autologin]\nUser=%s\n' "$USER_NAME" > "$MNT/etc/bayu-dm.conf"
 fi
