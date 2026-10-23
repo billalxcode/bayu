@@ -1,7 +1,0 @@
-[epel]
-name=EPEL $releasever
-baseurl=https://dl.fedoraproject.org/pub/epel/$releasever${releasever_minor:+z}/Everything/$basearch/
-#metalink=https://mirrors.fedoraproject.org/metalink?repo=epel-$releasever&arch=$basearch
-enabled=1
-gpgcheck=1
-gpgkey=https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-10
