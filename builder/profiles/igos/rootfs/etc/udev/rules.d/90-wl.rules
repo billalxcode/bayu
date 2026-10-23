@@ -1,0 +1,4 @@
+# Broadcom chips supported by wl (broadcom-wl README_6.30.223.271.txt, plus
+# 0x43b1, the BCM4352 the README lists under 0x43a0). See
+# /etc/modprobe.d/wl.conf; modprobe by name is not stopped by its blacklist.
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x14e4", ATTR{class}=="0x028000", ATTR{device}=="0x4311|0x4312|0x4313|0x4315|0x4727|0x4328|0x4329|0x432a|0x432b|0x432c|0x432d|0x4365|0x4353|0x4357|0x4358|0x4359|0x4331|0x43a0|0x43b1", RUN+="/usr/sbin/modprobe wl"

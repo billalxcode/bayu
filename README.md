@@ -69,9 +69,10 @@ CONFIG=/path/to/profile.conf REPOS=/path/to/repos.d builder/build-iso.sh
 ## Hardware
 
 IGOS Nusantara includes the Broadcom `wl` driver (`broadcom-wl`,
-`kmod-wl`), loaded automatically for the Wi-Fi chips of MacBooks up to 2015
-(BCM4311 to BCM4360). Newer MacBooks use chips that the kernel's `brcmfmac`
-drives, which stays available. Apple keyboards, trackpads and the SMC use
+`kmod-wl`), loaded automatically for the Wi-Fi chips it supports (BCM4311
+to BCM4360, as in MacBooks up to early 2015). Newer Broadcom chips, such as
+the BCM43602 of the 2015 MacBook Pro, use the kernel's `brcmfmac` with its
+firmware, and Intel cards use `iwlwifi`. Apple keyboards, trackpads and the SMC use
 drivers built into the kernel. UEFI Secure Boot must be off, since the Bayu
 kernel is not signed by AlmaLinux.
 
