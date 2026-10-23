@@ -50,6 +50,16 @@ menuentry "Start $DISTRO_NAME (basic graphics)" {
   linux /boot/vmlinuz $CMDLINE nomodeset
   initrd /boot/initrd.img
 }
+submenu "Troubleshooting" {
+  menuentry "Start $DISTRO_NAME (verbose)" {
+    linux /boot/vmlinuz $CMDLINE systemd.show_status=1 rd.shell panic=0
+    initrd /boot/initrd.img
+  }
+  menuentry "Start $DISTRO_NAME (verbose, without the Broadcom wl driver)" {
+    linux /boot/vmlinuz $CMDLINE systemd.show_status=1 rd.shell panic=0 modprobe.blacklist=wl
+    initrd /boot/initrd.img
+  }
+}
 EOF
 grub2-mkrescue -o "$ISO" "$TREE" -- -volid "$ISO_LABEL"
 echo "Built $ISO ($(du -h "$ISO" | cut -f1), kernel $KVER)"
