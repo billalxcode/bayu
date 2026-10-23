@@ -16,23 +16,23 @@ permissions:
 jobs:
   rpm:
     runs-on: ubuntu-latest
-    container: docker.io/almalinux/10-base:latest
     steps:
-      - name: Install build dependencies
-        run: |
-          dnf -y install epel-release dnf-plugins-core git
-          dnf config-manager --set-enabled crb
-          dnf -y install rpm-build
-
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Install BuildRequires
-        run: dnf -y builddep packaging/bayu-desktop.spec
-
-      - name: Build RPMs
-        run: packaging/rpmbuild.sh
+      # The AlmaLinux image also has an x86_64_v2 variant, which Docker may pick
+      # on the runner; select the regular x86_64 one by digest.
+      - name: Build RPMs in AlmaLinux 10
+        run: |
+          image=docker.io/almalinux/10-base:latest
+          digest=$(docker manifest inspect "$image" | jq -r '.manifests[]
+            | select(.platform.architecture == "amd64" and .platform.variant == null) | .digest')
+          docker run --rm -v "$PWD":/src -w /src "${image%:*}@$digest" bash -euc '
+            dnf -y install epel-release dnf-plugins-core git rpm-build
+            dnf config-manager --set-enabled crb
+            dnf -y builddep packaging/bayu-desktop.spec
+            packaging/rpmbuild.sh'
 
       - uses: actions/upload-artifact@v4
         with:
