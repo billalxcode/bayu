@@ -23,4 +23,6 @@ exec qemu-system-x86_64 -name bayu -machine q35,accel=kvm -cpu host -smp "${CPUS
   -drive file="$IMAGE",if=virtio,format=qcow2 ${SNAPSHOT:+-snapshot} \
   -nic user,model=virtio-net-pci "${GPU[@]}" -vnc "$VNC_ADDR:$VNC_DISPLAY" \
   -device qemu-xhci -device usb-tablet -audiodev none,id=snd \
-  -serial "file:$ROOT/out/serial.log" -monitor "unix:$ROOT/out/qemu-monitor.sock,server,nowait"
+  -serial "file:$ROOT/out/serial-$VNC_DISPLAY.log" -monitor "unix:$ROOT/out/monitor-$VNC_DISPLAY.sock,server,nowait" \
+  -device virtio-serial -chardev "socket,id=qga,path=$ROOT/out/qga-$VNC_DISPLAY.sock,server=on,wait=off" \
+  -device virtserialport,chardev=qga,name=org.qemu.guest_agent.0
