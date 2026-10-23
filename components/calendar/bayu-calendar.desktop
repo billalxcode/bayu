@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=Calendar
+Comment=Keep track of events and appointments
+Exec=bayu-calendar %F
+Icon=office-calendar
+Terminal=false
+Type=Application
+Categories=Office;Calendar;
+Keywords=Events;Appointments;Schedule;Date;
+MimeType=text/calendar;
+StartupNotify=true

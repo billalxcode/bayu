@@ -1,0 +1,28 @@
+# Build environment for Bayu: AlmaLinux 10 with every build dependency.
+ARG BASE=docker.io/almalinux/10-base:latest
+FROM ${BASE}
+# Empty: use the mirrorlists. Otherwise base URLs of an AlmaLinux / EPEL mirror.
+ARG ALMA_MIRROR=
+ARG EPEL_MIRROR=
+RUN if [ -n "$ALMA_MIRROR" ]; then sed -i -e 's/^mirrorlist=/#mirrorlist=/' \
+      -e "s|^# *baseurl=https://repo.almalinux.org/almalinux|baseurl=$ALMA_MIRROR|" /etc/yum.repos.d/almalinux*.repo; fi && \
+    dnf -y install epel-release dnf-plugins-core && dnf config-manager --set-enabled crb && \
+    if [ -n "$EPEL_MIRROR" ]; then sed -i -e 's/^metalink=/#metalink=/' \
+      -e "s|^# *baseurl=https://download.example/pub/epel|baseurl=$EPEL_MIRROR|" /etc/yum.repos.d/epel*.repo; fi && \
+    dnf -y install git cmake ninja-build pkgconf clang gcc-c++ python3 gettext rpm-build createrepo_c \
+      gtk-update-icon-cache libxcrypt-devel libzip-devel pam-devel \
+      'pkgconfig(wayland-client)' 'pkgconfig(wayland-server)' 'pkgconfig(wayland-egl)' \
+      'pkgconfig(wayland-scanner)' 'pkgconfig(wayland-protocols)' 'pkgconfig(egl)' 'pkgconfig(glesv2)' \
+      'pkgconfig(xkbcommon)' 'pkgconfig(libsystemd)' 'pkgconfig(fontconfig)' 'pkgconfig(freetype2)' \
+      'pkgconfig(harfbuzz)' 'pkgconfig(icu-uc)' 'pkgconfig(icu-i18n)' 'pkgconfig(expat)' \
+      'pkgconfig(libpng)' 'pkgconfig(libjpeg)' 'pkgconfig(zlib)' 'pkgconfig(libwebp)' \
+      'pkgconfig(libtiff-4)' 'pkgconfig(libheif)' 'pkgconfig(libjxl)' 'pkgconfig(libjxl_threads)' \
+      'pkgconfig(libpipewire-0.3)' 'pkgconfig(libspa-0.2)' 'pkgconfig(gbm)' 'pkgconfig(libdrm)' \
+      'pkgconfig(libavcodec)' 'pkgconfig(libavformat)' 'pkgconfig(libavutil)' 'pkgconfig(libswscale)' \
+      'pkgconfig(libva)' 'pkgconfig(libinput)' 'pkgconfig(libseat)' 'pkgconfig(libudev)' \
+      'pkgconfig(xcb)' 'pkgconfig(xcb-composite)' 'pkgconfig(xcb-xfixes)' 'pkgconfig(xcb-shape)' \
+      'pkgconfig(xcb-sync)' 'pkgconfig(xcursor)' 'pkgconfig(libpcre2-16)' 'pkgconfig(libpcre2-8)' \
+      'pkgconfig(libarchive)' 'pkgconfig(fuse3)' 'pkgconfig(libmtp)' 'pkgconfig(smbclient)' \
+      'pkgconfig(libssh)' 'pkgconfig(libcurl)' 'pkgconfig(libical)' \
+      'pkgconfig(librsvg-2.0)' qt6-qtbase-devel qt6-qtbase-private-devel qt6-qtdeclarative-devel && \
+    dnf clean all

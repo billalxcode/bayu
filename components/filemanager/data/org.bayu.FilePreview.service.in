@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.bayu.FilePreview
+Exec=@CMAKE_INSTALL_FULL_BINDIR@/bayu-filemanager --dbus-activated

@@ -1,0 +1,133 @@
+// SPDX-FileCopyrightText: 2026 Reion Wong <reionwong@gmail.com>
+// SPDX-License-Identifier: BSD-3-Clause
+
+#pragma once
+
+#include "widgets.h"
+
+#include "playersettings.h"
+
+#include "ui/scroll_view.h"
+
+#include <functional>
+#include <vector>
+
+class MainWindow;
+
+// A short message over the video, with an optional action.
+class Osd : public bayu::ui::View
+{
+public:
+    Osd();
+
+    // From the plate's edge to its text when there is no action.
+    static constexpr double kTextInset = 12;
+
+    void show(const std::string& message, int timeoutMs, std::string actionText, std::function<void()> action);
+    void hide();
+    bayu::ui::SizeF sizeHint() const override;
+    bool acceptsPointer() const override { return isVisible() && m_opacity.target() > 0; }
+
+protected:
+    void layout() override;
+    void paint(bayu::ui::Painter& painter) override;
+    void hoverChanged() override;
+
+private:
+    void fadeTo(double opacity);
+
+    bayu::ui::Label* m_label;
+    views::PillButton* m_action;
+    std::function<void()> m_callback;
+    bayu::base::Timer m_hideTimer;
+    views::Tween m_opacity{0, std::chrono::milliseconds(180)};
+};
+
+// The play or pause glyph a click on the video flashes.
+class Flash : public bayu::ui::View
+{
+public:
+    Flash();
+
+    void show(const std::string& icon);
+
+protected:
+    void layout() override;
+    void paint(bayu::ui::Painter& painter) override;
+
+private:
+    void apply();
+
+    bayu::ui::Icon* m_icon;
+    std::unique_ptr<bayu::ui::Animation> m_animation;
+    double m_value = 0;
+    double m_scale = 1;
+};
+
+class RecentRow : public views::Clickable
+{
+public:
+    explicit RecentRow(const PlayerSettings::RecentFile& file, double resumeAt, bool last);
+
+    bayu::ui::SizeF sizeHint() const override { return {0, 52}; }
+
+protected:
+    void layout() override;
+    void paint(bayu::ui::Painter& painter) override;
+
+private:
+    bayu::ui::Label* m_name;
+    bayu::ui::Label* m_folder;
+    bayu::ui::Label* m_resume;
+    bool m_last;
+};
+
+// How to open a video, and the recently watched ones; scrolls when the
+// window is too short for them.
+class EmptyPage : public bayu::ui::ScrollView
+{
+public:
+    explicit EmptyPage(MainWindow& owner);
+
+    // Re-read on each showing, which leaves out files deleted since.
+    void reload();
+    void retranslate();
+
+private:
+    class Column;
+
+    double columnHeight() const;
+    void layoutColumn(double pageWidth, double pageHeight);
+
+    MainWindow& m_owner;
+    Column* m_column;
+    bayu::ui::ThemeIcon* m_icon;
+    bayu::ui::Label* m_title;
+    bayu::ui::Label* m_subtitle;
+    views::PillButton* m_openFile;
+    views::PillButton* m_openUrl;
+    bayu::ui::Label* m_recentLabel;
+    views::Clickable* m_clear;
+    bayu::ui::Label* m_clearLabel;
+    bayu::ui::View* m_card;
+    std::vector<RecentRow*> m_rows;
+};
+
+// The page in place of the picture when a file cannot be played.
+class ErrorPage : public bayu::ui::View
+{
+public:
+    explicit ErrorPage(MainWindow& owner);
+
+    void update(const std::string& text, bool hasNext);
+    void retranslate();
+
+protected:
+    void layout() override;
+
+private:
+    bayu::ui::Label* m_title;
+    bayu::ui::Label* m_detail;
+    views::PillButton* m_another;
+    views::PillButton* m_next;
+};

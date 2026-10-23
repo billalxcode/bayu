@@ -1,0 +1,14 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: bayuos/.github/.github/workflows/build.yml@main
+    with:
+      dependencies: bayu-toolkit
+      packages: libcurl4-openssl-dev libical-dev

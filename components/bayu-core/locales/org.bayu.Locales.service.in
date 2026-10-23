@@ -1,0 +1,5 @@
+[D-BUS Service]
+Name=org.bayu.Locales
+Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/bayu-locales
+User=root
+SystemdService=bayu-locales.service

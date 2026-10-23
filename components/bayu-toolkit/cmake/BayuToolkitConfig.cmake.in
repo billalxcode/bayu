@@ -1,0 +1,5 @@
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/BayuToolkitTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/BayuTranslations.cmake")
+check_required_components(BayuToolkit)

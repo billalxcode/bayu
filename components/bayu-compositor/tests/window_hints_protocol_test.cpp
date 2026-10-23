@@ -1,0 +1,292 @@
+// Copyright 2026 Reion Wong <reionwong@gmail.com>
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include <atomic>
+#include <chrono>
+#include <cstring>
+#include <bayu-window-hints-v1-client-protocol.h>
+#include <gtest/gtest.h>
+#include <sys/socket.h>
+#include <thread>
+#include <vector>
+#include <wayland-client.h>
+#include <wayland-server-core.h>
+
+#include "compositor/compositor.h"
+#include "compositor/surface.h"
+#include "scene/scene.h"
+#include "wayland/protocols/window_hints.h"
+#include "wayland/protocols/wl_compositor.h"
+#include "wayland/server_util.h"
+
+using namespace bayu;
+
+namespace {
+
+class WindowHintsProtocolTest : public testing::Test
+{
+protected:
+    scene::Scene scene;
+    compositor::Compositor compositor {scene.root()};
+    wl_display *server = nullptr;
+    wl_display *client = nullptr;
+    wl_registry *registry = nullptr;
+    wl_compositor *clientCompositor = nullptr;
+    bayu_window_hints_v1 *hints = nullptr;
+
+    void SetUp() override
+    {
+        server = wl_display_create();
+        ASSERT_TRUE(server);
+        ASSERT_TRUE(wayland::createCompositorGlobal(server, &compositor));
+        ASSERT_TRUE(wayland::createWindowHintsGlobal(server));
+        int sockets[2];
+        ASSERT_EQ(socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sockets), 0);
+        ASSERT_TRUE(wl_client_create(server, sockets[0])) << std::strerror(errno);
+        client = wl_display_connect_to_fd(sockets[1]);
+        ASSERT_TRUE(client);
+        registry = wl_display_get_registry(client);
+        static const wl_registry_listener listener = {
+                [](void *data, wl_registry *registry, uint32_t name, const char *interface,
+                   uint32_t) {
+                    auto *self = static_cast<WindowHintsProtocolTest *>(data);
+                    if (std::strcmp(interface, "wl_compositor") == 0)
+                        self->clientCompositor = static_cast<wl_compositor *>(
+                                wl_registry_bind(registry, name, &wl_compositor_interface, 4));
+                    else if (std::strcmp(interface, "bayu_window_hints_v1") == 0)
+                        self->hints = static_cast<bayu_window_hints_v1 *>(wl_registry_bind(
+                                registry, name, &bayu_window_hints_v1_interface, 1));
+                },
+                [](void *, wl_registry *, uint32_t) {}};
+        wl_registry_add_listener(registry, &listener, this);
+        ASSERT_GE(roundtrip(), 0);
+        ASSERT_TRUE(hints);
+        ASSERT_TRUE(clientCompositor);
+    }
+
+    int roundtrip()
+    {
+        std::atomic<bool> done = false;
+        int result = -1;
+        std::thread worker([&] {
+            result = wl_display_roundtrip(client);
+            done = true;
+        });
+        const auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(3);
+        while (!done && std::chrono::steady_clock::now() < deadline) {
+            wl_event_loop_dispatch(wl_display_get_event_loop(server), 1);
+            wl_display_flush_clients(server);
+        }
+        if (!done)
+            shutdown(wl_display_get_fd(client), SHUT_RDWR);
+        worker.join();
+        return result;
+    }
+
+    void TearDown() override
+    {
+        if (hints)
+            bayu_window_hints_v1_destroy(hints);
+        if (clientCompositor)
+            wl_compositor_destroy(clientCompositor);
+        if (registry)
+            wl_registry_destroy(registry);
+        if (client)
+            wl_display_disconnect(client);
+        if (server) {
+            wl_display_destroy_clients(server);
+            wl_display_destroy(server);
+        }
+    }
+};
+
+TEST_F(WindowHintsProtocolTest, MetadataIsImmediateAndPersistsUntilTheSurfaceDies)
+{
+    auto *surface = wl_compositor_create_surface(clientCompositor);
+    ASSERT_GE(roundtrip(), 0);
+    auto *model = compositor.surfaces().front();
+    EXPECT_FALSE(model->skipTaskbar());
+    bayu_window_hints_v1_set_skip_taskbar(hints, surface, 1);
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_TRUE(model->skipTaskbar());
+    bayu_window_hints_v1_set_skip_taskbar(hints, surface, 0);
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_FALSE(model->skipTaskbar());
+    bayu_window_hints_v1_set_skip_taskbar(hints, surface, 1);
+    bayu_window_hints_v1_destroy(hints);
+    hints = nullptr;
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_TRUE(model->skipTaskbar());
+    wl_surface_destroy(surface);
+    surface = wl_compositor_create_surface(clientCompositor);
+    ASSERT_GE(roundtrip(), 0);
+    ASSERT_EQ(compositor.surfaces().size(), 1u);
+    EXPECT_FALSE(compositor.surfaces().front()->skipTaskbar());
+    wl_surface_destroy(surface);
+}
+
+TEST_F(WindowHintsProtocolTest, AlwaysOnTopIsImmediateAndPersistsUntilTheSurfaceDies)
+{
+    auto *surface = wl_compositor_create_surface(clientCompositor);
+    ASSERT_GE(roundtrip(), 0);
+    auto *model = compositor.surfaces().front();
+    EXPECT_FALSE(model->alwaysOnTop());
+    bayu_window_hints_v1_set_always_on_top(hints, surface, 1);
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_TRUE(model->alwaysOnTop());
+    bayu_window_hints_v1_set_always_on_top(hints, surface, 0);
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_FALSE(model->alwaysOnTop());
+    bayu_window_hints_v1_set_always_on_top(hints, surface, 1);
+    bayu_window_hints_v1_destroy(hints);
+    hints = nullptr;
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_TRUE(model->alwaysOnTop());
+    wl_surface_destroy(surface);
+    surface = wl_compositor_create_surface(clientCompositor);
+    ASSERT_GE(roundtrip(), 0);
+    ASSERT_EQ(compositor.surfaces().size(), 1u);
+    EXPECT_FALSE(compositor.surfaces().front()->alwaysOnTop());
+    wl_surface_destroy(surface);
+}
+
+TEST_F(WindowHintsProtocolTest, InvalidAlwaysOnTopIsAProtocolError)
+{
+    auto *surface = wl_compositor_create_surface(clientCompositor);
+    bayu_window_hints_v1_set_always_on_top(hints, surface, 2);
+    EXPECT_LT(roundtrip(), 0);
+    EXPECT_EQ(wl_display_get_protocol_error(client, nullptr, nullptr),
+              BAYU_WINDOW_HINTS_V1_ERROR_INVALID_VALUE);
+    wl_surface_destroy(surface);
+}
+
+TEST_F(WindowHintsProtocolTest, ResizeAnchorIsImmediateAndPersistsUntilTheSurfaceDies)
+{
+    auto *surface = wl_compositor_create_surface(clientCompositor);
+    ASSERT_GE(roundtrip(), 0);
+    auto *model = compositor.surfaces().front();
+    EXPECT_EQ(model->resizeAnchor(), compositor::ResizeAnchor::TopLeft);
+    bayu_window_hints_v1_set_resize_anchor(hints, surface,
+                                               BAYU_WINDOW_HINTS_V1_RESIZE_ANCHOR_CENTER);
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_EQ(model->resizeAnchor(), compositor::ResizeAnchor::Center);
+    bayu_window_hints_v1_destroy(hints);
+    hints = nullptr;
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_EQ(model->resizeAnchor(), compositor::ResizeAnchor::Center);
+    wl_surface_destroy(surface);
+    surface = wl_compositor_create_surface(clientCompositor);
+    ASSERT_GE(roundtrip(), 0);
+    ASSERT_EQ(compositor.surfaces().size(), 1u);
+    EXPECT_EQ(compositor.surfaces().front()->resizeAnchor(), compositor::ResizeAnchor::TopLeft);
+    wl_surface_destroy(surface);
+}
+
+TEST_F(WindowHintsProtocolTest, UnknownResizeAnchorIsAProtocolError)
+{
+    auto *surface = wl_compositor_create_surface(clientCompositor);
+    bayu_window_hints_v1_set_resize_anchor(hints, surface, 2);
+    EXPECT_LT(roundtrip(), 0);
+    EXPECT_EQ(wl_display_get_protocol_error(client, nullptr, nullptr),
+              BAYU_WINDOW_HINTS_V1_ERROR_INVALID_VALUE);
+    wl_surface_destroy(surface);
+}
+
+TEST_F(WindowHintsProtocolTest, ServerResizeIsImmediateAndRejectsOtherValues)
+{
+    auto *surface = wl_compositor_create_surface(clientCompositor);
+    ASSERT_GE(roundtrip(), 0);
+    auto *model = compositor.surfaces().front();
+    EXPECT_FALSE(model->serverResize());
+    bayu_window_hints_v1_set_server_resize(hints, surface, 1);
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_TRUE(model->serverResize());
+    bayu_window_hints_v1_set_server_resize(hints, surface, 2);
+    EXPECT_LT(roundtrip(), 0);
+    EXPECT_EQ(wl_display_get_protocol_error(client, nullptr, nullptr),
+              BAYU_WINDOW_HINTS_V1_ERROR_INVALID_VALUE);
+    wl_surface_destroy(surface);
+}
+
+TEST_F(WindowHintsProtocolTest, RestoreIdIsImmediateAndPersistsUntilTheSurfaceDies)
+{
+    auto *surface = wl_compositor_create_surface(clientCompositor);
+    ASSERT_GE(roundtrip(), 0);
+    auto *model = compositor.surfaces().front();
+    EXPECT_TRUE(model->restoreId().empty());
+    bayu_window_hints_v1_set_restore_id(hints, surface, "preview");
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_EQ(model->restoreId(), "preview");
+    bayu_window_hints_v1_set_restore_id(hints, surface, "");
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_TRUE(model->restoreId().empty());
+    wl_surface_destroy(surface);
+}
+
+TEST_F(WindowHintsProtocolTest, RestoreSizeIsImmediateAndRejectsNegativeValues)
+{
+    auto *surface = wl_compositor_create_surface(clientCompositor);
+    ASSERT_GE(roundtrip(), 0);
+    auto *model = compositor.surfaces().front();
+    EXPECT_TRUE(model->restoreSize().isEmpty());
+    bayu_window_hints_v1_set_restore_size(hints, surface, 300, 200);
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_EQ(model->restoreSize(), bayu::base::Size(300, 200));
+    bayu_window_hints_v1_set_restore_size(hints, surface, -1, 200);
+    EXPECT_LT(roundtrip(), 0);
+    EXPECT_EQ(wl_display_get_protocol_error(client, nullptr, nullptr),
+              BAYU_WINDOW_HINTS_V1_ERROR_INVALID_VALUE);
+    wl_surface_destroy(surface);
+}
+
+TEST_F(WindowHintsProtocolTest, InteractiveResizeReachesTheSurfacesClient)
+{
+    struct Event {
+        wl_surface *surface;
+        uint32_t active;
+    };
+    std::vector<Event> events;
+    static const bayu_window_hints_v1_listener listener = {
+            [](void *data, bayu_window_hints_v1 *, wl_surface *surface, uint32_t active) {
+                static_cast<std::vector<Event> *>(data)->push_back({surface, active});
+            }};
+    bayu_window_hints_v1_add_listener(hints, &listener, &events);
+    auto *surface = wl_compositor_create_surface(clientCompositor);
+    ASSERT_GE(roundtrip(), 0);
+    wl_resource *resource = wayland::getSurfaceResource(compositor.surfaces().front());
+    ASSERT_TRUE(resource);
+
+    wayland::sendInteractiveResize(resource, true);
+    wayland::sendInteractiveResize(resource, false);
+    ASSERT_GE(roundtrip(), 0);
+    ASSERT_EQ(events.size(), 2u);
+    EXPECT_EQ(events[0].surface, surface);
+    EXPECT_EQ(events[0].active, 1u);
+    EXPECT_EQ(events[1].active, 0u);
+
+    // A destroyed manager hears nothing more.
+    bayu_window_hints_v1_destroy(hints);
+    hints = nullptr;
+    ASSERT_GE(roundtrip(), 0);
+    wayland::sendInteractiveResize(resource, true);
+    ASSERT_GE(roundtrip(), 0);
+    EXPECT_EQ(events.size(), 2u);
+    wl_surface_destroy(surface);
+}
+
+TEST_F(WindowHintsProtocolTest, InvalidBooleanIsAProtocolError)
+{
+    auto *surface = wl_compositor_create_surface(clientCompositor);
+    bayu_window_hints_v1_set_skip_taskbar(hints, surface, 2);
+    EXPECT_LT(roundtrip(), 0);
+    const wl_interface *interface = nullptr;
+    uint32_t id = 0;
+    EXPECT_EQ(wl_display_get_protocol_error(client, &interface, &id),
+              BAYU_WINDOW_HINTS_V1_ERROR_INVALID_VALUE);
+    ASSERT_NE(interface, nullptr);
+    EXPECT_STREQ(interface->name, "bayu_window_hints_v1");
+    wl_surface_destroy(surface);
+}
+
+} // namespace

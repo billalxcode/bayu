@@ -1,0 +1,17 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+find_dependency(BayuToolkit)
+
+foreach(_component IN LISTS BayuClients_FIND_COMPONENTS)
+    set(_targets "${CMAKE_CURRENT_LIST_DIR}/BayuClient${_component}Targets.cmake")
+    if(EXISTS "${_targets}")
+        include("${_targets}")
+        set(BayuClients_${_component}_FOUND TRUE)
+    else()
+        set(BayuClients_${_component}_FOUND FALSE)
+    endif()
+    unset(_targets)
+endforeach()
+
+check_required_components(BayuClients)

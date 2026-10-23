@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bayu ("wind"): three gusts of wind. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 30">
+  <defs>
+    <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="64" y2="30">
+      <stop offset="0" stop-color="#3fa9f5"/>
+      <stop offset="1" stop-color="#1d5fd6"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#g)" stroke-linecap="round" stroke-width="3.2">
+    <path d="M6 9h30a5 5 0 1 0-5-5"/>
+    <path d="M2 16h44a6 6 0 1 1-6 6"/>
+    <path d="M10 23h16"/>
+  </g>
+  <circle cx="56" cy="9" r="3" fill="#3fa9f5"/>
+</svg>

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Calendar Reminders
+Exec=bayu-calendar-reminders
+TryExec=bayu-calendar-reminders
+NoDisplay=true
+OnlyShowIn=Bayu;

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Bayu (Wayland)
+Comment=Bayu desktop session
+Exec=/usr/bin/bayu-wayland-session
+TryExec=/usr/bin/bayu-compositor
+Type=Application
+DesktopNames=Bayu;
+X-GDM-SessionRegisters=true

@@ -1,0 +1,33 @@
+# Settings
+
+The System Settings application for Bayu Desktop.
+
+## Dependencies
+
+Settings is built on [bayu-toolkit](https://github.com/igos-nusantara/bayu)
+and the clients of [bayu-framework](https://github.com/igos-nusantara/bayu);
+install those first.
+
+Arch/Manjaro Dependencies:
+```shell
+sudo pacman -S cmake pkgconf icu libxcrypt fontconfig libxcursor libxkbcommon expat systemd-libs
+```
+
+Debian/Ubuntu Dependencies:
+```shell
+sudo apt install cmake pkg-config libicu-dev libcrypt-dev libfontconfig-dev libxcursor-dev libxkbcommon-dev libexpat1-dev libsystemd-dev
+```
+
+## Build
+
+```shell
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
+make
+sudo make install
+```
+
+## License
+
+BSD-3-Clause; see [LICENSE](LICENSE).

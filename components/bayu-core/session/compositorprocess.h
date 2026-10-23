@@ -1,0 +1,37 @@
+#pragma once
+
+#include <functional>
+#include <string>
+#include <vector>
+
+#include "base/process.h"
+#include "base/timer.h"
+
+// Session lifecycle only. No window-management or shell UI traffic crosses here.
+class CompositorProcess final
+{
+public:
+    CompositorProcess();
+    ~CompositorProcess();
+    void start(const std::string& program, const std::string& socket, const std::string& controlSocket,
+               int timeoutMs = 15000, const std::string& xwaylandReadyFile = {});
+    void stop();
+
+    bool isReady() const { return m_ready; }
+
+    std::function<void()> onReady;
+    std::function<void(const std::string& reason)> onFailed;
+    std::function<void(int code)> onExited;
+
+private:
+    void closeReadyPipe();
+    void fail(const std::string& reason);
+    void readReady();
+    bayu::base::Process m_process;
+    bayu::base::Timer m_timeout;
+    int m_readFd = -1;
+    int m_readWatch = 0;
+    bool m_ready = false;
+    bool m_stopping = false;
+    bool m_failed = false;
+};

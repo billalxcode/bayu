@@ -1,0 +1,127 @@
+#include "compositorprocess.h"
+
+#include "base/event_loop.h"
+#include "journalstream.h"
+
+#include <fcntl.h>
+#include <sys/epoll.h>
+#include <unistd.h>
+
+using namespace std::chrono_literals;
+
+CompositorProcess::CompositorProcess()
+{
+    m_process.setOutputForwarded(true);
+    m_timeout.setSingleShot(true);
+    m_timeout.onTimeout = [this] {
+        fail("Compositor startup timed out");
+    };
+    m_process.onFinished = [this](int code, bool crashed) {
+        closeReadyPipe();
+        if (m_stopping || m_failed)
+            return;
+        if (!m_ready)
+            fail("Compositor exited before becoming ready");
+        else if (onExited)
+            onExited(crashed ? 1 : code);
+    };
+}
+
+CompositorProcess::~CompositorProcess()
+{
+    stop();
+}
+
+void CompositorProcess::closeReadyPipe()
+{
+    m_timeout.stop();
+    if (m_readWatch) {
+        bayu::base::EventLoop::current()->unwatch(m_readWatch);
+        m_readWatch = 0;
+    }
+    if (m_readFd >= 0) {
+        close(m_readFd);
+        m_readFd = -1;
+    }
+}
+
+void CompositorProcess::fail(const std::string& reason)
+{
+    if (m_failed || m_stopping)
+        return;
+    m_failed = true;
+    stop();
+    if (onFailed)
+        onFailed(reason);
+}
+
+void CompositorProcess::readReady()
+{
+    char marker = 0;
+    const auto count = read(m_readFd, &marker, 1);
+    if (count < 0)
+        return;
+    if (count != 1 || marker != 'R') {
+        fail("Compositor did not confirm startup");
+        return;
+    }
+    closeReadyPipe();
+    m_ready = true;
+    if (onReady)
+        onReady();
+}
+
+void CompositorProcess::start(const std::string& program, const std::string& socket,
+                              const std::string& controlSocket, int timeoutMs,
+                              const std::string& xwaylandReadyFile)
+{
+    if (m_process.isRunning() || m_readFd >= 0)
+        return;
+    m_ready = false;
+    m_stopping = false;
+    m_failed = false;
+    int fds[2];
+    if (pipe2(fds, O_CLOEXEC | O_NONBLOCK) != 0) {
+        fail("Cannot create compositor startup pipe");
+        return;
+    }
+    m_readFd = fds[0];
+    const int writeFd = fds[1];
+    // The write end is the compositor's only inherited descriptor.
+    std::vector<std::string> arguments{"--socket", socket, "--ready-fd",
+                                       std::to_string(bayu::base::Process::kInheritedFd)};
+    if (!controlSocket.empty()) {
+        arguments.push_back("--shell-control-socket");
+        arguments.push_back(controlSocket);
+    }
+    if (!xwaylandReadyFile.empty()) {
+        arguments.push_back("--xwayland-ready-file");
+        arguments.push_back(xwaylandReadyFile);
+    }
+    m_readWatch = bayu::base::EventLoop::current()->watch(m_readFd, EPOLLIN, [this](uint32_t) {
+        readReady();
+    });
+    m_process.setInheritedFd(writeFd);
+    const bool started = startWithOwnJournalStream(m_process, program, arguments);
+    close(writeFd);
+    if (!started) {
+        fail("Cannot start " + program);
+        return;
+    }
+    if (!m_ready && !m_failed && !m_stopping)
+        m_timeout.start(std::chrono::milliseconds(timeoutMs));
+}
+
+void CompositorProcess::stop()
+{
+    m_stopping = true;
+    closeReadyPipe();
+    if (m_process.isRunning()) {
+        m_process.terminate();
+        if (!m_process.waitForFinished(3000ms)) {
+            m_process.kill();
+            m_process.waitForFinished(1000ms);
+        }
+    }
+    m_ready = false;
+}

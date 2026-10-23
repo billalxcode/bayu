@@ -1,0 +1,5 @@
+#%PAM-1.0
+# Enterprise Linux version of components/bayu-compositor/data/bayu-auth.
+auth       requisite    pam_nologin.so
+auth       include      password-auth
+account    include      password-auth

@@ -1,0 +1,37 @@
+# xdg-desktop-portal-bayu
+
+The `xdg-desktop-portal` backend for Bayu: Settings, FileChooser, Inhibit
+and ScreenCast.
+
+## Dependencies
+
+It is built on the base library of
+[bayu-toolkit](https://github.com/igos-nusantara/bayu); install it
+first.
+
+```sh
+sudo apt install cmake ninja-build pkg-config libsystemd-dev libpipewire-0.3-dev \
+    libwayland-dev wayland-protocols libgbm-dev libdrm-dev
+```
+
+At runtime it needs `xdg-desktop-portal`, `xdg-desktop-portal-gtk`, PipeWire,
+bayu-services and the File Manager daemon (file dialogs). Tests also need
+`dbus-run-session` and GoogleTest (`libgtest-dev`).
+
+## Build
+
+```sh
+cmake -S . -B build -G Ninja -DCMAKE_INSTALL_PREFIX=/usr
+cmake --build build
+sudo cmake --install build
+```
+
+## Tests
+
+```sh
+ctest --test-dir build --output-on-failure
+```
+
+## License
+
+BSD-3-Clause; see [LICENSE](LICENSE).

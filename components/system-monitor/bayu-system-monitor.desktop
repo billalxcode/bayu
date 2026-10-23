@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2026 Reion Wong <reionwong@gmail.com>
+# SPDX-License-Identifier: BSD-3-Clause
+
+[Desktop Entry]
+Version=1.0
+Name=System Monitor
+Comment=View resource usage and manage running processes
+Exec=bayu-system-monitor
+Icon=utilities-system-monitor
+Terminal=false
+Type=Application
+Categories=System;Monitor;
+Keywords=CPU;Memory;Network;Disk;Processes;
+StartupNotify=true

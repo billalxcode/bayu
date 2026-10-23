@@ -1,0 +1,44 @@
+// Copyright 2026 Reion Wong <reionwong@gmail.com>
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// Resize hit regions along a window's rounded outline, shared by the server
+// frame and by the handles the compositor keeps for client-decorated windows
+// that ask for them (exo's server_side_resize, ash's EasyResizeWindowTargeter).
+
+#ifndef BAYU_WM_RESIZE_HANDLES_H_
+#define BAYU_WM_RESIZE_HANDLES_H_
+
+#include "base/geometry.h"
+#include "render/rounded_shape.h"
+#include "wm/types.h"
+
+namespace bayu::decoration {
+struct WindowVisualStyle;
+}
+
+namespace bayu::wm {
+
+class Window;
+
+// chromeos_ui_constants.h: how far the handles reach outside the window and
+// into it, and how far along an edge a corner reaches.
+constexpr int kResizeOutsideBoundsSize = 6;
+constexpr int kResizeOutsideBoundsScaleForTouch = 5;
+constexpr int kResizeInsideBoundsSize = 1;
+constexpr int kResizeAreaCornerSize = 16;
+
+// The edge `point` grabs on a window outlined by `shape` within `frame`: any
+// point outside the outline or less than `inside` into it. A corner reaches
+// `corner` along each edge, and past the arc. The caller bounds the outside.
+ResizeEdge resizeEdgeFor(const render::RoundedShape& shape, const base::Rect& frame,
+                         const base::Point& point, int inside, int corner);
+
+// The edge of a client-decorated window that asked for server resize under
+// `location`, in output coordinates, or None.
+ResizeEdge serverResizeEdgeAt(const Window& window, const decoration::WindowVisualStyle& style,
+                              const base::PointF& location, bool touch);
+
+} // namespace bayu::wm
+
+#endif // BAYU_WM_RESIZE_HANDLES_H_

@@ -1,0 +1,10 @@
+[Unit]
+Description=Bayu desktop portal
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=dbus
+BusName=org.freedesktop.impl.portal.desktop.bayu
+ExecStart=@CMAKE_INSTALL_FULL_LIBEXECDIR@/xdg-desktop-portal-bayu
+Restart=on-failure
