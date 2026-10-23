@@ -1,6 +1,12 @@
 # Builds bayu-desktop .rpm and .src.rpm on AlmaLinux 10. Every push and pull
 # request uploads them as a workflow artifact; a vX.Y.Z tag also publishes
 # them as a GitHub release.
+#
+# Runs in igosnusantara/bayu-builder-rpm, built from packaging/Containerfile
+# with the spec's BuildRequires already installed. Rebuild and push it after
+# changing BuildRequires:
+#   docker build -t igosnusantara/bayu-builder-rpm -f packaging/Containerfile packaging
+#   docker push igosnusantara/bayu-builder-rpm
 name: RPM
 
 on:
@@ -16,23 +22,14 @@ permissions:
 jobs:
   rpm:
     runs-on: ubuntu-latest
+    container: docker.io/igosnusantara/bayu-builder-rpm:latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # The AlmaLinux image also has an x86_64_v2 variant, which Docker may pick
-      # on the runner; select the regular x86_64 one by digest.
-      - name: Build RPMs in AlmaLinux 10
-        run: |
-          image=docker.io/almalinux/10-base:latest
-          digest=$(docker manifest inspect "$image" | jq -r '.manifests[]
-            | select(.platform.architecture == "amd64" and .platform.variant == null) | .digest')
-          docker run --rm -v "$PWD":/src -w /src "${image%:*}@$digest" bash -euc '
-            dnf -y install epel-release dnf-plugins-core git rpm-build
-            dnf config-manager --set-enabled crb
-            dnf -y builddep packaging/bayu-desktop.spec
-            packaging/rpmbuild.sh'
+      - name: Build RPMs
+        run: packaging/rpmbuild.sh
 
       - uses: actions/upload-artifact@v4
         with:
