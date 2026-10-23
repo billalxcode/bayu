@@ -37,12 +37,26 @@ Everything runs in containers on any Linux host with Podman; the build
 environment is AlmaLinux 10 with EPEL and CRB.
 
 ```shell
-packaging/build-rpm.sh          # components -> out/repo/bayu-desktop-*.rpm (+ repodata)
+packaging/build-rpm.sh          # .src.rpm + .rpm -> out/rpms, and a dnf repo in out/repo
 builder/build-image.sh          # AlmaLinux 10 + Bayu -> out/bayu-os.qcow2
 builder/run-vm.sh               # boot it in QEMU/KVM, VNC on the Tailscale IP
 ```
 
 The first build fetches Skia, which bayu-toolkit builds, and takes a while.
+`packaging/bayu-desktop.spec` builds from source: its sources are the
+repository (`git archive`) and the pinned Skia checkout, which
+`packaging/rpmbuild.sh` prepares, so the `.src.rpm` rebuilds anywhere with
+`rpmbuild --rebuild` or mock.
+
+### Releases
+
+GitHub Actions (`.github/workflows/rpm.yml`) builds the `.rpm` and `.src.rpm`
+on AlmaLinux 10 for every push and pull request. Pushing a `vX.Y.Z` tag
+builds version X.Y.Z-1 and attaches the packages to a GitHub release:
+
+```shell
+git tag -a v0.2.0 -m "Bayu 0.2.0" && git push origin v0.2.0
+```
 
 ### OS builder
 

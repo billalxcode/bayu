@@ -1,4 +1,6 @@
-# Packages the tree that build.sh installed into $STAGE (see build-rpm.sh).
+# Builds the whole Bayu monorepo. Sources come from packaging/rpmbuild.sh:
+# Source0 is `git archive` of the repository, Source1 the pinned Skia checkout
+# that bayu-toolkit builds (components/bayu-toolkit/scripts/fetch-skia.sh).
 %global debug_package %{nil}
 %global __brp_mangle_shebangs %{nil}
 
@@ -8,11 +10,25 @@ Release:        %{?bayu_release}%{!?bayu_release:1}%{?dist}
 Summary:        Bayu desktop environment
 License:        BSD-3-Clause
 URL:            https://github.com/igos-nusantara/bayu
-Source0:        bayu-stage.tar
-Source1:        bayu-dm.pam
-Source2:        bayu-dm-greeter.pam
-Source3:        bayu-auth.pam
-Source4:        60-bayu-noto-mono.conf
+Source0:        bayu-%{version}.tar.gz
+Source1:        skia.tar.gz
+
+BuildRequires:  git cmake ninja-build pkgconf clang gcc-c++ python3 gettext
+BuildRequires:  gtk-update-icon-cache libxcrypt-devel libzip-devel pam-devel
+BuildRequires:  pkgconfig(wayland-client) pkgconfig(wayland-server) pkgconfig(wayland-egl)
+BuildRequires:  pkgconfig(wayland-scanner) pkgconfig(wayland-protocols) pkgconfig(egl) pkgconfig(glesv2)
+BuildRequires:  pkgconfig(xkbcommon) pkgconfig(libsystemd) pkgconfig(fontconfig) pkgconfig(freetype2)
+BuildRequires:  pkgconfig(harfbuzz) pkgconfig(icu-uc) pkgconfig(icu-i18n) pkgconfig(expat)
+BuildRequires:  pkgconfig(libpng) pkgconfig(libjpeg) pkgconfig(zlib) pkgconfig(libwebp)
+BuildRequires:  pkgconfig(libtiff-4) pkgconfig(libheif) pkgconfig(libjxl) pkgconfig(libjxl_threads)
+BuildRequires:  pkgconfig(libpipewire-0.3) pkgconfig(libspa-0.2) pkgconfig(gbm) pkgconfig(libdrm)
+BuildRequires:  pkgconfig(libavcodec) pkgconfig(libavformat) pkgconfig(libavutil) pkgconfig(libswscale)
+BuildRequires:  pkgconfig(libva) pkgconfig(libinput) pkgconfig(libseat) pkgconfig(libudev)
+BuildRequires:  pkgconfig(xcb) pkgconfig(xcb-composite) pkgconfig(xcb-xfixes) pkgconfig(xcb-shape)
+BuildRequires:  pkgconfig(xcb-sync) pkgconfig(xcursor) pkgconfig(libpcre2-16) pkgconfig(libpcre2-8)
+BuildRequires:  pkgconfig(libarchive) pkgconfig(fuse3) pkgconfig(libmtp) pkgconfig(smbclient)
+BuildRequires:  pkgconfig(libssh) pkgconfig(libcurl) pkgconfig(libical) pkgconfig(librsvg-2.0)
+BuildRequires:  qt6-qtbase-devel qt6-qtbase-private-devel qt6-qtdeclarative-devel
 
 # Runtime services, from upstream's getting-started step 4.
 Requires:       accountsservice polkit gsettings-desktop-schemas xdg-user-dirs
@@ -30,18 +46,24 @@ Bayu is a Wayland desktop environment forked from Cutefish
 manager, file manager, settings, terminal and the apps around them.
 
 %prep
-%setup -q -c -T
-tar -xf %{SOURCE0}
+%autosetup -n bayu-%{version}
+mkdir -p components/bayu-toolkit/third_party
+tar -xzf %{SOURCE1} -C components/bayu-toolkit/third_party
+
+%build
+BUILD=$PWD/_build STAGE=$PWD/_stage ./build.sh
 
 %install
-cp -a . %{buildroot}/
-install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/bayu-dm
-install -m 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/pam.d/bayu-dm-greeter
-install -m 644 %{SOURCE3} %{buildroot}%{_sysconfdir}/pam.d/bayu-auth
-install -Dm 644 %{SOURCE4} %{buildroot}%{_datadir}/fontconfig/conf.avail/60-bayu-noto-mono.conf
+cp -a _stage/. %{buildroot}/
+install -m 644 packaging/pam/bayu-dm packaging/pam/bayu-dm-greeter packaging/pam/bayu-auth \
+  %{buildroot}%{_sysconfdir}/pam.d/
+install -Dm 644 packaging/fontconfig/60-bayu-noto-mono.conf \
+  %{buildroot}%{_datadir}/fontconfig/conf.avail/60-bayu-noto-mono.conf
 mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
-ln -s ../../..%{_datadir}/fontconfig/conf.avail/60-bayu-noto-mono.conf %{buildroot}%{_sysconfdir}/fonts/conf.d/60-bayu-noto-mono.conf
-cd %{buildroot} && find . \( -type f -o -type l \) | sed -e 's#^\.##' -e 's#^/etc/#%%config(noreplace) /etc/#' > %{_builddir}/files.list
+ln -s ../../..%{_datadir}/fontconfig/conf.avail/60-bayu-noto-mono.conf \
+  %{buildroot}%{_sysconfdir}/fonts/conf.d/60-bayu-noto-mono.conf
+cd %{buildroot} && find . \( -type f -o -type l \) | sed -e 's#^\.##' \
+  -e 's#^/etc/#%%config(noreplace) /etc/#' > %{_builddir}/bayu-files.list
 
 %pre
 getent passwd bayu-greeter >/dev/null || \
@@ -52,4 +74,6 @@ getent passwd bayu-greeter >/dev/null || \
 gtk-update-icon-cache -q -f /usr/share/icons/* 2>/dev/null || :
 glib-compile-schemas /usr/share/glib-2.0/schemas 2>/dev/null || :
 
-%files -f %{_builddir}/files.list
+%files -f %{_builddir}/bayu-files.list
+%license LICENSE
+%doc README.md UPSTREAM.md

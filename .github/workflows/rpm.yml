@@ -1,0 +1,48 @@
+# Builds bayu-desktop .rpm and .src.rpm on AlmaLinux 10. Every push and pull
+# request uploads them as a workflow artifact; a vX.Y.Z tag also publishes
+# them as a GitHub release.
+name: RPM
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rpm:
+    runs-on: ubuntu-latest
+    container: docker.io/almalinux/10-base:latest
+    steps:
+      - name: Install build dependencies
+        run: |
+          dnf -y install epel-release dnf-plugins-core git
+          dnf config-manager --set-enabled crb
+          dnf -y install rpm-build
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install BuildRequires
+        run: dnf -y builddep packaging/bayu-desktop.spec
+
+      - name: Build RPMs
+        run: packaging/rpmbuild.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bayu-desktop-rpms
+          path: out/rpms/*.rpm
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Bayu ${{ github.ref_name }}
+          files: out/rpms/*.rpm
+          generate_release_notes: true
