@@ -28,7 +28,7 @@ struct Fixture
         auto content = std::make_unique<EditorView>();
         view = content.get();
         view->setDocument(&document);
-        view->setFont(FontSpec{"Noto Mono", 9});
+        view->setFont(FontSpec{"Noto Sans Mono", 9});
         view->setSidePadding(14);
         window.setContentView(std::move(content));
         window.show();

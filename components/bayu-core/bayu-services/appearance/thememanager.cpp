@@ -53,7 +53,7 @@ ThemeManager::ThemeManager(Settings &settings, dbus::Connection *session, dbus::
 
     // Init fonts.
     if (!m_settings.contains(s_systemFixedFontName))
-        m_settings.setValue(s_systemFixedFontName, "Noto Mono");
+        m_settings.setValue(s_systemFixedFontName, "Noto Sans Mono");
 
     if (!m_settings.contains(s_systemFontName)) {
         const std::string fontName = fontForLocale(bayu::core::language::preferredLanguages().front());
@@ -274,7 +274,7 @@ void ThemeManager::setSystemFont(const std::string &fontFamily)
 
 std::string ThemeManager::systemFixedFont()
 {
-    return m_settings.stringValue(s_systemFixedFontName, "Noto Mono");
+    return m_settings.stringValue(s_systemFixedFontName, "Noto Sans Mono");
 }
 
 void ThemeManager::setSystemFixedFont(const std::string &fontFamily)

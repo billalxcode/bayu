@@ -12,6 +12,7 @@ Source0:        bayu-stage.tar
 Source1:        bayu-dm.pam
 Source2:        bayu-dm-greeter.pam
 Source3:        bayu-auth.pam
+Source4:        60-bayu-noto-mono.conf
 
 # Runtime services, from upstream's getting-started step 4.
 Requires:       accountsservice polkit gsettings-desktop-schemas xdg-user-dirs
@@ -19,6 +20,8 @@ Requires:       NetworkManager bluez upower (power-profiles-daemon or tuned-ppd)
 Requires:       pipewire pipewire-pulseaudio wireplumber gnome-keyring gnome-keyring-pam
 Requires:       xdg-desktop-portal xorg-x11-server-Xwayland adwaita-icon-theme
 Requires:       mesa-dri-drivers mesa-libEGL mesa-libgbm glibc-langpack-en
+# Default UI and fixed-width fonts.
+Requires:       google-noto-sans-vf-fonts google-noto-sans-mono-vf-fonts
 Requires(pre):  shadow-utils
 
 %description
@@ -35,6 +38,9 @@ cp -a . %{buildroot}/
 install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/bayu-dm
 install -m 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/pam.d/bayu-dm-greeter
 install -m 644 %{SOURCE3} %{buildroot}%{_sysconfdir}/pam.d/bayu-auth
+install -Dm 644 %{SOURCE4} %{buildroot}%{_datadir}/fontconfig/conf.avail/60-bayu-noto-mono.conf
+mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
+ln -s ../../..%{_datadir}/fontconfig/conf.avail/60-bayu-noto-mono.conf %{buildroot}%{_sysconfdir}/fonts/conf.d/60-bayu-noto-mono.conf
 cd %{buildroot} && find . \( -type f -o -type l \) | sed -e 's#^\.##' -e 's#^/etc/#%%config(noreplace) /etc/#' > %{_builddir}/files.list
 
 %pre

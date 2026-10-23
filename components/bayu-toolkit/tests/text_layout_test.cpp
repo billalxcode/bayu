@@ -18,11 +18,11 @@ using namespace bayu::ui;
 
 namespace {
 
-const FontSpec kMono{"Noto Mono", 10, false, false};
+const FontSpec kMono{"Noto Sans Mono", 10, false, false};
 
 bool monoInstalled()
 {
-    return FontMetrics(kMono).family() == "Noto Mono";
+    return FontMetrics(kMono).family() == "Noto Sans Mono";
 }
 
 struct Laid
@@ -57,12 +57,12 @@ std::vector<Laid> layOut(TextLayout& layout, double width)
 TEST(TextLayoutTest, BreaksMatchReference)
 {
     if (!monoInstalled())
-        GTEST_SKIP() << "Noto Mono is not installed";
+        GTEST_SKIP() << "Noto Sans Mono is not installed";
     TextLayout code("int main(int argc, char** argv) { return 0; }", kMono);
     EXPECT_EQ(layOut(code, 120), (std::vector<Laid>{{0, 13, 104}, {13, 13, 104}, {26, 15, 120}, {41, 4, 32}}));
     TextLayout word("a_very_long_identifier_without_any_break_opportunity_at_all", kMono);
     EXPECT_EQ(layOut(word, 100), (std::vector<Laid>{{0, 12, 96}, {12, 12, 96}, {24, 12, 96}, {36, 12, 96}, {48, 11, 88}}));
-    TextLayout spaced("word1 word2   word3 word4 word5 word6", {"Noto Mono", 12, false, false});
+    TextLayout spaced("word1 word2   word3 word4 word5 word6", {"Noto Sans Mono", 12, false, false});
     EXPECT_EQ(layOut(spaced, 70), (std::vector<Laid>{{0, 6, 60}, {6, 8, 80}, {14, 6, 60}, {20, 6, 60}, {26, 6, 60}, {32, 5, 50}}));
     TextLayout empty("", kMono);
     EXPECT_EQ(layOut(empty, 0), (std::vector<Laid>{{0, 0, 0}}));
@@ -71,7 +71,7 @@ TEST(TextLayoutTest, BreaksMatchReference)
 TEST(TextLayoutTest, TabsAdvanceToStopsFromTheLineStart)
 {
     if (!monoInstalled())
-        GTEST_SKIP() << "Noto Mono is not installed";
+        GTEST_SKIP() << "Noto Sans Mono is not installed";
     TextLayout layout("\tif (x)\t{ y = 1; }   ", kMono);
     EXPECT_EQ(layOut(layout, 0), (std::vector<Laid>{{0, 21, 232}}));
     // Eight spaces of 8 px per stop.
@@ -89,7 +89,7 @@ TEST(TextLayoutTest, TabsAdvanceToStopsFromTheLineStart)
 TEST(TextLayoutTest, CaretSnapsToGraphemes)
 {
     if (!monoInstalled())
-        GTEST_SKIP() << "Noto Mono is not installed";
+        GTEST_SKIP() << "Noto Sans Mono is not installed";
     // e and a combining acute accent are one grapheme.
     TextLayout layout("e\xCC\x81t", kMono);
     layOut(layout, 0);
@@ -101,7 +101,7 @@ TEST(TextLayoutTest, CaretSnapsToGraphemes)
 TEST(TextLayoutTest, LinesHaveTheirOwnWidthsAndPositions)
 {
     if (!monoInstalled())
-        GTEST_SKIP() << "Noto Mono is not installed";
+        GTEST_SKIP() << "Noto Sans Mono is not installed";
     TextLayout layout("    hanging indent for wrapped lines of code", kMono);
     layout.setWrap(TextLayout::Wrap::WordOrAnywhere);
     layout.beginLayout();
@@ -195,11 +195,11 @@ TEST(TextLayoutTest, SystemFixedFontFollowsTheTheme)
 }
 
 // A line takes the largest ascent and descent of the fonts it uses: CJK
-// through fallback sits lower under Noto Mono.
+// through fallback sits lower under Noto Sans Mono.
 TEST(TextLayoutTest, LinesTakeTheTallestFontsMetrics)
 {
     if (!monoInstalled())
-        GTEST_SKIP() << "Noto Mono is not installed";
+        GTEST_SKIP() << "Noto Sans Mono is not installed";
     for (const double scale : {1.0, 1.5}) {
         const FontMetrics metrics(kMono, scale);
         TextLayout latin("int main()", kMono, scale);

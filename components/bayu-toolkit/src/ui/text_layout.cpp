@@ -947,7 +947,7 @@ void TextLayout::draw(Painter& painter, PointF origin)
 FontSpec systemFixedFont()
 {
     const Theme& theme = Theme::current();
-    return {theme.fixedFontFamily.empty() ? std::string("Noto Mono") : theme.fixedFontFamily, theme.fontPointSize,
+    return {theme.fixedFontFamily.empty() ? std::string("Noto Sans Mono") : theme.fixedFontFamily, theme.fontPointSize,
             false, false};
 }
 

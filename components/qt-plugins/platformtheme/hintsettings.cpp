@@ -110,7 +110,7 @@ QString HintsSettings::systemFont() const
 
 QString HintsSettings::systemFixedFont() const
 {
-    return availableFontFamily(m_settings->value(s_systemFixedFontName, "Noto Mono").toString(),
+    return availableFontFamily(m_settings->value(s_systemFixedFontName, "Noto Sans Mono").toString(),
                                QStringLiteral("DejaVu Sans Mono"));
 }
 

@@ -56,7 +56,7 @@ private:
 
     std::unique_ptr<bayu::base::Settings> m_settings;
     int m_fontPointSize = 10;
-    std::string m_fontName = "Noto Mono";
+    std::string m_fontName = "Noto Sans Mono";
     bool m_blinkingCursor = true;
     int m_cursorShape = 0;
     int m_scrollbackLines = 10000;

@@ -203,8 +203,8 @@ TEST(LabelTest, FontFamilyIsUsed)
 {
     Label narrow("iiiiiiii");
     Label wide("MMMMMMMM");
-    narrow.setFontFamily("Noto Mono");
-    wide.setFontFamily("Noto Mono");
+    narrow.setFontFamily("Noto Sans Mono");
+    wide.setFontFamily("Noto Sans Mono");
     // A fixed-pitch family: both as wide.
     EXPECT_NEAR(narrow.sizeHint().width, wide.sizeHint().width, 0.5);
 }

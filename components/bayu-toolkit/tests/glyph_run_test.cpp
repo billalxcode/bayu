@@ -93,8 +93,8 @@ const ExpectedMetrics kReferenceMetrics[] = {
     {"Noto Sans Mono", 10, 14, 4, 18, 0, 1, 4, 15, 1, 760, 1.296875, false},
     {"Noto Sans Mono", 11, 16, 4, 20, 0, 2, 5, 17, 1, 855, 1.5, false},
     {"Noto Sans Mono", 12.5, 18, 5, 23, 0, 2, 6, 19, 1, 950, 1.703125, false},
-    {"Noto Mono", 9, 11, 3, 14, 0, 1, 3, 12, 1, 665, 0.90625, true},
-    {"Noto Mono", 11, 14, 4, 18, 0, 1, 4, 15, 1, 855, 1.125, true},
+    {"Noto Sans Mono", 9, 11, 3, 14, 0, 1, 3, 12, 1, 665, 0.90625, true},
+    {"Noto Sans Mono", 11, 14, 4, 18, 0, 1, 4, 15, 1, 855, 1.125, true},
 };
 
 const char kPrintable[] =
@@ -169,15 +169,15 @@ TEST(GlyphRunTest, FallsBackForWhatTheFontLacks)
     EXPECT_GT(renderer.advance(han), 12);
 }
 
-// Block elements through the CFF fallback (Noto Sans CJK under Noto Mono)
+// Block elements through the CFF fallback (Noto Sans CJK under Noto Sans Mono)
 // where the reference draws them: CFF stems darkened, which also moves
 // their hinted edges. Reference ink rows on the laptop at scale 1, baseline
 // 20.
 TEST(GlyphRunTest, FallbackBlockElementsSitOnDarkenedStems)
 {
-    const FontSpec font{"Noto Mono", 10, false, false};
-    if (FontMetrics(font).family() != "Noto Mono")
-        GTEST_SKIP() << "Noto Mono is not installed";
+    const FontSpec font{"Noto Sans Mono", 10, false, false};
+    if (FontMetrics(font).family() != "Noto Sans Mono")
+        GTEST_SKIP() << "Noto Sans Mono is not installed";
     struct Expected
     {
         char32_t character;
@@ -201,13 +201,13 @@ TEST(GlyphRunTest, FallbackBlockElementsSitOnDarkenedStems)
 }
 
 // Scaled text draws unhinted at the device size: the reference ink for
-// "find xenon mux 0123" in Noto Mono 10, a cell every 8 px from x 4,
+// "find xenon mux 0123" in Noto Sans Mono 10, a cell every 8 px from x 4,
 // baseline 20, on white (bounds in device pixels, then the summed ink).
 TEST(GlyphRunTest, ScaledTextIsUnhintedAtTheDeviceSize)
 {
-    const FontSpec font{"Noto Mono", 10, false, false};
-    if (FontMetrics(font).family() != "Noto Mono")
-        GTEST_SKIP() << "Noto Mono is not installed";
+    const FontSpec font{"Noto Sans Mono", 10, false, false};
+    if (FontMetrics(font).family() != "Noto Sans Mono")
+        GTEST_SKIP() << "Noto Sans Mono is not installed";
     struct Expected
     {
         double scale;

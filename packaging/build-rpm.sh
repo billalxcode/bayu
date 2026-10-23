@@ -11,6 +11,7 @@ podman run --rm -v "$ROOT":/src:Z -w /src -e JOBS="${JOBS:-}" bayu-builder bash 
   mkdir -p ~/rpmbuild/SOURCES
   tar -C /tmp/stage -cf ~/rpmbuild/SOURCES/bayu-stage.tar .
   for f in bayu-dm bayu-dm-greeter bayu-auth; do cp packaging/pam/$f ~/rpmbuild/SOURCES/$f.pam; done
+  cp packaging/fontconfig/*.conf ~/rpmbuild/SOURCES/
   rpmbuild -bb packaging/bayu-desktop.spec --define "bayu_release $(date +%Y%m%d%H%M)"
   mkdir -p out/repo && cp ~/rpmbuild/RPMS/*/*.rpm out/repo/ && createrepo_c -q out/repo'
 ls -l out/repo/*.rpm

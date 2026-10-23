@@ -113,7 +113,7 @@ private:
 };
 
 // The system's fixed-pitch font:
-// the appearance's fixed family ("Noto Mono" unless set) at the system
+// the appearance's fixed family ("Noto Sans Mono" unless set) at the system
 // font's point size.
 FontSpec systemFixedFont();
 
