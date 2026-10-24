@@ -394,7 +394,21 @@ entry > text > placeholder:not(#_), spinbutton > text > placeholder:not(#_), tex
 }
 entry > image:not(#_), spinbutton > image:not(#_) { color: @bayu_text_tertiary; }
 entry > image:hover:not(#_) { color: @bayu_text_secondary; }
-entry.search:not(#_) { border-radius: 8px; }
+/* Search fields as bayu-toolkit's: a 28 px pill of the second background,
+   edged and ringed in the accent while focused. */
+entry.search:not(#_) {
+  min-height: 26px;
+  padding: 0 10px;
+  border: 1px solid @bayu_bg_card;
+  border-radius: 9999px;
+  background-color: @bayu_bg_card;
+}
+entry.search:focus-within:not(#_) {
+  border-color: @bayu_accent;
+  background-color: @bayu_bg_card;
+  outline: 2px solid alpha(@bayu_accent, 0.25);
+  outline-offset: 0;
+}
 entry > progress:not(#_) { margin: 0 -8px; border-bottom: 2px solid @bayu_accent; background: none; box-shadow: none; }
 spinbutton:not(.vertical) > text:not(#_) { min-width: 32px; }
 spinbutton > button:not(#_), spinbutton > button.up:not(#_), spinbutton > button.down:not(#_) {
@@ -743,28 +757,31 @@ stacksidebar list:not(#_), .sidebar-pane:not(#_), .sidebar:not(#_) {
   background-color: @bayu_bg_sidebar;
   color: @bayu_text_primary;
 }
-.navigation-sidebar:not(#_), stacksidebar:not(#_), placessidebar:not(#_) { box-shadow: inset -1px 0 @bayu_border; }
-popover .navigation-sidebar:not(#_) { background-color: transparent; box-shadow: none; }
-.navigation-sidebar:not(#_) { padding: 8px 0; }
+.navigation-sidebar:not(#_), stacksidebar:not(#_), placessidebar:not(#_) { box-shadow: none; }
+popover .navigation-sidebar:not(#_) { background-color: transparent; }
+.navigation-sidebar:not(#_) { padding: 4px 0; }
+/* Rows as in Bayu's Settings sidebar: 36 px, radius 10, 12 px from the edges,
+   the current one a soft plate in the regular weight. */
 .navigation-sidebar > row:not(#_), stacksidebar row:not(#_), placessidebar row:not(#_) {
-  min-height: 20px;
-  margin: 0 8px 2px;
-  padding: 6px 8px;
+  min-height: 24px;
+  margin: 0 12px 2px;
+  padding: 6px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   background-color: transparent;
   color: @bayu_text_primary;
 }
-.navigation-sidebar > row:hover:not(#_), stacksidebar row:hover:not(#_), placessidebar row:hover:not(#_) { background-color: @bayu_bg_hover; }
-.navigation-sidebar > row:active:not(#_), stacksidebar row:active:not(#_), placessidebar row:active:not(#_) { background-color: @bayu_bg_selected; transition: none; }
+.navigation-sidebar > row > box:not(#_), stacksidebar row > box:not(#_) { border-spacing: 8px; }
+.navigation-sidebar > row:hover:not(#_), stacksidebar row:hover:not(#_), placessidebar row:hover:not(#_) { background-color: @bayu_sidebar_hover; }
+.navigation-sidebar > row:active:not(#_), stacksidebar row:active:not(#_), placessidebar row:active:not(#_) { background-color: @bayu_sidebar_current; transition: none; }
 .navigation-sidebar > row:selected:not(#_), stacksidebar row:selected:not(#_), placessidebar row:selected:not(#_) {
-  background-color: @bayu_bg_selected;
+  background-color: @bayu_sidebar_current;
   color: @bayu_text_primary;
-  font-weight: 500;
+  font-weight: normal;
 }
 .navigation-sidebar > row.separator:not(#_), .navigation-sidebar > separator:not(#_) { margin: 8px 16px; background-color: @bayu_divider; }
 placessidebar .navigation-sidebar > row:not(#_) { padding: 0; }
-placessidebar .navigation-sidebar > row > revealer:not(#_) { padding: 6px 8px; }
+placessidebar .navigation-sidebar > row > revealer:not(#_) { padding: 6px; }
 .navigation-sidebar label.heading:not(#_), placessidebar row.sidebar-placeholder-row:not(#_) { font-size: 12px; font-weight: 500; color: @bayu_text_secondary; }
 
 /* Column and tree views */

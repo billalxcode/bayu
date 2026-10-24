@@ -20,6 +20,8 @@
 @define-color bayu_slider_track #E6E6E6;
 @define-color bayu_tooltip_bg #FFFFFF;
 @define-color bayu_tooltip_fg #323238;
+@define-color bayu_sidebar_current alpha(@bayu_text_primary, 0.1);
+@define-color bayu_sidebar_hover alpha(@bayu_text_primary, 0.05);
 @define-color bayu_shadow_card rgba(0, 0, 0, 0.06);
 @define-color bayu_shadow_menu rgba(0, 0, 0, 0.17);
 @define-color bayu_shadow_dialog rgba(0, 0, 0, 0.22);
