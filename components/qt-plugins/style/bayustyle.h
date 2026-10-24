@@ -3,9 +3,14 @@
 
 #include <QProxyStyle>
 
-// Draws Qt Widgets controls the way bayu-toolkit draws its own: the same
-// metrics, corner radii and colours (bayu-toolkit/src/ui/theme.cpp and
-// toolkit_colors.cpp), over Fusion for everything else.
+// Draws Qt Widgets with the Bayu design system: its colour tokens, radii
+// (6 tile, 8 control, 10 menu, 12 card), 4 px spacing rhythm and interaction
+// states, over Fusion for anything it does not cover. The GTK theme in
+// components/gtk-theme follows the same tokens.
+//
+// Applications can opt into a few variants with dynamic properties:
+// QPushButton "primary" and "danger", QCheckBox "switch", QFrame named
+// "Card", QWidget named "Row", and QLabel "badge", "keycap" and "banner".
 class BayuStyle : public QProxyStyle
 {
     Q_OBJECT
@@ -34,6 +39,9 @@ public:
                      const QWidget *widget = nullptr) const override;
     void drawComplexControl(ComplexControl control, const QStyleOptionComplex *option, QPainter *painter,
                             const QWidget *widget = nullptr) const override;
+
+protected:
+    bool eventFilter(QObject *object, QEvent *event) override;
 };
 
 #endif // BAYUSTYLE_H

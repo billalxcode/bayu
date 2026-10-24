@@ -1,279 +1,1009 @@
-/* Bayu's controls for GTK 4, over GTK's Default theme. Sizes follow
- * bayu-toolkit: buttons 32 px with a 10 px radius, fields 35 px with 8 px,
- * check boxes 20 px with 6 px, menus 12 px. Colours come from colors-*.css.
- * libadwaita applications draw with their own stylesheet and are not affected. */
+/* Bayu for GTK 4, over GTK's Default theme, following the Bayu design system:
+ * tokens in ../colors-*.css, radii 6 (tile), 8 (control), 10 (menu),
+ * 12 (card), 99 (pill), a 4 px spacing rhythm and three elevations.
+ *
+ * Every selector carries :not(#_), an id's worth of specificity, so these
+ * rules win over GTK's own (backdrop states and long toolbar selectors
+ * included) without copying them; among themselves they cascade as usual.
+ * libadwaita applications draw with their own stylesheet. */
 
-/* Surfaces */
-window, .background, dialog {
-  background-color: @bayu_window;
-  color: @bayu_fg;
-}
-.view, textview > text, iconview, columnview, listview, list, gridview {
-  background-color: @bayu_view;
-  color: @bayu_fg;
-}
-separator { background-color: @bayu_separator; }
-link, button.link { color: @bayu_accent; }
+/* Named colours applications use in their own CSS */
+@define-color theme_fg_color @bayu_text_primary;
+@define-color theme_text_color @bayu_text_primary;
+@define-color theme_bg_color @bayu_bg_window;
+@define-color theme_base_color @bayu_bg_card;
+@define-color theme_selected_bg_color @bayu_accent;
+@define-color theme_selected_fg_color @bayu_text_on_accent;
+@define-color insensitive_bg_color @bayu_bg_field;
+@define-color insensitive_fg_color @bayu_text_tertiary;
+@define-color insensitive_base_color @bayu_bg_field;
+@define-color theme_unfocused_fg_color @bayu_text_primary;
+@define-color theme_unfocused_text_color @bayu_text_primary;
+@define-color theme_unfocused_bg_color @bayu_bg_window;
+@define-color theme_unfocused_base_color @bayu_bg_card;
+@define-color theme_unfocused_selected_bg_color @bayu_accent;
+@define-color theme_unfocused_selected_fg_color @bayu_text_on_accent;
+@define-color unfocused_insensitive_color @bayu_text_tertiary;
+@define-color borders @bayu_border;
+@define-color unfocused_borders @bayu_border;
+@define-color warning_color @bayu_warning;
+@define-color error_color @bayu_danger;
+@define-color success_color @bayu_success;
+@define-color content_view_bg @bayu_bg_card;
+@define-color text_view_bg @bayu_bg_card;
+@define-color accent_color @bayu_accent;
+@define-color accent_bg_color @bayu_accent;
+@define-color accent_fg_color @bayu_text_on_accent;
+@define-color window_bg_color @bayu_bg_window;
+@define-color window_fg_color @bayu_text_primary;
+@define-color view_bg_color @bayu_bg_card;
+@define-color view_fg_color @bayu_text_primary;
+@define-color card_bg_color @bayu_bg_card;
+@define-color card_fg_color @bayu_text_primary;
+@define-color sidebar_bg_color @bayu_bg_sidebar;
+@define-color sidebar_fg_color @bayu_text_primary;
+@define-color headerbar_bg_color @bayu_bg_window;
+@define-color headerbar_fg_color @bayu_text_primary;
+@define-color popover_bg_color @bayu_bg_card;
+@define-color popover_fg_color @bayu_text_primary;
+@define-color dialog_bg_color @bayu_bg_card;
+@define-color dialog_fg_color @bayu_text_primary;
+@define-color destructive_color @bayu_danger;
+@define-color destructive_bg_color @bayu_danger;
+@define-color success_bg_color @bayu_success;
+@define-color warning_bg_color @bayu_warning;
+@define-color error_bg_color @bayu_danger;
 
-/* Selection */
-row:selected, columnview > listview > row:selected, gridview > child:selected,
-listview > row:selected, flowbox > flowboxchild:selected, .view:selected {
-  background-color: @bayu_accent;
-  color: @bayu_accent_fg;
-}
-selection, text > selection, label > selection {
-  background-color: alpha(@bayu_accent, 0.35);
-  color: @bayu_fg;
-}
+/* -- Surfaces and text ------------------------------------------------- */
 
-/* Header bars: the window background with a hairline under it. */
-headerbar, headerbar:backdrop {
-  background-color: @bayu_window;
-  background-image: none;
-  box-shadow: inset 0 -1px @bayu_header_separator;
-  color: @bayu_fg;
+window:not(#_), window.background:not(#_), .background:not(popover):not(tooltip):not(#_) {
+  background-color: @bayu_bg_window;
+  color: @bayu_text_primary;
 }
-headerbar .title { font-weight: bold; }
-
-/* Buttons */
-button {
-  min-height: 24px;
-  min-width: 16px;
-  padding: 4px 12px;
-  border: none;
-  border-radius: 10px;
-  background-color: @bayu_control;
-  background-image: none;
-  box-shadow: none;
-  color: @bayu_fg;
+window.csd:not(#_) {
+  border-radius: 12px;
+  box-shadow: 0 8px 24px @bayu_shadow_menu, 0 0 0 1px alpha(@bayu_text_primary, 0.06);
 }
-button:hover { background-color: @bayu_control_hover; }
-button:active, button:checked { background-color: @bayu_control_active; }
-button:disabled { background-color: alpha(@bayu_control, 0.6); color: @bayu_fg_disabled; }
-button:focus-visible { outline: 2px solid alpha(@bayu_accent, 0.5); outline-offset: -2px; }
-button.image-button { padding: 4px 8px; }
-
-button.suggested-action, button.default {
-  background-color: @bayu_accent;
-  color: @bayu_accent_fg;
-}
-button.suggested-action:hover, button.default:hover { background-color: @bayu_accent_hover; }
-button.suggested-action:active, button.suggested-action:checked, button.default:active { background-color: @bayu_accent_active; }
-button.destructive-action { background-color: @bayu_destructive; color: #FFFFFF; }
-button.destructive-action:hover { background-color: shade(@bayu_destructive, 1.08); }
-button.destructive-action:active { background-color: shade(@bayu_destructive, 0.87); }
-
-/* Flat buttons, header bar buttons and window controls: clear until hovered. */
-button.flat, headerbar button:not(.suggested-action):not(.destructive-action),
-windowcontrols > button {
-  background-color: transparent;
-}
-button.flat:hover, headerbar button:not(.suggested-action):not(.destructive-action):hover,
-windowcontrols > button:hover {
-  background-color: @bayu_flat_hover;
-}
-button.flat:active, button.flat:checked,
-headerbar button:not(.suggested-action):not(.destructive-action):active,
-headerbar button:not(.suggested-action):not(.destructive-action):checked,
-windowcontrols > button:active {
-  background-color: @bayu_flat_active;
-}
-
-/* Linked groups (segmented buttons) round only their outer corners. */
-.linked > button { border-radius: 0; }
-.linked > button:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
-.linked > button:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
-.linked > button:only-child { border-radius: 10px; }
-
-/* Text fields */
-entry, spinbutton, spinbutton:not(.vertical), dropdown > button, combobox > box > button, passwordentry {
-  min-height: 33px;
-  border: 1px solid @bayu_control;
-  border-radius: 8px;
-  background-color: @bayu_control;
-  background-image: none;
-  box-shadow: none;
-  color: @bayu_fg;
-}
-entry, passwordentry { padding-left: 8px; padding-right: 8px; }
-entry:focus-within, spinbutton:focus-within, spinbutton:not(.vertical):focus-within, passwordentry:focus-within {
-  border-color: @bayu_accent;
-  outline: 2px solid alpha(@bayu_accent, 0.25);
-  outline-offset: 0;
-}
-entry:disabled, spinbutton:disabled, spinbutton:not(.vertical):disabled, combobox:disabled button.combo,
-dropdown:disabled > button, combobox:disabled > box > button { border-color: transparent; background-color: alpha(@bayu_control, 0.6); color: @bayu_fg_disabled; }
-spinbutton > text { padding-left: 8px; }
-spinbutton > button, spinbutton > button:hover, spinbutton > button:active {
-  border: none;
+window.csd.dialog:not(#_) { box-shadow: 0 16px 48px @bayu_shadow_dialog, 0 0 0 1px alpha(@bayu_text_primary, 0.06); }
+window.csd.maximized:not(#_), window.csd.fullscreen:not(#_), window.csd.tiled:not(#_),
+window.csd.tiled-top:not(#_), window.csd.tiled-left:not(#_), window.csd.tiled-right:not(#_),
+window.csd.tiled-bottom:not(#_) {
   border-radius: 0;
-  background-color: transparent;
-  color: alpha(@bayu_fg, 0.7);
   box-shadow: none;
 }
-spinbutton > button:hover { color: @bayu_fg; }
-entry > image { color: alpha(@bayu_fg, 0.6); }
-dropdown > button, combobox > box > button { padding: 4px 10px; }
-dropdown > button:hover, combobox > box > button:hover { background-color: @bayu_control_hover; border-color: @bayu_control_hover; }
+window.csd.popup:not(#_) { border-radius: 10px; box-shadow: 0 8px 24px @bayu_shadow_menu; }
 
-/* Check boxes and radio buttons */
-check, radio {
+label:disabled:not(#_) { color: @bayu_text_tertiary; }
+.dim-label:not(#_), label.dim-label:not(#_), label.subtitle:not(#_) { color: @bayu_text_secondary; opacity: 1; }
+label.caption:not(#_), .caption:not(#_) { font-size: 12px; font-weight: 500; }
+label.caption-heading:not(#_), .caption-heading:not(#_) { font-size: 12px; font-weight: 500; color: @bayu_text_secondary; }
+label.heading:not(#_), .heading:not(#_) { font-weight: 600; }
+.title-1:not(#_) { font-size: 40px; font-weight: 700; letter-spacing: -1px; }
+.title-2:not(#_) { font-size: 22px; font-weight: 600; letter-spacing: -0.3px; }
+.title-3:not(#_), .title-4:not(#_) { font-size: 15px; font-weight: 600; }
+.monospace:not(#_) { font-family: "JetBrains Mono", monospace; }
+label.error:not(#_) { color: @bayu_danger; }
+label.warning:not(#_) { color: @bayu_warning; }
+label.success:not(#_) { color: @bayu_success; }
+label.accent:not(#_) { color: @bayu_accent; }
+
+.view:not(#_), iconview:not(#_), textview > text:not(#_), list:not(#_), listview:not(#_),
+columnview:not(#_), gridview:not(#_), treeview.view:not(#_) {
+  background-color: @bayu_bg_card;
+  color: @bayu_text_primary;
+}
+.view:disabled:not(#_), textview > text:disabled:not(#_) { background-color: @bayu_bg_card; color: @bayu_text_tertiary; }
+textview:not(#_) { background-color: @bayu_bg_card; }
+text > selection:not(#_), label > selection:not(#_), textview > text > selection:not(#_),
+entry > text > selection:not(#_), spinbutton > text > selection:not(#_) {
+  background-color: alpha(@bayu_accent, 0.25);
+  color: @bayu_text_primary;
+}
+text > selection:focus-within:not(#_), entry > text > selection:focus-within:not(#_) { background-color: alpha(@bayu_accent, 0.3); }
+text > block-cursor:not(#_) { background-color: @bayu_text_primary; color: @bayu_bg_card; }
+
+separator:not(#_) { min-width: 1px; min-height: 1px; background-color: @bayu_divider; }
+separator.spacer:not(#_) { background: none; }
+paned > separator:not(#_) { background-color: @bayu_border; background-image: none; }
+paned.wide > separator:not(#_) { background-color: @bayu_bg_window; box-shadow: inset 0 1px @bayu_border, inset 0 -1px @bayu_border; }
+
+link:not(#_), button.link:not(#_), button.link > label:not(#_) {
+  color: @bayu_accent;
+  text-decoration: none;
+  text-shadow: none;
+}
+link:hover:not(#_), button.link:hover > label:not(#_) { text-decoration: underline; }
+link:visited:not(#_), button.link:visited:not(#_) { color: @bayu_accent_hover; }
+link:focus-visible:not(#_), button.link:focus-visible:not(#_) { outline: 2px solid @bayu_accent; outline-offset: 2px; border-radius: 6px; }
+
+rubberband:not(#_), .rubberband:not(#_) { border: 1px solid @bayu_accent; background-color: alpha(@bayu_accent, 0.15); }
+
+/* -- Header bars and window controls ------------------------------------ */
+
+headerbar:not(#_), .titlebar:not(headerbar):not(#_) {
+  min-height: 48px;
+  padding: 0 8px;
+  border: none;
+  background-color: @bayu_bg_window;
+  background-image: none;
+  box-shadow: none;
+  color: @bayu_text_primary;
+}
+headerbar .title:not(#_), headerbar label.title:not(#_), headerbar windowtitle > .title:not(#_) {
+  font-size: 15px;
+  font-weight: 600;
+  color: @bayu_text_primary;
+}
+headerbar .subtitle:not(#_) { font-size: 12px; color: @bayu_text_secondary; }
+headerbar entry:not(#_), headerbar spinbutton:not(#_), headerbar button:not(#_),
+headerbar menubutton:not(#_), headerbar dropdown:not(#_) {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+windowcontrols:not(#_) { border-spacing: 4px; }
+windowcontrols > button:not(#_) {
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+  color: @bayu_text_secondary;
+}
+windowcontrols > button > image:not(#_) {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  -gtk-icon-size: 16px;
+}
+windowcontrols > button:hover:not(#_) { background-color: @bayu_bg_hover; color: @bayu_text_primary; }
+windowcontrols > button:active:not(#_) { background-color: @bayu_bg_selected; transition: none; }
+
+/* -- Buttons ------------------------------------------------------------- */
+
+/* Secondary: card colour with a border, the default look. */
+button:not(#_), notebook > header > tabs > arrow:not(#_) {
+  min-height: 18px;
+  min-width: 18px;
+  padding: 8px 18px;
+  border: 1px solid @bayu_border;
+  border-radius: 8px;
+  background-color: @bayu_bg_card;
+  background-image: none;
+  box-shadow: none;
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+  -gtk-icon-filter: none;
+  color: @bayu_text_primary;
+  outline: 0 solid transparent;
+  outline-offset: 2px;
+  transition: background-color 100ms ease-out, color 100ms ease-out, border-color 100ms ease-out;
+}
+button:hover:not(#_) {
+  background-color: @bayu_bg_hover;
+  background-image: none;
+  box-shadow: none;
+}
+button:active:not(#_), button:checked:not(#_),
+button.keyboard-activating:not(#_) {
+  background-color: @bayu_bg_selected;
+  background-image: none;
+  box-shadow: none;
+  transition: none;
+}
+button:focus-visible:not(#_) {
+  outline: 2px solid @bayu_accent;
+  outline-offset: 2px;
+}
+button:disabled:not(#_) {
+  border-color: @bayu_bg_field;
+  background-color: @bayu_bg_field;
+  background-image: none;
+  box-shadow: none;
+  color: @bayu_text_tertiary;
+}
+button:disabled > button.text-button:not(#_) { padding: 8px 18px; }
+button.image-button:not(#_) { min-width: 18px; padding: 8px; }
+button.image-text-button:not(#_) { padding: 8px 14px; }
+button.image-text-button > box:not(#_) { border-spacing: 8px; }
+
+/* Primary: one per surface, the accent. */
+button.suggested-action:not(#_), button.default:not(#_) {
+  border-color: @bayu_accent;
+  background-color: @bayu_accent;
+  color: @bayu_text_on_accent;
+  font-weight: 500;
+}
+button.suggested-action:hover:not(#_), button.default:hover:not(#_) {
+  border-color: @bayu_accent_hover;
+  background-color: @bayu_accent_hover;
+}
+button.suggested-action:active:not(#_), button.suggested-action:checked:not(#_), button.default:active:not(#_) {
+  border-color: alpha(@bayu_accent_hover, 0.86);
+  background-color: alpha(@bayu_accent_hover, 0.86);
+}
+button.suggested-action:disabled:not(#_), button.default:disabled:not(#_) {
+  border-color: @bayu_bg_field;
+  background-color: @bayu_bg_field;
+  color: @bayu_text_tertiary;
+}
+
+/* Destructive: the danger colour. */
+button.destructive-action:not(#_) {
+  border-color: @bayu_danger;
+  background-color: @bayu_danger;
+  color: @bayu_text_on_accent;
+  font-weight: 500;
+}
+button.destructive-action:hover:not(#_) { border-color: shade(@bayu_danger, 0.92); background-color: shade(@bayu_danger, 0.92); }
+button.destructive-action:active:not(#_), button.destructive-action:checked:not(#_) {
+  border-color: shade(@bayu_danger, 0.86);
+  background-color: shade(@bayu_danger, 0.86);
+}
+button.destructive-action:disabled:not(#_) { border-color: @bayu_bg_field; background-color: @bayu_bg_field; color: @bayu_text_tertiary; }
+
+/* Ghost and icon buttons: no plate until hovered; ghost labels in the accent. */
+button.flat:not(#_), button.image-button:not(.suggested-action):not(.destructive-action):not(#_),
+button.sidebar-button:not(#_), notebook > header > tabs > arrow:not(#_),
+.toolbar button:not(.suggested-action):not(.destructive-action):not(#_),
+headerbar button:not(.suggested-action):not(.destructive-action):not(#_),
+actionbar button:not(.suggested-action):not(.destructive-action):not(#_),
+searchbar button:not(#_), infobar button.close:not(#_), popover button.image-button:not(#_),
+entry > button:not(#_) {
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: none;
+}
+button.flat.text-button:not(.suggested-action):not(.destructive-action):not(#_) { color: @bayu_accent; }
+button.flat.suggested-action:not(#_) { color: @bayu_accent; font-weight: 500; }
+button.flat.destructive-action:not(#_) { color: @bayu_danger; }
+button.flat:hover:not(#_), button.image-button:hover:not(.suggested-action):not(.destructive-action):not(#_),
+button.sidebar-button:hover:not(#_), notebook > header > tabs > arrow:hover:not(#_),
+.toolbar button:hover:not(.suggested-action):not(.destructive-action):not(#_),
+headerbar button:hover:not(.suggested-action):not(.destructive-action):not(#_),
+actionbar button:hover:not(.suggested-action):not(.destructive-action):not(#_),
+searchbar button:hover:not(#_), infobar button.close:hover:not(#_), entry > button:hover:not(#_) {
+  border-color: transparent;
+  background-color: @bayu_bg_hover;
+}
+button.flat:active:not(#_), button.flat:checked:not(#_),
+button.image-button:active:not(.suggested-action):not(.destructive-action):not(#_),
+button.image-button:checked:not(.suggested-action):not(.destructive-action):not(#_),
+.toolbar button:active:not(.suggested-action):not(.destructive-action):not(#_),
+.toolbar button:checked:not(.suggested-action):not(.destructive-action):not(#_),
+headerbar button:active:not(.suggested-action):not(.destructive-action):not(#_),
+headerbar button:checked:not(.suggested-action):not(.destructive-action):not(#_),
+actionbar button:active:not(.suggested-action):not(.destructive-action):not(#_),
+actionbar button:checked:not(.suggested-action):not(.destructive-action):not(#_),
+searchbar button:active:not(#_), entry > button:active:not(#_) {
+  border-color: transparent;
+  background-color: @bayu_bg_selected;
+}
+button.flat:disabled:not(#_), button.image-button:disabled:not(#_), headerbar button:disabled:not(#_) {
+  border-color: transparent;
+  background-color: transparent;
+  color: alpha(@bayu_text_tertiary, 0.8);
+}
+headerbar button:not(.suggested-action):not(.destructive-action):not(#_) { color: @bayu_text_primary; }
+
+button.circular:not(#_) { min-width: 18px; padding: 8px; border-radius: 9999px; }
+button.pill:not(#_) { padding: 8px 32px; border-radius: 9999px; }
+button.opaque:not(#_) { border-color: transparent; }
+
+/* On-screen display buttons keep their translucent look. */
+button.osd:not(#_), .osd button:not(#_) {
+  border: none;
+  background-color: rgba(0, 0, 0, 0.6);
+  background-image: none;
+  color: #FFFFFF;
+}
+button.osd:hover:not(#_), .osd button:hover:not(#_) { background-color: rgba(0, 0, 0, 0.7); }
+button.osd:active:not(#_), .osd button:active:not(#_), button.osd:checked:not(#_) { background-color: rgba(0, 0, 0, 0.8); }
+button.emoji-section:not(#_), button.emoji-section:hover:not(#_), button.emoji-section:checked:not(#_) {
+  min-width: 32px;
+  min-height: 28px;
+  padding: 3px 0 0;
+  border-width: 0 0 3px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 0;
+  background: none;
+}
+
+/* Linked groups share edges; only the outer corners are rounded. */
+.linked:not(.vertical) > button:not(#_), .linked:not(.vertical) > menubutton > button:not(#_),
+.linked:not(.vertical) > dropdown > button:not(#_), .linked:not(.vertical) > entry:not(#_) { border-radius: 0; }
+.linked:not(.vertical) > :first-child:not(#_), .linked:not(.vertical) > :first-child > button:not(#_) {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.linked:not(.vertical) > :last-child:not(#_), .linked:not(.vertical) > :last-child > button:not(#_) {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.linked:not(.vertical) > :not(:first-child):not(#_), .linked:not(.vertical) > :not(:first-child) > button:not(#_) { border-left-width: 0; }
+.linked.vertical > button:not(#_), .linked.vertical > entry:not(#_) { border-radius: 0; }
+.linked.vertical > :first-child:not(#_) { border-top-left-radius: 8px; border-top-right-radius: 8px; }
+.linked.vertical > :last-child:not(#_) { border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
+.linked.vertical > :not(:first-child):not(#_) { border-top-width: 0; }
+
+/* -- Selects: drop-downs, combo boxes and menu buttons ------------------- */
+
+dropdown > button:not(#_), combobox > box > button.combo:not(#_), combobox button.combo:not(#_),
+appchooserbutton > combobox > box > button.combo:not(#_), fontbutton > button:not(#_), colorbutton > button:not(#_) {
+  min-height: 16px;
+  padding: 8px 10px 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: @bayu_bg_field;
+  color: @bayu_text_primary;
+}
+dropdown > button:hover:not(#_), combobox button.combo:hover:not(#_), fontbutton > button:hover:not(#_),
+colorbutton > button:hover:not(#_) { background-color: @bayu_bg_hover; }
+dropdown > button:active:not(#_), dropdown > button:checked:not(#_), combobox button.combo:active:not(#_),
+combobox button.combo:checked:not(#_) { background-color: @bayu_bg_selected; }
+dropdown > button:disabled:not(#_), combobox button.combo:disabled:not(#_) { background-color: @bayu_bg_field; color: @bayu_text_tertiary; }
+dropdown > button > box:not(#_), combobox button.combo > box:not(#_) { border-spacing: 6px; }
+dropdown arrow:not(#_), combobox arrow:not(#_), menubutton arrow:not(#_) {
+  min-width: 16px;
+  min-height: 16px;
+  color: @bayu_text_secondary;
+  -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+}
+menubutton > button.toggle:not(.image-button):not(#_) { padding: 8px 12px; }
+menubutton > button > box:not(#_) { border-spacing: 6px; }
+colorbutton > button:not(#_) { padding: 6px; }
+
+/* -- Text fields --------------------------------------------------------- */
+
+entry:not(#_), spinbutton:not(.vertical):not(#_), spinbutton.vertical > text:not(#_), passwordentry:not(#_) {
+  min-height: 32px;
+  padding: 0 10px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-color: @bayu_bg_field;
+  background-image: none;
+  box-shadow: none;
+  color: @bayu_text_primary;
+  caret-color: @bayu_accent;
+  outline: none;
+  transition: background-color 100ms ease-out, border-color 100ms ease-out;
+}
+entry:focus-within:not(#_), spinbutton:not(.vertical):focus-within:not(#_), passwordentry:focus-within:not(#_) {
+  border-color: @bayu_accent;
+  background-color: @bayu_bg_card;
+  box-shadow: none;
+  outline: none;
+}
+entry:disabled:not(#_), spinbutton:disabled:not(#_), passwordentry:disabled:not(#_) {
+  border-color: transparent;
+  background-color: @bayu_bg_field;
+  color: @bayu_text_tertiary;
+  opacity: 0.45;
+}
+entry.error:not(#_), spinbutton.error:not(#_) { border-color: @bayu_danger; color: @bayu_text_primary; }
+entry.warning:not(#_), spinbutton.warning:not(#_) { border-color: @bayu_warning; color: @bayu_text_primary; }
+entry.flat:not(#_) { border-color: transparent; background-color: transparent; }
+entry > text > placeholder:not(#_), spinbutton > text > placeholder:not(#_), text > placeholder:not(#_) {
+  color: @bayu_text_tertiary;
+  opacity: 1;
+}
+entry > image:not(#_), spinbutton > image:not(#_) { color: @bayu_text_tertiary; }
+entry > image:hover:not(#_) { color: @bayu_text_secondary; }
+entry.search:not(#_) { border-radius: 8px; }
+entry > progress:not(#_) { margin: 0 -8px; border-bottom: 2px solid @bayu_accent; background: none; box-shadow: none; }
+spinbutton:not(.vertical) > text:not(#_) { min-width: 32px; }
+spinbutton > button:not(#_), spinbutton > button.up:not(#_), spinbutton > button.down:not(#_) {
   min-width: 18px;
   min-height: 18px;
-  border: 1px solid @bayu_toggle_border;
+  margin: 4px 0;
+  padding: 3px;
+  border: none;
   border-radius: 6px;
-  background-color: @bayu_view;
+  background-color: transparent;
+  color: @bayu_text_secondary;
+}
+spinbutton > button:hover:not(#_) { background-color: @bayu_bg_hover; color: @bayu_text_primary; }
+spinbutton > button:active:not(#_) { background-color: @bayu_bg_selected; }
+spinbutton > button:disabled:not(#_) { background-color: transparent; color: @bayu_text_tertiary; }
+spinbutton.vertical > button:not(#_) { margin: 0; padding: 6px; }
+
+/* -- Check boxes and radio buttons --------------------------------------- */
+
+check:not(#_), radio:not(#_) {
+  min-width: 16px;
+  min-height: 16px;
+  margin: 0 8px 0 0;
+  padding: 0;
+  border: 1px solid alpha(@bayu_text_tertiary, 0.7);
+  border-radius: 6px;
+  background-color: @bayu_bg_card;
   background-image: none;
   box-shadow: none;
-  color: @bayu_accent_fg;
+  color: @bayu_text_on_accent;
+  -gtk-icon-size: 14px;
+  -gtk-icon-shadow: none;
+  transition: background-color 100ms ease-out, border-color 100ms ease-out;
 }
-radio { border-radius: 9999px; }
-check:checked, check:indeterminate, radio:checked, radio:indeterminate {
-  border-color: @bayu_accent_border;
+radio:not(#_) { border-radius: 9999px; }
+checkbutton.text-button > check:dir(rtl):not(#_), checkbutton.text-button > radio:dir(rtl):not(#_) { margin: 0 0 0 8px; }
+checkbutton:not(.text-button) > check:not(#_), checkbutton:not(.text-button) > radio:not(#_) { margin: 0; }
+check:hover:not(:checked):not(:indeterminate):not(#_), radio:hover:not(:checked):not(:indeterminate):not(#_) {
+  border-color: @bayu_text_tertiary;
+  background-color: @bayu_bg_hover;
+}
+check:checked:not(#_), check:indeterminate:not(#_), radio:checked:not(#_), radio:indeterminate:not(#_) {
+  border-color: @bayu_accent;
   background-color: @bayu_accent;
-  color: @bayu_accent_fg;
+  background-image: none;
+  box-shadow: none;
+  color: @bayu_text_on_accent;
 }
-check:hover:not(:checked):not(:indeterminate), radio:hover:not(:checked) { border-color: alpha(@bayu_accent, 0.6); }
-check:disabled, radio:disabled { opacity: 0.5; }
-checkbutton:focus-visible > check, checkbutton:focus-visible > radio { outline: 2px solid alpha(@bayu_accent, 0.35); outline-offset: 1px; }
+check:checked:hover:not(#_), check:indeterminate:hover:not(#_), radio:checked:hover:not(#_), radio:indeterminate:hover:not(#_) {
+  border-color: @bayu_accent_hover;
+  background-color: @bayu_accent_hover;
+  background-image: none;
+}
+check:checked:active:not(#_), radio:checked:active:not(#_) { background-image: none; box-shadow: none; }
+check:checked:not(#_) { -gtk-icon-source: -gtk-icontheme("object-select-symbolic"); }
+check:indeterminate:not(#_), radio:indeterminate:not(#_) { -gtk-icon-source: -gtk-icontheme("list-remove-symbolic"); }
+radio:checked:not(#_) {
+  -gtk-icon-source: none;
+  background-image: radial-gradient(circle, @bayu_text_on_accent 3px, @bayu_accent 3.5px);
+}
+radio:checked:hover:not(#_) { background-image: radial-gradient(circle, @bayu_text_on_accent 3px, @bayu_accent_hover 3.5px); }
+check:disabled:not(#_), radio:disabled:not(#_) { opacity: 0.45; }
+check:checked:disabled:not(#_), radio:checked:disabled:not(#_) { color: @bayu_text_on_accent; }
+checkbutton:focus-visible > check:not(#_), checkbutton:focus-visible > radio:not(#_) {
+  outline: 2px solid @bayu_accent;
+  outline-offset: 2px;
+}
+checkbutton:not(#_) { padding: 2px; border-spacing: 8px; outline: none; }
+checkbutton:disabled > label:not(#_) { color: @bayu_text_tertiary; }
 
-/* Switches: 38 x 20 track, 16 px handle. */
-switch {
+/* -- Switches: 44 x 26 with a 22 px knob --------------------------------- */
+
+switch:not(#_) {
+  min-width: 0;
+  min-height: 26px;
+  padding: 0;
   border: none;
   border-radius: 9999px;
-  background-color: alpha(@bayu_fg, 0.2);
+  background-color: @bayu_bg_selected;
   background-image: none;
   box-shadow: none;
   color: transparent;
+  font-size: 0;
+  outline: 0 solid transparent;
+  outline-offset: 2px;
+  transition: background-color 100ms ease-out;
 }
-switch:checked { background-color: @bayu_accent; }
-switch > slider, switch:hover > slider, switch:checked > slider {
-  min-width: 16px;
-  min-height: 16px;
-  margin: 2px;
+switch:hover:not(:checked):not(#_) { background-color: shade(@bayu_bg_selected, 0.96); }
+switch:checked:not(#_) { background-color: @bayu_accent; }
+switch:checked:hover:not(#_) { background-color: @bayu_accent_hover; }
+switch > image:not(#_) { color: transparent; -gtk-icon-size: 0; }
+/* Each half is as wide as the knob; the knob sits 2 px in from the end. */
+switch > slider:not(#_), switch:hover > slider:not(#_), switch:checked > slider:not(#_),
+switch:checked:hover > slider:not(#_), row:selected switch > slider:not(#_) {
+  min-width: 22px;
+  min-height: 22px;
+  margin: 2px -2px 2px 2px;
   border: none;
   border-radius: 9999px;
   background-color: #FFFFFF;
   background-image: none;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+  transition: margin 100ms ease-out;
 }
-switch > image { color: transparent; }
-switch:disabled { opacity: 0.5; }
+switch:checked > slider:not(#_), switch:checked:hover > slider:not(#_) { margin: 2px 2px 2px -2px; }
+switch:focus-visible:not(#_) { outline: 2px solid @bayu_accent; outline-offset: 2px; }
+switch:disabled:not(#_) { opacity: 0.45; }
 
-/* Sliders: 4 px track, 22 px white handle. */
-scale > trough {
+/* -- Sliders: 4 px groove, 18 px handle ---------------------------------- */
+
+scale:not(#_) { min-height: 18px; min-width: 18px; padding: 8px 9px; outline: none; }
+scale.vertical:not(#_) { padding: 9px 8px; }
+scale > trough:not(#_) {
   min-height: 4px;
   min-width: 4px;
   border: none;
   border-radius: 2px;
   background-color: @bayu_slider_track;
+  background-image: none;
+  box-shadow: none;
   outline: none;
 }
-scale > trough > highlight {
+scale > trough > highlight:not(#_), scale > trough > highlight:disabled:not(#_) {
+  min-height: 4px;
+  min-width: 4px;
   border: none;
   border-radius: 2px;
   background-color: @bayu_accent;
   background-image: none;
 }
-scale > trough > fill { background-color: transparent; }
-scale > trough > slider {
-  min-width: 22px;
-  min-height: 22px;
-  margin: -9px;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+scale > trough > fill:not(#_) { border: none; border-radius: 2px; background-color: alpha(@bayu_text_tertiary, 0.4); }
+scale > trough > slider:not(#_) {
+  min-width: 18px;
+  min-height: 18px;
+  margin: -7px;
+  border: 1px solid @bayu_border;
   border-radius: 9999px;
   background-color: #FFFFFF;
   background-image: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  outline: 0 solid transparent;
+  outline-offset: 2px;
+  transition: box-shadow 100ms ease-out;
 }
-scale > trough > slider:active { background-color: #FAFAFA; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); }
-scale:disabled { opacity: 0.5; }
+scale > trough > slider:hover:not(#_) { background-image: none; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18); }
+scale > trough > slider:active:not(#_) { background-color: @bayu_bg_field; transition: none; }
+scale:focus-visible > trough > slider:not(#_) { outline: 2px solid @bayu_accent; outline-offset: 2px; }
+scale:disabled:not(#_) { opacity: 0.45; }
+scale > trough > slider:disabled:not(#_) { background-color: #FFFFFF; background-image: none; }
+scale > marks > mark > indicator:not(#_) { min-height: 4px; min-width: 1px; background-color: @bayu_text_tertiary; }
+scale > marks > mark > label:not(#_), scale > value:not(#_) { font-size: 12px; color: @bayu_text_secondary; }
 
-/* Progress bars: a rounded pill. */
-progressbar > trough {
-  min-height: 6px;
-  min-width: 6px;
+/* -- Progress and level bars ---------------------------------------------- */
+
+progressbar > trough:not(#_), progressbar > trough:disabled:not(#_) {
+  min-height: 4px;
+  min-width: 4px;
   border: none;
   border-radius: 9999px;
-  background-color: @bayu_control;
+  background-color: @bayu_bg_selected;
+  background-image: none;
   box-shadow: none;
 }
-progressbar > trough > progress {
-  min-height: 6px;
-  min-width: 6px;
+progressbar > trough > progress:not(#_) {
+  min-height: 4px;
+  min-width: 4px;
   border: none;
   border-radius: 9999px;
   background-color: @bayu_accent;
   background-image: none;
+  box-shadow: none;
 }
-levelbar > trough > block.filled, levelbar > trough > block.high { background-color: @bayu_accent; }
+progressbar > text:not(#_) { font-size: 12px; color: @bayu_text_secondary; }
+progressbar:disabled:not(#_) { opacity: 0.45; }
+levelbar > trough:not(#_) { padding: 0; border: none; border-radius: 9999px; background-color: @bayu_bg_selected; box-shadow: none; }
+levelbar > trough > block:not(#_) { border: none; border-radius: 9999px; box-shadow: none; }
+levelbar > trough > block.filled:not(#_), levelbar > trough > block.high:not(#_), levelbar > trough > block.full:not(#_) { background-color: @bayu_accent; }
+levelbar > trough > block.low:not(#_) { background-color: @bayu_warning; }
+levelbar > trough > block.empty:not(#_) { background-color: transparent; }
+levelbar.discrete > trough > block:not(#_) { margin: 0 1px; border-radius: 2px; }
 
-/* Scroll bars: a thin rounded handle. */
-scrollbar, scrollbar > range > trough { background-color: transparent; border-color: transparent; }
-scrollbar > range > trough > slider {
+/* -- Scroll bars: a thin overlay indicator -------------------------------- */
+
+scrollbar:not(#_), scrollbar > range > trough:not(#_) {
+  border: none;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+}
+scrollbar > range > trough > slider:not(#_) {
   min-width: 6px;
   min-height: 6px;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  background-clip: padding-box;
-  background-color: @bayu_scrollbar;
-}
-scrollbar > range > trough > slider:active { background-color: @bayu_fg; }
-
-/* Notebooks: tabs as Bayu's segmented control. */
-notebook > header { background-color: @bayu_window; border-color: @bayu_separator; box-shadow: none; }
-notebook > header > tabs { background-color: @bayu_tab_track; border-radius: 8px; margin: 4px; }
-notebook > header > tabs > tab {
-  min-height: 24px;
   margin: 2px;
-  padding: 2px 12px;
+  border: none;
+  border-radius: 9999px;
+  background-color: alpha(@bayu_text_tertiary, 0.7);
+}
+scrollbar > range > trough > slider:hover:not(#_) { background-color: @bayu_text_secondary; }
+scrollbar > range > trough > slider:active:not(#_) { background-color: @bayu_text_secondary; }
+scrollbar.overlay-indicator:not(.hovering) > range > trough > slider:not(#_) { min-width: 4px; min-height: 4px; margin: 3px; }
+scrollbar.overlay-indicator.hovering > range > trough:not(#_) { background-color: transparent; }
+scrollbar > button:not(#_) { min-width: 0; min-height: 0; padding: 0; border: none; background: none; -gtk-icon-size: 0; }
+
+/* -- Tabs: GtkNotebook is the tab bar, an accent label and underline ----- */
+
+notebook:not(#_) { background-color: transparent; }
+notebook:not(#_), notebook.frame:not(#_) { border: none; box-shadow: none; }
+notebook > header:not(#_) {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+notebook > header.top:not(#_) { box-shadow: inset 0 -1px @bayu_divider; }
+notebook > header.bottom:not(#_) { box-shadow: inset 0 1px @bayu_divider; }
+notebook > header.left:not(#_) { box-shadow: inset -1px 0 @bayu_divider; }
+notebook > header.right:not(#_) { box-shadow: inset 1px 0 @bayu_divider; }
+notebook > header > tabs > tab:not(#_), notebook > header.top > tabs > tab:not(#_), notebook > header.bottom > tabs > tab:not(#_),
+notebook > header.left > tabs > tab:not(#_), notebook > header.right > tabs > tab:not(#_) {
+  min-height: 32px;
+  min-width: 16px;
+  margin: 0 4px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+  color: @bayu_text_secondary;
+  font-weight: normal;
+  outline: none;
+  transition: color 100ms ease-out, box-shadow 100ms ease-out;
+}
+notebook > header > tabs > tab:hover:not(#_), notebook > header.top > tabs > tab:hover:not(#_),
+notebook > header.bottom > tabs > tab:hover:not(#_) {
+  background-color: transparent;
+  box-shadow: none;
+  color: @bayu_text_primary;
+}
+notebook > header.top > tabs > tab:checked:not(#_) { color: @bayu_accent; box-shadow: inset 0 -2px @bayu_accent; }
+notebook > header.bottom > tabs > tab:checked:not(#_) { color: @bayu_accent; box-shadow: inset 0 2px @bayu_accent; }
+notebook > header.left > tabs > tab:checked:not(#_) { color: @bayu_accent; box-shadow: inset -2px 0 @bayu_accent; }
+notebook > header.right > tabs > tab:checked:not(#_) { color: @bayu_accent; box-shadow: inset 2px 0 @bayu_accent; }
+notebook > header > tabs > tab:checked > label:not(#_) { font-weight: 500; }
+notebook:focus-visible > header > tabs > tab:checked:not(#_) { outline: 2px solid @bayu_accent; outline-offset: -2px; border-radius: 6px; }
+notebook > header > tabs > tab:disabled:not(#_) { color: @bayu_text_tertiary; }
+notebook > header > tabs > tab button.flat:not(#_) { min-width: 16px; min-height: 16px; padding: 2px; border-radius: 6px; color: @bayu_text_secondary; }
+notebook > stack:not(:only-child):not(#_) { border-radius: 0 0 12px 12px; background-color: @bayu_bg_card; }
+
+/* -- Segmented control: GtkStackSwitcher ---------------------------------- */
+
+stackswitcher:not(#_) {
+  padding: 2px;
+  border-radius: 8px;
+  border-spacing: 0;
+  background-color: @bayu_bg_field;
+}
+stackswitcher > button:not(#_), stackswitcher.linked:not(.vertical) > button:nth-child(n):not(#_) {
+  min-height: 16px;
+  padding: 6px 16px;
   border: none;
   border-radius: 6px;
+  background-color: transparent;
   box-shadow: none;
-  color: alpha(@bayu_fg, 0.7);
+  color: @bayu_text_secondary;
 }
-notebook > header > tabs > tab:hover { background-color: alpha(@bayu_fg, 0.06); color: @bayu_fg; }
-notebook > header > tabs > tab:checked { background-color: @bayu_tab_plate; color: @bayu_fg; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
-notebook > stack:not(:only-child) { background-color: @bayu_view; }
+stackswitcher > button:hover:not(#_), stackswitcher.linked:not(.vertical) > button:nth-child(n):hover:not(#_) { background-color: transparent; color: @bayu_text_primary; }
+stackswitcher > button:checked:not(#_), stackswitcher.linked:not(.vertical) > button:nth-child(n):checked:not(#_),
+stackswitcher.linked:not(.vertical) > button:nth-child(n):active:not(#_) {
+  background-color: @bayu_bg_card;
+  box-shadow: 0 1px 2px @bayu_shadow_card, 0 1px 3px @bayu_shadow_card;
+  color: @bayu_text_primary;
+  font-weight: 500;
+}
+stackswitcher > button:focus-visible:not(#_) { outline: 2px solid @bayu_accent; outline-offset: 0; }
 
-/* Menus and popovers */
-popover > contents, popover.menu > contents, popover.background > contents {
-  padding: 4px;
-  border: 1px solid @bayu_menu_border;
+/* -- Lists, rows and cards ------------------------------------------------- */
+
+row:not(#_) {
+  outline: 0 solid transparent;
+  outline-offset: -2px;
+  transition: background-color 100ms ease-out;
+}
+list > row.activatable:hover:not(#_), listview > row:hover:not(#_), row.activatable:hover:not(#_),
+columnview > listview > row:hover:not(#_), gridview > child:hover:not(#_), flowbox > flowboxchild:hover:not(#_) {
+  background-color: @bayu_bg_hover;
+}
+list > row.activatable:active:not(#_), listview > row:active:not(#_), row.activatable:active:not(#_),
+columnview > listview > row:active:not(#_), gridview > child:active:not(#_) {
+  background-color: @bayu_bg_selected;
+  transition: none;
+}
+row:selected:not(#_), list > row:selected:not(#_), listview > row:selected:not(#_), columnview > listview > row:selected:not(#_),
+gridview > child:selected:not(#_), flowbox > flowboxchild:selected:not(#_), .view:selected:not(#_),
+treeview.view:selected:not(#_), iconview:selected:not(#_), textview > text:selected:not(#_),
+modelbutton.flat:selected:not(#_), calendar > grid > label.day-number:selected:not(#_) {
+  background-color: @bayu_bg_selected;
+  color: @bayu_text_primary;
+  font-weight: 500;
+}
+row:selected label:not(#_), .view:selected label:not(#_), label:selected:not(#_) { color: @bayu_text_primary; }
+row:focus-visible:not(#_), listview > row:focus-visible:not(#_), list > row:focus-visible:not(#_),
+gridview > child:focus-visible:not(#_), flowbox > flowboxchild:focus-visible:not(#_) {
+  outline: 2px solid @bayu_accent;
+  outline-offset: -2px;
+}
+row:disabled:not(#_) > * { opacity: 0.45; }
+list.separators > row:not(.separator):not(#_) { border-bottom: 1px solid @bayu_divider; }
+list > row.separator:not(#_), listview > row.separator:not(#_) { border-color: @bayu_divider; }
+
+/* Settings groups: a card of 44 px rows divided by an inset rule. */
+.boxed-list:not(#_), list.boxed-list:not(#_), list.content:not(#_), .card:not(#_), frame.card:not(#_) {
+  border: none;
   border-radius: 12px;
-  background-color: @bayu_view;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  color: @bayu_fg;
+  background-color: @bayu_bg_card;
+  box-shadow: 0 1px 2px @bayu_shadow_card;
+  color: @bayu_text_primary;
 }
-popover > arrow { background-color: @bayu_view; border-color: @bayu_menu_border; }
-popover modelbutton, popover.menu modelbutton {
-  min-height: 26px;
-  padding: 2px 8px;
-  border-radius: 6px;
+.card.activatable:hover:not(#_) { background-color: shade(@bayu_bg_card, 0.98); }
+.boxed-list > row:not(#_), list.content > row:not(#_) {
+  min-height: 20px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 0;
+  background-image: linear-gradient(@bayu_divider, @bayu_divider);
+  background-size: 100% 1px;
+  background-position: 16px 100%;
+  background-repeat: no-repeat;
 }
-popover modelbutton:hover, popover modelbutton:selected, popover.menu modelbutton:hover {
-  background-color: alpha(@bayu_accent, 0.9);
-  color: @bayu_accent_fg;
-}
-popover modelbutton:disabled { color: alpha(@bayu_fg, 0.4); }
-popover separator { margin: 4px 6px; background-color: @bayu_menu_border; }
+.boxed-list > row:last-child:not(#_), list.content > row:last-child:not(#_) { background-image: none; }
+.boxed-list > row:first-child:not(#_), list.content > row:first-child:not(#_) { border-top-left-radius: 12px; border-top-right-radius: 12px; }
+.boxed-list > row:last-child:not(#_), list.content > row:last-child:not(#_) { border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
+.boxed-list > row:selected:not(#_) { font-weight: normal; }
+.boxed-list > row:focus-visible:not(#_) { outline-offset: -2px; border-radius: 12px; }
 
-/* Tool tips */
-tooltip, tooltip.background {
+/* Frames are cards; their labels are the caption above. */
+frame:not(#_) { border: none; border-radius: 12px; background-color: @bayu_bg_card; box-shadow: 0 1px 2px @bayu_shadow_card; }
+frame.flat:not(#_), frame.view:not(#_) { box-shadow: none; }
+frame > label:not(#_) { margin: 0 0 8px 4px; color: @bayu_text_secondary; }
+scrolledwindow.frame:not(#_) { border: 1px solid @bayu_border; border-radius: 8px; }
+scrolledwindow > undershoot:not(#_), scrolledwindow > overshoot:not(#_) { background: none; box-shadow: none; }
+
+/* Sidebars */
+.navigation-sidebar:not(#_), stacksidebar:not(#_), placessidebar:not(#_), placessidebar list:not(#_),
+stacksidebar list:not(#_), .sidebar-pane:not(#_), .sidebar:not(#_) {
+  border: none;
+  background-color: @bayu_bg_sidebar;
+  color: @bayu_text_primary;
+}
+.navigation-sidebar:not(#_), stacksidebar:not(#_), placessidebar:not(#_) { box-shadow: inset -1px 0 @bayu_border; }
+popover .navigation-sidebar:not(#_) { background-color: transparent; box-shadow: none; }
+.navigation-sidebar:not(#_) { padding: 8px 0; }
+.navigation-sidebar > row:not(#_), stacksidebar row:not(#_), placessidebar row:not(#_) {
+  min-height: 20px;
+  margin: 0 8px 2px;
+  padding: 6px 8px;
   border: none;
   border-radius: 8px;
-  background-color: alpha(@bayu_view, 0.95);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  color: @bayu_fg;
+  background-color: transparent;
+  color: @bayu_text_primary;
 }
-tooltip > box > label { color: @bayu_fg; }
+.navigation-sidebar > row:hover:not(#_), stacksidebar row:hover:not(#_), placessidebar row:hover:not(#_) { background-color: @bayu_bg_hover; }
+.navigation-sidebar > row:active:not(#_), stacksidebar row:active:not(#_), placessidebar row:active:not(#_) { background-color: @bayu_bg_selected; transition: none; }
+.navigation-sidebar > row:selected:not(#_), stacksidebar row:selected:not(#_), placessidebar row:selected:not(#_) {
+  background-color: @bayu_bg_selected;
+  color: @bayu_text_primary;
+  font-weight: 500;
+}
+.navigation-sidebar > row.separator:not(#_), .navigation-sidebar > separator:not(#_) { margin: 8px 16px; background-color: @bayu_divider; }
+placessidebar .navigation-sidebar > row:not(#_) { padding: 0; }
+placessidebar .navigation-sidebar > row > revealer:not(#_) { padding: 6px 8px; }
+.navigation-sidebar label.heading:not(#_), placessidebar row.sidebar-placeholder-row:not(#_) { font-size: 12px; font-weight: 500; color: @bayu_text_secondary; }
 
-/* Lists */
-listview > row:hover:not(:selected), list > row:hover:not(:selected) { background-color: alpha(@bayu_fg, 0.05); }
-frame > border, .frame { border-color: @bayu_separator; }
+/* Column and tree views */
+columnview > header > button:not(#_), treeview.view > header > button:not(#_), treeview.view header button:not(#_) {
+  min-height: 16px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 0;
+  background-color: @bayu_bg_card;
+  background-image: none;
+  box-shadow: inset 0 -1px @bayu_divider, inset -1px 0 @bayu_divider;
+  color: @bayu_text_secondary;
+  font-size: 12px;
+  font-weight: 500;
+}
+columnview > header > button:last-child:not(#_), treeview.view header button:last-child:not(#_) { box-shadow: inset 0 -1px @bayu_divider; }
+columnview > header > button:hover:not(#_), treeview.view header button:hover:not(#_) { background-color: @bayu_bg_hover; color: @bayu_text_primary; }
+columnview > header > button sort-indicator:not(#_), treeview.view header button arrow:not(#_) { color: @bayu_text_secondary; }
+columnview > listview > row > cell:not(#_) { padding: 6px 12px; }
+columnview.data-table > listview > row > cell:not(#_) { padding: 2px 12px; }
+treeview.view:not(#_) { border-color: @bayu_divider; }
+treeview.view.separator:not(#_) { color: @bayu_divider; }
+treeview.view:hover:not(:selected):not(#_) { background-color: @bayu_bg_hover; }
+treeview.view > dndtarget:drop(active):not(#_), treeview.view:drop(active):not(#_) { border-color: @bayu_accent; }
+expander:not(#_), treeview.view expander:not(#_) { min-width: 16px; min-height: 16px; color: @bayu_text_secondary; }
+expander:hover:not(#_) { color: @bayu_text_primary; }
 
-/* Beat the position-specific tab rules of GTK's own theme. */
-notebook > header.top > tabs > tab, notebook > header.bottom > tabs > tab, notebook > header.left > tabs > tab, notebook > header.right > tabs > tab { box-shadow: none; border: none; }
-notebook > header.top > tabs > tab:hover:not(:checked), notebook > header.bottom > tabs > tab:hover:not(:checked), notebook > header.left > tabs > tab:hover:not(:checked), notebook > header.right > tabs > tab:hover:not(:checked) { box-shadow: none; background-color: alpha(@bayu_fg, 0.06); }
-notebook > header.top > tabs > tab:checked, notebook > header.bottom > tabs > tab:checked, notebook > header.left > tabs > tab:checked, notebook > header.right > tabs > tab:checked { background-color: @bayu_tab_plate; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
+/* -- Menus, popovers and drop-down lists: radius 10, elevation 1 ---------- */
+
+popover:not(#_), popover.background:not(#_) { background-color: transparent; box-shadow: none; }
+popover.background > contents:not(#_), popover.menu > contents:not(#_), popover > contents:not(#_) {
+  padding: 6px;
+  border: none;
+  border-radius: 10px;
+  background-color: @bayu_bg_card;
+  box-shadow: 0 8px 24px @bayu_shadow_menu, 0 0 0 1px alpha(@bayu_text_primary, 0.06);
+  color: @bayu_text_primary;
+}
+popover.background > arrow:not(#_), popover > arrow:not(#_) {
+  border: 1px solid alpha(@bayu_text_primary, 0.06);
+  background-color: @bayu_bg_card;
+  box-shadow: none;
+}
+popover.background > contents > list:not(#_), popover.background > contents > listview:not(#_),
+popover.background > contents > .view:not(#_), popover > contents list:not(#_), popover > contents listview:not(#_) {
+  background-color: transparent;
+  box-shadow: none;
+}
+dropdown > popover.menu.background > contents:not(#_), dropdown popover > contents:not(#_) { padding: 6px; }
+popover listview > row:not(#_), dropdown popover listview > row:not(#_), popover list > row:not(#_) {
+  min-height: 20px;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+popover listview > row:selected:not(#_), dropdown popover listview > row:selected:not(#_) { background-color: transparent; font-weight: normal; }
+popover listview > row:hover:not(#_), popover listview > row:selected:hover:not(#_) { background-color: @bayu_bg_hover; }
+dropdown popover listview > row image:not(#_), combobox popover image:not(#_) { color: @bayu_accent; }
+modelbutton:not(#_), popover.menu modelbutton:not(#_) {
+  min-height: 20px;
+  min-width: 40px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: @bayu_text_primary;
+  outline: none;
+  transition: background-color 100ms ease-out;
+}
+modelbutton:hover:not(#_), modelbutton.flat:hover:not(#_), modelbutton:selected:not(#_), popover.menu modelbutton:hover:not(#_),
+popover.menu modelbutton:selected:not(#_), popover.menu modelbutton:focus-visible:not(#_) {
+  background-color: @bayu_bg_hover;
+  color: @bayu_text_primary;
+  font-weight: normal;
+}
+modelbutton:active:not(#_) { background-color: @bayu_bg_selected; transition: none; }
+modelbutton:disabled:not(#_) { color: @bayu_text_tertiary; }
+modelbutton accelerator:not(#_), popover.menu accelerator:not(#_) { color: @bayu_text_tertiary; font-family: "JetBrains Mono", monospace; font-size: 12px; }
+/* Checked menu items: an accent check mark, no box. */
+popover.menu check:not(#_), popover.menu radio:not(#_), modelbutton check:not(#_), modelbutton radio:not(#_) {
+  min-width: 16px;
+  min-height: 16px;
+  border: none;
+  background: none;
+  box-shadow: none;
+  color: @bayu_accent;
+  -gtk-icon-source: none;
+}
+popover.menu check:checked:not(#_), popover.menu radio:checked:not(#_), modelbutton check:checked:not(#_),
+modelbutton radio:checked:not(#_) {
+  background: none;
+  color: @bayu_accent;
+  -gtk-icon-source: -gtk-icontheme("object-select-symbolic");
+}
+popover.menu check:indeterminate:not(#_), popover.menu radio:indeterminate:not(#_) { background: none; color: @bayu_accent; }
+popover.menu arrow:not(#_), modelbutton arrow:not(#_) { color: @bayu_text_secondary; }
+popover separator:not(#_), popover.menu separator:not(#_) { margin: 4px 8px; background-color: @bayu_divider; }
+popover.menu box.inline-buttons button.image-button.model:not(#_) { border-radius: 6px; }
+
+menubar:not(#_), .menubar:not(#_) {
+  padding: 2px 4px;
+  border: none;
+  background-color: @bayu_bg_window;
+  box-shadow: inset 0 -1px @bayu_divider;
+}
+menubar > item:not(#_), .menubar > item:not(#_) { min-height: 16px; padding: 4px 10px; border-radius: 6px; color: @bayu_text_primary; }
+menubar > item:hover:not(#_), menubar > item:selected:not(#_) { background-color: @bayu_bg_hover; box-shadow: none; }
+
+/* -- Tool tips ------------------------------------------------------------- */
+
+tooltip:not(#_), tooltip.background:not(#_) {
+  padding: 6px 10px;
+  border: 1px solid @bayu_border;
+  border-radius: 6px;
+  background-color: @bayu_tooltip_bg;
+  box-shadow: none;
+  color: @bayu_tooltip_fg;
+  font-size: 12px;
+}
+tooltip > box:not(#_) { border-spacing: 6px; }
+tooltip label:not(#_) { color: @bayu_tooltip_fg; }
+
+/* -- Bars: action bars, search bars, tool bars, status bars ---------------- */
+
+actionbar > revealer > box:not(#_) {
+  padding: 8px;
+  border: none;
+  background-color: @bayu_bg_window;
+  box-shadow: inset 0 1px @bayu_divider;
+}
+searchbar > revealer > box:not(#_) {
+  padding: 8px;
+  border: none;
+  background-color: @bayu_bg_window;
+  box-shadow: inset 0 -1px @bayu_divider;
+}
+.toolbar:not(#_), toolbar:not(#_) { padding: 4px; border-spacing: 4px; background-color: @bayu_bg_window; }
+statusbar:not(#_) { padding: 4px 12px; color: @bayu_text_secondary; font-size: 12px; }
+
+/* Banners */
+infobar:not(#_) { border: none; }
+infobar > revealer > box:not(#_), infobar.info > revealer > box:not(#_), infobar.question > revealer > box:not(#_) {
+  padding: 10px 16px;
+  border: none;
+  border-spacing: 12px;
+  background-color: @bayu_accent_soft;
+  background-image: none;
+  color: @bayu_text_primary;
+}
+infobar.warning > revealer > box:not(#_) { background-color: alpha(@bayu_warning, 0.16); border: none; }
+infobar.error > revealer > box:not(#_) { background-color: alpha(@bayu_danger, 0.14); border: none; }
+infobar.action:hover > revealer > box:not(#_) { background-color: shade(@bayu_accent_soft, 0.97); }
+infobar label:not(#_) { color: @bayu_text_primary; }
+.banner:not(#_) { padding: 10px 16px; border-radius: 8px; background-color: @bayu_accent_soft; color: @bayu_text_primary; }
+
+/* Toasts */
+.app-notification:not(#_), .toast:not(#_) {
+  margin: 8px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background-color: @bayu_bg_card;
+  background-image: none;
+  box-shadow: 0 8px 24px @bayu_shadow_menu, 0 0 0 1px alpha(@bayu_text_primary, 0.06);
+  color: @bayu_text_primary;
+}
+.app-notification label:not(#_), .toast label:not(#_) { color: @bayu_text_primary; }
+
+/* Badges and key caps */
+label.pill:not(#_), label.badge:not(#_), .badge:not(#_) {
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background-color: @bayu_accent_soft;
+  color: @bayu_accent;
+  font-size: 12px;
+  font-weight: 500;
+}
+label.pill.success:not(#_), label.badge.success:not(#_), .badge.success:not(#_) { background-color: alpha(@bayu_success, 0.14); color: @bayu_success; }
+label.pill.warning:not(#_), label.badge.warning:not(#_), .badge.warning:not(#_) { background-color: alpha(@bayu_warning, 0.16); color: @bayu_warning; }
+label.pill.error:not(#_), label.badge.error:not(#_), .badge.error:not(#_) { background-color: alpha(@bayu_danger, 0.14); color: @bayu_danger; }
+shortcut > .keycap:not(#_), .keycap:not(#_) {
+  min-width: 12px;
+  min-height: 16px;
+  margin: 0;
+  padding: 2px 6px;
+  border: 1px solid @bayu_border;
+  border-radius: 6px;
+  background-color: @bayu_bg_card;
+  box-shadow: none;
+  color: @bayu_text_primary;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+}
+shortcut:not(#_) { border-spacing: 4px; color: @bayu_text_tertiary; }
+
+/* -- Dialogs: actions right aligned, 10 px apart ---------------------------- */
+
+window.dialog:not(#_) { background-color: @bayu_bg_window; }
+window.dialog.message:not(#_), window.dialog.message.csd:not(#_) {
+  border-radius: 12px;
+  background-color: @bayu_bg_card;
+  box-shadow: 0 16px 48px @bayu_shadow_dialog, 0 0 0 1px alpha(@bayu_text_primary, 0.06);
+}
+window.dialog.message .titlebar:not(#_) { min-height: 0; background-color: transparent; box-shadow: none; }
+window.dialog.message box.message-area:not(#_) { padding: 24px 24px 8px; border-spacing: 8px; }
+window.dialog.message label.title:not(#_), window.dialog.message .message-area > label:first-child:not(#_) { font-size: 15px; font-weight: 600; }
+.dialog-action-area:not(#_), .dialog-action-box:not(#_) { padding: 16px 24px 24px; border-spacing: 10px; }
+window.dialog.message .dialog-action-area:not(#_) { padding: 16px 24px 24px; border: none; border-spacing: 10px; }
+window.dialog.message.csd .dialog-action-area button:not(#_), window.dialog.message.csd .dialog-action-area button:first-child:not(#_),
+window.dialog.message.csd .dialog-action-area button:last-child:not(#_) {
+  padding: 8px 18px;
+  border: 1px solid @bayu_border;
+  border-radius: 8px;
+}
+window.dialog.message.csd .dialog-action-area button.suggested-action:not(#_) { border-color: @bayu_accent; }
+window.dialog.message.csd .dialog-action-area button.destructive-action:not(#_) { border-color: @bayu_danger; }
+filechooser .dialog-action-box:not(#_) { border-top: 1px solid @bayu_divider; }
+filechooser #pathbarbox:not(#_) { border-bottom: 1px solid @bayu_divider; background-color: @bayu_bg_window; }
+
+/* -- Calendar ----------------------------------------------------------- */
+
+calendar:not(#_) {
+  padding: 4px;
+  border: none;
+  border-radius: 12px;
+  background-color: @bayu_bg_card;
+  color: @bayu_text_primary;
+}
+calendar > header:not(#_) { border: none; background: none; box-shadow: none; }
+calendar > header > button:not(#_) { border-color: transparent; background-color: transparent; border-radius: 8px; }
+calendar > header > button:hover:not(#_) { background-color: @bayu_bg_hover; }
+calendar > grid > label.day-name:not(#_), calendar > grid > label.week-number:not(#_) { color: @bayu_text_secondary; font-size: 12px; font-weight: 500; }
+calendar > grid > label.day-number:not(#_) { padding: 4px; border-radius: 8px; }
+calendar > grid > label.day-number:selected:not(#_) { background-color: @bayu_accent; color: @bayu_text_on_accent; }
+calendar > grid > label.today:not(#_) { color: @bayu_accent; font-weight: 600; box-shadow: none; }
+calendar > grid > label.today:selected:not(#_) { color: @bayu_text_on_accent; }
+calendar > grid > label.other-month:not(#_) { color: @bayu_text_tertiary; }
+
+/* -- Misc ----------------------------------------------------------------- */
+
+spinner:not(#_) { color: @bayu_text_secondary; }
+spinner:checked:not(#_) { color: @bayu_accent; }
+.osd levelbar > trough > block.filled:not(#_) { background-color: @bayu_accent; }
+colorswatch:not(#_) { border-radius: 6px; }
+emojichooser button.emoji-section:checked:not(#_) { border-color: @bayu_accent; }

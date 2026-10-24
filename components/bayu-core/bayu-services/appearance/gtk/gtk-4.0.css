@@ -1,13 +1,16 @@
+/* Header bars are 48px tall in the Bayu design system, in every GTK 4
+ * application, libadwaita ones included. */
+
 /* libadwaita pushes the bar 1px past each window edge; the padding makes up for it */
 headerbar {
-  min-height: 40px;
+  min-height: 48px;
   padding: 0;
   margin-left: -1px;
   margin-right: -1px;
 }
 
 headerbar > windowhandle > box {
-  padding: 6px 6px;
+  padding: 6px 8px;
 }
 
 headerbar entry,
@@ -20,30 +23,9 @@ headerbar switch {
   margin-bottom: 0;
 }
 
-/* Only direct header bar buttons; a descendant selector would reach into popovers */
-headerbar box.start > button,
-headerbar box.end > button,
-headerbar box.start > menubutton > button,
-headerbar box.end > menubutton > button,
-headerbar box.start > splitbutton > button,
-headerbar box.end > splitbutton > button,
-headerbar box.start > splitbutton > menubutton > button,
-headerbar box.end > splitbutton > menubutton > button,
-headerbar box.start > box > button,
-headerbar box.end > box > button,
-headerbar box.start > box > menubutton > button,
-headerbar box.end > box > menubutton > button,
-headerbar box.start > .linked > button,
-headerbar box.end > .linked > button,
-headerbar box.start > dropdown > button,
-headerbar box.end > dropdown > button,
-headerbar stackswitcher > button {
-  min-height: 18px;
-}
-
 headerbar entry,
 headerbar spinbutton:not(.vertical) {
-  min-height: 26px;
+  min-height: 32px;
 }
 
 headerbar windowcontrols.start,
@@ -52,33 +34,40 @@ headerbar windowcontrols.end {
   margin-right: 0;
 }
 
-/* A 26px circle, 7px from the next one and centred 20px from the top and right edges */
+/* Window controls: plain 28px glyph buttons that shift background on hover */
 headerbar windowcontrols > button {
-  min-width: 26px;
-  min-height: 26px;
-  padding: 2px;
-  margin: -1px 0;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0;
+  margin: 4px 0 4px 4px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  box-shadow: none;
+  transition: background-color 100ms ease-out;
 }
 
 headerbar windowcontrols > button > image {
   min-width: 16px;
   min-height: 16px;
-  padding: 5px;
-  background-color: transparent;
+  padding: 0;
+  background: none;
+  box-shadow: none;
   transition: none;
 }
 
-/* Restated because the transparent rest state above outranks libadwaita's state rules too */
-headerbar windowcontrols > button:hover > image {
-  background-color: color-mix(in srgb, currentColor 15%, transparent);
+/* Restated because the clear rest state above outranks libadwaita's state rules too */
+headerbar windowcontrols > button:hover {
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
 }
 
-headerbar windowcontrols > button:active > image {
-  background-color: color-mix(in srgb, currentColor 30%, transparent);
+headerbar windowcontrols > button:active {
+  background-color: color-mix(in srgb, currentColor 16%, transparent);
+  transition: none;
 }
 
 headerbar viewswitcher:not(.narrow) {
-  min-height: 28px;
+  min-height: 32px;
 }
 
 headerbar viewswitcher:not(.narrow) button.toggle > stack > box.narrow {
@@ -87,12 +76,12 @@ headerbar viewswitcher:not(.narrow) button.toggle > stack > box.narrow {
 }
 
 headerbar windowcontrols > .icon {
-  margin: 6px 7px;
+  margin: 8px;
 }
 
-/* With the bar's own 3px above and below, a stacked header bar still totals 40px */
+/* With the bar's own 3px above and below, a stacked header bar still totals 48px */
 toolbarview > .top-bar .collapse-spacing headerbar {
-  min-height: 34px;
+  min-height: 42px;
 }
 
 toolbarview > .top-bar .collapse-spacing headerbar > windowhandle > box {
