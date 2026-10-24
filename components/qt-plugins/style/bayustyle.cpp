@@ -2,12 +2,14 @@
 
 #include <QAbstractSpinBox>
 #include <QComboBox>
+#include <QListView>
 #include <QMenu>
 #include <QPainter>
 #include <QPainterPath>
 #include <QPushButton>
 #include <QStyleFactory>
 #include <QStyleOption>
+#include <QTabBar>
 
 #include <tuple>
 
@@ -28,6 +30,8 @@ constexpr int kScrollBarExtent = 10;
 constexpr int kScrollBarMinLength = 32; // scroll_bar.cpp kMinimumHandleLength
 constexpr int kMenuRowHeight = 30;    // menu kRowHeight
 constexpr int kFieldPadding = 8;      // text inset in fields
+constexpr int kSegmentedHeight = 32;  // segmented_control.cpp kSegmentedHeight
+constexpr int kSectionLabelSpacing = 8; // settings metrics sectionLabelSpacing
 
 bool isDark(const QPalette &palette)
 {
@@ -181,13 +185,13 @@ void BayuStyle::polish(QWidget *widget)
 {
     QProxyStyle::polish(widget);
     // Menus draw their own rounded panel; the corners around it stay clear.
-    if (qobject_cast<QMenu *>(widget))
+    if (qobject_cast<QMenu *>(widget) || widget->inherits("QComboBoxPrivateContainer"))
         widget->setAttribute(Qt::WA_TranslucentBackground);
 }
 
 void BayuStyle::unpolish(QWidget *widget)
 {
-    if (qobject_cast<QMenu *>(widget))
+    if (qobject_cast<QMenu *>(widget) || widget->inherits("QComboBoxPrivateContainer"))
         widget->setAttribute(Qt::WA_TranslucentBackground, false);
     QProxyStyle::unpolish(widget);
 }
@@ -238,6 +242,12 @@ int BayuStyle::styleHint(StyleHint hint, const QStyleOption *option, const QWidg
         return 0;
     case SH_LineEdit_PasswordCharacter:
         return 0x2022; // text_field.cpp kPasswordDot
+    case SH_TabBar_Alignment:
+        return Qt::AlignCenter;
+    case SH_ComboBox_Popup:
+        return 1; // a menu with a check mark on the current item
+    case SH_ItemView_ShowDecorationSelected:
+        return 1;
     default:
         return QProxyStyle::styleHint(hint, option, widget, returnData);
     }
@@ -259,6 +269,19 @@ QSize BayuStyle::sizeFromContents(ContentsType type, const QStyleOption *option,
         break;
     case CT_ComboBox:
         result.setHeight(qMax(result.height(), kFieldHeight));
+        if (const auto *combo = qstyleoption_cast<const QStyleOptionComboBox *>(option); combo && !combo->editable)
+            result.setWidth(result.width() + 20); // the popup's check column
+        break;
+    case CT_ItemViewItem:
+        // List rows as tall as Bayu's sidebar and list rows.
+        if (qobject_cast<const QListView *>(widget))
+            result.setHeight(qMax(result.height(), 32));
+        break;
+    case CT_TabBarTab:
+        if (const auto *tab = qstyleoption_cast<const QStyleOptionTab *>(option);
+            tab && (tab->shape == QTabBar::RoundedNorth || tab->shape == QTabBar::RoundedSouth
+                    || tab->shape == QTabBar::TriangularNorth || tab->shape == QTabBar::TriangularSouth))
+            result = QSize(result.width() + 16, qMax(result.height(), kSegmentedHeight));
         break;
     case CT_MenuItem:
         if (const auto *item = qstyleoption_cast<const QStyleOptionMenuItem *>(option);
@@ -312,6 +335,26 @@ QRect BayuStyle::subControlRect(ComplexControl control, const QStyleOptionComple
             return visualRect(bar->direction, groove, rect);
         }
     }
+    if (control == CC_GroupBox) {
+        if (const auto *box = qstyleoption_cast<const QStyleOptionGroupBox *>(option)) {
+            const QRect label = QProxyStyle::subControlRect(control, option, SC_GroupBoxLabel, widget);
+            const QRect check = QProxyStyle::subControlRect(control, option, SC_GroupBoxCheckBox, widget);
+            const bool titled = !box->text.isEmpty() || (box->subControls & SC_GroupBoxCheckBox);
+            const int labelBottom = qMax(box->text.isEmpty() ? option->rect.top() : label.bottom() + 1,
+                                         (box->subControls & SC_GroupBoxCheckBox) ? check.bottom() + 1 : option->rect.top());
+            QRect frame = option->rect;
+            if (titled)
+                frame.setTop(labelBottom + kSectionLabelSpacing);
+            switch (subControl) {
+            case SC_GroupBoxFrame:
+                return frame;
+            case SC_GroupBoxContents:
+                return frame.adjusted(6, 6, -6, -6);
+            default:
+                break;
+            }
+        }
+    }
     QRect rect = QProxyStyle::subControlRect(control, option, subControl, widget);
     if (control == CC_SpinBox && subControl == SC_SpinBoxEditField)
         rect.adjust(kFieldPadding - 2, 0, 0, 0);
@@ -335,18 +378,41 @@ void BayuStyle::drawPrimitive(PrimitiveElement element, const QStyleOption *opti
     switch (element) {
     case PE_PanelButtonCommand:
     case PE_PanelButtonBevel: {
+        // DialogButton (dialog_window.cpp): a capsule, the default one in the
+        // accent colour, the others edged with DialogButtonBorder.
         const auto *button = qstyleoption_cast<const QStyleOptionButton *>(option);
-        const bool prominent = button && (button->features & QStyleOptionButton::DefaultButton)
-            && (option->state & State_Enabled);
-        QColor fill = prominent ? palette.color(QPalette::Highlight) : buttonColor(option);
-        if (prominent && (option->state & (State_Sunken | State_MouseOver)))
-            fill = (option->state & State_Sunken) ? fill.darker(115) : fill.lighter(108);
-        if (!(option->state & State_Enabled))
-            fill = withAlpha(fill, 0.6);
-        fillRounded(painter, option->rect, kMediumRadius, fill);
+        const bool primary = button && (button->features & QStyleOptionButton::DefaultButton);
+        const bool dark = isDark(palette);
+        const QRectF rect = option->rect;
+        const qreal radius = rect.height() / 2;
+        QColor fill;
+        QColor border;
+        if (primary) {
+            const QColor accent = palette.color(QPalette::Highlight);
+            fill = accent;
+            if (option->state & State_Sunken)
+                fill = accent.darker(115);
+            else if (option->state & State_MouseOver)
+                fill = accent.lighter(105);
+            border = accent.darker(125);
+        } else {
+            const QColor base = palette.color(QPalette::Button);
+            fill = base;
+            if (option->state & (State_Sunken | State_On))
+                fill = dark ? base.lighter(112) : base.darker(110);
+            else if (option->state & State_MouseOver)
+                fill = dark ? base.lighter(105) : base.darker(104);
+            border = dark ? QColor(0x545455) : QColor(0xD9DADD);
+        }
+        if (!(option->state & State_Enabled)) {
+            fill = withAlpha(fill, 0.5);
+            border = withAlpha(border, 0.5);
+        }
+        fillRounded(painter, rect, radius, fill, border);
+        if (!primary && !dark)
+            strokeRounded(painter, rect.adjusted(1, 1, -1, -1), radius - 1, QColor(255, 255, 255, 20), 1);
         if (hasFocusRing(option))
-            strokeRounded(painter, option->rect, kMediumRadius,
-                          withAlpha(palette.color(QPalette::Highlight), 0.5), 2);
+            strokeRounded(painter, rect, radius, withAlpha(palette.color(QPalette::Highlight), 0.3), 2);
         return;
     }
     case PE_FrameDefaultButton:
@@ -378,20 +444,28 @@ void BayuStyle::drawPrimitive(PrimitiveElement element, const QStyleOption *opti
                     withAlpha(palette.color(QPalette::Text), isDark(palette) ? 0.14 : 0.1));
         return;
     }
-    case PE_FrameTabWidget: {
-        const QRectF rect = QRectF(option->rect).adjusted(0.5, 0.5, -0.5, -0.5);
-        fillRounded(painter, rect, kMediumRadius, palette.color(QPalette::Base),
-                    withAlpha(palette.color(QPalette::Text), isDark(palette) ? 0.12 : 0.08));
+    case PE_FrameTabWidget:
+        // A Settings card (settings/src/widgets/card.cpp).
+        fillRounded(painter, option->rect, kBigRadius, palette.color(QPalette::Base));
         return;
-    }
     case PE_FrameTabBarBase:
         return;
-    case PE_FrameGroupBox: {
-        const QRectF rect = QRectF(option->rect).adjusted(0.5, 0.5, -0.5, -0.5);
-        fillRounded(painter, rect, kMediumRadius, Qt::transparent,
-                    withAlpha(palette.color(QPalette::Text), isDark(palette) ? 0.12 : 0.1));
+    case PE_Frame:
+        // Scroll areas (tree views, text edits): a faint rounded edge, no dark box.
+        if (option->state & (State_Sunken | State_Raised)) {
+            fillRounded(painter, option->rect, kSmallRadius, Qt::transparent,
+                        withAlpha(palette.color(QPalette::Text), isDark(palette) ? 0.14 : 0.1));
+        }
         return;
-    }
+    case PE_FrameGroupBox:
+        fillRounded(painter, option->rect, kBigRadius, palette.color(QPalette::Base));
+        return;
+    case PE_PanelItemViewRow:
+        if (option->state & State_Selected) {
+            fillRounded(painter, option->rect, 0, withAlpha(palette.color(QPalette::Text), isDark(palette) ? 0.1 : 0.08));
+            return;
+        }
+        break;
     case PE_PanelTipLabel:
         painter->fillRect(option->rect, palette.color(QPalette::ToolTipBase));
         painter->save();
@@ -409,33 +483,73 @@ void BayuStyle::drawControl(ControlElement element, const QStyleOption *option, 
                             const QWidget *widget) const
 {
     switch (element) {
+    case CE_ToolBoxTabShape:
+        // QToolBox pages: flat rows, highlighted like sidebar items on hover.
+        if (option->state & State_MouseOver)
+            fillRounded(painter, option->rect, kSmallRadius, withAlpha(option->palette.color(QPalette::Text), isDark(option->palette) ? 0.1 : 0.05));
+        return;
     case CE_PushButtonLabel:
         // The default button is filled with the highlight, so its label is light.
         if (const auto *button = qstyleoption_cast<const QStyleOptionButton *>(option);
-            button && (button->features & QStyleOptionButton::DefaultButton) && (option->state & State_Enabled)) {
+            button && (button->features & QStyleOptionButton::DefaultButton)) {
             QStyleOptionButton copy(*button);
-            copy.palette.setColor(QPalette::ButtonText, option->palette.color(QPalette::HighlightedText));
+            QColor text = option->palette.color(QPalette::HighlightedText);
+            if (!(option->state & State_Enabled))
+                text = withAlpha(text, 0.6);
+            copy.palette.setColor(QPalette::ButtonText, text);
+            copy.palette.setColor(QPalette::Disabled, QPalette::ButtonText, text);
             QProxyStyle::drawControl(element, &copy, painter, widget);
             return;
         }
         break;
     case CE_TabBarTabShape:
         if (const auto *tab = qstyleoption_cast<const QStyleOptionTab *>(option)) {
+            // segmented_control.cpp: a pill track (SegmentedControlTrack) behind
+            // the tabs, rounded at the ends of the row, and a pill plate with a
+            // soft shadow under the current tab.
             const bool dark = isDark(option->palette);
-            // The track behind every tab, then the raised plate of the current one.
-            fillRounded(painter, option->rect, 0, dark ? QColor(255, 255, 255, 15) : QColor(0, 0, 0, 10));
+            const QRectF rect = option->rect;
+            const qreal radius = rect.height() / 2;
+            const bool first = tab->position == QStyleOptionTab::Beginning || tab->position == QStyleOptionTab::OnlyOneTab;
+            const bool last = tab->position == QStyleOptionTab::End || tab->position == QStyleOptionTab::OnlyOneTab;
+            QPainterPath track;
+            track.addRoundedRect(rect, radius, radius);
+            if (!first)
+                track.addRect(QRectF(rect.left(), rect.top(), radius, rect.height()));
+            if (!last)
+                track.addRect(QRectF(rect.right() - radius, rect.top(), radius, rect.height()));
+            track.setFillRule(Qt::WindingFill);
+            painter->save();
+            painter->setRenderHint(QPainter::Antialiasing);
+            painter->fillPath(track.simplified(), dark ? QColor(255, 255, 255, 15) : QColor(0, 0, 0, 10));
+            painter->restore();
+            const QRectF plate = rect.adjusted(2, 2, -2, -2);
             if (option->state & State_Selected) {
-                const QRectF plate = QRectF(option->rect).adjusted(2, 2, -2, -2);
                 QColor fill = option->palette.color(QPalette::Base);
                 if (dark)
                     fill = fill.lighter(200);
-                fillRounded(painter, plate.translated(0, 0.5), kSmallRadius - 2, QColor(0, 0, 0, dark ? 46 : 31));
-                fillRounded(painter, plate, kSmallRadius - 2, fill);
+                fillRounded(painter, plate.translated(0, 1), plate.height() / 2, QColor(0, 0, 0, dark ? 46 : 31));
+                fillRounded(painter, plate, plate.height() / 2, fill);
             } else if (option->state & State_MouseOver) {
-                fillRounded(painter, QRectF(option->rect).adjusted(2, 2, -2, -2), kSmallRadius - 2,
-                            withAlpha(option->palette.color(QPalette::Text), 0.06));
+                fillRounded(painter, plate, plate.height() / 2, withAlpha(option->palette.color(QPalette::Text), 0.05));
             }
-            Q_UNUSED(tab)
+            return;
+        }
+        break;
+    case CE_ItemViewItem:
+        // Selected rows are a soft grey plate (SidebarItemCurrent), not the accent.
+        if (const auto *item = qstyleoption_cast<const QStyleOptionViewItem *>(option);
+            item && (option->state & State_Selected)) {
+            QStyleOptionViewItem copy(*item);
+            const QColor plate = withAlpha(option->palette.color(QPalette::Text), isDark(option->palette) ? 0.1 : 0.08);
+            const bool whole = item->viewItemPosition == QStyleOptionViewItem::OnlyOne
+                || item->viewItemPosition == QStyleOptionViewItem::Invalid;
+            if (whole)
+                fillRounded(painter, QRectF(option->rect).adjusted(2, 1, -2, -1), kSmallRadius, plate);
+            else
+                painter->fillRect(option->rect, plate);
+            copy.state &= ~State_Selected;
+            QProxyStyle::drawControl(element, &copy, painter, widget);
             return;
         }
         break;
@@ -470,19 +584,41 @@ void BayuStyle::drawControl(ControlElement element, const QStyleOption *option, 
         break;
     case CE_MenuItem:
         if (const auto *item = qstyleoption_cast<const QStyleOptionMenuItem *>(option);
-            item && (option->state & State_Selected) && (option->state & State_Enabled)
-            && item->menuItemType != QStyleOptionMenuItem::Separator) {
-            // MenuHighlight: a rounded plate inset from the menu's edges.
-            const bool dark = isDark(option->palette);
-            fillRounded(painter, QRectF(option->rect).adjusted(3, 1, -3, -1), 6,
-                        withAlpha(option->palette.color(QPalette::Highlight), dark ? 0.82 : 0.9));
+            item && item->menuItemType != QStyleOptionMenuItem::Separator) {
             QStyleOptionMenuItem copy(*item);
-            copy.state &= ~State_Selected;
-            const QColor text = option->palette.color(QPalette::HighlightedText);
-            for (auto role : {QPalette::Text, QPalette::ButtonText, QPalette::WindowText})
-                copy.palette.setColor(role, text);
-            copy.palette.setColor(QPalette::Window, Qt::transparent);
+            const bool highlighted = (option->state & State_Selected) && (option->state & State_Enabled);
+            QColor markColor = option->palette.color(QPalette::Highlight);
+            if (highlighted) {
+                // MenuHighlight: a rounded plate inset from the menu's edges.
+                const bool dark = isDark(option->palette);
+                fillRounded(painter, QRectF(option->rect).adjusted(3, 1, -3, -1), 6,
+                            withAlpha(option->palette.color(QPalette::Highlight), dark ? 0.82 : 0.9));
+                copy.state &= ~State_Selected;
+                markColor = option->palette.color(QPalette::HighlightedText);
+                for (auto role : {QPalette::Text, QPalette::ButtonText, QPalette::WindowText})
+                    copy.palette.setColor(role, markColor);
+                copy.palette.setColor(QPalette::Window, Qt::transparent);
+            }
+            const bool checked = item->checkType != QStyleOptionMenuItem::NotCheckable && item->checked;
+            copy.checked = false;
+            // Combo box popups list their items without a check column; make one.
+            const bool comboPopup = item->checkType != QStyleOptionMenuItem::NotCheckable && !qobject_cast<const QMenu *>(widget);
+            if (comboPopup)
+                copy.rect.setLeft(copy.rect.left() + 20);
             QProxyStyle::drawControl(element, &copy, painter, widget);
+            if (checked) {
+                // The selected choice gets a check mark, as Bayu's menus do.
+                const QRectF box(option->rect.left() + (comboPopup ? 6 : 7), option->rect.center().y() - 7, 14, 14);
+                QPainterPath mark;
+                mark.moveTo(box.left() + 2, box.top() + 7.5);
+                mark.lineTo(box.left() + 5.5, box.top() + 11);
+                mark.lineTo(box.right() - 2, box.top() + 3);
+                painter->save();
+                painter->setRenderHint(QPainter::Antialiasing);
+                painter->setPen(QPen(markColor, 1.8, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+                painter->drawPath(mark);
+                painter->restore();
+            }
             return;
         }
         break;
@@ -510,6 +646,31 @@ void BayuStyle::drawComplexControl(ComplexControl control, const QStyleOptionCom
                 const QRect arrow = subControlRect(CC_ComboBox, combo, SC_ComboBoxArrow, widget);
                 drawChevron(painter, arrow, withAlpha(palette.color(QPalette::ButtonText),
                                                       (option->state & State_Enabled) ? 0.7 : 0.35));
+            }
+            return;
+        }
+        break;
+    case CC_GroupBox:
+        if (const auto *box = qstyleoption_cast<const QStyleOptionGroupBox *>(option)) {
+            if ((box->subControls & SC_GroupBoxFrame) && !(box->features & QStyleOptionFrame::Flat)) {
+                QStyleOptionFrame frame;
+                frame.QStyleOption::operator=(*box);
+                frame.rect = subControlRect(CC_GroupBox, box, SC_GroupBoxFrame, widget);
+                proxy()->drawPrimitive(PE_FrameGroupBox, &frame, painter, widget);
+            }
+            if ((box->subControls & SC_GroupBoxLabel) && !box->text.isEmpty()) {
+                const QRect label = subControlRect(CC_GroupBox, box, SC_GroupBoxLabel, widget);
+                painter->save();
+                // Section labels: DisabledText (settings/src/widgets/sections.cpp).
+                painter->setPen(palette.color(QPalette::Disabled, QPalette::WindowText));
+                painter->drawText(label, Qt::AlignLeft | Qt::AlignVCenter | Qt::TextShowMnemonic, box->text);
+                painter->restore();
+            }
+            if (box->subControls & SC_GroupBoxCheckBox) {
+                QStyleOptionButton check;
+                check.QStyleOption::operator=(*box);
+                check.rect = subControlRect(CC_GroupBox, box, SC_GroupBoxCheckBox, widget);
+                proxy()->drawPrimitive(PE_IndicatorCheckBox, &check, painter, widget);
             }
             return;
         }

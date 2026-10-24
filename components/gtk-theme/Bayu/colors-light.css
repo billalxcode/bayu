@@ -22,3 +22,7 @@
 @define-color bayu_menu_border rgba(0, 0, 0, 0.1);
 @define-color bayu_tab_track rgba(0, 0, 0, 0.04);
 @define-color bayu_tab_plate #FFFFFF;
+@define-color bayu_button_border #D9DADD;
+@define-color bayu_button_hover #E9EBEC;
+@define-color bayu_accent_edge #296ACC;
+@define-color bayu_row_selected alpha(@bayu_fg, 0.08);

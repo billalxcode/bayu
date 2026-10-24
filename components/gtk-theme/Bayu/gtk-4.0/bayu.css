@@ -277,3 +277,62 @@ frame > border, .frame { border-color: @bayu_separator; }
 notebook > header.top > tabs > tab, notebook > header.bottom > tabs > tab, notebook > header.left > tabs > tab, notebook > header.right > tabs > tab { box-shadow: none; border: none; }
 notebook > header.top > tabs > tab:hover:not(:checked), notebook > header.bottom > tabs > tab:hover:not(:checked), notebook > header.left > tabs > tab:hover:not(:checked), notebook > header.right > tabs > tab:hover:not(:checked) { box-shadow: none; background-color: alpha(@bayu_fg, 0.06); }
 notebook > header.top > tabs > tab:checked, notebook > header.bottom > tabs > tab:checked, notebook > header.left > tabs > tab:checked, notebook > header.right > tabs > tab:checked { background-color: @bayu_tab_plate; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
+
+/* -- Bayu Settings look ------------------------------------------------ */
+
+/* Buttons: DialogButton capsules, edged; the suggested one in the accent. */
+button {
+  border: 1px solid @bayu_button_border;
+  border-radius: 9999px;
+  padding: 4px 16px;
+}
+button:hover { background-color: @bayu_button_hover; }
+button.suggested-action, button.default { border-color: @bayu_accent_edge; }
+button.destructive-action { border-color: shade(@bayu_destructive, 0.8); }
+button.flat, button.titlebutton, button.circular,
+headerbar button:not(.suggested-action):not(.destructive-action),
+spinbutton button, .linked.vertical > button {
+  border-color: transparent;
+}
+button.image-button { padding: 4px 8px; }
+.linked > button:first-child { border-top-left-radius: 9999px; border-bottom-left-radius: 9999px; }
+.linked > button:last-child { border-top-right-radius: 9999px; border-bottom-right-radius: 9999px; }
+.linked > button:only-child { border-radius: 9999px; }
+.linked > button:not(:first-child) { border-left-width: 0; }
+
+/* Rows: a soft grey plate when selected (SidebarItemCurrent), lists as tall
+   as Bayu's. */
+row { min-height: 32px; }
+
+row:selected, listview > row:selected, columnview > listview > row:selected,
+list > row:selected, gridview > child:selected, flowbox > flowboxchild:selected,
+.view:selected {
+  background-color: @bayu_row_selected;
+  color: @bayu_fg;
+}
+listview > row, list > row { border-radius: 8px; }
+dropdown > button, combobox > box > button { border-color: transparent; border-radius: 8px; }
+
+/* Frames, cards and boxed lists: Settings cards. */
+frame, .card, list.boxed-list, .boxed-list, list.content {
+  border: none;
+  border-radius: 12px;
+  background-color: @bayu_view;
+}
+.boxed-list > row:not(:last-child) { border-bottom: 1px solid @bayu_separator; }
+frame > label, .heading.dim-label { color: @bayu_fg_disabled; }
+
+/* Tabs: the segmented control's pill track and plates. */
+notebook > header > tabs { border-radius: 9999px; margin: 6px; }
+notebook > header > tabs > tab { min-height: 24px; border-radius: 9999px; }
+notebook > header.top > tabs > tab, notebook > header.bottom > tabs > tab,
+notebook > header.left > tabs > tab, notebook > header.right > tabs > tab { border-radius: 9999px; }
+
+/* The search entry: a pill, as in Settings' sidebar. */
+searchbar entry, entry.search { border-radius: 9999px; }
+
+/* Combo boxes are fields (combo_box.cpp), not capsules. */
+combobox > box.linked > button.combo, combobox > box.linked > button.combo:only-child, dropdown > button.toggle {
+  border-color: transparent;
+  border-radius: 8px;
+}
