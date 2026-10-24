@@ -49,6 +49,20 @@ The live ISO boots on BIOS and UEFI machines, from optical media or from a
 USB stick written with `dd`, and starts the desktop with the profile's user
 logged in.
 
+### Testing packages on a running system
+
+New packages do not need a new image. Serve `out/repo` and point systems at
+it, then upgrade them after each build:
+
+```shell
+packaging/serve-repo.sh                   # http://<tailscale address>:8090/
+sudo dnf upgrade --refresh bayu-desktop   # on the running system
+```
+
+Images and ISOs built with `BAYU_REPO_URL=http://<address>:8090/` in
+`profile.conf` come with that repository; on another system, add it as a
+repo file (see `packaging/serve-repo.sh`).
+
 ## Profiles
 
 `PROFILE` picks the distribution the system is built from:
