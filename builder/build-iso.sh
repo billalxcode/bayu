@@ -25,8 +25,16 @@ rm -rf "$WORK" && mkdir -p "$TREE"/{LiveOS,boot/grub}
 CMDLINE="root=live:CDLABEL=$ISO_LABEL rd.live.image rd.live.overlay.overlayfs=1 psi=1 selinux=0"
 mkdir -p "$ROOTFS/etc/kernel" && echo "$CMDLINE" > "$ROOTFS/etc/kernel/cmdline"
 : > "$ROOTFS/etc/fstab"
-install_root "$ROOTFS" dracut-live
+# The installer, and what it needs beyond the system: live media only (it
+# removes itself from what it installs).
+install_root "$ROOTFS" dracut-live bayu-installer ${ISO_PACKAGES:-}
 configure_root "$ROOTFS"
+mkdir -p "$ROOTFS/etc/bayu-installer"
+cat > "$ROOTFS/etc/bayu-installer/installer.conf" <<EOF
+PRODUCT_NAME="$DISTRO_NAME"
+SHORT_NAME="${SHORT_NAME:-$DISTRO_NAME}"
+LIVE_USER="$USER_NAME"
+EOF
 
 # The installed kernel is the one with a vmlinuz (kmod packages create bare
 # module trees for the kernel they were built against).

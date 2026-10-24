@@ -227,6 +227,9 @@ public:
     static Connection* system(EventLoop* loop = nullptr);
     // A connection of its own.
     static std::unique_ptr<Connection> open(Bus bus, EventLoop* loop = nullptr);
+    // A connection of its own to a bus at an address, such as a private bus
+    // ("unix:path=/run/..."); null when it cannot be reached.
+    static std::unique_ptr<Connection> openAddress(const std::string& address, EventLoop* loop = nullptr);
     ~Connection();
 
     Connection(const Connection&) = delete;

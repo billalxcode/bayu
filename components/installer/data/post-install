@@ -1,0 +1,50 @@
+#!/bin/bash
+# Finishes the system bayu-installer copied to /mnt/sysroot: the live
+# session's account, autologin and installer go; the new account's settings
+# and the add-ons chosen come. Reports "progress <text>" and "packages <n>".
+# Environment: USER_NAME AUTOLOGIN PICTURE AUTOCONNECT ADDONS.
+set -u
+root=${SYSROOT:-/mnt/sysroot}
+exec 2>>/tmp/bayu-installer-post.log
+LIVE_USER=
+# shellcheck disable=SC1091
+[[ -r /etc/bayu-installer/installer.conf ]] && . /etc/bayu-installer/installer.conf
+status=0
+
+echo "progress Removing the live session's account"
+if [[ -n $LIVE_USER && $LIVE_USER != "$USER_NAME" ]]; then
+    if chroot "$root" id "$LIVE_USER" >/dev/null 2>&1; then
+        chroot "$root" userdel -r "$LIVE_USER" || status=1
+    fi
+    rm -f "$root/etc/sudoers.d/90-$LIVE_USER"
+fi
+
+echo "progress Setting up $USER_NAME's sign-in"
+if [[ $AUTOLOGIN == 1 && -n $USER_NAME ]]; then
+    printf '[Autologin]\nUser=%s\n' "$USER_NAME" > "$root/etc/bayu-dm.conf"
+else
+    rm -f "$root/etc/bayu-dm.conf"
+fi
+if [[ -n $PICTURE && -r $PICTURE && -n $USER_NAME ]]; then
+    mkdir -p "$root/var/lib/AccountsService/icons" "$root/var/lib/AccountsService/users"
+    cp "$PICTURE" "$root/var/lib/AccountsService/icons/$USER_NAME"
+    printf '[User]\nIcon=/var/lib/AccountsService/icons/%s\n' "$USER_NAME" \
+        > "$root/var/lib/AccountsService/users/$USER_NAME"
+fi
+if [[ $AUTOCONNECT == 0 ]]; then
+    for file in "$root"/etc/NetworkManager/system-connections/*.nmconnection; do
+        [[ -e $file ]] && sed -i '/^autoconnect=/d; /^\[connection\]/a autoconnect=false' "$file"
+    done
+fi
+
+for group in $ADDONS; do
+    echo "progress Installing the $group add-on"
+    dnf -y -q --installroot="$root" --setopt=skip_if_unavailable=True group install "$group" >&2 || status=1
+done
+
+echo "progress Removing the installer from the new system"
+dnf -y -q --installroot="$root" --disablerepo='*' remove bayu-installer 'anaconda*' >&2 || status=1
+rm -rf "$root/etc/bayu-installer"
+
+echo "packages $(rpm --root "$root" -qa | wc -l)"
+exit $status

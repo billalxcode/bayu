@@ -1,0 +1,67 @@
+#!/bin/bash
+# Starts Anaconda for bayu-installer and finishes the installed system. Runs
+# as root through pkexec and talks to the installer over stdin and stdout:
+#   bayu-installer-backend <installer pid>
+# Out: "status <text>", "error <text>", "ready <bus address>", then the
+# post-install's "progress <text>", "packages <n>" and "done <status>".
+# In: "set <key> <value>" lines, "postinstall", "reboot"; end of input once
+# the installer leaves.
+set -u
+installer=$1
+log=/tmp/bayu-installer-backend.log
+exec 2>>"$log"
+
+mkdir -p /run/anaconda
+rm -f /run/anaconda/backend_ready
+# Anaconda leaves when this process does: the installer takes the place of
+# its web UI.
+echo -n "$installer" > /run/anaconda/webui_script.pid
+
+# What liveinst does before Anaconda, without its web UI: Anaconda takes its
+# web UI's part (the installer) since /usr/share/cockpit/anaconda-webui exists.
+echo "status Detecting disks and network"
+for module in raid0 raid1 raid456 raid10 dm-mod dm-zero dm-mirror dm-snapshot dm-multipath dm-round-robin \
+    vfat dm-crypt; do
+    modprobe "$module" 2>/dev/null
+done
+export PATH=/sbin:/usr/sbin:$PATH
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/${PKEXEC_UID:-1000}/bus
+HOME=$(getent passwd "${PKEXEC_UID:-1000}" | cut -d: -f6)
+export HOME XDG_CONFIG_HOME=$HOME/.config
+ANACONDA_PRODUCTNAME=$(sed -r -e 's/ *release.*//' /etc/system-release)
+ANACONDA_PRODUCTVERSION=$(sed -r -e 's/^.* ([0-9\.]+).*$/\1/' /etc/system-release)
+export ANACONDA_PRODUCTNAME ANACONDA_PRODUCTVERSION ANACONDA_ISFINAL=true
+selinux=()
+sestatus 2>/dev/null | grep -q enabled || selinux=(--noselinux)
+anaconda-cleanup anaconda >>"$log" 2>&1
+anaconda --liveinst --graphical "${selinux[@]}" >>"$log" 2>&1 </dev/null &
+anaconda=$!
+until [[ -e /run/anaconda/backend_ready && -s /run/anaconda/bus.address ]]; do
+    if ! kill -0 "$anaconda" 2>/dev/null; then
+        echo "error Anaconda stopped while starting. Its log is in /tmp/anaconda.log."
+        exit 1
+    fi
+    sleep 0.5
+done
+echo "ready $(cat /run/anaconda/bus.address)"
+
+reboot=0
+declare -A settings
+while read -r command key value; do
+    case $command in
+    set) settings[$key]=$value ;;
+    postinstall)
+        USER_NAME=${settings[user]-} AUTOLOGIN=${settings[autologin]-0} PICTURE=${settings[picture]-} \
+            AUTOCONNECT=${settings[autoconnect]-1} ADDONS=${settings[groups]-} \
+            /usr/libexec/bayu-installer/post-install
+        echo "done $?"
+        ;;
+    reboot) reboot=1 ;;
+    esac
+done
+
+# The installer is gone: Anaconda unmounts the new system and leaves.
+wait "$anaconda"
+if [[ $reboot == 1 ]]; then
+    systemctl reboot
+fi

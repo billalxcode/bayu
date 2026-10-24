@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Install to Disk
+Comment=Offers to install the system when the live media starts
+Exec=bayu-installer --autostart
+Terminal=false
+NoDisplay=true
