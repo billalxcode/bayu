@@ -1,45 +1,35 @@
-# Builds bayu-desktop .rpm and .src.rpm on AlmaLinux 10. Every push and pull
-# request uploads them as a workflow artifact; a vX.Y.Z tag also publishes
-# them as a GitHub release.
+# Builds bayu-desktop .rpm and .src.rpm on AlmaLinux 10 for every push and
+# pull request and uploads them as a workflow artifact. Releases come from
+# release.yml.
 #
-# Runs in igosnusantara/bayu-builder-rpm, built from packaging/Containerfile
-# with the spec's BuildRequires already installed. Rebuild and push it after
-# changing BuildRequires:
-#   docker build -t igosnusantara/bayu-builder-rpm -f packaging/Containerfile packaging
-#   docker push igosnusantara/bayu-builder-rpm
+# Runs on the self-hosted runner on sj (label bayu-builder), in the
+# bayu-builder image that packaging/build-rpm.sh builds from
+# packaging/Containerfile.
 name: RPM
 
 on:
   push:
     branches: [main]
-    tags: ['v*']
   pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   rpm:
-    runs-on: ubuntu-latest
-    container: docker.io/igosnusantara/bayu-builder-rpm:latest
+    runs-on: [self-hosted, bayu-builder]
     steps:
+      - name: Clear the last build
+        run: sudo rm -rf out
+
+      # clean: false keeps the downloaded Skia between runs.
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          clean: false
 
       - name: Build RPMs
-        run: packaging/rpmbuild.sh
+        run: packaging/build-rpm.sh
 
       - uses: actions/upload-artifact@v4
         with:
           name: bayu-desktop-rpms
           path: out/rpms/*.rpm
-
-      - name: Publish release
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
-        with:
-          name: Bayu ${{ github.ref_name }}
-          files: out/rpms/*.rpm
-          generate_release_notes: true
