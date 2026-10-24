@@ -6,7 +6,7 @@
 #   SRPM_URL=...                     where to fetch its source RPM
 set -Eeuo pipefail
 ROOT=$(realpath "$(dirname "$0")/../..")
-KERNEL=${KERNEL:-6.12.0-211.67.1.el10_2}
+KERNEL=${KERNEL:-6.12.0-211.68.1.el10_2}
 SRPM_URL=${SRPM_URL:-https://vault.almalinux.org/10.2/BaseOS/Source/Packages/kernel-$KERNEL.src.rpm}
 mkdir -p "$ROOT/out/kernel" "$ROOT/out/repo"
 [[ -f $ROOT/out/kernel/kernel-$KERNEL.src.rpm ]] || curl -fL -o "$ROOT/out/kernel/kernel-$KERNEL.src.rpm" "$SRPM_URL"

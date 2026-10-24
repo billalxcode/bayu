@@ -1,0 +1,14 @@
+# RPM Fusion for EL 10: the Broadcom wl driver (MacBook Wi-Fi).
+[rpmfusion-free-updates]
+name=RPM Fusion for EL $releasever - Free - Updates
+baseurl=https://download1.rpmfusion.org/free/el/updates/$releasever/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=https://download1.rpmfusion.org/free/el/RPM-GPG-KEY-rpmfusion-free-el-10
+
+[rpmfusion-nonfree-updates]
+name=RPM Fusion for EL $releasever - Nonfree - Updates
+baseurl=https://download1.rpmfusion.org/nonfree/el/updates/$releasever/$basearch/
+enabled=1
+gpgcheck=1
+gpgkey=https://download1.rpmfusion.org/nonfree/el/RPM-GPG-KEY-rpmfusion-nonfree-el-10
