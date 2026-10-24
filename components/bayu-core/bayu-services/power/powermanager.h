@@ -52,6 +52,9 @@ private:
     int m_acScreenOff = 1200;
     bool m_acPreventSleep = false;
     bool m_onBattery = false;
+    // In a virtual machine, which does not come back from sleep reliably
+    // (virtio-gpu loses its display), the system never sleeps on its own.
+    bool m_virtualMachine = false;
 };
 
 #endif
