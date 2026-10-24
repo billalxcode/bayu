@@ -36,6 +36,9 @@ Requires:       NetworkManager bluez upower (power-profiles-daemon or tuned-ppd)
 Requires:       pipewire pipewire-pulseaudio wireplumber gnome-keyring gnome-keyring-pam
 Requires:       xdg-desktop-portal xorg-x11-server-Xwayland adwaita-icon-theme
 Requires:       mesa-dri-drivers mesa-libEGL mesa-libgbm glibc-langpack-en
+# dbus-update-activation-environment: the session hands its environment
+# (WAYLAND_DISPLAY, XDG_CURRENT_DESKTOP) to D-Bus and systemd services.
+Requires:       dbus-tools
 # Default UI and fixed-width fonts.
 Requires:       google-noto-sans-vf-fonts google-noto-sans-mono-vf-fonts
 Requires(pre):  shadow-utils

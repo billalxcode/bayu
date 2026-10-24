@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Bayu
+Comment=GTK theme matching the Bayu desktop
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Bayu
+IconTheme=Bayu

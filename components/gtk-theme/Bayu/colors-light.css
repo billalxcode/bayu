@@ -1,0 +1,24 @@
+/* Bayu light theme (bayu-toolkit/src/ui/theme.cpp, toolkit_colors.cpp). */
+@define-color bayu_window #F5F6FA;
+@define-color bayu_view #FFFFFF;
+@define-color bayu_control #F2F4F5;
+@define-color bayu_control_hover #DCDEDF;
+@define-color bayu_control_active #CACBCC;
+@define-color bayu_fg #323238;
+@define-color bayu_fg_disabled #64646E;
+@define-color bayu_accent #3385FF;
+@define-color bayu_accent_hover #4791FF;
+@define-color bayu_accent_active #2C74DE;
+@define-color bayu_accent_border #2E77E4;
+@define-color bayu_accent_fg #FFFFFF;
+@define-color bayu_destructive #D92D20;
+@define-color bayu_toggle_border alpha(@bayu_fg, 0.2);
+@define-color bayu_separator alpha(@bayu_fg_disabled, 0.1);
+@define-color bayu_header_separator alpha(@bayu_fg, 0.08);
+@define-color bayu_flat_hover alpha(@bayu_fg, 0.11);
+@define-color bayu_flat_active alpha(@bayu_fg, 0.21);
+@define-color bayu_slider_track rgba(0, 0, 0, 0.1);
+@define-color bayu_scrollbar rgba(0, 0, 0, 0.4);
+@define-color bayu_menu_border rgba(0, 0, 0, 0.1);
+@define-color bayu_tab_track rgba(0, 0, 0, 0.04);
+@define-color bayu_tab_plate #FFFFFF;

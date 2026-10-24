@@ -23,8 +23,8 @@ static std::string gtk3SettingsIniPath()
 void writeGtkSettings(const GtkSettings &gtk)
 {
     const std::string fontName = gtk.fontFamily + ' ' + number(gtk.fontPointSize, 'g', -1);
-    // No Bayu GTK theme ships; Adwaita's dark variant is what gtk-theme can switch to.
-    const std::string gtkTheme = gtk.darkMode ? "Adwaita-dark" : "Adwaita";
+    // components/gtk-theme. GTK on Wayland switches to dark by theme name, as with Adwaita-dark.
+    const std::string gtkTheme = gtk.darkMode ? "Bayu-dark" : "Bayu";
     const bool subpixel = gtk.fontAntialias && gtk.fontRgba != "none";
 
     // Only GTK clients on Xwayland still read this, for every key the compositor's XSETTINGS

@@ -1,0 +1,279 @@
+/* Bayu's controls for GTK 4, over GTK's Default theme. Sizes follow
+ * bayu-toolkit: buttons 32 px with a 10 px radius, fields 35 px with 8 px,
+ * check boxes 20 px with 6 px, menus 12 px. Colours come from colors-*.css.
+ * libadwaita applications draw with their own stylesheet and are not affected. */
+
+/* Surfaces */
+window, .background, dialog {
+  background-color: @bayu_window;
+  color: @bayu_fg;
+}
+.view, textview > text, iconview, columnview, listview, list, gridview {
+  background-color: @bayu_view;
+  color: @bayu_fg;
+}
+separator { background-color: @bayu_separator; }
+link, button.link { color: @bayu_accent; }
+
+/* Selection */
+row:selected, columnview > listview > row:selected, gridview > child:selected,
+listview > row:selected, flowbox > flowboxchild:selected, .view:selected {
+  background-color: @bayu_accent;
+  color: @bayu_accent_fg;
+}
+selection, text > selection, label > selection {
+  background-color: alpha(@bayu_accent, 0.35);
+  color: @bayu_fg;
+}
+
+/* Header bars: the window background with a hairline under it. */
+headerbar, headerbar:backdrop {
+  background-color: @bayu_window;
+  background-image: none;
+  box-shadow: inset 0 -1px @bayu_header_separator;
+  color: @bayu_fg;
+}
+headerbar .title { font-weight: bold; }
+
+/* Buttons */
+button {
+  min-height: 24px;
+  min-width: 16px;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: @bayu_control;
+  background-image: none;
+  box-shadow: none;
+  color: @bayu_fg;
+}
+button:hover { background-color: @bayu_control_hover; }
+button:active, button:checked { background-color: @bayu_control_active; }
+button:disabled { background-color: alpha(@bayu_control, 0.6); color: @bayu_fg_disabled; }
+button:focus-visible { outline: 2px solid alpha(@bayu_accent, 0.5); outline-offset: -2px; }
+button.image-button { padding: 4px 8px; }
+
+button.suggested-action, button.default {
+  background-color: @bayu_accent;
+  color: @bayu_accent_fg;
+}
+button.suggested-action:hover, button.default:hover { background-color: @bayu_accent_hover; }
+button.suggested-action:active, button.suggested-action:checked, button.default:active { background-color: @bayu_accent_active; }
+button.destructive-action { background-color: @bayu_destructive; color: #FFFFFF; }
+button.destructive-action:hover { background-color: shade(@bayu_destructive, 1.08); }
+button.destructive-action:active { background-color: shade(@bayu_destructive, 0.87); }
+
+/* Flat buttons, header bar buttons and window controls: clear until hovered. */
+button.flat, headerbar button:not(.suggested-action):not(.destructive-action),
+windowcontrols > button {
+  background-color: transparent;
+}
+button.flat:hover, headerbar button:not(.suggested-action):not(.destructive-action):hover,
+windowcontrols > button:hover {
+  background-color: @bayu_flat_hover;
+}
+button.flat:active, button.flat:checked,
+headerbar button:not(.suggested-action):not(.destructive-action):active,
+headerbar button:not(.suggested-action):not(.destructive-action):checked,
+windowcontrols > button:active {
+  background-color: @bayu_flat_active;
+}
+
+/* Linked groups (segmented buttons) round only their outer corners. */
+.linked > button { border-radius: 0; }
+.linked > button:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+.linked > button:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+.linked > button:only-child { border-radius: 10px; }
+
+/* Text fields */
+entry, spinbutton, spinbutton:not(.vertical), dropdown > button, combobox > box > button, passwordentry {
+  min-height: 33px;
+  border: 1px solid @bayu_control;
+  border-radius: 8px;
+  background-color: @bayu_control;
+  background-image: none;
+  box-shadow: none;
+  color: @bayu_fg;
+}
+entry, passwordentry { padding-left: 8px; padding-right: 8px; }
+entry:focus-within, spinbutton:focus-within, spinbutton:not(.vertical):focus-within, passwordentry:focus-within {
+  border-color: @bayu_accent;
+  outline: 2px solid alpha(@bayu_accent, 0.25);
+  outline-offset: 0;
+}
+entry:disabled, spinbutton:disabled, spinbutton:not(.vertical):disabled, combobox:disabled button.combo,
+dropdown:disabled > button, combobox:disabled > box > button { border-color: transparent; background-color: alpha(@bayu_control, 0.6); color: @bayu_fg_disabled; }
+spinbutton > text { padding-left: 8px; }
+spinbutton > button, spinbutton > button:hover, spinbutton > button:active {
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: alpha(@bayu_fg, 0.7);
+  box-shadow: none;
+}
+spinbutton > button:hover { color: @bayu_fg; }
+entry > image { color: alpha(@bayu_fg, 0.6); }
+dropdown > button, combobox > box > button { padding: 4px 10px; }
+dropdown > button:hover, combobox > box > button:hover { background-color: @bayu_control_hover; border-color: @bayu_control_hover; }
+
+/* Check boxes and radio buttons */
+check, radio {
+  min-width: 18px;
+  min-height: 18px;
+  border: 1px solid @bayu_toggle_border;
+  border-radius: 6px;
+  background-color: @bayu_view;
+  background-image: none;
+  box-shadow: none;
+  color: @bayu_accent_fg;
+}
+radio { border-radius: 9999px; }
+check:checked, check:indeterminate, radio:checked, radio:indeterminate {
+  border-color: @bayu_accent_border;
+  background-color: @bayu_accent;
+  color: @bayu_accent_fg;
+}
+check:hover:not(:checked):not(:indeterminate), radio:hover:not(:checked) { border-color: alpha(@bayu_accent, 0.6); }
+check:disabled, radio:disabled { opacity: 0.5; }
+checkbutton:focus-visible > check, checkbutton:focus-visible > radio { outline: 2px solid alpha(@bayu_accent, 0.35); outline-offset: 1px; }
+
+/* Switches: 38 x 20 track, 16 px handle. */
+switch {
+  border: none;
+  border-radius: 9999px;
+  background-color: alpha(@bayu_fg, 0.2);
+  background-image: none;
+  box-shadow: none;
+  color: transparent;
+}
+switch:checked { background-color: @bayu_accent; }
+switch > slider, switch:hover > slider, switch:checked > slider {
+  min-width: 16px;
+  min-height: 16px;
+  margin: 2px;
+  border: none;
+  border-radius: 9999px;
+  background-color: #FFFFFF;
+  background-image: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+switch > image { color: transparent; }
+switch:disabled { opacity: 0.5; }
+
+/* Sliders: 4 px track, 22 px white handle. */
+scale > trough {
+  min-height: 4px;
+  min-width: 4px;
+  border: none;
+  border-radius: 2px;
+  background-color: @bayu_slider_track;
+  outline: none;
+}
+scale > trough > highlight {
+  border: none;
+  border-radius: 2px;
+  background-color: @bayu_accent;
+  background-image: none;
+}
+scale > trough > fill { background-color: transparent; }
+scale > trough > slider {
+  min-width: 22px;
+  min-height: 22px;
+  margin: -9px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 9999px;
+  background-color: #FFFFFF;
+  background-image: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+scale > trough > slider:active { background-color: #FAFAFA; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); }
+scale:disabled { opacity: 0.5; }
+
+/* Progress bars: a rounded pill. */
+progressbar > trough {
+  min-height: 6px;
+  min-width: 6px;
+  border: none;
+  border-radius: 9999px;
+  background-color: @bayu_control;
+  box-shadow: none;
+}
+progressbar > trough > progress {
+  min-height: 6px;
+  min-width: 6px;
+  border: none;
+  border-radius: 9999px;
+  background-color: @bayu_accent;
+  background-image: none;
+}
+levelbar > trough > block.filled, levelbar > trough > block.high { background-color: @bayu_accent; }
+
+/* Scroll bars: a thin rounded handle. */
+scrollbar, scrollbar > range > trough { background-color: transparent; border-color: transparent; }
+scrollbar > range > trough > slider {
+  min-width: 6px;
+  min-height: 6px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;
+  background-color: @bayu_scrollbar;
+}
+scrollbar > range > trough > slider:active { background-color: @bayu_fg; }
+
+/* Notebooks: tabs as Bayu's segmented control. */
+notebook > header { background-color: @bayu_window; border-color: @bayu_separator; box-shadow: none; }
+notebook > header > tabs { background-color: @bayu_tab_track; border-radius: 8px; margin: 4px; }
+notebook > header > tabs > tab {
+  min-height: 24px;
+  margin: 2px;
+  padding: 2px 12px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: none;
+  color: alpha(@bayu_fg, 0.7);
+}
+notebook > header > tabs > tab:hover { background-color: alpha(@bayu_fg, 0.06); color: @bayu_fg; }
+notebook > header > tabs > tab:checked { background-color: @bayu_tab_plate; color: @bayu_fg; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
+notebook > stack:not(:only-child) { background-color: @bayu_view; }
+
+/* Menus and popovers */
+popover > contents, popover.menu > contents, popover.background > contents {
+  padding: 4px;
+  border: 1px solid @bayu_menu_border;
+  border-radius: 12px;
+  background-color: @bayu_view;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  color: @bayu_fg;
+}
+popover > arrow { background-color: @bayu_view; border-color: @bayu_menu_border; }
+popover modelbutton, popover.menu modelbutton {
+  min-height: 26px;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+popover modelbutton:hover, popover modelbutton:selected, popover.menu modelbutton:hover {
+  background-color: alpha(@bayu_accent, 0.9);
+  color: @bayu_accent_fg;
+}
+popover modelbutton:disabled { color: alpha(@bayu_fg, 0.4); }
+popover separator { margin: 4px 6px; background-color: @bayu_menu_border; }
+
+/* Tool tips */
+tooltip, tooltip.background {
+  border: none;
+  border-radius: 8px;
+  background-color: alpha(@bayu_view, 0.95);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  color: @bayu_fg;
+}
+tooltip > box > label { color: @bayu_fg; }
+
+/* Lists */
+listview > row:hover:not(:selected), list > row:hover:not(:selected) { background-color: alpha(@bayu_fg, 0.05); }
+frame > border, .frame { border-color: @bayu_separator; }
+
+/* Beat the position-specific tab rules of GTK's own theme. */
+notebook > header.top > tabs > tab, notebook > header.bottom > tabs > tab, notebook > header.left > tabs > tab, notebook > header.right > tabs > tab { box-shadow: none; border: none; }
+notebook > header.top > tabs > tab:hover:not(:checked), notebook > header.bottom > tabs > tab:hover:not(:checked), notebook > header.left > tabs > tab:hover:not(:checked), notebook > header.right > tabs > tab:hover:not(:checked) { box-shadow: none; background-color: alpha(@bayu_fg, 0.06); }
+notebook > header.top > tabs > tab:checked, notebook > header.bottom > tabs > tab:checked, notebook > header.left > tabs > tab:checked, notebook > header.right > tabs > tab:checked { background-color: @bayu_tab_plate; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }

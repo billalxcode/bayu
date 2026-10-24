@@ -1,0 +1,4 @@
+/* Bayu for GTK 4: GTK's own theme, recoloured and resized to match Bayu. */
+@import url("resource:///org/gtk/libgtk/theme/Default/Default-light.css");
+@import url("../colors-light.css");
+@import url("bayu.css");
