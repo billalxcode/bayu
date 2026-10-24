@@ -3,6 +3,7 @@
 #include "ui/disk_editor.h"
 
 #include <algorithm>
+#include <chrono>
 #include <cmath>
 #include <cstdio>
 
@@ -54,6 +55,19 @@ std::string formatName(const std::string& format)
         || format == "vfat")
         return format;
     return format;
+}
+
+// The mount points in a piece: one, or the volumes' joined by ", ".
+std::vector<std::string> mountPointsOf(const DiskSegment& segment)
+{
+    std::vector<std::string> points;
+    size_t start = 0;
+    while (start < segment.mountPoint.size()) {
+        const size_t end = segment.mountPoint.find(", ", start);
+        points.push_back(segment.mountPoint.substr(start, end == std::string::npos ? std::string::npos : end - start));
+        start = end == std::string::npos ? segment.mountPoint.size() : end + 2;
+    }
+    return points;
 }
 
 // The name shown on a piece of the disk.
@@ -320,13 +334,17 @@ DiskEditor::DiskEditor(Installer& installer)
     bottom->setSpacing(style::columnSpacing);
     bottom->setLayoutHints({.fillWidth = true, .fillHeight = true});
 
-    ScrollView* panelScroll = bottom->addChild<ScrollView>();
-    panelScroll->setLayoutHints({.fillWidth = true, .fillHeight = true, .stretch = 1.05, .preferredWidth = 0});
-    m_panel = panelScroll->setContent<Card>(18);
+    m_panelScroll = bottom->addChild<ScrollView>();
+    m_panelScroll->setLayoutHints({.fillWidth = true, .fillHeight = true, .stretch = 1.05, .preferredWidth = 0});
+    m_panelScroll->setVerticalBarPolicy(ScrollView::BarPolicy::AlwaysOn);
+    m_panel = m_panelScroll->setContent<Card>(18);
+    m_reveal.setSingleShot(true);
+    m_reveal.onTimeout = [this] { m_panelScroll->setScrollPosition({0, 1e6}); };
     m_panel->setSpacing(12);
 
     ScrollView* listScroll = bottom->addChild<ScrollView>();
     listScroll->setLayoutHints({.fillWidth = true, .fillHeight = true, .preferredWidth = 0});
+    listScroll->setVerticalBarPolicy(ScrollView::BarPolicy::AlwaysOn);
     Column* lists = listScroll->setContent<Column>();
     lists->setSpacing(10);
     m_error = lists->addChild<Banner>(Banner::Kind::Error, std::string(), std::string());
@@ -341,6 +359,7 @@ DiskEditor::DiskEditor(Installer& installer)
     ActionButton* reset = changesHeading->addChild<ActionButton>(tr("Reset all"), ActionButton::Kind::Link);
     reset->onClicked = [this] {
         m_installer.backend().resetCustom();
+        m_selectedDisk.clear();
         reload();
     };
     m_actions = lists->addChild<Card>(16);
@@ -450,13 +469,16 @@ void DiskEditor::showFreePanel(const Disk& disk, const DiskSegment& segment)
         return;
     }
 
-    ActionButton* recommended = m_panel->addChild<ActionButton>(tr("Create the recommended layout here"),
-                                                                ActionButton::Kind::Primary);
-    recommended->setLeadingGlyph("wand");
-    recommended->setLayoutHints({.fillWidth = true});
-    recommended->onClicked = [this] { apply(m_installer.backend().createRecommended(m_encrypt)); };
-    Label* or_ = addText(m_panel, tr("or add a mount point yourself:"), 13, 400, Role::SecondaryText);
-    or_->setLayoutHints({.margins = {0, 4, 0, 0}});
+    // Until there is a system on the disks, the quick way to one.
+    if (!hasRoot()) {
+        ActionButton* recommended = m_panel->addChild<ActionButton>(tr("Create the recommended layout here"),
+                                                                    ActionButton::Kind::Primary);
+        recommended->setLeadingGlyph("wand");
+        recommended->setLayoutHints({.fillWidth = true});
+        recommended->onClicked = [this] { apply(m_installer.backend().createRecommended(m_encrypt)); };
+        Label* or_ = addText(m_panel, tr("or add a mount point yourself:"), 13, 400, Role::SecondaryText);
+        or_->setLayoutHints({.margins = {0, 4, 0, 0}});
+    }
 
     ComboBox* mount = addFormRow<ComboBox>(m_panel, tr("Mount point"), m_installer.backend().suggestedMountPoints());
     mount->setEditable(true);
@@ -464,8 +486,8 @@ void DiskEditor::showFreePanel(const Disk& disk, const DiskSegment& segment)
     std::vector<std::string> used;
     for (const Disk& each : m_disks) {
         for (const DiskSegment& piece : each.segments) {
-            if (!piece.mountPoint.empty())
-                used.push_back(piece.mountPoint);
+            for (const std::string& point : mountPointsOf(piece))
+                used.push_back(point);
         }
     }
     for (const std::string& point : m_installer.backend().suggestedMountPoints()) {
@@ -495,14 +517,31 @@ void DiskEditor::showFreePanel(const Disk& disk, const DiskSegment& segment)
     };
     suggestFormat(mount->editText());
     mount->onEditTextChanged = [mount, suggestFormat] { suggestFormat(mount->editText()); };
+    // Advanced: what the mount point lives on.
+    const std::vector<std::string> types = m_installer.backend().deviceTypes();
+    Dropdown* type = nullptr;
+    if (m_advanced && types.size() > 1) {
+        type = addFormRow<Dropdown>(m_panel, tr("Device type"));
+        std::vector<std::string> names;
+        for (const std::string& id : types) {
+            names.push_back(id == "lvm"        ? tr("LVM")
+                            : id == "lvm-thin" ? tr("LVM thin provisioning")
+                            : id == "btrfs"    ? tr("Btrfs")
+                                               : tr("Standard partition"));
+        }
+        type->setItems(names);
+        type->setCurrentIndex(0);
+    }
     CheckBox* encrypt = m_panel->addChild<CheckBox>(tr("Encrypt"));
     encrypt->setChecked(m_encrypt);
     ActionButton* add = m_panel->addChild<ActionButton>(tr("Add mount point"), ActionButton::Kind::Secondary);
     add->setLeadingGlyph("plus");
     add->setLayoutHints({.fillWidth = true, .margins = {0, 4, 0, 0}});
     const std::string diskId = disk.id;
-    add->onClicked = [this, mount, size, fs, encrypt, diskId] {
+    add->onClicked = [this, mount, size, fs, encrypt, diskId, type, types] {
         Backend::MountRequest request;
+        if (type && type->currentIndex() >= 0 && size_t(type->currentIndex()) < types.size())
+            request.type = types[size_t(type->currentIndex())];
         request.disk = diskId;
         request.mountPoint = mount->editText();
         request.size = size->value();
@@ -545,12 +584,38 @@ void DiskEditor::showPartitionPanel(const Disk& disk, const DiskSegment& segment
     mount->onClicked = [this, diskCopy, segmentCopy] { showMountForm(diskCopy, segmentCopy); };
     resize->onClicked = [this, segmentCopy] { showResizeForm(segmentCopy); };
     remove->onClicked = [this, segmentCopy] { confirmDelete(segmentCopy); };
+    // Three equal buttons across the panel.
+    for (ActionButton* button : {mount, resize, remove})
+        button->setLayoutHints({.fillWidth = true, .preferredWidth = 0});
     if (!segment.existing && segment.mountPoint.empty() && segment.format.empty())
         mount->setEnabled(false);
+    // Volumes inside it are not edited one by one here.
+    if (segment.format == "lvmpv" || segment.format == "btrfs") {
+        mount->setEnabled(false);
+        const std::vector<DiskSegment> volumes = m_installer.backend().volumes(segment.device);
+        Label* note = addText(m_panel,
+                              volumes.empty() ? tr("It holds LVM or Btrfs volumes. Delete it to use its space.")
+                                              : tr("Volumes in it:"),
+                              12, 400, Role::SecondaryText);
+        note->setWrap(true);
+        note->setLayoutHints({.fillWidth = true, .margins = {0, 6, 0, 0}});
+        for (const DiskSegment& volume : volumes) {
+            Row* row = m_panel->addChild<Row>();
+            row->setSpacing(8);
+            row->setLayoutHints({.fillWidth = true});
+            addText(row, volume.mountPoint.empty() ? volume.description : volume.mountPoint, 13, 600);
+            addText(row, formatName(volume.format) + " · " + style::formatSize(volume.size), 12, 400,
+                    Role::SecondaryText);
+            row->addStretch();
+            ActionButton* drop = row->addChild<ActionButton>(tr("Delete"), ActionButton::Kind::Link);
+            drop->onClicked = [this, volume] { confirmDelete(volume); };
+        }
+    }
 }
 
 void DiskEditor::showMountForm(const Disk&, const DiskSegment& segment)
 {
+    revealForm();
     while (m_panel->children().size() > 3)
         m_panel->takeChild(m_panel->children().back().get());
     addSectionLabel(m_panel, segment.existing ? tr("USE THIS PARTITION") : tr("CHANGE THIS MOUNT POINT"));
@@ -583,12 +648,22 @@ void DiskEditor::showMountForm(const Disk&, const DiskSegment& segment)
         request.reformat = reformat->isChecked();
         request.format = reformat->isChecked() ? fs->currentText() : copy.format;
         request.size = copy.size;
+        // A partition encrypted stays so when it is formatted again.
+        request.encrypt = copy.encrypted;
+        request.label = copy.label;
         apply(m_installer.backend().changeMount(request));
     };
 }
 
+void DiskEditor::revealForm()
+{
+    // Once laid out with the form.
+    m_reveal.start(std::chrono::milliseconds(30));
+}
+
 void DiskEditor::showResizeForm(const DiskSegment& segment)
 {
+    revealForm();
     while (m_panel->children().size() > 3)
         m_panel->takeChild(m_panel->children().back().get());
     addSectionLabel(m_panel, tr("RESIZE"));
@@ -718,8 +793,10 @@ bool DiskEditor::hasRoot() const
 {
     for (const Disk& disk : m_disks) {
         for (const DiskSegment& segment : disk.segments) {
-            if (segment.mountPoint == "/")
-                return true;
+            for (const std::string& point : mountPointsOf(segment)) {
+                if (point == "/")
+                    return true;
+            }
         }
     }
     return false;

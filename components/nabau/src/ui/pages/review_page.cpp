@@ -76,6 +76,14 @@ public:
     {
         if (!m_report.ok())
             return tr("The disk layout cannot be installed as it is. Edit the storage settings and come back here.");
+        bool deletes = false;
+        if (installer().choices().storage.method == StoragePlan::Method::Custom) {
+            for (const PendingAction& action : installer().backend().pendingActions())
+                deletes = deletes || action.destructive;
+        }
+        if (deletes)
+            return tr("Nothing has been written yet. Take one last look — after you begin, the partitions you "
+                      "deleted are erased.");
         if (installer().choices().erasedDisks.empty())
             return tr("Nothing has been written yet. Take one last look — what else is on the disk is kept.");
         return tr("Nothing has been written yet. Take one last look — after you begin, the selected disk is "
@@ -161,8 +169,19 @@ private:
                 scheme += " · " + part.format;
         }
         m_storage->addLine(tr("Scheme"), scheme);
-        m_storage->addLine(tr("Encryption"), choices.storage.encrypt ? tr("LUKS2 enabled") : tr("off"),
-                           choices.storage.encrypt ? std::optional<Role>(Role::Success) : std::nullopt);
+        // Custom layouts encrypt mount points one by one.
+        bool encrypted = choices.storage.encrypt && choices.storage.method == StoragePlan::Method::Automatic;
+        int deleted = 0;
+        if (choices.storage.method == StoragePlan::Method::Custom) {
+            for (const Disk& disk : backend.customDisks()) {
+                for (const DiskSegment& segment : disk.segments)
+                    encrypted = encrypted || (segment.encrypted && !segment.existing);
+            }
+            for (const PendingAction& action : backend.pendingActions())
+                deleted += action.destructive ? 1 : 0;
+        }
+        m_storage->addLine(tr("Encryption"), encrypted ? tr("LUKS2 enabled") : tr("off"),
+                           encrypted ? std::optional<Role>(Role::Success) : std::nullopt);
         std::vector<LayoutPart> layout = backend.appliedLayout();
         if (layout.empty())
             layout = choices.layout;
@@ -196,6 +215,11 @@ private:
             m_warning->setText(format(tr("{disk} will be erased"), {{"disk", choices.erasedDisks.front()}}),
                                format(tr("All {size} on this device is reformatted. Other disks are left untouched."),
                                       {{"size", style::formatSize(size)}}));
+        } else if (deleted) {
+            m_warning->setKind(Banner::Kind::Warning);
+            m_warning->setText(tr("Partitions will be deleted"),
+                               tr("What the custom layout deletes is lost once the installation starts. Edit the "
+                                  "storage to check the pending changes."));
         } else if (!m_report.warnings.empty()) {
             std::string text;
             for (const std::string& line : m_report.warnings)

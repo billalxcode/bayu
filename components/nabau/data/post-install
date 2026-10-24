@@ -1,14 +1,14 @@
 #!/bin/bash
-# Finishes the system bayu-installer copied to /mnt/sysroot: the live
+# Finishes the system nabau copied to /mnt/sysroot: the live
 # session's account, autologin and installer go; the new account's settings
 # and the add-ons chosen come. Reports "progress <text>" and "packages <n>".
 # Environment: USER_NAME AUTOLOGIN PICTURE AUTOCONNECT ADDONS.
 set -u
 root=${SYSROOT:-/mnt/sysroot}
-exec 2>>/tmp/bayu-installer-post.log
+exec 2>>/tmp/nabau-post.log
 LIVE_USER=
 # shellcheck disable=SC1091
-[[ -r /etc/bayu-installer/installer.conf ]] && . /etc/bayu-installer/installer.conf
+[[ -r /etc/nabau/nabau.conf ]] && . /etc/nabau/nabau.conf
 status=0
 
 echo "progress Removing the live session's account"
@@ -43,8 +43,8 @@ for group in $ADDONS; do
 done
 
 echo "progress Removing the installer from the new system"
-dnf -y -q --installroot="$root" --disablerepo='*' remove bayu-installer 'anaconda*' >&2 || status=1
-rm -rf "$root/etc/bayu-installer"
+dnf -y -q --installroot="$root" --disablerepo='*' --noautoremove remove nabau 'anaconda*' >&2 || status=1
+rm -rf "$root/etc/nabau"
 
 echo "packages $(rpm --root "$root" -qa | wc -l)"
 exit $status

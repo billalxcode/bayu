@@ -2,7 +2,7 @@
 <!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
-  <action id="org.bayu.installer.backend">
+  <action id="org.bayu.nabau.backend">
     <description>Install the system</description>
     <message>Installing the system to a disk requires administrator rights</message>
     <defaults>
@@ -10,6 +10,6 @@
       <allow_inactive>auth_admin</allow_inactive>
       <allow_active>auth_admin_keep</allow_active>
     </defaults>
-    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/bayu-installer/bayu-installer-backend</annotate>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/nabau/nabau-backend</annotate>
   </action>
 </policyconfig>

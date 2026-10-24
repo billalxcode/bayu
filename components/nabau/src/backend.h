@@ -93,6 +93,8 @@ public:
         bool reformat = true;
         bool encrypt = false;
         std::string label;
+        // Advanced: "partition", "lvm", "lvm-thin" or "btrfs".
+        std::string type = "partition";
     };
     // An error text, empty on success.
     virtual std::string addMount(const MountRequest& request) = 0;
@@ -105,6 +107,10 @@ public:
     virtual std::vector<PendingAction> pendingActions() const = 0;
     virtual std::vector<std::string> fileSystems() const = 0;
     virtual std::vector<std::string> suggestedMountPoints() const = 0;
+    // The device types new mount points can have, "partition" first.
+    virtual std::vector<std::string> deviceTypes() const { return {"partition"}; }
+    // The volumes of an LVM group or a Btrfs volume on a partition.
+    virtual std::vector<DiskSegment> volumes(const std::string&) const { return {}; }
     // Limits for a device's size; equal when it cannot change.
     virtual std::pair<uint64_t, uint64_t> sizeLimits(const std::string& device) const = 0;
 

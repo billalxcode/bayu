@@ -48,13 +48,17 @@ std::string diskStatus(const Disk& disk)
 }
 
 // The partition to make room from: the largest one with data.
+// The partition to shrink for an installation beside it: Windows' when
+// there is one, else the largest.
 const DiskSegment* largestPartition(const Disk& disk)
 {
     const DiskSegment* best = nullptr;
     for (const DiskSegment& segment : disk.segments) {
         if (segment.free || segment.format == "efi" || segment.format == "swap" || segment.format.empty())
             continue;
-        if (!best || segment.size > best->size)
+        const bool windows = segment.format == "ntfs";
+        const bool bestWindows = best && best->format == "ntfs";
+        if (!best || windows > bestWindows || (windows == bestWindows && segment.size > best->size))
             best = &segment;
     }
     return best;
@@ -82,6 +86,7 @@ public:
         for (RadioButton* button : {m_replace, m_alongside, m_free})
             button->setGroup(&m_group);
         m_group.onChanged = [this](int index) {
+            m_chosen = true;
             m_choice = index == 0   ? StoragePlan::ExistingData::Replace
                        : index == 1 ? StoragePlan::ExistingData::Alongside
                                     : StoragePlan::ExistingData::UseFreeSpace;
@@ -115,7 +120,9 @@ public:
         m_replace->setText(format(tr("Erase everything on {path}"), {{"path", disk.path}}));
         m_shrink = largest ? largest->device : std::string();
         const bool canShrink = largest && largest->size > minimumKeep + required;
-        m_alongside->setText(format(tr("Install alongside {system}"), {{"system", system}}));
+        m_alongside->setText(canShrink ? format(tr("Install alongside {system}"), {{"system", system}})
+                                       : format(tr("Install alongside {system} (it cannot be shrunk now)"),
+                                                {{"system", system}}));
         m_alongside->setEnabled(canShrink);
         m_free->setText(format(tr("Use the free space only ({size})"), {{"size", style::formatSize(disk.freeSpace)}}));
         m_free->setEnabled(disk.freeSpace >= required);
@@ -126,7 +133,11 @@ public:
             m_partitionSize = largest->size;
             m_systemName = system;
         }
-        // The safest choice that works: free space, then beside, then erase.
+        // The safest choice that works: free space, then beside. Erasing is
+        // never chosen for the user.
+        for (RadioButton* button : {m_replace, m_alongside, m_free})
+            button->setChecked(false);
+        m_chosen = true;
         if (disk.freeSpace >= required) {
             m_free->setChecked(true);
             m_choice = StoragePlan::ExistingData::UseFreeSpace;
@@ -134,7 +145,7 @@ public:
             m_alongside->setChecked(true);
             m_choice = StoragePlan::ExistingData::Alongside;
         } else {
-            m_replace->setChecked(true);
+            m_chosen = false;
             m_choice = StoragePlan::ExistingData::Replace;
         }
         m_split->setVisible(m_choice == StoragePlan::ExistingData::Alongside);
@@ -143,6 +154,8 @@ public:
     }
 
     StoragePlan::ExistingData choice() const { return m_choice; }
+    // Something was picked, by the user or as a safe default.
+    bool chosen() const { return m_chosen; }
     const std::string& shrinkDevice() const { return m_shrink; }
     uint64_t keepSize() const { return m_keep; }
     std::function<void()> onChanged;
@@ -162,6 +175,7 @@ private:
     RadioButton* m_replace;
     RadioButton* m_alongside;
     RadioButton* m_free;
+    bool m_chosen = true;
     Column* m_split;
     Slider* m_slider;
     Label* m_splitText;
@@ -229,7 +243,7 @@ public:
         m_custom->setDetail(tr("Your own mount points"));
         m_advanced = right->addChild<OptionCard>("terminal");
         m_advanced->setTitle(tr("Advanced"));
-        m_advanced->setDetail(tr("LVM, RAID, Btrfs by hand"));
+        m_advanced->setDetail(tr("LVM or Btrfs volumes, by hand"));
         m_automatic->onClicked = [this] { setMethod(Method::Automatic); };
         m_custom->onClicked = [this] { setMethod(Method::Custom); };
         m_advanced->onClicked = [this] { setMethod(Method::Advanced); };
@@ -286,7 +300,7 @@ public:
     {
         if (m_editing)
             return m_editor->hasRoot();
-        return selectedDisk() != nullptr && !m_planning;
+        return selectedDisk() != nullptr && !m_planning && (!m_existing->isVisible() || m_existing->chosen());
     }
 
     bool handleBack() override

@@ -1,7 +1,7 @@
 // The live session's administrator installs without a password: the
 // installer is only on the live media.
 polkit.addRule(function(action, subject) {
-    if (action.id == "org.bayu.installer.backend" && subject.local && subject.active
+    if (action.id == "org.bayu.nabau.backend" && subject.local && subject.active
         && subject.isInGroup("wheel")) {
         return polkit.Result.YES;
     }

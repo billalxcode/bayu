@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: BSD-3-Clause
-// bayu-installer: installs the system from the live session, a native
+// nabau: installs the system from the live session, a native
 // frontend for Anaconda's installation modules.
 
 #include <cstdio>
@@ -60,8 +60,8 @@ int main(int argc, char** argv)
     bayu::ui::Application application(argc, argv,
                                       capture.empty() ? bayu::ui::Application::Platform::Wayland
                                                       : bayu::ui::Application::Platform::Headless);
-    application.setApplicationId("bayu-installer");
-    bayu::i18n::setDomain("bayu-installer");
+    application.setApplicationId("nabau");
+    bayu::i18n::setDomain("nabau");
     if (dark)
         bayu::ui::Theme::setCurrent(bayu::ui::Theme::dark());
     style::install();

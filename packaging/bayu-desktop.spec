@@ -43,16 +43,16 @@ Requires:       dbus-tools
 Requires:       google-noto-sans-vf-fonts google-noto-sans-mono-vf-fonts
 Requires(pre):  shadow-utils
 
-%package -n bayu-installer
+%package -n nabau
 Summary:        Installs the system from Bayu live media
 Requires:       %{name}%{?_isa} = %{version}-%{release}
-Requires:       anaconda-live anaconda-core polkit redhat-mono-fonts rsync kbd
+Requires:       anaconda-live anaconda-core polkit redhat-mono-fonts rsync kbd chrony
 Requires:       libblockdev-lvm libblockdev-dm libblockdev-mpath libblockdev-mdraid lvm2
 Requires:       dosfstools e2fsprogs xfsprogs efibootmgr cryptsetup
 Recommends:     ntfsprogs
 
-%description -n bayu-installer
-The installer of Bayu live media: a native frontend for Anaconda's
+%description -n nabau
+Nabau, the installer of Bayu live media: a native frontend for Anaconda's
 installation modules. It copies the live system to a disk, beside Windows
 or alone, and removes itself from the installed system.
 
@@ -81,8 +81,8 @@ ln -s ../../..%{_datadir}/fontconfig/conf.avail/60-bayu-noto-mono.conf \
 cd %{buildroot} && find . \( -type f -o -type l \) | sed -e 's#^\.##' \
   -e 's#^/etc/#%%config(noreplace) /etc/#' > %{_builddir}/all-files.list
 # The installer is its own package, on live media only.
-grep -E 'bayu-installer|org\.bayu\.installer' %{_builddir}/all-files.list > %{_builddir}/installer-files.list
-grep -vE 'bayu-installer|org\.bayu\.installer' %{_builddir}/all-files.list > %{_builddir}/bayu-files.list
+grep -E 'nabau' %{_builddir}/all-files.list > %{_builddir}/installer-files.list
+grep -vE 'nabau' %{_builddir}/all-files.list > %{_builddir}/bayu-files.list
 
 %pre
 getent passwd bayu-greeter >/dev/null || \
@@ -93,8 +93,8 @@ getent passwd bayu-greeter >/dev/null || \
 gtk-update-icon-cache -q -f /usr/share/icons/* 2>/dev/null || :
 glib-compile-schemas /usr/share/glib-2.0/schemas 2>/dev/null || :
 
-%files -n bayu-installer -f %{_builddir}/installer-files.list
-%dir %{_libexecdir}/bayu-installer
+%files -n nabau -f %{_builddir}/installer-files.list
+%dir %{_libexecdir}/nabau
 %dir %{_datadir}/cockpit
 %dir %{_datadir}/cockpit/anaconda-webui
 

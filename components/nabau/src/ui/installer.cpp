@@ -474,7 +474,7 @@ Installer::Installer(std::unique_ptr<Backend> backend)
     : m_backend(std::move(backend))
     , m_window(std::make_unique<Window>())
 {
-    m_window->setTitle(tr("Install"));
+    m_window->setTitle("Nabau");
     m_window->resize({style::windowWidth, style::windowHeight});
     m_window->setMinimumSize({960, 660});
     m_window->setBackgroundColor(ColorRecipe(ColorId::TranslucentWindowBackground));

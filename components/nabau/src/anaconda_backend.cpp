@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 // The installer's backend on a live system: Anaconda's modules on their
-// private bus, started as root by bayu-installer-backend, plus
+// private bus, started as root by nabau-backend, plus
 // NetworkManager for the network and the session for the keyboard.
 
 #include <crypt.h>
@@ -44,8 +44,8 @@ namespace installer {
 namespace {
 
 constexpr uint64_t MiB = 1024ull * 1024;
-constexpr const char* kHelper = "/usr/libexec/bayu-installer/bayu-installer-backend";
-constexpr const char* kConfig = "/etc/bayu-installer/installer.conf";
+constexpr const char* kHelper = "/usr/libexec/nabau/nabau-backend";
+constexpr const char* kConfig = "/etc/nabau/nabau.conf";
 constexpr const char* kRules = "/usr/share/X11/xkb/rules/evdev.xml";
 
 constexpr const char* kBoss = "org.fedoraproject.Anaconda.Boss";
@@ -349,7 +349,6 @@ public:
     {
         m_locale = locale;
         module("Localization").setProperty("Language", locale);
-        Proxy(m_bus.get(), kBoss, "/org/fedoraproject/Anaconda/Boss", kBoss).call("SetLocale", locale);
     }
 
     std::vector<KeyboardLayout> keyboardLayouts(const std::string& language) const override
@@ -528,7 +527,10 @@ public:
             if (std::string error = validateMountPoint(mountPoint); !error.empty())
                 return error;
         }
-        const VariantMap factory{{"device-type", kPartition},
+        static const std::map<std::string, int32_t> types{
+            {"partition", kPartition}, {"lvm", 0}, {"lvm-thin", 5}, {"btrfs", 3}};
+        const auto type = types.find(request.type);
+        const VariantMap factory{{"device-type", type == types.end() ? kPartition : type->second},
                                  {"disks", Strings{request.disk}},
                                  {"mount-point", mountPoint},
                                  {"format-type", fileSystem},
@@ -589,8 +591,20 @@ public:
         return errorText(scheduler().call("ChangeDevice", changed, original));
     }
 
+    // What is inside goes first: Anaconda destroys leaves only (the volumes
+    // of an LVM group, then the group, then the partition holding it).
     std::string remove(const std::string& device) override
     {
+        VariantMap data;
+        if (!viewer(m_custom.tree).call("GetDeviceData", device).read(data))
+            return {};
+        for (const std::string& child : get<Strings>(data, "children")) {
+            if (std::string error = remove(child); !error.empty())
+                return error;
+        }
+        // A group goes with its last volume.
+        if (!viewer(m_custom.tree).call("GetDeviceData", device).read(data))
+            return {};
         return errorText(scheduler().call("DestroyDevice", device));
     }
 
@@ -612,8 +626,26 @@ public:
             return errorText(scheduler().call("AddDevice", factory));
         };
         if (m_info.uefi && !mounts.count("/boot/efi")) {
-            if (std::string error = add("/boot/efi", "efi", 600 * MiB, false); !error.empty())
-                return error;
+            // Beside Windows, its EFI partition takes the new boot loader too.
+            std::string existing;
+            const std::set<std::string> created = createdDevices(m_custom.tree);
+            for (const std::string& child : get<Strings>(deviceData(view, disk), "children")) {
+                if (!created.count(child) && get<std::string>(formatData(view, child), "type") == "efi")
+                    existing = child;
+            }
+            std::string error = existing.empty() ? std::string("none") : std::string();
+            if (!existing.empty()) {
+                VariantMap original;
+                scheduler().call("GenerateDeviceFactoryRequest", existing).read(original);
+                VariantMap changed = original;
+                changed["mount-point"] = std::string("/boot/efi");
+                changed["reformat"] = false;
+                error = errorText(scheduler().call("ChangeDevice", changed, original));
+            }
+            if (!error.empty()) {
+                if (std::string added = add("/boot/efi", "efi", 600 * MiB, false); !added.empty())
+                    return added;
+            }
         }
         if (!m_info.uefi && !hasFormat(m_custom.tree, disk, "biosboot")) {
             // Only GPT disks need it; on an MBR disk this fails and is not needed.
@@ -684,6 +716,44 @@ public:
     }
 
     std::vector<std::string> fileSystems() const override { return m_fileSystems; }
+
+    std::vector<std::string> deviceTypes() const override
+    {
+        Strings types{"partition", "lvm", "lvm-thin"};
+        if (m_scheme == kBtrfs)
+            types.push_back("btrfs");
+        return types;
+    }
+
+    std::vector<DiskSegment> volumes(const std::string& device) const override
+    {
+        std::vector<DiskSegment> out;
+        if (m_custom.tree.empty())
+            return out;
+        const Proxy view = viewer(m_custom.tree);
+        const std::set<std::string> created = createdDevices(m_custom.tree);
+        // Partition, then LUKS, then group or volume, then the volumes.
+        std::vector<std::string> queue{device};
+        for (size_t i = 0; i < queue.size() && i < 64; ++i) {
+            const VariantMap data = deviceData(view, queue[i]);
+            const std::string type = get<std::string>(data, "type");
+            if (type == "lvmlv" || type == "lvmthinlv" || type == "btrfs subvolume") {
+                const VariantMap format = formatData(view, queue[i]);
+                DiskSegment volume;
+                volume.device = queue[i];
+                volume.size = get<uint64_t>(data, "size");
+                volume.format = get<std::string>(format, "type");
+                volume.mountPoint = volume.format == "swap" ? "swap"
+                                                            : valueOf(get<StringMap>(format, "attrs"), "mount-point");
+                volume.existing = !created.count(queue[i]);
+                volume.description = get<std::string>(data, "name");
+                out.push_back(volume);
+            }
+            for (const std::string& child : get<Strings>(data, "children"))
+                queue.push_back(child);
+        }
+        return out;
+    }
 
     std::vector<std::string> suggestedMountPoints() const override
     {
@@ -778,6 +848,8 @@ public:
         // Anaconda would start initial-setup on the first boot: the account
         // exists already.
         module("Services").setProperty("SetupOnBoot", int32_t(0));
+        // Anaconda looks for display managers it knows; bayu-dm is not one.
+        module("Services").setProperty("DefaultTarget", std::string("graphical.target"));
         std::vector<ObjectPath> tasks;
         const Reply reply =
             Proxy(m_bus.get(), kBoss, "/org/fedoraproject/Anaconda/Boss", kBoss).call("InstallWithTasks");
@@ -793,7 +865,7 @@ public:
                 if (m_steps <= 0)
                     m_steps = Proxy(m_bus.get(), kBoss, path, kTask).property<int32_t>("Steps").value_or(0);
                 logStep(message);
-                report(m_steps > 0 ? 0.9 * double(step) / double(m_steps) : 0, message);
+                report(installFraction(step, message), message);
             },
             [this](const std::string& error) {
                 if (!error.empty()) {
@@ -1031,7 +1103,9 @@ private:
         m_locale = localization.property<std::string>("Language").value_or(std::string());
         if (m_locale.empty())
             m_locale = "en_US.UTF-8";
-        Proxy(m_bus.get(), kBoss, "/org/fedoraproject/Anaconda/Boss", kBoss).call("SetLocale", m_locale);
+        // Anaconda's messages and descriptions in the installer's language.
+        // ponytail: English until the installer is translated.
+        Proxy(m_bus.get(), kBoss, "/org/fedoraproject/Anaconda/Boss", kBoss).call("SetLocale", std::string("en_US.UTF-8"));
 
         m_xkb = readXkbLayouts();
         // The layout the session types with now, else what Anaconda has.
@@ -1142,14 +1216,14 @@ private:
                 return;
             run->finished = true;
             const std::string error = errorText(run->task.call("Finish"));
-            fprintf(stderr, "bayu-installer: task %s finished%s%s\n", run->task.path().c_str(),
+            fprintf(stderr, "nabau: task %s finished%s%s\n", run->task.path().c_str(),
                     error.empty() ? "" : ": ", error.c_str());
             // Dropped once this callback is over.
             bayu::base::EventLoop::current()->post([this, run] { m_tasks.erase(run); });
             done(error);
         });
         m_tasks.insert(run);
-        fprintf(stderr, "bayu-installer: task %s starting\n", path.c_str());
+        fprintf(stderr, "nabau: task %s starting\n", path.c_str());
         const Reply reply = run->task.call("Start");
         if (reply.isError()) {
             m_tasks.erase(run);
@@ -1377,9 +1451,7 @@ private:
         const VariantMap format = formatData(view, device);
         const std::string type = get<std::string>(format, "type");
         const std::string mountPoint = valueOf(get<StringMap>(format, "attrs"), "mount-point");
-        if (type == "swap")
-            out.push_back("swap");
-        else if (!mountPoint.empty())
+        if (!mountPoint.empty())
             out.push_back(mountPoint);
         for (const std::string& child : get<Strings>(deviceData(view, device), "children"))
             collectMounts(view, child, out, depth + 1);
@@ -1468,7 +1540,9 @@ private:
             const StringMap formatAttrs = get<StringMap>(format, "attrs");
             segment.format = type == "luks" ? "luks" : type;
             segment.label = valueOf(formatAttrs, "label");
-            segment.mountPoint = type == "swap" ? "swap" : valueOf(formatAttrs, "mount-point");
+            // Swap in use is swap made by the plan; old swap on the disk is not.
+            segment.mountPoint = type == "swap" ? (segment.existing ? std::string() : "swap")
+                                                : valueOf(formatAttrs, "mount-point");
             segment.description = get<std::string>(format, "description");
             if (type == "lvmpv" || type == "btrfs") {
                 Strings mounts;
@@ -1480,7 +1554,7 @@ private:
             }
             if (type == "ntfs" && std::find(disk.systems.begin(), disk.systems.end(), "Windows") == disk.systems.end()
                 && size > 20 * 1000 * MiB) {
-                disk.systems.push_back("Windows");
+                disk.systems.insert(disk.systems.begin(), "Windows");
                 segment.description = "Windows";
             }
             if (get<bool>(piece.data, "protected"))
@@ -1509,9 +1583,39 @@ private:
             m_progress(progress);
     }
 
-    // The step running is done once the next one starts.
-    void logStep(const std::string& message)
+    // Copying the system takes most of the time, though it is one of
+    // Anaconda's steps: it gets 5–70 %, the steps before and after the rest
+    // up to 90 % (the post-install has the last 10).
+    double installFraction(int step, const std::string& message)
     {
+        if (m_steps <= 0)
+            return m_fraction;
+        double percent = -1;
+        if (message.starts_with("Installing software")) {
+            if (m_softwareStep < 0)
+                m_softwareStep = step;
+            percent = std::atof(message.c_str() + message.find_last_of(' ') + 1);
+        }
+        double fraction;
+        if (m_softwareStep < 0)
+            fraction = 0.05 * std::min(1.0, double(step) / std::max(1, m_steps / 4));
+        else if (percent >= 0)
+            fraction = 0.05 + 0.65 * percent / 100;
+        else
+            fraction = 0.7 + 0.2 * double(step - m_softwareStep) / std::max(1, m_steps - m_softwareStep);
+        return std::clamp(std::max(fraction, m_fraction), 0.0, 0.9);
+    }
+
+    // The step running is done once the next one starts. Steps that report
+    // a percentage ("Installing software 42%") are one line.
+    void logStep(const std::string& reported)
+    {
+        std::string message = reported;
+        if (!message.empty() && message.back() == '%') {
+            const size_t space = message.find_last_of(' ');
+            if (space != std::string::npos)
+                message.resize(space);
+        }
         if (message.empty() || message == m_running)
             return;
         if (!m_running.empty())
@@ -1546,7 +1650,7 @@ private:
         // live account or an add-on may remain), so it warns but succeeds.
         if (code != 0)
             m_log({InstallLogLine::State::Failed,
-                   tr("Finishing the system did not complete; see /tmp/bayu-installer-post.log")});
+                   tr("Finishing the system did not complete; see /tmp/nabau-post.log")});
         finish(true, {});
     }
 
@@ -1606,7 +1710,7 @@ private:
     bool m_encryptedMounts = false;
     // Planning checks an encrypted layout with this until the account step
     // gives the real passphrase.
-    const std::string m_placeholder = "bayu-installer-plan";
+    const std::string m_placeholder = "nabau-plan";
 
     std::vector<std::string> m_addons;
     int m_packageCount = 0;
@@ -1618,6 +1722,7 @@ private:
     std::chrono::steady_clock::time_point m_started;
     int32_t m_steps = 0;
     double m_fraction = 0;
+    int m_softwareStep = -1;
     std::string m_running;
     bool m_postDone = false;
 };

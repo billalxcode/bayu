@@ -7,11 +7,13 @@
 #include <string>
 #include <vector>
 
+#include "base/timer.h"
 #include "model.h"
 #include "ui/layout.h"
 
 namespace bayu::ui {
 class ConfirmDialog;
+class ScrollView;
 }
 
 namespace installer {
@@ -52,10 +54,14 @@ private:
     void fillLists();
     // Applies an edit: shows its error, or reloads.
     void apply(const std::string& error);
+    // Scrolls the panel down to the form just opened in it.
+    void revealForm();
 
     Installer& m_installer;
     bayu::ui::Column* m_maps;
+    bayu::ui::ScrollView* m_panelScroll;
     Card* m_panel;
+    bayu::base::Timer m_reveal;
     bayu::ui::Column* m_mounts;
     bayu::ui::Column* m_actions;
     Banner* m_report;

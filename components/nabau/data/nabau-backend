@@ -1,14 +1,14 @@
 #!/bin/bash
-# Starts Anaconda for bayu-installer and finishes the installed system. Runs
+# Starts Anaconda for nabau and finishes the installed system. Runs
 # as root through pkexec and talks to the installer over stdin and stdout:
-#   bayu-installer-backend <installer pid>
+#   nabau-backend <installer pid>
 # Out: "status <text>", "error <text>", "ready <bus address>", then the
 # post-install's "progress <text>", "packages <n>" and "done <status>".
 # In: "set <key> <value>" lines, "postinstall", "reboot"; end of input once
 # the installer leaves.
 set -u
 installer=$1
-log=/tmp/bayu-installer-backend.log
+log=/tmp/nabau-backend.log
 exec 2>>"$log"
 
 mkdir -p /run/anaconda
@@ -53,7 +53,7 @@ while read -r command key value; do
     postinstall)
         USER_NAME=${settings[user]-} AUTOLOGIN=${settings[autologin]-0} PICTURE=${settings[picture]-} \
             AUTOCONNECT=${settings[autoconnect]-1} ADDONS=${settings[groups]-} \
-            /usr/libexec/bayu-installer/post-install
+            /usr/libexec/nabau/post-install
         echo "done $?"
         ;;
     reboot) reboot=1 ;;

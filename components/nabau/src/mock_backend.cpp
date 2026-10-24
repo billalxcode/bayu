@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 // Sample data shaped like the design, for developing the pages and taking
-// screenshots without a backend: bayu-installer --mock.
+// screenshots without a backend: nabau --mock.
 
 #include <algorithm>
 #include <chrono>
@@ -205,6 +205,7 @@ public:
     {
         return {"/", "/home", "/boot", "/boot/efi", "swap", "/var", "/srv", "/opt"};
     }
+    std::vector<std::string> deviceTypes() const override { return {"partition", "lvm", "lvm-thin", "btrfs"}; }
     std::pair<uint64_t, uint64_t> sizeLimits(const std::string&) const override { return {GB, 500 * GB}; }
 
     std::vector<SoftwareEnvironment> environments() const override
