@@ -49,7 +49,8 @@ HintsSettings::HintsSettings(QObject *parent)
     m_iconTheme = m_settings->value("IconTheme", s_defaultIconName).toString();
     updateIconThemeHint();
 
-    m_hints[QPlatformTheme::StyleNames] = QStringList {QStringLiteral("Fusion")};
+    // Bayu's own widget style (../style), Fusion where it is not installed.
+    m_hints[QPlatformTheme::StyleNames] = QStringList {QStringLiteral("bayu"), QStringLiteral("Fusion")};
     m_hints[QPlatformTheme::SystemIconFallbackThemeName] = QStringLiteral("hicolor");
     m_hints[QPlatformTheme::IconThemeSearchPaths] = xdgIconThemePaths();
     m_hints[QPlatformTheme::UseFullScreenForPopupMenu] = false;

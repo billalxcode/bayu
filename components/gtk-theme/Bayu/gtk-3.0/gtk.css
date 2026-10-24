@@ -1,0 +1,4 @@
+/* Bayu for GTK 3: GTK's own theme, recoloured and resized to match Bayu. */
+@import url("resource:///org/gtk/libgtk/theme/Adwaita/gtk-contained.css");
+@import url("../colors-light.css");
+@import url("bayu.css");

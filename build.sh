@@ -12,7 +12,7 @@ BUILD=${BUILD:-$ROOT/build}
 JOBS=${JOBS:-$(nproc)}
 COMPONENTS=${COMPONENTS:-"bayu-toolkit bayu-framework qt-plugins icons bayu-core bayu-dm
 filemanager terminal xdg-desktop-portal-bayu settings system-monitor text-editor
-calendar bayu-compositor wallpapers"}
+calendar bayu-compositor wallpapers gtk-theme"}
 
 [[ -d $ROOT/components/bayu-toolkit/third_party/skia ]] || "$ROOT/components/bayu-toolkit/scripts/fetch-skia.sh"
 

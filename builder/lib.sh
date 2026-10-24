@@ -35,10 +35,15 @@ install_root() {
   # shellcheck disable=SC2086
   dnf -y --installroot="$dir" --releasever="$RELEASEVER" --setopt=reposdir=/repos.d \
     --setopt=install_weak_deps=False --setopt=tsflags=nodocs install $PACKAGES "$@"
-  # The system updates from the repositories it was built from; a file:///repo
-  # source only exists at build time, so it is left disabled.
+  # The system updates from the repositories it was built from. A file:///repo
+  # source only exists at build time: it points at BAYU_REPO_URL when one is
+  # set, and is left disabled otherwise.
   rm -f "$dir"/etc/yum.repos.d/*.repo && cp /repos.d/*.repo "$dir/etc/yum.repos.d/"
-  grep -l 'file:///repo' "$dir"/etc/yum.repos.d/*.repo | xargs -r sed -i 's/^enabled=1/enabled=0/'
+  if [[ -n ${BAYU_REPO_URL:-} ]]; then
+    grep -l 'file:///repo' "$dir"/etc/yum.repos.d/*.repo | xargs -r sed -i "s|^baseurl=file:///repo.*|baseurl=$BAYU_REPO_URL|"
+  else
+    grep -l 'file:///repo' "$dir"/etc/yum.repos.d/*.repo | xargs -r sed -i 's/^enabled=1/enabled=0/'
+  fi
 }
 
 # configure_root DIR: locale, users, login and services from the profile.

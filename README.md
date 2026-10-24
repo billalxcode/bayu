@@ -49,6 +49,20 @@ The live ISO boots on BIOS and UEFI machines, from optical media or from a
 USB stick written with `dd`, and starts the desktop with the profile's user
 logged in.
 
+### Testing packages on a running system
+
+New packages do not need a new image. Serve `out/repo` and point systems at
+it, then upgrade them after each build:
+
+```shell
+packaging/serve-repo.sh                   # http://<tailscale address>:8090/
+sudo dnf upgrade --refresh bayu-desktop   # on the running system
+```
+
+Images and ISOs built with `BAYU_REPO_URL=http://<address>:8090/` in
+`profile.conf` come with that repository; on another system, add it as a
+repo file (see `packaging/serve-repo.sh`).
+
 ## Profiles
 
 `PROFILE` picks the distribution the system is built from:
@@ -74,6 +88,17 @@ the same place. To use another mirror or an internal repository, edit
 ```shell
 CONFIG=/path/to/profile.conf REPOS=/path/to/repos.d builder/build-iso.sh
 ```
+
+## Applications
+
+Bayu's own applications use `components/bayu-toolkit`. Other applications
+follow the desktop as closely as their toolkit allows:
+
+| Toolkit | Integration |
+|---|---|
+| Qt 6 | The `bayu` widget style and platform theme (`components/qt-plugins`): Bayu's controls, colours, dark mode, fonts, icons and file chooser |
+| GTK 3 and GTK 4 | The `Bayu` and `Bayu-dark` themes (`components/gtk-theme`), switched with dark mode |
+| libadwaita | Dark mode only; libadwaita keeps its own style |
 
 ## Hardware
 

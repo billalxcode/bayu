@@ -13,38 +13,45 @@
 #include <private/qiconloader_p.h>
 #include <qpa/qwindowsysteminterface.h>
 
-static QPalette darkPalette()
+// Bayu's light and dark themes (bayu-toolkit/src/ui/theme.cpp): Window is the
+// background, Base the second background (views, menus), Button the
+// alternate background that buttons and fields are filled with.
+static QPalette bayuPalette(bool dark)
 {
-    const QColor window(45, 45, 45);
-    const QColor base(30, 30, 30);
-    const QColor text(230, 230, 230);
-    const QColor disabledText(127, 127, 127);
-    const QColor highlight(42, 130, 218);
+    const QColor window = dark ? QColor(0x1C1C1D) : QColor(0xF5F6FA);
+    const QColor base = dark ? QColor(0x2C2C2D) : QColor(0xFFFFFF);
+    const QColor alternate = dark ? QColor(0x3C3C3D) : QColor(0xF2F4F5);
+    const QColor text = dark ? QColor(0xFFFFFF) : QColor(0x323238);
+    const QColor disabledText = dark ? QColor(0x888888) : QColor(0x64646E);
+    const QColor highlight(0x3385FF);
+    QColor placeholder = text;
+    placeholder.setAlphaF(0.4);
 
     QPalette palette(window);
+    palette.setColor(QPalette::Window, window);
     palette.setColor(QPalette::WindowText, text);
     palette.setColor(QPalette::Base, base);
-    palette.setColor(QPalette::AlternateBase, window);
-    palette.setColor(QPalette::ToolTipBase, window);
+    palette.setColor(QPalette::AlternateBase, alternate);
+    palette.setColor(QPalette::ToolTipBase, base);
     palette.setColor(QPalette::ToolTipText, text);
-    palette.setColor(QPalette::PlaceholderText, disabledText);
+    palette.setColor(QPalette::PlaceholderText, placeholder);
     palette.setColor(QPalette::Text, text);
-    palette.setColor(QPalette::Button, window);
+    palette.setColor(QPalette::Button, alternate);
     palette.setColor(QPalette::ButtonText, text);
-    palette.setColor(QPalette::BrightText, Qt::red);
+    palette.setColor(QPalette::BrightText, dark ? QColor(0xFF453A) : QColor(0xD92D20));
     palette.setColor(QPalette::Link, highlight);
+    palette.setColor(QPalette::LinkVisited, highlight.darker(120));
     palette.setColor(QPalette::Highlight, highlight);
     palette.setColor(QPalette::HighlightedText, Qt::white);
-    palette.setColor(QPalette::Light, window.lighter(150));
-    palette.setColor(QPalette::Midlight, window.lighter(125));
-    palette.setColor(QPalette::Mid, window.darker(125));
-    palette.setColor(QPalette::Dark, window.darker(150));
+    palette.setColor(QPalette::Accent, highlight);
+    palette.setColor(QPalette::Light, alternate.lighter(150));
+    palette.setColor(QPalette::Midlight, alternate.lighter(125));
+    palette.setColor(QPalette::Mid, alternate.darker(125));
+    palette.setColor(QPalette::Dark, alternate.darker(150));
     palette.setColor(QPalette::Shadow, Qt::black);
-    palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledText);
-    palette.setColor(QPalette::Disabled, QPalette::Text, disabledText);
-    palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledText);
-    palette.setColor(QPalette::Disabled, QPalette::HighlightedText, disabledText);
-    palette.setColor(QPalette::Disabled, QPalette::Highlight, window.lighter(130));
+    for (auto role : {QPalette::WindowText, QPalette::Text, QPalette::ButtonText, QPalette::HighlightedText})
+        palette.setColor(QPalette::Disabled, role, disabledText);
+    palette.setColor(QPalette::Disabled, QPalette::Highlight, alternate);
     return palette;
 }
 
@@ -96,9 +103,10 @@ Qt::ColorScheme PlatformTheme::colorScheme() const
 
 const QPalette *PlatformTheme::palette(Palette type) const
 {
-    if (type == SystemPalette && m_hints->darkMode()) {
-        static const QPalette dark = darkPalette();
-        return &dark;
+    if (type == SystemPalette) {
+        static const QPalette light = bayuPalette(false);
+        static const QPalette dark = bayuPalette(true);
+        return m_hints->darkMode() ? &dark : &light;
     }
 
     return QGenericUnixTheme::palette(type);

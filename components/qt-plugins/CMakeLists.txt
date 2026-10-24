@@ -7,4 +7,5 @@ include(CTest)
 
 add_subdirectory(scrolling)
 add_subdirectory(platformtheme)
+add_subdirectory(style)
 add_subdirectory(imageformat)
