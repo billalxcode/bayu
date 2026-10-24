@@ -61,5 +61,8 @@ submenu "Troubleshooting" {
   }
 }
 EOF
-grub2-mkrescue -o "$ISO" "$TREE" -- -volid "$ISO_LABEL"
+# No HFS+ copy for Macs: Intel Macs boot from the EFI partition anyway, and
+# the HFS+ partition carries the same label as the ISO, so the initramfs
+# could pick it and fail to mount it (EL kernels have no hfsplus).
+grub2-mkrescue -o "$ISO" "$TREE" -- -volid "$ISO_LABEL" -hfsplus off
 echo "Built $ISO ($(du -h "$ISO" | cut -f1), kernel $KVER)"
