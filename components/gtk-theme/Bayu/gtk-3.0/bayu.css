@@ -811,7 +811,7 @@ menubar > menuitem menu:not(#_), .menubar > menuitem menu:not(#_) { border-radiu
 
 tooltip:not(#_), tooltip.background:not(#_) {
   padding: 6px 10px;
-  border: none;
+  border: 1px solid @bayu_border;
   border-radius: 6px;
   background-color: @bayu_tooltip_bg;
   box-shadow: none;

@@ -28,7 +28,8 @@
 
 namespace {
 
-// The design system's colour tokens, light and dark (gtk-theme/Bayu/colors-*.css).
+// The design system's colour tokens, light and dark (gtk-theme/Bayu/colors-*.css):
+// bayu-toolkit's theme and the colours its controls and Settings derive from it.
 struct Tokens {
     QColor window, sidebar, card, field, hover, selected;
     QColor text, text2, text3, onAccent, border, divider;
@@ -39,21 +40,13 @@ struct Tokens {
 
 const Tokens &lightTokens()
 {
-    static const Tokens t{QColor(0xF1F3F5), QColor(0xF7F8FA), QColor(0xFFFFFF), QColor(0xEFF0F3), QColor(0xE9EAEE),
-                          QColor(0xE2E4E9), QColor(0x17191D), QColor(0x6B7280), QColor(0x9BA1AC), QColor(0xFFFFFF),
-                          QColor(0xE1E4E9), QColor(0xECEEF1), QColor(0x0A7AFF), QColor(0x0B6BE0), QColor(0xE6F0FF),
-                          QColor(0x2FB457), QColor(0xF0A030), QColor(0xE8453C), QColor(0xD6D8DE), QColor(0x17191D),
-                          QColor(0xFFFFFF), 15};
+    static const Tokens t{QColor(0xF5F6FA), QColor(0xECEDF1), QColor(0xFFFFFF), QColor(0xF2F4F5), QColor(0xE9EBEC), QColor(0xE3E4E8), QColor(0x323238), QColor(0x64646E), QColor(0xA2A2A8), QColor(0xFFFFFF), QColor(0xD9DADD), QColor(0xEFEFF0), QColor(0x3385FF), QColor(0x2C74DE), QColor(0xE7F0FF), QColor(0x35BF56), QColor(0xFEA042), QColor(0xFF5C6D), QColor(0xE6E6E6), QColor(0xFFFFFF), QColor(0x323238), 15};
     return t;
 }
 
 const Tokens &darkTokens()
 {
-    static const Tokens t{QColor(0x1B1B1D), QColor(0x222224), QColor(0x2C2C2E), QColor(0x3A3A3C), QColor(0x3A3A3C),
-                          QColor(0x3F3F43), QColor(0xF2F2F5), QColor(0x9D9DA5), QColor(0x76767C), QColor(0xFFFFFF),
-                          QColor(0x3A3A3C), QColor(0x343436), QColor(0x0A84FF), QColor(0x2B95FF), QColor(0x15345C),
-                          QColor(0x2FB457), QColor(0xF0A030), QColor(0xFF453A), QColor(0x48484C), QColor(0x3A3A3C),
-                          QColor(0xF2F2F5), 50};
+    static const Tokens t{QColor(0x1C1C1D), QColor(0x262627), QColor(0x2C2C2D), QColor(0x3C3C3D), QColor(0x414142), QColor(0x48484A), QColor(0xFFFFFF), QColor(0x888888), QColor(0x636364), QColor(0xFFFFFF), QColor(0x545455), QColor(0x484848), QColor(0x3385FF), QColor(0x4791FF), QColor(0x2D3E57), QColor(0x35BF56), QColor(0xFEA042), QColor(0xFF5C6D), QColor(0x6B6B6C), QColor(0x2C2C2D), QColor(0xFFFFFF), 50};
     return t;
 }
 
@@ -905,7 +898,7 @@ void BayuStyle::drawPrimitive(PrimitiveElement element, const QStyleOption *opti
         fillRounded(painter, option->rect, kMenuRadius, palette.color(QPalette::Base), t.border);
         return;
     case PE_PanelTipLabel:
-        fillRounded(painter, option->rect, kTileRadius, t.tooltipBg);
+        fillRounded(painter, option->rect, kTileRadius, t.tooltipBg, t.border);
         return;
     case PE_FrameTabWidget:
         fillCard(painter, QRectF(option->rect).adjusted(0, 0, 0, -1), palette);
