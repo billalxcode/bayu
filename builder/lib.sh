@@ -32,6 +32,9 @@ install_root() {
   mount --bind /dev "$dir/dev" && mount -t proc proc "$dir/proc" && mount -t sysfs sys "$dir/sys"
   # Kernel installs and updates become the boot default.
   printf 'UPDATEDEFAULT=yes\nDEFAULTKERNEL=kernel-core\n' > "$dir/etc/sysconfig/kernel"
+  # The container image keeps only C.utf8 translations (%_install_langs);
+  # the system gets them all.
+  rm -f /etc/rpm/macros.image-language-conf
   # shellcheck disable=SC2086
   dnf -y --installroot="$dir" --releasever="$RELEASEVER" --setopt=reposdir=/repos.d \
     --setopt=install_weak_deps=False --setopt=tsflags=nodocs install $PACKAGES "$@"

@@ -44,7 +44,7 @@ chroot "$ROOTFS" dracut --force --no-hostonly --add dmsquash-live --omit plymout
 cp "$ROOTFS/lib/modules/$KVER/vmlinuz" "$TREE/boot/vmlinuz"
 mv "$ROOTFS/boot/initramfs-live.img" "$TREE/boot/initrd.img"
 release_root "$ROOTFS"
-rm -rf "$ROOTFS"/tmp/* "$ROOTFS"/var/cache/dnf/*
+rm -rf "$ROOTFS"/tmp/* "$ROOTFS"/var/tmp/* "$ROOTFS"/var/cache/dnf/*
 
 mksquashfs "$ROOTFS" "$TREE/LiveOS/squashfs.img" -comp zstd -noappend -quiet
 cat > "$TREE/boot/grub/grub.cfg" <<EOF

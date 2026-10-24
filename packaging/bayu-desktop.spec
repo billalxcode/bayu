@@ -32,7 +32,7 @@ BuildRequires:  qt6-qtbase-devel qt6-qtbase-private-devel qt6-qtdeclarative-deve
 
 # Runtime services, from upstream's getting-started step 4.
 Requires:       accountsservice polkit gsettings-desktop-schemas xdg-user-dirs
-Requires:       NetworkManager bluez upower (power-profiles-daemon or tuned-ppd) udisks2 fuse3
+Requires:       NetworkManager NetworkManager-wifi bluez upower (power-profiles-daemon or tuned-ppd) udisks2 fuse3
 Requires:       pipewire pipewire-pulseaudio wireplumber gnome-keyring gnome-keyring-pam
 Requires:       xdg-desktop-portal xorg-x11-server-Xwayland adwaita-icon-theme
 Requires:       mesa-dri-drivers mesa-libEGL mesa-libgbm glibc-langpack-en
