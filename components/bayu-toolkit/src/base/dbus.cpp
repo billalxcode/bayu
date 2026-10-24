@@ -488,6 +488,24 @@ std::unique_ptr<Connection> Connection::open(Bus bus, EventLoop* loop)
     return std::unique_ptr<Connection>(new Connection(connection, *loop));
 }
 
+std::unique_ptr<Connection> Connection::openAddress(const std::string& address, EventLoop* loop)
+{
+    if (!loop)
+        loop = EventLoop::current();
+    if (!loop)
+        return nullptr;
+
+    sd_bus* connection = nullptr;
+    if (sd_bus_new(&connection) < 0)
+        return nullptr;
+    if (sd_bus_set_address(connection, address.c_str()) < 0 || sd_bus_set_bus_client(connection, 1) < 0
+        || sd_bus_start(connection) < 0) {
+        sd_bus_unref(connection);
+        return nullptr;
+    }
+    return std::unique_ptr<Connection>(new Connection(connection, *loop));
+}
+
 Connection::Connection(sd_bus* bus, EventLoop& loop)
     : m_bus(bus)
     , m_loop(loop)

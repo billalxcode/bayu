@@ -25,8 +25,16 @@ rm -rf "$WORK" && mkdir -p "$TREE"/{LiveOS,boot/grub}
 CMDLINE="root=live:CDLABEL=$ISO_LABEL rd.live.image rd.live.overlay.overlayfs=1 psi=1 selinux=0"
 mkdir -p "$ROOTFS/etc/kernel" && echo "$CMDLINE" > "$ROOTFS/etc/kernel/cmdline"
 : > "$ROOTFS/etc/fstab"
-install_root "$ROOTFS" dracut-live
+# Nabau, the installer, and what it needs beyond the system: live media only (it
+# removes itself from what it installs).
+install_root "$ROOTFS" dracut-live nabau ${ISO_PACKAGES:-}
 configure_root "$ROOTFS"
+mkdir -p "$ROOTFS/etc/nabau"
+cat > "$ROOTFS/etc/nabau/nabau.conf" <<EOF
+PRODUCT_NAME="$DISTRO_NAME"
+SHORT_NAME="${SHORT_NAME:-$DISTRO_NAME}"
+LIVE_USER="$USER_NAME"
+EOF
 
 # The installed kernel is the one with a vmlinuz (kmod packages create bare
 # module trees for the kernel they were built against).
@@ -36,7 +44,7 @@ chroot "$ROOTFS" dracut --force --no-hostonly --add dmsquash-live --omit plymout
 cp "$ROOTFS/lib/modules/$KVER/vmlinuz" "$TREE/boot/vmlinuz"
 mv "$ROOTFS/boot/initramfs-live.img" "$TREE/boot/initrd.img"
 release_root "$ROOTFS"
-rm -rf "$ROOTFS"/tmp/* "$ROOTFS"/var/cache/dnf/*
+rm -rf "$ROOTFS"/tmp/* "$ROOTFS"/var/tmp/* "$ROOTFS"/var/cache/dnf/*
 
 mksquashfs "$ROOTFS" "$TREE/LiveOS/squashfs.img" -comp zstd -noappend -quiet
 cat > "$TREE/boot/grub/grub.cfg" <<EOF

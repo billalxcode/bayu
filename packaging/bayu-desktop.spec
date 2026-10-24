@@ -32,7 +32,7 @@ BuildRequires:  qt6-qtbase-devel qt6-qtbase-private-devel qt6-qtdeclarative-deve
 
 # Runtime services, from upstream's getting-started step 4.
 Requires:       accountsservice polkit gsettings-desktop-schemas xdg-user-dirs
-Requires:       NetworkManager bluez upower (power-profiles-daemon or tuned-ppd) udisks2 fuse3
+Requires:       NetworkManager NetworkManager-wifi bluez upower (power-profiles-daemon or tuned-ppd) udisks2 fuse3
 Requires:       pipewire pipewire-pulseaudio wireplumber gnome-keyring gnome-keyring-pam
 Requires:       xdg-desktop-portal xorg-x11-server-Xwayland adwaita-icon-theme
 Requires:       mesa-dri-drivers mesa-libEGL mesa-libgbm glibc-langpack-en
@@ -42,6 +42,19 @@ Requires:       dbus-tools
 # Default UI and fixed-width fonts.
 Requires:       google-noto-sans-vf-fonts google-noto-sans-mono-vf-fonts
 Requires(pre):  shadow-utils
+
+%package -n nabau
+Summary:        Installs the system from Bayu live media
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+Requires:       anaconda-live anaconda-core polkit redhat-mono-fonts rsync kbd chrony
+Requires:       libblockdev-lvm libblockdev-dm libblockdev-mpath libblockdev-mdraid lvm2
+Requires:       dosfstools e2fsprogs xfsprogs efibootmgr cryptsetup
+Recommends:     ntfsprogs
+
+%description -n nabau
+Nabau, the installer of Bayu live media: a native frontend for Anaconda's
+installation modules. It copies the live system to a disk, beside Windows
+or alone, and removes itself from the installed system.
 
 %description
 Bayu is a Wayland desktop environment forked from Cutefish
@@ -66,7 +79,10 @@ mkdir -p %{buildroot}%{_sysconfdir}/fonts/conf.d
 ln -s ../../..%{_datadir}/fontconfig/conf.avail/60-bayu-noto-mono.conf \
   %{buildroot}%{_sysconfdir}/fonts/conf.d/60-bayu-noto-mono.conf
 cd %{buildroot} && find . \( -type f -o -type l \) | sed -e 's#^\.##' \
-  -e 's#^/etc/#%%config(noreplace) /etc/#' > %{_builddir}/bayu-files.list
+  -e 's#^/etc/#%%config(noreplace) /etc/#' > %{_builddir}/all-files.list
+# The installer is its own package, on live media only.
+grep -E 'nabau' %{_builddir}/all-files.list > %{_builddir}/installer-files.list
+grep -vE 'nabau' %{_builddir}/all-files.list > %{_builddir}/bayu-files.list
 
 %pre
 getent passwd bayu-greeter >/dev/null || \
@@ -76,6 +92,11 @@ getent passwd bayu-greeter >/dev/null || \
 %post
 gtk-update-icon-cache -q -f /usr/share/icons/* 2>/dev/null || :
 glib-compile-schemas /usr/share/glib-2.0/schemas 2>/dev/null || :
+
+%files -n nabau -f %{_builddir}/installer-files.list
+%dir %{_libexecdir}/nabau
+%dir %{_datadir}/cockpit
+%dir %{_datadir}/cockpit/anaconda-webui
 
 %files -f %{_builddir}/bayu-files.list
 %license LICENSE

@@ -4,6 +4,7 @@
 #include "displaypolicy.h"
 
 #include <algorithm>
+#include <cstdlib>
 
 using namespace bayu::base;
 
@@ -28,6 +29,7 @@ PowerManager::PowerManager(PowerSupply *powerSupply, BrightnessManager *brightne
 {
     loadSettings();
 
+    m_virtualMachine = std::system("systemd-detect-virt --vm --quiet") == 0;
     m_onBattery = m_powerSupply && m_powerSupply->onBattery();
 
     if (m_powerSupply) {
@@ -76,7 +78,7 @@ void PowerManager::applyPolicy()
 {
     const int timeout = m_onBattery ? m_batteryScreenOff : m_acScreenOff;
     // A delay of zero keeps the system awake while the display is off.
-    const int suspendDelay = m_onBattery ? 300 : (m_acPreventSleep ? 0 : 900);
+    const int suspendDelay = m_virtualMachine ? 0 : m_onBattery ? 300 : (m_acPreventSleep ? 0 : 900);
 
     m_displayPolicy->setPolicy(timeout, suspendDelay);
 }

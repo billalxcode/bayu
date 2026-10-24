@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Nabau
+GenericName=Install to Disk
+Comment=Install this system on the computer's disk
+Exec=nabau
+Icon=drive-harddisk
+Terminal=false
+Categories=System;
