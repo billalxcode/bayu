@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Builds a live ISO of a profile in builder/profiles/ (PROFILE, default
-# igos). The ISO boots on BIOS and UEFI machines, from
+# Builds a live ISO of a profile in builder/profiles/: PROFILE=igos
+# (default) or PROFILE=almalinux. The ISO boots on BIOS and UEFI machines, from
 # optical media or written to a USB stick (dd), and starts the desktop with
 # the profile's user logged in. Output: out/<IMAGE_NAME>-live.iso.
 # See lib.sh for CONFIG and REPOS.

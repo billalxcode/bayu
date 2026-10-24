@@ -1,0 +1,7 @@
+# Bayu packages. Defaults to the repo packaging/build-rpm.sh writes to out/repo
+# (mounted at /repo by build-image.sh); swap in an http(s) baseurl once published.
+[bayu]
+name=Bayu
+baseurl=file:///repo
+enabled=1
+gpgcheck=0

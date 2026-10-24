@@ -2,7 +2,7 @@
 
 # Outside the container: pick the profile and re-run the calling script with
 # --inside in a privileged AlmaLinux container (loop devices and chroots).
-#   PROFILE=name             profile under builder/profiles/ (default igos)
+#   PROFILE=igos|almalinux   profile under builder/profiles/ (default igos)
 #   CONFIG=file REPOS=dir    override the profile's profile.conf / repos.d
 # A rootfs/ directory next to profile.conf is copied over the system.
 run_in_builder() {
@@ -13,7 +13,7 @@ run_in_builder() {
   config=$(realpath "${CONFIG:-$profile/profile.conf}")
   repos=$(realpath "${REPOS:-$profile/repos.d}")
   overlay=$(dirname "$config")/rootfs
-  [[ -d $overlay ]] || overlay=$(mktemp -d)
+  if [[ -d $overlay ]]; then overlay=$(realpath "$overlay"); else overlay=$(mktemp -d); fi
   mkdir -p "$root/out/repo"
   podman=podman; [[ $EUID == 0 ]] || podman="sudo podman"
   $podman image exists bayu-builder ||
@@ -73,6 +73,14 @@ configure_root() {
     else
       chr systemctl disable lapis-control.socket
     fi
+    # dnf installs the newest kernel; once the distribution ships one newer
+    # than Bayu's, lapis has no binder until packaging/kernel is rebuilt.
+    local config
+    for config in "$dir"/lib/modules/*/config; do
+      grep -q '^CONFIG_ANDROID_BINDER_IPC=y' "$config" ||
+        echo "WARNING: kernel $(basename "$(dirname "$config")") has no binder; lapis will not run." \
+             "Rebuild it with packaging/kernel/build-kernel.sh." >&2
+    done
   fi
 
   cp -a /overlay/. "$dir/"

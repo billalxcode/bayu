@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Builds a bootable disk image (qcow2, BIOS/GPT) of a profile in
-# builder/profiles/ (PROFILE, default igos).
+# builder/profiles/: PROFILE=igos (default) or PROFILE=almalinux.
 # Output: out/<IMAGE_NAME>.qcow2. See lib.sh for CONFIG and REPOS.
 set -Eeuo pipefail
 source "$(dirname "$0")/lib.sh"

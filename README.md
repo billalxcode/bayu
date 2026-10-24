@@ -1,7 +1,7 @@
 # Bayu
 
-Bayu is a Wayland desktop environment, and the tooling to ship it as the
-desktop of IGOS Nusantara 26, an AlmaLinux 10 based distribution.
+Bayu is a Wayland desktop environment, and the tooling to ship it as an
+operating system on IGOS Nusantara 26 or AlmaLinux 10.
 
 Bayu is a fork of Cutefish.
 
@@ -12,7 +12,7 @@ Bayu is a fork of Cutefish.
 | `components/` | Desktop source: toolkit, compositor and shell, session, display manager, file manager, settings, terminal and applications |
 | `build.sh` | Builds every component in dependency order |
 | `packaging/` | RPM packaging: build container, `bayu-desktop` spec, kernel, Android support |
-| `builder/` | IGOS Nusantara live ISO and disk image builder |
+| `builder/` | Live ISO and disk image builder, with one profile per distribution |
 | `.github/workflows/` | Continuous integration and releases |
 
 ## Requirements
@@ -38,8 +38,9 @@ and takes a while.
 ### Operating system
 
 ```shell
-builder/build-iso.sh                      # out/igos-bayu-live.iso
-builder/build-image.sh                    # out/igos-bayu.qcow2
+builder/build-iso.sh                      # IGOS Nusantara: out/igos-bayu-live.iso
+PROFILE=almalinux builder/build-iso.sh    # AlmaLinux: out/alma-bayu-live.iso
+builder/build-image.sh                    # disk image: out/igos-bayu.qcow2
 builder/run-vm.sh                         # boot the image, VNC on the Tailscale address
 UEFI=yes builder/run-vm.sh out/igos-bayu-live.iso   # boot the ISO as a Mac would
 ```
@@ -48,14 +49,22 @@ The live ISO boots on BIOS and UEFI machines, from optical media or from a
 USB stick written with `dd`, and starts the desktop with the profile's user
 logged in.
 
-## Configuration
+## Profiles
 
-The system is described by a profile in `builder/profiles/igos/`:
+`PROFILE` picks the distribution the system is built from:
+
+| Profile | Base | Repositories |
+|---|---|---|
+| `igos` (default) | IGOS Nusantara 26 | IGOS mirror (`r2`, with `repo2` as fallback) |
+| `almalinux` | AlmaLinux 10 | AlmaLinux, EPEL, RPM Fusion |
+
+Both ship the same desktop, drivers and Android support. A profile is a
+directory in `builder/profiles/`:
 
 | File | Contents |
 |---|---|
 | `profile.conf` | Packages, user, locale, image and ISO names |
-| `repos.d/` | dnf repositories to install from: IGOS Nusantara 26 (with `repo2` as fallback mirror) and Bayu's `out/repo` |
+| `repos.d/` | dnf repositories to install from, plus Bayu's `out/repo` |
 | `rootfs/` | Files copied over the system |
 
 The repository files are installed into the system too, so it updates from
@@ -68,7 +77,7 @@ CONFIG=/path/to/profile.conf REPOS=/path/to/repos.d builder/build-iso.sh
 
 ## Hardware
 
-IGOS Nusantara includes the Broadcom `wl` driver (`broadcom-wl`,
+Both profiles include the Broadcom `wl` driver (`broadcom-wl`,
 `kmod-wl`), loaded automatically for the Wi-Fi chips it supports (BCM4311
 to BCM4360, as in MacBooks up to early 2015). Newer Broadcom chips, such as
 the BCM43602 of the 2015 MacBook Pro, use the kernel's `brcmfmac` with its
