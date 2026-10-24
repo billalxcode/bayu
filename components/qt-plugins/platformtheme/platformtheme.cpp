@@ -13,45 +13,49 @@
 #include <private/qiconloader_p.h>
 #include <qpa/qwindowsysteminterface.h>
 
-// Bayu's light and dark themes (bayu-toolkit/src/ui/theme.cpp): Window is the
-// background, Base the second background (views, menus), Button the
-// alternate background that buttons and fields are filled with.
+// The Bayu design system's light and dark tokens (gtk-theme/Bayu/colors-*.css,
+// style/bayustyle.cpp): Window is $bg-window, Base $bg-card (views, menus,
+// secondary buttons), Button $bg-card, Highlight $accent.
 static QPalette bayuPalette(bool dark)
 {
-    const QColor window = dark ? QColor(0x1C1C1D) : QColor(0xF5F6FA);
-    const QColor base = dark ? QColor(0x2C2C2D) : QColor(0xFFFFFF);
-    const QColor alternate = dark ? QColor(0x3C3C3D) : QColor(0xF2F4F5);
-    const QColor text = dark ? QColor(0xFFFFFF) : QColor(0x323238);
-    const QColor disabledText = dark ? QColor(0x888888) : QColor(0x64646E);
-    const QColor highlight(0x3385FF);
-    QColor placeholder = text;
-    placeholder.setAlphaF(0.4);
+    const QColor window = dark ? QColor(0x1B1B1D) : QColor(0xF1F3F5);
+    const QColor sidebar = dark ? QColor(0x222224) : QColor(0xF7F8FA);
+    const QColor card = dark ? QColor(0x2C2C2E) : QColor(0xFFFFFF);
+    const QColor field = dark ? QColor(0x3A3A3C) : QColor(0xEFF0F3);
+    const QColor selected = dark ? QColor(0x3F3F43) : QColor(0xE2E4E9);
+    const QColor text = dark ? QColor(0xF2F2F5) : QColor(0x17191D);
+    const QColor tertiary = dark ? QColor(0x76767C) : QColor(0x9BA1AC);
+    const QColor border = dark ? QColor(0x3A3A3C) : QColor(0xE1E4E9);
+    const QColor accent = dark ? QColor(0x0A84FF) : QColor(0x0A7AFF);
+    const QColor accentHover = dark ? QColor(0x2B95FF) : QColor(0x0B6BE0);
 
     QPalette palette(window);
     palette.setColor(QPalette::Window, window);
     palette.setColor(QPalette::WindowText, text);
-    palette.setColor(QPalette::Base, base);
-    palette.setColor(QPalette::AlternateBase, alternate);
-    palette.setColor(QPalette::ToolTipBase, base);
-    palette.setColor(QPalette::ToolTipText, text);
-    palette.setColor(QPalette::PlaceholderText, placeholder);
+    palette.setColor(QPalette::Base, card);
+    palette.setColor(QPalette::AlternateBase, sidebar);
+    palette.setColor(QPalette::ToolTipBase, dark ? field : text);
+    palette.setColor(QPalette::ToolTipText, dark ? text : card);
+    palette.setColor(QPalette::PlaceholderText, tertiary);
     palette.setColor(QPalette::Text, text);
-    palette.setColor(QPalette::Button, alternate);
+    palette.setColor(QPalette::Button, card);
     palette.setColor(QPalette::ButtonText, text);
-    palette.setColor(QPalette::BrightText, dark ? QColor(0xFF453A) : QColor(0xD92D20));
-    palette.setColor(QPalette::Link, highlight);
-    palette.setColor(QPalette::LinkVisited, highlight.darker(120));
-    palette.setColor(QPalette::Highlight, highlight);
+    palette.setColor(QPalette::BrightText, dark ? QColor(0xFF453A) : QColor(0xE8453C));
+    palette.setColor(QPalette::Link, accent);
+    palette.setColor(QPalette::LinkVisited, accentHover);
+    palette.setColor(QPalette::Highlight, accent);
     palette.setColor(QPalette::HighlightedText, Qt::white);
-    palette.setColor(QPalette::Accent, highlight);
-    palette.setColor(QPalette::Light, alternate.lighter(150));
-    palette.setColor(QPalette::Midlight, alternate.lighter(125));
-    palette.setColor(QPalette::Mid, alternate.darker(125));
-    palette.setColor(QPalette::Dark, alternate.darker(150));
-    palette.setColor(QPalette::Shadow, Qt::black);
-    for (auto role : {QPalette::WindowText, QPalette::Text, QPalette::ButtonText, QPalette::HighlightedText})
-        palette.setColor(QPalette::Disabled, role, disabledText);
-    palette.setColor(QPalette::Disabled, QPalette::Highlight, alternate);
+    palette.setColor(QPalette::Accent, accent);
+    palette.setColor(QPalette::Light, card);
+    palette.setColor(QPalette::Midlight, field);
+    palette.setColor(QPalette::Mid, border);
+    palette.setColor(QPalette::Dark, tertiary);
+    palette.setColor(QPalette::Shadow, QColor(0, 0, 0, dark ? 128 : 40));
+    for (auto role : {QPalette::WindowText, QPalette::Text, QPalette::ButtonText, QPalette::HighlightedText,
+                      QPalette::PlaceholderText})
+        palette.setColor(QPalette::Disabled, role, tertiary);
+    palette.setColor(QPalette::Disabled, QPalette::Button, field);
+    palette.setColor(QPalette::Disabled, QPalette::Highlight, selected);
     return palette;
 }
 

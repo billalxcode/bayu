@@ -1,6 +1,7 @@
+/* Header bars are 48px tall in the Bayu design system. */
 headerbar,
 .titlebar:not(headerbar) {
-  min-height: 40px;
+  min-height: 48px;
 }
 
 headerbar entry,
@@ -17,39 +18,41 @@ headerbar spinbutton button {
   margin-bottom: 0;
 }
 
-headerbar button:not(.titlebutton) {
-  min-height: 18px;
-}
-
-headerbar button.image-button:not(.titlebutton) {
-  min-width: 16px;
-}
-
 headerbar entry,
 headerbar spinbutton:not(.vertical) {
-  min-height: 26px;
+  min-height: 32px;
 }
 
 headerbar switch {
-  margin-top: 7px;
-  margin-bottom: 7px;
+  margin-top: 11px;
+  margin-bottom: 11px;
 }
 
-/* A 26px circle, 7px from the next one and centred 20px from the top and right edges */
+/* Window controls: plain 28px glyph buttons, centred in the bar */
 headerbar button.titlebutton:not(.appmenu),
 .titlebar button.titlebutton:not(.appmenu) {
-  padding: 4px;
-  margin: 7px 1px 7px 0;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0;
+  margin: 10px 0 10px 4px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  box-shadow: none;
   transition: none;
+}
+
+headerbar button.titlebutton:not(.appmenu):hover,
+.titlebar button.titlebutton:not(.appmenu):hover {
+  background-color: alpha(currentColor, 0.1);
+}
+
+headerbar button.titlebutton:not(.appmenu):active,
+.titlebar button.titlebutton:not(.appmenu):active {
+  background-color: alpha(currentColor, 0.16);
 }
 
 headerbar.default-decoration,
 .default-decoration.titlebar:not(headerbar) {
-  padding: 0 6px;
-}
-
-headerbar.default-decoration button.titlebutton,
-.default-decoration.titlebar:not(headerbar) button.titlebutton {
-  min-height: 0;
-  min-width: 0;
+  padding: 0 8px;
 }

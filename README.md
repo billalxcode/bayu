@@ -91,8 +91,9 @@ CONFIG=/path/to/profile.conf REPOS=/path/to/repos.d builder/build-iso.sh
 
 ## Applications
 
-Bayu's own applications use `components/bayu-toolkit`. Other applications
-follow the desktop as closely as their toolkit allows:
+Bayu's own applications use `components/bayu-toolkit`. Qt and GTK
+applications follow the Bayu design system, one set of colour tokens, radii
+and interaction states drawn by both toolkits:
 
 | Toolkit | Integration |
 |---|---|

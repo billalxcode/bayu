@@ -18,14 +18,20 @@ private slots:
         QApplication::setStyle(new BayuStyle);
     }
 
-    // Controls keep bayu-toolkit's sizes.
+    // Controls keep the design system's sizes: 36 px buttons and fields, an
+    // 18 px check box with room for its focus ring, 44 x 26 switches.
     void metrics()
     {
-        QCOMPARE(QApplication::style()->pixelMetric(QStyle::PM_IndicatorWidth), 20);
-        QVERIFY(QPushButton(QStringLiteral("OK")).sizeHint().height() >= 32);
+        QStyle *style = QApplication::style();
+        QCOMPARE(style->pixelMetric(QStyle::PM_IndicatorWidth), 26);
+        QCOMPARE(QPushButton(QStringLiteral("OK")).sizeHint().height(), 36);
         QVERIFY(QPushButton(QStringLiteral("OK")).sizeHint().width() >= 64);
-        QVERIFY(QLineEdit().sizeHint().height() >= 35);
-        QVERIFY(QComboBox().sizeHint().height() >= 35);
+        QCOMPARE(QLineEdit().sizeHint().height(), 36);
+        QCOMPARE(QComboBox().sizeHint().height(), 36);
+        QCheckBox toggle;
+        toggle.setProperty("switch", true);
+        QCOMPARE(style->pixelMetric(QStyle::PM_IndicatorWidth, nullptr, &toggle), 52);
+        QCOMPARE(style->pixelMetric(QStyle::PM_IndicatorHeight, nullptr, &toggle), 34);
     }
 
     // Scroll bars have no arrow buttons and their handle tracks the value.
