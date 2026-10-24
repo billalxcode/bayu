@@ -487,9 +487,17 @@ private:
         while (!footer->children().empty())
             footer->takeChild(footer->children().back().get());
         if (m_state == State::Installing) {
-            ActionButton* cancel = footer->addChild<ActionButton>(tr("Cancel"));
-            cancel->setLeadingGlyph("x");
-            cancel->onClicked = [this] { installer().requestQuit(); };
+            // Anaconda cannot stop halfway: the log instead of a Cancel that
+            // would leave the disk half written.
+            if (installer().backend().canCancelInstall()) {
+                ActionButton* cancel = footer->addChild<ActionButton>(tr("Cancel"));
+                cancel->setLeadingGlyph("x");
+                cancel->onClicked = [this] { installer().requestQuit(); };
+            } else {
+                ActionButton* log = footer->addChild<ActionButton>(tr("View log"));
+                log->setLeadingGlyph("scroll");
+                log->onClicked = [this] { installer().showLog(); };
+            }
             ActionButton* busy = footer->addChild<ActionButton>(tr("Installing…"), ActionButton::Kind::Primary);
             busy->setBusy(true);
         } else {

@@ -882,7 +882,7 @@ public:
     std::string logText() const override
     {
         std::string text;
-        for (const char* path : {"/tmp/anaconda.log", "/tmp/storage.log", "/tmp/program.log"}) {
+        for (const char* path : {"/tmp/anaconda.log", "/tmp/program.log", "/tmp/storage.log", "/tmp/nabau-post.log"}) {
             const std::string contents = readFile(path);
             text += format(tr("==> {path} <=="), {{"path", path}}) + "\n";
             text += contents.empty() ? std::string(tr("(cannot be read)")) + "\n" : contents;

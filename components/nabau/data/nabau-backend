@@ -11,6 +11,11 @@ installer=$1
 log=/tmp/nabau-backend.log
 exec 2>>"$log"
 
+# One installation at a time: Anaconda's bus and disks are not shared.
+if pgrep -x anaconda >/dev/null; then
+    echo "error The installer is already open in another window."
+    exit 1
+fi
 mkdir -p /run/anaconda
 rm -f /run/anaconda/backend_ready
 # Anaconda leaves when this process does: the installer takes the place of
@@ -43,6 +48,8 @@ until [[ -e /run/anaconda/backend_ready && -s /run/anaconda/bus.address ]]; do
     fi
     sleep 0.5
 done
+# The installer shows these in its log view; the live session has one user.
+chmod a+r /tmp/anaconda.log /tmp/storage.log /tmp/program.log /tmp/packaging.log "$log" 2>/dev/null
 echo "ready $(cat /run/anaconda/bus.address)"
 
 reboot=0
