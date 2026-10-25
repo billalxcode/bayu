@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Bayu Store
+GenericName=App Store
+Comment=Find and install apps from Flathub and F-Droid
+Exec=bayu-store
+Icon=system-software-install
+Terminal=false
+Categories=System;PackageManager;
+Keywords=apps;install;flatpak;flathub;fdroid;android;store;

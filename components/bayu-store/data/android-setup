@@ -1,0 +1,8 @@
+#!/bin/bash
+# Sets Android apps (lapis) up for the Bayu store, as root through pkexec:
+# the control service, and Android's images on first use.
+set -e
+systemctl enable --now lapis-control.socket
+if ! ls /var/lib/lapis/images/system.img >/dev/null 2>&1; then
+    lapis init -type VANILLA
+fi

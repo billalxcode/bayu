@@ -28,10 +28,12 @@ BuildRequires:  pkgconfig(xcb) pkgconfig(xcb-composite) pkgconfig(xcb-xfixes) pk
 BuildRequires:  pkgconfig(xcb-sync) pkgconfig(xcursor) pkgconfig(libpcre2-16) pkgconfig(libpcre2-8)
 BuildRequires:  pkgconfig(libarchive) pkgconfig(fuse3) pkgconfig(libmtp) pkgconfig(smbclient)
 BuildRequires:  pkgconfig(libssh) pkgconfig(libcurl) pkgconfig(libical) pkgconfig(librsvg-2.0)
+BuildRequires:  flatpak-devel
 BuildRequires:  qt6-qtbase-devel qt6-qtbase-private-devel qt6-qtdeclarative-devel
 
 # Runtime services, from upstream's getting-started step 4.
 Requires:       accountsservice polkit gsettings-desktop-schemas xdg-user-dirs
+Requires:       flatpak flatpak-libs redhat-display-fonts redhat-text-fonts
 Requires:       NetworkManager NetworkManager-wifi bluez upower (power-profiles-daemon or tuned-ppd) udisks2 fuse3
 Requires:       pipewire pipewire-pulseaudio wireplumber gnome-keyring gnome-keyring-pam
 Requires:       xdg-desktop-portal xorg-x11-server-Xwayland adwaita-icon-theme
@@ -90,6 +92,8 @@ getent passwd bayu-greeter >/dev/null || \
 :
 
 %post
+# The store installs Flathub apps system-wide.
+flatpak remote-add --system --if-not-exists flathub %{_datadir}/bayu-store/flathub.flatpakrepo >/dev/null 2>&1 || :
 gtk-update-icon-cache -q -f /usr/share/icons/* 2>/dev/null || :
 glib-compile-schemas /usr/share/glib-2.0/schemas 2>/dev/null || :
 

@@ -42,3 +42,17 @@ TEST(UserDirectoryTest, ReadsUserDirsFile)
     EXPECT_EQ(paths::userDirectory(UserDirectory::Pictures, "/nonexistent/user-dirs.dirs"), home + "/Pictures");
     EXPECT_EQ(paths::userDirectory(UserDirectory::Videos, "/nonexistent/user-dirs.dirs"), home + "/Videos");
 }
+
+TEST(UserDirectoryTest, DataDirectoriesFollowEnvironment)
+{
+    const char* saved = getenv("XDG_DATA_DIRS");
+    const std::string previous = saved ? saved : "";
+    setenv("XDG_DATA_DIRS", "/var/lib/flatpak/exports/share::/usr/share", 1);
+    EXPECT_EQ(paths::dataDirectories(), (std::vector<std::string>{"/var/lib/flatpak/exports/share", "/usr/share"}));
+    setenv("XDG_DATA_DIRS", "", 1);
+    EXPECT_EQ(paths::dataDirectories(), (std::vector<std::string>{"/usr/local/share", "/usr/share"}));
+    if (saved)
+        setenv("XDG_DATA_DIRS", previous.c_str(), 1);
+    else
+        unsetenv("XDG_DATA_DIRS");
+}

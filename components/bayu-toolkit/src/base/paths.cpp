@@ -3,12 +3,14 @@
 
 #include "base/paths.h"
 
+#include <cstdlib>
 #include <optional>
 #include <pwd.h>
 #include <regex>
 #include <unistd.h>
 
 #include "base/file.h"
+#include "base/strings.h"
 
 namespace bayu::base::paths {
 
@@ -52,7 +54,12 @@ std::string runtimeDirectory()
 
 std::vector<std::string> dataDirectories()
 {
-    return {"/usr/local/share", "/usr/share"};
+    // Flatpak adds its exported applications here.
+    const char* value = getenv("XDG_DATA_DIRS");
+    std::vector<std::string> directories = strings::split(value ? value : "", ':', strings::SplitBehavior::SkipEmptyParts);
+    if (directories.empty())
+        return {"/usr/local/share", "/usr/share"};
+    return directories;
 }
 
 std::vector<std::string> configDirectories()
