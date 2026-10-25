@@ -62,19 +62,26 @@ function(bayu_add_translations domain)
     set(desktop_po_directory ${CMAKE_CURRENT_BINARY_DIR}/desktop-po)
     string(REPLACE ";" "\n" linguas "${languages}")
     file(WRITE ${desktop_po_directory}/LINGUAS "${linguas}\n")
+    # The catalogs are copied there once: one copy per desktop file would race
+    # in a parallel build.
+    set(copies "")
+    foreach(po_file ${po_files})
+        list(APPEND copies COMMAND ${CMAKE_COMMAND} -E copy ${po_file} ${desktop_po_directory}/)
+    endforeach()
+    set(copied ${desktop_po_directory}/copied.stamp)
+    add_custom_command(OUTPUT ${copied}
+        ${copies}
+        COMMAND ${CMAKE_COMMAND} -E touch ${copied}
+        DEPENDS ${po_files}
+        VERBATIM)
     set(desktop_outputs "")
     foreach(desktop_file ${arg_DESKTOP_FILES})
         get_filename_component(name ${desktop_file} NAME)
         get_filename_component(template ${desktop_file} ABSOLUTE)
         set(output ${CMAKE_CURRENT_BINARY_DIR}/${name})
-        set(copies "")
-        foreach(po_file ${po_files})
-            list(APPEND copies COMMAND ${CMAKE_COMMAND} -E copy ${po_file} ${desktop_po_directory}/)
-        endforeach()
         add_custom_command(OUTPUT ${output}
-            ${copies}
             COMMAND ${BAYU_MSGFMT} --desktop --template=${template} -d ${desktop_po_directory} -o ${output}
-            DEPENDS ${template} ${po_files}
+            DEPENDS ${template} ${copied}
             VERBATIM)
         list(APPEND desktop_outputs ${output})
     endforeach()
