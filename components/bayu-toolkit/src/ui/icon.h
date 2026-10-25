@@ -86,6 +86,11 @@ private:
 // cached.
 std::string themeIconPath(const std::string& name, int size = 16, double scale = 1);
 
+// The distribution's logo, a theme icon name: LOGO= in /etc/bayu/branding.conf,
+// which an image build sets, else in /etc/os-release, else
+// "distributor-logo".
+std::string distributorLogo();
+
 // Makes the theme icons a ThemeIcon of the size draws at the scale ahead of
 // time: the lookup now, the rasterising on the global thread pool, the
 // images into the icon cache on this thread, then `done` here. Icons cached

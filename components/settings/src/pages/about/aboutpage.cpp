@@ -5,6 +5,8 @@
 #include "pages/about/aboutinfo.h"
 #include "ui/label.h"
 #include "ui/cell_layout.h"
+#include "ui/icon.h"
+#include "ui/image_view.h"
 #include "ui/theme.h"
 #include "widgets/card.h"
 #include "widgets/listrow.h"
@@ -34,9 +36,18 @@ public:
         LayoutHints brandHints{.horizontalAlignment = Alignment::Center};
         brandHints.margins.top = metrics::l;
         brand->setLayoutHints(brandHints);
-        Picture* logo = brand->addChild<Picture>(dataPath("images/logo.svg"));
-        logo->setLayoutHints({.preferredWidth = 140, .preferredHeight = 72,
-                              .horizontalAlignment = Alignment::Center, .verticalAlignment = Alignment::Start});
+        // The distribution's logo; Bayu's own without one.
+        const std::string distributor = themeIconPath(distributorLogo(), 96, 2);
+        if (!distributor.empty()) {
+            auto* logo = brand->addChild<ImageView>(distributor);
+            logo->setFillMode(ImageView::FillMode::PreserveAspectFit);
+            logo->setLayoutHints({.preferredWidth = 96, .preferredHeight = 96,
+                                  .horizontalAlignment = Alignment::Center, .verticalAlignment = Alignment::Start});
+        } else {
+            Picture* logo = brand->addChild<Picture>(dataPath("images/logo.svg"));
+            logo->setLayoutHints({.preferredWidth = 140, .preferredHeight = 72,
+                                  .horizontalAlignment = Alignment::Center, .verticalAlignment = Alignment::Start});
+        }
         Label* name = brand->addChild<Label>("Bayu");
         name->setFontSize(metrics::points(22));
         name->setWeight(700);

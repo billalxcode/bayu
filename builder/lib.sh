@@ -92,6 +92,9 @@ configure_root() {
   fi
 
   cp -a /overlay/. "$dir/"
+  # A profile's own icons, such as its logo, join the hicolor cache.
+  [[ -x $dir/usr/bin/gtk-update-icon-cache ]] &&
+    chroot "$dir" gtk-update-icon-cache -qf /usr/share/icons/hicolor
 
   # Each boot of a copy of this system gets its own machine-id.
   : > "$dir/etc/machine-id"
