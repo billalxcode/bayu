@@ -33,10 +33,11 @@ Each scenario:
 | `win-full` | Windows filling the disk | *Install alongside Windows* |
 | `win-mbr` | Windows on MBR, BIOS | *Use the free space* |
 | `two-disks` | Windows, and an empty disk | defaults: the empty disk must be picked |
+| `custom-free` | as `win-free` | *Custom*: the recommended layout in the free space |
 | `too-small` | 4 GB | must refuse |
 
 Results are in `out/e2e/<scenario>/`: `result.txt`, the screenshots, the
-installation logs and `system.txt`.
+installation logs and `system.txt`; the disks too when the scenario failed.
 
 Needs `qemu-system-x86_64` with KVM, OVMF, `qemu-nbd`, `sgdisk`, `sfdisk`,
 `mkntfs`, `mkfs.exfat`, `sshpass`, and sudo for the disks. `E2E_VNC` (default

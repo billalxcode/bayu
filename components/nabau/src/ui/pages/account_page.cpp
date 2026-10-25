@@ -292,9 +292,9 @@ private:
         m_confirm->setInvalid(!m_confirm->text().empty() && m_confirm->text() != m_password->text());
         const std::string password = m_password->text();
         const int level = strength(password);
-        static const char* captions[] = {"", "Weak passphrase", "Fair passphrase", "Good passphrase",
-                                         "Strong passphrase"};
-        m_meter->setStrength(level, level ? tr(captions[level]) : std::string(),
+        const std::string captions[] = {"", tr("Weak passphrase"), tr("Fair passphrase"), tr("Good passphrase"),
+                                        tr("Strong passphrase")};
+        m_meter->setStrength(level, captions[level],
                              password.empty() ? std::string()
                                               : bayu::i18n::trn("{n} character", "{n} characters", password.size()));
         if (installer().choices().storage.encrypt)

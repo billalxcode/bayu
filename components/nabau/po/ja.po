@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 19:00+0000\n"
+"POT-Creation-Date: 2026-10-25 19:56+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -188,6 +188,10 @@ msgid "From {min} to {max}"
 msgstr "{min} ～ {max}"
 
 #: src/ui/disk_editor.cpp
+msgid "PARTITIONS"
+msgstr "パーティション"
+
+#: src/ui/disk_editor.cpp
 msgid "MOUNT POINTS"
 msgstr "マウントポイント"
 
@@ -303,6 +307,10 @@ msgstr "サイズ変更…"
 #: src/ui/disk_editor.cpp
 msgid "Delete"
 msgstr "削除"
+
+#: src/ui/disk_editor.cpp
+msgid "It cannot be shrunk now. Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart)."
+msgstr "現在は縮小できません。まず Windows を完全にシャットダウンしてください。Windows で高速スタートアップをオフにし、空き容量を確保してから、シャットダウン（再起動ではなく）してください。"
 
 #: src/ui/disk_editor.cpp
 msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
@@ -606,6 +614,22 @@ msgid "Adds {user} to the wheel group and allows sudo"
 msgstr "{user} を wheel グループに追加し、sudo を許可します"
 
 #: src/ui/pages/account_page.cpp
+msgid "Weak passphrase"
+msgstr "弱いパスフレーズ"
+
+#: src/ui/pages/account_page.cpp
+msgid "Fair passphrase"
+msgstr "まずまずのパスフレーズ"
+
+#: src/ui/pages/account_page.cpp
+msgid "Good passphrase"
+msgstr "良いパスフレーズ"
+
+#: src/ui/pages/account_page.cpp
+msgid "Strong passphrase"
+msgstr "強いパスフレーズ"
+
+#: src/ui/pages/account_page.cpp
 #, python-brace-format
 msgid "{n} character"
 msgid_plural "{n} characters"
@@ -649,6 +673,10 @@ msgstr "空"
 msgid "{n} partition"
 msgid_plural "{n} partitions"
 msgstr[0] "{n} 個のパーティション"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart) and start the installer again."
+msgstr "まず Windows を完全にシャットダウンしてください。Windows で高速スタートアップをオフにし、空き容量を確保してから、シャットダウン（再起動ではなく）して、インストーラーをもう一度起動してください。"
 
 #: src/ui/pages/destination_page.cpp
 msgid "the data on it"
@@ -725,8 +753,8 @@ msgid "Encrypt my data"
 msgstr "データを暗号化"
 
 #: src/ui/pages/destination_page.cpp
-msgid "LUKS2 · passphrase at next step"
-msgstr "LUKS2 · パスフレーズは次のステップで"
+msgid "LUKS2 · unlocked with your password"
+msgstr "LUKS2 · パスワードでロック解除"
 
 #: src/ui/pages/destination_page.cpp
 msgid "RESULTING LAYOUT"
@@ -802,6 +830,10 @@ msgstr "保持"
 #, python-brace-format
 msgid "Too little space: {product} needs at least {size} for its system."
 msgstr "空き容量が足りません。{product} のシステムには少なくとも {size} が必要です。"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Choose a larger disk, or free space on this one."
+msgstr "より大きなディスクを選ぶか、このディスクの空き容量を増やしてください。"
 
 #: src/ui/pages/destination_page.cpp
 msgid "Specialized disks"
@@ -1385,3 +1417,6 @@ msgstr "ディスクにインストール"
 #: data/nabau.desktop
 msgid "Install this system on the computer's disk"
 msgstr "このシステムをコンピュータのディスクにインストールします"
+
+#~ msgid "LUKS2 · passphrase at next step"
+#~ msgstr "LUKS2 · パスフレーズは次のステップで"

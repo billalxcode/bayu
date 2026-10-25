@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 19:00+0000\n"
+"POT-Creation-Date: 2026-10-25 19:56+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -187,6 +187,10 @@ msgid "From {min} to {max}"
 msgstr "Dari {min} hingga {max}"
 
 #: src/ui/disk_editor.cpp
+msgid "PARTITIONS"
+msgstr "PARTISI"
+
+#: src/ui/disk_editor.cpp
 msgid "MOUNT POINTS"
 msgstr "TITIK PEMASANGAN"
 
@@ -302,6 +306,10 @@ msgstr "Ubah Ukuran…"
 #: src/ui/disk_editor.cpp
 msgid "Delete"
 msgstr "Hapus"
+
+#: src/ui/disk_editor.cpp
+msgid "It cannot be shrunk now. Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart)."
+msgstr "Saat ini tidak dapat dikecilkan. Windows harus dimatikan sepenuhnya terlebih dahulu: di Windows matikan Fast Startup, kosongkan sebagian ruang, lalu matikan (bukan mulai ulang)."
 
 #: src/ui/disk_editor.cpp
 msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
@@ -605,6 +613,22 @@ msgid "Adds {user} to the wheel group and allows sudo"
 msgstr "Menambahkan {user} ke grup wheel dan mengizinkan sudo"
 
 #: src/ui/pages/account_page.cpp
+msgid "Weak passphrase"
+msgstr "Frasa sandi lemah"
+
+#: src/ui/pages/account_page.cpp
+msgid "Fair passphrase"
+msgstr "Frasa sandi cukup"
+
+#: src/ui/pages/account_page.cpp
+msgid "Good passphrase"
+msgstr "Frasa sandi baik"
+
+#: src/ui/pages/account_page.cpp
+msgid "Strong passphrase"
+msgstr "Frasa sandi kuat"
+
+#: src/ui/pages/account_page.cpp
 #, python-brace-format
 msgid "{n} character"
 msgid_plural "{n} characters"
@@ -648,6 +672,10 @@ msgstr "kosong"
 msgid "{n} partition"
 msgid_plural "{n} partitions"
 msgstr[0] "{n} partisi"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart) and start the installer again."
+msgstr "Windows harus dimatikan sepenuhnya terlebih dahulu: di Windows matikan Fast Startup, kosongkan sebagian ruang, lalu matikan (bukan mulai ulang) dan jalankan penginstal lagi."
 
 #: src/ui/pages/destination_page.cpp
 msgid "the data on it"
@@ -724,8 +752,8 @@ msgid "Encrypt my data"
 msgstr "Enkripsi data saya"
 
 #: src/ui/pages/destination_page.cpp
-msgid "LUKS2 · passphrase at next step"
-msgstr "LUKS2 · frasa sandi di langkah berikutnya"
+msgid "LUKS2 · unlocked with your password"
+msgstr "LUKS2 · dibuka dengan kata sandi Anda"
 
 #: src/ui/pages/destination_page.cpp
 msgid "RESULTING LAYOUT"
@@ -801,6 +829,10 @@ msgstr "dipertahankan"
 #, python-brace-format
 msgid "Too little space: {product} needs at least {size} for its system."
 msgstr "Ruang tidak cukup: {product} memerlukan setidaknya {size} untuk sistemnya."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Choose a larger disk, or free space on this one."
+msgstr "Pilih disk yang lebih besar, atau kosongkan ruang di disk ini."
 
 #: src/ui/pages/destination_page.cpp
 msgid "Specialized disks"
@@ -1384,3 +1416,6 @@ msgstr "Pasang ke Disk"
 #: data/nabau.desktop
 msgid "Install this system on the computer's disk"
 msgstr "Pasang sistem ini ke disk komputer"
+
+#~ msgid "LUKS2 · passphrase at next step"
+#~ msgstr "LUKS2 · frasa sandi di langkah berikutnya"

@@ -22,10 +22,12 @@ class Banner;
 class Card;
 class DiskMap;
 class Installer;
+class ListRow;
 
 // The custom layout editor: each disk drawn as a bar of its partitions and
-// free space, one piece selected at a time with what can be done to it
-// beside, and the mount points and the changes so far.
+// free space, in their order on it, and listed as a table; one piece
+// selected at a time with what can be done to it beside, and the mount
+// points and the changes so far.
 class DiskEditor : public bayu::ui::Column
 {
 public:
@@ -52,6 +54,8 @@ private:
     void showResizeForm(const DiskSegment& segment);
     void confirmDelete(const DiskSegment& segment);
     void fillLists();
+    // The table of the pieces of every disk, the selected one marked.
+    void fillPartitions();
     // Applies an edit: shows its error, or reloads.
     void apply(const std::string& error);
     // Scrolls the panel down to the form just opened in it.
@@ -62,6 +66,8 @@ private:
     bayu::ui::ScrollView* m_panelScroll;
     Card* m_panel;
     bayu::base::Timer m_reveal;
+    bayu::ui::Column* m_partitions;
+    std::vector<ListRow*> m_partitionRows;
     bayu::ui::Column* m_mounts;
     bayu::ui::Column* m_actions;
     Banner* m_report;

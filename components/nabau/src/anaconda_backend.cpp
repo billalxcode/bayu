@@ -1060,6 +1060,9 @@ private:
         uint64_t payload = 0;
         module("Payloads").call("CalculateRequiredSpace").read(payload);
         viewer(kAppliedTree).call("GetRequiredDeviceSize", payload).read(m_required);
+        // Anaconda counts the live image's compressed size (1.4 GB); the
+        // copy takes 2.5 GB, and the new system room to start.
+        m_required = std::max<uint64_t>(m_required, 4000 * MiB);
         m_packageCount = std::atoi(command("rpm -qa | wc -l").c_str());
 
         loadDisks();
@@ -1520,7 +1523,6 @@ private:
             && get<std::string>(diskFormat, "type") != "disklabel")
             pieces.push_back({name, data, diskFormat});
 
-        uint64_t start = 0;
         for (const Piece& piece : pieces) {
             const uint64_t size = get<uint64_t>(piece.data, "size");
             std::string type = get<std::string>(piece.format, "type");
@@ -1529,9 +1531,12 @@ private:
                 continue;
             DiskSegment segment;
             segment.device = piece.name;
-            segment.start = start;
             segment.size = size;
             segment.existing = !created.count(piece.name);
+            // Where a partition on the disk starts (sysfs counts 512-byte
+            // sectors); a planned one has no place until it is made.
+            if (segment.existing && piece.name != name)
+                segment.start = std::strtoull(readFile("/sys/class/block/" + piece.name + "/start").c_str(), nullptr, 10) * 512;
             VariantMap format = piece.format;
             if (type == "luks") {
                 segment.encrypted = true;
@@ -1564,11 +1569,55 @@ private:
             if (get<bool>(piece.data, "protected"))
                 disk.installationMedia = true;
             disk.segments.push_back(segment);
-            start += size;
         }
-        if (disk.freeSpace >= MiB)
-            disk.segments.push_back({.start = start, .size = disk.freeSpace, .free = true, .existing = false});
+        placeSegments(disk);
         return disk;
+    }
+
+    // Lays the pieces of a disk out in order, as they are on it: the free
+    // space between them where it is. Planned partitions go to the first
+    // space they fit, as blivet puts them.
+    static void placeSegments(Disk& disk)
+    {
+        std::vector<DiskSegment> placed;
+        std::vector<DiskSegment> planned;
+        for (DiskSegment& segment : disk.segments)
+            (segment.existing ? placed : planned).push_back(segment);
+        std::stable_sort(placed.begin(), placed.end(),
+                         [](const DiskSegment& a, const DiskSegment& b) { return a.start < b.start; });
+        // The spaces: before, between and after the partitions there.
+        struct Gap
+        {
+            uint64_t start, end;
+        };
+        std::vector<Gap> gaps;
+        uint64_t cursor = 0;
+        for (const DiskSegment& segment : placed) {
+            if (segment.start > cursor)
+                gaps.push_back({cursor, segment.start});
+            cursor = std::max(cursor, segment.start + segment.size);
+        }
+        if (disk.size > cursor)
+            gaps.push_back({cursor, disk.size});
+        for (DiskSegment& segment : planned) {
+            for (Gap& gap : gaps) {
+                if (gap.end - gap.start >= segment.size) {
+                    segment.start = gap.start;
+                    gap.start += segment.size;
+                    break;
+                }
+            }
+            placed.push_back(segment);
+        }
+        // Spaces too small to use (alignment, the GPT's backup, what is left
+        // after planned partitions) are left out.
+        for (const Gap& gap : gaps) {
+            if (gap.end - gap.start >= 16 * MiB)
+                placed.push_back({.start = gap.start, .size = gap.end - gap.start, .free = true, .existing = false});
+        }
+        std::stable_sort(placed.begin(), placed.end(),
+                         [](const DiskSegment& a, const DiskSegment& b) { return a.start < b.start; });
+        disk.segments = std::move(placed);
     }
 
     // Installation.

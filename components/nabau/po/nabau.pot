@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 19:00+0000\n"
+"POT-Creation-Date: 2026-10-25 19:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -188,6 +188,10 @@ msgid "From {min} to {max}"
 msgstr ""
 
 #: src/ui/disk_editor.cpp
+msgid "PARTITIONS"
+msgstr ""
+
+#: src/ui/disk_editor.cpp
 msgid "MOUNT POINTS"
 msgstr ""
 
@@ -302,6 +306,10 @@ msgstr ""
 
 #: src/ui/disk_editor.cpp
 msgid "Delete"
+msgstr ""
+
+#: src/ui/disk_editor.cpp
+msgid "It cannot be shrunk now. Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart)."
 msgstr ""
 
 #: src/ui/disk_editor.cpp
@@ -606,6 +614,22 @@ msgid "Adds {user} to the wheel group and allows sudo"
 msgstr ""
 
 #: src/ui/pages/account_page.cpp
+msgid "Weak passphrase"
+msgstr ""
+
+#: src/ui/pages/account_page.cpp
+msgid "Fair passphrase"
+msgstr ""
+
+#: src/ui/pages/account_page.cpp
+msgid "Good passphrase"
+msgstr ""
+
+#: src/ui/pages/account_page.cpp
+msgid "Strong passphrase"
+msgstr ""
+
+#: src/ui/pages/account_page.cpp
 #, python-brace-format
 msgid "{n} character"
 msgid_plural "{n} characters"
@@ -651,6 +675,10 @@ msgid "{n} partition"
 msgid_plural "{n} partitions"
 msgstr[0] ""
 msgstr[1] ""
+
+#: src/ui/pages/destination_page.cpp
+msgid "Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart) and start the installer again."
+msgstr ""
 
 #: src/ui/pages/destination_page.cpp
 msgid "the data on it"
@@ -727,7 +755,7 @@ msgid "Encrypt my data"
 msgstr ""
 
 #: src/ui/pages/destination_page.cpp
-msgid "LUKS2 · passphrase at next step"
+msgid "LUKS2 · unlocked with your password"
 msgstr ""
 
 #: src/ui/pages/destination_page.cpp
@@ -798,6 +826,10 @@ msgstr ""
 #: src/ui/pages/destination_page.cpp
 #, python-brace-format
 msgid "Too little space: {product} needs at least {size} for its system."
+msgstr ""
+
+#: src/ui/pages/destination_page.cpp
+msgid "Choose a larger disk, or free space on this one."
 msgstr ""
 
 #: src/ui/pages/destination_page.cpp

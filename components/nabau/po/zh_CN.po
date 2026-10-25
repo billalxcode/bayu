@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 19:00+0000\n"
+"POT-Creation-Date: 2026-10-25 19:56+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -187,6 +187,10 @@ msgid "From {min} to {max}"
 msgstr "从 {min} 到 {max}"
 
 #: src/ui/disk_editor.cpp
+msgid "PARTITIONS"
+msgstr "分区"
+
+#: src/ui/disk_editor.cpp
 msgid "MOUNT POINTS"
 msgstr "挂载点"
 
@@ -302,6 +306,10 @@ msgstr "调整大小…"
 #: src/ui/disk_editor.cpp
 msgid "Delete"
 msgstr "删除"
+
+#: src/ui/disk_editor.cpp
+msgid "It cannot be shrunk now. Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart)."
+msgstr "现在无法缩小。请先完全关闭 Windows：在 Windows 中关闭“快速启动”，释放一些空间，然后关机（不是重启）。"
 
 #: src/ui/disk_editor.cpp
 msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
@@ -605,6 +613,22 @@ msgid "Adds {user} to the wheel group and allows sudo"
 msgstr "将 {user} 添加到 wheel 组并允许使用 sudo"
 
 #: src/ui/pages/account_page.cpp
+msgid "Weak passphrase"
+msgstr "密码短语较弱"
+
+#: src/ui/pages/account_page.cpp
+msgid "Fair passphrase"
+msgstr "密码短语一般"
+
+#: src/ui/pages/account_page.cpp
+msgid "Good passphrase"
+msgstr "密码短语良好"
+
+#: src/ui/pages/account_page.cpp
+msgid "Strong passphrase"
+msgstr "密码短语很强"
+
+#: src/ui/pages/account_page.cpp
 #, python-brace-format
 msgid "{n} character"
 msgid_plural "{n} characters"
@@ -648,6 +672,10 @@ msgstr "空"
 msgid "{n} partition"
 msgid_plural "{n} partitions"
 msgstr[0] "{n} 个分区"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart) and start the installer again."
+msgstr "请先完全关闭 Windows：在 Windows 中关闭“快速启动”，释放一些空间，然后关机（不是重启），再重新运行安装程序。"
 
 #: src/ui/pages/destination_page.cpp
 msgid "the data on it"
@@ -724,8 +752,8 @@ msgid "Encrypt my data"
 msgstr "加密我的数据"
 
 #: src/ui/pages/destination_page.cpp
-msgid "LUKS2 · passphrase at next step"
-msgstr "LUKS2 · 下一步输入密码短语"
+msgid "LUKS2 · unlocked with your password"
+msgstr "LUKS2 · 用您的密码解锁"
 
 #: src/ui/pages/destination_page.cpp
 msgid "RESULTING LAYOUT"
@@ -801,6 +829,10 @@ msgstr "保留"
 #, python-brace-format
 msgid "Too little space: {product} needs at least {size} for its system."
 msgstr "空间不足：{product} 的系统至少需要 {size}。"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Choose a larger disk, or free space on this one."
+msgstr "请选择更大的磁盘，或在此磁盘上腾出空间。"
 
 #: src/ui/pages/destination_page.cpp
 msgid "Specialized disks"
@@ -1384,3 +1416,6 @@ msgstr "安装到磁盘"
 #: data/nabau.desktop
 msgid "Install this system on the computer's disk"
 msgstr "将此系统安装到计算机的磁盘上"
+
+#~ msgid "LUKS2 · passphrase at next step"
+#~ msgstr "LUKS2 · 下一步输入密码短语"

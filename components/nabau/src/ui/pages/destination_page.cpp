@@ -64,6 +64,14 @@ const DiskSegment* largestPartition(const Disk& disk)
     return best;
 }
 
+// Why Windows cannot give room: hibernated (Fast Startup), marked for a
+// disk check, or full.
+std::string windowsHint()
+{
+    return tr("Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, "
+              "then shut it down (not restart) and start the installer again.");
+}
+
 // What to do with the data already on the chosen disk.
 class ExistingDataCard : public Card
 {
@@ -82,6 +90,9 @@ public:
         m_slider = m_split->addChild<Slider>();
         m_slider->setLayoutHints({.fillWidth = true});
         m_splitText = addText(m_split, {}, 12, 400, Role::SecondaryText);
+        m_hint = addText(this, windowsHint(), 12, 400, Role::SecondaryText);
+        m_hint->setWrap(true);
+        m_hint->setLayoutHints({.fillWidth = true, .margins = {28, 0, 0, 4}});
         m_free = addChild<RadioButton>();
         for (RadioButton* button : {m_replace, m_alongside, m_free})
             button->setGroup(&m_group);
@@ -124,6 +135,7 @@ public:
                                        : format(tr("Install alongside {system} (it cannot be shrunk now)"),
                                                 {{"system", system}}));
         m_alongside->setEnabled(canShrink);
+        m_hint->setVisible(!canShrink && largest && largest->format == "ntfs");
         m_free->setText(format(tr("Use the free space only ({size})"), {{"size", style::formatSize(disk.freeSpace)}}));
         m_free->setEnabled(disk.freeSpace >= required);
         if (canShrink) {
@@ -179,6 +191,7 @@ private:
     Column* m_split;
     Slider* m_slider;
     Label* m_splitText;
+    Label* m_hint;
     Disk m_disk;
     std::string m_product;
     std::string m_systemName;
@@ -221,6 +234,9 @@ public:
         add->setLeadingGlyph("plus");
         add->setLayoutHints({.fillWidth = true});
         add->onClicked = [this] { explainSpecialized(); };
+        // Why Continue is off, where it is seen.
+        m_space = left->addChild<Banner>(Banner::Kind::Error, std::string(), std::string());
+        m_space->setVisible(false);
         m_existing = left->addChild<ExistingDataCard>();
         m_existing->onChanged = [this] { replan(); };
         m_existing->setVisible(false);
@@ -248,7 +264,7 @@ public:
         m_custom->onClicked = [this] { setMethod(Method::Custom); };
         m_advanced->onClicked = [this] { setMethod(Method::Advanced); };
         m_encrypt = right->addChild<ToggleCard>(tr("Encrypt my data"),
-                                                tr("LUKS2 · passphrase at next step"));
+                                                tr("LUKS2 · unlocked with your password"));
         m_encrypt->onToggled = [this](bool on) {
             m_encrypted = on;
             changed();
@@ -518,10 +534,13 @@ private:
         for (const LayoutPart& part : layout)
             root = part.mountPoint == "/" ? part.size : root;
         m_tooSmall = !layout.empty() && root < m_required;
-        if (m_tooSmall)
-            m_layoutNote->setText(format(tr("Too little space: {product} needs at least {size} for its system."),
+        const std::string space = format(tr("Too little space: {product} needs at least {size} for its system."),
                                          {{"product", installer().backend().systemInfo().productShortName},
-                                          {"size", style::formatSize(m_required)}}));
+                                          {"size", style::formatSize(m_required)}});
+        m_space->setText(space, tr("Choose a larger disk, or free space on this one."));
+        m_space->setVisible(m_tooSmall);
+        if (m_tooSmall)
+            m_layoutNote->setText(space);
         else if (!report.errors.empty())
             m_layoutNote->setText(report.errors.front());
         else if (!report.warnings.empty())
@@ -568,6 +587,7 @@ private:
     bool m_planning = false;
     uint64_t m_required = 0;
     bool m_tooSmall = false;
+    Banner* m_space;
     bayu::base::Timer m_replan;
     std::unique_ptr<DialogWindow> m_dialog;
 };
