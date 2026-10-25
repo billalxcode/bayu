@@ -1,0 +1,210 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-terminal\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-19 22:34+0800\n"
+"PO-Revision-Date: 2026-10-25 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/findbar.cpp
+msgid "Find"
+msgstr "Buscar"
+
+#: src/settingsdialog.cpp
+msgid "Theme"
+msgstr "Tema"
+
+#: src/settingsdialog.cpp
+msgid "Font"
+msgstr "Fuente"
+
+#: src/settingsdialog.cpp
+msgid "Font Size"
+msgstr "Tamaño de fuente"
+
+#: src/settingsdialog.cpp
+msgid "Blinking Cursor"
+msgstr "Cursor parpadeante"
+
+#: src/settingsdialog.cpp
+msgid "Opacity"
+msgstr "Opacidad"
+
+#: src/settingsdialog.cpp
+msgid "Window Blur"
+msgstr "Desenfoque de ventana"
+
+#: src/settingsdialog.cpp
+msgid "Cursor Shape"
+msgstr "Forma del cursor"
+
+#. TRANSLATORS: the shapes of the text cursor.
+#: src/settingsdialog.cpp
+msgid "Block"
+msgstr "Bloque"
+
+#: src/settingsdialog.cpp
+msgid "Underline"
+msgstr "Subrayado"
+
+#: src/settingsdialog.cpp
+msgid "I-Beam"
+msgstr "Barra"
+
+#: src/settingsdialog.cpp
+msgid "Scrollback"
+msgstr "Historial de desplazamiento"
+
+#: src/settingsdialog.cpp
+msgid "1,000 lines"
+msgstr "1000 líneas"
+
+#: src/settingsdialog.cpp
+msgid "10,000 lines"
+msgstr "10 000 líneas"
+
+#: src/settingsdialog.cpp
+msgid "100,000 lines"
+msgstr "100 000 líneas"
+
+#: src/settingsdialog.cpp
+msgid "Unlimited"
+msgstr "Ilimitado"
+
+#: src/settingsdialog.cpp
+msgid "Flash on Bell"
+msgstr "Destello con la campana"
+
+#: src/settingsdialog.cpp
+msgid "Warn Before Pasting Multiple Lines"
+msgstr "Advertir antes de pegar varias líneas"
+
+#. TRANSLATORS: a font size in points.
+#: src/settingsdialog.cpp src/terminalwindow.cpp
+#, python-brace-format
+msgid "{size} pt"
+msgstr "{size} pt"
+
+#. TRANSLATORS: a percentage, such as "80%".
+#: src/settingsdialog.cpp
+#, python-brace-format
+msgid "{percent}%"
+msgstr "{percent} %"
+
+#: src/settingsdialog.cpp src/terminalpage.cpp
+msgid "Settings"
+msgstr "Ajustes"
+
+#: src/terminalpage.cpp
+msgid "Open Link"
+msgstr "Abrir enlace"
+
+#: src/terminalpage.cpp
+msgid "Copy Link"
+msgstr "Copiar enlace"
+
+#: src/terminalpage.cpp
+#, python-brace-format
+msgid "Open “{name}”"
+msgstr "Abrir «{name}»"
+
+#: src/terminalpage.cpp
+msgid "Show in File Manager"
+msgstr "Mostrar en el gestor de archivos"
+
+#: src/terminalpage.cpp
+msgid "Copy"
+msgstr "Copiar"
+
+#: src/terminalpage.cpp src/terminalwindow.cpp
+msgid "Paste"
+msgstr "Pegar"
+
+#: src/terminalpage.cpp
+msgid "Select All"
+msgstr "Seleccionar todo"
+
+#: src/terminalpage.cpp
+msgid "Find…"
+msgstr "Buscar…"
+
+#: src/terminalpage.cpp
+msgid "Clear Scrollback"
+msgstr "Borrar historial de desplazamiento"
+
+#: src/terminalpage.cpp
+msgid "Reset Terminal"
+msgstr "Restablecer terminal"
+
+#: src/terminalpage.cpp
+msgid "New Tab"
+msgstr "Pestaña nueva"
+
+#: src/terminalpage.cpp
+msgid "New Window"
+msgstr "Ventana nueva"
+
+#: src/terminalpage.cpp
+msgid "Open File Manager"
+msgstr "Abrir el gestor de archivos"
+
+#: src/terminalpage.cpp
+msgid "Exit full screen"
+msgstr "Salir de pantalla completa"
+
+#: src/terminalpage.cpp
+msgid "Full screen"
+msgstr "Pantalla completa"
+
+#: src/terminalwindow.cpp
+msgid "Rename Tab…"
+msgstr "Renombrar pestaña…"
+
+#: src/terminalwindow.cpp
+msgid "Close Tab"
+msgstr "Cerrar pestaña"
+
+#: src/terminalwindow.cpp
+msgid "Close Other Tabs"
+msgstr "Cerrar otras pestañas"
+
+#: src/terminalwindow.cpp
+msgid "Process is running, are you sure you want to quit?"
+msgstr "Hay un proceso en ejecución. ¿Seguro que quieres salir?"
+
+#: src/terminalwindow.cpp
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/terminalwindow.cpp
+msgid "OK"
+msgstr "Aceptar"
+
+#: src/terminalwindow.cpp
+msgid "Open this link?"
+msgstr "¿Abrir este enlace?"
+
+#: src/terminalwindow.cpp
+msgid "Open"
+msgstr "Abrir"
+
+#: src/terminalwindow.cpp
+#, python-brace-format
+msgid "Paste {n} line?"
+msgid_plural "Paste {n} lines?"
+msgstr[0] "¿Pegar {n} línea?"
+msgstr[1] "¿Pegar {n} líneas?"
+
+#: src/terminalwindow.cpp
+msgid "Paste this line and press Enter?"
+msgstr "¿Pegar esta línea y pulsar Intro?"
+
+#: bayu-terminal.desktop
+msgid "Terminal"
+msgstr "Terminal"

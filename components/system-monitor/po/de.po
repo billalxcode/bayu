@@ -1,0 +1,500 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-system-monitor\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-19 22:12+0800\n"
+"PO-Revision-Date: 2026-10-25 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: a browser's helper process, such as "Chromium (Renderer)".
+#: src/monitor.cpp src/processlist.cpp
+#, python-brace-format
+msgid "{name} ({helper})"
+msgstr "{name} ({helper})"
+
+#: src/monitor.cpp
+msgid "The process has already exited."
+msgstr "Der Prozess wurde bereits beendet."
+
+#: src/monitor.cpp
+msgid "The application has already quit."
+msgstr "Die Anwendung wurde bereits beendet."
+
+#: src/monitor.cpp
+msgid "This application cannot be quit here."
+msgstr "Diese Anwendung kann hier nicht beendet werden."
+
+#: src/monitor.cpp
+msgid "This process cannot be ended here."
+msgstr "Dieser Prozess kann hier nicht beendet werden."
+
+#: src/monitor.cpp
+#, python-brace-format
+msgid "Unable to open the process: {error}"
+msgstr "Prozess kann nicht geöffnet werden: {error}"
+
+#: src/monitor.cpp
+msgid "You can only end your own processes."
+msgstr "Sie können nur Ihre eigenen Prozesse beenden."
+
+#: src/monitor.cpp
+#, python-brace-format
+msgid "Unable to end the process: {error}"
+msgstr "Prozess kann nicht beendet werden: {error}"
+
+#: src/monitor.cpp
+msgid "B"
+msgstr "B"
+
+#: src/monitor.cpp
+msgid "KiB"
+msgstr "KiB"
+
+#: src/monitor.cpp
+msgid "MiB"
+msgstr "MiB"
+
+#: src/monitor.cpp
+msgid "GiB"
+msgstr "GiB"
+
+#: src/monitor.cpp
+msgid "TiB"
+msgstr "TiB"
+
+#. TRANSLATORS: a size, such as "1.5 MiB".
+#: src/monitor.cpp
+#, python-brace-format
+msgid "{value} {unit}"
+msgstr "{value} {unit}"
+
+#: src/monitor.cpp
+#, python-brace-format
+msgid "{size}/s"
+msgstr "{size}/s"
+
+#: src/procreader.cpp
+msgid "Running"
+msgstr "Läuft"
+
+#: src/procreader.cpp
+msgid "Sleeping"
+msgstr "Schlafend"
+
+#: src/procreader.cpp
+msgid "Waiting for I/O"
+msgstr "Wartet auf E/A"
+
+#: src/procreader.cpp
+msgid "Stopped"
+msgstr "Angehalten"
+
+#: src/procreader.cpp
+msgid "Zombie"
+msgstr "Zombie"
+
+#: src/procreader.cpp
+msgid "Renderer"
+msgstr "Renderer"
+
+#: src/procreader.cpp
+msgid "Extension"
+msgstr "Erweiterung"
+
+#: src/procreader.cpp src/views/mainwindow.cpp
+msgid "GPU"
+msgstr "GPU"
+
+#: src/procreader.cpp
+msgid "Zygote"
+msgstr "Zygote"
+
+#: src/procreader.cpp src/views/mainwindow.cpp
+msgid "Network"
+msgstr "Netzwerk"
+
+#: src/procreader.cpp
+msgid "Audio"
+msgstr "Audio"
+
+#: src/procreader.cpp src/views/resourcepage.cpp
+msgid "Storage"
+msgstr "Speicher"
+
+#: src/procreader.cpp
+msgid "Video Capture"
+msgstr "Videoaufnahme"
+
+#: src/procreader.cpp
+msgid "Utility"
+msgstr "Dienstprogramm"
+
+#: src/procreader.cpp
+msgid "System information is unavailable."
+msgstr "Systeminformationen sind nicht verfügbar."
+
+#: src/views/chartcard.cpp
+msgid "Now"
+msgstr "Jetzt"
+
+#: src/views/mainwindow.cpp src/views/processdetails.cpp
+#: src/views/summarycard.cpp
+msgid "Processes"
+msgstr "Prozesse"
+
+#: src/views/mainwindow.cpp src/views/processdetails.cpp
+#: src/views/processespage.cpp
+msgid "CPU"
+msgstr "CPU"
+
+#: src/views/mainwindow.cpp src/views/processdetails.cpp
+#: src/views/processespage.cpp
+msgid "Memory"
+msgstr "Speicher"
+
+#: src/views/mainwindow.cpp
+msgid "Disk"
+msgstr "Datenträger"
+
+#: src/views/mainwindow.cpp bayu-system-monitor.desktop
+msgid "System Monitor"
+msgstr "Systemüberwachung"
+
+#: src/views/mainwindow.cpp
+msgid "Update Every Second"
+msgstr "Jede Sekunde aktualisieren"
+
+#: src/views/mainwindow.cpp
+msgid "Update Every 2 Seconds"
+msgstr "Alle 2 Sekunden aktualisieren"
+
+#: src/views/mainwindow.cpp
+msgid "Update Every 5 Seconds"
+msgstr "Alle 5 Sekunden aktualisieren"
+
+#: src/views/mainwindow.cpp
+msgid "Details"
+msgstr "Details"
+
+#: src/views/mainwindow.cpp
+msgid "Copy Process ID"
+msgstr "Prozess-ID kopieren"
+
+#: src/views/mainwindow.cpp
+msgid "Quit"
+msgstr "Beenden"
+
+#: src/views/mainwindow.cpp
+msgid "Force Quit"
+msgstr "Beenden erzwingen"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Force quit {name}?"
+msgstr "{name} beenden erzwingen?"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Quit {name}?"
+msgstr "{name} beenden?"
+
+#: src/views/mainwindow.cpp
+msgid "All of its processes will stop immediately. Unsaved work may be lost."
+msgstr "Alle zugehörigen Prozesse werden sofort angehalten. Nicht gespeicherte Arbeit kann verloren gehen."
+
+#: src/views/mainwindow.cpp
+msgid "The application will be asked to quit. Unsaved work may be lost."
+msgstr "Die Anwendung wird aufgefordert, sich zu beenden. Nicht gespeicherte Arbeit kann verloren gehen."
+
+#: src/views/mainwindow.cpp
+msgid "The process will stop immediately. Unsaved work may be lost."
+msgstr "Der Prozess wird sofort angehalten. Nicht gespeicherte Arbeit kann verloren gehen."
+
+#: src/views/mainwindow.cpp
+msgid "The process will be asked to quit. Unsaved work may be lost."
+msgstr "Der Prozess wird aufgefordert, sich zu beenden. Nicht gespeicherte Arbeit kann verloren gehen."
+
+#: src/views/mainwindow.cpp src/views/summarycard.cpp
+msgid "Collecting data…"
+msgstr "Daten werden erfasst …"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "{n} logical processor"
+msgid_plural "{n} logical processors"
+msgstr[0] "{n} logischer Prozessor"
+msgstr[1] "{n} logische Prozessoren"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Write {rate}"
+msgstr "Schreiben {rate}"
+
+#: src/views/processdetails.cpp
+msgid "User"
+msgstr "Benutzer"
+
+#: src/views/processdetails.cpp src/views/resourcepage.cpp
+msgid "State"
+msgstr "Zustand"
+
+#: src/views/processdetails.cpp
+msgid "Threads"
+msgstr "Threads"
+
+#: src/views/processdetails.cpp
+msgid "Nice value"
+msgstr "Nice-Wert"
+
+#: src/views/processdetails.cpp
+msgid "Parent process"
+msgstr "Übergeordneter Prozess"
+
+#: src/views/processdetails.cpp
+msgid "Command"
+msgstr "Befehl"
+
+#: src/views/processdetails.cpp
+msgid "Application quit"
+msgstr "Anwendung beendet"
+
+#: src/views/processdetails.cpp
+msgid "Process exited"
+msgstr "Prozess beendet"
+
+#: src/views/processdetails.cpp
+msgid "Exited"
+msgstr "Beendet"
+
+#: src/views/processdetails.cpp
+#, python-brace-format
+msgid "PID {pid}"
+msgstr "PID {pid}"
+
+#: src/views/processdetails.cpp
+msgid "Application Details"
+msgstr "Anwendungsdetails"
+
+#: src/views/processdetails.cpp
+msgid "Process Details"
+msgstr "Prozessdetails"
+
+#: src/views/processespage.cpp
+msgid "Name"
+msgstr "Name"
+
+#: src/views/processespage.cpp src/views/resourcepage.cpp
+msgid "Read"
+msgstr "Lesen"
+
+#: src/views/processespage.cpp src/views/resourcepage.cpp
+msgid "Write"
+msgstr "Schreiben"
+
+#: src/views/processespage.cpp
+msgid "PID"
+msgstr "PID"
+
+#: src/views/processespage.cpp
+msgid "Applications"
+msgstr "Anwendungen"
+
+#: src/views/processespage.cpp
+msgid "My Processes"
+msgstr "Meine Prozesse"
+
+#: src/views/processespage.cpp
+msgid "All Processes"
+msgstr "Alle Prozesse"
+
+#: src/views/processespage.cpp
+msgid "Search processes"
+msgstr "Prozesse suchen"
+
+#: src/views/processespage.cpp
+msgid "No applications found"
+msgstr "Keine Anwendungen gefunden"
+
+#: src/views/processespage.cpp
+msgid "No processes found"
+msgstr "Keine Prozesse gefunden"
+
+#: src/views/processespage.cpp
+msgid "Try a different name, user, or process ID."
+msgstr "Versuchen Sie einen anderen Namen, Benutzer oder eine andere Prozess-ID."
+
+#: src/views/resourcepage.cpp
+msgid "Logical processors"
+msgstr "Logische Prozessoren"
+
+#: src/views/resourcepage.cpp
+msgid "In use"
+msgstr "In Benutzung"
+
+#: src/views/resourcepage.cpp
+msgid "Available"
+msgstr "Verfügbar"
+
+#: src/views/resourcepage.cpp
+msgid "Cached"
+msgstr "Zwischengespeichert"
+
+#: src/views/resourcepage.cpp
+msgid "Total memory"
+msgstr "Gesamter Speicher"
+
+#: src/views/resourcepage.cpp
+msgid "Swap"
+msgstr "Swap"
+
+#: src/views/resourcepage.cpp
+msgid "Download"
+msgstr "Download"
+
+#: src/views/resourcepage.cpp
+msgid "Upload"
+msgstr "Upload"
+
+#: src/views/resourcepage.cpp
+msgid "Total received"
+msgstr "Insgesamt empfangen"
+
+#: src/views/resourcepage.cpp
+msgid "Total sent"
+msgstr "Insgesamt gesendet"
+
+#: src/views/resourcepage.cpp
+msgid "Network interfaces"
+msgstr "Netzwerkschnittstellen"
+
+#: src/views/resourcepage.cpp
+msgid "Hardware address"
+msgstr "Hardwareadresse"
+
+#: src/views/resourcepage.cpp
+msgid "Device"
+msgstr "Gerät"
+
+#: src/views/resourcepage.cpp
+msgid "Capacity"
+msgstr "Kapazität"
+
+#: src/views/resourcepage.cpp
+msgid "Used"
+msgstr "Belegt"
+
+#: src/views/resourcepage.cpp
+msgid "File system"
+msgstr "Dateisystem"
+
+#: src/views/resourcepage.cpp
+msgid "Driver"
+msgstr "Treiber"
+
+#: src/views/resourcepage.cpp
+msgid "Activity"
+msgstr "Aktivität"
+
+#: src/views/resourcepage.cpp
+msgid "Temperature"
+msgstr "Temperatur"
+
+#: src/views/resourcepage.cpp
+msgid "Clock speed"
+msgstr "Taktfrequenz"
+
+#: src/views/resourcepage.cpp
+msgid "Video memory"
+msgstr "Videospeicher"
+
+#: src/views/resourcepage.cpp
+msgid "Processor activity"
+msgstr "Prozessoraktivität"
+
+#: src/views/resourcepage.cpp
+msgid "Memory usage"
+msgstr "Speicherauslastung"
+
+#: src/views/resourcepage.cpp
+msgid "Network activity"
+msgstr "Netzwerkaktivität"
+
+#: src/views/resourcepage.cpp
+msgid "Disk activity"
+msgstr "Datenträgeraktivität"
+
+#: src/views/resourcepage.cpp
+msgid "Graphics activity"
+msgstr "Grafikaktivität"
+
+#: src/views/resourcepage.cpp
+msgid "Graphics temperature"
+msgstr "Grafiktemperatur"
+
+#: src/views/resourcepage.cpp
+#, python-brace-format
+msgid "{used} of {total} in use"
+msgstr "{used} von {total} belegt"
+
+#: src/views/resourcepage.cpp
+msgid "Physical network interfaces"
+msgstr "Physische Netzwerkschnittstellen"
+
+#: src/views/resourcepage.cpp
+msgid "Physical disks"
+msgstr "Physische Datenträger"
+
+#: src/views/resourcepage.cpp
+#, python-brace-format
+msgid "{n} second"
+msgid_plural "{n} seconds"
+msgstr[0] "{n} Sekunde"
+msgstr[1] "{n} Sekunden"
+
+#: src/views/resourcepage.cpp
+#, python-brace-format
+msgid "CPU {number}"
+msgstr "CPU {number}"
+
+#: src/views/resourcepage.cpp
+msgid "Not configured"
+msgstr "Nicht konfiguriert"
+
+#: src/views/resourcepage.cpp
+msgid "Connected"
+msgstr "Verbunden"
+
+#: src/views/resourcepage.cpp
+msgid "Disconnected"
+msgstr "Getrennt"
+
+#: src/views/resourcepage.cpp
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: src/views/resourcepage.cpp
+#, python-brace-format
+msgid "{used} of {total}"
+msgstr "{used} von {total}"
+
+#: src/views/resourcepage.cpp
+msgid "Active"
+msgstr "Aktiv"
+
+#: src/views/resourcepage.cpp
+msgid "Powered off"
+msgstr "Ausgeschaltet"
+
+#: bayu-system-monitor.desktop
+msgid "View resource usage and manage running processes"
+msgstr "Ressourcennutzung ansehen und laufende Prozesse verwalten"
+
+#: bayu-system-monitor.desktop
+msgid "CPU;Memory;Network;Disk;Processes;"
+msgstr "CPU;Speicher;Netzwerk;Datenträger;Prozesse;Memory;Network;Disk;Processes;"

@@ -40,6 +40,7 @@ install(PROGRAMS data/nabau-backend data/post-install
 install(DIRECTORY DESTINATION ${CMAKE_INSTALL_DATADIR}/cockpit/anaconda-webui)
 install(FILES data/org.bayu.nabau.policy DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/actions)
 install(FILES data/50-nabau.rules DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/rules.d)
-install(FILES data/nabau.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+bayu_add_translations(nabau SOURCES src DESKTOP_FILES data/nabau.desktop)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/nabau.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
 install(FILES data/nabau-autostart.desktop DESTINATION ${CMAKE_INSTALL_FULL_SYSCONFDIR}/xdg/autostart
     RENAME nabau.desktop)

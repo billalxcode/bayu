@@ -1,0 +1,616 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-video-player\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-19 22:33+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: jv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/player.cpp
+msgid "mpv could not be started"
+msgstr "mpv ora bisa diwiwiti"
+
+#: src/sleepinhibitor.cpp
+msgid "Playing a video"
+msgstr "Muter video"
+
+#: src/sleepinhibitor.cpp src/views/dialogs.cpp src/views/mainwindow.cpp
+#: bayu-video-player.desktop
+msgid "Video Player"
+msgstr "Pamutar Video"
+
+#: src/sleepinhibitor.cpp
+msgid "Playing audio"
+msgstr "Muter audio"
+
+#. TRANSLATORS: a track's own title, then its language.
+#: src/tracks.cpp
+#, python-brace-format
+msgid "{title} ({language})"
+msgstr "{title} ({language})"
+
+#: src/tracks.cpp
+#, python-brace-format
+msgid "Track {number}"
+msgstr "Trek {number}"
+
+#: src/views/controlbar.cpp
+msgid "Unmute"
+msgstr "Aktifake Swara"
+
+#: src/views/controlbar.cpp src/views/dialogs.cpp
+msgid "Mute"
+msgstr "Bisu"
+
+#: src/views/controlbar.cpp
+msgid "Back 10 Seconds"
+msgstr "Mundur 10 Detik"
+
+#: src/views/controlbar.cpp
+msgid "Forward 10 Seconds"
+msgstr "Maju 10 Detik"
+
+#: src/views/controlbar.cpp
+msgid "Playlist, Tracks and Playback"
+msgstr "Daftar Putar, Trek lan Pemutaran"
+
+#: src/views/controlbar.cpp
+msgid "Play Again"
+msgstr "Puter Maneh"
+
+#: src/views/controlbar.cpp src/views/mainwindow.cpp
+msgid "Play"
+msgstr "Puter"
+
+#: src/views/controlbar.cpp src/views/mainwindow.cpp
+msgid "Pause"
+msgstr "Jeda"
+
+#: src/views/controlbar.cpp src/views/mainwindow.cpp
+msgid "Exit Full Screen"
+msgstr "Metu saka Layar Kebak"
+
+#: src/views/controlbar.cpp src/views/mainwindow.cpp
+msgid "Full Screen"
+msgstr "Layar Kebak"
+
+#: src/views/dialogs.cpp
+msgid "Open URL"
+msgstr "Bukak URL"
+
+#: src/views/dialogs.cpp
+msgid "Cancel"
+msgstr "Batal"
+
+#: src/views/dialogs.cpp
+msgid "Open"
+msgstr "Bukak"
+
+#: src/views/dialogs.cpp
+msgid "Plays videos with subtitles and playlists."
+msgstr "Muter video nganggo subtitle lan daftar putar."
+
+#: src/views/dialogs.cpp src/views/mainwindow.cpp
+msgid "Media Info"
+msgstr "Info Media"
+
+#. TRANSLATORS: a bit rate in kilobits per second.
+#: src/views/dialogs.cpp
+#, python-brace-format
+msgid "{rate} kb/s"
+msgstr "{rate} kb/s"
+
+#: src/views/dialogs.cpp
+msgid "Location"
+msgstr "Panggonan"
+
+#: src/views/dialogs.cpp
+msgid "Format"
+msgstr "Format"
+
+#: src/views/dialogs.cpp
+msgid "Size"
+msgstr "Ukuran"
+
+#: src/views/dialogs.cpp
+msgid "Duration"
+msgstr "Durasi"
+
+#: src/views/dialogs.cpp
+msgid "Video"
+msgstr "Video"
+
+#: src/views/dialogs.cpp
+msgid "Codec"
+msgstr "Codec"
+
+#: src/views/dialogs.cpp
+msgid "Resolution"
+msgstr "Resolusi"
+
+#. TRANSLATORS: a picture's width and height in pixels.
+#: src/views/dialogs.cpp
+#, python-brace-format
+msgid "{width} × {height}"
+msgstr "{width} × {height}"
+
+#: src/views/dialogs.cpp
+msgid "Frame rate"
+msgstr "Frame rate"
+
+#. TRANSLATORS: a frame rate in frames per second.
+#: src/views/dialogs.cpp
+#, python-brace-format
+msgid "{rate} fps"
+msgstr "{rate} fps"
+
+#: src/views/dialogs.cpp
+msgid "Bit rate"
+msgstr "Bit rate"
+
+#: src/views/dialogs.cpp src/views/mainwindow.cpp src/views/sidepanel.cpp
+msgid "Audio"
+msgstr "Audio"
+
+#: src/views/dialogs.cpp
+msgid "Channels"
+msgstr "Saluran"
+
+#: src/views/dialogs.cpp
+msgid "Sample rate"
+msgstr "Sample rate"
+
+#. TRANSLATORS: a sample rate in hertz.
+#: src/views/dialogs.cpp
+#, python-brace-format
+msgid "{rate} Hz"
+msgstr "{rate} Hz"
+
+#: src/views/dialogs.cpp src/views/mainwindow.cpp
+msgid "Settings"
+msgstr "Setelan"
+
+#. TRANSLATORS: follow the language the desktop is shown in.
+#: src/views/dialogs.cpp
+msgid "Display Language"
+msgstr "Basa Tampilan"
+
+#: src/views/dialogs.cpp
+msgid "Small"
+msgstr "Cilik"
+
+#: src/views/dialogs.cpp
+msgid "Medium"
+msgstr "Sedheng"
+
+#: src/views/dialogs.cpp
+msgid "Large"
+msgstr "Gedhe"
+
+#: src/views/dialogs.cpp
+msgid "Extra Large"
+msgstr "Gedhe Banget"
+
+#: src/views/dialogs.cpp src/views/sidepanel.cpp
+msgid "Playback"
+msgstr "Pemutaran"
+
+#: src/views/dialogs.cpp
+msgid "Resume where you left off"
+msgstr "Lanjutake saka pungkasan"
+
+#: src/views/dialogs.cpp
+msgid "Play the other videos in the folder"
+msgstr "Puter video liyane ing folder"
+
+#: src/views/dialogs.cpp
+msgid "Audio language"
+msgstr "Basa audio"
+
+#: src/views/dialogs.cpp src/views/mainwindow.cpp src/views/sidepanel.cpp
+msgid "Subtitles"
+msgstr "Subtitle"
+
+#: src/views/dialogs.cpp
+msgid "Subtitle language"
+msgstr "Basa subtitle"
+
+#: src/views/dialogs.cpp
+msgid "Subtitle size"
+msgstr "Ukuran subtitle"
+
+#: src/views/dialogs.cpp
+msgid "Screenshots"
+msgstr "Gambar Layar"
+
+#: src/views/dialogs.cpp
+msgid "Save to"
+msgstr "Simpen ing"
+
+#: src/views/dialogs.cpp
+msgid "Change…"
+msgstr "Ganti…"
+
+#: src/views/dialogs.cpp
+msgid "Save Screenshots To"
+msgstr "Simpen Gambar Layar ing"
+
+#: src/views/dialogs.cpp src/views/mainwindow.cpp
+msgid "Keyboard Shortcuts"
+msgstr "Pintasan Papan Tombol"
+
+#: src/views/dialogs.cpp
+msgid "Play or pause"
+msgstr "Setel utawa jeda"
+
+#: src/views/dialogs.cpp
+msgid "Back or forward 5 seconds"
+msgstr "Mundur utawa maju 5 detik"
+
+#: src/views/dialogs.cpp
+msgid "Back or forward 30 seconds"
+msgstr "Mundur utawa maju 30 detik"
+
+#: src/views/dialogs.cpp
+msgid "Go to the start or the end"
+msgstr "Menyang wiwitan utawa pungkasan"
+
+#: src/views/dialogs.cpp
+msgid "Slower, faster, normal speed"
+msgstr "Luwih alon, luwih cepet, kecepatan normal"
+
+#: src/views/dialogs.cpp
+msgid "Previous or next frame"
+msgstr "Frame sadurunge utawa sabanjure"
+
+#: src/views/dialogs.cpp
+msgid "Previous or next chapter"
+msgstr "Bab sadurunge utawa sabanjure"
+
+#: src/views/dialogs.cpp
+msgid "Previous or next file"
+msgstr "Berkas sadurunge utawa sabanjure"
+
+#: src/views/dialogs.cpp
+msgid "Sound and Subtitles"
+msgstr "Swara lan Subtitle"
+
+#: src/views/dialogs.cpp
+msgid "Volume up or down"
+msgstr "Volume munggah utawa mudhun"
+
+#: src/views/dialogs.cpp
+msgid "Next audio track"
+msgstr "Trek audio sabanjure"
+
+#: src/views/dialogs.cpp
+msgid "Next or previous subtitle"
+msgstr "Subtitle sabanjure utawa sadurunge"
+
+#: src/views/dialogs.cpp
+msgid "Show or hide subtitles"
+msgstr "Tuduhna utawa delikna subtitle"
+
+#: src/views/dialogs.cpp
+msgid "Subtitles earlier or later"
+msgstr "Subtitle luwih awal utawa luwih telat"
+
+#: src/views/dialogs.cpp
+msgid "Window"
+msgstr "Jendhela"
+
+#: src/views/dialogs.cpp
+msgid "Full screen"
+msgstr "Layar kebak"
+
+#. TRANSLATORS: key names stay as they are.
+#: src/views/dialogs.cpp
+msgid "F, F11, double-click"
+msgstr "F, F11, klik kaping pindho"
+
+#: src/views/dialogs.cpp
+msgid "Leave full screen"
+msgstr "Metu saka layar kebak"
+
+#: src/views/dialogs.cpp src/views/mainwindow.cpp src/views/sidepanel.cpp
+msgid "Playlist"
+msgstr "Daftar Putar"
+
+#: src/views/dialogs.cpp
+msgid "Open a file"
+msgstr "Bukak berkas"
+
+#: src/views/dialogs.cpp
+msgid "Open a URL"
+msgstr "Bukak URL"
+
+#: src/views/dialogs.cpp
+msgid "Take a screenshot"
+msgstr "Jupuk gambar layar"
+
+#: src/views/dialogs.cpp
+msgid "Media info"
+msgstr "Info media"
+
+#: src/views/dialogs.cpp
+msgid "Keyboard shortcuts"
+msgstr "Pintasan papan tombol"
+
+#: src/views/dialogs.cpp
+msgid "Close"
+msgstr "Tutup"
+
+#: src/views/mainwindow.cpp
+msgid "Drop to Play"
+msgstr "Selehna kanggo Muter"
+
+#: src/views/mainwindow.cpp
+msgid "Screenshot saved"
+msgstr "Gambar layar disimpen"
+
+#: src/views/mainwindow.cpp
+msgid "Show"
+msgstr "Tuduhna"
+
+#: src/views/mainwindow.cpp
+msgid "Could not save the screenshot"
+msgstr "Ora bisa nyimpen gambar layar"
+
+#: src/views/mainwindow.cpp
+msgid "Could not open the subtitle file"
+msgstr "Ora bisa mbukak berkas subtitle"
+
+#. TRANSLATORS: a file's name, then why it could not be played.
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "{name} — {error}"
+msgstr "{name} — {error}"
+
+#: src/views/mainwindow.cpp
+msgid "Add to Playlist"
+msgstr "Tambah menyang Daftar Putar"
+
+#: src/views/mainwindow.cpp
+msgid "Open Video"
+msgstr "Bukak Video"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Videos and audio ({patterns})"
+msgstr "Video lan audio ({patterns})"
+
+#: src/views/mainwindow.cpp
+msgid "All files (*)"
+msgstr "Kabeh berkas (*)"
+
+#: src/views/mainwindow.cpp
+msgid "Add Subtitle File"
+msgstr "Tambah Berkas Subtitle"
+
+#: src/views/mainwindow.cpp
+msgid "Subtitles (*.srt *.ass *.ssa *.vtt *.sub *.idx *.sup *.smi)"
+msgstr "Subtitle (*.srt *.ass *.ssa *.vtt *.sub *.idx *.sup *.smi)"
+
+#: src/views/mainwindow.cpp src/views/pages.cpp
+msgid "Open File…"
+msgstr "Bukak Berkas…"
+
+#: src/views/mainwindow.cpp src/views/pages.cpp
+msgid "Open URL…"
+msgstr "Bukak URL…"
+
+#: src/views/mainwindow.cpp src/views/pages.cpp
+msgid "Recent"
+msgstr "Anyar"
+
+#: src/views/mainwindow.cpp
+msgid "Clear Recent"
+msgstr "Resiki Pungkasan"
+
+#: src/views/mainwindow.cpp
+msgid "Show in Files"
+msgstr "Tuduhna ing Berkas"
+
+#: src/views/mainwindow.cpp
+msgid "Take Screenshot"
+msgstr "Jupuk Gambar Layar"
+
+#: src/views/mainwindow.cpp
+msgid "About Video Player"
+msgstr "Bab Pamutar Video"
+
+#: src/views/mainwindow.cpp
+msgid "Previous"
+msgstr "Sadurunge"
+
+#: src/views/mainwindow.cpp
+msgid "Next"
+msgstr "Sabanjure"
+
+#. TRANSLATORS: no subtitles shown.
+#: src/views/mainwindow.cpp src/views/sidepanel.cpp
+msgid "Off"
+msgstr "Pateni"
+
+#: src/views/mainwindow.cpp src/views/sidepanel.cpp
+msgid "Add Subtitle File…"
+msgstr "Tambah Berkas Subtitle…"
+
+#: src/views/mainwindow.cpp
+msgid "Subtitle Timing"
+msgstr "Wektu Subtitle"
+
+#: src/views/mainwindow.cpp src/views/sidepanel.cpp
+msgid "Show Earlier"
+msgstr "Tuduhna Luwih Awal"
+
+#: src/views/mainwindow.cpp src/views/sidepanel.cpp
+msgid "Show Later"
+msgstr "Tuduhna Luwih Telat"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Reset ({delay})"
+msgstr "Reset ({delay})"
+
+#: src/views/mainwindow.cpp src/views/sidepanel.cpp
+msgid "No Audio Tracks"
+msgstr "Ora Ana Trek Audio"
+
+#: src/views/mainwindow.cpp src/views/sidepanel.cpp
+msgid "Speed"
+msgstr "Kecepatan"
+
+#. TRANSLATORS: the normal playback speed.
+#: src/views/mainwindow.cpp
+msgid "Normal"
+msgstr "Normal"
+
+#: src/views/mainwindow.cpp src/views/sidepanel.cpp
+msgid "Chapters"
+msgstr "Bab"
+
+#: src/views/mainwindow.cpp src/views/sidepanel.cpp
+#, python-brace-format
+msgid "Chapter {number}"
+msgstr "Bab {number}"
+
+#: src/views/mainwindow.cpp src/views/sidepanel.cpp
+msgid "Repeat"
+msgstr "Baleni"
+
+#: src/views/mainwindow.cpp
+msgid "Remove from Playlist"
+msgstr "Busak saka Daftar Putar"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Resumed from {time}"
+msgstr "Dilanjutake saka {time}"
+
+#: src/views/mainwindow.cpp
+msgid "End of playlist"
+msgstr "Pungkasan daftar putar"
+
+#. TRANSLATORS: a jump such as "+10 s", then the time it lands on.
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "{sign}{seconds} s   {time}"
+msgstr "{sign}{seconds} d   {time}"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Volume {percent}%"
+msgstr "Volume {percent}%"
+
+#: src/views/mainwindow.cpp
+msgid "Muted"
+msgstr "Dibisukake"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Speed {speed}"
+msgstr "Kecepatan {speed}"
+
+#: src/views/mainwindow.cpp
+msgid "Subtitles off"
+msgstr "Subtitle mati"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Subtitles: {track}"
+msgstr "Subtitle: {track}"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Audio: {track}"
+msgstr "Audio: {track}"
+
+#. TRANSLATORS: a subtitle delay such as "+100 ms".
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "{sign}{milliseconds} ms"
+msgstr "{sign}{milliseconds} ms"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Subtitle delay {delay}"
+msgstr "Tundha subtitle {delay}"
+
+#: src/views/pages.cpp
+msgid "Drop a Video Here"
+msgstr "Selehna Video ing Kene"
+
+#: src/views/pages.cpp
+msgid "Or open a file or a web address to start watching."
+msgstr "Utawa bukak berkas utawa alamat web kanggo miwiti nonton."
+
+#: src/views/pages.cpp
+msgid "Clear"
+msgstr "Resiki"
+
+#: src/views/pages.cpp
+msgid "Unable to Play This File"
+msgstr "Ora Bisa Muter Berkas Iki"
+
+#: src/views/pages.cpp
+msgid "Open Another File…"
+msgstr "Bukak Berkas Liyane…"
+
+#: src/views/pages.cpp
+msgid "Next File"
+msgstr "Berkas Sabanjure"
+
+#: src/views/sidepanel.cpp
+msgid "Timing"
+msgstr "Wektu"
+
+#: src/views/sidepanel.cpp
+msgid "Tracks"
+msgstr "Trek"
+
+#: src/views/sidepanel.cpp
+msgid "Drop files here to add them."
+msgstr "Selehna berkas ing kene kanggo nambah."
+
+#: src/views/sidepanel.cpp
+msgid "Add Files…"
+msgstr "Tambah Berkas…"
+
+#: src/views/sidepanel.cpp
+msgid "Repeat Off"
+msgstr "Baleni Mati"
+
+#: src/views/sidepanel.cpp
+msgid "Repeat One"
+msgstr "Baleni Siji"
+
+#: src/views/sidepanel.cpp
+msgid "Repeat All"
+msgstr "Baleni Kabeh"
+
+#: src/views/sidepanel.cpp
+msgid "Options"
+msgstr "Opsi"
+
+#: src/views/sidepanel.cpp
+msgid "Rotate Left"
+msgstr "Puter Kiwa"
+
+#: src/views/sidepanel.cpp
+msgid "Rotate Right"
+msgstr "Puter Tengen"
+
+#: bayu-video-player.desktop
+msgid "Play videos and other media files"
+msgstr "Puter video lan berkas media liyane"
+
+#: bayu-video-player.desktop
+msgid "Video;Movie;Film;Player;Subtitles;"
+msgstr "Video;Film;Pamutar;Subtitle;Movie;Player;"

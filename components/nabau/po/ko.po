@@ -1,0 +1,1381 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: nabau\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"PO-Revision-Date: 2026-10-25 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/anaconda_backend.cpp
+msgid "Starting the installation backend"
+msgstr "설치 백엔드를 시작하는 중"
+
+#: src/anaconda_backend.cpp
+msgid "The installer needs administrator rights, which were not given."
+msgstr "설치 프로그램에 관리자 권한이 필요하지만 부여되지 않았습니다."
+
+#: src/anaconda_backend.cpp
+msgid "The installation backend stopped unexpectedly. Its log is in /tmp/anaconda.log."
+msgstr "설치 백엔드가 예기치 않게 중지되었습니다. 로그는 /tmp/anaconda.log에 있습니다."
+
+#: src/anaconda_backend.cpp
+msgid "Cannot start the installation backend (pkexec is missing)."
+msgstr "설치 백엔드를 시작할 수 없습니다(pkexec이 없음)."
+
+#: src/anaconda_backend.cpp
+msgid "This partition holds LVM or Btrfs volumes. Delete it to use its space."
+msgstr "이 파티션에는 LVM 또는 Btrfs 볼륨이 있습니다. 공간을 사용하려면 삭제하세요."
+
+#: src/anaconda_backend.cpp
+msgid "This partition cannot be resized."
+msgstr "이 파티션은 크기를 조정할 수 없습니다."
+
+#: src/anaconda_backend.cpp
+msgid "Choose a disk first."
+msgstr "먼저 디스크를 선택하세요."
+
+#: src/anaconda_backend.cpp
+msgid "This disk already has a root (/) mount point."
+msgstr "이 디스크에는 이미 루트(/) 마운트 지점이 있습니다."
+
+#: src/anaconda_backend.cpp
+msgid "There is not enough free space left for the system."
+msgstr "시스템을 위한 여유 공간이 부족합니다."
+
+#: src/anaconda_backend.cpp
+msgid "This live system"
+msgstr "이 라이브 시스템"
+
+#: src/anaconda_backend.cpp
+msgid "The desktop on this media, as you see it now: Files, Terminal, Settings"
+msgstr "지금 보시는 이 미디어의 데스크톱: 파일, 터미널, 설정"
+
+#: src/anaconda_backend.cpp
+msgid "Development Tools"
+msgstr "개발 도구"
+
+#: src/anaconda_backend.cpp
+msgid "gcc, make, git, headers"
+msgstr "gcc, make, git, 헤더"
+
+#: src/anaconda_backend.cpp
+msgid "Container Tools"
+msgstr "컨테이너 도구"
+
+#: src/anaconda_backend.cpp
+msgid "podman, buildah, skopeo"
+msgstr "podman, buildah, skopeo"
+
+#: src/anaconda_backend.cpp
+msgid "RPM Development"
+msgstr "RPM 개발"
+
+#: src/anaconda_backend.cpp
+msgid "rpmbuild, mock"
+msgstr "rpmbuild, mock"
+
+#: src/anaconda_backend.cpp
+msgid "Headless Management"
+msgstr "헤드리스 관리"
+
+#: src/anaconda_backend.cpp
+msgid "cockpit, remote administration"
+msgstr "cockpit, 원격 관리"
+
+#: src/anaconda_backend.cpp
+msgid "Scientific Support"
+msgstr "과학 지원"
+
+#: src/anaconda_backend.cpp
+msgid "Math and science libraries"
+msgstr "수학 및 과학 라이브러리"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "==> {path} <=="
+msgstr "==> {path} <=="
+
+#: src/anaconda_backend.cpp
+msgid "(cannot be read)"
+msgstr "(읽을 수 없음)"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "Cannot connect to the installation backend at {address}."
+msgstr "{address}의 설치 백엔드에 연결할 수 없습니다."
+
+#: src/anaconda_backend.cpp
+msgid "Reading the disks"
+msgstr "디스크를 읽는 중"
+
+#: src/anaconda_backend.cpp
+msgid "Lay out the disk first."
+msgstr "먼저 디스크 레이아웃을 구성하세요."
+
+#: src/anaconda_backend.cpp
+msgid "Finishing the installed system"
+msgstr "설치된 시스템 마무리 중"
+
+#: src/anaconda_backend.cpp
+msgid "Finishing the system did not complete; see /tmp/nabau-post.log"
+msgstr "시스템 마무리가 완료되지 않았습니다. /tmp/nabau-post.log를 확인하세요"
+
+#: src/anaconda_backend.cpp
+msgid "Complete"
+msgstr "완료"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "Wired · {name}"
+msgstr "유선 · {name}"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "Connected · {rate}"
+msgstr "연결됨 · {rate}"
+
+#: src/network_manager.cpp
+msgid "Connected"
+msgstr "연결됨"
+
+#: src/network_manager.cpp
+msgid "Cable connected · not set up"
+msgstr "케이블 연결됨 · 설정되지 않음"
+
+#: src/network_manager.cpp
+msgid "Cable unplugged"
+msgstr "케이블 분리됨"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "{security} · secured"
+msgstr "{security} · 보안 연결"
+
+#: src/network_manager.cpp
+msgid "Open network"
+msgstr "공개 네트워크"
+
+#: src/network_manager.cpp
+msgid "Personal hotspot"
+msgstr "개인 핫스폿"
+
+#: src/network_manager.cpp
+msgid "NetworkManager is not running."
+msgstr "NetworkManager가 실행 중이 아닙니다."
+
+#: src/ui/disk_editor.cpp
+msgid "unformatted"
+msgstr "포맷되지 않음"
+
+#: src/ui/disk_editor.cpp
+msgid "encrypted"
+msgstr "암호화됨"
+
+#: src/ui/disk_editor.cpp
+msgid "Free space"
+msgstr "여유 공간"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "From {min} to {max}"
+msgstr "{min}에서 {max}까지"
+
+#: src/ui/disk_editor.cpp
+msgid "MOUNT POINTS"
+msgstr "마운트 지점"
+
+#: src/ui/disk_editor.cpp
+msgid "PENDING CHANGES"
+msgstr "보류 중인 변경 사항"
+
+#: src/ui/disk_editor.cpp
+msgid "Reset all"
+msgstr "모두 초기화"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "{size} free"
+msgstr "{size} 사용 가능"
+
+#: src/ui/disk_editor.cpp
+msgid "Select a part of a disk above."
+msgstr "위에서 디스크의 일부를 선택하세요."
+
+#: src/ui/disk_editor.cpp
+msgid "Too small to hold a mount point."
+msgstr "마운트 지점을 담기에는 너무 작습니다."
+
+#: src/ui/disk_editor.cpp
+msgid "Create the recommended layout here"
+msgstr "여기에 권장 레이아웃 만들기"
+
+#: src/ui/disk_editor.cpp
+msgid "or add a mount point yourself:"
+msgstr "또는 마운트 지점을 직접 추가하세요:"
+
+#: src/ui/disk_editor.cpp
+msgid "Mount point"
+msgstr "마운트 지점"
+
+#: src/ui/disk_editor.cpp
+msgid "Size"
+msgstr "크기"
+
+#: src/ui/disk_editor.cpp
+msgid "File system"
+msgstr "파일 시스템"
+
+#: src/ui/disk_editor.cpp
+msgid "Device type"
+msgstr "장치 유형"
+
+#: src/ui/disk_editor.cpp
+msgid "LVM"
+msgstr "LVM"
+
+#: src/ui/disk_editor.cpp
+msgid "LVM thin provisioning"
+msgstr "LVM 씬 프로비저닝"
+
+#: src/ui/disk_editor.cpp
+msgid "Btrfs"
+msgstr "Btrfs"
+
+#: src/ui/disk_editor.cpp
+msgid "Standard partition"
+msgstr "표준 파티션"
+
+#: src/ui/disk_editor.cpp
+msgid "Encrypt"
+msgstr "암호화"
+
+#: src/ui/disk_editor.cpp
+msgid "Add mount point"
+msgstr "마운트 지점 추가"
+
+#: src/ui/disk_editor.cpp src/ui/pages/review_page.cpp
+msgid "Device"
+msgstr "장치"
+
+#: src/ui/disk_editor.cpp
+msgid "Format"
+msgstr "포맷"
+
+#: src/ui/disk_editor.cpp
+msgid "Label"
+msgstr "레이블"
+
+#: src/ui/disk_editor.cpp src/ui/pages/destination_page.cpp
+msgid "none"
+msgstr "없음"
+
+#: src/ui/disk_editor.cpp
+msgid "State"
+msgstr "상태"
+
+#: src/ui/disk_editor.cpp
+msgid "on the disk now"
+msgstr "현재 디스크에 있음"
+
+#: src/ui/disk_editor.cpp
+msgid "to be created"
+msgstr "생성 예정"
+
+#: src/ui/disk_editor.cpp
+msgid "Use…"
+msgstr "사용…"
+
+#: src/ui/disk_editor.cpp
+msgid "Change…"
+msgstr "변경…"
+
+#: src/ui/disk_editor.cpp
+msgid "Resize…"
+msgstr "크기 조정…"
+
+#: src/ui/disk_editor.cpp
+msgid "Delete"
+msgstr "삭제"
+
+#: src/ui/disk_editor.cpp
+msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
+msgstr "LVM 또는 Btrfs 볼륨이 들어 있습니다. 공간을 사용하려면 삭제하세요."
+
+#: src/ui/disk_editor.cpp
+msgid "Volumes in it:"
+msgstr "포함된 볼륨:"
+
+#: src/ui/disk_editor.cpp
+msgid "USE THIS PARTITION"
+msgstr "이 파티션 사용"
+
+#: src/ui/disk_editor.cpp
+msgid "CHANGE THIS MOUNT POINT"
+msgstr "이 마운트 지점 변경"
+
+#: src/ui/disk_editor.cpp
+msgid "Format it (erases what is on it)"
+msgstr "포맷(내용이 지워집니다)"
+
+#: src/ui/disk_editor.cpp src/ui/pages/install_page.cpp
+#: src/ui/pages/network_page.cpp
+msgid "Cancel"
+msgstr "취소"
+
+#: src/ui/disk_editor.cpp
+msgid "Apply"
+msgstr "적용"
+
+#: src/ui/disk_editor.cpp
+msgid "RESIZE"
+msgstr "크기 조정"
+
+#: src/ui/disk_editor.cpp
+msgid "Shrinking keeps the data on it and frees the rest of the space for the new system."
+msgstr "축소해도 데이터는 유지되며 나머지 공간은 새 시스템에 사용할 수 있게 됩니다."
+
+#: src/ui/disk_editor.cpp
+msgid "The size the new partition will have."
+msgstr "새 파티션의 크기입니다."
+
+#: src/ui/disk_editor.cpp
+msgid "Resize"
+msgstr "크기 조정"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "Delete {name}?"
+msgstr "{name}을(를) 삭제하시겠습니까?"
+
+#: src/ui/disk_editor.cpp
+msgid "Everything on it is lost when the installation starts. Until then, Reset all brings it back."
+msgstr "설치가 시작되면 그 안의 모든 내용이 사라집니다. 그 전까지는 모두 초기화로 되돌릴 수 있습니다."
+
+#: src/ui/disk_editor.cpp
+msgid "The planned partition is removed from the layout."
+msgstr "계획된 파티션이 레이아웃에서 제거됩니다."
+
+#: src/ui/disk_editor.cpp
+msgid "That change could not be made"
+msgstr "해당 변경을 수행할 수 없습니다"
+
+#: src/ui/disk_editor.cpp
+msgid "No mount points yet. Pick free space above and add “/”, or create the recommended layout."
+msgstr "아직 마운트 지점이 없습니다. 위에서 여유 공간을 선택하고 “/”를 추가하거나 권장 레이아웃을 만드세요."
+
+#: src/ui/disk_editor.cpp
+msgid "Nothing changes on the disks yet."
+msgstr "아직 디스크에는 아무 변경도 없습니다."
+
+#: src/ui/disk_editor.cpp src/ui/pages/review_page.cpp
+msgid "Check before installing"
+msgstr "설치 전 확인"
+
+#: src/ui/disk_editor.cpp
+msgid "This layout cannot be installed"
+msgstr "이 레이아웃은 설치할 수 없습니다"
+
+#: src/ui/installer.cpp
+msgid "Guided installation"
+msgstr "안내식 설치"
+
+#: src/ui/installer.cpp
+msgid "SETUP"
+msgstr "설정"
+
+#: src/ui/installer.cpp
+msgid "All steps complete"
+msgstr "모든 단계 완료"
+
+#: src/ui/installer.cpp
+#, python-brace-format
+msgid "Step {n} of {count}"
+msgstr "{count}단계 중 {n}단계"
+
+#: src/ui/installer.cpp
+msgid "F1 Help   ·   F12 Console"
+msgstr "F1 도움말   ·   F12 콘솔"
+
+#: src/ui/installer.cpp
+msgid "Back"
+msgstr "뒤로"
+
+#: src/ui/installer.cpp
+msgid "Continue"
+msgstr "계속"
+
+#: src/ui/installer.cpp
+msgid "Preparing the installer"
+msgstr "설치 프로그램 준비 중"
+
+#: src/ui/installer.cpp src/ui/pages/install_page.cpp
+msgid "Quit"
+msgstr "종료"
+
+#: src/ui/installer.cpp
+msgid "The installer cannot start"
+msgstr "설치 프로그램을 시작할 수 없습니다"
+
+#: src/ui/installer.cpp
+msgid "Help"
+msgstr "도움말"
+
+#: src/ui/installer.cpp
+msgid "Installation log"
+msgstr "설치 로그"
+
+#: src/ui/installer.cpp
+msgid "Open a terminal"
+msgstr "터미널 열기"
+
+#: src/ui/installer.cpp
+msgid "Quit the installer"
+msgstr "설치 프로그램 종료"
+
+#: src/ui/installer.cpp
+#, python-brace-format
+msgid "STEP {n} — {name}"
+msgstr "{n}단계 — {name}"
+
+#: src/ui/installer.cpp
+msgid "Quit the installer?"
+msgstr "설치 프로그램을 종료하시겠습니까?"
+
+#: src/ui/installer.cpp
+msgid "Nothing has been written to your disks yet."
+msgstr "아직 디스크에는 아무것도 기록되지 않았습니다."
+
+#: src/ui/installer.cpp
+msgid "The installation is running; stopping it now leaves the disk unusable until you install again."
+msgstr "설치가 진행 중입니다. 지금 중단하면 다시 설치하기 전까지 디스크를 사용할 수 없게 됩니다."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a user name."
+msgstr "사용자 이름을 선택하세요."
+
+#: src/ui/pages/account_page.cpp
+msgid "At most 32 characters."
+msgstr "최대 32자입니다."
+
+#: src/ui/pages/account_page.cpp
+msgid "Start with a lower-case letter."
+msgstr "소문자로 시작하세요."
+
+#: src/ui/pages/account_page.cpp
+msgid "Use lower-case letters, digits, “-” and “_” only."
+msgstr "소문자, 숫자, “-”, “_”만 사용하세요."
+
+#: src/ui/pages/account_page.cpp
+msgid "That name belongs to the system."
+msgstr "시스템에서 사용 중인 이름입니다."
+
+#: src/ui/pages/account_page.cpp
+msgid "Profile picture"
+msgstr "프로필 사진"
+
+#: src/ui/pages/account_page.cpp
+msgid "Generated from your initials · click to change"
+msgstr "이니셜로 생성됨 · 클릭하여 변경"
+
+#: src/ui/pages/account_page.cpp
+msgid "Full name"
+msgstr "전체 이름"
+
+#: src/ui/pages/account_page.cpp
+msgid "User name"
+msgstr "사용자 이름"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/network_page.cpp
+msgid "Password"
+msgstr "비밀번호"
+
+#: src/ui/pages/account_page.cpp
+msgid "Confirm password"
+msgstr "비밀번호 확인"
+
+#: src/ui/pages/account_page.cpp
+msgid "Four random words beat one short complex password"
+msgstr "무작위 단어 네 개가 짧고 복잡한 비밀번호보다 낫습니다"
+
+#: src/ui/pages/account_page.cpp
+msgid "PERMISSIONS"
+msgstr "권한"
+
+#: src/ui/pages/account_page.cpp
+msgid "Make this user an administrator"
+msgstr "이 사용자를 관리자로 설정"
+
+#: src/ui/pages/account_page.cpp
+msgid "Require a password to sign in"
+msgstr "로그인에 비밀번호 필요"
+
+#: src/ui/pages/account_page.cpp
+msgid "Disable only on a physically secure machine"
+msgstr "물리적으로 안전한 컴퓨터에서만 사용 안 함으로 설정하세요"
+
+#: src/ui/pages/account_page.cpp
+msgid "ROOT ACCOUNT"
+msgstr "루트 계정"
+
+#: src/ui/pages/account_page.cpp
+msgid "Lock the root account"
+msgstr "루트 계정 잠금"
+
+#: src/ui/pages/account_page.cpp
+msgid "Administer with sudo instead — safer by default"
+msgstr "대신 sudo로 관리하기 — 기본적으로 더 안전합니다"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/destination_page.cpp
+msgid "recommended"
+msgstr "권장"
+
+#: src/ui/pages/account_page.cpp
+msgid "Set a root password"
+msgstr "루트 비밀번호 설정"
+
+#: src/ui/pages/account_page.cpp
+msgid "Enables direct root sign-in on console and SSH"
+msgstr "콘솔과 SSH에서 루트로 직접 로그인할 수 있게 합니다"
+
+#: src/ui/pages/account_page.cpp
+msgid "Root password"
+msgstr "루트 비밀번호"
+
+#: src/ui/pages/account_page.cpp
+msgid "Confirm root password"
+msgstr "루트 비밀번호 확인"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/review_page.cpp
+msgid "Account"
+msgstr "계정"
+
+#: src/ui/pages/account_page.cpp
+msgid "Create your account."
+msgstr "계정을 만드세요."
+
+#: src/ui/pages/account_page.cpp
+msgid "This is the account you will sign in with on first boot. Pick a strong passphrase — it also unlocks your encrypted disk."
+msgstr "첫 부팅 때 로그인할 계정입니다. 강력한 암호문을 선택하세요. 암호화된 디스크의 잠금도 해제합니다."
+
+#: src/ui/pages/account_page.cpp
+msgid "This is the account you will sign in with on first boot. Pick a strong passphrase you will remember."
+msgstr "첫 부팅 때 로그인할 계정입니다. 기억할 수 있는 강력한 암호문을 선택하세요."
+
+#: src/ui/pages/account_page.cpp
+msgid "Enter your full name."
+msgstr "전체 이름을 입력하세요."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a password."
+msgstr "비밀번호를 입력하세요."
+
+#: src/ui/pages/account_page.cpp
+msgid "The passwords do not match."
+msgstr "비밀번호가 일치하지 않습니다."
+
+#: src/ui/pages/account_page.cpp
+msgid "A disk passphrase needs at least 8 characters."
+msgstr "디스크 암호문은 8자 이상이어야 합니다."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a root password."
+msgstr "루트 비밀번호를 입력하세요."
+
+#: src/ui/pages/account_page.cpp
+msgid "The root passwords do not match."
+msgstr "루트 비밀번호가 일치하지 않습니다."
+
+#: src/ui/pages/account_page.cpp
+msgid "With root locked, this user must be an administrator."
+msgstr "루트가 잠겨 있으면 이 사용자는 관리자여야 합니다."
+
+#: src/ui/pages/account_page.cpp
+msgid "this user"
+msgstr "이 사용자"
+
+#: src/ui/pages/account_page.cpp
+#, python-brace-format
+msgid "Adds {user} to the wheel group and allows sudo"
+msgstr "{user}을(를) wheel 그룹에 추가하고 sudo를 허용합니다"
+
+#: src/ui/pages/account_page.cpp
+#, python-brace-format
+msgid "{n} character"
+msgid_plural "{n} characters"
+msgstr[0] "{n}자"
+
+#: src/ui/pages/account_page.cpp
+msgid "Your passphrase unlocks LUKS2 at every boot. It is never written to the kickstart file or to installation logs."
+msgstr "암호문은 부팅할 때마다 LUKS2의 잠금을 해제합니다. kickstart 파일이나 설치 로그에는 기록되지 않습니다."
+
+#: src/ui/pages/account_page.cpp
+msgid "The password is stored only as a hash on the new system and never written to the installation logs."
+msgstr "비밀번호는 새 시스템에 해시로만 저장되며 설치 로그에는 기록되지 않습니다."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a profile picture"
+msgstr "프로필 사진 선택"
+
+#: src/ui/pages/account_page.cpp
+msgid "Images (*.png *.jpg *.jpeg *.webp *.svg)"
+msgstr "이미지 (*.png *.jpg *.jpeg *.webp *.svg)"
+
+#: src/ui/pages/account_page.cpp
+msgid "Click to choose another"
+msgstr "클릭하여 다른 사진 선택"
+
+#: src/ui/pages/destination_page.cpp
+msgid "installation media"
+msgstr "설치 미디어"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{system} detected"
+msgstr "{system} 감지됨"
+
+#: src/ui/pages/destination_page.cpp
+msgid "empty"
+msgstr "비어 있음"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{n} partition"
+msgid_plural "{n} partitions"
+msgstr[0] "파티션 {n}개"
+
+#: src/ui/pages/destination_page.cpp
+msgid "the data on it"
+msgstr "그 안의 데이터"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{disk} already holds data"
+msgstr "{disk}에 이미 데이터가 있습니다"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Erase everything on {path}"
+msgstr "{path}의 모든 내용 지우기"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Install alongside {system}"
+msgstr "{system} 옆에 설치"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Install alongside {system} (it cannot be shrunk now)"
+msgstr "{system} 옆에 설치 (지금은 축소할 수 없음)"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Use the free space only ({size})"
+msgstr "여유 공간만 사용 ({size})"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{system}: {keep}   ·   {product}: {new}"
+msgstr "{system}: {keep}   ·   {product}: {new}"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LOCAL STANDARD DISKS"
+msgstr "로컬 표준 디스크"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Add iSCSI, FCoE or multipath device"
+msgstr "iSCSI, FCoE 또는 멀티패스 장치 추가"
+
+#: src/ui/pages/destination_page.cpp
+msgid "STORAGE CONFIGURATION"
+msgstr "저장소 구성"
+
+#: src/ui/pages/destination_page.cpp src/ui/pages/review_page.cpp
+msgid "Automatic"
+msgstr "자동"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Laid out for you, safely"
+msgstr "알아서 안전하게 구성"
+
+#: src/ui/pages/destination_page.cpp src/ui/pages/review_page.cpp
+msgid "Custom"
+msgstr "사용자 지정"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Your own mount points"
+msgstr "직접 마운트 지점 지정"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Advanced"
+msgstr "고급"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LVM or Btrfs volumes, by hand"
+msgstr "LVM 또는 Btrfs 볼륨을 직접 구성"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Encrypt my data"
+msgstr "내 데이터 암호화"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LUKS2 · passphrase at next step"
+msgstr "LUKS2 · 다음 단계에서 암호문 설정"
+
+#: src/ui/pages/destination_page.cpp
+msgid "RESULTING LAYOUT"
+msgstr "결과 레이아웃"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Destination"
+msgstr "대상"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Lay out the disk yourself."
+msgstr "디스크 레이아웃을 직접 구성하세요."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Where should it live?"
+msgstr "어디에 설치할까요?"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Click a part of a disk to use it, resize it or delete it. Changes are only planned here; nothing is written until you confirm on the review screen."
+msgstr "디스크의 일부를 클릭하여 사용, 크기 조정 또는 삭제하세요. 변경 사항은 여기서 계획만 되며, 검토 화면에서 확인하기 전에는 아무것도 기록되지 않습니다."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Pick a disk, then decide how it is laid out. Nothing is written to any device until you confirm on the review screen."
+msgstr "디스크를 선택한 다음 레이아웃을 정하세요. 검토 화면에서 확인하기 전에는 어떤 장치에도 아무것도 기록되지 않습니다."
+
+#: src/ui/pages/destination_page.cpp
+msgid ""
+"Automatic lays the system out for you: a boot partition, the system, your files and swap. If the disk already holds Windows or another system, you can install beside it; drag the slider to share the space.\n"
+"\n"
+"Custom opens the disk editor: click free space to add a mount point (at least “/”), or click a partition to use it, resize it or delete it. Advanced also offers LVM, RAID and Btrfs volumes.\n"
+"\n"
+"Nothing is written to the disks until you begin the installation on the review screen."
+msgstr ""
+"자동은 부팅 파티션, 시스템, 파일, 스왑으로 시스템을 알아서 구성합니다. 디스크에 Windows나 다른 시스템이 이미 있으면 그 옆에 설치할 수 있으며, 슬라이더를 끌어 공간을 나눌 수 있습니다.\n"
+"\n"
+"사용자 지정은 디스크 편집기를 엽니다. 여유 공간을 클릭하여 마운트 지점(최소 “/”)을 추가하거나, 파티션을 클릭하여 사용, 크기 조정 또는 삭제할 수 있습니다. 고급에서는 LVM, RAID, Btrfs 볼륨도 사용할 수 있습니다.\n"
+"\n"
+"검토 화면에서 설치를 시작하기 전에는 디스크에 아무것도 기록되지 않습니다."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Selected"
+msgstr "선택됨"
+
+#: src/ui/pages/destination_page.cpp
+msgid "1 disk"
+msgstr "디스크 1개"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Capacity"
+msgstr "용량"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Free"
+msgstr "여유"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Reclaimable"
+msgstr "회수 가능"
+
+#: src/ui/pages/destination_page.cpp
+msgid "You lay the disk out yourself on the next screen."
+msgstr "다음 화면에서 디스크 레이아웃을 직접 구성합니다."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Working out the layout…"
+msgstr "레이아웃 계산 중…"
+
+#: src/ui/pages/destination_page.cpp
+msgid "kept"
+msgstr "유지됨"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Specialized disks"
+msgstr "특수 디스크"
+
+#: src/ui/pages/destination_page.cpp
+msgid "iSCSI, FCoE and multipath devices are set up from the network installation image, which has the tools to discover them. This live system installs to the disks attached to this computer."
+msgstr "iSCSI, FCoE 및 멀티패스 장치는 이를 검색할 도구가 있는 네트워크 설치 이미지에서 설정합니다. 이 라이브 시스템은 이 컴퓨터에 연결된 디스크에 설치됩니다."
+
+#: src/ui/pages/install_page.cpp
+msgid "WHILE YOU WAIT"
+msgstr "기다리는 동안"
+
+#: src/ui/pages/install_page.cpp
+msgid "Estimated remaining"
+msgstr "예상 남은 시간"
+
+#: src/ui/pages/install_page.cpp
+msgid "Starting the installation…"
+msgstr "설치를 시작하는 중…"
+
+#: src/ui/pages/install_page.cpp
+msgid "Ten years of updates"
+msgstr "10년간의 업데이트"
+
+#: src/ui/pages/install_page.cpp
+msgid "Every release is supported until 2035, with security errata published alongside upstream. Switch between minor versions without reinstalling."
+msgstr "모든 릴리스는 2035년까지 지원되며, 보안 에라타가 업스트림과 함께 게시됩니다. 다시 설치하지 않고 마이너 버전 간에 전환할 수 있습니다."
+
+#: src/ui/pages/install_page.cpp
+msgid "A desktop of its own"
+msgstr "독자적인 데스크톱"
+
+#: src/ui/pages/install_page.cpp
+msgid "Bayu brings Files, Terminal, Settings and a dock that stays out of your way, all drawn by one toolkit."
+msgstr "Bayu는 하나의 툴킷으로 그려진 파일, 터미널, 설정, 그리고 방해되지 않는 Dock을 제공합니다."
+
+#: src/ui/pages/install_page.cpp
+msgid "Android apps, when you want them"
+msgstr "원할 때 쓰는 Android 앱"
+
+#: src/ui/pages/install_page.cpp
+msgid "Lapis runs Android apps beside your desktop ones. It is installed and stays off until you turn it on."
+msgstr "Lapis는 데스크톱 앱 옆에서 Android 앱을 실행합니다. 설치되어 있으며 켜기 전까지는 꺼져 있습니다."
+
+#: src/ui/pages/install_page.cpp
+msgid "Safe by default"
+msgstr "기본적으로 안전"
+
+#: src/ui/pages/install_page.cpp
+msgid "SELinux, a firewall and signed packages from the start; full-disk encryption when you ask for it."
+msgstr "처음부터 SELinux, 방화벽, 서명된 패키지를 제공하며, 원하면 전체 디스크 암호화도 사용할 수 있습니다."
+
+#: src/ui/pages/install_page.cpp
+msgid "Install"
+msgstr "설치"
+
+#: src/ui/pages/install_page.cpp
+msgid "INSTALLATION COMPLETE"
+msgstr "설치 완료"
+
+#: src/ui/pages/install_page.cpp
+msgid "INSTALLATION FAILED"
+msgstr "설치 실패"
+
+#: src/ui/pages/install_page.cpp
+msgid "STEP 08 — INSTALLING"
+msgstr "8단계 — 설치 중"
+
+#: src/ui/pages/install_page.cpp
+msgid "You're all set."
+msgstr "모든 준비가 끝났습니다."
+
+#: src/ui/pages/install_page.cpp
+msgid "The installation stopped."
+msgstr "설치가 중단되었습니다."
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "Installing {product}."
+msgstr "{product} 설치 중."
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "{product} is on your disk. Remove the installation media, restart, and sign in with the account you just created."
+msgstr "{product}이(가) 디스크에 설치되었습니다. 설치 미디어를 제거하고 다시 시작한 다음, 방금 만든 계정으로 로그인하세요."
+
+#: src/ui/pages/install_page.cpp
+msgid "Nothing more is written. The log has the details; you can start the installer again."
+msgstr "더 이상 기록되는 내용은 없습니다. 로그에 자세한 내용이 있으며 설치 프로그램을 다시 시작할 수 있습니다."
+
+#: src/ui/pages/install_page.cpp
+msgid "Everything is set. Sit back — the installer is writing packages to disk and will tell you when it is safe to restart."
+msgstr "모든 준비가 끝났습니다. 편히 기다려 주세요. 설치 프로그램이 패키지를 디스크에 기록하고 있으며, 안전하게 다시 시작할 수 있을 때 알려 드립니다."
+
+#: src/ui/pages/install_page.cpp
+msgid "The installation could not finish"
+msgstr "설치를 완료할 수 없습니다"
+
+#: src/ui/pages/install_page.cpp
+msgid "Install time"
+msgstr "설치 시간"
+
+#: src/ui/pages/install_page.cpp
+msgid "Packages written"
+msgstr "기록된 패키지"
+
+#: src/ui/pages/install_page.cpp
+msgid "None"
+msgstr "없음"
+
+#: src/ui/pages/install_page.cpp
+msgid "Disk encryption"
+msgstr "디스크 암호화"
+
+#: src/ui/pages/install_page.cpp
+msgid "Remove the USB installation media before restarting."
+msgstr "다시 시작하기 전에 USB 설치 미디어를 제거하세요."
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "Sign in as {user}; your settings start fresh."
+msgstr "{user}(으)로 로그인하세요. 설정은 새로 시작됩니다."
+
+#: src/ui/pages/install_page.cpp
+msgid "Run sudo dnf upgrade to pull any errata published since this ISO."
+msgstr "이 ISO 이후에 게시된 에라타를 받으려면 sudo dnf upgrade를 실행하세요."
+
+#: src/ui/pages/install_page.cpp
+msgid "View log"
+msgstr "로그 보기"
+
+#: src/ui/pages/install_page.cpp
+msgid "Installing…"
+msgstr "설치 중…"
+
+#: src/ui/pages/install_page.cpp
+msgid "View installation log"
+msgstr "설치 로그 보기"
+
+#: src/ui/pages/install_page.cpp
+msgid "Restart now"
+msgstr "지금 다시 시작"
+
+#: src/ui/pages/language_page.cpp
+msgid "REGIONAL FORMAT"
+msgstr "지역 형식"
+
+#: src/ui/pages/language_page.cpp
+msgid "Preview"
+msgstr "미리보기"
+
+#: src/ui/pages/language_page.cpp
+#, python-brace-format
+msgid "Search {n} languages"
+msgstr "언어 {n}개 검색"
+
+#: src/ui/pages/language_page.cpp src/ui/pages/review_page.cpp
+msgid "Language"
+msgstr "언어"
+
+#: src/ui/pages/language_page.cpp
+msgid "Welcome. Let's pick your language."
+msgstr "환영합니다. 언어를 선택하세요."
+
+#: src/ui/pages/language_page.cpp
+msgid "This language will be used during installation and set as the system default. You can change it later in Settings."
+msgstr "이 언어는 설치 중에 사용되며 시스템 기본값으로 설정됩니다. 나중에 설정에서 변경할 수 있습니다."
+
+#: src/ui/pages/language_page.cpp
+msgid "Date"
+msgstr "날짜"
+
+#: src/ui/pages/language_page.cpp
+msgid "Time"
+msgstr "시간"
+
+#: src/ui/pages/language_page.cpp
+msgid "Numbers"
+msgstr "숫자"
+
+#: src/ui/pages/language_page.cpp
+msgid "Currency"
+msgstr "통화"
+
+#: src/ui/pages/localization_page.cpp
+msgid "KEYBOARD LAYOUT"
+msgstr "키보드 레이아웃"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Test the layout"
+msgstr "레이아웃 테스트"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Type here to test the layout"
+msgstr "여기에 입력하여 레이아웃을 테스트하세요"
+
+#: src/ui/pages/localization_page.cpp
+msgid "TIME & DATE"
+msgstr "시간 및 날짜"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Region"
+msgstr "지역"
+
+#: src/ui/pages/localization_page.cpp
+msgid "City"
+msgstr "도시"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Network time (NTP)"
+msgstr "네트워크 시간(NTP)"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Keep the clock in sync automatically"
+msgstr "시계를 자동으로 동기화"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Detect time zone from network"
+msgstr "네트워크에서 시간대 감지"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Uses your IP address, never your location"
+msgstr "IP 주소를 사용하며 위치는 사용하지 않습니다"
+
+#: src/ui/pages/localization_page.cpp src/ui/pages/review_page.cpp
+msgid "Localization"
+msgstr "지역화"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Keyboard and time."
+msgstr "키보드와 시간."
+
+#: src/ui/pages/localization_page.cpp
+msgid "Choose the layout you actually type with and confirm your time zone. Both take effect immediately, including on this screen."
+msgstr "실제로 입력할 레이아웃을 선택하고 시간대를 확인하세요. 둘 다 이 화면을 포함하여 즉시 적용됩니다."
+
+#: src/ui/pages/localization_page.cpp
+msgid "Network time is off · the clock is set by hand"
+msgstr "네트워크 시간이 꺼져 있습니다 · 시계를 직접 설정합니다"
+
+#: src/ui/pages/localization_page.cpp
+#, python-brace-format
+msgid "{server} · synchronised"
+msgstr "{server} · 동기화됨"
+
+#: src/ui/pages/localization_page.cpp
+#, python-brace-format
+msgid "{server} · waits for a connection"
+msgstr "{server} · 연결 대기 중"
+
+#: src/ui/pages/network_page.cpp
+msgid "AVAILABLE CONNECTIONS"
+msgstr "사용 가능한 연결"
+
+#: src/ui/pages/network_page.cpp
+msgid "HOST IDENTITY"
+msgstr "호스트 ID"
+
+#: src/ui/pages/network_page.cpp src/ui/pages/review_page.cpp
+msgid "Host name"
+msgstr "호스트 이름"
+
+#: src/ui/pages/network_page.cpp
+msgid "Connect automatically"
+msgstr "자동으로 연결"
+
+#: src/ui/pages/network_page.cpp
+msgid "Bring this interface up at every boot"
+msgstr "부팅할 때마다 이 인터페이스 켜기"
+
+#: src/ui/pages/network_page.cpp src/ui/pages/review_page.cpp
+msgid "Network"
+msgstr "네트워크"
+
+#: src/ui/pages/network_page.cpp
+msgid "Get connected."
+msgstr "연결하세요."
+
+#: src/ui/pages/network_page.cpp
+msgid "A connection is optional, but it lets the installer fetch updates, verify packages and sync the clock while you continue."
+msgstr "연결은 선택 사항이지만, 설치를 계속하는 동안 설치 프로그램이 업데이트를 가져오고 패키지를 확인하고 시계를 동기화할 수 있습니다."
+
+#: src/ui/pages/network_page.cpp
+msgid "Secure Boot enabled · packages verified with GPG"
+msgstr "보안 부팅 사용 · GPG로 패키지 확인됨"
+
+#: src/ui/pages/network_page.cpp
+msgid "Packages verified with GPG"
+msgstr "GPG로 패키지 확인됨"
+
+#: src/ui/pages/network_page.cpp
+msgid "Connecting…"
+msgstr "연결 중…"
+
+#: src/ui/pages/network_page.cpp
+msgid "IPv4 address"
+msgstr "IPv4 주소"
+
+#: src/ui/pages/network_page.cpp
+msgid "Gateway"
+msgstr "게이트웨이"
+
+#: src/ui/pages/network_page.cpp
+msgid "DNS"
+msgstr "DNS"
+
+#: src/ui/pages/network_page.cpp
+msgid "Link speed"
+msgstr "링크 속도"
+
+#: src/ui/pages/network_page.cpp
+msgid "Hardware"
+msgstr "하드웨어"
+
+#: src/ui/pages/network_page.cpp
+msgid "Status"
+msgstr "상태"
+
+#: src/ui/pages/network_page.cpp
+msgid "Not connected"
+msgstr "연결되지 않음"
+
+#: src/ui/pages/network_page.cpp
+#, python-brace-format
+msgid "Join “{name}”"
+msgstr "“{name}”에 연결"
+
+#: src/ui/pages/network_page.cpp
+msgid "Enter the network's password."
+msgstr "네트워크 비밀번호를 입력하세요."
+
+#: src/ui/pages/network_page.cpp
+msgid "Join"
+msgstr "연결"
+
+#: src/ui/pages/network_page.cpp
+msgid "Could not connect"
+msgstr "연결할 수 없습니다"
+
+#: src/ui/pages/review_page.cpp
+msgid "SUMMARY"
+msgstr "요약"
+
+#: src/ui/pages/review_page.cpp
+msgid "TARGET"
+msgstr "대상"
+
+#: src/ui/pages/review_page.cpp
+msgid "Storage"
+msgstr "저장소"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "Software"
+msgstr "소프트웨어"
+
+#: src/ui/pages/review_page.cpp
+msgid "Review"
+msgstr "검토"
+
+#: src/ui/pages/review_page.cpp
+msgid "Checking the plan…"
+msgstr "계획 확인 중…"
+
+#: src/ui/pages/review_page.cpp
+msgid "Everything checks out."
+msgstr "모두 문제없습니다."
+
+#: src/ui/pages/review_page.cpp
+msgid "Something needs a look."
+msgstr "확인이 필요한 항목이 있습니다."
+
+#: src/ui/pages/review_page.cpp
+msgid "The disk layout cannot be installed as it is. Edit the storage settings and come back here."
+msgstr "디스크 레이아웃을 이대로는 설치할 수 없습니다. 저장소 설정을 편집한 후 여기로 돌아오세요."
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — after you begin, the partitions you deleted are erased."
+msgstr "아직 아무것도 기록되지 않았습니다. 마지막으로 확인하세요. 시작하면 삭제한 파티션이 지워집니다."
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — what else is on the disk is kept."
+msgstr "아직 아무것도 기록되지 않았습니다. 마지막으로 확인하세요. 디스크에 있는 다른 내용은 유지됩니다."
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — after you begin, the selected disk is reformatted."
+msgstr "아직 아무것도 기록되지 않았습니다. 마지막으로 확인하세요. 시작하면 선택한 디스크가 다시 포맷됩니다."
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{n} item"
+msgid_plural "{n} items"
+msgstr[0] "항목 {n}개"
+
+#: src/ui/pages/review_page.cpp
+msgid "Begin installation"
+msgstr "설치 시작"
+
+#: src/ui/pages/review_page.cpp
+msgid "Keyboard"
+msgstr "키보드"
+
+#: src/ui/pages/review_page.cpp
+msgid "Time zone"
+msgstr "시간대"
+
+#: src/ui/pages/review_page.cpp
+msgid "not connected"
+msgstr "연결되지 않음"
+
+#: src/ui/pages/review_page.cpp
+msgid "Connection"
+msgstr "연결"
+
+#: src/ui/pages/review_page.cpp
+msgid "IPv4"
+msgstr "IPv4"
+
+#: src/ui/pages/review_page.cpp
+msgid "User"
+msgstr "사용자"
+
+#: src/ui/pages/review_page.cpp
+msgid "Administrator"
+msgstr "관리자"
+
+#: src/ui/pages/review_page.cpp
+msgid "yes · wheel"
+msgstr "예 · wheel"
+
+#: src/ui/pages/review_page.cpp
+msgid "no"
+msgstr "아니요"
+
+#: src/ui/pages/review_page.cpp
+msgid "Root account"
+msgstr "루트 계정"
+
+#: src/ui/pages/review_page.cpp
+msgid "locked"
+msgstr "잠김"
+
+#: src/ui/pages/review_page.cpp
+msgid "password set"
+msgstr "비밀번호 설정됨"
+
+#: src/ui/pages/review_page.cpp
+msgid "Scheme"
+msgstr "방식"
+
+#: src/ui/pages/review_page.cpp
+msgid "Encryption"
+msgstr "암호화"
+
+#: src/ui/pages/review_page.cpp
+msgid "LUKS2 enabled"
+msgstr "LUKS2 사용"
+
+#: src/ui/pages/review_page.cpp
+msgid "off"
+msgstr "꺼짐"
+
+#: src/ui/pages/review_page.cpp
+msgid "Layout"
+msgstr "레이아웃"
+
+#: src/ui/pages/review_page.cpp
+msgid "Environment"
+msgstr "환경"
+
+#: src/ui/pages/review_page.cpp
+msgid "Add-ons"
+msgstr "추가 기능"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{n} selected"
+msgid_plural "{n} selected"
+msgstr[0] "{n}개 선택됨"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "Packages"
+msgstr "패키지"
+
+#: src/ui/pages/review_page.cpp
+msgid "Download"
+msgstr "다운로드"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "nothing"
+msgstr "없음"
+
+#: src/ui/pages/review_page.cpp
+msgid "The disk layout cannot be installed"
+msgstr "디스크 레이아웃을 설치할 수 없습니다"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{disk} will be erased"
+msgstr "{disk}이(가) 지워집니다"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "All {size} on this device is reformatted. Other disks are left untouched."
+msgstr "이 장치의 모든 {size}이(가) 다시 포맷됩니다. 다른 디스크는 그대로 유지됩니다."
+
+#: src/ui/pages/review_page.cpp
+msgid "Partitions will be deleted"
+msgstr "파티션이 삭제됩니다"
+
+#: src/ui/pages/review_page.cpp
+msgid "What the custom layout deletes is lost once the installation starts. Edit the storage to check the pending changes."
+msgstr "사용자 지정 레이아웃에서 삭제하는 항목은 설치가 시작되면 사라집니다. 보류 중인 변경 사항을 확인하려면 저장소를 편집하세요."
+
+#: src/ui/pages/review_page.cpp
+msgid "Your existing data is kept"
+msgstr "기존 데이터가 유지됩니다"
+
+#: src/ui/pages/review_page.cpp
+msgid "Only the space chosen on the destination step is changed."
+msgstr "대상 단계에서 선택한 공간만 변경됩니다."
+
+#: src/ui/pages/software_page.cpp
+msgid "BASE ENVIRONMENT"
+msgstr "기본 환경"
+
+#: src/ui/pages/software_page.cpp
+msgid "Choose what to install."
+msgstr "설치할 항목을 선택하세요."
+
+#: src/ui/pages/software_page.cpp
+msgid "Start from a base environment, then add only what you need. You can install or remove anything later with dnf."
+msgstr "기본 환경으로 시작한 다음 필요한 것만 추가하세요. 나중에 dnf로 언제든지 설치하거나 제거할 수 있습니다."
+
+#: src/ui/pages/software_page.cpp
+msgid "Installing from this live system"
+msgstr "이 라이브 시스템에서 설치"
+
+#: src/ui/pages/software_page.cpp
+msgid "The live system is copied to the disk as it is. The other environments come from the network installation image."
+msgstr "라이브 시스템이 그대로 디스크에 복사됩니다. 다른 환경은 네트워크 설치 이미지에서 가져옵니다."
+
+#: src/ui/pages/software_page.cpp
+#, python-brace-format
+msgid "ADD-ONS FOR {name}"
+msgstr "{name}의 추가 기능"
+
+#: src/ui/pages/software_page.cpp
+msgid "Add-ons are downloaded: connect to a network to choose them."
+msgstr "추가 기능은 다운로드됩니다. 선택하려면 네트워크에 연결하세요."
+
+#: src/ui/pages/software_page.cpp
+msgid "Download size"
+msgstr "다운로드 크기"
+
+#: src/ui/pages/software_page.cpp
+msgid "Installed size"
+msgstr "설치 크기"
+
+#: src/ui/pages/software_page.cpp
+msgid "Est. install time"
+msgstr "예상 설치 시간"
+
+#: src/ui/pages/software_page.cpp
+#, python-brace-format
+msgid "~{n} min"
+msgstr "약 {n}분"
+
+#: src/ui/widgets.cpp
+msgid "Edit"
+msgstr "편집"
+
+#: data/nabau.desktop
+msgid "Nabau"
+msgstr "Nabau"
+
+#: data/nabau.desktop
+msgid "Install to Disk"
+msgstr "디스크에 설치"
+
+#: data/nabau.desktop
+msgid "Install this system on the computer's disk"
+msgstr "이 시스템을 컴퓨터 디스크에 설치합니다"

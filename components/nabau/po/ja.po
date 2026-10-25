@@ -1,0 +1,1377 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nabau\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"PO-Revision-Date: 2026-10-25 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/anaconda_backend.cpp
+msgid "Starting the installation backend"
+msgstr "インストールバックエンドを起動中"
+
+#: src/anaconda_backend.cpp
+msgid "The installer needs administrator rights, which were not given."
+msgstr "インストーラには管理者権限が必要ですが、付与されませんでした。"
+
+#: src/anaconda_backend.cpp
+msgid "The installation backend stopped unexpectedly. Its log is in /tmp/anaconda.log."
+msgstr "インストールバックエンドが予期せず停止しました。ログは /tmp/anaconda.log にあります。"
+
+#: src/anaconda_backend.cpp
+msgid "Cannot start the installation backend (pkexec is missing)."
+msgstr "インストールバックエンドを起動できません (pkexec がありません)。"
+
+#: src/anaconda_backend.cpp
+msgid "This partition holds LVM or Btrfs volumes. Delete it to use its space."
+msgstr "このパーティションには LVM または Btrfs ボリュームが含まれています。その領域を使うには削除してください。"
+
+#: src/anaconda_backend.cpp
+msgid "This partition cannot be resized."
+msgstr "このパーティションはサイズを変更できません。"
+
+#: src/anaconda_backend.cpp
+msgid "Choose a disk first."
+msgstr "先にディスクを選択してください。"
+
+#: src/anaconda_backend.cpp
+msgid "This disk already has a root (/) mount point."
+msgstr "このディスクにはすでにルート (/) のマウントポイントがあります。"
+
+#: src/anaconda_backend.cpp
+msgid "There is not enough free space left for the system."
+msgstr "システム用の空き容量が足りません。"
+
+#: src/anaconda_backend.cpp
+msgid "This live system"
+msgstr "このライブシステム"
+
+#: src/anaconda_backend.cpp
+msgid "The desktop on this media, as you see it now: Files, Terminal, Settings"
+msgstr "このメディア上のデスクトップを現在の状態のまま: ファイル、ターミナル、設定"
+
+#: src/anaconda_backend.cpp
+msgid "Development Tools"
+msgstr "開発ツール"
+
+#: src/anaconda_backend.cpp
+msgid "gcc, make, git, headers"
+msgstr "gcc、make、git、ヘッダ"
+
+#: src/anaconda_backend.cpp
+msgid "Container Tools"
+msgstr "コンテナツール"
+
+#: src/anaconda_backend.cpp
+msgid "podman, buildah, skopeo"
+msgstr "podman、buildah、skopeo"
+
+#: src/anaconda_backend.cpp
+msgid "RPM Development"
+msgstr "RPM 開発"
+
+#: src/anaconda_backend.cpp
+msgid "rpmbuild, mock"
+msgstr "rpmbuild、mock"
+
+#: src/anaconda_backend.cpp
+msgid "Headless Management"
+msgstr "ヘッドレス管理"
+
+#: src/anaconda_backend.cpp
+msgid "cockpit, remote administration"
+msgstr "cockpit、リモート管理"
+
+#: src/anaconda_backend.cpp
+msgid "Scientific Support"
+msgstr "科学技術サポート"
+
+#: src/anaconda_backend.cpp
+msgid "Math and science libraries"
+msgstr "数学・科学ライブラリ"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "==> {path} <=="
+msgstr "==> {path} <=="
+
+#: src/anaconda_backend.cpp
+msgid "(cannot be read)"
+msgstr "(読み取れません)"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "Cannot connect to the installation backend at {address}."
+msgstr "{address} のインストールバックエンドに接続できません。"
+
+#: src/anaconda_backend.cpp
+msgid "Reading the disks"
+msgstr "ディスクを読み取り中"
+
+#: src/anaconda_backend.cpp
+msgid "Lay out the disk first."
+msgstr "先にディスクのレイアウトを決めてください。"
+
+#: src/anaconda_backend.cpp
+msgid "Finishing the installed system"
+msgstr "インストールしたシステムを仕上げています"
+
+#: src/anaconda_backend.cpp
+msgid "Finishing the system did not complete; see /tmp/nabau-post.log"
+msgstr "システムの仕上げが完了しませんでした。/tmp/nabau-post.log を確認してください"
+
+#: src/anaconda_backend.cpp
+msgid "Complete"
+msgstr "完了"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "Wired · {name}"
+msgstr "有線 · {name}"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "Connected · {rate}"
+msgstr "接続済み · {rate}"
+
+#: src/network_manager.cpp
+msgid "Connected"
+msgstr "接続済み"
+
+#: src/network_manager.cpp
+msgid "Cable connected · not set up"
+msgstr "ケーブル接続済み · 未設定"
+
+#: src/network_manager.cpp
+msgid "Cable unplugged"
+msgstr "ケーブル未接続"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "{security} · secured"
+msgstr "{security} · 保護あり"
+
+#: src/network_manager.cpp
+msgid "Open network"
+msgstr "オープンネットワーク"
+
+#: src/network_manager.cpp
+msgid "Personal hotspot"
+msgstr "パーソナルホットスポット"
+
+#: src/network_manager.cpp
+msgid "NetworkManager is not running."
+msgstr "NetworkManager が実行されていません。"
+
+#: src/ui/disk_editor.cpp
+msgid "unformatted"
+msgstr "未フォーマット"
+
+#: src/ui/disk_editor.cpp
+msgid "encrypted"
+msgstr "暗号化済み"
+
+#: src/ui/disk_editor.cpp
+msgid "Free space"
+msgstr "空き領域"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "From {min} to {max}"
+msgstr "{min} ～ {max}"
+
+#: src/ui/disk_editor.cpp
+msgid "MOUNT POINTS"
+msgstr "マウントポイント"
+
+#: src/ui/disk_editor.cpp
+msgid "PENDING CHANGES"
+msgstr "保留中の変更"
+
+#: src/ui/disk_editor.cpp
+msgid "Reset all"
+msgstr "すべてリセット"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "{size} free"
+msgstr "空き {size}"
+
+#: src/ui/disk_editor.cpp
+msgid "Select a part of a disk above."
+msgstr "上のディスクの一部を選択してください。"
+
+#: src/ui/disk_editor.cpp
+msgid "Too small to hold a mount point."
+msgstr "小さすぎてマウントポイントを置けません。"
+
+#: src/ui/disk_editor.cpp
+msgid "Create the recommended layout here"
+msgstr "推奨レイアウトをここに作成"
+
+#: src/ui/disk_editor.cpp
+msgid "or add a mount point yourself:"
+msgstr "またはマウントポイントを自分で追加:"
+
+#: src/ui/disk_editor.cpp
+msgid "Mount point"
+msgstr "マウントポイント"
+
+#: src/ui/disk_editor.cpp
+msgid "Size"
+msgstr "サイズ"
+
+#: src/ui/disk_editor.cpp
+msgid "File system"
+msgstr "ファイルシステム"
+
+#: src/ui/disk_editor.cpp
+msgid "Device type"
+msgstr "デバイスの種類"
+
+#: src/ui/disk_editor.cpp
+msgid "LVM"
+msgstr "LVM"
+
+#: src/ui/disk_editor.cpp
+msgid "LVM thin provisioning"
+msgstr "LVM シンプロビジョニング"
+
+#: src/ui/disk_editor.cpp
+msgid "Btrfs"
+msgstr "Btrfs"
+
+#: src/ui/disk_editor.cpp
+msgid "Standard partition"
+msgstr "標準パーティション"
+
+#: src/ui/disk_editor.cpp
+msgid "Encrypt"
+msgstr "暗号化"
+
+#: src/ui/disk_editor.cpp
+msgid "Add mount point"
+msgstr "マウントポイントを追加"
+
+#: src/ui/disk_editor.cpp src/ui/pages/review_page.cpp
+msgid "Device"
+msgstr "デバイス"
+
+#: src/ui/disk_editor.cpp
+msgid "Format"
+msgstr "フォーマット"
+
+#: src/ui/disk_editor.cpp
+msgid "Label"
+msgstr "ラベル"
+
+#: src/ui/disk_editor.cpp src/ui/pages/destination_page.cpp
+msgid "none"
+msgstr "なし"
+
+#: src/ui/disk_editor.cpp
+msgid "State"
+msgstr "状態"
+
+#: src/ui/disk_editor.cpp
+msgid "on the disk now"
+msgstr "現在ディスク上にあります"
+
+#: src/ui/disk_editor.cpp
+msgid "to be created"
+msgstr "作成予定"
+
+#: src/ui/disk_editor.cpp
+msgid "Use…"
+msgstr "使用…"
+
+#: src/ui/disk_editor.cpp
+msgid "Change…"
+msgstr "変更…"
+
+#: src/ui/disk_editor.cpp
+msgid "Resize…"
+msgstr "サイズ変更…"
+
+#: src/ui/disk_editor.cpp
+msgid "Delete"
+msgstr "削除"
+
+#: src/ui/disk_editor.cpp
+msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
+msgstr "LVM または Btrfs ボリュームが含まれています。その領域を使うには削除してください。"
+
+#: src/ui/disk_editor.cpp
+msgid "Volumes in it:"
+msgstr "含まれるボリューム:"
+
+#: src/ui/disk_editor.cpp
+msgid "USE THIS PARTITION"
+msgstr "このパーティションを使用"
+
+#: src/ui/disk_editor.cpp
+msgid "CHANGE THIS MOUNT POINT"
+msgstr "このマウントポイントを変更"
+
+#: src/ui/disk_editor.cpp
+msgid "Format it (erases what is on it)"
+msgstr "フォーマットする (中身は消去されます)"
+
+#: src/ui/disk_editor.cpp src/ui/pages/install_page.cpp
+#: src/ui/pages/network_page.cpp
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: src/ui/disk_editor.cpp
+msgid "Apply"
+msgstr "適用"
+
+#: src/ui/disk_editor.cpp
+msgid "RESIZE"
+msgstr "サイズ変更"
+
+#: src/ui/disk_editor.cpp
+msgid "Shrinking keeps the data on it and frees the rest of the space for the new system."
+msgstr "縮小してもデータは保持され、残りの領域は新しいシステムのために解放されます。"
+
+#: src/ui/disk_editor.cpp
+msgid "The size the new partition will have."
+msgstr "新しいパーティションのサイズです。"
+
+#: src/ui/disk_editor.cpp
+msgid "Resize"
+msgstr "サイズ変更"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "Delete {name}?"
+msgstr "{name} を削除しますか?"
+
+#: src/ui/disk_editor.cpp
+msgid "Everything on it is lost when the installation starts. Until then, Reset all brings it back."
+msgstr "インストールが始まると、その中身はすべて失われます。それまでは「すべてリセット」で元に戻せます。"
+
+#: src/ui/disk_editor.cpp
+msgid "The planned partition is removed from the layout."
+msgstr "計画されたパーティションがレイアウトから削除されます。"
+
+#: src/ui/disk_editor.cpp
+msgid "That change could not be made"
+msgstr "その変更は行えませんでした"
+
+#: src/ui/disk_editor.cpp
+msgid "No mount points yet. Pick free space above and add “/”, or create the recommended layout."
+msgstr "マウントポイントがまだありません。上の空き領域を選んで「/」を追加するか、推奨レイアウトを作成してください。"
+
+#: src/ui/disk_editor.cpp
+msgid "Nothing changes on the disks yet."
+msgstr "ディスクにはまだ何も変更されていません。"
+
+#: src/ui/disk_editor.cpp src/ui/pages/review_page.cpp
+msgid "Check before installing"
+msgstr "インストール前の確認"
+
+#: src/ui/disk_editor.cpp
+msgid "This layout cannot be installed"
+msgstr "このレイアウトはインストールできません"
+
+#: src/ui/installer.cpp
+msgid "Guided installation"
+msgstr "ガイド付きインストール"
+
+#: src/ui/installer.cpp
+msgid "SETUP"
+msgstr "セットアップ"
+
+#: src/ui/installer.cpp
+msgid "All steps complete"
+msgstr "すべてのステップが完了しました"
+
+#: src/ui/installer.cpp
+#, python-brace-format
+msgid "Step {n} of {count}"
+msgstr "ステップ {n} / {count}"
+
+#: src/ui/installer.cpp
+msgid "F1 Help   ·   F12 Console"
+msgstr "F1 ヘルプ   ·   F12 コンソール"
+
+#: src/ui/installer.cpp
+msgid "Back"
+msgstr "戻る"
+
+#: src/ui/installer.cpp
+msgid "Continue"
+msgstr "続ける"
+
+#: src/ui/installer.cpp
+msgid "Preparing the installer"
+msgstr "インストーラを準備中"
+
+#: src/ui/installer.cpp src/ui/pages/install_page.cpp
+msgid "Quit"
+msgstr "終了"
+
+#: src/ui/installer.cpp
+msgid "The installer cannot start"
+msgstr "インストーラを起動できません"
+
+#: src/ui/installer.cpp
+msgid "Help"
+msgstr "ヘルプ"
+
+#: src/ui/installer.cpp
+msgid "Installation log"
+msgstr "インストールログ"
+
+#: src/ui/installer.cpp
+msgid "Open a terminal"
+msgstr "ターミナルを開く"
+
+#: src/ui/installer.cpp
+msgid "Quit the installer"
+msgstr "インストーラを終了"
+
+#: src/ui/installer.cpp
+#, python-brace-format
+msgid "STEP {n} — {name}"
+msgstr "ステップ {n} — {name}"
+
+#: src/ui/installer.cpp
+msgid "Quit the installer?"
+msgstr "インストーラを終了しますか?"
+
+#: src/ui/installer.cpp
+msgid "Nothing has been written to your disks yet."
+msgstr "ディスクにはまだ何も書き込まれていません。"
+
+#: src/ui/installer.cpp
+msgid "The installation is running; stopping it now leaves the disk unusable until you install again."
+msgstr "インストールを実行中です。ここで中止すると、再インストールするまでディスクは使用できなくなります。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a user name."
+msgstr "ユーザ名を決めてください。"
+
+#: src/ui/pages/account_page.cpp
+msgid "At most 32 characters."
+msgstr "32 文字以内にしてください。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Start with a lower-case letter."
+msgstr "先頭は小文字にしてください。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Use lower-case letters, digits, “-” and “_” only."
+msgstr "小文字、数字、「-」、「_」のみ使用できます。"
+
+#: src/ui/pages/account_page.cpp
+msgid "That name belongs to the system."
+msgstr "その名前はシステムが使用しています。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Profile picture"
+msgstr "プロフィール画像"
+
+#: src/ui/pages/account_page.cpp
+msgid "Generated from your initials · click to change"
+msgstr "イニシャルから生成 · クリックして変更"
+
+#: src/ui/pages/account_page.cpp
+msgid "Full name"
+msgstr "氏名"
+
+#: src/ui/pages/account_page.cpp
+msgid "User name"
+msgstr "ユーザ名"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/network_page.cpp
+msgid "Password"
+msgstr "パスワード"
+
+#: src/ui/pages/account_page.cpp
+msgid "Confirm password"
+msgstr "パスワードの確認"
+
+#: src/ui/pages/account_page.cpp
+msgid "Four random words beat one short complex password"
+msgstr "短い複雑なパスワードより、ランダムな 4 単語のほうが強力です"
+
+#: src/ui/pages/account_page.cpp
+msgid "PERMISSIONS"
+msgstr "権限"
+
+#: src/ui/pages/account_page.cpp
+msgid "Make this user an administrator"
+msgstr "このユーザを管理者にする"
+
+#: src/ui/pages/account_page.cpp
+msgid "Require a password to sign in"
+msgstr "サインインにパスワードを要求"
+
+#: src/ui/pages/account_page.cpp
+msgid "Disable only on a physically secure machine"
+msgstr "物理的に安全なマシンでのみ無効にしてください"
+
+#: src/ui/pages/account_page.cpp
+msgid "ROOT ACCOUNT"
+msgstr "ルートアカウント"
+
+#: src/ui/pages/account_page.cpp
+msgid "Lock the root account"
+msgstr "ルートアカウントをロック"
+
+#: src/ui/pages/account_page.cpp
+msgid "Administer with sudo instead — safer by default"
+msgstr "代わりに sudo で管理します — デフォルトでより安全です"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/destination_page.cpp
+msgid "recommended"
+msgstr "推奨"
+
+#: src/ui/pages/account_page.cpp
+msgid "Set a root password"
+msgstr "ルートパスワードを設定"
+
+#: src/ui/pages/account_page.cpp
+msgid "Enables direct root sign-in on console and SSH"
+msgstr "コンソールと SSH から直接ルートでサインインできるようになります"
+
+#: src/ui/pages/account_page.cpp
+msgid "Root password"
+msgstr "ルートパスワード"
+
+#: src/ui/pages/account_page.cpp
+msgid "Confirm root password"
+msgstr "ルートパスワードの確認"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/review_page.cpp
+msgid "Account"
+msgstr "アカウント"
+
+#: src/ui/pages/account_page.cpp
+msgid "Create your account."
+msgstr "アカウントを作成します。"
+
+#: src/ui/pages/account_page.cpp
+msgid "This is the account you will sign in with on first boot. Pick a strong passphrase — it also unlocks your encrypted disk."
+msgstr "初回起動時にサインインするアカウントです。強力なパスフレーズを選んでください。暗号化されたディスクのロック解除にも使われます。"
+
+#: src/ui/pages/account_page.cpp
+msgid "This is the account you will sign in with on first boot. Pick a strong passphrase you will remember."
+msgstr "初回起動時にサインインするアカウントです。覚えやすい強力なパスフレーズを選んでください。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Enter your full name."
+msgstr "氏名を入力してください。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a password."
+msgstr "パスワードを決めてください。"
+
+#: src/ui/pages/account_page.cpp
+msgid "The passwords do not match."
+msgstr "パスワードが一致しません。"
+
+#: src/ui/pages/account_page.cpp
+msgid "A disk passphrase needs at least 8 characters."
+msgstr "ディスクのパスフレーズは 8 文字以上にしてください。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a root password."
+msgstr "ルートパスワードを決めてください。"
+
+#: src/ui/pages/account_page.cpp
+msgid "The root passwords do not match."
+msgstr "ルートパスワードが一致しません。"
+
+#: src/ui/pages/account_page.cpp
+msgid "With root locked, this user must be an administrator."
+msgstr "ルートをロックする場合、このユーザは管理者である必要があります。"
+
+#: src/ui/pages/account_page.cpp
+msgid "this user"
+msgstr "このユーザ"
+
+#: src/ui/pages/account_page.cpp
+#, python-brace-format
+msgid "Adds {user} to the wheel group and allows sudo"
+msgstr "{user} を wheel グループに追加し、sudo を許可します"
+
+#: src/ui/pages/account_page.cpp
+#, python-brace-format
+msgid "{n} character"
+msgid_plural "{n} characters"
+msgstr[0] "{n} 文字"
+
+#: src/ui/pages/account_page.cpp
+msgid "Your passphrase unlocks LUKS2 at every boot. It is never written to the kickstart file or to installation logs."
+msgstr "パスフレーズは起動のたびに LUKS2 のロック解除に使われます。kickstart ファイルやインストールログには書き込まれません。"
+
+#: src/ui/pages/account_page.cpp
+msgid "The password is stored only as a hash on the new system and never written to the installation logs."
+msgstr "パスワードは新しいシステムにハッシュとしてのみ保存され、インストールログには書き込まれません。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a profile picture"
+msgstr "プロフィール画像を選択"
+
+#: src/ui/pages/account_page.cpp
+msgid "Images (*.png *.jpg *.jpeg *.webp *.svg)"
+msgstr "画像 (*.png *.jpg *.jpeg *.webp *.svg)"
+
+#: src/ui/pages/account_page.cpp
+msgid "Click to choose another"
+msgstr "クリックして別の画像を選択"
+
+#: src/ui/pages/destination_page.cpp
+msgid "installation media"
+msgstr "インストールメディア"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{system} detected"
+msgstr "{system} を検出しました"
+
+#: src/ui/pages/destination_page.cpp
+msgid "empty"
+msgstr "空"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{n} partition"
+msgid_plural "{n} partitions"
+msgstr[0] "{n} 個のパーティション"
+
+#: src/ui/pages/destination_page.cpp
+msgid "the data on it"
+msgstr "その中のデータ"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{disk} already holds data"
+msgstr "{disk} にはすでにデータがあります"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Erase everything on {path}"
+msgstr "{path} のすべてを消去"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Install alongside {system}"
+msgstr "{system} と共存してインストール"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Install alongside {system} (it cannot be shrunk now)"
+msgstr "{system} と共存してインストール (現在は縮小できません)"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Use the free space only ({size})"
+msgstr "空き領域のみを使用 ({size})"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{system}: {keep}   ·   {product}: {new}"
+msgstr "{system}: {keep}   ·   {product}: {new}"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LOCAL STANDARD DISKS"
+msgstr "ローカルの標準ディスク"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Add iSCSI, FCoE or multipath device"
+msgstr "iSCSI、FCoE、またはマルチパスデバイスを追加"
+
+#: src/ui/pages/destination_page.cpp
+msgid "STORAGE CONFIGURATION"
+msgstr "ストレージ構成"
+
+#: src/ui/pages/destination_page.cpp src/ui/pages/review_page.cpp
+msgid "Automatic"
+msgstr "自動"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Laid out for you, safely"
+msgstr "安全に自動でレイアウト"
+
+#: src/ui/pages/destination_page.cpp src/ui/pages/review_page.cpp
+msgid "Custom"
+msgstr "カスタム"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Your own mount points"
+msgstr "独自のマウントポイント"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Advanced"
+msgstr "詳細設定"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LVM or Btrfs volumes, by hand"
+msgstr "LVM または Btrfs ボリュームを手動で"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Encrypt my data"
+msgstr "データを暗号化"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LUKS2 · passphrase at next step"
+msgstr "LUKS2 · パスフレーズは次のステップで"
+
+#: src/ui/pages/destination_page.cpp
+msgid "RESULTING LAYOUT"
+msgstr "結果のレイアウト"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Destination"
+msgstr "インストール先"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Lay out the disk yourself."
+msgstr "ディスクを自分でレイアウトします。"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Where should it live?"
+msgstr "どこにインストールしますか?"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Click a part of a disk to use it, resize it or delete it. Changes are only planned here; nothing is written until you confirm on the review screen."
+msgstr "ディスクの一部をクリックして、使用、サイズ変更、削除ができます。ここでは変更を計画するだけで、確認画面で確定するまで何も書き込まれません。"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Pick a disk, then decide how it is laid out. Nothing is written to any device until you confirm on the review screen."
+msgstr "ディスクを選び、レイアウト方法を決めてください。確認画面で確定するまで、どのデバイスにも何も書き込まれません。"
+
+#: src/ui/pages/destination_page.cpp
+msgid ""
+"Automatic lays the system out for you: a boot partition, the system, your files and swap. If the disk already holds Windows or another system, you can install beside it; drag the slider to share the space.\n"
+"\n"
+"Custom opens the disk editor: click free space to add a mount point (at least “/”), or click a partition to use it, resize it or delete it. Advanced also offers LVM, RAID and Btrfs volumes.\n"
+"\n"
+"Nothing is written to the disks until you begin the installation on the review screen."
+msgstr "「自動」は、ブートパーティション、システム、ファイル、スワップをまとめてレイアウトします。ディスクに Windows などのシステムがすでにある場合は、スライダーをドラッグして領域を分け合い、並べてインストールできます。\n\n「カスタム」はディスクエディタを開きます。空き領域をクリックしてマウントポイント (少なくとも「/」) を追加するか、パーティションをクリックして使用、サイズ変更、削除ができます。「詳細設定」では LVM、RAID、Btrfs ボリュームも使えます。\n\n確認画面でインストールを開始するまで、ディスクには何も書き込まれません。"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Selected"
+msgstr "選択済み"
+
+#: src/ui/pages/destination_page.cpp
+msgid "1 disk"
+msgstr "1 台のディスク"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Capacity"
+msgstr "容量"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Free"
+msgstr "空き"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Reclaimable"
+msgstr "再利用可能"
+
+#: src/ui/pages/destination_page.cpp
+msgid "You lay the disk out yourself on the next screen."
+msgstr "次の画面でディスクのレイアウトを自分で行います。"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Working out the layout…"
+msgstr "レイアウトを計算中…"
+
+#: src/ui/pages/destination_page.cpp
+msgid "kept"
+msgstr "保持"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Specialized disks"
+msgstr "特殊なディスク"
+
+#: src/ui/pages/destination_page.cpp
+msgid "iSCSI, FCoE and multipath devices are set up from the network installation image, which has the tools to discover them. This live system installs to the disks attached to this computer."
+msgstr "iSCSI、FCoE、マルチパスデバイスは、検出ツールを備えたネットワークインストールイメージから設定します。このライブシステムは、このコンピュータに接続されたディスクにインストールします。"
+
+#: src/ui/pages/install_page.cpp
+msgid "WHILE YOU WAIT"
+msgstr "お待ちの間"
+
+#: src/ui/pages/install_page.cpp
+msgid "Estimated remaining"
+msgstr "残り時間の目安"
+
+#: src/ui/pages/install_page.cpp
+msgid "Starting the installation…"
+msgstr "インストールを開始中…"
+
+#: src/ui/pages/install_page.cpp
+msgid "Ten years of updates"
+msgstr "10 年間のアップデート"
+
+#: src/ui/pages/install_page.cpp
+msgid "Every release is supported until 2035, with security errata published alongside upstream. Switch between minor versions without reinstalling."
+msgstr "すべてのリリースが 2035 年までサポートされ、セキュリティ勧告は上流と同時に公開されます。再インストールせずにマイナーバージョンを切り替えられます。"
+
+#: src/ui/pages/install_page.cpp
+msgid "A desktop of its own"
+msgstr "独自のデスクトップ"
+
+#: src/ui/pages/install_page.cpp
+msgid "Bayu brings Files, Terminal, Settings and a dock that stays out of your way, all drawn by one toolkit."
+msgstr "Bayu は、ファイル、ターミナル、設定、邪魔にならない Dock を提供し、すべて 1 つのツールキットで描画されています。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Android apps, when you want them"
+msgstr "必要なときに Android アプリ"
+
+#: src/ui/pages/install_page.cpp
+msgid "Lapis runs Android apps beside your desktop ones. It is installed and stays off until you turn it on."
+msgstr "Lapis は Android アプリをデスクトップアプリと並べて実行します。インストール済みで、オンにするまでオフのままです。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Safe by default"
+msgstr "デフォルトで安全"
+
+#: src/ui/pages/install_page.cpp
+msgid "SELinux, a firewall and signed packages from the start; full-disk encryption when you ask for it."
+msgstr "SELinux、ファイアウォール、署名付きパッケージを最初から搭載。ディスク全体の暗号化は必要に応じて有効にできます。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Install"
+msgstr "インストール"
+
+#: src/ui/pages/install_page.cpp
+msgid "INSTALLATION COMPLETE"
+msgstr "インストール完了"
+
+#: src/ui/pages/install_page.cpp
+msgid "INSTALLATION FAILED"
+msgstr "インストール失敗"
+
+#: src/ui/pages/install_page.cpp
+msgid "STEP 08 — INSTALLING"
+msgstr "ステップ 08 — インストール中"
+
+#: src/ui/pages/install_page.cpp
+msgid "You're all set."
+msgstr "準備が整いました。"
+
+#: src/ui/pages/install_page.cpp
+msgid "The installation stopped."
+msgstr "インストールが停止しました。"
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "Installing {product}."
+msgstr "{product} をインストール中。"
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "{product} is on your disk. Remove the installation media, restart, and sign in with the account you just created."
+msgstr "{product} がディスクにインストールされました。インストールメディアを取り外して再起動し、作成したアカウントでサインインしてください。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Nothing more is written. The log has the details; you can start the installer again."
+msgstr "これ以上は何も書き込まれません。詳細はログにあり、インストーラをもう一度起動できます。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Everything is set. Sit back — the installer is writing packages to disk and will tell you when it is safe to restart."
+msgstr "すべて設定済みです。そのままお待ちください — インストーラがパッケージをディスクに書き込んでいます。再起動しても安全になったらお知らせします。"
+
+#: src/ui/pages/install_page.cpp
+msgid "The installation could not finish"
+msgstr "インストールを完了できませんでした"
+
+#: src/ui/pages/install_page.cpp
+msgid "Install time"
+msgstr "インストール時間"
+
+#: src/ui/pages/install_page.cpp
+msgid "Packages written"
+msgstr "書き込まれたパッケージ"
+
+#: src/ui/pages/install_page.cpp
+msgid "None"
+msgstr "なし"
+
+#: src/ui/pages/install_page.cpp
+msgid "Disk encryption"
+msgstr "ディスク暗号化"
+
+#: src/ui/pages/install_page.cpp
+msgid "Remove the USB installation media before restarting."
+msgstr "再起動する前に USB インストールメディアを取り外してください。"
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "Sign in as {user}; your settings start fresh."
+msgstr "{user} としてサインインしてください。設定は初期状態から始まります。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Run sudo dnf upgrade to pull any errata published since this ISO."
+msgstr "この ISO の公開後に出たエラータを取得するには、sudo dnf upgrade を実行してください。"
+
+#: src/ui/pages/install_page.cpp
+msgid "View log"
+msgstr "ログを表示"
+
+#: src/ui/pages/install_page.cpp
+msgid "Installing…"
+msgstr "インストール中…"
+
+#: src/ui/pages/install_page.cpp
+msgid "View installation log"
+msgstr "インストールログを表示"
+
+#: src/ui/pages/install_page.cpp
+msgid "Restart now"
+msgstr "今すぐ再起動"
+
+#: src/ui/pages/language_page.cpp
+msgid "REGIONAL FORMAT"
+msgstr "地域の形式"
+
+#: src/ui/pages/language_page.cpp
+msgid "Preview"
+msgstr "プレビュー"
+
+#: src/ui/pages/language_page.cpp
+#, python-brace-format
+msgid "Search {n} languages"
+msgstr "{n} 個の言語を検索"
+
+#: src/ui/pages/language_page.cpp src/ui/pages/review_page.cpp
+msgid "Language"
+msgstr "言語"
+
+#: src/ui/pages/language_page.cpp
+msgid "Welcome. Let's pick your language."
+msgstr "ようこそ。言語を選びましょう。"
+
+#: src/ui/pages/language_page.cpp
+msgid "This language will be used during installation and set as the system default. You can change it later in Settings."
+msgstr "この言語はインストール中に使われ、システムのデフォルトに設定されます。あとから設定で変更できます。"
+
+#: src/ui/pages/language_page.cpp
+msgid "Date"
+msgstr "日付"
+
+#: src/ui/pages/language_page.cpp
+msgid "Time"
+msgstr "時刻"
+
+#: src/ui/pages/language_page.cpp
+msgid "Numbers"
+msgstr "数値"
+
+#: src/ui/pages/language_page.cpp
+msgid "Currency"
+msgstr "通貨"
+
+#: src/ui/pages/localization_page.cpp
+msgid "KEYBOARD LAYOUT"
+msgstr "キーボードレイアウト"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Test the layout"
+msgstr "レイアウトをテスト"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Type here to test the layout"
+msgstr "ここに入力してレイアウトをテスト"
+
+#: src/ui/pages/localization_page.cpp
+msgid "TIME & DATE"
+msgstr "時刻と日付"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Region"
+msgstr "地域"
+
+#: src/ui/pages/localization_page.cpp
+msgid "City"
+msgstr "都市"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Network time (NTP)"
+msgstr "ネットワーク時刻 (NTP)"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Keep the clock in sync automatically"
+msgstr "時計を自動的に同期"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Detect time zone from network"
+msgstr "ネットワークからタイムゾーンを検出"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Uses your IP address, never your location"
+msgstr "IP アドレスを使用し、位置情報は使用しません"
+
+#: src/ui/pages/localization_page.cpp src/ui/pages/review_page.cpp
+msgid "Localization"
+msgstr "ローカライズ"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Keyboard and time."
+msgstr "キーボードと時刻。"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Choose the layout you actually type with and confirm your time zone. Both take effect immediately, including on this screen."
+msgstr "実際に入力に使うレイアウトを選び、タイムゾーンを確認してください。どちらもこの画面を含めてすぐに反映されます。"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Network time is off · the clock is set by hand"
+msgstr "ネットワーク時刻はオフ · 時計は手動で設定されています"
+
+#: src/ui/pages/localization_page.cpp
+#, python-brace-format
+msgid "{server} · synchronised"
+msgstr "{server} · 同期済み"
+
+#: src/ui/pages/localization_page.cpp
+#, python-brace-format
+msgid "{server} · waits for a connection"
+msgstr "{server} · 接続を待機中"
+
+#: src/ui/pages/network_page.cpp
+msgid "AVAILABLE CONNECTIONS"
+msgstr "利用可能な接続"
+
+#: src/ui/pages/network_page.cpp
+msgid "HOST IDENTITY"
+msgstr "ホスト ID"
+
+#: src/ui/pages/network_page.cpp src/ui/pages/review_page.cpp
+msgid "Host name"
+msgstr "ホスト名"
+
+#: src/ui/pages/network_page.cpp
+msgid "Connect automatically"
+msgstr "自動的に接続"
+
+#: src/ui/pages/network_page.cpp
+msgid "Bring this interface up at every boot"
+msgstr "起動のたびにこのインターフェイスを有効にする"
+
+#: src/ui/pages/network_page.cpp src/ui/pages/review_page.cpp
+msgid "Network"
+msgstr "ネットワーク"
+
+#: src/ui/pages/network_page.cpp
+msgid "Get connected."
+msgstr "接続しましょう。"
+
+#: src/ui/pages/network_page.cpp
+msgid "A connection is optional, but it lets the installer fetch updates, verify packages and sync the clock while you continue."
+msgstr "接続は任意ですが、接続すると、続行中にインストーラがアップデートの取得、パッケージの検証、時計の同期を行えます。"
+
+#: src/ui/pages/network_page.cpp
+msgid "Secure Boot enabled · packages verified with GPG"
+msgstr "セキュアブート有効 · パッケージは GPG で検証済み"
+
+#: src/ui/pages/network_page.cpp
+msgid "Packages verified with GPG"
+msgstr "パッケージは GPG で検証済み"
+
+#: src/ui/pages/network_page.cpp
+msgid "Connecting…"
+msgstr "接続中…"
+
+#: src/ui/pages/network_page.cpp
+msgid "IPv4 address"
+msgstr "IPv4 アドレス"
+
+#: src/ui/pages/network_page.cpp
+msgid "Gateway"
+msgstr "ゲートウェイ"
+
+#: src/ui/pages/network_page.cpp
+msgid "DNS"
+msgstr "DNS"
+
+#: src/ui/pages/network_page.cpp
+msgid "Link speed"
+msgstr "リンク速度"
+
+#: src/ui/pages/network_page.cpp
+msgid "Hardware"
+msgstr "ハードウェア"
+
+#: src/ui/pages/network_page.cpp
+msgid "Status"
+msgstr "ステータス"
+
+#: src/ui/pages/network_page.cpp
+msgid "Not connected"
+msgstr "未接続"
+
+#: src/ui/pages/network_page.cpp
+#, python-brace-format
+msgid "Join “{name}”"
+msgstr "「{name}」に参加"
+
+#: src/ui/pages/network_page.cpp
+msgid "Enter the network's password."
+msgstr "ネットワークのパスワードを入力してください。"
+
+#: src/ui/pages/network_page.cpp
+msgid "Join"
+msgstr "参加"
+
+#: src/ui/pages/network_page.cpp
+msgid "Could not connect"
+msgstr "接続できませんでした"
+
+#: src/ui/pages/review_page.cpp
+msgid "SUMMARY"
+msgstr "概要"
+
+#: src/ui/pages/review_page.cpp
+msgid "TARGET"
+msgstr "対象"
+
+#: src/ui/pages/review_page.cpp
+msgid "Storage"
+msgstr "ストレージ"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "Software"
+msgstr "ソフトウェア"
+
+#: src/ui/pages/review_page.cpp
+msgid "Review"
+msgstr "確認"
+
+#: src/ui/pages/review_page.cpp
+msgid "Checking the plan…"
+msgstr "プランを確認中…"
+
+#: src/ui/pages/review_page.cpp
+msgid "Everything checks out."
+msgstr "問題ありません。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Something needs a look."
+msgstr "確認が必要な項目があります。"
+
+#: src/ui/pages/review_page.cpp
+msgid "The disk layout cannot be installed as it is. Edit the storage settings and come back here."
+msgstr "ディスクのレイアウトはこのままではインストールできません。ストレージ設定を編集してから、ここに戻ってください。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — after you begin, the partitions you deleted are erased."
+msgstr "まだ何も書き込まれていません。最後にもう一度確認してください。開始すると、削除したパーティションは消去されます。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — what else is on the disk is kept."
+msgstr "まだ何も書き込まれていません。最後にもう一度確認してください。ディスク上のそのほかのデータは保持されます。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — after you begin, the selected disk is reformatted."
+msgstr "まだ何も書き込まれていません。最後にもう一度確認してください。開始すると、選択したディスクは再フォーマットされます。"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{n} item"
+msgid_plural "{n} items"
+msgstr[0] "{n} 個の項目"
+
+#: src/ui/pages/review_page.cpp
+msgid "Begin installation"
+msgstr "インストールを開始"
+
+#: src/ui/pages/review_page.cpp
+msgid "Keyboard"
+msgstr "キーボード"
+
+#: src/ui/pages/review_page.cpp
+msgid "Time zone"
+msgstr "タイムゾーン"
+
+#: src/ui/pages/review_page.cpp
+msgid "not connected"
+msgstr "未接続"
+
+#: src/ui/pages/review_page.cpp
+msgid "Connection"
+msgstr "接続"
+
+#: src/ui/pages/review_page.cpp
+msgid "IPv4"
+msgstr "IPv4"
+
+#: src/ui/pages/review_page.cpp
+msgid "User"
+msgstr "ユーザ"
+
+#: src/ui/pages/review_page.cpp
+msgid "Administrator"
+msgstr "管理者"
+
+#: src/ui/pages/review_page.cpp
+msgid "yes · wheel"
+msgstr "はい · wheel"
+
+#: src/ui/pages/review_page.cpp
+msgid "no"
+msgstr "いいえ"
+
+#: src/ui/pages/review_page.cpp
+msgid "Root account"
+msgstr "ルートアカウント"
+
+#: src/ui/pages/review_page.cpp
+msgid "locked"
+msgstr "ロック中"
+
+#: src/ui/pages/review_page.cpp
+msgid "password set"
+msgstr "パスワード設定済み"
+
+#: src/ui/pages/review_page.cpp
+msgid "Scheme"
+msgstr "方式"
+
+#: src/ui/pages/review_page.cpp
+msgid "Encryption"
+msgstr "暗号化"
+
+#: src/ui/pages/review_page.cpp
+msgid "LUKS2 enabled"
+msgstr "LUKS2 有効"
+
+#: src/ui/pages/review_page.cpp
+msgid "off"
+msgstr "オフ"
+
+#: src/ui/pages/review_page.cpp
+msgid "Layout"
+msgstr "レイアウト"
+
+#: src/ui/pages/review_page.cpp
+msgid "Environment"
+msgstr "環境"
+
+#: src/ui/pages/review_page.cpp
+msgid "Add-ons"
+msgstr "アドオン"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{n} selected"
+msgid_plural "{n} selected"
+msgstr[0] "{n} 個選択"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "Packages"
+msgstr "パッケージ"
+
+#: src/ui/pages/review_page.cpp
+msgid "Download"
+msgstr "ダウンロード"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "nothing"
+msgstr "なし"
+
+#: src/ui/pages/review_page.cpp
+msgid "The disk layout cannot be installed"
+msgstr "ディスクのレイアウトはインストールできません"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{disk} will be erased"
+msgstr "{disk} は消去されます"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "All {size} on this device is reformatted. Other disks are left untouched."
+msgstr "このデバイスの {size} すべてが再フォーマットされます。ほかのディスクには影響しません。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Partitions will be deleted"
+msgstr "パーティションが削除されます"
+
+#: src/ui/pages/review_page.cpp
+msgid "What the custom layout deletes is lost once the installation starts. Edit the storage to check the pending changes."
+msgstr "カスタムレイアウトで削除されるものは、インストールの開始後に失われます。保留中の変更を確認するには、ストレージを編集してください。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Your existing data is kept"
+msgstr "既存のデータは保持されます"
+
+#: src/ui/pages/review_page.cpp
+msgid "Only the space chosen on the destination step is changed."
+msgstr "インストール先のステップで選んだ領域のみが変更されます。"
+
+#: src/ui/pages/software_page.cpp
+msgid "BASE ENVIRONMENT"
+msgstr "ベース環境"
+
+#: src/ui/pages/software_page.cpp
+msgid "Choose what to install."
+msgstr "インストールする内容を選択してください。"
+
+#: src/ui/pages/software_page.cpp
+msgid "Start from a base environment, then add only what you need. You can install or remove anything later with dnf."
+msgstr "ベース環境から始めて、必要なものだけを追加します。あとから dnf で何でもインストールまたは削除できます。"
+
+#: src/ui/pages/software_page.cpp
+msgid "Installing from this live system"
+msgstr "このライブシステムからインストール"
+
+#: src/ui/pages/software_page.cpp
+msgid "The live system is copied to the disk as it is. The other environments come from the network installation image."
+msgstr "ライブシステムはそのままディスクにコピーされます。そのほかの環境はネットワークインストールイメージから取得されます。"
+
+#: src/ui/pages/software_page.cpp
+#, python-brace-format
+msgid "ADD-ONS FOR {name}"
+msgstr "{name} のアドオン"
+
+#: src/ui/pages/software_page.cpp
+msgid "Add-ons are downloaded: connect to a network to choose them."
+msgstr "アドオンはダウンロードされます。選択するにはネットワークに接続してください。"
+
+#: src/ui/pages/software_page.cpp
+msgid "Download size"
+msgstr "ダウンロードサイズ"
+
+#: src/ui/pages/software_page.cpp
+msgid "Installed size"
+msgstr "インストールサイズ"
+
+#: src/ui/pages/software_page.cpp
+msgid "Est. install time"
+msgstr "インストール時間の目安"
+
+#: src/ui/pages/software_page.cpp
+#, python-brace-format
+msgid "~{n} min"
+msgstr "約 {n} 分"
+
+#: src/ui/widgets.cpp
+msgid "Edit"
+msgstr "編集"
+
+#: data/nabau.desktop
+msgid "Nabau"
+msgstr "Nabau"
+
+#: data/nabau.desktop
+msgid "Install to Disk"
+msgstr "ディスクにインストール"
+
+#: data/nabau.desktop
+msgid "Install this system on the computer's disk"
+msgstr "このシステムをコンピュータのディスクにインストールします"

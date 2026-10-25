@@ -1,0 +1,2425 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-settings\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"PO-Revision-Date: 2026-10-25 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: su\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/pages/about/aboutinfo.cpp
+msgid "Unknown"
+msgstr "Teu dipikanyaho"
+
+#. TRANSLATORS: a processor model and its number of cores, such as "Intel Core i5 x 8".
+#: src/pages/about/aboutinfo.cpp
+#, python-brace-format
+msgid "{model} x {count}"
+msgstr "{model} x {count}"
+
+#: src/pages/about/aboutinfo.cpp
+msgid "B"
+msgstr "B"
+
+#: src/pages/about/aboutinfo.cpp
+msgid "KB"
+msgstr "KB"
+
+#: src/pages/about/aboutinfo.cpp
+msgid "MB"
+msgstr "MB"
+
+#: src/pages/about/aboutinfo.cpp
+msgid "GB"
+msgstr "GB"
+
+#: src/pages/about/aboutinfo.cpp
+msgid "TB"
+msgstr "TB"
+
+#: src/pages/about/aboutinfo.cpp
+msgid "PB"
+msgstr "PB"
+
+#: src/pages/about/aboutinfo.cpp
+msgid "EB"
+msgstr "EB"
+
+#: src/pages/about/aboutinfo.cpp
+msgid "ZB"
+msgstr "ZB"
+
+#: src/pages/about/aboutinfo.cpp
+msgid "YB"
+msgstr "YB"
+
+#. TRANSLATORS: a size, such as "16 GB".
+#: src/pages/about/aboutinfo.cpp
+#, python-brace-format
+msgid "{value} {unit}"
+msgstr "{value} {unit}"
+
+#. TRANSLATORS: the space used on the system disk and its size, such as "40 GB / 256 GB".
+#: src/pages/about/aboutinfo.cpp
+#, python-brace-format
+msgid "{used} / {total}"
+msgstr "{used} / {total}"
+
+#: src/pages/about/aboutpage.cpp src/window/pagelist.cpp
+msgid "About"
+msgstr "Ngeunaan"
+
+#: src/pages/about/aboutpage.cpp
+#, python-brace-format
+msgid "Running on {system}"
+msgstr "Jalan dina {system}"
+
+#: src/pages/about/aboutpage.cpp
+msgid "Model"
+msgstr "Modél"
+
+#: src/pages/about/aboutpage.cpp
+msgid "System version"
+msgstr "Vérsi sistem"
+
+#: src/pages/about/aboutpage.cpp
+msgid "System type"
+msgstr "Jenis sistem"
+
+#: src/pages/about/aboutpage.cpp
+msgid "Kernel version"
+msgstr "Vérsi kernel"
+
+#: src/pages/about/aboutpage.cpp
+msgid "Processor"
+msgstr "Prosesor"
+
+#: src/pages/about/aboutpage.cpp
+msgid "RAM"
+msgstr "RAM"
+
+#: src/pages/about/aboutpage.cpp
+msgid "Internal storage"
+msgstr "Panyimpenan internal"
+
+#: src/pages/accounts/accountspage.cpp src/window/pagelist.cpp
+msgid "Users"
+msgstr "Pamaké"
+
+#: src/pages/accounts/accountspage.cpp
+msgid "Add user"
+msgstr "Tambahkeun pamaké"
+
+#: src/pages/accounts/accountspage.cpp src/pages/wallpaper/wallpaperpage.cpp
+#, python-brace-format
+msgid "Image files ({patterns})"
+msgstr "Berkas gambar ({patterns})"
+
+#: src/pages/accounts/accountspage.cpp src/pages/network/vpn/vpndialogs.cpp
+#: src/pages/network/vpn/vpnpage.cpp
+msgid "All files (*)"
+msgstr "Sakabéh berkas (*)"
+
+#: src/pages/accounts/accountspage.cpp src/pages/accounts/userdetailsdialog.cpp
+msgid "Delete this user"
+msgstr "Hapus pamaké ieu"
+
+#: src/pages/accounts/accountspage.cpp
+#, python-brace-format
+msgid "Delete user “{name}”? Their home directory and its contents will be permanently deleted. This cannot be undone."
+msgstr "Hapus pamaké “{name}”? Diréktori imah jeung eusina bakal dihapus permanén. Ieu teu tiasa dibatalkeun."
+
+#: src/pages/accounts/accountspage.cpp src/pages/accounts/userdialogs.cpp
+#: src/pages/datetime/timezonedialog.cpp
+#: src/pages/language/addlanguagedialog.cpp
+#: src/pages/network/common/ipsettingsview.cpp
+#: src/pages/network/hotspot/hotspotpage.cpp
+#: src/pages/network/vpn/vpndialogs.cpp
+#: src/pages/network/wlan/newnetworkdialog.cpp
+#: src/pages/shortcuts/shortcuteditdialog.cpp
+#: src/pages/shortcuts/shortcutspage.cpp
+msgid "Cancel"
+msgstr "Batal"
+
+#: src/pages/accounts/accountspage.cpp
+msgid "Delete"
+msgstr "Hapus"
+
+#: src/pages/accounts/userdetailsdialog.cpp src/pages/accounts/userdialogs.cpp
+msgid "Account type"
+msgstr "Jenis akun"
+
+#: src/pages/accounts/userdetailsdialog.cpp
+msgid "Change password…"
+msgstr "Robah kecap sandi…"
+
+#: src/pages/accounts/userdetailsdialog.cpp src/pages/accounts/userdialogs.cpp
+msgid "Standard"
+msgstr "Baku"
+
+#: src/pages/accounts/userdetailsdialog.cpp src/pages/accounts/userdialogs.cpp
+msgid "Administrator"
+msgstr "Administrator"
+
+#: src/pages/accounts/userdialogs.cpp
+msgid "Change password"
+msgstr "Robah kecap sandi"
+
+#: src/pages/accounts/userdialogs.cpp
+msgid "Current password"
+msgstr "Kecap sandi ayeuna"
+
+#: src/pages/accounts/userdialogs.cpp
+msgid "New password"
+msgstr "Kecap sandi anyar"
+
+#: src/pages/accounts/userdialogs.cpp src/pages/network/hotspot/hotspotpage.cpp
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "Password"
+msgstr "Kecap sandi"
+
+#: src/pages/accounts/userdialogs.cpp
+msgid "Verify password"
+msgstr "Pastikeun kecap sandi"
+
+#: src/pages/accounts/userdialogs.cpp
+msgid "The current password is incorrect"
+msgstr "Kecap sandi ayeuna salah"
+
+#: src/pages/accounts/userdialogs.cpp
+msgid "The new password was not accepted"
+msgstr "Kecap sandi anyar teu ditarima"
+
+#: src/pages/accounts/userdialogs.cpp
+msgid "The password could not be changed"
+msgstr "Kecap sandi teu tiasa dirobah"
+
+#: src/pages/accounts/userdialogs.cpp
+msgid "The password change did not finish in time"
+msgstr "Parobahan kecap sandi teu réngsé dina waktosna"
+
+#: src/pages/accounts/userdialogs.cpp
+msgid "Add new user"
+msgstr "Tambahkeun pamaké anyar"
+
+#: src/pages/accounts/userdialogs.cpp
+msgid "User name"
+msgstr "Ngaran pamaké"
+
+#: src/pages/accounts/userdialogs.cpp src/pages/language/addlanguagedialog.cpp
+#: src/pages/network/vpn/vpndialogs.cpp
+msgid "Add"
+msgstr "Tambahkeun"
+
+#: src/pages/accounts/userrow.cpp
+msgid "Logged in"
+msgstr "Parantos asup"
+
+#: src/pages/appearance/appearancepage.cpp src/window/pagelist.cpp
+msgid "Appearance"
+msgstr "Tampilan"
+
+#: src/pages/appearance/appearancepage.cpp
+msgid "Light"
+msgstr "Caang"
+
+#: src/pages/appearance/appearancepage.cpp
+msgid "Dark"
+msgstr "Poék"
+
+#: src/pages/appearance/appearancepage.cpp
+msgid "Auto"
+msgstr "Otomatis"
+
+#: src/pages/appearance/appearancepage.cpp
+msgid "Accent color"
+msgstr "Warna aksén"
+
+#: src/pages/appearance/appearancepage.cpp src/pages/fonts/fontspage.cpp
+#: src/window/pagelist.cpp
+msgid "Fonts"
+msgstr "Fon"
+
+#: src/pages/appearance/appearancepage.cpp
+#: src/pages/icontheme/iconthemepage.cpp src/window/pagelist.cpp
+msgid "Icon Theme"
+msgstr "Téma Ikon"
+
+#: src/pages/appearance/appearancepage.cpp
+#: src/pages/cursortheme/cursorthemepage.cpp src/window/pagelist.cpp
+msgid "Cursor Style"
+msgstr "Gaya Kursor"
+
+#: src/pages/battery/battery.cpp
+#, python-brace-format
+msgid "Today at {time}"
+msgstr "Dinten ieu jam {time}"
+
+#: src/pages/battery/battery.cpp
+#, python-brace-format
+msgid "Yesterday at {time}"
+msgstr "Kamari jam {time}"
+
+#: src/pages/battery/batterypage.cpp
+msgid "History"
+msgstr "Riwayat"
+
+#: src/pages/battery/batterypage.cpp
+msgid "24 hours"
+msgstr "24 jam"
+
+#: src/pages/battery/batterypage.cpp
+msgid "7 days"
+msgstr "7 poé"
+
+#: src/pages/battery/batterypage.cpp src/window/pagelist.cpp
+msgid "Battery"
+msgstr "Batré"
+
+#: src/pages/battery/batterypage.cpp
+msgid "Health"
+msgstr "Kaséhatan"
+
+#: src/pages/battery/batterypage.cpp
+msgid "Condition"
+msgstr "Kaayaan"
+
+#: src/pages/battery/batterypage.cpp
+msgid "Maximum capacity"
+msgstr "Kapasitas maksimum"
+
+#: src/pages/battery/batterypage.cpp src/pages/battery/historygraph.cpp
+msgid "Charging"
+msgstr "Ngecas"
+
+#: src/pages/battery/batterypage.cpp
+msgid "Show percentage in status bar"
+msgstr "Témbongkeun perséntase dina bar status"
+
+#: src/pages/battery/batterypage.cpp
+msgid "Excellent"
+msgstr "Alus pisan"
+
+#: src/pages/battery/batterypage.cpp
+msgid "Normal"
+msgstr "Normal"
+
+#: src/pages/battery/batterypage.cpp
+msgid "Poor"
+msgstr "Goréng"
+
+#. TRANSLATORS: a percentage, such as "92%".
+#: src/pages/battery/batterypage.cpp src/pages/display/displaypage.cpp
+#: src/pages/network/common/detailsdialog.cpp
+#, python-brace-format
+msgid "{percent}%"
+msgstr "{percent}%"
+
+#: src/pages/battery/batterypage.cpp
+#, python-brace-format
+msgid "Last charged to {percent}%"
+msgstr "Pamungkas dicas nepi ka {percent}%"
+
+#: src/pages/battery/batterypage.cpp
+#, python-brace-format
+msgid "Limit charging to {percent}%"
+msgstr "Watesan ngecas nepi ka {percent}%"
+
+#: src/pages/battery/batterypage.cpp
+#, python-brace-format
+msgid "While plugged in, charging stops at {end}% and resumes below {start}%, so the battery wears more slowly."
+msgstr "Salila dicolok, ngecas eureun dina {end}% sarta neruskeun handap {start}%, sangkan batré kurang gancang aus."
+
+#: src/pages/battery/batterypage.cpp
+msgid "This computer's battery controller did not keep the limit, so the battery still charges fully."
+msgstr "Pangontrol batré komputer ieu teu ngajaga watesan, jadi batré tetep ngecas pinuh."
+
+#: src/pages/battery/historygraph.cpp
+msgid "Fully charged"
+msgstr "Pinuh dicas"
+
+#: src/pages/battery/historygraph.cpp
+msgid "Not charging"
+msgstr "Teu ngecas"
+
+#: src/pages/battery/historygraph.cpp
+msgid "On battery"
+msgstr "Dina batré"
+
+#: src/pages/battery/historygraph.cpp
+msgid "Plugged in"
+msgstr "Dicolok"
+
+#. TRANSLATORS: a weekday and a time in the graph's readout, such as "Mon 9:41 AM".
+#: src/pages/battery/historygraph.cpp
+#, python-brace-format
+msgid "{day} {time}"
+msgstr "{day} {time}"
+
+#. TRANSLATORS: the battery state and the time in the graph's readout, such as "Charging · 9:41 AM".
+#: src/pages/battery/historygraph.cpp
+#, python-brace-format
+msgid "{state} · {time}"
+msgstr "{state} · {time}"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Audio device"
+msgstr "Parangkat audio"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Headphones"
+msgstr "Hérdfon"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Headset"
+msgstr "Headset"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Camera"
+msgstr "Kaméra"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Video camera"
+msgstr "Kaméra vidéo"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Computer"
+msgstr "Komputer"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Game controller"
+msgstr "Pangontrol kaulinan"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/keyboard/keyboardpage.cpp
+#: src/window/pagelist.cpp
+msgid "Keyboard"
+msgstr "Kibor"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/mouse/mousepage.cpp
+#: src/window/pagelist.cpp
+msgid "Mouse"
+msgstr "Beurit"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Drawing tablet"
+msgstr "Tablét gambar"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Modem"
+msgstr "Modem"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Media player"
+msgstr "Pamaén média"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Network device"
+msgstr "Parangkat jaringan"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Phone"
+msgstr "Telepon"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Printer"
+msgstr "Printer"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Scanner"
+msgstr "Skanner"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/display/displaypage.cpp
+#: src/window/pagelist.cpp
+msgid "Display"
+msgstr "Layar"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/network/vpn/vpneditor.cpp
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "Name"
+msgstr "Ngaran"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/network/vpn/vpneditor.cpp
+msgid "Address"
+msgstr "Alamat"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Powered"
+msgstr "Hurung"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Visible to other devices"
+msgstr "Katingali ku parangkat séjén"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Allow incoming pairing"
+msgstr "Ijinkeun pasangan asup"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+#: src/pages/network/common/detailsdialog.cpp
+msgid "Close"
+msgstr "Tutup"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Device type"
+msgstr "Jenis parangkat"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Model number"
+msgstr "Nomer modél"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Version"
+msgstr "Vérsi"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Trusted"
+msgstr "Dipercaya"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+#: src/pages/bluetooth/bluetoothpage.cpp
+msgid "Blocked"
+msgstr "Diblokir"
+
+#: src/pages/bluetooth/bluetoothdialogs.cpp
+msgid "Forget this device"
+msgstr "Lalawora parangkat ieu"
+
+#: src/pages/bluetooth/bluetoothpage.cpp src/pages/network/vpn/vpndialogs.cpp
+msgid "Connected"
+msgstr "Nyambung"
+
+#: src/pages/bluetooth/bluetoothpage.cpp src/pages/network/vpn/vpndialogs.cpp
+msgid "Not connected"
+msgstr "Teu nyambung"
+
+#. TRANSLATORS: a device's connection and its battery level, such as "Connected · 80%".
+#: src/pages/bluetooth/bluetoothpage.cpp
+#, python-brace-format
+msgid "{status} · {percent}%"
+msgstr "{status} · {percent}%"
+
+#: src/pages/bluetooth/bluetoothpage.cpp
+msgid "Cancel pairing"
+msgstr "Batalkeun pasangan"
+
+#: src/pages/bluetooth/bluetoothpage.cpp
+msgid "Disconnect"
+msgstr "Pegatkeun"
+
+#: src/pages/bluetooth/bluetoothpage.cpp
+msgid "Discoverable"
+msgstr "Bisa kapanggih"
+
+#: src/pages/bluetooth/bluetoothpage.cpp
+msgid "Not discoverable"
+msgstr "Teu bisa kapanggih"
+
+#: src/pages/bluetooth/bluetoothpage.cpp src/pages/sound/soundpage.cpp
+#: src/window/pagelist.cpp
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: src/pages/bluetooth/bluetoothpage.cpp
+msgid "My devices"
+msgstr "Parangkat kuring"
+
+#: src/pages/bluetooth/bluetoothpage.cpp
+msgid "Other devices"
+msgstr "Parangkat séjén"
+
+#: src/pages/bluetooth/bluetoothpage.cpp
+msgid "Bluetooth service is unavailable"
+msgstr "Layanan Bluetooth teu sayogi"
+
+#: src/pages/bluetooth/bluetoothpage.cpp
+msgid "Bluetooth is blocked by a hardware switch"
+msgstr "Bluetooth diblokir ku saklar hardware"
+
+#: src/pages/bluetooth/bluetoothpage.cpp
+msgid "No Bluetooth adapters found"
+msgstr "Euweuh adaptor Bluetooth kapendak"
+
+#: src/pages/bluetooth/bluetoothpage.cpp
+msgid "No devices found. Make sure your device is discoverable."
+msgstr "Teu aya parangkat kapendak. Pastikeun parangkat Ibu/Bapa bisa kapanggih."
+
+#: src/pages/cursortheme/cursorthemepage.cpp
+msgid "Cursor theme"
+msgstr "Téma kursor"
+
+#: src/pages/cursortheme/cursorthemepage.cpp
+msgid "Cursor size"
+msgstr "Ukuran kursor"
+
+#: src/pages/datetime/datetimepage.cpp src/window/pagelist.cpp
+msgid "Date & Time"
+msgstr "Tanggal & Waktos"
+
+#: src/pages/datetime/datetimepage.cpp
+msgid "Auto sync"
+msgstr "Sinkron otomatis"
+
+#: src/pages/datetime/datetimepage.cpp
+msgid "24-hour time"
+msgstr "Waktos 24 jam"
+
+#: src/pages/datetime/datetimepage.cpp
+msgid "Time zone"
+msgstr "Zona waktos"
+
+#: src/pages/datetime/datetimepage.cpp
+msgid "Unable to use auto sync. Please ensure your NTP service is installed."
+msgstr "Teu tiasa ngagunakeun sinkron otomatis. Pastikeun layanan NTP geus dipasang."
+
+#: src/pages/datetime/timezonedialog.cpp
+msgid "Search city or country"
+msgstr "Téangan kota atanapi nagara"
+
+#: src/pages/datetime/timezonedialog.cpp
+msgid "No matching time zones"
+msgstr "Teu aya zona waktos nu cocog"
+
+#: src/pages/datetime/timezonedialog.cpp
+msgid "Time Zone"
+msgstr "Zona Waktos"
+
+#. TRANSLATORS: the button that makes the chosen time zone the system's.
+#: src/pages/datetime/timezonedialog.cpp
+msgid "Set"
+msgstr "Setél"
+
+#: src/pages/datetime/timezonedialog.cpp
+msgid "Click the map or search to choose a time zone"
+msgstr "Klik peta atanapi téangan pikeun milih zona waktos"
+
+#. TRANSLATORS: a time zone's city and its country or region, such as "Paris, France".
+#: src/pages/datetime/timezonedialog.cpp
+#, python-brace-format
+msgid "{city}, {region}"
+msgstr "{city}, {region}"
+
+#: src/pages/datetime/timezonedialog.cpp
+msgid "Current time zone"
+msgstr "Zona waktos ayeuna"
+
+#: src/pages/datetime/timezonedialog.cpp
+#, python-brace-format
+msgid "Currently {zone}"
+msgstr "Ayeuna {zone}"
+
+#: src/pages/datetime/timezonemap.cpp
+msgid "Same time as now"
+msgstr "Waktos nu sarua jeung ayeuna"
+
+#: src/pages/datetime/timezonemap.cpp
+#, python-brace-format
+msgid "{n} hour ahead"
+msgid_plural "{n} hours ahead"
+msgstr[0] "{n} jam leuwih awal"
+
+#: src/pages/datetime/timezonemap.cpp
+#, python-brace-format
+msgid "{n} hour behind"
+msgid_plural "{n} hours behind"
+msgstr[0] "{n} jam leuwih lambat"
+
+#: src/pages/datetime/timezonemap.cpp
+#, python-brace-format
+msgid "{n} min ahead"
+msgid_plural "{n} min ahead"
+msgstr[0] "{n} mnt leuwih awal"
+
+#: src/pages/datetime/timezonemap.cpp
+#, python-brace-format
+msgid "{n} min behind"
+msgid_plural "{n} min behind"
+msgstr[0] "{n} mnt leuwih lambat"
+
+#: src/pages/datetime/timezonemap.cpp
+#, python-brace-format
+msgid "{hours} h {minutes} min ahead"
+msgstr "{hours} j {minutes} mnt leuwih awal"
+
+#: src/pages/datetime/timezonemap.cpp
+#, python-brace-format
+msgid "{hours} h {minutes} min behind"
+msgstr "{hours} j {minutes} mnt leuwih lambat"
+
+#: src/pages/datetime/timezonemap.cpp
+msgid "Tomorrow"
+msgstr "Isukan"
+
+#: src/pages/datetime/timezonemap.cpp
+msgid "Yesterday"
+msgstr "Kamari"
+
+#: src/pages/defaultapps/defaultappspage.cpp src/window/pagelist.cpp
+msgid "Default Applications"
+msgstr "Aplikasi Standar"
+
+#: src/pages/defaultapps/defaultappspage.cpp
+msgid "Web browser"
+msgstr "Pangotéktak wéb"
+
+#: src/pages/defaultapps/defaultappspage.cpp
+msgid "Email client"
+msgstr "Klién surélék"
+
+#: src/pages/defaultapps/defaultappspage.cpp
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/pages/defaultapps/defaultappspage.cpp
+msgid "Video player"
+msgstr "Pamaén vidéo"
+
+#: src/pages/defaultapps/defaultappspage.cpp src/pages/fonts/fontspage.cpp
+#: src/pages/hotcorners/hotcornerspage.cpp src/pages/keyboard/keyboardpage.cpp
+#: src/pages/shortcuts/shortcutspage.cpp
+msgid "None"
+msgstr "Euweuh"
+
+#: src/pages/display/displaypage.cpp
+#, python-brace-format
+msgid "{item} (Recommended)"
+msgstr "{item} (Disarankeun)"
+
+#: src/pages/display/displaypage.cpp
+msgid "Brightness"
+msgstr "Kacaangan"
+
+#: src/pages/display/displaypage.cpp
+msgid "Resolution"
+msgstr "Résolusi"
+
+#: src/pages/display/displaypage.cpp
+msgid "Refresh rate"
+msgstr "Laju ségeran"
+
+#: src/pages/display/displaypage.cpp
+msgid "Scale"
+msgstr "Skala"
+
+#: src/pages/display/displaypage.cpp
+msgid "Rotation"
+msgstr "Rotasi"
+
+#: src/pages/display/displaypage.cpp
+msgctxt "rotation"
+msgid "Normal"
+msgstr "Normal"
+
+#: src/pages/display/displaypage.cpp
+msgid "Enabled"
+msgstr "Diaktipkeun"
+
+#: src/pages/display/displaypage.cpp
+msgid "Primary"
+msgstr "Utama"
+
+#: src/pages/display/displaypage.cpp src/pages/power/powerpage.cpp
+msgid "Mode"
+msgstr "Mode"
+
+#: src/pages/display/displaypage.cpp
+msgid "Position"
+msgstr "Posisi"
+
+#: src/pages/display/displaypage.cpp
+msgid "Night Light"
+msgstr "Cahaya Peuting"
+
+#: src/pages/display/displaypage.cpp
+msgid "Color temperature"
+msgstr "Suhu warna"
+
+#: src/pages/display/displaypage.cpp
+msgid "Less warm"
+msgstr "Kurang haneut"
+
+#: src/pages/display/displaypage.cpp
+msgid "More warm"
+msgstr "Leuwih haneut"
+
+#: src/pages/display/displaypage.cpp
+msgid "Schedule"
+msgstr "Jadwal"
+
+#: src/pages/display/displaypage.cpp src/pages/power/powerpage.cpp
+msgid "Never"
+msgstr "Pernah"
+
+#: src/pages/display/displaypage.cpp
+msgid "Sunset to sunrise"
+msgstr "Panonpoé surup nepi ka bijil"
+
+#: src/pages/display/displaypage.cpp src/pages/shortcuts/shortcuteditdialog.cpp
+msgid "Custom"
+msgstr "Khusus"
+
+#: src/pages/display/displaypage.cpp
+msgid "Sunset"
+msgstr "Panonpoé surup"
+
+#: src/pages/display/displaypage.cpp
+msgid "Sunrise"
+msgstr "Panonpoé bijil"
+
+#: src/pages/display/displaypage.cpp
+msgid "From"
+msgstr "Ti"
+
+#: src/pages/display/displaypage.cpp
+msgid "To"
+msgstr "Ka"
+
+#: src/pages/display/displaypage.cpp
+msgid "Screen"
+msgstr "Layar"
+
+#: src/pages/display/displaypage.cpp
+msgid "Display configuration is unavailable in this session."
+msgstr "Konfigurasi layar teu sayogi dina sési ieu."
+
+#: src/pages/display/displaypage.cpp
+#, python-brace-format
+msgid "The previous settings come back in {n} second."
+msgid_plural "The previous settings come back in {n} seconds."
+msgstr[0] "Setélan samemehna balik dina {n} detik."
+
+#: src/pages/display/displaypage.cpp
+msgid "Keep these display settings?"
+msgstr "Tetep setélan layar ieu?"
+
+#: src/pages/display/displaypage.cpp
+msgid "Revert"
+msgstr "Balikkeun"
+
+#: src/pages/display/displaypage.cpp
+msgid "Keep"
+msgstr "Tetep"
+
+#: src/pages/dock/dockpage.cpp src/window/pagelist.cpp
+msgid "Dock"
+msgstr "Dok"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Position on screen"
+msgstr "Posisi dina layar"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Left"
+msgstr "Kenca"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Bottom"
+msgstr "Handap"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Right"
+msgstr "Katuhu"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Size"
+msgstr "Ukuran"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Small"
+msgstr "Leutik"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Huge"
+msgstr "Ageung pisan"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Glass effect"
+msgstr "Éféktif kaca"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More clear"
+msgstr "Leuwih bening"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More tinted"
+msgstr "Leuwih warnaan"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Display mode"
+msgstr "Mode tampilan"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Always show"
+msgstr "Salawasna témbongkeun"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Always hide"
+msgstr "Salawasna sumputkeun"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Smart hide"
+msgstr "Sumputkeun pinter"
+
+#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
+#: src/window/pagelist.cpp
+msgid "Hot Corners"
+msgstr "Juru Panas"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Minimized windows area"
+msgstr "Wewengkon jandéla diminimalkeun"
+
+#. TRANSLATORS: a font size in points, such as "9pt".
+#: src/pages/fonts/fontspage.cpp
+#, python-brace-format
+msgid "{size}pt"
+msgstr "{size}pt"
+
+#: src/pages/fonts/fontspage.cpp
+msgid "General font"
+msgstr "Fon umum"
+
+#: src/pages/fonts/fontspage.cpp
+msgid "Fixed font"
+msgstr "Fon tetep"
+
+#: src/pages/fonts/fontspage.cpp
+#, python-brace-format
+msgid "{size} (Default)"
+msgstr "{size} (Standar)"
+
+#: src/pages/fonts/fontspage.cpp
+msgid "Font size"
+msgstr "Ukuran fon"
+
+#: src/pages/fonts/fontspage.cpp
+msgid "Hinting"
+msgstr "Hinting"
+
+#: src/pages/fonts/fontspage.cpp
+msgid "Slight"
+msgstr "Rada"
+
+#: src/pages/fonts/fontspage.cpp
+msgid "Medium"
+msgstr "Sedeng"
+
+#: src/pages/fonts/fontspage.cpp
+msgid "Full"
+msgstr "Pinuh"
+
+#: src/pages/fonts/fontspage.cpp
+msgid "Anti-Aliasing"
+msgstr "Anti-Aliasing"
+
+#: src/pages/hotcorners/hotcorners.cpp src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Control"
+msgstr "Control"
+
+#: src/pages/hotcorners/hotcorners.cpp src/pages/keyboard/keyboardpage.cpp
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#: src/pages/hotcorners/hotcorners.cpp src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Option"
+msgstr "Option"
+
+#: src/pages/hotcorners/hotcorners.cpp src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Alt"
+msgstr "Alt"
+
+#: src/pages/hotcorners/hotcorners.cpp src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Shift"
+msgstr "Shift"
+
+#: src/pages/hotcorners/hotcorners.cpp src/pages/keyboard/keyboardpage.cpp
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Command"
+msgstr "Command"
+
+#: src/pages/hotcorners/hotcorners.cpp src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Meta"
+msgstr "Meta"
+
+#: src/pages/hotcorners/hotcornerspage.cpp
+msgid "Show All Windows"
+msgstr "Témbongkeun Sakabéh Jandéla"
+
+#: src/pages/hotcorners/hotcornerspage.cpp
+msgid "Show Desktop"
+msgstr "Témbongkeun Dékstop"
+
+#: src/pages/hotcorners/hotcornerspage.cpp
+msgid "Launcher"
+msgstr "Peluncur"
+
+#: src/pages/hotcorners/hotcornerspage.cpp
+msgid "Lock Screen"
+msgstr "Konci Layar"
+
+#: src/pages/hotcorners/hotcornerspage.cpp
+msgid "Hot corners are managed by the Bayu compositor, which is not running."
+msgstr "Juru panas diatur ku kompositor Bayu, nu teu keur jalan."
+
+#: src/pages/hotcorners/hotcornerspage.cpp
+msgid "Top left"
+msgstr "Luhur kenca"
+
+#: src/pages/hotcorners/hotcornerspage.cpp
+msgid "Top right"
+msgstr "Luhur katuhu"
+
+#: src/pages/hotcorners/hotcornerspage.cpp
+msgid "Bottom left"
+msgstr "Handap kenca"
+
+#: src/pages/hotcorners/hotcornerspage.cpp
+msgid "Bottom right"
+msgstr "Handap katuhu"
+
+#: src/pages/hotcorners/hotcornerspage.cpp
+msgid "Move the pointer into a corner of the screen to run its action. Hold modifier keys while choosing an action to make the corner work only while they are held."
+msgstr "Gerakkeun panunjuk ka juru layar pikeun ngajalankeun aksina. Tahan konci modifier nalika milih aksi supados juru ngan jalan salila konci ditahan."
+
+#. TRANSLATORS: the keys a hot corner needs held and its action, such as "Ctrl + Alt – Lock Screen".
+#: src/pages/hotcorners/hotcornerspage.cpp
+#, python-brace-format
+msgid "{keys} – {action}"
+msgstr "{keys} – {action}"
+
+#: src/pages/icontheme/iconthemepage.cpp
+msgid "Icon theme"
+msgstr "Téma ikon"
+
+#: src/pages/keyboard/keyboardpage.cpp
+msgid "Input method"
+msgstr "Métode input"
+
+#: src/pages/keyboard/keyboardpage.cpp
+msgid "Input methods can only be selected in a Bayu Wayland session."
+msgstr "Métode input ngan tiasa dipilih dina sési Bayu Wayland."
+
+#: src/pages/keyboard/keyboardpage.cpp
+msgid "The selected input method is not running."
+msgstr "Métode input nu dipilih teu keur jalan."
+
+#: src/pages/keyboard/keyboardpage.cpp
+msgid "Applications started before the input method may need to be restarted."
+msgstr "Aplikasi nu dimimitian samemeh métode input meureun kedah dimimitian deui."
+
+#: src/pages/keyboard/keyboardpage.cpp
+msgid "Shortcut key"
+msgstr "Konci pintonan"
+
+#: src/pages/keyboard/keyboardpage.cpp src/pages/keyboard/layoutpage.cpp
+msgid "Layout"
+msgstr "Tata letak"
+
+#: src/pages/keyboard/keyboardpage.cpp src/pages/shortcuts/shortcutspage.cpp
+#: src/window/pagelist.cpp
+msgid "Keyboard Shortcuts"
+msgstr "Potong Kompas Kibor"
+
+#: src/pages/keyboard/keyboardpage.cpp
+msgid "Key repeat"
+msgstr "Pengulangan konci"
+
+#: src/pages/keyboard/keyboardpage.cpp
+msgid "Delay until repeat"
+msgstr "Reureuh nepi ka ngulang"
+
+#: src/pages/keyboard/keyboardpage.cpp
+msgid "Repeat rate"
+msgstr "Laju ngulang"
+
+#: src/pages/keyboard/keyboardpage.cpp
+msgid "The key next to the space bar works as Command and the one beside it as Option, on any keyboard: Command+C copies, Command+Tab switches windows, Command+Q quits. The shortcuts can be changed in Keyboard Shortcuts."
+msgstr "Konci gigireun spasi jalan salaku Command sarta nu gigireunana salaku Option, dina kibor naon waé: Command+C nyalin, Command+Tab ngaganti jandéla, Command+Q kaluar. Potong kompas tiasa dirobah dina Potong Kompas Kibor."
+
+#: src/pages/keyboard/keyboardpage.cpp
+msgid "Ctrl is the shortcut key and Alt switches windows. The shortcuts can be changed in Keyboard Shortcuts."
+msgstr "Ctrl nyaéta konci potong kompas sarta Alt ngaganti jandéla. Potong kompas tiasa dirobah dina Potong Kompas Kibor."
+
+#: src/pages/keyboard/layoutpage.cpp
+msgid "No layouts found"
+msgstr "Teu aya tata letak kapendak"
+
+#: src/pages/keyboard/layoutpage.cpp
+msgid "Search layouts"
+msgstr "Téangan tata letak"
+
+#: src/pages/language/addlanguagedialog.cpp
+msgid "Add Language"
+msgstr "Tambahkeun Basa"
+
+#: src/pages/language/addlanguagedialog.cpp
+msgid "Search languages"
+msgstr "Téangan basa"
+
+#: src/pages/language/addlanguagedialog.cpp
+msgid "Loading languages…"
+msgstr "Nuju ngamuat basa…"
+
+#: src/pages/language/addlanguagedialog.cpp
+msgid "No languages found"
+msgstr "Teu aya basa kapendak"
+
+#: src/pages/language/language.cpp
+msgid "Could not save preferred languages. Please try again."
+msgstr "Teu tiasa nyimpen basa pikaresepeun. Cobian deui."
+
+#: src/pages/language/languagepage.cpp src/window/pagelist.cpp
+msgid "Language"
+msgstr "Basa"
+
+#: src/pages/language/languagepage.cpp
+msgid "Preferred languages"
+msgstr "Basa pikaresepeun"
+
+#: src/pages/language/languagepage.cpp
+msgid "Drag a language to the top to make it the system language. Right-click a language to remove it."
+msgstr "Sered basa ka luhur pikeun ngajadikeunana basa sistem. Klik katuhu basa pikeun miceunna."
+
+#: src/pages/language/languagepage.cpp
+msgid "Add language…"
+msgstr "Tambahkeun basa…"
+
+#: src/pages/language/preferredlanguagelist.cpp
+msgid "System language"
+msgstr "Basa sistem"
+
+#: src/pages/language/preferredlanguagelist.cpp
+msgid "Remove language"
+msgstr "Piceun basa"
+
+#: src/pages/mouse/mousepage.cpp
+msgid "Left hand"
+msgstr "Leungeun kenca"
+
+#: src/pages/mouse/mousepage.cpp src/pages/touchpad/touchpadpage.cpp
+msgid "Natural scrolling"
+msgstr "Gulung alami"
+
+#: src/pages/mouse/mousepage.cpp
+msgid "Mouse acceleration"
+msgstr "Akselerasi beurit"
+
+#: src/pages/mouse/mousepage.cpp src/pages/touchpad/touchpadpage.cpp
+msgid "Pointer speed"
+msgstr "Laju panunjuk"
+
+#: src/pages/network/common/detailsdialog.cpp
+msgid "Auto-Join"
+msgstr "Gabung Otomatis"
+
+#: src/pages/network/common/detailsdialog.cpp
+msgid "Connect Automatically"
+msgstr "Sambungkeun Otomatis"
+
+#: src/pages/network/common/detailsdialog.cpp
+msgid "IP Settings"
+msgstr "Setélan IP"
+
+#: src/pages/network/common/detailsdialog.cpp
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "Security"
+msgstr "Kaamanan"
+
+#: src/pages/network/common/detailsdialog.cpp
+msgid "Signal"
+msgstr "Sinyal"
+
+#: src/pages/network/common/detailsdialog.cpp
+#: src/pages/network/vpn/vpndialogs.cpp
+msgid "IPv4 address"
+msgstr "Alamat IPv4"
+
+#: src/pages/network/common/detailsdialog.cpp
+msgid "IPv6 address"
+msgstr "Alamat IPv6"
+
+#: src/pages/network/common/detailsdialog.cpp
+msgid "MAC address"
+msgstr "Alamat MAC"
+
+#: src/pages/network/common/detailsdialog.cpp
+msgid "Gateway"
+msgstr "Gerbang"
+
+#: src/pages/network/common/detailsdialog.cpp
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "DNS"
+msgstr "DNS"
+
+#: src/pages/network/common/detailsdialog.cpp
+msgid "Forget this network"
+msgstr "Lalawora jaringan ieu"
+
+#: src/pages/network/common/ipsettingsview.cpp
+msgid "Configure IPv4"
+msgstr "Konfigurasi IPv4"
+
+#: src/pages/network/common/ipsettingsview.cpp
+msgid "IP Address"
+msgstr "Alamat IP"
+
+#: src/pages/network/common/ipsettingsview.cpp
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Required"
+msgstr "Diperyogikeun"
+
+#: src/pages/network/common/ipsettingsview.cpp
+msgid "Subnet Mask"
+msgstr "Mask Subjaringan"
+
+#: src/pages/network/common/ipsettingsview.cpp
+msgid "Router"
+msgstr "Router"
+
+#: src/pages/network/common/ipsettingsview.cpp
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Optional"
+msgstr "Opsional"
+
+#: src/pages/network/common/ipsettingsview.cpp
+msgid "Configure IPv6"
+msgstr "Konfigurasi IPv6"
+
+#: src/pages/network/common/ipsettingsview.cpp
+msgid "Prefix Length"
+msgstr "Panjang Préfiks"
+
+#: src/pages/network/common/ipsettingsview.cpp
+msgid "Automatic DNS"
+msgstr "DNS Otomatis"
+
+#: src/pages/network/common/ipsettingsview.cpp
+msgid "DNS Servers"
+msgstr "Server DNS"
+
+#: src/pages/network/common/ipsettingsview.cpp
+#: src/pages/network/proxy/proxypage.cpp src/pages/network/vpn/vpndialogs.cpp
+msgid "Save"
+msgstr "Simpen"
+
+#: src/pages/network/common/ipsettingsview.cpp
+msgid "These servers are asked before the network's own."
+msgstr "Server ieu ditanya samemeh server jaringan sorangan."
+
+#: src/pages/network/common/ipsettingsview.cpp
+#: src/pages/network/vpn/vpndialogs.cpp
+msgid "Saving…"
+msgstr "Nuju nyimpen…"
+
+#: src/pages/network/ethernet/ethernetpage.cpp src/window/pagelist.cpp
+msgid "Ethernet"
+msgstr "Ethernet"
+
+#: src/pages/network/hotspot/hotspotpage.cpp src/pages/network/networkpage.cpp
+#: src/pages/network/wlan/wlanpage.cpp src/window/pagelist.cpp
+msgid "Hotspot"
+msgstr "Hotspot"
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+msgid "Wi-Fi hotspot"
+msgstr "Hotspot Wi-Fi"
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "Network name"
+msgstr "Ngaran jaringan"
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+msgid "Generate password"
+msgstr "Jieun kecap sandi"
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+msgid "Turn On Wi-Fi Hotspot?"
+msgstr "Hurungkeun Hotspot Wi-Fi?"
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+#, python-brace-format
+msgid "Turning on the hotspot will disconnect from “{network}”, and you will not have access to the internet it provides."
+msgstr "Ngahurungkeun hotspot bakal megatkeun sambungan ka “{network}”, sarta Ibu/Bapa moal gaduh aksés ka internét nu disayogikeunana."
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+msgid "Turn on"
+msgstr "Hurungkeun"
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+msgid "Share this computer's internet connection by creating a Wi-Fi network other devices can join. The connection to share must come from a source other than Wi-Fi."
+msgstr "Bagikeun sambungan internét komputer ieu ku nyieun jaringan Wi-Fi nu tiasa digabungan parangkat séjén. Sambungan nu dibagikeun kedah asalna tina sumber salian ti Wi-Fi."
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+msgid "Turn on Wi-Fi to use the hotspot."
+msgstr "Hurungkeun Wi-Fi pikeun ngagunakeun hotspot."
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+msgid "System policy prohibits use as a hotspot."
+msgstr "Kabijakan sistem ngalarang pamakéan salaku hotspot."
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+#, python-brace-format
+msgid "Other devices can join “{network}” with the password below. Turn off the hotspot to use Wi-Fi on this computer."
+msgstr "Parangkat séjén tiasa gabung ka “{network}” ku kecap sandi di handap. Pareuman hotspot pikeun ngagunakeun Wi-Fi dina komputer ieu."
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+msgid "Network name cannot be empty."
+msgstr "Ngaran jaringan teu tiasa kosong."
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+msgid "Network name is too long."
+msgstr "Ngaran jaringan panjang teuing."
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+msgid "The password must have at least 8 characters."
+msgstr "Kecap sandi kedah sahanteuna 8 karakter."
+
+#: src/pages/network/hotspot/hotspotpage.cpp
+msgid "The password must have at most 63 characters."
+msgstr "Kecap sandi kedah pangseueurna 63 karakter."
+
+#: src/pages/network/networkpage.cpp src/window/pagelist.cpp
+msgid "Network"
+msgstr "Jaringan"
+
+#: src/pages/network/networkpage.cpp src/pages/network/vpn/vpnpage.cpp
+#: src/window/pagelist.cpp
+msgid "VPN"
+msgstr "VPN"
+
+#: src/pages/network/networkpage.cpp src/pages/network/proxy/proxypage.cpp
+#: src/window/pagelist.cpp
+msgid "Proxy"
+msgstr "Proksi"
+
+#: src/pages/network/proxy/proxypage.cpp
+msgid "No proxy"
+msgstr "Tanpa proksi"
+
+#: src/pages/network/proxy/proxypage.cpp
+msgid "Use proxy auto configuration URL"
+msgstr "Paké URL konfigurasi proksi otomatis"
+
+#: src/pages/network/proxy/proxypage.cpp
+msgid "Use manually specified proxy configuration"
+msgstr "Paké konfigurasi proksi nu ditangtukeun sacara manual"
+
+#: src/pages/network/proxy/proxypage.cpp
+msgid "Select file"
+msgstr "Pilih berkas"
+
+#: src/pages/network/proxy/proxypage.cpp
+msgid "HTTP proxy"
+msgstr "Proksi HTTP"
+
+#: src/pages/network/proxy/proxypage.cpp
+msgid "Port"
+msgstr "Port"
+
+#: src/pages/network/proxy/proxypage.cpp
+msgid "Also use this proxy for FTP"
+msgstr "Paké ogé proksi ieu pikeun FTP"
+
+#: src/pages/network/proxy/proxypage.cpp
+msgid "FTP proxy"
+msgstr "Proksi FTP"
+
+#: src/pages/network/proxy/proxypage.cpp
+msgid "SOCKS proxy"
+msgstr "Proksi SOCKS"
+
+#: src/pages/network/vpn/vpndialogs.cpp
+msgid "Add VPN"
+msgstr "Tambahkeun VPN"
+
+#: src/pages/network/vpn/vpndialogs.cpp
+msgid "Type"
+msgstr "Jenis"
+
+#: src/pages/network/vpn/vpndialogs.cpp
+#, python-brace-format
+msgid "{type} (Not Installed)"
+msgstr "{type} (Can Dipasang)"
+
+#: src/pages/network/vpn/vpndialogs.cpp
+msgid "Status"
+msgstr "Status"
+
+#: src/pages/network/vpn/vpndialogs.cpp
+msgid "Export to file…"
+msgstr "Ékspor ka berkas…"
+
+#: src/pages/network/vpn/vpndialogs.cpp
+msgid "Export VPN Configuration"
+msgstr "Ékspor Konfigurasi VPN"
+
+#: src/pages/network/vpn/vpndialogs.cpp src/pages/network/vpn/vpnpage.cpp
+#, python-brace-format
+msgid "VPN configurations ({patterns})"
+msgstr "Konfigurasi VPN ({patterns})"
+
+#: src/pages/network/vpn/vpndialogs.cpp
+msgid "Remove VPN"
+msgstr "Piceun VPN"
+
+#: src/pages/network/vpn/vpndialogs.cpp src/pages/network/vpn/vpnpage.cpp
+msgid "Connecting…"
+msgstr "Nuju nyambung…"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Show advanced options"
+msgstr "Témbongkeun pilihan lanjutan"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Asked on connect"
+msgstr "Ditanya nalika nyambung"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Choose…"
+msgstr "Pilih…"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Saved for all"
+msgstr "Disimpen pikeun sadayana"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Saved"
+msgstr "Disimpen"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Ask each time"
+msgstr "Tanya unggal waktos"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Not needed"
+msgstr "Teu diperyogikeun"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Hide advanced options"
+msgstr "Sumputkeun pilihan lanjutan"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Private key"
+msgstr "Konci pribadi"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Interface name"
+msgstr "Ngaran antarmuka"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "From the name"
+msgstr "Tina ngaran"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Listen port"
+msgstr "Port ngadéngékeun"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Automatic"
+msgstr "Otomatis"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Firewall mark"
+msgstr "Tanda firewall"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "MTU"
+msgstr "MTU"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Add routes for the peers' allowed IPs"
+msgstr "Tambahkeun rute pikeun IP nu diidinan peer"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Add peer"
+msgstr "Tambahkeun peer"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Peer"
+msgstr "Peer"
+
+#: src/pages/network/vpn/vpneditor.cpp src/pages/privacy/privacypage.cpp
+#: src/pages/shortcuts/shortcuteditdialog.cpp
+msgid "Remove"
+msgstr "Piceun"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Public key"
+msgstr "Konci umum"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Preshared key"
+msgstr "Konci pra-bagi"
+
+#. TRANSLATORS: a placeholder: the stored key stays unless a new one is typed.
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Kept"
+msgstr "Dijaga"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Endpoint"
+msgstr "Titik tungtung"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Allowed IPs"
+msgstr "IP nu diidinan"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "All traffic"
+msgstr "Sakabéh lalu lintas"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Keepalive"
+msgstr "Keepalive"
+
+#: src/pages/network/vpn/vpneditor.cpp
+#: src/pages/notifications/notificationspage.cpp
+msgid "Off"
+msgstr "Pareum"
+
+#: src/pages/network/vpn/vpneditor.cpp
+#, python-brace-format
+msgid "Peer {number}"
+msgstr "Peer {number}"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Available to all users"
+msgstr "Sayogi pikeun sadaya pamaké"
+
+#: src/pages/network/vpn/vpneditor.cpp
+msgid "Use only for resources on its network"
+msgstr "Paké ngan pikeun sumber daya dina jaringanna"
+
+#: src/pages/network/vpn/vpneditor.cpp
+#, python-brace-format
+msgid "Install {package} to set up this kind of VPN."
+msgstr "Pasang {package} pikeun nyetél VPN jenis ieu."
+
+#: src/pages/network/vpn/vpnpage.cpp
+msgid "Add your user name to connect."
+msgstr "Tambahkeun ngaran pamaké Ibu/Bapa pikeun nyambung."
+
+#: src/pages/network/vpn/vpnpage.cpp
+msgid "Add VPN…"
+msgstr "Tambahkeun VPN…"
+
+#: src/pages/network/vpn/vpnpage.cpp
+msgid "Import from file…"
+msgstr "Impor tina berkas…"
+
+#: src/pages/network/vpn/vpnpage.cpp
+msgid "Import VPN Configuration"
+msgstr "Impor Konfigurasi VPN"
+
+#: src/pages/network/vpn/vpnpage.cpp
+msgid "Importing…"
+msgstr "Nuju ngimpor…"
+
+#: src/pages/network/vpn/vpnpage.cpp
+msgid "Import the configuration file your VPN provider gives you, such as an OpenVPN .ovpn or a WireGuard .conf file."
+msgstr "Impor berkas konfigurasi nu dipasihkeun panyadia VPN Ibu/Bapa, sapertos berkas OpenVPN .ovpn atanapi WireGuard .conf."
+
+#. TRANSLATORS: a Wi-Fi network's security: none, anyone can join.
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "Open"
+msgstr "Buka"
+
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "WPA Enterprise"
+msgstr "WPA Enterprise"
+
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "WPA2 Enterprise"
+msgstr "WPA2 Enterprise"
+
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "WPA3 Enterprise"
+msgstr "WPA3 Enterprise"
+
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "Add Other Network"
+msgstr "Tambahkeun Jaringan Séjén"
+
+#: src/pages/network/wlan/newnetworkdialog.cpp
+#, python-brace-format
+msgid "Join “{network}”"
+msgstr "Gabung ka “{network}”"
+
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "Username"
+msgstr "Ngaran pamaké"
+
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "This network signs in with a certificate, which can't be set up here yet."
+msgstr "Jaringan ieu asup ku sértifikat, nu can tiasa disetél di dieu."
+
+#: src/pages/network/wlan/newnetworkdialog.cpp
+msgid "Join"
+msgstr "Gabung"
+
+#: src/pages/network/wlan/wlanpage.cpp src/window/pagelist.cpp
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#: src/pages/network/wlan/wlanpage.cpp
+msgid "Known networks"
+msgstr "Jaringan nu dikenal"
+
+#: src/pages/network/wlan/wlanpage.cpp
+msgid "Other networks"
+msgstr "Jaringan séjén"
+
+#: src/pages/network/wlan/wlanpage.cpp
+msgid "Add other…"
+msgstr "Tambahkeun séjén…"
+
+#: src/pages/notifications/notificationspage.cpp src/window/pagelist.cpp
+msgid "Notifications"
+msgstr "Béwara"
+
+#: src/pages/notifications/notificationspage.cpp
+msgid "Do Not Disturb"
+msgstr "Ulah Ngaganggu"
+
+#: src/pages/notifications/notificationspage.cpp
+msgid "Applications"
+msgstr "Aplikasi"
+
+#: src/pages/notifications/notificationspage.cpp
+msgid "Applications appear here after they send a notification."
+msgstr "Aplikasi bakal muncul di dieu sanggeus ngirim béwara."
+
+#: src/pages/notifications/notificationspage.cpp
+msgid "Notifications that skip the banner still go to the Notification Center. Turned off, they are dropped."
+msgstr "Béwara nu ngalangkungan spanduk tetep asup ka Puseur Béwara. Mun dipareuman, éta dibuang."
+
+#: src/pages/notifications/notificationspage.cpp
+msgid "Banners"
+msgstr "Spanduk"
+
+#: src/pages/notifications/notificationspage.cpp
+msgid "Notification Center only"
+msgstr "Puseur Béwara waé"
+
+#: src/pages/power/powerpage.cpp
+#, python-brace-format
+msgid "{n} minute"
+msgid_plural "{n} minutes"
+msgstr[0] "{n} menit"
+
+#: src/pages/power/powerpage.cpp
+msgid "Power save"
+msgstr "Héman daya"
+
+#: src/pages/power/powerpage.cpp
+msgid "Balanced"
+msgstr "Saimbang"
+
+#: src/pages/power/powerpage.cpp
+msgid "Performance"
+msgstr "Kinerja"
+
+#: src/pages/power/powerpage.cpp src/window/pagelist.cpp
+msgid "Power"
+msgstr "Daya"
+
+#: src/pages/power/powerpage.cpp
+msgid "Turn off display when inactive on battery"
+msgstr "Pareuman layar nalika teu aktip dina batré"
+
+#: src/pages/power/powerpage.cpp
+msgid "Reduces performance and power consumption."
+msgstr "Ngurangan kinerja jeung konsumsi daya."
+
+#: src/pages/power/powerpage.cpp
+msgid "Standard performance and power consumption."
+msgstr "Kinerja jeung konsumsi daya standar."
+
+#: src/pages/power/powerpage.cpp
+msgid "Higher performance, with more power consumption and heat."
+msgstr "Kinerja leuwih luhur, kalayan konsumsi daya jeung panas leuwih loba."
+
+#: src/pages/power/powerpage.cpp
+msgid "Performance is limited because the computer is on your lap."
+msgstr "Kinerja diwatesan sabab komputer aya dina pangkonan."
+
+#: src/pages/power/powerpage.cpp
+msgid "Performance is limited because the computer is too hot."
+msgstr "Kinerja diwatesan sabab komputer teuing panas."
+
+#: src/pages/power/powerpage.cpp
+msgid "Performance is currently limited."
+msgstr "Kinerja nuju diwatesan."
+
+#: src/pages/power/powerpage.cpp
+msgid "Turn off display when inactive on power adapter"
+msgstr "Pareuman layar nalika teu aktip dina adaptor daya"
+
+#: src/pages/power/powerpage.cpp
+msgid "Turn off display when inactive"
+msgstr "Pareuman layar nalika teu aktip"
+
+#: src/pages/power/powerpage.cpp
+msgid "Prevent automatic sleeping on power adapter when the display is off"
+msgstr "Cegah anteng otomatis dina adaptor daya nalika layar pareum"
+
+#: src/pages/power/powerpage.cpp
+msgid "Prevent automatic sleeping when the display is off"
+msgstr "Cegah anteng otomatis nalika layar pareum"
+
+#: src/pages/privacy/privacypage.cpp src/window/pagelist.cpp
+msgid "Privacy"
+msgstr "Privasi"
+
+#: src/pages/privacy/privacypage.cpp
+msgid "Computer control"
+msgstr "Kontrol komputer"
+
+#: src/pages/privacy/privacypage.cpp
+msgid "Computer control is managed by the Bayu compositor, which is not running."
+msgstr "Kontrol komputer diatur ku kompositor Bayu, nu teu keur jalan."
+
+#: src/pages/privacy/privacypage.cpp
+msgid "No apps are allowed to control this computer without asking."
+msgstr "Euweuh aplikasi nu diidinan ngontrol komputer ieu tanpa nanya."
+
+#: src/pages/privacy/privacypage.cpp
+msgid "An app you always allow can let its agent see the screen and use the pointer and keyboard without asking first. The Stop button in the status bar still shows while it is in control."
+msgstr "Aplikasi nu salawasna diidinan tiasa ngantep agénna ningali layar jeung ngagunakeun panunjuk sarta kibor tanpa nanya heula. Tombol Eureun dina bar status tetep nembongan nalika nuju ngontrol."
+
+#: src/pages/shortcuts/shortcuteditdialog.cpp
+msgid "Press the new shortcut…"
+msgstr "Pencét potong kompas anyar…"
+
+#: src/pages/shortcuts/shortcuteditdialog.cpp
+msgid "Press the shortcut…"
+msgstr "Pencét potong kompas…"
+
+#: src/pages/shortcuts/shortcuteditdialog.cpp
+msgid "No shortcut. Add one below."
+msgstr "Euweuh potong kompas. Tambahkeun di handap."
+
+#: src/pages/shortcuts/shortcuteditdialog.cpp
+msgid "Add shortcut"
+msgstr "Tambahkeun potong kompas"
+
+#: src/pages/shortcuts/shortcuteditdialog.cpp
+msgid "Restore default"
+msgstr "Pulihkeun standar"
+
+#: src/pages/shortcuts/shortcuteditdialog.cpp
+msgid "Change"
+msgstr "Robah"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "General"
+msgstr "Umum"
+
+#. TRANSLATORS: the group of keyboard shortcuts that act on windows.
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Windows"
+msgstr "Jandéla"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Desks"
+msgstr "Méja"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Screenshots and Recording"
+msgstr "Potrét Layar jeung Rékaman"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Open the launcher"
+msgstr "Buka peluncur"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Lock the screen"
+msgstr "Konci layar"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Show the clipboard history"
+msgstr "Témbongkeun riwayat papan klip"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to the next window"
+msgstr "Ganti ka jandéla saterusna"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to the previous window"
+msgstr "Ganti ka jandéla samemehna"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Show all windows"
+msgstr "Témbongkeun sakabéh jandéla"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Show the desktop"
+msgstr "Témbongkeun dékstop"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Maximize or restore the window"
+msgstr "Gedékeun atanapi pulihkeun jandéla"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Minimize the window"
+msgstr "Minimalkeun jandéla"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Quit the application"
+msgstr "Kaluar tina aplikasi"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Hide the application"
+msgstr "Sumputkeun aplikasi"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Hide other applications"
+msgstr "Sumputkeun aplikasi séjén"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Toggle full screen"
+msgstr "Ganti layar pinuh"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Snap the window to the left"
+msgstr "Rapétkeun jandéla ka kenca"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Snap the window to the right"
+msgstr "Rapétkeun jandéla ka katuhu"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Close the window"
+msgstr "Tutup jandéla"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Move the window to the next display"
+msgstr "Pindahkeun jandéla ka layar saterusna"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to the desk on the left"
+msgstr "Ganti ka méja di kenca"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to the desk on the right"
+msgstr "Ganti ka méja di katuhu"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Move the window to the desk on the left"
+msgstr "Pindahkeun jandéla ka méja di kenca"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Move the window to the desk on the right"
+msgstr "Pindahkeun jandéla ka méja di katuhu"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Add a desk"
+msgstr "Tambahkeun méja"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Remove the desk"
+msgstr "Piceun méja"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to desk 1"
+msgstr "Ganti ka méja 1"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to desk 2"
+msgstr "Ganti ka méja 2"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to desk 3"
+msgstr "Ganti ka méja 3"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to desk 4"
+msgstr "Ganti ka méja 4"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to desk 5"
+msgstr "Ganti ka méja 5"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to desk 6"
+msgstr "Ganti ka méja 6"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to desk 7"
+msgstr "Ganti ka méja 7"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Switch to desk 8"
+msgstr "Ganti ka méja 8"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Show the window on every desk"
+msgstr "Témbongkeun jandéla dina unggal méja"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Save a picture of the screen"
+msgstr "Simpen gambar layar"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Copy a picture of the screen"
+msgstr "Salin gambar layar"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Save a picture of the selected area"
+msgstr "Simpen gambar wewengkon nu dipilih"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Copy a picture of the selected area"
+msgstr "Salin gambar wewengkon nu dipilih"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Screenshot and recording options"
+msgstr "Pilihan potrét layar jeung rékaman"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Stop screen recording"
+msgstr "Eureun ngarékam layar"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Esc"
+msgstr "Esc"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Enter"
+msgstr "Enter"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Space"
+msgstr "Spasi"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Backspace"
+msgstr "Backspace"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Delete"
+msgstr "Hapus"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Insert"
+msgstr "Insert"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Home"
+msgstr "Imah"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "End"
+msgstr "End"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Page Up"
+msgstr "Page Up"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Page Down"
+msgstr "Page Down"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Print Screen"
+msgstr "Print Screen"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Tab"
+msgstr "Tab"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Menu"
+msgstr "Ménu"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Volume Up"
+msgstr "Volume Naék"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Volume Down"
+msgstr "Volume Turun"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Mute"
+msgstr "Cicingkeun"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Brightness Up"
+msgstr "Kacaangan Naék"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Brightness Down"
+msgstr "Kacaangan Turun"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Play/Pause"
+msgstr "Maénkeun/Eureun Samentawis"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Pause"
+msgstr "Eureun Samentawis"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Next Track"
+msgstr "Lagu Saterusna"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Previous Track"
+msgstr "Lagu Samemehna"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Stop"
+msgstr "Eureun"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Calculator"
+msgstr "Kalkulator"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "File Manager"
+msgstr "Manajer Berkas"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Search"
+msgstr "Téangan"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Home Page"
+msgstr "Kaca Utama"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgctxt "key"
+msgid "Mail"
+msgstr "Surat"
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "The shortcut service is not available."
+msgstr "Layanan potong kompas teu sayogi."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+#, python-brace-format
+msgid "This shortcut is already used by \"{action}\"."
+msgstr "Potong kompas ieu parantos dipaké ku \"{action}\"."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+#, python-brace-format
+msgid "This shortcut is used by \"{action}\". Press it again to reassign it."
+msgstr "Potong kompas ieu dipaké ku \"{action}\". Pencét deui pikeun nugaskeun deui."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Include Control, Option or Command, or use a function key."
+msgstr "Sertakeun Control, Option atanapi Command, atanapi paké konci fungsi."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Include Ctrl, Alt or Meta, or use a function key."
+msgstr "Sertakeun Ctrl, Alt atanapi Meta, atanapi paké konci fungsi."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Shift cannot be the only modifier. Add Control, Option or Command."
+msgstr "Shift teu tiasa jadi hiji-hijina modifier. Tambahkeun Control, Option atanapi Command."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Shift cannot be the only modifier. Add Ctrl, Alt or Meta."
+msgstr "Shift teu tiasa jadi hiji-hijina modifier. Tambahkeun Ctrl, Alt atanapi Meta."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "This key cannot be used in a shortcut."
+msgstr "Konci ieu teu tiasa dipaké dina potong kompas."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "This action already has the maximum of five shortcuts."
+msgstr "Aksi ieu parantos gaduh maksimum lima potong kompas."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Shortcuts without both Control and Command may be intercepted before applications see them. Press it again to keep it."
+msgstr "Potong kompas tanpa Control jeung Command bisa dicegat samemeh katingali ku aplikasi. Pencét deui pikeun nyimpen."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Shortcuts without Meta may be intercepted before applications see them. Press it again to keep it."
+msgstr "Potong kompas tanpa Meta bisa dicegat samemeh katingali ku aplikasi. Pencét deui pikeun nyimpen."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "Some default shortcuts are in use by other actions and were not restored."
+msgstr "Sababaraha potong kompas standar dipaké ku aksi séjén sarta teu dipulihkeun."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "This shortcut no longer exists."
+msgstr "Potong kompas ieu parantos teu aya."
+
+#: src/pages/shortcuts/shortcutsmodel.cpp
+msgid "The shortcut could not be changed."
+msgstr "Potong kompas teu tiasa dirobah."
+
+#: src/pages/shortcuts/shortcutspage.cpp
+msgid "Keyboard shortcuts are managed by the Bayu compositor, which is not running."
+msgstr "Potong kompas kibor diatur ku kompositor Bayu, nu teu keur jalan."
+
+#: src/pages/shortcuts/shortcutspage.cpp
+msgid "Restore all defaults"
+msgstr "Pulihkeun sakabéh standar"
+
+#: src/pages/shortcuts/shortcutspage.cpp
+msgid "Click a system shortcut to change it. Shortcuts with both Control and Command are the safest choice: applications never get them."
+msgstr "Klik potong kompas sistem pikeun ngarobahna. Potong kompas nu ngagunakeun Control jeung Command mangrupa pilihan nu pangamanna: aplikasi pernah nampa éta."
+
+#: src/pages/shortcuts/shortcutspage.cpp
+msgid "Click a system shortcut to change it. Shortcuts with Meta are the safest choice: applications never use them."
+msgstr "Klik potong kompas sistem pikeun ngarobahna. Potong kompas nu ngagunakeun Meta mangrupa pilihan nu pangamanna: aplikasi pernah ngagunakeunana."
+
+#: src/pages/shortcuts/shortcutspage.cpp
+msgid "Every shortcut goes back to its default. Your changes will be lost."
+msgstr "Unggal potong kompas balik ka standarna. Parobahan Ibu/Bapa bakal leungit."
+
+#: src/pages/shortcuts/shortcutspage.cpp
+msgid "Restore"
+msgstr "Pulihkeun"
+
+#: src/pages/sound/soundpage.cpp
+msgid "Virtual"
+msgstr "Virtual"
+
+#: src/pages/sound/soundpage.cpp
+msgid "Built-in"
+msgstr "Bawaan"
+
+#: src/pages/sound/soundpage.cpp src/window/pagelist.cpp
+msgid "Sound"
+msgstr "Sora"
+
+#: src/pages/sound/soundpage.cpp
+msgid "Connecting to the audio service…"
+msgstr "Nuju nyambung ka layanan audio…"
+
+#: src/pages/sound/soundpage.cpp
+msgid "Dismiss"
+msgstr "Tutup"
+
+#: src/pages/sound/soundpage.cpp
+msgid "Output"
+msgstr "Kaluaran"
+
+#: src/pages/sound/soundpage.cpp
+msgid "Input"
+msgstr "Input"
+
+#: src/pages/sound/soundpage.cpp
+msgid "Output volume"
+msgstr "Volume kaluaran"
+
+#: src/pages/sound/soundpage.cpp
+msgid "Balance"
+msgstr "Kasaimbangan"
+
+#: src/pages/sound/soundpage.cpp src/widgets/sliderrow.cpp
+msgctxt "balance"
+msgid "Left"
+msgstr "Kenca"
+
+#: src/pages/sound/soundpage.cpp src/widgets/sliderrow.cpp
+msgctxt "balance"
+msgid "Right"
+msgstr "Katuhu"
+
+#: src/pages/sound/soundpage.cpp
+msgid "Input volume"
+msgstr "Volume input"
+
+#: src/pages/sound/soundpage.cpp
+msgid "Input level"
+msgstr "Tingkat input"
+
+#: src/pages/sound/soundpage.cpp
+#, python-brace-format
+msgid "Could not apply the audio change: {error}"
+msgstr "Teu tiasa nerapkeun parobahan audio: {error}"
+
+#: src/pages/sound/soundpage.cpp
+msgid "No input devices"
+msgstr "Euweuh parangkat input"
+
+#: src/pages/sound/soundpage.cpp
+msgid "No output devices"
+msgstr "Euweuh parangkat kaluaran"
+
+#: src/pages/touchpad/touchpadpage.cpp src/window/pagelist.cpp
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#: src/pages/touchpad/touchpadpage.cpp
+msgid "Enable"
+msgstr "Aktipkeun"
+
+#: src/pages/touchpad/touchpadpage.cpp
+msgid "Disable when a mouse is connected"
+msgstr "Pareuman nalika beurit nyambung"
+
+#: src/pages/touchpad/touchpadpage.cpp
+msgid "Disable while typing"
+msgstr "Pareuman nalika ngetik"
+
+#: src/pages/touchpad/touchpadpage.cpp
+msgid "Tap to click"
+msgstr "Ketuk pikeun ngaklik"
+
+#: src/pages/touchpad/touchpadpage.cpp
+msgid "Tap and drag"
+msgstr "Ketuk jeung sered"
+
+#: src/pages/touchpad/touchpadpage.cpp
+msgid "Secondary click"
+msgstr "Klik kadua"
+
+#: src/pages/touchpad/touchpadpage.cpp
+msgid "Two-finger press"
+msgstr "Pencét dua ramo"
+
+#: src/pages/touchpad/touchpadpage.cpp
+msgid "Bottom-right corner press"
+msgstr "Pencét juru handap katuhu"
+
+#: src/pages/touchpad/touchpadpage.cpp
+msgid "Scroll speed"
+msgstr "Laju gulung"
+
+#: src/pages/touchscreen/touchscreenpage.cpp src/window/pagelist.cpp
+msgid "Touchscreen"
+msgstr "Layar sentuh"
+
+#: src/pages/wallpaper/wallpapergrid.cpp src/pages/wallpaper/wallpaperpage.cpp
+msgid "Add wallpaper"
+msgstr "Tambahkeun rarapihan"
+
+#. TRANSLATORS: the number of wallpapers after a section's title, such as "(12)".
+#: src/pages/wallpaper/wallpapergrid.cpp
+#, python-brace-format
+msgid "({count})"
+msgstr "({count})"
+
+#: src/pages/wallpaper/wallpapergrid.cpp
+msgid "Show less"
+msgstr "Témbongkeun saeutik"
+
+#: src/pages/wallpaper/wallpapergrid.cpp
+msgid "Show all"
+msgstr "Témbongkeun kabéh"
+
+#: src/pages/wallpaper/wallpaperpage.cpp src/window/pagelist.cpp
+msgid "Wallpaper"
+msgstr "Rarapihan"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Your wallpapers"
+msgstr "Rarapihan Ibu/Bapa"
+
+#: src/pages/wallpaper/wallpaperpage.cpp src/window/pagelist.cpp
+msgid "System"
+msgstr "Sistem"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Colors"
+msgstr "Warna"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Choose file…"
+msgstr "Pilih berkas…"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Choose folder…"
+msgstr "Pilih folder…"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Add Wallpaper Folder"
+msgstr "Tambahkeun Folder Rarapihan"
+
+#: src/widgets/searchfield.cpp src/window/sidebar.cpp
+msgid "Search"
+msgstr "Téangan"
+
+#: src/window/page.cpp
+msgid "This page is not ported yet."
+msgstr "Kaca ieu can dipindahkeun."
+
+#: src/window/pagelist.cpp
+msgid "wireless, WLAN, network, internet, password, DNS, IP address"
+msgstr "nirkabel, WLAN, jaringan, internét, kecap sandi, DNS, alamat IP, wireless, network, internet, password"
+
+#: src/window/pagelist.cpp
+msgid "wired, LAN, network, internet, cable, IP address"
+msgstr "kabel, LAN, jaringan, internét, alamat IP, wired, network, internet, cable"
+
+#: src/window/pagelist.cpp
+msgid "wireless, devices, pairing, headphones"
+msgstr "nirkabel, parangkat, pasangan, hérdfon, wireless, devices, pairing, headphones"
+
+#: src/window/pagelist.cpp
+msgid "VPN, proxy, hotspot, tethering, internet"
+msgstr "VPN, proksi, hotspot, tethering, internét, proxy, internet"
+
+#: src/window/pagelist.cpp
+msgid "Desktop"
+msgstr "Dékstop"
+
+#: src/window/pagelist.cpp
+msgid "theme, dark mode, light mode, accent color, dim wallpaper"
+msgstr "téma, mode poék, mode caang, warna aksén, theme, dark mode, light mode, accent color"
+
+#: src/window/pagelist.cpp
+msgid "background, desktop picture, image"
+msgstr "latar, gambar dékstop, gambar, background, desktop picture, image"
+
+#: src/window/pagelist.cpp
+msgid "taskbar, position, size, auto hide, glass effect"
+msgstr "dok, posisi, ukuran, sumputkeun otomatis, éféktif kaca, dock, position, size, auto hide"
+
+#: src/window/pagelist.cpp
+msgid "do not disturb, banners, alerts"
+msgstr "ulah ngaganggu, spanduk, bewara, do not disturb, banners, alerts"
+
+#: src/window/pagelist.cpp
+msgid "Devices"
+msgstr "Parangkat"
+
+#: src/window/pagelist.cpp
+msgid "monitor, screen, resolution, refresh rate, scaling, brightness, rotation"
+msgstr "monitor, layar, résolusi, laju ségeran, skala, kacaangan, rotasi, screen, resolution, refresh rate, scaling, brightness, rotation"
+
+#: src/window/pagelist.cpp
+msgid "audio, volume, speakers, headphones, microphone, input, output"
+msgstr "audio, volume, spéker, hérdfon, mikropon, input, kaluaran, speakers, headphones, microphone, output"
+
+#: src/window/pagelist.cpp
+msgid "input method, key repeat, keyboard style"
+msgstr "métode input, pengulangan konci, gaya kibor, input method, key repeat, keyboard style"
+
+#: src/window/pagelist.cpp
+msgid "pointer speed, acceleration, natural scrolling, left-handed"
+msgstr "laju panunjuk, akselerasi, gulung alami, leungeun kenca, pointer speed, acceleration, natural scrolling, left-handed"
+
+#: src/window/pagelist.cpp
+msgid "trackpad, tap to click, natural scrolling, secondary click, pointer speed"
+msgstr "trackpad, ketuk pikeun ngaklik, gulung alami, klik kadua, laju panunjuk, tap to click, natural scrolling, secondary click, pointer speed"
+
+#: src/window/pagelist.cpp
+msgid "touch, touch screen, touch panel"
+msgstr "sentuh, layar sentuh, panél sentuh, touch, touch screen, touch panel"
+
+#: src/window/pagelist.cpp
+msgid "accounts, password, login, administrator, avatar"
+msgstr "akun, kecap sandi, asup, administrator, avatar, accounts, password, login"
+
+#: src/window/pagelist.cpp
+msgid "region, locale, system language"
+msgstr "wewengkon, lokal, basa sistem, region, locale, system language"
+
+#: src/window/pagelist.cpp
+msgid "clock, time zone, 24-hour time, NTP, sync"
+msgstr "jam, zona waktos, waktos 24 jam, NTP, sinkron, clock, time zone, 24-hour time, sync"
+
+#: src/window/pagelist.cpp
+msgid "web browser, email client, terminal"
+msgstr "pangotéktak wéb, klién surélék, terminal, web browser, email client"
+
+#: src/window/pagelist.cpp
+msgid "computer control, agents, allowed apps, permissions"
+msgstr "kontrol komputer, agén, aplikasi diidinan, idin, computer control, agents, allowed apps, permissions"
+
+#: src/window/pagelist.cpp
+msgid "charge, charging limit, battery health, capacity, history, percentage"
+msgstr "ngecas, watesan ngecas, kaséhatan batré, kapasitas, riwayat, perséntase, charge, charging limit, battery health, capacity, history, percentage"
+
+#: src/window/pagelist.cpp
+msgid "energy, performance, power saving, sleep, turn off display"
+msgstr "énergi, kinerja, héman daya, anteng, pareuman layar, energy, performance, power saving, sleep, turn off display"
+
+#: src/window/pagelist.cpp
+msgid "system, version, kernel, processor, memory, storage, hardware"
+msgstr "sistem, vérsi, kernel, prosesor, mémori, panyimpenan, hardware, system, version, processor, memory, storage"
+
+#: src/window/pagelist.cpp
+msgid "VPN, WireGuard, OpenVPN, tunnel, network"
+msgstr "VPN, WireGuard, OpenVPN, torowongan, jaringan, tunnel, network"
+
+#: src/window/pagelist.cpp
+msgid "HTTP, HTTPS, SOCKS, FTP, PAC, network"
+msgstr "HTTP, HTTPS, SOCKS, FTP, PAC, jaringan, network"
+
+#: src/window/pagelist.cpp
+msgid "tethering, share internet, access point, Wi-Fi, wireless"
+msgstr "tethering, bagikeun internét, titik aksés, Wi-Fi, nirkabel, share internet, access point, wireless"
+
+#: src/window/pagelist.cpp
+msgid "general font, fixed font, font size, anti-aliasing, hinting"
+msgstr "fon umum, fon tetep, ukuran fon, anti-aliasing, hinting, general font, fixed font, font size"
+
+#: src/window/pagelist.cpp
+msgid "icons"
+msgstr "ikon, icons"
+
+#: src/window/pagelist.cpp
+msgid "cursor theme, cursor size, pointer"
+msgstr "téma kursor, ukuran kursor, panunjuk, cursor theme, cursor size, pointer"
+
+#: src/window/pagelist.cpp
+msgid "Keyboard Layout"
+msgstr "Tata Letak Kibor"
+
+#: src/window/pagelist.cpp
+msgid "input source"
+msgstr "sumber input"
+
+#: src/window/pagelist.cpp
+msgid "screen corners, show desktop, show all windows"
+msgstr "juru layar, témbongkeun dékstop, témbongkeun sakabéh jandéla, screen corners, show desktop, show all windows"
+
+#: src/window/pagelist.cpp
+msgid "hotkeys, key bindings"
+msgstr "konci pinten, hotkeys, key bindings"
+
+#: src/window/settingswindow.cpp src/window/sidebar.cpp bayu-settings.desktop
+msgid "Settings"
+msgstr "Setélan"
+
+#: src/window/sidebar.cpp
+msgid "No results"
+msgstr "Euweuh hasil"

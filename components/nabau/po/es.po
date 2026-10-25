@@ -1,0 +1,1385 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: nabau\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"PO-Revision-Date: 2026-10-25 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/anaconda_backend.cpp
+msgid "Starting the installation backend"
+msgstr "Iniciando el motor de instalación"
+
+#: src/anaconda_backend.cpp
+msgid "The installer needs administrator rights, which were not given."
+msgstr "El instalador necesita derechos de administrador, que no se concedieron."
+
+#: src/anaconda_backend.cpp
+msgid "The installation backend stopped unexpectedly. Its log is in /tmp/anaconda.log."
+msgstr "El motor de instalación se detuvo inesperadamente. Su registro está en /tmp/anaconda.log."
+
+#: src/anaconda_backend.cpp
+msgid "Cannot start the installation backend (pkexec is missing)."
+msgstr "No se puede iniciar el motor de instalación (falta pkexec)."
+
+#: src/anaconda_backend.cpp
+msgid "This partition holds LVM or Btrfs volumes. Delete it to use its space."
+msgstr "Esta partición contiene volúmenes LVM o Btrfs. Elimínala para usar su espacio."
+
+#: src/anaconda_backend.cpp
+msgid "This partition cannot be resized."
+msgstr "No se puede cambiar el tamaño de esta partición."
+
+#: src/anaconda_backend.cpp
+msgid "Choose a disk first."
+msgstr "Elige primero un disco."
+
+#: src/anaconda_backend.cpp
+msgid "This disk already has a root (/) mount point."
+msgstr "Este disco ya tiene un punto de montaje raíz (/)."
+
+#: src/anaconda_backend.cpp
+msgid "There is not enough free space left for the system."
+msgstr "No queda espacio libre suficiente para el sistema."
+
+#: src/anaconda_backend.cpp
+msgid "This live system"
+msgstr "Este sistema en vivo"
+
+#: src/anaconda_backend.cpp
+msgid "The desktop on this media, as you see it now: Files, Terminal, Settings"
+msgstr "El escritorio de este medio, tal como lo ves ahora: Archivos, Terminal, Ajustes"
+
+#: src/anaconda_backend.cpp
+msgid "Development Tools"
+msgstr "Herramientas de desarrollo"
+
+#: src/anaconda_backend.cpp
+msgid "gcc, make, git, headers"
+msgstr "gcc, make, git, cabeceras"
+
+#: src/anaconda_backend.cpp
+msgid "Container Tools"
+msgstr "Herramientas de contenedores"
+
+#: src/anaconda_backend.cpp
+msgid "podman, buildah, skopeo"
+msgstr "podman, buildah, skopeo"
+
+#: src/anaconda_backend.cpp
+msgid "RPM Development"
+msgstr "Desarrollo de RPM"
+
+#: src/anaconda_backend.cpp
+msgid "rpmbuild, mock"
+msgstr "rpmbuild, mock"
+
+#: src/anaconda_backend.cpp
+msgid "Headless Management"
+msgstr "Gestión sin interfaz gráfica"
+
+#: src/anaconda_backend.cpp
+msgid "cockpit, remote administration"
+msgstr "cockpit, administración remota"
+
+#: src/anaconda_backend.cpp
+msgid "Scientific Support"
+msgstr "Soporte científico"
+
+#: src/anaconda_backend.cpp
+msgid "Math and science libraries"
+msgstr "Bibliotecas de matemáticas y ciencias"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "==> {path} <=="
+msgstr "==> {path} <=="
+
+#: src/anaconda_backend.cpp
+msgid "(cannot be read)"
+msgstr "(no se puede leer)"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "Cannot connect to the installation backend at {address}."
+msgstr "No se puede conectar con el motor de instalación en {address}."
+
+#: src/anaconda_backend.cpp
+msgid "Reading the disks"
+msgstr "Leyendo los discos"
+
+#: src/anaconda_backend.cpp
+msgid "Lay out the disk first."
+msgstr "Distribuye primero el disco."
+
+#: src/anaconda_backend.cpp
+msgid "Finishing the installed system"
+msgstr "Finalizando el sistema instalado"
+
+#: src/anaconda_backend.cpp
+msgid "Finishing the system did not complete; see /tmp/nabau-post.log"
+msgstr "No se completó la finalización del sistema; consulta /tmp/nabau-post.log"
+
+#: src/anaconda_backend.cpp
+msgid "Complete"
+msgstr "Completado"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "Wired · {name}"
+msgstr "Cableada · {name}"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "Connected · {rate}"
+msgstr "Conectado · {rate}"
+
+#: src/network_manager.cpp
+msgid "Connected"
+msgstr "Conectado"
+
+#: src/network_manager.cpp
+msgid "Cable connected · not set up"
+msgstr "Cable conectado · sin configurar"
+
+#: src/network_manager.cpp
+msgid "Cable unplugged"
+msgstr "Cable desconectado"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "{security} · secured"
+msgstr "{security} · protegida"
+
+#: src/network_manager.cpp
+msgid "Open network"
+msgstr "Red abierta"
+
+#: src/network_manager.cpp
+msgid "Personal hotspot"
+msgstr "Punto de acceso personal"
+
+#: src/network_manager.cpp
+msgid "NetworkManager is not running."
+msgstr "NetworkManager no se está ejecutando."
+
+#: src/ui/disk_editor.cpp
+msgid "unformatted"
+msgstr "sin formatear"
+
+#: src/ui/disk_editor.cpp
+msgid "encrypted"
+msgstr "cifrado"
+
+#: src/ui/disk_editor.cpp
+msgid "Free space"
+msgstr "Espacio libre"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "From {min} to {max}"
+msgstr "De {min} a {max}"
+
+#: src/ui/disk_editor.cpp
+msgid "MOUNT POINTS"
+msgstr "PUNTOS DE MONTAJE"
+
+#: src/ui/disk_editor.cpp
+msgid "PENDING CHANGES"
+msgstr "CAMBIOS PENDIENTES"
+
+#: src/ui/disk_editor.cpp
+msgid "Reset all"
+msgstr "Restablecer todo"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "{size} free"
+msgstr "{size} libres"
+
+#: src/ui/disk_editor.cpp
+msgid "Select a part of a disk above."
+msgstr "Selecciona una parte de un disco arriba."
+
+#: src/ui/disk_editor.cpp
+msgid "Too small to hold a mount point."
+msgstr "Demasiado pequeño para contener un punto de montaje."
+
+#: src/ui/disk_editor.cpp
+msgid "Create the recommended layout here"
+msgstr "Crear aquí la distribución recomendada"
+
+#: src/ui/disk_editor.cpp
+msgid "or add a mount point yourself:"
+msgstr "o añade tú mismo un punto de montaje:"
+
+#: src/ui/disk_editor.cpp
+msgid "Mount point"
+msgstr "Punto de montaje"
+
+#: src/ui/disk_editor.cpp
+msgid "Size"
+msgstr "Tamaño"
+
+#: src/ui/disk_editor.cpp
+msgid "File system"
+msgstr "Sistema de archivos"
+
+#: src/ui/disk_editor.cpp
+msgid "Device type"
+msgstr "Tipo de dispositivo"
+
+#: src/ui/disk_editor.cpp
+msgid "LVM"
+msgstr "LVM"
+
+#: src/ui/disk_editor.cpp
+msgid "LVM thin provisioning"
+msgstr "Aprovisionamiento ligero LVM"
+
+#: src/ui/disk_editor.cpp
+msgid "Btrfs"
+msgstr "Btrfs"
+
+#: src/ui/disk_editor.cpp
+msgid "Standard partition"
+msgstr "Partición estándar"
+
+#: src/ui/disk_editor.cpp
+msgid "Encrypt"
+msgstr "Cifrar"
+
+#: src/ui/disk_editor.cpp
+msgid "Add mount point"
+msgstr "Añadir punto de montaje"
+
+#: src/ui/disk_editor.cpp src/ui/pages/review_page.cpp
+msgid "Device"
+msgstr "Dispositivo"
+
+#: src/ui/disk_editor.cpp
+msgid "Format"
+msgstr "Formato"
+
+#: src/ui/disk_editor.cpp
+msgid "Label"
+msgstr "Etiqueta"
+
+#: src/ui/disk_editor.cpp src/ui/pages/destination_page.cpp
+msgid "none"
+msgstr "ninguna"
+
+#: src/ui/disk_editor.cpp
+msgid "State"
+msgstr "Estado"
+
+#: src/ui/disk_editor.cpp
+msgid "on the disk now"
+msgstr "en el disco ahora"
+
+#: src/ui/disk_editor.cpp
+msgid "to be created"
+msgstr "por crear"
+
+#: src/ui/disk_editor.cpp
+msgid "Use…"
+msgstr "Usar…"
+
+#: src/ui/disk_editor.cpp
+msgid "Change…"
+msgstr "Cambiar…"
+
+#: src/ui/disk_editor.cpp
+msgid "Resize…"
+msgstr "Redimensionar…"
+
+#: src/ui/disk_editor.cpp
+msgid "Delete"
+msgstr "Eliminar"
+
+#: src/ui/disk_editor.cpp
+msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
+msgstr "Contiene volúmenes LVM o Btrfs. Elimínala para usar su espacio."
+
+#: src/ui/disk_editor.cpp
+msgid "Volumes in it:"
+msgstr "Volúmenes que contiene:"
+
+#: src/ui/disk_editor.cpp
+msgid "USE THIS PARTITION"
+msgstr "USAR ESTA PARTICIÓN"
+
+#: src/ui/disk_editor.cpp
+msgid "CHANGE THIS MOUNT POINT"
+msgstr "CAMBIAR ESTE PUNTO DE MONTAJE"
+
+#: src/ui/disk_editor.cpp
+msgid "Format it (erases what is on it)"
+msgstr "Formatearla (borra lo que contiene)"
+
+#: src/ui/disk_editor.cpp src/ui/pages/install_page.cpp
+#: src/ui/pages/network_page.cpp
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/ui/disk_editor.cpp
+msgid "Apply"
+msgstr "Aplicar"
+
+#: src/ui/disk_editor.cpp
+msgid "RESIZE"
+msgstr "REDIMENSIONAR"
+
+#: src/ui/disk_editor.cpp
+msgid "Shrinking keeps the data on it and frees the rest of the space for the new system."
+msgstr "Al reducirla se conservan sus datos y se libera el resto del espacio para el sistema nuevo."
+
+#: src/ui/disk_editor.cpp
+msgid "The size the new partition will have."
+msgstr "El tamaño que tendrá la partición nueva."
+
+#: src/ui/disk_editor.cpp
+msgid "Resize"
+msgstr "Redimensionar"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "Delete {name}?"
+msgstr "¿Eliminar {name}?"
+
+#: src/ui/disk_editor.cpp
+msgid "Everything on it is lost when the installation starts. Until then, Reset all brings it back."
+msgstr "Todo lo que contiene se perderá cuando empiece la instalación. Hasta entonces, Restablecer todo lo recupera."
+
+#: src/ui/disk_editor.cpp
+msgid "The planned partition is removed from the layout."
+msgstr "La partición planificada se quita de la distribución."
+
+#: src/ui/disk_editor.cpp
+msgid "That change could not be made"
+msgstr "No se pudo realizar ese cambio"
+
+#: src/ui/disk_editor.cpp
+msgid "No mount points yet. Pick free space above and add “/”, or create the recommended layout."
+msgstr "Aún no hay puntos de montaje. Elige espacio libre arriba y añade «/», o crea la distribución recomendada."
+
+#: src/ui/disk_editor.cpp
+msgid "Nothing changes on the disks yet."
+msgstr "Todavía no cambia nada en los discos."
+
+#: src/ui/disk_editor.cpp src/ui/pages/review_page.cpp
+msgid "Check before installing"
+msgstr "Comprobar antes de instalar"
+
+#: src/ui/disk_editor.cpp
+msgid "This layout cannot be installed"
+msgstr "Esta distribución no se puede instalar"
+
+#: src/ui/installer.cpp
+msgid "Guided installation"
+msgstr "Instalación guiada"
+
+#: src/ui/installer.cpp
+msgid "SETUP"
+msgstr "CONFIGURACIÓN"
+
+#: src/ui/installer.cpp
+msgid "All steps complete"
+msgstr "Todos los pasos completados"
+
+#: src/ui/installer.cpp
+#, python-brace-format
+msgid "Step {n} of {count}"
+msgstr "Paso {n} de {count}"
+
+#: src/ui/installer.cpp
+msgid "F1 Help   ·   F12 Console"
+msgstr "F1 Ayuda   ·   F12 Consola"
+
+#: src/ui/installer.cpp
+msgid "Back"
+msgstr "Atrás"
+
+#: src/ui/installer.cpp
+msgid "Continue"
+msgstr "Continuar"
+
+#: src/ui/installer.cpp
+msgid "Preparing the installer"
+msgstr "Preparando el instalador"
+
+#: src/ui/installer.cpp src/ui/pages/install_page.cpp
+msgid "Quit"
+msgstr "Salir"
+
+#: src/ui/installer.cpp
+msgid "The installer cannot start"
+msgstr "El instalador no puede iniciarse"
+
+#: src/ui/installer.cpp
+msgid "Help"
+msgstr "Ayuda"
+
+#: src/ui/installer.cpp
+msgid "Installation log"
+msgstr "Registro de instalación"
+
+#: src/ui/installer.cpp
+msgid "Open a terminal"
+msgstr "Abrir una terminal"
+
+#: src/ui/installer.cpp
+msgid "Quit the installer"
+msgstr "Salir del instalador"
+
+#: src/ui/installer.cpp
+#, python-brace-format
+msgid "STEP {n} — {name}"
+msgstr "PASO {n} — {name}"
+
+#: src/ui/installer.cpp
+msgid "Quit the installer?"
+msgstr "¿Salir del instalador?"
+
+#: src/ui/installer.cpp
+msgid "Nothing has been written to your disks yet."
+msgstr "Todavía no se ha escrito nada en tus discos."
+
+#: src/ui/installer.cpp
+msgid "The installation is running; stopping it now leaves the disk unusable until you install again."
+msgstr "La instalación está en curso; si la detienes ahora, el disco quedará inutilizable hasta que vuelvas a instalar."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a user name."
+msgstr "Elige un nombre de usuario."
+
+#: src/ui/pages/account_page.cpp
+msgid "At most 32 characters."
+msgstr "Máximo 32 caracteres."
+
+#: src/ui/pages/account_page.cpp
+msgid "Start with a lower-case letter."
+msgstr "Empieza con una letra minúscula."
+
+#: src/ui/pages/account_page.cpp
+msgid "Use lower-case letters, digits, “-” and “_” only."
+msgstr "Usa solo letras minúsculas, dígitos, «-» y «_»."
+
+#: src/ui/pages/account_page.cpp
+msgid "That name belongs to the system."
+msgstr "Ese nombre pertenece al sistema."
+
+#: src/ui/pages/account_page.cpp
+msgid "Profile picture"
+msgstr "Foto de perfil"
+
+#: src/ui/pages/account_page.cpp
+msgid "Generated from your initials · click to change"
+msgstr "Generada a partir de tus iniciales · haz clic para cambiarla"
+
+#: src/ui/pages/account_page.cpp
+msgid "Full name"
+msgstr "Nombre completo"
+
+#: src/ui/pages/account_page.cpp
+msgid "User name"
+msgstr "Nombre de usuario"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/network_page.cpp
+msgid "Password"
+msgstr "Contraseña"
+
+#: src/ui/pages/account_page.cpp
+msgid "Confirm password"
+msgstr "Confirmar contraseña"
+
+#: src/ui/pages/account_page.cpp
+msgid "Four random words beat one short complex password"
+msgstr "Cuatro palabras al azar superan a una contraseña corta y compleja"
+
+#: src/ui/pages/account_page.cpp
+msgid "PERMISSIONS"
+msgstr "PERMISOS"
+
+#: src/ui/pages/account_page.cpp
+msgid "Make this user an administrator"
+msgstr "Hacer administrador a este usuario"
+
+#: src/ui/pages/account_page.cpp
+msgid "Require a password to sign in"
+msgstr "Exigir una contraseña para iniciar sesión"
+
+#: src/ui/pages/account_page.cpp
+msgid "Disable only on a physically secure machine"
+msgstr "Desactívalo solo en un equipo físicamente seguro"
+
+#: src/ui/pages/account_page.cpp
+msgid "ROOT ACCOUNT"
+msgstr "CUENTA ROOT"
+
+#: src/ui/pages/account_page.cpp
+msgid "Lock the root account"
+msgstr "Bloquear la cuenta root"
+
+#: src/ui/pages/account_page.cpp
+msgid "Administer with sudo instead — safer by default"
+msgstr "Administra con sudo en su lugar: más seguro de forma predeterminada"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/destination_page.cpp
+msgid "recommended"
+msgstr "recomendado"
+
+#: src/ui/pages/account_page.cpp
+msgid "Set a root password"
+msgstr "Establecer una contraseña de root"
+
+#: src/ui/pages/account_page.cpp
+msgid "Enables direct root sign-in on console and SSH"
+msgstr "Permite iniciar sesión directamente como root en la consola y por SSH"
+
+#: src/ui/pages/account_page.cpp
+msgid "Root password"
+msgstr "Contraseña de root"
+
+#: src/ui/pages/account_page.cpp
+msgid "Confirm root password"
+msgstr "Confirmar contraseña de root"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/review_page.cpp
+msgid "Account"
+msgstr "Cuenta"
+
+#: src/ui/pages/account_page.cpp
+msgid "Create your account."
+msgstr "Crea tu cuenta."
+
+#: src/ui/pages/account_page.cpp
+msgid "This is the account you will sign in with on first boot. Pick a strong passphrase — it also unlocks your encrypted disk."
+msgstr "Esta es la cuenta con la que iniciarás sesión en el primer arranque. Elige una frase de contraseña segura: también desbloquea tu disco cifrado."
+
+#: src/ui/pages/account_page.cpp
+msgid "This is the account you will sign in with on first boot. Pick a strong passphrase you will remember."
+msgstr "Esta es la cuenta con la que iniciarás sesión en el primer arranque. Elige una frase de contraseña segura que recuerdes."
+
+#: src/ui/pages/account_page.cpp
+msgid "Enter your full name."
+msgstr "Introduce tu nombre completo."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a password."
+msgstr "Elige una contraseña."
+
+#: src/ui/pages/account_page.cpp
+msgid "The passwords do not match."
+msgstr "Las contraseñas no coinciden."
+
+#: src/ui/pages/account_page.cpp
+msgid "A disk passphrase needs at least 8 characters."
+msgstr "La frase de contraseña del disco necesita al menos 8 caracteres."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a root password."
+msgstr "Elige una contraseña de root."
+
+#: src/ui/pages/account_page.cpp
+msgid "The root passwords do not match."
+msgstr "Las contraseñas de root no coinciden."
+
+#: src/ui/pages/account_page.cpp
+msgid "With root locked, this user must be an administrator."
+msgstr "Con root bloqueado, este usuario debe ser administrador."
+
+#: src/ui/pages/account_page.cpp
+msgid "this user"
+msgstr "este usuario"
+
+#: src/ui/pages/account_page.cpp
+#, python-brace-format
+msgid "Adds {user} to the wheel group and allows sudo"
+msgstr "Añade a {user} al grupo wheel y permite sudo"
+
+#: src/ui/pages/account_page.cpp
+#, python-brace-format
+msgid "{n} character"
+msgid_plural "{n} characters"
+msgstr[0] "{n} carácter"
+msgstr[1] "{n} caracteres"
+
+#: src/ui/pages/account_page.cpp
+msgid "Your passphrase unlocks LUKS2 at every boot. It is never written to the kickstart file or to installation logs."
+msgstr "Tu frase de contraseña desbloquea LUKS2 en cada arranque. Nunca se escribe en el archivo kickstart ni en los registros de instalación."
+
+#: src/ui/pages/account_page.cpp
+msgid "The password is stored only as a hash on the new system and never written to the installation logs."
+msgstr "La contraseña se guarda solo como hash en el sistema nuevo y nunca se escribe en los registros de instalación."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a profile picture"
+msgstr "Elige una foto de perfil"
+
+#: src/ui/pages/account_page.cpp
+msgid "Images (*.png *.jpg *.jpeg *.webp *.svg)"
+msgstr "Imágenes (*.png *.jpg *.jpeg *.webp *.svg)"
+
+#: src/ui/pages/account_page.cpp
+msgid "Click to choose another"
+msgstr "Haz clic para elegir otra"
+
+#: src/ui/pages/destination_page.cpp
+msgid "installation media"
+msgstr "medio de instalación"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{system} detected"
+msgstr "{system} detectado"
+
+#: src/ui/pages/destination_page.cpp
+msgid "empty"
+msgstr "vacío"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{n} partition"
+msgid_plural "{n} partitions"
+msgstr[0] "{n} partición"
+msgstr[1] "{n} particiones"
+
+#: src/ui/pages/destination_page.cpp
+msgid "the data on it"
+msgstr "los datos que contiene"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{disk} already holds data"
+msgstr "{disk} ya contiene datos"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Erase everything on {path}"
+msgstr "Borrar todo en {path}"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Install alongside {system}"
+msgstr "Instalar junto a {system}"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Install alongside {system} (it cannot be shrunk now)"
+msgstr "Instalar junto a {system} (ahora no se puede reducir)"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Use the free space only ({size})"
+msgstr "Usar solo el espacio libre ({size})"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{system}: {keep}   ·   {product}: {new}"
+msgstr "{system}: {keep}   ·   {product}: {new}"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LOCAL STANDARD DISKS"
+msgstr "DISCOS LOCALES ESTÁNDAR"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Add iSCSI, FCoE or multipath device"
+msgstr "Añadir dispositivo iSCSI, FCoE o multipath"
+
+#: src/ui/pages/destination_page.cpp
+msgid "STORAGE CONFIGURATION"
+msgstr "CONFIGURACIÓN DEL ALMACENAMIENTO"
+
+#: src/ui/pages/destination_page.cpp src/ui/pages/review_page.cpp
+msgid "Automatic"
+msgstr "Automático"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Laid out for you, safely"
+msgstr "Distribuido por ti, de forma segura"
+
+#: src/ui/pages/destination_page.cpp src/ui/pages/review_page.cpp
+msgid "Custom"
+msgstr "Personalizado"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Your own mount points"
+msgstr "Tus propios puntos de montaje"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Advanced"
+msgstr "Avanzado"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LVM or Btrfs volumes, by hand"
+msgstr "Volúmenes LVM o Btrfs, a mano"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Encrypt my data"
+msgstr "Cifrar mis datos"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LUKS2 · passphrase at next step"
+msgstr "LUKS2 · frase de contraseña en el siguiente paso"
+
+#: src/ui/pages/destination_page.cpp
+msgid "RESULTING LAYOUT"
+msgstr "DISTRIBUCIÓN RESULTANTE"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Destination"
+msgstr "Destino"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Lay out the disk yourself."
+msgstr "Distribuye el disco tú mismo."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Where should it live?"
+msgstr "¿Dónde debe instalarse?"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Click a part of a disk to use it, resize it or delete it. Changes are only planned here; nothing is written until you confirm on the review screen."
+msgstr "Haz clic en una parte de un disco para usarla, redimensionarla o eliminarla. Aquí los cambios solo se planifican; no se escribe nada hasta que confirmes en la pantalla de revisión."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Pick a disk, then decide how it is laid out. Nothing is written to any device until you confirm on the review screen."
+msgstr "Elige un disco y decide cómo se distribuye. No se escribe nada en ningún dispositivo hasta que confirmes en la pantalla de revisión."
+
+#: src/ui/pages/destination_page.cpp
+msgid ""
+"Automatic lays the system out for you: a boot partition, the system, your files and swap. If the disk already holds Windows or another system, you can install beside it; drag the slider to share the space.\n"
+"\n"
+"Custom opens the disk editor: click free space to add a mount point (at least “/”), or click a partition to use it, resize it or delete it. Advanced also offers LVM, RAID and Btrfs volumes.\n"
+"\n"
+"Nothing is written to the disks until you begin the installation on the review screen."
+msgstr ""
+"Automático distribuye el sistema por ti: una partición de arranque, el sistema, tus archivos y el espacio de intercambio. Si el disco ya contiene Windows u otro sistema, puedes instalar junto a él; arrastra el control deslizante para repartir el espacio.\n"
+"\n"
+"Personalizado abre el editor de discos: haz clic en el espacio libre para añadir un punto de montaje (al menos «/»), o haz clic en una partición para usarla, redimensionarla o eliminarla. Avanzado también ofrece volúmenes LVM, RAID y Btrfs.\n"
+"\n"
+"No se escribe nada en los discos hasta que inicies la instalación en la pantalla de revisión."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Selected"
+msgstr "Seleccionado"
+
+#: src/ui/pages/destination_page.cpp
+msgid "1 disk"
+msgstr "1 disco"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Capacity"
+msgstr "Capacidad"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Free"
+msgstr "Libre"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Reclaimable"
+msgstr "Recuperable"
+
+#: src/ui/pages/destination_page.cpp
+msgid "You lay the disk out yourself on the next screen."
+msgstr "Distribuirás el disco tú mismo en la siguiente pantalla."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Working out the layout…"
+msgstr "Calculando la distribución…"
+
+#: src/ui/pages/destination_page.cpp
+msgid "kept"
+msgstr "conservado"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Specialized disks"
+msgstr "Discos especializados"
+
+#: src/ui/pages/destination_page.cpp
+msgid "iSCSI, FCoE and multipath devices are set up from the network installation image, which has the tools to discover them. This live system installs to the disks attached to this computer."
+msgstr "Los dispositivos iSCSI, FCoE y multipath se configuran desde la imagen de instalación de red, que tiene las herramientas para detectarlos. Este sistema en vivo se instala en los discos conectados a este equipo."
+
+#: src/ui/pages/install_page.cpp
+msgid "WHILE YOU WAIT"
+msgstr "MIENTRAS ESPERAS"
+
+#: src/ui/pages/install_page.cpp
+msgid "Estimated remaining"
+msgstr "Tiempo restante estimado"
+
+#: src/ui/pages/install_page.cpp
+msgid "Starting the installation…"
+msgstr "Iniciando la instalación…"
+
+#: src/ui/pages/install_page.cpp
+msgid "Ten years of updates"
+msgstr "Diez años de actualizaciones"
+
+#: src/ui/pages/install_page.cpp
+msgid "Every release is supported until 2035, with security errata published alongside upstream. Switch between minor versions without reinstalling."
+msgstr "Cada versión recibe soporte hasta 2035, con erratas de seguridad publicadas junto con el upstream. Cambia entre versiones menores sin reinstalar."
+
+#: src/ui/pages/install_page.cpp
+msgid "A desktop of its own"
+msgstr "Un escritorio propio"
+
+#: src/ui/pages/install_page.cpp
+msgid "Bayu brings Files, Terminal, Settings and a dock that stays out of your way, all drawn by one toolkit."
+msgstr "Bayu incluye Archivos, Terminal, Ajustes y un dock que no estorba, todo dibujado por un único toolkit."
+
+#: src/ui/pages/install_page.cpp
+msgid "Android apps, when you want them"
+msgstr "Aplicaciones Android, cuando las quieras"
+
+#: src/ui/pages/install_page.cpp
+msgid "Lapis runs Android apps beside your desktop ones. It is installed and stays off until you turn it on."
+msgstr "Lapis ejecuta aplicaciones Android junto a las de tu escritorio. Viene instalado y permanece apagado hasta que lo actives."
+
+#: src/ui/pages/install_page.cpp
+msgid "Safe by default"
+msgstr "Seguro de forma predeterminada"
+
+#: src/ui/pages/install_page.cpp
+msgid "SELinux, a firewall and signed packages from the start; full-disk encryption when you ask for it."
+msgstr "SELinux, un cortafuegos y paquetes firmados desde el principio; cifrado de disco completo cuando lo pidas."
+
+#: src/ui/pages/install_page.cpp
+msgid "Install"
+msgstr "Instalar"
+
+#: src/ui/pages/install_page.cpp
+msgid "INSTALLATION COMPLETE"
+msgstr "INSTALACIÓN COMPLETADA"
+
+#: src/ui/pages/install_page.cpp
+msgid "INSTALLATION FAILED"
+msgstr "ERROR EN LA INSTALACIÓN"
+
+#: src/ui/pages/install_page.cpp
+msgid "STEP 08 — INSTALLING"
+msgstr "PASO 08 — INSTALANDO"
+
+#: src/ui/pages/install_page.cpp
+msgid "You're all set."
+msgstr "Todo listo."
+
+#: src/ui/pages/install_page.cpp
+msgid "The installation stopped."
+msgstr "La instalación se detuvo."
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "Installing {product}."
+msgstr "Instalando {product}."
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "{product} is on your disk. Remove the installation media, restart, and sign in with the account you just created."
+msgstr "{product} está en tu disco. Retira el medio de instalación, reinicia e inicia sesión con la cuenta que acabas de crear."
+
+#: src/ui/pages/install_page.cpp
+msgid "Nothing more is written. The log has the details; you can start the installer again."
+msgstr "No se escribe nada más. El registro tiene los detalles; puedes iniciar el instalador de nuevo."
+
+#: src/ui/pages/install_page.cpp
+msgid "Everything is set. Sit back — the installer is writing packages to disk and will tell you when it is safe to restart."
+msgstr "Todo está listo. Relájate: el instalador está escribiendo los paquetes en el disco y te avisará cuando sea seguro reiniciar."
+
+#: src/ui/pages/install_page.cpp
+msgid "The installation could not finish"
+msgstr "La instalación no pudo terminar"
+
+#: src/ui/pages/install_page.cpp
+msgid "Install time"
+msgstr "Tiempo de instalación"
+
+#: src/ui/pages/install_page.cpp
+msgid "Packages written"
+msgstr "Paquetes escritos"
+
+#: src/ui/pages/install_page.cpp
+msgid "None"
+msgstr "Ninguno"
+
+#: src/ui/pages/install_page.cpp
+msgid "Disk encryption"
+msgstr "Cifrado de disco"
+
+#: src/ui/pages/install_page.cpp
+msgid "Remove the USB installation media before restarting."
+msgstr "Retira el medio de instalación USB antes de reiniciar."
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "Sign in as {user}; your settings start fresh."
+msgstr "Inicia sesión como {user}; tus ajustes empiezan de cero."
+
+#: src/ui/pages/install_page.cpp
+msgid "Run sudo dnf upgrade to pull any errata published since this ISO."
+msgstr "Ejecuta sudo dnf upgrade para obtener las erratas publicadas desde esta ISO."
+
+#: src/ui/pages/install_page.cpp
+msgid "View log"
+msgstr "Ver registro"
+
+#: src/ui/pages/install_page.cpp
+msgid "Installing…"
+msgstr "Instalando…"
+
+#: src/ui/pages/install_page.cpp
+msgid "View installation log"
+msgstr "Ver registro de instalación"
+
+#: src/ui/pages/install_page.cpp
+msgid "Restart now"
+msgstr "Reiniciar ahora"
+
+#: src/ui/pages/language_page.cpp
+msgid "REGIONAL FORMAT"
+msgstr "FORMATO REGIONAL"
+
+#: src/ui/pages/language_page.cpp
+msgid "Preview"
+msgstr "Vista previa"
+
+#: src/ui/pages/language_page.cpp
+#, python-brace-format
+msgid "Search {n} languages"
+msgstr "Buscar entre {n} idiomas"
+
+#: src/ui/pages/language_page.cpp src/ui/pages/review_page.cpp
+msgid "Language"
+msgstr "Idioma"
+
+#: src/ui/pages/language_page.cpp
+msgid "Welcome. Let's pick your language."
+msgstr "Te damos la bienvenida. Elijamos tu idioma."
+
+#: src/ui/pages/language_page.cpp
+msgid "This language will be used during installation and set as the system default. You can change it later in Settings."
+msgstr "Este idioma se usará durante la instalación y se establecerá como predeterminado del sistema. Puedes cambiarlo más tarde en Ajustes."
+
+#: src/ui/pages/language_page.cpp
+msgid "Date"
+msgstr "Fecha"
+
+#: src/ui/pages/language_page.cpp
+msgid "Time"
+msgstr "Hora"
+
+#: src/ui/pages/language_page.cpp
+msgid "Numbers"
+msgstr "Números"
+
+#: src/ui/pages/language_page.cpp
+msgid "Currency"
+msgstr "Moneda"
+
+#: src/ui/pages/localization_page.cpp
+msgid "KEYBOARD LAYOUT"
+msgstr "DISTRIBUCIÓN DEL TECLADO"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Test the layout"
+msgstr "Probar la distribución"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Type here to test the layout"
+msgstr "Escribe aquí para probar la distribución"
+
+#: src/ui/pages/localization_page.cpp
+msgid "TIME & DATE"
+msgstr "HORA Y FECHA"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Region"
+msgstr "Región"
+
+#: src/ui/pages/localization_page.cpp
+msgid "City"
+msgstr "Ciudad"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Network time (NTP)"
+msgstr "Hora de red (NTP)"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Keep the clock in sync automatically"
+msgstr "Mantener el reloj sincronizado automáticamente"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Detect time zone from network"
+msgstr "Detectar la zona horaria desde la red"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Uses your IP address, never your location"
+msgstr "Usa tu dirección IP, nunca tu ubicación"
+
+#: src/ui/pages/localization_page.cpp src/ui/pages/review_page.cpp
+msgid "Localization"
+msgstr "Localización"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Keyboard and time."
+msgstr "Teclado y hora."
+
+#: src/ui/pages/localization_page.cpp
+msgid "Choose the layout you actually type with and confirm your time zone. Both take effect immediately, including on this screen."
+msgstr "Elige la distribución con la que realmente escribes y confirma tu zona horaria. Ambas surten efecto de inmediato, también en esta pantalla."
+
+#: src/ui/pages/localization_page.cpp
+msgid "Network time is off · the clock is set by hand"
+msgstr "La hora de red está desactivada · el reloj se ajusta a mano"
+
+#: src/ui/pages/localization_page.cpp
+#, python-brace-format
+msgid "{server} · synchronised"
+msgstr "{server} · sincronizado"
+
+#: src/ui/pages/localization_page.cpp
+#, python-brace-format
+msgid "{server} · waits for a connection"
+msgstr "{server} · espera una conexión"
+
+#: src/ui/pages/network_page.cpp
+msgid "AVAILABLE CONNECTIONS"
+msgstr "CONEXIONES DISPONIBLES"
+
+#: src/ui/pages/network_page.cpp
+msgid "HOST IDENTITY"
+msgstr "IDENTIDAD DEL EQUIPO"
+
+#: src/ui/pages/network_page.cpp src/ui/pages/review_page.cpp
+msgid "Host name"
+msgstr "Nombre del equipo"
+
+#: src/ui/pages/network_page.cpp
+msgid "Connect automatically"
+msgstr "Conectar automáticamente"
+
+#: src/ui/pages/network_page.cpp
+msgid "Bring this interface up at every boot"
+msgstr "Activar esta interfaz en cada arranque"
+
+#: src/ui/pages/network_page.cpp src/ui/pages/review_page.cpp
+msgid "Network"
+msgstr "Red"
+
+#: src/ui/pages/network_page.cpp
+msgid "Get connected."
+msgstr "Conéctate."
+
+#: src/ui/pages/network_page.cpp
+msgid "A connection is optional, but it lets the installer fetch updates, verify packages and sync the clock while you continue."
+msgstr "La conexión es opcional, pero permite que el instalador obtenga actualizaciones, verifique paquetes y sincronice el reloj mientras continúas."
+
+#: src/ui/pages/network_page.cpp
+msgid "Secure Boot enabled · packages verified with GPG"
+msgstr "Arranque seguro activado · paquetes verificados con GPG"
+
+#: src/ui/pages/network_page.cpp
+msgid "Packages verified with GPG"
+msgstr "Paquetes verificados con GPG"
+
+#: src/ui/pages/network_page.cpp
+msgid "Connecting…"
+msgstr "Conectando…"
+
+#: src/ui/pages/network_page.cpp
+msgid "IPv4 address"
+msgstr "Dirección IPv4"
+
+#: src/ui/pages/network_page.cpp
+msgid "Gateway"
+msgstr "Puerta de enlace"
+
+#: src/ui/pages/network_page.cpp
+msgid "DNS"
+msgstr "DNS"
+
+#: src/ui/pages/network_page.cpp
+msgid "Link speed"
+msgstr "Velocidad del enlace"
+
+#: src/ui/pages/network_page.cpp
+msgid "Hardware"
+msgstr "Hardware"
+
+#: src/ui/pages/network_page.cpp
+msgid "Status"
+msgstr "Estado"
+
+#: src/ui/pages/network_page.cpp
+msgid "Not connected"
+msgstr "No conectado"
+
+#: src/ui/pages/network_page.cpp
+#, python-brace-format
+msgid "Join “{name}”"
+msgstr "Unirse a «{name}»"
+
+#: src/ui/pages/network_page.cpp
+msgid "Enter the network's password."
+msgstr "Introduce la contraseña de la red."
+
+#: src/ui/pages/network_page.cpp
+msgid "Join"
+msgstr "Unirse"
+
+#: src/ui/pages/network_page.cpp
+msgid "Could not connect"
+msgstr "No se pudo conectar"
+
+#: src/ui/pages/review_page.cpp
+msgid "SUMMARY"
+msgstr "RESUMEN"
+
+#: src/ui/pages/review_page.cpp
+msgid "TARGET"
+msgstr "DESTINO"
+
+#: src/ui/pages/review_page.cpp
+msgid "Storage"
+msgstr "Almacenamiento"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "Software"
+msgstr "Software"
+
+#: src/ui/pages/review_page.cpp
+msgid "Review"
+msgstr "Revisión"
+
+#: src/ui/pages/review_page.cpp
+msgid "Checking the plan…"
+msgstr "Comprobando el plan…"
+
+#: src/ui/pages/review_page.cpp
+msgid "Everything checks out."
+msgstr "Todo está en orden."
+
+#: src/ui/pages/review_page.cpp
+msgid "Something needs a look."
+msgstr "Algo requiere atención."
+
+#: src/ui/pages/review_page.cpp
+msgid "The disk layout cannot be installed as it is. Edit the storage settings and come back here."
+msgstr "La distribución del disco no se puede instalar tal como está. Edita los ajustes de almacenamiento y vuelve aquí."
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — after you begin, the partitions you deleted are erased."
+msgstr "Todavía no se ha escrito nada. Echa un último vistazo: al empezar, las particiones que eliminaste se borran."
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — what else is on the disk is kept."
+msgstr "Todavía no se ha escrito nada. Echa un último vistazo: lo demás que hay en el disco se conserva."
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — after you begin, the selected disk is reformatted."
+msgstr "Todavía no se ha escrito nada. Echa un último vistazo: al empezar, el disco seleccionado se reformatea."
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{n} item"
+msgid_plural "{n} items"
+msgstr[0] "{n} elemento"
+msgstr[1] "{n} elementos"
+
+#: src/ui/pages/review_page.cpp
+msgid "Begin installation"
+msgstr "Comenzar la instalación"
+
+#: src/ui/pages/review_page.cpp
+msgid "Keyboard"
+msgstr "Teclado"
+
+#: src/ui/pages/review_page.cpp
+msgid "Time zone"
+msgstr "Zona horaria"
+
+#: src/ui/pages/review_page.cpp
+msgid "not connected"
+msgstr "sin conexión"
+
+#: src/ui/pages/review_page.cpp
+msgid "Connection"
+msgstr "Conexión"
+
+#: src/ui/pages/review_page.cpp
+msgid "IPv4"
+msgstr "IPv4"
+
+#: src/ui/pages/review_page.cpp
+msgid "User"
+msgstr "Usuario"
+
+#: src/ui/pages/review_page.cpp
+msgid "Administrator"
+msgstr "Administrador"
+
+#: src/ui/pages/review_page.cpp
+msgid "yes · wheel"
+msgstr "sí · wheel"
+
+#: src/ui/pages/review_page.cpp
+msgid "no"
+msgstr "no"
+
+#: src/ui/pages/review_page.cpp
+msgid "Root account"
+msgstr "Cuenta root"
+
+#: src/ui/pages/review_page.cpp
+msgid "locked"
+msgstr "bloqueada"
+
+#: src/ui/pages/review_page.cpp
+msgid "password set"
+msgstr "contraseña establecida"
+
+#: src/ui/pages/review_page.cpp
+msgid "Scheme"
+msgstr "Esquema"
+
+#: src/ui/pages/review_page.cpp
+msgid "Encryption"
+msgstr "Cifrado"
+
+#: src/ui/pages/review_page.cpp
+msgid "LUKS2 enabled"
+msgstr "LUKS2 activado"
+
+#: src/ui/pages/review_page.cpp
+msgid "off"
+msgstr "desactivado"
+
+#: src/ui/pages/review_page.cpp
+msgid "Layout"
+msgstr "Distribución"
+
+#: src/ui/pages/review_page.cpp
+msgid "Environment"
+msgstr "Entorno"
+
+#: src/ui/pages/review_page.cpp
+msgid "Add-ons"
+msgstr "Complementos"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{n} selected"
+msgid_plural "{n} selected"
+msgstr[0] "{n} seleccionado"
+msgstr[1] "{n} seleccionados"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "Packages"
+msgstr "Paquetes"
+
+#: src/ui/pages/review_page.cpp
+msgid "Download"
+msgstr "Descarga"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "nothing"
+msgstr "nada"
+
+#: src/ui/pages/review_page.cpp
+msgid "The disk layout cannot be installed"
+msgstr "La distribución del disco no se puede instalar"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{disk} will be erased"
+msgstr "Se borrará {disk}"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "All {size} on this device is reformatted. Other disks are left untouched."
+msgstr "Los {size} de este dispositivo se reformatean. Los demás discos no se tocan."
+
+#: src/ui/pages/review_page.cpp
+msgid "Partitions will be deleted"
+msgstr "Se eliminarán particiones"
+
+#: src/ui/pages/review_page.cpp
+msgid "What the custom layout deletes is lost once the installation starts. Edit the storage to check the pending changes."
+msgstr "Lo que elimina la distribución personalizada se pierde cuando empieza la instalación. Edita el almacenamiento para comprobar los cambios pendientes."
+
+#: src/ui/pages/review_page.cpp
+msgid "Your existing data is kept"
+msgstr "Tus datos existentes se conservan"
+
+#: src/ui/pages/review_page.cpp
+msgid "Only the space chosen on the destination step is changed."
+msgstr "Solo se modifica el espacio elegido en el paso de destino."
+
+#: src/ui/pages/software_page.cpp
+msgid "BASE ENVIRONMENT"
+msgstr "ENTORNO BASE"
+
+#: src/ui/pages/software_page.cpp
+msgid "Choose what to install."
+msgstr "Elige qué instalar."
+
+#: src/ui/pages/software_page.cpp
+msgid "Start from a base environment, then add only what you need. You can install or remove anything later with dnf."
+msgstr "Empieza con un entorno base y añade solo lo que necesites. Puedes instalar o quitar cualquier cosa más tarde con dnf."
+
+#: src/ui/pages/software_page.cpp
+msgid "Installing from this live system"
+msgstr "Instalando desde este sistema en vivo"
+
+#: src/ui/pages/software_page.cpp
+msgid "The live system is copied to the disk as it is. The other environments come from the network installation image."
+msgstr "El sistema en vivo se copia al disco tal cual. Los demás entornos provienen de la imagen de instalación de red."
+
+#: src/ui/pages/software_page.cpp
+#, python-brace-format
+msgid "ADD-ONS FOR {name}"
+msgstr "COMPLEMENTOS PARA {name}"
+
+#: src/ui/pages/software_page.cpp
+msgid "Add-ons are downloaded: connect to a network to choose them."
+msgstr "Los complementos se descargan: conéctate a una red para elegirlos."
+
+#: src/ui/pages/software_page.cpp
+msgid "Download size"
+msgstr "Tamaño de descarga"
+
+#: src/ui/pages/software_page.cpp
+msgid "Installed size"
+msgstr "Tamaño instalado"
+
+#: src/ui/pages/software_page.cpp
+msgid "Est. install time"
+msgstr "Tiempo de instalación est."
+
+#: src/ui/pages/software_page.cpp
+#, python-brace-format
+msgid "~{n} min"
+msgstr "~{n} min"
+
+#: src/ui/widgets.cpp
+msgid "Edit"
+msgstr "Editar"
+
+#: data/nabau.desktop
+msgid "Nabau"
+msgstr "Nabau"
+
+#: data/nabau.desktop
+msgid "Install to Disk"
+msgstr "Instalar en el disco"
+
+#: data/nabau.desktop
+msgid "Install this system on the computer's disk"
+msgstr "Instala este sistema en el disco del equipo"

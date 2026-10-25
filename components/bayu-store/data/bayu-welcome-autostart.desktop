@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Welcome
+Comment=Shows the tour after the first login
+Exec=bayu-welcome --autostart
+Terminal=false
+NoDisplay=true

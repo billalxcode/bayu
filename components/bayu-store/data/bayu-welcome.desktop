@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Welcome
+Comment=A short tour of IGN 26 and its apps
+Exec=bayu-welcome
+Icon=help-about
+Terminal=false
+Categories=System;
+Keywords=tour;welcome;help;getting started;

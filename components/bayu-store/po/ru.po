@@ -1,0 +1,862 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-store\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-25 03:39+0000\n"
+"PO-Revision-Date: 2026-10-25 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: src/ui/pages.cpp
+msgid "never"
+msgstr "никогда"
+
+#: src/ui/pages.cpp
+msgid "just now"
+msgstr "только что"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} min ago"
+msgstr "{n} мин назад"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} h ago"
+msgstr "{n} ч назад"
+
+#: src/ui/pages.cpp
+msgid "yesterday"
+msgstr "вчера"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} days ago"
+msgstr "{n} дн. назад"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} months ago"
+msgstr "{n} мес. назад"
+
+#: src/ui/pages.cpp
+msgid "Most popular"
+msgstr "Самые популярные"
+
+#: src/ui/pages.cpp
+msgid "Recently updated"
+msgstr "Недавно обновлённые"
+
+#: src/ui/pages.cpp
+msgid "Name"
+msgstr "Имя"
+
+#: src/ui/pages.cpp
+msgid "Relevance"
+msgstr "Релевантность"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Sort: {order}"
+msgstr "Сортировка: {order}"
+
+#: src/ui/pages.cpp
+msgid "apps for drawing, photo, audio, and video work"
+msgstr "приложения для рисования, работы с фото, аудио и видео"
+
+#: src/ui/pages.cpp
+msgid "games, from puzzles to racing"
+msgstr "игры — от головоломок до гонок"
+
+#: src/ui/pages.cpp
+msgid "tools for writing, testing and shipping code"
+msgstr "инструменты для написания, тестирования и выпуска кода"
+
+#: src/ui/pages.cpp
+msgid "apps for mail, notes, money and the office"
+msgstr "приложения для почты, заметок, финансов и офиса"
+
+#: src/ui/pages.cpp
+msgid "players, podcasts and audio tools"
+msgstr "плееры, подкасты и аудиоинструменты"
+
+#: src/ui/pages.cpp
+msgid "cameras, galleries and video players"
+msgstr "камеры, галереи и видеоплееры"
+
+#: src/ui/pages.cpp
+msgid "apps for learning, reading and science"
+msgstr "приложения для обучения, чтения и науки"
+
+#: src/ui/pages.cpp
+msgid "tools that keep the computer tidy and safe"
+msgstr "инструменты, поддерживающие на компьютере порядок и безопасность"
+
+#: src/ui/pages.cpp
+msgid "The catalog could not be refreshed"
+msgstr "Не удалось обновить каталог"
+
+#: src/ui/pages.cpp
+msgid "What the store had before is shown; it tries again later."
+msgstr "Показано то, что было в магазине раньше; он повторит попытку позже."
+
+#: src/ui/pages.cpp
+msgid "Popular on Flathub"
+msgstr "Популярное на Flathub"
+
+#: src/ui/pages.cpp
+msgid "See all"
+msgstr "Показать все"
+
+#: src/ui/pages.cpp
+msgid "Fresh on F-Droid"
+msgstr "Свежее на F-Droid"
+
+#: src/ui/pages.cpp
+msgid "Browse"
+msgstr "Обзор"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Discover"
+msgstr "Рекомендации"
+
+#: src/ui/pages.cpp
+msgid "Getting the catalog"
+msgstr "Получение каталога"
+
+#: src/ui/pages.cpp
+msgid "Apps from Flathub and F-Droid appear in a moment. This happens once; later the store opens instantly, offline too."
+msgstr "Приложения из Flathub и F-Droid скоро появятся. Это происходит один раз; потом магазин будет открываться мгновенно, в том числе без сети."
+
+#: src/ui/pages.cpp
+msgid "Trending this week"
+msgstr "В тренде на этой неделе"
+
+#: src/ui/pages.cpp
+msgid "What people install, and what changed"
+msgstr "Что устанавливают и что изменилось"
+
+#: src/ui/pages.cpp
+msgid "Apps"
+msgstr "Приложения"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Games"
+msgstr "Игры"
+
+#: src/ui/pages.cpp
+msgid "Most installed"
+msgstr "Самые устанавливаемые"
+
+#: src/ui/pages.cpp
+msgid "Open source picks"
+msgstr "Выбор открытого ПО"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Trending"
+msgstr "В тренде"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps"
+msgstr "Приложений: {n}"
+
+#: src/ui/pages.cpp
+msgid "Find your next app by category"
+msgstr "Найдите своё следующее приложение по категории"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps from Flathub and F-Droid"
+msgstr "Приложений из Flathub и F-Droid: {n}"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Categories"
+msgstr "Категории"
+
+#: src/ui/pages.cpp
+msgid "All"
+msgstr "Все"
+
+#: src/ui/pages.cpp
+msgid "Open source"
+msgstr "Открытое ПО"
+
+#: src/ui/pages.cpp
+msgid "Verified"
+msgstr "Проверенные"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps, sandboxed with Flatpak"
+msgstr "Приложений: {n}, в песочнице Flatpak"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} free Android apps, built from source"
+msgstr "Бесплатных приложений Android: {n}, собранных из исходного кода"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} {what}"
+msgstr "{n} {what}"
+
+#: src/ui/pages.cpp
+msgid "Android apps are off"
+msgstr "Приложения Android отключены"
+
+#: src/ui/pages.cpp
+msgid "F-Droid apps run in Android (lapis). Installing one offers to turn it on."
+msgstr "Приложения F-Droid работают в Android (lapis). При установке такого приложения будет предложено включить его."
+
+#: src/ui/pages.cpp
+msgid "Nothing here yet."
+msgstr "Пока здесь ничего нет."
+
+#: src/ui/pages.cpp
+msgid "Not found"
+msgstr "Не найдено"
+
+#: src/ui/pages.cpp
+msgid "This app is no longer in the catalog."
+msgstr "Этого приложения больше нет в каталоге."
+
+#: src/ui/pages.cpp
+msgid "Unknown developer"
+msgstr "Неизвестный разработчик"
+
+#: src/ui/pages.cpp
+msgid "· Verified publisher"
+msgstr "· Проверенный издатель"
+
+#: src/ui/pages.cpp
+msgid "· Built from source by F-Droid"
+msgstr "· Собрано из исходного кода в F-Droid"
+
+#: src/ui/pages.cpp
+msgid "Sandboxed"
+msgstr "В песочнице"
+
+#: src/ui/pages.cpp
+msgid "No ads"
+msgstr "Без рекламы"
+
+#: src/ui/pages.cpp
+msgid "Link copied"
+msgstr "Ссылка скопирована"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "needs {size} free"
+msgstr "нужно {size} свободного места"
+
+#: src/ui/pages.cpp
+msgid "needs ARM translation"
+msgstr "нужна трансляция ARM"
+
+#: src/ui/pages.cpp
+msgid "verified publisher"
+msgstr "проверенный издатель"
+
+#: src/ui/pages.cpp
+msgid "free software"
+msgstr "свободное ПО"
+
+#: src/ui/pages.cpp
+msgid "community"
+msgstr "сообщество"
+
+#: src/ui/pages.cpp
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: src/ui/pages.cpp
+msgid "proprietary"
+msgstr "проприетарное"
+
+#: src/ui/pages.cpp
+msgid "installs"
+msgstr "установок"
+
+#: src/ui/pages.cpp
+msgid "download size"
+msgstr "размер загрузки"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "updated {when}"
+msgstr "обновлено {when}"
+
+#: src/ui/pages.cpp
+msgid "About this app"
+msgstr "Об этом приложении"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "What's new in {version}"
+msgstr "Что нового в {version}"
+
+#: src/ui/pages.cpp
+msgid "Source & permissions"
+msgstr "Исходный код и разрешения"
+
+#: src/ui/pages.cpp
+msgid "Asks for no special access."
+msgstr "Не запрашивает особого доступа."
+
+#: src/ui/pages.cpp
+msgid "No tracking"
+msgstr "Без отслеживания"
+
+#: src/ui/pages.cpp
+msgid "No non-free deps"
+msgstr "Без несвободных зависимостей"
+
+#: src/ui/pages.cpp
+msgid "Free software"
+msgstr "Свободное ПО"
+
+#: src/ui/pages.cpp
+msgid "of"
+msgstr "из"
+
+#: src/ui/pages.cpp
+msgid "Waiting"
+msgstr "Ожидание"
+
+#: src/ui/pages.cpp
+msgid "paused"
+msgstr "приостановлено"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "QUEUED"
+msgstr "В ОЧЕРЕДИ"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "UPDATE"
+msgstr "ОБНОВИТЬ"
+
+#: src/ui/pages.cpp
+msgid "Open"
+msgstr "Открыть"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Uninstall"
+msgstr "Удалить"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Updates"
+msgstr "Обновления"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Installed"
+msgstr "Установленные"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Recent"
+msgstr "Недавние"
+
+#: src/ui/pages.cpp
+msgid "Downloads"
+msgstr "Загрузки"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Last checked {when}"
+msgstr "Последняя проверка: {when}"
+
+#: src/ui/pages.cpp
+msgid "Check"
+msgstr "Проверить"
+
+#: src/ui/pages.cpp
+msgid "Library"
+msgstr "Библиотека"
+
+#: src/ui/pages.cpp
+msgid "from Flathub and F-Droid"
+msgstr "из Flathub и F-Droid"
+
+#: src/ui/pages.cpp
+msgid "from Flathub"
+msgstr "из Flathub"
+
+#: src/ui/pages.cpp
+msgid "from F-Droid"
+msgstr "из F-Droid"
+
+#: src/ui/pages.cpp
+msgid "Everything is up to date"
+msgstr "Всё обновлено"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} update available"
+msgid_plural "{n} updates available"
+msgstr[0] "Доступно {n} обновление"
+msgstr[1] "Доступно {n} обновления"
+msgstr[2] "Доступно {n} обновлений"
+
+#: src/ui/pages.cpp
+msgid "Updates install in the background as they arrive."
+msgstr "Обновления устанавливаются в фоновом режиме по мере поступления."
+
+#: src/ui/pages.cpp
+msgid "total"
+msgstr "всего"
+
+#: src/ui/pages.cpp
+msgid "installs in the background"
+msgstr "устанавливается в фоне"
+
+#: src/ui/pages.cpp
+msgid "Update all"
+msgstr "Обновить все"
+
+#: src/ui/pages.cpp
+msgid "Manage"
+msgstr "Управление"
+
+#: src/ui/pages.cpp
+msgid "App storage"
+msgstr "Хранилище приложений"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{used} of {total} used"
+msgstr "Использовано {used} из {total}"
+
+#: src/ui/pages.cpp
+msgid "Runtimes"
+msgstr "Среды выполнения"
+
+#: src/ui/pages.cpp
+msgid "Cache"
+msgstr "Кэш"
+
+#: src/ui/pages.cpp
+msgid "Free"
+msgstr "Свободно"
+
+#: src/ui/pages.cpp
+msgid "Recently installed"
+msgstr "Недавно установленные"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} app installed"
+msgid_plural "{n} apps installed"
+msgstr[0] "Установлено {n} приложение"
+msgstr[1] "Установлено {n} приложения"
+msgstr[2] "Установлено {n} приложений"
+
+#: src/ui/pages.cpp
+msgid "Installs and updates, newest first"
+msgstr "Установки и обновления, сначала новые"
+
+#: src/ui/pages.cpp
+msgid "From Flathub and F-Droid"
+msgstr "Из Flathub и F-Droid"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "installed {when}"
+msgstr "установлено {when}"
+
+#: src/ui/pages.cpp
+msgid "Nothing installed from the store yet."
+msgstr "Из магазина пока ничего не установлено."
+
+#: src/ui/pages.cpp
+msgid "Nothing is downloading."
+msgstr "Ничего не загружается."
+
+#: src/ui/pages.cpp
+msgid "One at a time, in the background"
+msgstr "По одному, в фоновом режиме"
+
+#: src/ui/pages.cpp
+msgid "Search"
+msgstr "Поиск"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Results for “{text}”"
+msgstr "Результаты по запросу «{text}»"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps across Flathub and F-Droid · {time}"
+msgstr "Приложений: {n} во Flathub и F-Droid · {time}"
+
+#: src/ui/pages.cpp
+msgid "No apps match. Try fewer or other words."
+msgstr "Подходящих приложений нет. Попробуйте меньше слов или другие слова."
+
+#: src/ui/pages.cpp
+msgid "Related searches"
+msgstr "Похожие запросы"
+
+#: src/ui/pages.cpp
+msgid "Top developers"
+msgstr "Лучшие разработчики"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} app"
+msgid_plural "{n} apps"
+msgstr[0] "{n} приложение"
+msgstr[1] "{n} приложения"
+msgstr[2] "{n} приложений"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Store settings"
+msgstr "Настройки магазина"
+
+#: src/ui/pages.cpp
+msgid "Where apps come from and how they stay up to date"
+msgstr "Откуда берутся приложения и как они остаются актуальными"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "SOURCES"
+msgstr "ИСТОЧНИКИ"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps · refreshed {when}"
+msgstr "Приложений: {n} · обновлено {when}"
+
+#: src/ui/pages.cpp
+msgid "Refresh the catalog"
+msgstr "Обновить каталог"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "ANDROID APPS"
+msgstr "ПРИЛОЖЕНИЯ ANDROID"
+
+#: src/ui/pages.cpp
+msgid "Android is running"
+msgstr "Android запущен"
+
+#: src/ui/pages.cpp
+msgid "F-Droid apps install into Android (lapis) and open in their own windows."
+msgstr "Приложения F-Droid устанавливаются в Android (lapis) и открываются в собственных окнах."
+
+#: src/ui/pages.cpp
+msgid "Turn on Android (lapis) to install apps from F-Droid. It downloads Android once, about 1.3 GB."
+msgstr "Включите Android (lapis), чтобы устанавливать приложения из F-Droid. Android загружается один раз, около 1,3 ГБ."
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Turn on"
+msgstr "Включить"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Android apps could not be turned on"
+msgstr "Не удалось включить приложения Android"
+
+#: src/ui/pages.cpp
+msgid "Show apps built only for ARM"
+msgstr "Показывать приложения только для ARM"
+
+#: src/ui/pages.cpp
+msgid "They run through ARM translation (libhoudini), slower and not always well"
+msgstr "Они работают через трансляцию ARM (libhoudini), медленнее и не всегда хорошо"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "UPDATES"
+msgstr "ОБНОВЛЕНИЯ"
+
+#: src/ui/pages.cpp
+msgid "Install updates automatically"
+msgstr "Устанавливать обновления автоматически"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "In the background · last checked {when}"
+msgstr "В фоновом режиме · последняя проверка: {when}"
+
+#: src/ui/pages.cpp
+msgid "STORAGE"
+msgstr "ХРАНИЛИЩЕ"
+
+#: src/ui/pages.cpp
+msgid "Downloaded pictures and packages"
+msgstr "Загруженные изображения и пакеты"
+
+#: src/ui/pages.cpp
+msgid "Clear cache"
+msgstr "Очистить кэш"
+
+#: src/ui/pages.cpp
+msgid "Settings"
+msgstr "Параметры"
+
+#: src/ui/store_widgets.cpp src/ui/store_window.cpp
+msgid "INSTALL"
+msgstr "УСТАНОВКА"
+
+#: src/ui/store_widgets.cpp
+msgid "APP OF THE DAY"
+msgstr "ПРИЛОЖЕНИЕ ДНЯ"
+
+#: src/ui/store_widgets.cpp
+msgid "Install"
+msgstr "Установить"
+
+#: src/ui/store_window.cpp
+msgid "BROWSE"
+msgstr "ОБЗОР"
+
+#: src/ui/store_window.cpp
+msgid "Creative"
+msgstr "Творчество"
+
+#: src/ui/store_window.cpp
+msgid "Developer"
+msgstr "Разработка"
+
+#: src/ui/store_window.cpp
+msgid "LIBRARY"
+msgstr "БИБЛИОТЕКА"
+
+#: src/ui/store_window.cpp
+msgid "Search apps and games"
+msgstr "Поиск приложений и игр"
+
+#: src/ui/store_window.cpp data/bayu-store.desktop
+msgid "Bayu Store"
+msgstr "Bayu Store"
+
+#: src/ui/store_window.cpp
+msgid "Check for updates"
+msgstr "Проверить обновления"
+
+#: src/ui/store_window.cpp
+msgid "Quit"
+msgstr "Выйти"
+
+#: src/ui/store_window.cpp
+msgid "That did not work"
+msgstr "Не получилось"
+
+#: src/ui/store_window.cpp
+msgid "PAUSED"
+msgstr "ПРИОСТАНОВЛЕНО"
+
+#: src/ui/store_window.cpp
+msgid "OPEN"
+msgstr "ОТКРЫТЬ"
+
+#: src/ui/store_window.cpp
+#, python-brace-format
+msgid "Uninstall {name}?"
+msgstr "Удалить {name}?"
+
+#: src/ui/store_window.cpp
+msgid "The app and everything it saved in Android are removed."
+msgstr "Приложение и всё, что оно сохранило в Android, будут удалены."
+
+#: src/ui/store_window.cpp
+msgid "You can install it again from the store at any time."
+msgstr "Вы сможете установить его снова из магазина в любой момент."
+
+#: src/ui/store_window.cpp
+msgid "Turn on Android apps?"
+msgstr "Включить приложения Android?"
+
+#: src/ui/store_window.cpp
+msgid "F-Droid apps are Android apps: they run in Android (lapis) beside the desktop. Turning it on downloads Android once (about 1.3 GB) and may ask for your password."
+msgstr "Приложения F-Droid — это приложения Android: они работают в Android (lapis) рядом с рабочим столом. При включении Android загружается один раз (около 1,3 ГБ), и может потребоваться ваш пароль."
+
+#: src/ui/store_window.cpp
+msgid "OK"
+msgstr "OK"
+
+#: src/ui/widgets.cpp
+msgid "Edit"
+msgstr "Правка"
+
+#: src/welcome/main.cpp
+msgid "Skip"
+msgstr "Пропустить"
+
+#: src/welcome/main.cpp
+msgid "Back"
+msgstr "Назад"
+
+#: src/welcome/main.cpp
+msgid "Start the tour"
+msgstr "Начать обзор"
+
+#: src/welcome/main.cpp
+msgid "Get started"
+msgstr "Начать работу"
+
+#: src/welcome/main.cpp
+msgid "Next"
+msgstr "Далее"
+
+#: src/welcome/main.cpp
+msgid "WELCOME"
+msgstr "ДОБРО ПОЖАЛОВАТЬ"
+
+#: src/welcome/main.cpp
+msgid "Welcome to IGN 26"
+msgstr "Добро пожаловать в IGN 26"
+
+#: src/welcome/main.cpp
+msgid "Bayu is ready to use. Take a short tour, under a minute, to find your way around."
+msgstr "Bayu готов к работе. Пройдите короткий обзор, меньше минуты, чтобы освоиться."
+
+#: src/welcome/main.cpp
+msgid "BAYU STORE"
+msgstr "BAYU STORE"
+
+#: src/welcome/main.cpp
+msgid "Install your first app"
+msgstr "Установите первое приложение"
+
+#: src/welcome/main.cpp
+msgid "Bayu Store brings thousands of apps from Flathub and F-Droid together. Search, click Install, and it is done. Some to start with:"
+msgstr "Bayu Store объединяет тысячи приложений из Flathub и F-Droid. Найдите, нажмите «Установить», и всё готово. Для начала:"
+
+#: src/welcome/main.cpp
+msgid "Browse the web"
+msgstr "Просмотр веб-страниц"
+
+#: src/welcome/main.cpp
+msgid "Documents, spreadsheets and slides"
+msgstr "Документы, таблицы и презентации"
+
+#: src/welcome/main.cpp
+msgid "Plays any video or music"
+msgstr "Воспроизводит любое видео и музыку"
+
+#: src/welcome/main.cpp
+msgid "Open Bayu Store"
+msgstr "Открыть Bayu Store"
+
+#: src/welcome/main.cpp
+msgid "LAUNCHER AND DOCK"
+msgstr "ЛАУНЧЕР И ДОК"
+
+#: src/welcome/main.cpp
+msgid "Find every app"
+msgstr "Найдите любое приложение"
+
+#: src/welcome/main.cpp
+msgid "Click the rocket in the dock to see all your apps, and type to search. Apps you install appear there at once. Drag one to the dock to keep it at hand."
+msgstr "Нажмите на ракету в доке, чтобы увидеть все приложения, и начните вводить текст для поиска. Установленные приложения сразу появляются там. Перетащите приложение в док, чтобы оно было под рукой."
+
+#: src/welcome/main.cpp
+msgid "Run Android apps"
+msgstr "Запускать приложения Android"
+
+#: src/welcome/main.cpp
+msgid "Android apps run in their own windows, next to your other apps, through lapis. Turning it on downloads Android once, about 1.3 GB."
+msgstr "Приложения Android работают в собственных окнах рядом с другими приложениями через lapis. При включении Android скачивается один раз, около 1,3 ГБ."
+
+#: src/welcome/main.cpp
+msgid "APPEARANCE"
+msgstr "ВНЕШНИЙ ВИД"
+
+#: src/welcome/main.cpp
+msgid "Make it yours"
+msgstr "Настройте под себя"
+
+#: src/welcome/main.cpp
+msgid "Choose light or dark, and a wallpaper. More choices are in Settings."
+msgstr "Выберите светлую или тёмную тему и обои. Другие параметры находятся в разделе «Параметры»."
+
+#: src/welcome/main.cpp
+msgid "Stay up to date"
+msgstr "Всегда в актуальном состоянии"
+
+#: src/welcome/main.cpp
+msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
+msgstr "Обновления приложений находятся в Bayu Store, в разделе «Обновления». Для системы выполните «sudo dnf upgrade» в Терминале."
+
+#: src/welcome/main.cpp
+msgid "Open Updates"
+msgstr "Открыть «Обновления»"
+
+#: src/welcome/main.cpp
+msgid "Report a problem"
+msgstr "Сообщить о проблеме"
+
+#: src/welcome/main.cpp
+msgid "ALL SET"
+msgstr "ВСЁ ГОТОВО"
+
+#: src/welcome/main.cpp
+msgid "Enjoy IGN 26"
+msgstr "Приятной работы в IGN 26"
+
+#: src/welcome/main.cpp
+msgid "Open this tour again any time from the launcher: look for Welcome."
+msgstr "Откройте этот обзор снова в любой момент из лаунчера: найдите «Добро пожаловать»."
+
+#: src/welcome/main.cpp
+msgid "Show at login"
+msgstr "Показывать при входе"
+
+#: src/welcome/main.cpp
+msgid "Open Welcome each time you sign in"
+msgstr "Открывать «Добро пожаловать» при каждом входе"
+
+#: src/welcome/main.cpp
+msgid "Android apps are not available on this system."
+msgstr "Приложения Android недоступны в этой системе."
+
+#: src/welcome/main.cpp
+msgid "Turn on Android apps"
+msgstr "Включить приложения Android"
+
+#: src/welcome/main.cpp
+msgid "Android apps are on. Find them in Bayu Store under F-Droid."
+msgstr "Приложения Android включены. Найдите их в Bayu Store в разделе F-Droid."
+
+#: src/welcome/main.cpp
+msgid "Setting up Android"
+msgstr "Настройка Android"
+
+#: src/welcome/main.cpp
+msgid "Android could not be set up. Try again from Bayu Store."
+msgstr "Не удалось настроить Android. Повторите попытку из Bayu Store."
+
+#: src/welcome/main.cpp
+msgid "Dark mode"
+msgstr "Тёмная тема"
+
+#: src/welcome/main.cpp
+msgid "Open Settings"
+msgstr "Открыть «Параметры»"
+
+#: src/welcome/main.cpp data/bayu-welcome.desktop
+msgid "Welcome"
+msgstr "Добро пожаловать"
+
+#: data/bayu-store.desktop
+msgid "App Store"
+msgstr "Магазин приложений"
+
+#: data/bayu-store.desktop
+msgid "Find and install apps from Flathub and F-Droid"
+msgstr "Поиск и установка приложений из Flathub и F-Droid"
+
+#: data/bayu-store.desktop
+msgid "apps;install;flatpak;flathub;fdroid;android;store;"
+msgstr "приложения;установка;магазин;apps;install;flatpak;flathub;fdroid;android;store;"
+
+#: data/bayu-welcome.desktop
+msgid "A short tour of IGN 26 and its apps"
+msgstr "Краткий обзор IGN 26 и его приложений"
+
+#: data/bayu-welcome.desktop
+msgid "tour;welcome;help;getting started;"
+msgstr "обзор;добро пожаловать;справка;начало работы;tour;welcome;help;getting started;"

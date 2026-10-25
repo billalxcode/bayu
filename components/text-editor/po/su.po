@@ -1,0 +1,881 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-text-editor\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"PO-Revision-Date: 2026-10-25 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: su\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/dialogs.cpp
+msgid "If you don't save, your changes will be lost."
+msgstr "Mun teu disimpen, parobahan Ibu/Bapa bakal leungit."
+
+#: src/dialogs.cpp src/pagebars.cpp
+msgid "Cancel"
+msgstr "Batal"
+
+#: src/dialogs.cpp
+msgid "Discard All"
+msgstr "Buang Kabéh"
+
+#: src/dialogs.cpp
+msgid "Don't Save"
+msgstr "Ulah Simpen"
+
+#: src/dialogs.cpp src/editorwindow.cpp src/pagebars.cpp
+msgid "Save"
+msgstr "Simpen"
+
+#: src/dialogs.cpp
+#, python-brace-format
+msgid "Save changes to “{name}”?"
+msgstr "Simpen parobahan kana “{name}”?"
+
+#: src/dialogs.cpp
+#, python-brace-format
+msgid "Save changes to {n} document?"
+msgid_plural "Save changes to {n} documents?"
+msgstr[0] "Simpen parobahan kana {n} dokumén?"
+
+#: src/dialogs.cpp
+msgid "System Monospace"
+msgstr "Monospace Sistem"
+
+#: src/dialogs.cpp
+msgid "Font"
+msgstr "Fon"
+
+#. TRANSLATORS: the system's default font size, first in a list of sizes in points.
+#: src/dialogs.cpp
+msgid "System"
+msgstr "Sistem"
+
+#: src/dialogs.cpp
+#, python-brace-format
+msgid "{size} pt"
+msgstr "{size} pt"
+
+#: src/dialogs.cpp
+msgid "Size"
+msgstr "Ukuran"
+
+#: src/dialogs.cpp
+msgid "Tab Width"
+msgstr "Lebar Tab"
+
+#: src/dialogs.cpp
+msgid "Insert Spaces Instead of Tabs"
+msgstr "Selapkeun Spasi gaganti Tab"
+
+#: src/dialogs.cpp
+msgid "Automatic Indentation"
+msgstr "Indéntasi Otomatis"
+
+#: src/dialogs.cpp
+msgid "Wrap Lines"
+msgstr "Bungkus Baris"
+
+#: src/dialogs.cpp src/editorwindow.cpp
+msgid "Line Numbers"
+msgstr "Nomer Baris"
+
+#: src/dialogs.cpp src/editorwindow.cpp
+msgid "Highlight Current Line"
+msgstr "Sorot Baris Ayeuna"
+
+#: src/dialogs.cpp src/editorwindow.cpp
+msgid "Show Whitespace"
+msgstr "Témbongkeun Spasi Kosong"
+
+#: src/dialogs.cpp src/editorwindow.cpp
+msgid "Match Brackets"
+msgstr "Cocogkeun Kurung"
+
+#: src/dialogs.cpp
+msgid "Restore Session on Start"
+msgstr "Pulihkeun Sési nalika Mimiti"
+
+#: src/dialogs.cpp src/editorwindow.cpp
+msgid "Settings"
+msgstr "Setélan"
+
+#: src/dialogs.cpp
+msgid "Files and Tabs"
+msgstr "Berkas jeung Tab"
+
+#: src/dialogs.cpp
+msgid "New tab"
+msgstr "Tab anyar"
+
+#: src/dialogs.cpp
+msgid "New window"
+msgstr "Jandéla anyar"
+
+#: src/dialogs.cpp
+msgid "Open a file"
+msgstr "Buka berkas"
+
+#: src/dialogs.cpp
+msgid "Save, save as"
+msgstr "Simpen, simpen salaku"
+
+#: src/dialogs.cpp
+msgid "Save all"
+msgstr "Simpen kabéh"
+
+#: src/dialogs.cpp
+msgid "Close the tab, the window"
+msgstr "Tutup tab, jandéla"
+
+#: src/dialogs.cpp
+msgid "Reopen the closed tab"
+msgstr "Buka deui tab nu ditutup"
+
+#: src/dialogs.cpp
+msgid "Next or previous tab"
+msgstr "Tab saterusna atanapi samemehna"
+
+#: src/dialogs.cpp
+msgid "Move the tab"
+msgstr "Pindahkeun tab"
+
+#: src/dialogs.cpp
+msgid "Go to tab 1 to 9"
+msgstr "Buka tab 1 nepi ka 9"
+
+#: src/dialogs.cpp
+msgid "Quit"
+msgstr "Kaluar"
+
+#: src/dialogs.cpp
+msgid "Editing"
+msgstr "Ngédit"
+
+#: src/dialogs.cpp
+msgid "Undo, redo"
+msgstr "Batalkeun, ulangan"
+
+#: src/dialogs.cpp
+msgid "Cut, copy, paste"
+msgstr "Gunting, salin, témpélkeun"
+
+#: src/dialogs.cpp
+msgid "Delete the word before or after"
+msgstr "Hapus kecap saméméh atanapi sanggeus"
+
+#: src/dialogs.cpp
+msgid "Indent or unindent"
+msgstr "Indéntasi atanapi cabut indéntasi"
+
+#: src/dialogs.cpp
+msgid "Move the line up or down"
+msgstr "Pindahkeun baris ka luhur atanapi ka handap"
+
+#: src/dialogs.cpp
+msgid "Duplicate the line"
+msgstr "Gandakeun baris"
+
+#: src/dialogs.cpp
+msgid "Delete the line"
+msgstr "Hapus baris"
+
+#: src/dialogs.cpp
+msgid "Uppercase, lowercase"
+msgstr "Hurup gedé, hurup leutik"
+
+#: src/dialogs.cpp
+msgid "Overwrite mode"
+msgstr "Mode nimpah"
+
+#: src/dialogs.cpp
+msgid "Find and Move"
+msgstr "Téangan jeung Pindah"
+
+#: src/dialogs.cpp
+msgid "Find, replace"
+msgstr "Téangan, gantian"
+
+#: src/dialogs.cpp
+msgid "Next or previous match"
+msgstr "Cocog saterusna atanapi samemehna"
+
+#: src/dialogs.cpp
+msgid "Go to line"
+msgstr "Buka baris"
+
+#: src/dialogs.cpp
+msgid "Word left or right"
+msgstr "Kecap kenca atanapi katuhu"
+
+#: src/dialogs.cpp
+msgid "Start or end of the document"
+msgstr "Awal atanapi tungtung dokumén"
+
+#: src/dialogs.cpp src/editorwindow.cpp
+msgid "View"
+msgstr "Tampilan"
+
+#: src/dialogs.cpp
+msgid "Zoom in, out, reset"
+msgstr "Zoom lebet, kaluar, réset"
+
+#: src/dialogs.cpp
+msgid "Word wrap"
+msgstr "Bungkus kecap"
+
+#: src/dialogs.cpp
+msgid "Full screen"
+msgstr "Layar pinuh"
+
+#: src/dialogs.cpp
+msgid "Keyboard shortcuts"
+msgstr "Potong kompas kibor"
+
+#: src/dialogs.cpp src/editorwindow.cpp
+msgid "Keyboard Shortcuts"
+msgstr "Potong Kompas Kibor"
+
+#: src/dialogs.cpp src/editorwindow.cpp bayu-text-editor.desktop
+msgid "Text Editor"
+msgstr "Éditor Téks"
+
+#: src/dialogs.cpp
+msgid "A simple editor for plain text"
+msgstr "Éditor basajan pikeun téks polos"
+
+#: src/document.cpp
+msgid "The file does not exist."
+msgstr "Berkas teu aya."
+
+#: src/document.cpp
+msgid "This is a folder."
+msgstr "Ieu folder."
+
+#: src/document.cpp src/editorwindow.cpp
+msgid "Untitled"
+msgstr "Tanpa judul"
+
+#: src/document.cpp
+#, python-brace-format
+msgid "Existing file {path} is not writable"
+msgstr "Berkas {path} nu aya teu tiasa ditulis"
+
+#: src/editorpage.cpp
+#, python-brace-format
+msgid "Revert “{name}”?"
+msgstr "Balikkeun “{name}”?"
+
+#: src/editorpage.cpp
+#, python-brace-format
+msgid "Reopen with {encoding}?"
+msgstr "Buka deui ku {encoding}?"
+
+#: src/editorpage.cpp
+msgid "Your unsaved changes will be lost."
+msgstr "Parobahan Ibu/Bapa nu can disimpen bakal leungit."
+
+#: src/editorpage.cpp
+msgid "Revert"
+msgstr "Balikkeun"
+
+#: src/editorpage.cpp
+msgid "Reopen"
+msgstr "Buka Deui"
+
+#: src/editorpage.cpp src/editorwindow.cpp
+msgid "Undo"
+msgstr "Batalkeun"
+
+#: src/editorpage.cpp src/editorwindow.cpp
+msgid "Redo"
+msgstr "Ulangan"
+
+#: src/editorpage.cpp
+msgid "Cut"
+msgstr "Gunting"
+
+#: src/editorpage.cpp
+msgid "Copy"
+msgstr "Salin"
+
+#: src/editorpage.cpp
+msgid "Paste"
+msgstr "Témpélkeun"
+
+#: src/editorpage.cpp
+msgid "Delete"
+msgstr "Hapus"
+
+#: src/editorpage.cpp
+msgid "Select All"
+msgstr "Pilih Kabéh"
+
+#: src/editorwindow.cpp
+msgid "Save As"
+msgstr "Simpen Salaku"
+
+#: src/editorwindow.cpp
+msgid "Open"
+msgstr "Buka"
+
+#: src/editorwindow.cpp
+msgid "Open…"
+msgstr "Buka…"
+
+#: src/editorwindow.cpp
+msgid "Open Recent"
+msgstr "Buka Panganyarna"
+
+#: src/editorwindow.cpp
+msgid "Clear Recent Files"
+msgstr "Pupus Berkas Panganyarna"
+
+#: src/editorwindow.cpp
+msgid "New Tab"
+msgstr "Tab Anyar"
+
+#: src/editorwindow.cpp bayu-text-editor.desktop
+msgid "New Window"
+msgstr "Jandéla Anyar"
+
+#: src/editorwindow.cpp
+msgid "Reopen Closed Tab"
+msgstr "Buka Deui Tab nu Ditutup"
+
+#: src/editorwindow.cpp src/pagebars.cpp
+msgid "Save As…"
+msgstr "Simpen Salaku…"
+
+#: src/editorwindow.cpp
+msgid "Save All"
+msgstr "Simpen Kabéh"
+
+#: src/editorwindow.cpp
+msgid "Revert to Saved…"
+msgstr "Balikkeun ka Nu Disimpen…"
+
+#: src/editorwindow.cpp
+msgid "Close Tab"
+msgstr "Tutup Tab"
+
+#: src/editorwindow.cpp
+msgid "Find…"
+msgstr "Téangan…"
+
+#: src/editorwindow.cpp
+msgid "Replace…"
+msgstr "Gantian…"
+
+#: src/editorwindow.cpp
+msgid "Go to Line…"
+msgstr "Buka Baris…"
+
+#: src/editorwindow.cpp
+msgid "Edit"
+msgstr "Édit"
+
+#: src/editorwindow.cpp
+msgid "Duplicate Line"
+msgstr "Gandakeun Baris"
+
+#: src/editorwindow.cpp
+msgid "Delete Line"
+msgstr "Hapus Baris"
+
+#: src/editorwindow.cpp
+msgid "Move Line Up"
+msgstr "Pindahkeun Baris ka Luhur"
+
+#: src/editorwindow.cpp
+msgid "Move Line Down"
+msgstr "Pindahkeun Baris ka Handap"
+
+#. TRANSLATORS: changes the selection to upper case; written in the case it applies, as are "lowercase" and "Title Case".
+#: src/editorwindow.cpp
+msgid "UPPERCASE"
+msgstr "HURUP GEDÉ"
+
+#: src/editorwindow.cpp
+msgid "lowercase"
+msgstr "hurup leutik"
+
+#: src/editorwindow.cpp
+msgid "Title Case"
+msgstr "Hurup Gedé Unggal Kecap"
+
+#: src/editorwindow.cpp
+msgid "Indent"
+msgstr "Indéntasi"
+
+#: src/editorwindow.cpp
+msgid "Unindent"
+msgstr "Cabut Indéntasi"
+
+#: src/editorwindow.cpp
+msgid "Word Wrap"
+msgstr "Bungkus Kecap"
+
+#: src/editorwindow.cpp
+msgid "Zoom In"
+msgstr "Zoom Lebet"
+
+#: src/editorwindow.cpp
+msgid "Zoom Out"
+msgstr "Zoom Kaluar"
+
+#: src/editorwindow.cpp
+msgid "Actual Size"
+msgstr "Ukuran Sabenerna"
+
+#: src/editorwindow.cpp
+msgid "Full Screen"
+msgstr "Layar Pinuh"
+
+#: src/editorwindow.cpp
+msgid "Document Statistics"
+msgstr "Statistik Dokumén"
+
+#: src/editorwindow.cpp
+msgid "About Text Editor"
+msgstr "Ngeunaan Éditor Téks"
+
+#: src/editorwindow.cpp
+#, python-brace-format
+msgid "Lines: {count}"
+msgstr "Baris: {count}"
+
+#: src/editorwindow.cpp
+#, python-brace-format
+msgid "Words: {count}"
+msgstr "Kecap: {count}"
+
+#: src/editorwindow.cpp
+#, python-brace-format
+msgid "Characters: {count}"
+msgstr "Karakter: {count}"
+
+#: src/editorwindow.cpp
+#, python-brace-format
+msgid "Characters without spaces: {count}"
+msgstr "Karakter tanpa spasi: {count}"
+
+#. TRANSLATORS: each value is a count with its noun, such as "3 lines".
+#: src/editorwindow.cpp
+#, python-brace-format
+msgid "Selection: {lines}, {words}, {characters}"
+msgstr "Pilihan: {lines}, {words}, {characters}"
+
+#: src/editorwindow.cpp
+#, python-brace-format
+msgid "{n} line"
+msgid_plural "{n} lines"
+msgstr[0] "{n} baris"
+
+#: src/editorwindow.cpp
+#, python-brace-format
+msgid "{n} word"
+msgid_plural "{n} words"
+msgstr[0] "{n} kecap"
+
+#: src/editorwindow.cpp
+#, python-brace-format
+msgid "{n} character"
+msgid_plural "{n} characters"
+msgstr[0] "{n} karakter"
+
+#: src/editorwindow.cpp src/pagebars.cpp
+msgid "OK"
+msgstr "OK"
+
+#: src/editorwindow.cpp
+msgid "Move to New Window"
+msgstr "Pindahkeun ka Jandéla Anyar"
+
+#: src/editorwindow.cpp
+msgid "Copy Path"
+msgstr "Salin Jalur"
+
+#: src/editorwindow.cpp
+msgid "Show in Folder"
+msgstr "Témbongkeun dina Folder"
+
+#: src/editorwindow.cpp
+msgid "Close Other Tabs"
+msgstr "Tutup Tab Séjén"
+
+#: src/editorwindow.cpp
+msgid "Close Tabs to the Right"
+msgstr "Tutup Tab di Katuhu"
+
+#. TRANSLATORS: the cursor position in the status bar; "Ln" and "Col" abbreviate line and column.
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "Ln {line}, Col {column}"
+msgstr "Bs {line}, Kol {column}"
+
+#. TRANSLATORS: {position} is the cursor position, such as "Ln 3, Col 7".
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "{position}  ({n} selected)"
+msgid_plural "{position}  ({n} selected)"
+msgstr[0] "{position}  ({n} dipilih)"
+
+#. TRANSLATORS: a short status bar badge shown while typing overwrites the text after the cursor.
+#: src/pagebars.cpp
+msgid "OVR"
+msgstr "OVR"
+
+#: src/pagebars.cpp
+msgid "Read-Only"
+msgstr "Baca-Wungkul"
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "Spaces: {width}"
+msgstr "Spasi: {width}"
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "Tab Width: {width}"
+msgstr "Lebar Tab: {width}"
+
+#: src/pagebars.cpp
+msgid "Indent with Spaces"
+msgstr "Indéntasi ku Spasi"
+
+#: src/pagebars.cpp
+msgid "Indent with Tabs"
+msgstr "Indéntasi ku Tab"
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "Width: {width}"
+msgstr "Lebar: {width}"
+
+#: src/pagebars.cpp
+msgid "Unix (LF)"
+msgstr "Unix (LF)"
+
+#: src/pagebars.cpp
+msgid "Windows (CRLF)"
+msgstr "Windows (CRLF)"
+
+#: src/pagebars.cpp
+msgid "Classic Mac (CR)"
+msgstr "Mac Klasik (CR)"
+
+#: src/pagebars.cpp
+msgid "Reopen with Encoding"
+msgstr "Buka Deui ku Énkoding"
+
+#: src/pagebars.cpp
+msgid "Save with Encoding"
+msgstr "Simpen ku Énkoding"
+
+#: src/pagebars.cpp
+msgid "Byte Order Mark"
+msgstr "Byte Order Mark"
+
+#: src/pagebars.cpp
+msgid "Unsaved changes from your last session were restored."
+msgstr "Parobahan nu can disimpen ti sési pamungkas dipulihkeun."
+
+#: src/pagebars.cpp
+msgid "Discard Changes"
+msgstr "Buang Parobahan"
+
+#: src/pagebars.cpp
+msgid "The file has changed on disk. Saving now would overwrite that change."
+msgstr "Berkas geus robah dina disk. Nyimpen ayeuna bakal nimpah parobahan éta."
+
+#: src/pagebars.cpp
+msgid "Keep My Version"
+msgstr "Tetep Vérsi Kuring"
+
+#: src/pagebars.cpp
+msgid "Reload"
+msgstr "Muat Deui"
+
+#: src/pagebars.cpp
+msgid "The file was deleted or moved. Your text is still here."
+msgstr "Berkas dihapus atanapi dipindahkeun. Téks Ibu/Bapa tetep aya di dieu."
+
+#: src/pagebars.cpp
+msgid "Close"
+msgstr "Tutup"
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "Some characters could not be read as {encoding} and show as �."
+msgstr "Sababaraha karakter teu tiasa dibaca salaku {encoding} sarta nembongan salaku �."
+
+#: src/pagebars.cpp
+msgid "Dismiss"
+msgstr "Tutup"
+
+#: src/pagebars.cpp
+msgid "Choose Encoding…"
+msgstr "Pilih Énkoding…"
+
+#: src/pagebars.cpp
+msgid "This file does not look like text. Editing it could damage it."
+msgstr "Berkas ieu teu siga téks. Ngéditna bisa ngarusak."
+
+#: src/pagebars.cpp
+msgid "Edit Anyway"
+msgstr "Édit Bae"
+
+#: src/pagebars.cpp
+msgid "You do not have permission to save this file."
+msgstr "Teu gaduh idin pikeun nyimpen berkas ieu."
+
+#: src/pagebars.cpp
+msgid "You do not have permission to open this file."
+msgstr "Teu gaduh idin pikeun muka berkas ieu."
+
+#: src/pagebars.cpp
+msgid "Retry"
+msgstr "Cobian Deui"
+
+#: src/pagebars.cpp
+msgid "The file could not be opened."
+msgstr "Berkas teu tiasa dibuka."
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "The file could not be opened. {error}"
+msgstr "Berkas teu tiasa dibuka. {error}"
+
+#: src/pagebars.cpp
+msgid "The file is too large to open (more than 256 MB)."
+msgstr "Berkas teuing ageung pikeun dibuka (leuwih ti 256 MB)."
+
+#: src/pagebars.cpp
+msgid "The file could not be saved."
+msgstr "Berkas teu tiasa disimpen."
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "The file could not be saved. {error}"
+msgstr "Berkas teu tiasa disimpen. {error}"
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "Some characters cannot be saved as {encoding}. Nothing was saved."
+msgstr "Sababaraha karakter teu tiasa disimpen salaku {encoding}. Teu aya nu disimpen."
+
+#: src/pagebars.cpp
+msgid "Save as UTF-8"
+msgstr "Simpen salaku UTF-8"
+
+#: src/pagebars.cpp
+msgid "Syntax highlighting is off for this large file."
+msgstr "Sorotan sintaksis pareum pikeun berkas ageung ieu."
+
+#: src/pagebars.cpp
+msgid "Highlight Anyway"
+msgstr "Sorot Bae"
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "Saving would replace the characters that could not be read as {encoding}."
+msgstr "Nyimpen bakal ngagantian karakter nu teu tiasa dibaca salaku {encoding}."
+
+#: src/pagebars.cpp
+msgid "Save Anyway"
+msgstr "Simpen Bae"
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "This file mixes line endings. Saving will use {ending} throughout."
+msgstr "Berkas ieu nyampur tungtung baris. Nyimpen bakal ngagunakeun {ending} sapanjang."
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "Replaced {n} occurrence"
+msgid_plural "Replaced {n} occurrences"
+msgstr[0] "{n} kajadian digantian"
+
+#: src/pagebars.cpp
+msgid "Find"
+msgstr "Téangan"
+
+#: src/pagebars.cpp
+msgid "Match Case"
+msgstr "Cocogkeun Hurup Gedé/Leutik"
+
+#: src/pagebars.cpp
+msgid "Whole Words"
+msgstr "Kecap Pinuh"
+
+#: src/pagebars.cpp
+msgid "Regular Expression"
+msgstr "Éksprési Réguler"
+
+#: src/pagebars.cpp
+msgid "In Selection"
+msgstr "Dina Pilihan"
+
+#: src/pagebars.cpp
+msgid "Replace with"
+msgstr "Gantian ku"
+
+#: src/pagebars.cpp
+msgid "Replace"
+msgstr "Gantian"
+
+#: src/pagebars.cpp
+msgid "Replace All"
+msgstr "Gantian Kabéh"
+
+#. TRANSLATORS: beside the find field, when the search is not a valid regular expression.
+#: src/pagebars.cpp
+msgid "Invalid"
+msgstr "Teu valid"
+
+#. TRANSLATORS: beside the find field, when the search has continued from the other end of the document.
+#: src/pagebars.cpp
+msgid "Wrapped"
+msgstr "Ngabungkus"
+
+#: src/pagebars.cpp
+msgid "No matches"
+msgstr "Teu aya nu cocog"
+
+#. TRANSLATORS: the current match and the number of matches, such as "2 of 5".
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "{index} of {count}"
+msgstr "{index} tina {count}"
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "{n} match"
+msgid_plural "{n} matches"
+msgstr[0] "{n} cocog"
+
+#. TRANSLATORS: {count} is the number of lines; a column number can follow the line number after a colon.
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "Go to line (1–{count}), :column"
+msgstr "Buka baris (1–{count}), :kolom"
+
+#: src/pagebars.cpp
+#, python-brace-format
+msgid "Opening “{name}”…"
+msgstr "Nuju muka “{name}”…"
+
+#: src/syntax.cpp
+msgid "Plain Text"
+msgstr "Téks Polos"
+
+#. TRANSLATORS: an encoding menu entry; the codec name in parentheses stays as it is.
+#: src/textcodec.cpp
+msgid "Unicode (UTF-8)"
+msgstr "Unicode (UTF-8)"
+
+#: src/textcodec.cpp
+msgid "Unicode (UTF-16 LE)"
+msgstr "Unicode (UTF-16 LE)"
+
+#: src/textcodec.cpp
+msgid "Unicode (UTF-16 BE)"
+msgstr "Unicode (UTF-16 BE)"
+
+#: src/textcodec.cpp
+msgid "Chinese Simplified (GB18030)"
+msgstr "Tionghoa Basajan (GB18030)"
+
+#: src/textcodec.cpp
+msgid "Chinese Traditional (Big5)"
+msgstr "Tionghoa Tradisional (Big5)"
+
+#: src/textcodec.cpp
+msgid "Chinese Traditional (Big5-HKSCS)"
+msgstr "Tionghoa Tradisional (Big5-HKSCS)"
+
+#: src/textcodec.cpp
+msgid "Japanese (Shift_JIS)"
+msgstr "Jepang (Shift_JIS)"
+
+#: src/textcodec.cpp
+msgid "Japanese (EUC-JP)"
+msgstr "Jepang (EUC-JP)"
+
+#: src/textcodec.cpp
+msgid "Korean (EUC-KR)"
+msgstr "Korea (EUC-KR)"
+
+#: src/textcodec.cpp
+msgid "Western (Windows-1252)"
+msgstr "Kulon (Windows-1252)"
+
+#: src/textcodec.cpp
+msgid "Western (ISO-8859-1)"
+msgstr "Kulon (ISO-8859-1)"
+
+#: src/textcodec.cpp
+msgid "Western (ISO-8859-15)"
+msgstr "Kulon (ISO-8859-15)"
+
+#: src/textcodec.cpp
+msgid "Central European (Windows-1250)"
+msgstr "Éropa Tengah (Windows-1250)"
+
+#: src/textcodec.cpp
+msgid "Central European (ISO-8859-2)"
+msgstr "Éropa Tengah (ISO-8859-2)"
+
+#: src/textcodec.cpp
+msgid "Cyrillic (Windows-1251)"
+msgstr "Sirilik (Windows-1251)"
+
+#: src/textcodec.cpp
+msgid "Cyrillic (KOI8-R)"
+msgstr "Sirilik (KOI8-R)"
+
+#: src/textcodec.cpp
+msgid "Cyrillic (KOI8-U)"
+msgstr "Sirilik (KOI8-U)"
+
+#: src/textcodec.cpp
+msgid "Greek (Windows-1253)"
+msgstr "Yunani (Windows-1253)"
+
+#: src/textcodec.cpp
+msgid "Turkish (Windows-1254)"
+msgstr "Turki (Windows-1254)"
+
+#: src/textcodec.cpp
+msgid "Hebrew (Windows-1255)"
+msgstr "Ibrani (Windows-1255)"
+
+#: src/textcodec.cpp
+msgid "Arabic (Windows-1256)"
+msgstr "Arab (Windows-1256)"
+
+#: src/textcodec.cpp
+msgid "Baltic (Windows-1257)"
+msgstr "Baltik (Windows-1257)"
+
+#: src/textcodec.cpp
+msgid "Vietnamese (Windows-1258)"
+msgstr "Vietnam (Windows-1258)"
+
+#: src/textcodec.cpp
+msgid "Thai (Windows-874)"
+msgstr "Thai (Windows-874)"
+
+#: bayu-text-editor.desktop
+msgid "Edit plain text files"
+msgstr "Édit berkas téks polos"
+
+#: bayu-text-editor.desktop
+msgid "Text;Editor;Plain;Notes;Code;"
+msgstr "Téks;Éditor;Polos;Catetan;Kode;Text;Editor;Plain;Notes;Code;"

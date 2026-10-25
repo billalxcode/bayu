@@ -1,0 +1,261 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-core\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-20 09:33+0800\n"
+"PO-Revision-Date: 2026-10-25 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: bayu-services/battery/battery.cpp
+msgid "Calculating…"
+msgstr "Calcul en cours…"
+
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{time} until fully charged"
+msgstr "{time} avant la charge complète"
+
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{time} remaining"
+msgstr "{time} restantes"
+
+#: bayu-services/battery/battery.cpp
+msgid "Fully charged."
+msgstr "Complètement chargée."
+
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "Charging paused at {percent}%"
+msgstr "Charge suspendue à {percent} %"
+
+#: bayu-services/battery/battery.cpp
+msgid "Not charging"
+msgstr "Ne charge pas"
+
+#. TRANSLATORS: days in a short battery time such as "1d 2h 5m".
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{n}d"
+msgstr "{n} j"
+
+#. TRANSLATORS: hours in a short battery time such as "2h 5m".
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{n}h"
+msgstr "{n} h"
+
+#. TRANSLATORS: minutes in a short battery time such as "2h 5m".
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{n}m"
+msgstr "{n} min"
+
+#. TRANSLATORS: when the battery was last fully charged, under a minute ago.
+#: bayu-services/battery/battery.cpp
+msgid "now"
+msgstr "maintenant"
+
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{time} ago"
+msgstr "il y a {time}"
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Low Battery"
+msgstr "Batterie faible"
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Battery Critically Low"
+msgstr "Batterie très faible"
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Battery Empty"
+msgstr "Batterie vide"
+
+#: bayu-services/battery/batterywarning.cpp
+#, python-brace-format
+msgid "{percent}% of battery remaining ({time})."
+msgstr "{percent} % de batterie restante ({time})."
+
+#: bayu-services/battery/batterywarning.cpp
+#, python-brace-format
+msgid "{percent}% of battery remaining."
+msgstr "{percent} % de batterie restante."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Save your work and connect to power. The computer will shut down when the battery is nearly empty."
+msgstr "Enregistrez votre travail et branchez l’ordinateur sur le secteur. Il s’éteindra lorsque la batterie sera presque vide."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Connect to power. The computer will hibernate when the battery is nearly empty."
+msgstr "Branchez l’ordinateur sur le secteur. Il passera en hibernation lorsque la batterie sera presque vide."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Save your work and connect to power. The computer will go to sleep when the battery is nearly empty."
+msgstr "Enregistrez votre travail et branchez l’ordinateur sur le secteur. Il passera en veille lorsque la batterie sera presque vide."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Connect to power soon."
+msgstr "Branchez-le bientôt sur le secteur."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "The computer is about to shut down. Connect to power to keep it running."
+msgstr "L’ordinateur est sur le point de s’éteindre. Branchez-le sur le secteur pour qu’il reste allumé."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "The computer is about to hibernate. Connect to power to keep it running."
+msgstr "L’ordinateur est sur le point de passer en hibernation. Branchez-le sur le secteur pour qu’il reste allumé."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "The computer is about to go to sleep. Connect to power to keep it running."
+msgstr "L’ordinateur est sur le point de passer en veille. Branchez-le sur le secteur pour qu’il reste allumé."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Connect to power now."
+msgstr "Branchez-le sur le secteur maintenant."
+
+#: bayu-services/crash/crashdialog.cpp
+#, python-brace-format
+msgid "“{name}” quit unexpectedly"
+msgstr "« {name} » s’est arrêtée de manière inattendue"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "Hide Details"
+msgstr "Masquer les détails"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "Show Details"
+msgstr "Afficher les détails"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "Close"
+msgstr "Fermer"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "Reopen"
+msgstr "Rouvrir"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "OK"
+msgstr "OK"
+
+#: bayu-services/crash/crashdialog.cpp
+#, python-brace-format
+msgid "Reason: {reason}"
+msgstr "Raison : {reason}"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "It is restarted automatically."
+msgstr "Elle est redémarrée automatiquement."
+
+#: bayu-services/crash/crashmanager.cpp
+msgid "Application Runtime"
+msgstr "Environnement d’exécution des applications"
+
+#: bayu-services/locale/language.cpp
+msgid "Some applications may need to be restarted for the change to take effect."
+msgstr "Certaines applications devront peut-être être redémarrées pour que le changement prenne effet."
+
+#: bayu-services/permissions/permissionprompt.cpp
+#, python-brace-format
+msgid "Share your screen with “{name}”"
+msgstr "Partager votre écran avec « {name} »"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Choose a display or a window. What is shown on it will be visible to the application until it stops sharing."
+msgstr "Choisissez un écran ou une fenêtre. Son contenu sera visible par l’application jusqu’à l’arrêt du partage."
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Choose a window. Its contents will be visible to the application until it stops sharing."
+msgstr "Choisissez une fenêtre. Son contenu sera visible par l’application jusqu’à l’arrêt du partage."
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Choose a display. Everything shown on it, including other windows, will be visible to the application until it stops sharing."
+msgstr "Choisissez un écran. Tout ce qui s’y affiche, y compris les autres fenêtres, sera visible par l’application jusqu’à l’arrêt du partage."
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Share"
+msgstr "Partager"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Windows"
+msgstr "Fenêtres"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Displays"
+msgstr "Écrans"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Always allow this app"
+msgstr "Toujours autoriser cette application"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Let “An app” control this computer?"
+msgstr "Laisser « Une application » contrôler cet ordinateur ?"
+
+#: bayu-services/permissions/permissionprompt.cpp
+#, python-brace-format
+msgid "Let “{name}” control this computer?"
+msgstr "Laisser « {name} » contrôler cet ordinateur ?"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "It will see your screen and use the pointer and keyboard until you stop it with the Stop button in the status bar. Using the pointer or keyboard yourself pauses it, and it cannot answer system dialogs like this one."
+msgstr "Elle verra votre écran et utilisera le pointeur et le clavier jusqu’à ce que vous l’arrêtiez avec le bouton Arrêter de la barre d’état. Si vous utilisez vous-même le pointeur ou le clavier, elle est mise en pause, et elle ne peut pas répondre aux boîtes de dialogue système comme celle-ci."
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Allow"
+msgstr "Autoriser"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Cancel"
+msgstr "Annuler"
+
+#: session/processmanager.cpp
+msgid "Log out cancelled"
+msgstr "Déconnexion annulée"
+
+#: session/processmanager.cpp
+msgid "Restart cancelled"
+msgstr "Redémarrage annulé"
+
+#: session/processmanager.cpp
+msgid "Shutdown cancelled"
+msgstr "Arrêt annulé"
+
+#: session/processmanager.cpp
+msgid "An application cancelled it."
+msgstr "Une application l’a annulé."
+
+#: session/processmanager.cpp
+msgid "An application did not quit."
+msgstr "Une application n’a pas quitté."
+
+#: session/processmanager.cpp
+#, python-brace-format
+msgid "{name} cancelled it."
+msgstr "{name} l’a annulé."
+
+#: session/processmanager.cpp
+#, python-brace-format
+msgid "{name} did not quit."
+msgstr "{name} n’a pas quitté."
+
+#. TRANSLATORS: the sender of a notification from the session itself.
+#: session/processmanager.cpp
+msgid "System"
+msgstr "Système"
+
+#: session/bayu-wayland.desktop
+msgid "Bayu (Wayland)"
+msgstr "Bayu (Wayland)"
+
+#: session/bayu-wayland.desktop
+msgid "Bayu desktop session"
+msgstr "Session de bureau Bayu"

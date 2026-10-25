@@ -1,0 +1,261 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-core\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-20 09:33+0800\n"
+"PO-Revision-Date: 2026-10-25 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: bayu-services/battery/battery.cpp
+msgid "Calculating…"
+msgstr "Menghitung…"
+
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{time} until fully charged"
+msgstr "{time} hingga terisi penuh"
+
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{time} remaining"
+msgstr "{time} tersisa"
+
+#: bayu-services/battery/battery.cpp
+msgid "Fully charged."
+msgstr "Terisi penuh."
+
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "Charging paused at {percent}%"
+msgstr "Pengisian dijeda pada {percent}%"
+
+#: bayu-services/battery/battery.cpp
+msgid "Not charging"
+msgstr "Tidak mengisi daya"
+
+#. TRANSLATORS: days in a short battery time such as "1d 2h 5m".
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{n}d"
+msgstr "{n}h"
+
+#. TRANSLATORS: hours in a short battery time such as "2h 5m".
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{n}h"
+msgstr "{n}j"
+
+#. TRANSLATORS: minutes in a short battery time such as "2h 5m".
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{n}m"
+msgstr "{n}m"
+
+#. TRANSLATORS: when the battery was last fully charged, under a minute ago.
+#: bayu-services/battery/battery.cpp
+msgid "now"
+msgstr "sekarang"
+
+#: bayu-services/battery/battery.cpp
+#, python-brace-format
+msgid "{time} ago"
+msgstr "{time} yang lalu"
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Low Battery"
+msgstr "Baterai Lemah"
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Battery Critically Low"
+msgstr "Baterai Sangat Lemah"
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Battery Empty"
+msgstr "Baterai Habis"
+
+#: bayu-services/battery/batterywarning.cpp
+#, python-brace-format
+msgid "{percent}% of battery remaining ({time})."
+msgstr "Baterai tersisa {percent}% ({time})."
+
+#: bayu-services/battery/batterywarning.cpp
+#, python-brace-format
+msgid "{percent}% of battery remaining."
+msgstr "Baterai tersisa {percent}%."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Save your work and connect to power. The computer will shut down when the battery is nearly empty."
+msgstr "Simpan pekerjaan Anda dan sambungkan ke daya. Komputer akan mati saat baterai hampir habis."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Connect to power. The computer will hibernate when the battery is nearly empty."
+msgstr "Sambungkan ke daya. Komputer akan hibernasi saat baterai hampir habis."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Save your work and connect to power. The computer will go to sleep when the battery is nearly empty."
+msgstr "Simpan pekerjaan Anda dan sambungkan ke daya. Komputer akan masuk ke mode tidur saat baterai hampir habis."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Connect to power soon."
+msgstr "Segera sambungkan ke daya."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "The computer is about to shut down. Connect to power to keep it running."
+msgstr "Komputer akan segera mati. Sambungkan ke daya agar tetap menyala."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "The computer is about to hibernate. Connect to power to keep it running."
+msgstr "Komputer akan segera hibernasi. Sambungkan ke daya agar tetap menyala."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "The computer is about to go to sleep. Connect to power to keep it running."
+msgstr "Komputer akan segera masuk ke mode tidur. Sambungkan ke daya agar tetap menyala."
+
+#: bayu-services/battery/batterywarning.cpp
+msgid "Connect to power now."
+msgstr "Sambungkan ke daya sekarang."
+
+#: bayu-services/crash/crashdialog.cpp
+#, python-brace-format
+msgid "“{name}” quit unexpectedly"
+msgstr "“{name}” berhenti secara tak terduga"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "Hide Details"
+msgstr "Sembunyikan Detail"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "Show Details"
+msgstr "Tampilkan Detail"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "Close"
+msgstr "Tutup"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "Reopen"
+msgstr "Buka Kembali"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "OK"
+msgstr "OK"
+
+#: bayu-services/crash/crashdialog.cpp
+#, python-brace-format
+msgid "Reason: {reason}"
+msgstr "Alasan: {reason}"
+
+#: bayu-services/crash/crashdialog.cpp
+msgid "It is restarted automatically."
+msgstr "Aplikasi dimulai ulang secara otomatis."
+
+#: bayu-services/crash/crashmanager.cpp
+msgid "Application Runtime"
+msgstr "Runtime Aplikasi"
+
+#: bayu-services/locale/language.cpp
+msgid "Some applications may need to be restarted for the change to take effect."
+msgstr "Beberapa aplikasi mungkin perlu dimulai ulang agar perubahan berlaku."
+
+#: bayu-services/permissions/permissionprompt.cpp
+#, python-brace-format
+msgid "Share your screen with “{name}”"
+msgstr "Bagikan layar Anda dengan “{name}”"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Choose a display or a window. What is shown on it will be visible to the application until it stops sharing."
+msgstr "Pilih layar atau jendela. Apa yang ditampilkan di dalamnya akan terlihat oleh aplikasi hingga berhenti berbagi."
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Choose a window. Its contents will be visible to the application until it stops sharing."
+msgstr "Pilih jendela. Isinya akan terlihat oleh aplikasi hingga berhenti berbagi."
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Choose a display. Everything shown on it, including other windows, will be visible to the application until it stops sharing."
+msgstr "Pilih layar. Semua yang ditampilkan di dalamnya, termasuk jendela lain, akan terlihat oleh aplikasi hingga berhenti berbagi."
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Share"
+msgstr "Bagikan"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Windows"
+msgstr "Jendela"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Displays"
+msgstr "Layar"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Always allow this app"
+msgstr "Selalu izinkan aplikasi ini"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Let “An app” control this computer?"
+msgstr "Izinkan “Sebuah aplikasi” mengendalikan komputer ini?"
+
+#: bayu-services/permissions/permissionprompt.cpp
+#, python-brace-format
+msgid "Let “{name}” control this computer?"
+msgstr "Izinkan “{name}” mengendalikan komputer ini?"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "It will see your screen and use the pointer and keyboard until you stop it with the Stop button in the status bar. Using the pointer or keyboard yourself pauses it, and it cannot answer system dialogs like this one."
+msgstr "Aplikasi ini akan melihat layar Anda serta menggunakan penunjuk dan papan ketik hingga Anda menghentikannya dengan tombol Berhenti di bilah status. Jika Anda sendiri menggunakan penunjuk atau papan ketik, aplikasi akan dijeda, dan aplikasi tidak dapat menjawab dialog sistem seperti ini."
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Allow"
+msgstr "Izinkan"
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Cancel"
+msgstr "Batal"
+
+#: session/processmanager.cpp
+msgid "Log out cancelled"
+msgstr "Keluar dibatalkan"
+
+#: session/processmanager.cpp
+msgid "Restart cancelled"
+msgstr "Mulai ulang dibatalkan"
+
+#: session/processmanager.cpp
+msgid "Shutdown cancelled"
+msgstr "Pematian dibatalkan"
+
+#: session/processmanager.cpp
+msgid "An application cancelled it."
+msgstr "Sebuah aplikasi membatalkannya."
+
+#: session/processmanager.cpp
+msgid "An application did not quit."
+msgstr "Sebuah aplikasi tidak keluar."
+
+#: session/processmanager.cpp
+#, python-brace-format
+msgid "{name} cancelled it."
+msgstr "{name} membatalkannya."
+
+#: session/processmanager.cpp
+#, python-brace-format
+msgid "{name} did not quit."
+msgstr "{name} tidak keluar."
+
+#. TRANSLATORS: the sender of a notification from the session itself.
+#: session/processmanager.cpp
+msgid "System"
+msgstr "Sistem"
+
+#: session/bayu-wayland.desktop
+msgid "Bayu (Wayland)"
+msgstr "Bayu (Wayland)"
+
+#: session/bayu-wayland.desktop
+msgid "Bayu desktop session"
+msgstr "Sesi desktop Bayu"

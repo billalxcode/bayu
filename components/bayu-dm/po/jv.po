@@ -1,0 +1,57 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-dm\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-20 01:29+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: jv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: daemon/daemon.cpp
+msgid "No session is being created"
+msgstr "Ora ana sesi sing lagi digawe"
+
+#: daemon/daemon.cpp
+msgid "No authentication message is pending"
+msgstr "Ora ana pesen autentikasi sing ditundha"
+
+#: daemon/daemon.cpp
+msgid "Not authenticated"
+msgstr "Durung diautentikasi"
+
+#: daemon/daemon.cpp
+msgid "No such session"
+msgstr "Sesi ora ana"
+
+#: daemon/daemon.cpp
+msgid "Nothing to start"
+msgstr "Ora ana sing diwiwiti"
+
+#: daemon/greeterserver.cpp
+msgid "Unknown request"
+msgstr "Panjaluk ora dikenal"
+
+#: daemon/helperprocess.cpp
+msgid "The login helper exited"
+msgstr "Pembantu login metu"
+
+#: daemon/helperprocess.cpp
+msgid "The login helper did not start"
+msgstr "Pembantu login ora diwiwiti"
+
+#: helper/main.cpp
+msgid "Expected a login request"
+msgstr "Mbutuhake panjaluk login"
+
+#: helper/main.cpp
+msgid "Incomplete login request"
+msgstr "Panjaluk login ora lengkap"
+
+#: helper/main.cpp
+msgid "No command or no account to start"
+msgstr "Ora ana perintah utawa akun kanggo diwiwiti"
