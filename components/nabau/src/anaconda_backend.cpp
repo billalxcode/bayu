@@ -882,8 +882,12 @@ public:
     std::string logText() const override
     {
         std::string text;
-        for (const char* path : {"/tmp/anaconda.log", "/tmp/program.log", "/tmp/storage.log", "/tmp/nabau-post.log"}) {
-            const std::string contents = readFile(path);
+        // The ends of the logs: a whole one would not fit a label.
+        constexpr size_t kTail = 64 * 1024;
+        for (const char* path : {"/tmp/nabau-install.log", "/tmp/anaconda.log", "/tmp/storage.log", "/tmp/nabau-post.log"}) {
+            std::string contents = readFile(path);
+            if (contents.size() > kTail)
+                contents = "…" + contents.substr(contents.find('\n', contents.size() - kTail) + 1);
             text += format(tr("==> {path} <=="), {{"path", path}}) + "\n";
             text += contents.empty() ? std::string(tr("(cannot be read)")) + "\n" : contents;
             text += "\n";

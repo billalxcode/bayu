@@ -42,6 +42,19 @@ for group in $ADDONS; do
     dnf -y -q --installroot="$root" --setopt=skip_if_unavailable=True group install "$group" >&2 || status=1
 done
 
+# GRUB 2.12 leaves other systems (Windows, an earlier Linux) out of its menu
+# unless os-prober is enabled; enabled, they stay there on later updates.
+echo "progress Adding the other systems to the boot menu"
+if chroot "$root" rpm -q os-prober grub2-tools >/dev/null 2>&1; then
+    sed -i '/^GRUB_DISABLE_OS_PROBER=/d' "$root/etc/default/grub"
+    echo 'GRUB_DISABLE_OS_PROBER=false' >> "$root/etc/default/grub"
+    chroot "$root" grub2-mkconfig -o /boot/grub2/grub.cfg >&2 || status=1
+    # A hidden menu would hide them too.
+    if grep -q osprober "$root/boot/grub2/grub.cfg"; then
+        chroot "$root" grub2-editenv - unset menu_auto_hide >&2 || status=1
+    fi
+fi
+
 echo "progress Removing the installer from the new system"
 dnf -y -q --installroot="$root" --disablerepo='*' --noautoremove remove nabau 'anaconda*' >&2 || status=1
 rm -rf "$root/etc/nabau"
