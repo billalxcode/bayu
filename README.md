@@ -3,7 +3,12 @@
 Bayu is a Wayland desktop environment, and the tooling to ship it as an
 operating system on IGOS Nusantara 26 or AlmaLinux 10.
 
-Bayu is a fork of Cutefish.
+Bayu is a fork of [Cutefish](https://github.com/cutefishos). The desktop
+components were forked from the Cutefish repositories and renamed
+`cutefish` → `bayu`, and are developed independently since; the
+upstream repository and revision of each component are listed in
+[FORK.md](FORK.md). Nabau (the installer), Bayu Store and the packaging and
+image builder are Bayu's own.
 
 ## Contents
 
@@ -128,7 +133,9 @@ Set `LAPIS_ENABLED=yes` in `profile.conf` to ship it enabled.
 ## Releases
 
 Pushing a `vX.Y.Z` tag builds `bayu-desktop` X.Y.Z on AlmaLinux 10 and
-attaches the `.rpm` and `.src.rpm` to a GitHub release:
+attaches the `.rpm` and `.src.rpm` to a GitHub release. It also builds
+the live ISO and uploads it to `repo/iso/nightly/ign-26-harian-<timestamp>.iso`
+on R2 (`.github/workflows/release.yml`, on the self-hosted runner):
 
 ```shell
 git tag -a v0.2.0 -m "Bayu 0.2.0" && git push origin v0.2.0
@@ -136,4 +143,10 @@ git tag -a v0.2.0 -m "Bayu 0.2.0" && git push origin v0.2.0
 
 ## License
 
-BSD-3-Clause; see [LICENSE](LICENSE).
+Bayu is licensed under the GNU General Public License, version 3 or (at
+your option) any later version; see [LICENSE](LICENSE).
+
+The code forked from Cutefish keeps its BSD-3-Clause license: see
+[LICENSE.cutefish](LICENSE.cutefish), the `LICENSE` file of each forked
+component and the notices in its source files. [FORK.md](FORK.md) lists
+what was forked and from where.

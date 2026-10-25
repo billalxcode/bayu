@@ -8,7 +8,7 @@ Name:           bayu-desktop
 Version:        %{?bayu_version}%{!?bayu_version:0.1.0}
 Release:        %{?bayu_release}%{!?bayu_release:1}%{?dist}
 Summary:        Bayu desktop environment
-License:        BSD-3-Clause
+License:        GPL-3.0-or-later AND BSD-3-Clause
 URL:            https://github.com/igos-nusantara/bayu
 Source0:        bayu-%{version}.tar.gz
 Source1:        skia.tar.gz
@@ -103,5 +103,5 @@ glib-compile-schemas /usr/share/glib-2.0/schemas 2>/dev/null || :
 %dir %{_datadir}/cockpit/anaconda-webui
 
 %files -f %{_builddir}/bayu-files.list
-%license LICENSE
-%doc README.md UPSTREAM.md
+%license LICENSE LICENSE.cutefish
+%doc README.md FORK.md
