@@ -116,14 +116,12 @@ ColorRecipe color(Role role)
 
 void setFont(Label* label, double size, int weight)
 {
-    label->setFontFamily(kFontFamily);
     label->setFontSize(size);
     label->setWeight(weight);
 }
 
 void setFont(TextField* field, double size, int weight)
 {
-    field->setFontFamily(kFontFamily);
     field->setFontSize(size);
     field->setFontWeight(weight);
 }

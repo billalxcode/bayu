@@ -17,10 +17,6 @@ class TextField;
 
 namespace installer::style {
 
-// The typeface of the whole installer: a monospaced one, as designed.
-// Text the family lacks falls back to the desktop font.
-inline constexpr const char* kFontFamily = "Red Hat Mono";
-
 // Window and columns, logical pixels.
 inline constexpr double windowWidth = 1120;
 inline constexpr double windowHeight = 728;
@@ -79,7 +75,7 @@ void install();
 
 bayu::ui::ColorRecipe color(Role role);
 
-// A label in the installer's typeface.
+// A label in the desktop's typeface, as every toolkit app.
 void setFont(bayu::ui::Label* label, double size, int weight = 400);
 void setFont(bayu::ui::TextField* field, double size, int weight = 400);
 
