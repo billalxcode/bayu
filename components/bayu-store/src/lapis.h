@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Android apps through lapis' control service (/run/lapis/control.sock):
 // one JSON request per connection, as `lapis app ...` sends them. Blocking:
 // call from a worker thread.

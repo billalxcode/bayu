@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Reads an F-Droid index-v2.json and prints what the store makes of it:
 //   store-fdroid-test /path/index-v2.json [package...]
 

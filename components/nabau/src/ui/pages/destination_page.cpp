@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Step 4: the disk to install to and how it is laid out, automatically or in
 // the disk editor.
 

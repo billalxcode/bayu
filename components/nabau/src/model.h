@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // What the installer shows and asks for, independent of the backend that
 // provides it (Anaconda over D-Bus, or sample data).
 

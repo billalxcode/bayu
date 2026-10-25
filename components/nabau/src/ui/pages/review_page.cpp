@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Step 7: everything chosen, in one place, and the last check of the disk
 // layout before anything is written.
 

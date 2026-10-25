@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // HTTP for the catalog and downloads (libcurl). Blocking: call from a worker
 // thread.
 

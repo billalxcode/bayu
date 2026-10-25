@@ -1,5 +1,5 @@
 # A vX.Y.Z tag publishes the bayu-desktop .rpm and .src.rpm as a GitHub release
-# and the live ISO to R2 (repo/iso/nightly/ign-26-harian-<timestamp>.iso, with
+# and the live ISO to R2 (repo/iso/nightly/ign-26-harian-latest.iso, with
 # the index pages rebuilt). Runs on the self-hosted runner on sj (label
 # bayu-builder): the ISO needs a privileged container, loop devices and disk.
 #

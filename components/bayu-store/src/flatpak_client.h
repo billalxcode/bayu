@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Flathub apps through libflatpak, in the system installation (polkit lets
 // administrators install without a password). Blocking: call from a worker
 // thread.

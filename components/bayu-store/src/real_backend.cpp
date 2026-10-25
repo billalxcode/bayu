@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // The store's backend on a real system: the catalog from Flathub's API and
 // F-Droid's index (kept in ~/.cache/bayu-store), Flatpak to install Flathub
 // apps and lapis for F-Droid's Android apps.

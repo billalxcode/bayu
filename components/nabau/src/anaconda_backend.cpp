@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // The installer's backend on a live system: Anaconda's modules on their
 // private bus, started as root by nabau-backend, plus
 // NetworkManager for the network and the session for the keyboard.

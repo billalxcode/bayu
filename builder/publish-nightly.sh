@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Uploads out/igos-bayu-live.iso to R2 as repo/iso/nightly/ign-26-harian-<UTC
-# timestamp>.iso, then rebuilds the index.html pages under repo/iso so they list
+# Uploads out/igos-bayu-live.iso to R2 as repo/iso/nightly/ign-26-harian-latest.iso,
+# replacing the last one, then rebuilds the index.html pages under repo/iso so they list
 # every nightly ISO. Needs an rclone remote "r2", for instance from
 # RCLONE_CONFIG_R2_* variables (see .github/workflows/release.yml).
 set -Eeuo pipefail
 ROOT=$(realpath "$(dirname "$0")/..")
 ISO=${1:-$ROOT/out/igos-bayu-live.iso}
-NAME=ign-26-harian-$(date -u +%Y%m%d-%H%M).iso
+NAME=ign-26-harian-latest.iso
 
 rclone copyto "$ISO" "r2:repo/iso/nightly/$NAME" --s3-upload-concurrency 8 --stats-one-line -v
 

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Sample data shaped like the design, for developing the pages and taking
 // screenshots without a backend: nabau --mock.
 

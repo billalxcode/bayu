@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // What the store shows: apps from Flathub and F-Droid, the ones installed,
 // and the work on them, independent of where the data comes from.
 

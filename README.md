@@ -10,6 +10,15 @@ upstream repository and revision of each component are listed in
 [FORK.md](FORK.md). Nabau (the installer), Bayu Store and the packaging and
 image builder are Bayu's own.
 
+## Screenshots
+
+| | |
+|---|---|
+| ![Bayu Store](docs/screenshots/store.png) | ![An app in Bayu Store](docs/screenshots/app.png) |
+| Bayu Store: apps from Flathub and F-Droid | An app page in Bayu Store |
+| ![Launcher](docs/screenshots/launcher.png) | ![Nabau](docs/screenshots/nabau.png) |
+| The launcher, with Flatpak and Android apps | Nabau after an installation |
+
 ## Contents
 
 | Path | Purpose |
@@ -134,7 +143,7 @@ Set `LAPIS_ENABLED=yes` in `profile.conf` to ship it enabled.
 
 Pushing a `vX.Y.Z` tag builds `bayu-desktop` X.Y.Z on AlmaLinux 10 and
 attaches the `.rpm` and `.src.rpm` to a GitHub release. It also builds
-the live ISO and uploads it to `repo/iso/nightly/ign-26-harian-<timestamp>.iso`
+the live ISO and uploads it to `repo/iso/nightly/ign-26-harian-latest.iso`
 on R2 (`.github/workflows/release.yml`, on the self-hosted runner):
 
 ```shell

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Flathub's catalog, through its web API: the apps (with installs, ratings
 // and verification Flatpak's own metadata lacks) and each app's details.
 // Blocking: call from a worker thread.
