@@ -34,8 +34,14 @@ jobs:
       RCLONE_CONFIG_R2_NO_CHECK_BUCKET: 'true'
     steps:
       # The ISO build writes out/ as root.
+      # A cancelled run leaves its build containers running (they hold CPU
+      # and disk); the runner takes one job at a time, so any left are stale.
       - name: Clear the last build
-        run: sudo rm -rf out
+        run: |
+          podman ps -aq --filter ancestor=localhost/bayu-builder | xargs -r podman rm -f
+          sudo podman ps -aq --filter ancestor=localhost/bayu-builder | xargs -r sudo podman rm -f
+          podman image prune -f >/dev/null
+          sudo rm -rf out
 
       # clean: false keeps the downloaded Skia between runs.
       - uses: actions/checkout@v4
