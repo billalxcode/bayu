@@ -1,0 +1,1376 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: nabau\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"PO-Revision-Date: 2026-10-25 12:00+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/anaconda_backend.cpp
+msgid "Starting the installation backend"
+msgstr "正在启动安装后端"
+
+#: src/anaconda_backend.cpp
+msgid "The installer needs administrator rights, which were not given."
+msgstr "安装程序需要管理员权限，但未获得授予。"
+
+#: src/anaconda_backend.cpp
+msgid "The installation backend stopped unexpectedly. Its log is in /tmp/anaconda.log."
+msgstr "安装后端意外停止。其日志位于 /tmp/anaconda.log。"
+
+#: src/anaconda_backend.cpp
+msgid "Cannot start the installation backend (pkexec is missing)."
+msgstr "无法启动安装后端（缺少 pkexec）。"
+
+#: src/anaconda_backend.cpp
+msgid "This partition holds LVM or Btrfs volumes. Delete it to use its space."
+msgstr "此分区包含 LVM 或 Btrfs 卷。请删除它以使用其空间。"
+
+#: src/anaconda_backend.cpp
+msgid "This partition cannot be resized."
+msgstr "无法调整此分区的大小。"
+
+#: src/anaconda_backend.cpp
+msgid "Choose a disk first."
+msgstr "请先选择一块磁盘。"
+
+#: src/anaconda_backend.cpp
+msgid "This disk already has a root (/) mount point."
+msgstr "此磁盘已有根 (/) 挂载点。"
+
+#: src/anaconda_backend.cpp
+msgid "There is not enough free space left for the system."
+msgstr "剩余可用空间不足以安装系统。"
+
+#: src/anaconda_backend.cpp
+msgid "This live system"
+msgstr "此 Live 系统"
+
+#: src/anaconda_backend.cpp
+msgid "The desktop on this media, as you see it now: Files, Terminal, Settings"
+msgstr "此介质上的桌面，与您现在看到的一致：文件、终端、设置"
+
+#: src/anaconda_backend.cpp
+msgid "Development Tools"
+msgstr "开发工具"
+
+#: src/anaconda_backend.cpp
+msgid "gcc, make, git, headers"
+msgstr "gcc、make、git、头文件"
+
+#: src/anaconda_backend.cpp
+msgid "Container Tools"
+msgstr "容器工具"
+
+#: src/anaconda_backend.cpp
+msgid "podman, buildah, skopeo"
+msgstr "podman、buildah、skopeo"
+
+#: src/anaconda_backend.cpp
+msgid "RPM Development"
+msgstr "RPM 开发"
+
+#: src/anaconda_backend.cpp
+msgid "rpmbuild, mock"
+msgstr "rpmbuild、mock"
+
+#: src/anaconda_backend.cpp
+msgid "Headless Management"
+msgstr "无头管理"
+
+#: src/anaconda_backend.cpp
+msgid "cockpit, remote administration"
+msgstr "cockpit、远程管理"
+
+#: src/anaconda_backend.cpp
+msgid "Scientific Support"
+msgstr "科学计算支持"
+
+#: src/anaconda_backend.cpp
+msgid "Math and science libraries"
+msgstr "数学和科学库"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "==> {path} <=="
+msgstr "==> {path} <=="
+
+#: src/anaconda_backend.cpp
+msgid "(cannot be read)"
+msgstr "（无法读取）"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "Cannot connect to the installation backend at {address}."
+msgstr "无法连接到 {address} 上的安装后端。"
+
+#: src/anaconda_backend.cpp
+msgid "Reading the disks"
+msgstr "正在读取磁盘"
+
+#: src/anaconda_backend.cpp
+msgid "Lay out the disk first."
+msgstr "请先规划磁盘布局。"
+
+#: src/anaconda_backend.cpp
+msgid "Finishing the installed system"
+msgstr "正在完成已安装的系统"
+
+#: src/anaconda_backend.cpp
+msgid "Finishing the system did not complete; see /tmp/nabau-post.log"
+msgstr "系统收尾未能完成；请查看 /tmp/nabau-post.log"
+
+#: src/anaconda_backend.cpp
+msgid "Complete"
+msgstr "完成"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "Wired · {name}"
+msgstr "有线 · {name}"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "Connected · {rate}"
+msgstr "已连接 · {rate}"
+
+#: src/network_manager.cpp
+msgid "Connected"
+msgstr "已连接"
+
+#: src/network_manager.cpp
+msgid "Cable connected · not set up"
+msgstr "网线已连接 · 未设置"
+
+#: src/network_manager.cpp
+msgid "Cable unplugged"
+msgstr "网线已拔出"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "{security} · secured"
+msgstr "{security} · 已加密"
+
+#: src/network_manager.cpp
+msgid "Open network"
+msgstr "开放网络"
+
+#: src/network_manager.cpp
+msgid "Personal hotspot"
+msgstr "个人热点"
+
+#: src/network_manager.cpp
+msgid "NetworkManager is not running."
+msgstr "NetworkManager 未在运行。"
+
+#: src/ui/disk_editor.cpp
+msgid "unformatted"
+msgstr "未格式化"
+
+#: src/ui/disk_editor.cpp
+msgid "encrypted"
+msgstr "已加密"
+
+#: src/ui/disk_editor.cpp
+msgid "Free space"
+msgstr "可用空间"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "From {min} to {max}"
+msgstr "从 {min} 到 {max}"
+
+#: src/ui/disk_editor.cpp
+msgid "MOUNT POINTS"
+msgstr "挂载点"
+
+#: src/ui/disk_editor.cpp
+msgid "PENDING CHANGES"
+msgstr "待应用的更改"
+
+#: src/ui/disk_editor.cpp
+msgid "Reset all"
+msgstr "全部重置"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "{size} free"
+msgstr "{size} 可用"
+
+#: src/ui/disk_editor.cpp
+msgid "Select a part of a disk above."
+msgstr "请在上方选择磁盘的某个部分。"
+
+#: src/ui/disk_editor.cpp
+msgid "Too small to hold a mount point."
+msgstr "太小，无法容纳挂载点。"
+
+#: src/ui/disk_editor.cpp
+msgid "Create the recommended layout here"
+msgstr "在此创建推荐的布局"
+
+#: src/ui/disk_editor.cpp
+msgid "or add a mount point yourself:"
+msgstr "或自行添加挂载点："
+
+#: src/ui/disk_editor.cpp
+msgid "Mount point"
+msgstr "挂载点"
+
+#: src/ui/disk_editor.cpp
+msgid "Size"
+msgstr "大小"
+
+#: src/ui/disk_editor.cpp
+msgid "File system"
+msgstr "文件系统"
+
+#: src/ui/disk_editor.cpp
+msgid "Device type"
+msgstr "设备类型"
+
+#: src/ui/disk_editor.cpp
+msgid "LVM"
+msgstr "LVM"
+
+#: src/ui/disk_editor.cpp
+msgid "LVM thin provisioning"
+msgstr "LVM 精简配置"
+
+#: src/ui/disk_editor.cpp
+msgid "Btrfs"
+msgstr "Btrfs"
+
+#: src/ui/disk_editor.cpp
+msgid "Standard partition"
+msgstr "标准分区"
+
+#: src/ui/disk_editor.cpp
+msgid "Encrypt"
+msgstr "加密"
+
+#: src/ui/disk_editor.cpp
+msgid "Add mount point"
+msgstr "添加挂载点"
+
+#: src/ui/disk_editor.cpp src/ui/pages/review_page.cpp
+msgid "Device"
+msgstr "设备"
+
+#: src/ui/disk_editor.cpp
+msgid "Format"
+msgstr "格式化"
+
+#: src/ui/disk_editor.cpp
+msgid "Label"
+msgstr "标签"
+
+#: src/ui/disk_editor.cpp src/ui/pages/destination_page.cpp
+msgid "none"
+msgstr "无"
+
+#: src/ui/disk_editor.cpp
+msgid "State"
+msgstr "状态"
+
+#: src/ui/disk_editor.cpp
+msgid "on the disk now"
+msgstr "现在在磁盘上"
+
+#: src/ui/disk_editor.cpp
+msgid "to be created"
+msgstr "待创建"
+
+#: src/ui/disk_editor.cpp
+msgid "Use…"
+msgstr "使用…"
+
+#: src/ui/disk_editor.cpp
+msgid "Change…"
+msgstr "更改…"
+
+#: src/ui/disk_editor.cpp
+msgid "Resize…"
+msgstr "调整大小…"
+
+#: src/ui/disk_editor.cpp
+msgid "Delete"
+msgstr "删除"
+
+#: src/ui/disk_editor.cpp
+msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
+msgstr "它包含 LVM 或 Btrfs 卷。请删除它以使用其空间。"
+
+#: src/ui/disk_editor.cpp
+msgid "Volumes in it:"
+msgstr "其中的卷："
+
+#: src/ui/disk_editor.cpp
+msgid "USE THIS PARTITION"
+msgstr "使用此分区"
+
+#: src/ui/disk_editor.cpp
+msgid "CHANGE THIS MOUNT POINT"
+msgstr "更改此挂载点"
+
+#: src/ui/disk_editor.cpp
+msgid "Format it (erases what is on it)"
+msgstr "格式化（会清除其上的内容）"
+
+#: src/ui/disk_editor.cpp src/ui/pages/install_page.cpp
+#: src/ui/pages/network_page.cpp
+msgid "Cancel"
+msgstr "取消"
+
+#: src/ui/disk_editor.cpp
+msgid "Apply"
+msgstr "应用"
+
+#: src/ui/disk_editor.cpp
+msgid "RESIZE"
+msgstr "调整大小"
+
+#: src/ui/disk_editor.cpp
+msgid "Shrinking keeps the data on it and frees the rest of the space for the new system."
+msgstr "缩小会保留其上的数据，并将其余空间留给新系统。"
+
+#: src/ui/disk_editor.cpp
+msgid "The size the new partition will have."
+msgstr "新分区的大小。"
+
+#: src/ui/disk_editor.cpp
+msgid "Resize"
+msgstr "调整大小"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "Delete {name}?"
+msgstr "删除 {name}？"
+
+#: src/ui/disk_editor.cpp
+msgid "Everything on it is lost when the installation starts. Until then, Reset all brings it back."
+msgstr "安装开始时，其上的所有内容都将丢失。在此之前，可通过“全部重置”恢复。"
+
+#: src/ui/disk_editor.cpp
+msgid "The planned partition is removed from the layout."
+msgstr "计划的分区将从布局中移除。"
+
+#: src/ui/disk_editor.cpp
+msgid "That change could not be made"
+msgstr "无法进行该更改"
+
+#: src/ui/disk_editor.cpp
+msgid "No mount points yet. Pick free space above and add “/”, or create the recommended layout."
+msgstr "还没有挂载点。请在上方选择可用空间并添加“/”，或创建推荐的布局。"
+
+#: src/ui/disk_editor.cpp
+msgid "Nothing changes on the disks yet."
+msgstr "磁盘上暂无任何更改。"
+
+#: src/ui/disk_editor.cpp src/ui/pages/review_page.cpp
+msgid "Check before installing"
+msgstr "安装前检查"
+
+#: src/ui/disk_editor.cpp
+msgid "This layout cannot be installed"
+msgstr "无法安装此布局"
+
+#: src/ui/installer.cpp
+msgid "Guided installation"
+msgstr "引导式安装"
+
+#: src/ui/installer.cpp
+msgid "SETUP"
+msgstr "设置"
+
+#: src/ui/installer.cpp
+msgid "All steps complete"
+msgstr "所有步骤已完成"
+
+#: src/ui/installer.cpp
+#, python-brace-format
+msgid "Step {n} of {count}"
+msgstr "第 {n} 步，共 {count} 步"
+
+#: src/ui/installer.cpp
+msgid "F1 Help   ·   F12 Console"
+msgstr "F1 帮助   ·   F12 控制台"
+
+#: src/ui/installer.cpp
+msgid "Back"
+msgstr "返回"
+
+#: src/ui/installer.cpp
+msgid "Continue"
+msgstr "继续"
+
+#: src/ui/installer.cpp
+msgid "Preparing the installer"
+msgstr "正在准备安装程序"
+
+#: src/ui/installer.cpp src/ui/pages/install_page.cpp
+msgid "Quit"
+msgstr "退出"
+
+#: src/ui/installer.cpp
+msgid "The installer cannot start"
+msgstr "安装程序无法启动"
+
+#: src/ui/installer.cpp
+msgid "Help"
+msgstr "帮助"
+
+#: src/ui/installer.cpp
+msgid "Installation log"
+msgstr "安装日志"
+
+#: src/ui/installer.cpp
+msgid "Open a terminal"
+msgstr "打开终端"
+
+#: src/ui/installer.cpp
+msgid "Quit the installer"
+msgstr "退出安装程序"
+
+#: src/ui/installer.cpp
+#, python-brace-format
+msgid "STEP {n} — {name}"
+msgstr "第 {n} 步 — {name}"
+
+#: src/ui/installer.cpp
+msgid "Quit the installer?"
+msgstr "要退出安装程序吗？"
+
+#: src/ui/installer.cpp
+msgid "Nothing has been written to your disks yet."
+msgstr "尚未向您的磁盘写入任何内容。"
+
+#: src/ui/installer.cpp
+msgid "The installation is running; stopping it now leaves the disk unusable until you install again."
+msgstr "安装正在进行；现在停止会使磁盘无法使用，直到您重新安装。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a user name."
+msgstr "请选择用户名。"
+
+#: src/ui/pages/account_page.cpp
+msgid "At most 32 characters."
+msgstr "最多 32 个字符。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Start with a lower-case letter."
+msgstr "请以小写字母开头。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Use lower-case letters, digits, “-” and “_” only."
+msgstr "仅可使用小写字母、数字、“-”和“_”。"
+
+#: src/ui/pages/account_page.cpp
+msgid "That name belongs to the system."
+msgstr "该名称属于系统。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Profile picture"
+msgstr "头像"
+
+#: src/ui/pages/account_page.cpp
+msgid "Generated from your initials · click to change"
+msgstr "根据您的姓名首字母生成 · 点击更改"
+
+#: src/ui/pages/account_page.cpp
+msgid "Full name"
+msgstr "全名"
+
+#: src/ui/pages/account_page.cpp
+msgid "User name"
+msgstr "用户名"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/network_page.cpp
+msgid "Password"
+msgstr "密码"
+
+#: src/ui/pages/account_page.cpp
+msgid "Confirm password"
+msgstr "确认密码"
+
+#: src/ui/pages/account_page.cpp
+msgid "Four random words beat one short complex password"
+msgstr "四个随机单词胜过一个简短而复杂的密码"
+
+#: src/ui/pages/account_page.cpp
+msgid "PERMISSIONS"
+msgstr "权限"
+
+#: src/ui/pages/account_page.cpp
+msgid "Make this user an administrator"
+msgstr "将此用户设为管理员"
+
+#: src/ui/pages/account_page.cpp
+msgid "Require a password to sign in"
+msgstr "登录时需要密码"
+
+#: src/ui/pages/account_page.cpp
+msgid "Disable only on a physically secure machine"
+msgstr "仅在物理安全的机器上禁用"
+
+#: src/ui/pages/account_page.cpp
+msgid "ROOT ACCOUNT"
+msgstr "ROOT 账户"
+
+#: src/ui/pages/account_page.cpp
+msgid "Lock the root account"
+msgstr "锁定 root 账户"
+
+#: src/ui/pages/account_page.cpp
+msgid "Administer with sudo instead — safer by default"
+msgstr "改用 sudo 管理——默认更安全"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/destination_page.cpp
+msgid "recommended"
+msgstr "推荐"
+
+#: src/ui/pages/account_page.cpp
+msgid "Set a root password"
+msgstr "设置 root 密码"
+
+#: src/ui/pages/account_page.cpp
+msgid "Enables direct root sign-in on console and SSH"
+msgstr "允许在控制台和 SSH 上直接以 root 登录"
+
+#: src/ui/pages/account_page.cpp
+msgid "Root password"
+msgstr "Root 密码"
+
+#: src/ui/pages/account_page.cpp
+msgid "Confirm root password"
+msgstr "确认 root 密码"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/review_page.cpp
+msgid "Account"
+msgstr "账户"
+
+#: src/ui/pages/account_page.cpp
+msgid "Create your account."
+msgstr "创建您的账户。"
+
+#: src/ui/pages/account_page.cpp
+msgid "This is the account you will sign in with on first boot. Pick a strong passphrase — it also unlocks your encrypted disk."
+msgstr "这是您首次启动时用于登录的账户。请选择一个强密码短语——它也会解锁您的加密磁盘。"
+
+#: src/ui/pages/account_page.cpp
+msgid "This is the account you will sign in with on first boot. Pick a strong passphrase you will remember."
+msgstr "这是您首次启动时用于登录的账户。请选择一个您能记住的强密码短语。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Enter your full name."
+msgstr "请输入您的全名。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a password."
+msgstr "请选择密码。"
+
+#: src/ui/pages/account_page.cpp
+msgid "The passwords do not match."
+msgstr "两次输入的密码不一致。"
+
+#: src/ui/pages/account_page.cpp
+msgid "A disk passphrase needs at least 8 characters."
+msgstr "磁盘密码短语至少需要 8 个字符。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a root password."
+msgstr "请选择 root 密码。"
+
+#: src/ui/pages/account_page.cpp
+msgid "The root passwords do not match."
+msgstr "两次输入的 root 密码不一致。"
+
+#: src/ui/pages/account_page.cpp
+msgid "With root locked, this user must be an administrator."
+msgstr "锁定 root 后，此用户必须是管理员。"
+
+#: src/ui/pages/account_page.cpp
+msgid "this user"
+msgstr "此用户"
+
+#: src/ui/pages/account_page.cpp
+#, python-brace-format
+msgid "Adds {user} to the wheel group and allows sudo"
+msgstr "将 {user} 添加到 wheel 组并允许使用 sudo"
+
+#: src/ui/pages/account_page.cpp
+#, python-brace-format
+msgid "{n} character"
+msgid_plural "{n} characters"
+msgstr[0] "{n} 个字符"
+
+#: src/ui/pages/account_page.cpp
+msgid "Your passphrase unlocks LUKS2 at every boot. It is never written to the kickstart file or to installation logs."
+msgstr "您的密码短语在每次启动时解锁 LUKS2。它绝不会写入 kickstart 文件或安装日志。"
+
+#: src/ui/pages/account_page.cpp
+msgid "The password is stored only as a hash on the new system and never written to the installation logs."
+msgstr "密码仅以哈希形式存储在新系统上，绝不会写入安装日志。"
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a profile picture"
+msgstr "选择头像"
+
+#: src/ui/pages/account_page.cpp
+msgid "Images (*.png *.jpg *.jpeg *.webp *.svg)"
+msgstr "图像 (*.png *.jpg *.jpeg *.webp *.svg)"
+
+#: src/ui/pages/account_page.cpp
+msgid "Click to choose another"
+msgstr "点击选择其他头像"
+
+#: src/ui/pages/destination_page.cpp
+msgid "installation media"
+msgstr "安装介质"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{system} detected"
+msgstr "检测到 {system}"
+
+#: src/ui/pages/destination_page.cpp
+msgid "empty"
+msgstr "空"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{n} partition"
+msgid_plural "{n} partitions"
+msgstr[0] "{n} 个分区"
+
+#: src/ui/pages/destination_page.cpp
+msgid "the data on it"
+msgstr "其上的数据"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{disk} already holds data"
+msgstr "{disk} 已包含数据"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Erase everything on {path}"
+msgstr "清除 {path} 上的所有内容"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Install alongside {system}"
+msgstr "与 {system} 并存安装"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Install alongside {system} (it cannot be shrunk now)"
+msgstr "与 {system} 并存安装（当前无法缩小）"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Use the free space only ({size})"
+msgstr "仅使用可用空间（{size}）"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{system}: {keep}   ·   {product}: {new}"
+msgstr "{system}：{keep}   ·   {product}：{new}"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LOCAL STANDARD DISKS"
+msgstr "本地标准磁盘"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Add iSCSI, FCoE or multipath device"
+msgstr "添加 iSCSI、FCoE 或多路径设备"
+
+#: src/ui/pages/destination_page.cpp
+msgid "STORAGE CONFIGURATION"
+msgstr "存储配置"
+
+#: src/ui/pages/destination_page.cpp src/ui/pages/review_page.cpp
+msgid "Automatic"
+msgstr "自动"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Laid out for you, safely"
+msgstr "为您安全地规划好"
+
+#: src/ui/pages/destination_page.cpp src/ui/pages/review_page.cpp
+msgid "Custom"
+msgstr "自定义"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Your own mount points"
+msgstr "您自己的挂载点"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Advanced"
+msgstr "高级"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LVM or Btrfs volumes, by hand"
+msgstr "手动配置 LVM 或 Btrfs 卷"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Encrypt my data"
+msgstr "加密我的数据"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LUKS2 · passphrase at next step"
+msgstr "LUKS2 · 下一步输入密码短语"
+
+#: src/ui/pages/destination_page.cpp
+msgid "RESULTING LAYOUT"
+msgstr "最终布局"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Destination"
+msgstr "目标位置"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Lay out the disk yourself."
+msgstr "自行规划磁盘布局。"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Where should it live?"
+msgstr "安装到哪里？"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Click a part of a disk to use it, resize it or delete it. Changes are only planned here; nothing is written until you confirm on the review screen."
+msgstr "点击磁盘的某个部分即可使用、调整大小或删除它。更改仅在此处计划；在确认界面上确认之前不会写入任何内容。"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Pick a disk, then decide how it is laid out. Nothing is written to any device until you confirm on the review screen."
+msgstr "选择一块磁盘，然后决定如何规划布局。在确认界面上确认之前，不会向任何设备写入内容。"
+
+#: src/ui/pages/destination_page.cpp
+msgid ""
+"Automatic lays the system out for you: a boot partition, the system, your files and swap. If the disk already holds Windows or another system, you can install beside it; drag the slider to share the space.\n"
+"\n"
+"Custom opens the disk editor: click free space to add a mount point (at least “/”), or click a partition to use it, resize it or delete it. Advanced also offers LVM, RAID and Btrfs volumes.\n"
+"\n"
+"Nothing is written to the disks until you begin the installation on the review screen."
+msgstr "“自动”会为您规划系统布局：引导分区、系统、您的文件和交换空间。如果磁盘上已有 Windows 或其他系统，您可以并存安装；拖动滑块来分配空间。\n\n“自定义”会打开磁盘编辑器：点击可用空间以添加挂载点（至少需要“/”），或点击某个分区以使用、调整大小或删除它。“高级”还提供 LVM、RAID 和 Btrfs 卷。\n\n在确认界面上开始安装之前，不会向磁盘写入任何内容。"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Selected"
+msgstr "已选择"
+
+#: src/ui/pages/destination_page.cpp
+msgid "1 disk"
+msgstr "1 块磁盘"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Capacity"
+msgstr "容量"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Free"
+msgstr "可用"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Reclaimable"
+msgstr "可回收"
+
+#: src/ui/pages/destination_page.cpp
+msgid "You lay the disk out yourself on the next screen."
+msgstr "您将在下一屏幕中自行规划磁盘布局。"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Working out the layout…"
+msgstr "正在计算布局…"
+
+#: src/ui/pages/destination_page.cpp
+msgid "kept"
+msgstr "保留"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Specialized disks"
+msgstr "专用磁盘"
+
+#: src/ui/pages/destination_page.cpp
+msgid "iSCSI, FCoE and multipath devices are set up from the network installation image, which has the tools to discover them. This live system installs to the disks attached to this computer."
+msgstr "iSCSI、FCoE 和多路径设备需通过网络安装镜像设置，该镜像带有发现它们的工具。此 Live 系统安装到连接在这台计算机上的磁盘。"
+
+#: src/ui/pages/install_page.cpp
+msgid "WHILE YOU WAIT"
+msgstr "请稍候"
+
+#: src/ui/pages/install_page.cpp
+msgid "Estimated remaining"
+msgstr "预计剩余"
+
+#: src/ui/pages/install_page.cpp
+msgid "Starting the installation…"
+msgstr "正在开始安装…"
+
+#: src/ui/pages/install_page.cpp
+msgid "Ten years of updates"
+msgstr "十年的更新"
+
+#: src/ui/pages/install_page.cpp
+msgid "Every release is supported until 2035, with security errata published alongside upstream. Switch between minor versions without reinstalling."
+msgstr "每个版本都获得支持直至 2035 年，安全勘误与上游同步发布。无需重新安装即可在次要版本之间切换。"
+
+#: src/ui/pages/install_page.cpp
+msgid "A desktop of its own"
+msgstr "专属于自己的桌面"
+
+#: src/ui/pages/install_page.cpp
+msgid "Bayu brings Files, Terminal, Settings and a dock that stays out of your way, all drawn by one toolkit."
+msgstr "Bayu 带来文件、终端、设置，以及不碍事的程序坞，全部由同一个工具包绘制。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Android apps, when you want them"
+msgstr "需要时的 Android 应用"
+
+#: src/ui/pages/install_page.cpp
+msgid "Lapis runs Android apps beside your desktop ones. It is installed and stays off until you turn it on."
+msgstr "Lapis 让 Android 应用与桌面应用并排运行。它已安装，并在您开启之前保持关闭。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Safe by default"
+msgstr "默认安全"
+
+#: src/ui/pages/install_page.cpp
+msgid "SELinux, a firewall and signed packages from the start; full-disk encryption when you ask for it."
+msgstr "从一开始就提供 SELinux、防火墙和签名软件包；需要时可启用全盘加密。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Install"
+msgstr "安装"
+
+#: src/ui/pages/install_page.cpp
+msgid "INSTALLATION COMPLETE"
+msgstr "安装完成"
+
+#: src/ui/pages/install_page.cpp
+msgid "INSTALLATION FAILED"
+msgstr "安装失败"
+
+#: src/ui/pages/install_page.cpp
+msgid "STEP 08 — INSTALLING"
+msgstr "第 08 步 — 正在安装"
+
+#: src/ui/pages/install_page.cpp
+msgid "You're all set."
+msgstr "一切就绪。"
+
+#: src/ui/pages/install_page.cpp
+msgid "The installation stopped."
+msgstr "安装已停止。"
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "Installing {product}."
+msgstr "正在安装 {product}。"
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "{product} is on your disk. Remove the installation media, restart, and sign in with the account you just created."
+msgstr "{product} 已安装到您的磁盘上。请移除安装介质，重启，然后使用您刚创建的账户登录。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Nothing more is written. The log has the details; you can start the installer again."
+msgstr "不会再写入任何内容。日志中有详细信息；您可以重新启动安装程序。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Everything is set. Sit back — the installer is writing packages to disk and will tell you when it is safe to restart."
+msgstr "一切就绪。请稍候——安装程序正在将软件包写入磁盘，可以安全重启时会通知您。"
+
+#: src/ui/pages/install_page.cpp
+msgid "The installation could not finish"
+msgstr "安装无法完成"
+
+#: src/ui/pages/install_page.cpp
+msgid "Install time"
+msgstr "安装用时"
+
+#: src/ui/pages/install_page.cpp
+msgid "Packages written"
+msgstr "已写入的软件包"
+
+#: src/ui/pages/install_page.cpp
+msgid "None"
+msgstr "无"
+
+#: src/ui/pages/install_page.cpp
+msgid "Disk encryption"
+msgstr "磁盘加密"
+
+#: src/ui/pages/install_page.cpp
+msgid "Remove the USB installation media before restarting."
+msgstr "重启前请移除 USB 安装介质。"
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "Sign in as {user}; your settings start fresh."
+msgstr "以 {user} 身份登录；您的设置将从头开始。"
+
+#: src/ui/pages/install_page.cpp
+msgid "Run sudo dnf upgrade to pull any errata published since this ISO."
+msgstr "运行 sudo dnf upgrade 以获取自此 ISO 发布以来的所有勘误。"
+
+#: src/ui/pages/install_page.cpp
+msgid "View log"
+msgstr "查看日志"
+
+#: src/ui/pages/install_page.cpp
+msgid "Installing…"
+msgstr "正在安装…"
+
+#: src/ui/pages/install_page.cpp
+msgid "View installation log"
+msgstr "查看安装日志"
+
+#: src/ui/pages/install_page.cpp
+msgid "Restart now"
+msgstr "立即重启"
+
+#: src/ui/pages/language_page.cpp
+msgid "REGIONAL FORMAT"
+msgstr "区域格式"
+
+#: src/ui/pages/language_page.cpp
+msgid "Preview"
+msgstr "预览"
+
+#: src/ui/pages/language_page.cpp
+#, python-brace-format
+msgid "Search {n} languages"
+msgstr "搜索 {n} 种语言"
+
+#: src/ui/pages/language_page.cpp src/ui/pages/review_page.cpp
+msgid "Language"
+msgstr "语言"
+
+#: src/ui/pages/language_page.cpp
+msgid "Welcome. Let's pick your language."
+msgstr "欢迎。请选择您的语言。"
+
+#: src/ui/pages/language_page.cpp
+msgid "This language will be used during installation and set as the system default. You can change it later in Settings."
+msgstr "此语言将用于安装过程，并设为系统默认语言。您可以稍后在“设置”中更改。"
+
+#: src/ui/pages/language_page.cpp
+msgid "Date"
+msgstr "日期"
+
+#: src/ui/pages/language_page.cpp
+msgid "Time"
+msgstr "时间"
+
+#: src/ui/pages/language_page.cpp
+msgid "Numbers"
+msgstr "数字"
+
+#: src/ui/pages/language_page.cpp
+msgid "Currency"
+msgstr "货币"
+
+#: src/ui/pages/localization_page.cpp
+msgid "KEYBOARD LAYOUT"
+msgstr "键盘布局"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Test the layout"
+msgstr "测试布局"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Type here to test the layout"
+msgstr "在此输入以测试布局"
+
+#: src/ui/pages/localization_page.cpp
+msgid "TIME & DATE"
+msgstr "时间和日期"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Region"
+msgstr "区域"
+
+#: src/ui/pages/localization_page.cpp
+msgid "City"
+msgstr "城市"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Network time (NTP)"
+msgstr "网络时间 (NTP)"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Keep the clock in sync automatically"
+msgstr "自动保持时钟同步"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Detect time zone from network"
+msgstr "通过网络检测时区"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Uses your IP address, never your location"
+msgstr "使用您的 IP 地址，绝不使用您的位置"
+
+#: src/ui/pages/localization_page.cpp src/ui/pages/review_page.cpp
+msgid "Localization"
+msgstr "本地化"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Keyboard and time."
+msgstr "键盘和时间。"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Choose the layout you actually type with and confirm your time zone. Both take effect immediately, including on this screen."
+msgstr "请选择您实际使用的键盘布局并确认时区。两者都会立即生效，包括在此界面上。"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Network time is off · the clock is set by hand"
+msgstr "网络时间已关闭 · 时钟为手动设置"
+
+#: src/ui/pages/localization_page.cpp
+#, python-brace-format
+msgid "{server} · synchronised"
+msgstr "{server} · 已同步"
+
+#: src/ui/pages/localization_page.cpp
+#, python-brace-format
+msgid "{server} · waits for a connection"
+msgstr "{server} · 等待连接"
+
+#: src/ui/pages/network_page.cpp
+msgid "AVAILABLE CONNECTIONS"
+msgstr "可用连接"
+
+#: src/ui/pages/network_page.cpp
+msgid "HOST IDENTITY"
+msgstr "主机标识"
+
+#: src/ui/pages/network_page.cpp src/ui/pages/review_page.cpp
+msgid "Host name"
+msgstr "主机名"
+
+#: src/ui/pages/network_page.cpp
+msgid "Connect automatically"
+msgstr "自动连接"
+
+#: src/ui/pages/network_page.cpp
+msgid "Bring this interface up at every boot"
+msgstr "每次启动时启用此接口"
+
+#: src/ui/pages/network_page.cpp src/ui/pages/review_page.cpp
+msgid "Network"
+msgstr "网络"
+
+#: src/ui/pages/network_page.cpp
+msgid "Get connected."
+msgstr "连接网络。"
+
+#: src/ui/pages/network_page.cpp
+msgid "A connection is optional, but it lets the installer fetch updates, verify packages and sync the clock while you continue."
+msgstr "连接是可选的，但它能让安装程序在您继续操作时获取更新、验证软件包并同步时钟。"
+
+#: src/ui/pages/network_page.cpp
+msgid "Secure Boot enabled · packages verified with GPG"
+msgstr "已启用安全启动 · 软件包已通过 GPG 验证"
+
+#: src/ui/pages/network_page.cpp
+msgid "Packages verified with GPG"
+msgstr "软件包已通过 GPG 验证"
+
+#: src/ui/pages/network_page.cpp
+msgid "Connecting…"
+msgstr "正在连接…"
+
+#: src/ui/pages/network_page.cpp
+msgid "IPv4 address"
+msgstr "IPv4 地址"
+
+#: src/ui/pages/network_page.cpp
+msgid "Gateway"
+msgstr "网关"
+
+#: src/ui/pages/network_page.cpp
+msgid "DNS"
+msgstr "DNS"
+
+#: src/ui/pages/network_page.cpp
+msgid "Link speed"
+msgstr "链路速度"
+
+#: src/ui/pages/network_page.cpp
+msgid "Hardware"
+msgstr "硬件"
+
+#: src/ui/pages/network_page.cpp
+msgid "Status"
+msgstr "状态"
+
+#: src/ui/pages/network_page.cpp
+msgid "Not connected"
+msgstr "未连接"
+
+#: src/ui/pages/network_page.cpp
+#, python-brace-format
+msgid "Join “{name}”"
+msgstr "加入“{name}”"
+
+#: src/ui/pages/network_page.cpp
+msgid "Enter the network's password."
+msgstr "请输入网络密码。"
+
+#: src/ui/pages/network_page.cpp
+msgid "Join"
+msgstr "加入"
+
+#: src/ui/pages/network_page.cpp
+msgid "Could not connect"
+msgstr "无法连接"
+
+#: src/ui/pages/review_page.cpp
+msgid "SUMMARY"
+msgstr "摘要"
+
+#: src/ui/pages/review_page.cpp
+msgid "TARGET"
+msgstr "目标"
+
+#: src/ui/pages/review_page.cpp
+msgid "Storage"
+msgstr "存储"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "Software"
+msgstr "软件"
+
+#: src/ui/pages/review_page.cpp
+msgid "Review"
+msgstr "检查"
+
+#: src/ui/pages/review_page.cpp
+msgid "Checking the plan…"
+msgstr "正在检查方案…"
+
+#: src/ui/pages/review_page.cpp
+msgid "Everything checks out."
+msgstr "一切正常。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Something needs a look."
+msgstr "有需要留意的地方。"
+
+#: src/ui/pages/review_page.cpp
+msgid "The disk layout cannot be installed as it is. Edit the storage settings and come back here."
+msgstr "磁盘布局无法按现状安装。请编辑存储设置后再回到此处。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — after you begin, the partitions you deleted are erased."
+msgstr "尚未写入任何内容。请最后检查一遍——开始后，您删除的分区将被清除。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — what else is on the disk is kept."
+msgstr "尚未写入任何内容。请最后检查一遍——磁盘上的其他内容将被保留。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — after you begin, the selected disk is reformatted."
+msgstr "尚未写入任何内容。请最后检查一遍——开始后，所选磁盘将被重新格式化。"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{n} item"
+msgid_plural "{n} items"
+msgstr[0] "{n} 项"
+
+#: src/ui/pages/review_page.cpp
+msgid "Begin installation"
+msgstr "开始安装"
+
+#: src/ui/pages/review_page.cpp
+msgid "Keyboard"
+msgstr "键盘"
+
+#: src/ui/pages/review_page.cpp
+msgid "Time zone"
+msgstr "时区"
+
+#: src/ui/pages/review_page.cpp
+msgid "not connected"
+msgstr "未连接"
+
+#: src/ui/pages/review_page.cpp
+msgid "Connection"
+msgstr "连接"
+
+#: src/ui/pages/review_page.cpp
+msgid "IPv4"
+msgstr "IPv4"
+
+#: src/ui/pages/review_page.cpp
+msgid "User"
+msgstr "用户"
+
+#: src/ui/pages/review_page.cpp
+msgid "Administrator"
+msgstr "管理员"
+
+#: src/ui/pages/review_page.cpp
+msgid "yes · wheel"
+msgstr "是 · wheel"
+
+#: src/ui/pages/review_page.cpp
+msgid "no"
+msgstr "否"
+
+#: src/ui/pages/review_page.cpp
+msgid "Root account"
+msgstr "Root 账户"
+
+#: src/ui/pages/review_page.cpp
+msgid "locked"
+msgstr "已锁定"
+
+#: src/ui/pages/review_page.cpp
+msgid "password set"
+msgstr "已设置密码"
+
+#: src/ui/pages/review_page.cpp
+msgid "Scheme"
+msgstr "方案"
+
+#: src/ui/pages/review_page.cpp
+msgid "Encryption"
+msgstr "加密"
+
+#: src/ui/pages/review_page.cpp
+msgid "LUKS2 enabled"
+msgstr "已启用 LUKS2"
+
+#: src/ui/pages/review_page.cpp
+msgid "off"
+msgstr "关"
+
+#: src/ui/pages/review_page.cpp
+msgid "Layout"
+msgstr "布局"
+
+#: src/ui/pages/review_page.cpp
+msgid "Environment"
+msgstr "环境"
+
+#: src/ui/pages/review_page.cpp
+msgid "Add-ons"
+msgstr "附加组件"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{n} selected"
+msgid_plural "{n} selected"
+msgstr[0] "已选择 {n} 项"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "Packages"
+msgstr "软件包"
+
+#: src/ui/pages/review_page.cpp
+msgid "Download"
+msgstr "下载"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "nothing"
+msgstr "无"
+
+#: src/ui/pages/review_page.cpp
+msgid "The disk layout cannot be installed"
+msgstr "无法安装此磁盘布局"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{disk} will be erased"
+msgstr "{disk} 将被清除"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "All {size} on this device is reformatted. Other disks are left untouched."
+msgstr "此设备上的全部 {size} 都将被重新格式化。其他磁盘不受影响。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Partitions will be deleted"
+msgstr "分区将被删除"
+
+#: src/ui/pages/review_page.cpp
+msgid "What the custom layout deletes is lost once the installation starts. Edit the storage to check the pending changes."
+msgstr "自定义布局所删除的内容在安装开始后将丢失。请编辑存储以检查待应用的更改。"
+
+#: src/ui/pages/review_page.cpp
+msgid "Your existing data is kept"
+msgstr "您现有的数据将被保留"
+
+#: src/ui/pages/review_page.cpp
+msgid "Only the space chosen on the destination step is changed."
+msgstr "仅更改在“目标位置”步骤中所选的空间。"
+
+#: src/ui/pages/software_page.cpp
+msgid "BASE ENVIRONMENT"
+msgstr "基础环境"
+
+#: src/ui/pages/software_page.cpp
+msgid "Choose what to install."
+msgstr "选择要安装的内容。"
+
+#: src/ui/pages/software_page.cpp
+msgid "Start from a base environment, then add only what you need. You can install or remove anything later with dnf."
+msgstr "从基础环境开始，然后只添加您需要的内容。之后可随时使用 dnf 安装或移除任何内容。"
+
+#: src/ui/pages/software_page.cpp
+msgid "Installing from this live system"
+msgstr "从此 Live 系统安装"
+
+#: src/ui/pages/software_page.cpp
+msgid "The live system is copied to the disk as it is. The other environments come from the network installation image."
+msgstr "Live 系统将原样复制到磁盘。其他环境来自网络安装镜像。"
+
+#: src/ui/pages/software_page.cpp
+#, python-brace-format
+msgid "ADD-ONS FOR {name}"
+msgstr "{name} 的附加组件"
+
+#: src/ui/pages/software_page.cpp
+msgid "Add-ons are downloaded: connect to a network to choose them."
+msgstr "附加组件需要下载：请连接网络以选择它们。"
+
+#: src/ui/pages/software_page.cpp
+msgid "Download size"
+msgstr "下载大小"
+
+#: src/ui/pages/software_page.cpp
+msgid "Installed size"
+msgstr "安装后大小"
+
+#: src/ui/pages/software_page.cpp
+msgid "Est. install time"
+msgstr "预计安装时间"
+
+#: src/ui/pages/software_page.cpp
+#, python-brace-format
+msgid "~{n} min"
+msgstr "约 {n} 分钟"
+
+#: src/ui/widgets.cpp
+msgid "Edit"
+msgstr "编辑"
+
+#: data/nabau.desktop
+msgid "Nabau"
+msgstr "Nabau"
+
+#: data/nabau.desktop
+msgid "Install to Disk"
+msgstr "安装到磁盘"
+
+#: data/nabau.desktop
+msgid "Install this system on the computer's disk"
+msgstr "将此系统安装到计算机的磁盘上"

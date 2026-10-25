@@ -1,0 +1,856 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-store\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-25 03:39+0000\n"
+"PO-Revision-Date: 2026-10-25 12:00+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ui/pages.cpp
+msgid "never"
+msgstr "从未"
+
+#: src/ui/pages.cpp
+msgid "just now"
+msgstr "刚刚"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} min ago"
+msgstr "{n} 分钟前"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} h ago"
+msgstr "{n} 小时前"
+
+#: src/ui/pages.cpp
+msgid "yesterday"
+msgstr "昨天"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} days ago"
+msgstr "{n} 天前"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} months ago"
+msgstr "{n} 个月前"
+
+#: src/ui/pages.cpp
+msgid "Most popular"
+msgstr "最受欢迎"
+
+#: src/ui/pages.cpp
+msgid "Recently updated"
+msgstr "最近更新"
+
+#: src/ui/pages.cpp
+msgid "Name"
+msgstr "名称"
+
+#: src/ui/pages.cpp
+msgid "Relevance"
+msgstr "相关度"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Sort: {order}"
+msgstr "排序：{order}"
+
+#: src/ui/pages.cpp
+msgid "apps for drawing, photo, audio, and video work"
+msgstr "用于绘图、照片、音频和视频工作的应用"
+
+#: src/ui/pages.cpp
+msgid "games, from puzzles to racing"
+msgstr "从益智到竞速的游戏"
+
+#: src/ui/pages.cpp
+msgid "tools for writing, testing and shipping code"
+msgstr "用于编写、测试和发布代码的工具"
+
+#: src/ui/pages.cpp
+msgid "apps for mail, notes, money and the office"
+msgstr "用于邮件、笔记、财务和办公的应用"
+
+#: src/ui/pages.cpp
+msgid "players, podcasts and audio tools"
+msgstr "播放器、播客和音频工具"
+
+#: src/ui/pages.cpp
+msgid "cameras, galleries and video players"
+msgstr "相机、图库和视频播放器"
+
+#: src/ui/pages.cpp
+msgid "apps for learning, reading and science"
+msgstr "用于学习、阅读和科学的应用"
+
+#: src/ui/pages.cpp
+msgid "tools that keep the computer tidy and safe"
+msgstr "让计算机保持整洁和安全的工具"
+
+#: src/ui/pages.cpp
+msgid "The catalog could not be refreshed"
+msgstr "无法刷新目录"
+
+#: src/ui/pages.cpp
+msgid "What the store had before is shown; it tries again later."
+msgstr "显示的是商店之前的内容；稍后会再次尝试。"
+
+#: src/ui/pages.cpp
+msgid "Popular on Flathub"
+msgstr "Flathub 热门"
+
+#: src/ui/pages.cpp
+msgid "See all"
+msgstr "查看全部"
+
+#: src/ui/pages.cpp
+msgid "Fresh on F-Droid"
+msgstr "F-Droid 新品"
+
+#: src/ui/pages.cpp
+msgid "Browse"
+msgstr "浏览"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Discover"
+msgstr "发现"
+
+#: src/ui/pages.cpp
+msgid "Getting the catalog"
+msgstr "正在获取目录"
+
+#: src/ui/pages.cpp
+msgid "Apps from Flathub and F-Droid appear in a moment. This happens once; later the store opens instantly, offline too."
+msgstr "来自 Flathub 和 F-Droid 的应用稍后将会出现。此过程仅一次；之后商店将即时打开，离线时也是如此。"
+
+#: src/ui/pages.cpp
+msgid "Trending this week"
+msgstr "本周趋势"
+
+#: src/ui/pages.cpp
+msgid "What people install, and what changed"
+msgstr "大家安装了什么，以及有何变化"
+
+#: src/ui/pages.cpp
+msgid "Apps"
+msgstr "应用"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Games"
+msgstr "游戏"
+
+#: src/ui/pages.cpp
+msgid "Most installed"
+msgstr "安装最多"
+
+#: src/ui/pages.cpp
+msgid "Open source picks"
+msgstr "开源精选"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Trending"
+msgstr "趋势"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps"
+msgstr "{n} 个应用"
+
+#: src/ui/pages.cpp
+msgid "Find your next app by category"
+msgstr "按分类查找您的下一个应用"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps from Flathub and F-Droid"
+msgstr "来自 Flathub 和 F-Droid 的 {n} 个应用"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Categories"
+msgstr "分类"
+
+#: src/ui/pages.cpp
+msgid "All"
+msgstr "全部"
+
+#: src/ui/pages.cpp
+msgid "Open source"
+msgstr "开源"
+
+#: src/ui/pages.cpp
+msgid "Verified"
+msgstr "已验证"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps, sandboxed with Flatpak"
+msgstr "{n} 个应用，使用 Flatpak 沙盒隔离"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} free Android apps, built from source"
+msgstr "{n} 个免费 Android 应用，从源码构建"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} {what}"
+msgstr "{n} {what}"
+
+#: src/ui/pages.cpp
+msgid "Android apps are off"
+msgstr "Android 应用已关闭"
+
+#: src/ui/pages.cpp
+msgid "F-Droid apps run in Android (lapis). Installing one offers to turn it on."
+msgstr "F-Droid 应用在 Android (lapis) 中运行。安装其中一个时会提示开启它。"
+
+#: src/ui/pages.cpp
+msgid "Nothing here yet."
+msgstr "这里还没有内容。"
+
+#: src/ui/pages.cpp
+msgid "Not found"
+msgstr "未找到"
+
+#: src/ui/pages.cpp
+msgid "This app is no longer in the catalog."
+msgstr "此应用已不在目录中。"
+
+#: src/ui/pages.cpp
+msgid "Unknown developer"
+msgstr "未知开发者"
+
+#: src/ui/pages.cpp
+msgid "· Verified publisher"
+msgstr "· 已验证的发布者"
+
+#: src/ui/pages.cpp
+msgid "· Built from source by F-Droid"
+msgstr "· 由 F-Droid 从源码构建"
+
+#: src/ui/pages.cpp
+msgid "Sandboxed"
+msgstr "沙盒隔离"
+
+#: src/ui/pages.cpp
+msgid "No ads"
+msgstr "无广告"
+
+#: src/ui/pages.cpp
+msgid "Link copied"
+msgstr "链接已复制"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "needs {size} free"
+msgstr "需要 {size} 可用空间"
+
+#: src/ui/pages.cpp
+msgid "needs ARM translation"
+msgstr "需要 ARM 转译"
+
+#: src/ui/pages.cpp
+msgid "verified publisher"
+msgstr "已验证的发布者"
+
+#: src/ui/pages.cpp
+msgid "free software"
+msgstr "自由软件"
+
+#: src/ui/pages.cpp
+msgid "community"
+msgstr "社区"
+
+#: src/ui/pages.cpp
+msgid "Unknown"
+msgstr "未知"
+
+#: src/ui/pages.cpp
+msgid "proprietary"
+msgstr "专有"
+
+#: src/ui/pages.cpp
+msgid "installs"
+msgstr "安装次数"
+
+#: src/ui/pages.cpp
+msgid "download size"
+msgstr "下载大小"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "updated {when}"
+msgstr "{when}更新"
+
+#: src/ui/pages.cpp
+msgid "About this app"
+msgstr "关于此应用"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "What's new in {version}"
+msgstr "{version} 的新变化"
+
+#: src/ui/pages.cpp
+msgid "Source & permissions"
+msgstr "源码与权限"
+
+#: src/ui/pages.cpp
+msgid "Asks for no special access."
+msgstr "不请求特殊访问权限。"
+
+#: src/ui/pages.cpp
+msgid "No tracking"
+msgstr "无跟踪"
+
+#: src/ui/pages.cpp
+msgid "No non-free deps"
+msgstr "无非自由依赖"
+
+#: src/ui/pages.cpp
+msgid "Free software"
+msgstr "自由软件"
+
+#: src/ui/pages.cpp
+msgid "of"
+msgstr "/"
+
+#: src/ui/pages.cpp
+msgid "Waiting"
+msgstr "等待中"
+
+#: src/ui/pages.cpp
+msgid "paused"
+msgstr "已暂停"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "QUEUED"
+msgstr "已排队"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "UPDATE"
+msgstr "更新"
+
+#: src/ui/pages.cpp
+msgid "Open"
+msgstr "打开"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Uninstall"
+msgstr "卸载"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Updates"
+msgstr "更新"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Installed"
+msgstr "已安装"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Recent"
+msgstr "最近"
+
+#: src/ui/pages.cpp
+msgid "Downloads"
+msgstr "下载"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Last checked {when}"
+msgstr "上次检查：{when}"
+
+#: src/ui/pages.cpp
+msgid "Check"
+msgstr "检查"
+
+#: src/ui/pages.cpp
+msgid "Library"
+msgstr "资料库"
+
+#: src/ui/pages.cpp
+msgid "from Flathub and F-Droid"
+msgstr "来自 Flathub 和 F-Droid"
+
+#: src/ui/pages.cpp
+msgid "from Flathub"
+msgstr "来自 Flathub"
+
+#: src/ui/pages.cpp
+msgid "from F-Droid"
+msgstr "来自 F-Droid"
+
+#: src/ui/pages.cpp
+msgid "Everything is up to date"
+msgstr "一切均为最新"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} update available"
+msgid_plural "{n} updates available"
+msgstr[0] "有 {n} 个可用更新"
+
+#: src/ui/pages.cpp
+msgid "Updates install in the background as they arrive."
+msgstr "更新会在到达时于后台安装。"
+
+#: src/ui/pages.cpp
+msgid "total"
+msgstr "总计"
+
+#: src/ui/pages.cpp
+msgid "installs in the background"
+msgstr "在后台安装"
+
+#: src/ui/pages.cpp
+msgid "Update all"
+msgstr "全部更新"
+
+#: src/ui/pages.cpp
+msgid "Manage"
+msgstr "管理"
+
+#: src/ui/pages.cpp
+msgid "App storage"
+msgstr "应用存储"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{used} of {total} used"
+msgstr "已使用 {used}，共 {total}"
+
+#: src/ui/pages.cpp
+msgid "Runtimes"
+msgstr "运行时"
+
+#: src/ui/pages.cpp
+msgid "Cache"
+msgstr "缓存"
+
+#: src/ui/pages.cpp
+msgid "Free"
+msgstr "可用"
+
+#: src/ui/pages.cpp
+msgid "Recently installed"
+msgstr "最近安装"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} app installed"
+msgid_plural "{n} apps installed"
+msgstr[0] "已安装 {n} 个应用"
+
+#: src/ui/pages.cpp
+msgid "Installs and updates, newest first"
+msgstr "安装和更新，最新的在前"
+
+#: src/ui/pages.cpp
+msgid "From Flathub and F-Droid"
+msgstr "来自 Flathub 和 F-Droid"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "installed {when}"
+msgstr "{when}安装"
+
+#: src/ui/pages.cpp
+msgid "Nothing installed from the store yet."
+msgstr "尚未从商店安装任何内容。"
+
+#: src/ui/pages.cpp
+msgid "Nothing is downloading."
+msgstr "没有正在下载的内容。"
+
+#: src/ui/pages.cpp
+msgid "One at a time, in the background"
+msgstr "在后台逐个进行"
+
+#: src/ui/pages.cpp
+msgid "Search"
+msgstr "搜索"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Results for “{text}”"
+msgstr "“{text}”的结果"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps across Flathub and F-Droid · {time}"
+msgstr "Flathub 和 F-Droid 共 {n} 个应用 · {time}"
+
+#: src/ui/pages.cpp
+msgid "No apps match. Try fewer or other words."
+msgstr "没有匹配的应用。请尝试更少或其他的词语。"
+
+#: src/ui/pages.cpp
+msgid "Related searches"
+msgstr "相关搜索"
+
+#: src/ui/pages.cpp
+msgid "Top developers"
+msgstr "热门开发者"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} app"
+msgid_plural "{n} apps"
+msgstr[0] "{n} 个应用"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Store settings"
+msgstr "商店设置"
+
+#: src/ui/pages.cpp
+msgid "Where apps come from and how they stay up to date"
+msgstr "应用的来源以及保持更新的方式"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "SOURCES"
+msgstr "来源"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps · refreshed {when}"
+msgstr "{n} 个应用 · {when}刷新"
+
+#: src/ui/pages.cpp
+msgid "Refresh the catalog"
+msgstr "刷新目录"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "ANDROID APPS"
+msgstr "ANDROID 应用"
+
+#: src/ui/pages.cpp
+msgid "Android is running"
+msgstr "Android 正在运行"
+
+#: src/ui/pages.cpp
+msgid "F-Droid apps install into Android (lapis) and open in their own windows."
+msgstr "F-Droid 应用会安装到 Android (lapis) 中，并在各自的窗口中打开。"
+
+#: src/ui/pages.cpp
+msgid "Turn on Android (lapis) to install apps from F-Droid. It downloads Android once, about 1.3 GB."
+msgstr "开启 Android (lapis) 以从 F-Droid 安装应用。它会下载一次 Android，约 1.3 GB。"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Turn on"
+msgstr "开启"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Android apps could not be turned on"
+msgstr "无法开启 Android 应用"
+
+#: src/ui/pages.cpp
+msgid "Show apps built only for ARM"
+msgstr "显示仅为 ARM 构建的应用"
+
+#: src/ui/pages.cpp
+msgid "They run through ARM translation (libhoudini), slower and not always well"
+msgstr "它们通过 ARM 转译 (libhoudini) 运行，速度较慢，且不一定运行良好"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "UPDATES"
+msgstr "更新"
+
+#: src/ui/pages.cpp
+msgid "Install updates automatically"
+msgstr "自动安装更新"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "In the background · last checked {when}"
+msgstr "在后台进行 · 上次检查：{when}"
+
+#: src/ui/pages.cpp
+msgid "STORAGE"
+msgstr "存储"
+
+#: src/ui/pages.cpp
+msgid "Downloaded pictures and packages"
+msgstr "已下载的图片和软件包"
+
+#: src/ui/pages.cpp
+msgid "Clear cache"
+msgstr "清除缓存"
+
+#: src/ui/pages.cpp
+msgid "Settings"
+msgstr "设置"
+
+#: src/ui/store_widgets.cpp src/ui/store_window.cpp
+msgid "INSTALL"
+msgstr "安装"
+
+#: src/ui/store_widgets.cpp
+msgid "APP OF THE DAY"
+msgstr "每日一应用"
+
+#: src/ui/store_widgets.cpp
+msgid "Install"
+msgstr "安装"
+
+#: src/ui/store_window.cpp
+msgid "BROWSE"
+msgstr "浏览"
+
+#: src/ui/store_window.cpp
+msgid "Creative"
+msgstr "创意"
+
+#: src/ui/store_window.cpp
+msgid "Developer"
+msgstr "开发"
+
+#: src/ui/store_window.cpp
+msgid "LIBRARY"
+msgstr "资料库"
+
+#: src/ui/store_window.cpp
+msgid "Search apps and games"
+msgstr "搜索应用和游戏"
+
+#: src/ui/store_window.cpp data/bayu-store.desktop
+msgid "Bayu Store"
+msgstr "Bayu Store"
+
+#: src/ui/store_window.cpp
+msgid "Check for updates"
+msgstr "检查更新"
+
+#: src/ui/store_window.cpp
+msgid "Quit"
+msgstr "退出"
+
+#: src/ui/store_window.cpp
+msgid "That did not work"
+msgstr "操作未成功"
+
+#: src/ui/store_window.cpp
+msgid "PAUSED"
+msgstr "已暂停"
+
+#: src/ui/store_window.cpp
+msgid "OPEN"
+msgstr "打开"
+
+#: src/ui/store_window.cpp
+#, python-brace-format
+msgid "Uninstall {name}?"
+msgstr "卸载 {name}？"
+
+#: src/ui/store_window.cpp
+msgid "The app and everything it saved in Android are removed."
+msgstr "该应用及其在 Android 中保存的所有内容都将被移除。"
+
+#: src/ui/store_window.cpp
+msgid "You can install it again from the store at any time."
+msgstr "您可以随时从商店重新安装它。"
+
+#: src/ui/store_window.cpp
+msgid "Turn on Android apps?"
+msgstr "开启 Android 应用？"
+
+#: src/ui/store_window.cpp
+msgid "F-Droid apps are Android apps: they run in Android (lapis) beside the desktop. Turning it on downloads Android once (about 1.3 GB) and may ask for your password."
+msgstr "F-Droid 应用是 Android 应用：它们在桌面旁的 Android (lapis) 中运行。开启后会下载一次 Android（约 1.3 GB），并可能要求输入您的密码。"
+
+#: src/ui/store_window.cpp
+msgid "OK"
+msgstr "确定"
+
+#: src/ui/widgets.cpp
+msgid "Edit"
+msgstr "编辑"
+
+#: src/welcome/main.cpp
+msgid "Skip"
+msgstr "跳过"
+
+#: src/welcome/main.cpp
+msgid "Back"
+msgstr "返回"
+
+#: src/welcome/main.cpp
+msgid "Start the tour"
+msgstr "开始导览"
+
+#: src/welcome/main.cpp
+msgid "Get started"
+msgstr "开始使用"
+
+#: src/welcome/main.cpp
+msgid "Next"
+msgstr "下一步"
+
+#: src/welcome/main.cpp
+msgid "WELCOME"
+msgstr "欢迎"
+
+#: src/welcome/main.cpp
+msgid "Welcome to IGN 26"
+msgstr "欢迎使用 IGN 26"
+
+#: src/welcome/main.cpp
+msgid "Bayu is ready to use. Take a short tour, under a minute, to find your way around."
+msgstr "Bayu 已准备就绪。花不到一分钟进行简短导览,熟悉一下环境。"
+
+#: src/welcome/main.cpp
+msgid "BAYU STORE"
+msgstr "BAYU STORE"
+
+#: src/welcome/main.cpp
+msgid "Install your first app"
+msgstr "安装你的第一个应用"
+
+#: src/welcome/main.cpp
+msgid "Bayu Store brings thousands of apps from Flathub and F-Droid together. Search, click Install, and it is done. Some to start with:"
+msgstr "Bayu Store 汇集了来自 Flathub 和 F-Droid 的数千款应用。搜索,点击“安装”,即可完成。先来看看这些:"
+
+#: src/welcome/main.cpp
+msgid "Browse the web"
+msgstr "浏览网页"
+
+#: src/welcome/main.cpp
+msgid "Documents, spreadsheets and slides"
+msgstr "文档、电子表格和幻灯片"
+
+#: src/welcome/main.cpp
+msgid "Plays any video or music"
+msgstr "播放任何视频或音乐"
+
+#: src/welcome/main.cpp
+msgid "Open Bayu Store"
+msgstr "打开 Bayu Store"
+
+#: src/welcome/main.cpp
+msgid "LAUNCHER AND DOCK"
+msgstr "启动器和程序坞"
+
+#: src/welcome/main.cpp
+msgid "Find every app"
+msgstr "找到所有应用"
+
+#: src/welcome/main.cpp
+msgid "Click the rocket in the dock to see all your apps, and type to search. Apps you install appear there at once. Drag one to the dock to keep it at hand."
+msgstr "点击程序坞中的火箭即可查看所有应用,直接输入即可搜索。你安装的应用会立即出现在那里。将应用拖到程序坞,即可随手取用。"
+
+#: src/welcome/main.cpp
+msgid "Run Android apps"
+msgstr "运行 Android 应用"
+
+#: src/welcome/main.cpp
+msgid "Android apps run in their own windows, next to your other apps, through lapis. Turning it on downloads Android once, about 1.3 GB."
+msgstr "Android 应用通过 lapis 在各自的窗口中运行,与其他应用并排显示。启用时会下载一次 Android,约 1.3 GB。"
+
+#: src/welcome/main.cpp
+msgid "APPEARANCE"
+msgstr "外观"
+
+#: src/welcome/main.cpp
+msgid "Make it yours"
+msgstr "打造专属于你的桌面"
+
+#: src/welcome/main.cpp
+msgid "Choose light or dark, and a wallpaper. More choices are in Settings."
+msgstr "选择浅色或深色,再选一张壁纸。更多选项请在“设置”中查看。"
+
+#: src/welcome/main.cpp
+msgid "Stay up to date"
+msgstr "保持最新"
+
+#: src/welcome/main.cpp
+msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
+msgstr "应用更新在 Bayu Store 的“更新”中。系统更新请在终端中运行“sudo dnf upgrade”。"
+
+#: src/welcome/main.cpp
+msgid "Open Updates"
+msgstr "打开“更新”"
+
+#: src/welcome/main.cpp
+msgid "Report a problem"
+msgstr "报告问题"
+
+#: src/welcome/main.cpp
+msgid "ALL SET"
+msgstr "一切就绪"
+
+#: src/welcome/main.cpp
+msgid "Enjoy IGN 26"
+msgstr "尽情享用 IGN 26"
+
+#: src/welcome/main.cpp
+msgid "Open this tour again any time from the launcher: look for Welcome."
+msgstr "随时可以从启动器重新打开此导览:查找“欢迎”。"
+
+#: src/welcome/main.cpp
+msgid "Show at login"
+msgstr "登录时显示"
+
+#: src/welcome/main.cpp
+msgid "Open Welcome each time you sign in"
+msgstr "每次登录时打开“欢迎”"
+
+#: src/welcome/main.cpp
+msgid "Android apps are not available on this system."
+msgstr "此系统不支持 Android 应用。"
+
+#: src/welcome/main.cpp
+msgid "Turn on Android apps"
+msgstr "启用 Android 应用"
+
+#: src/welcome/main.cpp
+msgid "Android apps are on. Find them in Bayu Store under F-Droid."
+msgstr "Android 应用已启用。可在 Bayu Store 的 F-Droid 中找到。"
+
+#: src/welcome/main.cpp
+msgid "Setting up Android"
+msgstr "正在设置 Android"
+
+#: src/welcome/main.cpp
+msgid "Android could not be set up. Try again from Bayu Store."
+msgstr "无法设置 Android。请从 Bayu Store 重试。"
+
+#: src/welcome/main.cpp
+msgid "Dark mode"
+msgstr "深色模式"
+
+#: src/welcome/main.cpp
+msgid "Open Settings"
+msgstr "打开“设置”"
+
+#: src/welcome/main.cpp data/bayu-welcome.desktop
+msgid "Welcome"
+msgstr "欢迎"
+
+#: data/bayu-store.desktop
+msgid "App Store"
+msgstr "应用商店"
+
+#: data/bayu-store.desktop
+msgid "Find and install apps from Flathub and F-Droid"
+msgstr "从 Flathub 和 F-Droid 查找并安装应用"
+
+#: data/bayu-store.desktop
+msgid "apps;install;flatpak;flathub;fdroid;android;store;"
+msgstr "apps;install;flatpak;flathub;fdroid;android;store;应用;安装;商店;"
+
+#: data/bayu-welcome.desktop
+msgid "A short tour of IGN 26 and its apps"
+msgstr "IGN 26 及其应用的简短导览"
+
+#: data/bayu-welcome.desktop
+msgid "tour;welcome;help;getting started;"
+msgstr "导览;欢迎;帮助;入门;tour;welcome;help;getting started;"

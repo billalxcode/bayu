@@ -1,0 +1,856 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-store\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-25 03:39+0000\n"
+"PO-Revision-Date: 2026-10-25 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ui/pages.cpp
+msgid "never"
+msgstr "안 함"
+
+#: src/ui/pages.cpp
+msgid "just now"
+msgstr "방금"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} min ago"
+msgstr "{n}분 전"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} h ago"
+msgstr "{n}시간 전"
+
+#: src/ui/pages.cpp
+msgid "yesterday"
+msgstr "어제"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} days ago"
+msgstr "{n}일 전"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} months ago"
+msgstr "{n}개월 전"
+
+#: src/ui/pages.cpp
+msgid "Most popular"
+msgstr "가장 인기 있는"
+
+#: src/ui/pages.cpp
+msgid "Recently updated"
+msgstr "최근 업데이트"
+
+#: src/ui/pages.cpp
+msgid "Name"
+msgstr "이름"
+
+#: src/ui/pages.cpp
+msgid "Relevance"
+msgstr "관련도"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Sort: {order}"
+msgstr "정렬: {order}"
+
+#: src/ui/pages.cpp
+msgid "apps for drawing, photo, audio, and video work"
+msgstr "그림, 사진, 오디오, 비디오 작업용 앱"
+
+#: src/ui/pages.cpp
+msgid "games, from puzzles to racing"
+msgstr "퍼즐부터 레이싱까지 게임"
+
+#: src/ui/pages.cpp
+msgid "tools for writing, testing and shipping code"
+msgstr "코드 작성, 테스트, 배포 도구"
+
+#: src/ui/pages.cpp
+msgid "apps for mail, notes, money and the office"
+msgstr "메일, 메모, 금융, 사무용 앱"
+
+#: src/ui/pages.cpp
+msgid "players, podcasts and audio tools"
+msgstr "플레이어, 팟캐스트, 오디오 도구"
+
+#: src/ui/pages.cpp
+msgid "cameras, galleries and video players"
+msgstr "카메라, 갤러리, 비디오 플레이어"
+
+#: src/ui/pages.cpp
+msgid "apps for learning, reading and science"
+msgstr "학습, 독서, 과학용 앱"
+
+#: src/ui/pages.cpp
+msgid "tools that keep the computer tidy and safe"
+msgstr "컴퓨터를 깔끔하고 안전하게 유지하는 도구"
+
+#: src/ui/pages.cpp
+msgid "The catalog could not be refreshed"
+msgstr "카탈로그를 새로 고칠 수 없습니다"
+
+#: src/ui/pages.cpp
+msgid "What the store had before is shown; it tries again later."
+msgstr "스토어에 이전에 있던 내용을 표시합니다. 나중에 다시 시도합니다."
+
+#: src/ui/pages.cpp
+msgid "Popular on Flathub"
+msgstr "Flathub 인기"
+
+#: src/ui/pages.cpp
+msgid "See all"
+msgstr "모두 보기"
+
+#: src/ui/pages.cpp
+msgid "Fresh on F-Droid"
+msgstr "F-Droid 신규"
+
+#: src/ui/pages.cpp
+msgid "Browse"
+msgstr "둘러보기"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Discover"
+msgstr "탐색"
+
+#: src/ui/pages.cpp
+msgid "Getting the catalog"
+msgstr "카탈로그 가져오는 중"
+
+#: src/ui/pages.cpp
+msgid "Apps from Flathub and F-Droid appear in a moment. This happens once; later the store opens instantly, offline too."
+msgstr "Flathub와 F-Droid의 앱이 곧 표시됩니다. 이 과정은 한 번만 진행되며, 이후에는 오프라인에서도 스토어가 즉시 열립니다."
+
+#: src/ui/pages.cpp
+msgid "Trending this week"
+msgstr "이번 주 인기"
+
+#: src/ui/pages.cpp
+msgid "What people install, and what changed"
+msgstr "사람들이 설치하는 앱과 변경된 내용"
+
+#: src/ui/pages.cpp
+msgid "Apps"
+msgstr "앱"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Games"
+msgstr "게임"
+
+#: src/ui/pages.cpp
+msgid "Most installed"
+msgstr "가장 많이 설치됨"
+
+#: src/ui/pages.cpp
+msgid "Open source picks"
+msgstr "오픈 소스 추천"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Trending"
+msgstr "인기"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps"
+msgstr "앱 {n}개"
+
+#: src/ui/pages.cpp
+msgid "Find your next app by category"
+msgstr "카테고리별로 다음 앱 찾기"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps from Flathub and F-Droid"
+msgstr "Flathub와 F-Droid의 앱 {n}개"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Categories"
+msgstr "카테고리"
+
+#: src/ui/pages.cpp
+msgid "All"
+msgstr "전체"
+
+#: src/ui/pages.cpp
+msgid "Open source"
+msgstr "오픈 소스"
+
+#: src/ui/pages.cpp
+msgid "Verified"
+msgstr "인증됨"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps, sandboxed with Flatpak"
+msgstr "Flatpak 샌드박스 앱 {n}개"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} free Android apps, built from source"
+msgstr "소스에서 빌드된 무료 Android 앱 {n}개"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} {what}"
+msgstr "{what} {n}개"
+
+#: src/ui/pages.cpp
+msgid "Android apps are off"
+msgstr "Android 앱 꺼짐"
+
+#: src/ui/pages.cpp
+msgid "F-Droid apps run in Android (lapis). Installing one offers to turn it on."
+msgstr "F-Droid 앱은 Android(lapis)에서 실행됩니다. 앱을 설치하면 Android를 켤지 묻습니다."
+
+#: src/ui/pages.cpp
+msgid "Nothing here yet."
+msgstr "아직 아무것도 없습니다."
+
+#: src/ui/pages.cpp
+msgid "Not found"
+msgstr "찾을 수 없음"
+
+#: src/ui/pages.cpp
+msgid "This app is no longer in the catalog."
+msgstr "이 앱은 더 이상 카탈로그에 없습니다."
+
+#: src/ui/pages.cpp
+msgid "Unknown developer"
+msgstr "알 수 없는 개발자"
+
+#: src/ui/pages.cpp
+msgid "· Verified publisher"
+msgstr "· 인증된 게시자"
+
+#: src/ui/pages.cpp
+msgid "· Built from source by F-Droid"
+msgstr "· F-Droid가 소스에서 빌드"
+
+#: src/ui/pages.cpp
+msgid "Sandboxed"
+msgstr "샌드박스"
+
+#: src/ui/pages.cpp
+msgid "No ads"
+msgstr "광고 없음"
+
+#: src/ui/pages.cpp
+msgid "Link copied"
+msgstr "링크 복사됨"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "needs {size} free"
+msgstr "{size} 여유 공간 필요"
+
+#: src/ui/pages.cpp
+msgid "needs ARM translation"
+msgstr "ARM 변환 필요"
+
+#: src/ui/pages.cpp
+msgid "verified publisher"
+msgstr "인증된 게시자"
+
+#: src/ui/pages.cpp
+msgid "free software"
+msgstr "자유 소프트웨어"
+
+#: src/ui/pages.cpp
+msgid "community"
+msgstr "커뮤니티"
+
+#: src/ui/pages.cpp
+msgid "Unknown"
+msgstr "알 수 없음"
+
+#: src/ui/pages.cpp
+msgid "proprietary"
+msgstr "독점"
+
+#: src/ui/pages.cpp
+msgid "installs"
+msgstr "설치 수"
+
+#: src/ui/pages.cpp
+msgid "download size"
+msgstr "다운로드 크기"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "updated {when}"
+msgstr "{when} 업데이트됨"
+
+#: src/ui/pages.cpp
+msgid "About this app"
+msgstr "이 앱 정보"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "What's new in {version}"
+msgstr "{version}의 새로운 기능"
+
+#: src/ui/pages.cpp
+msgid "Source & permissions"
+msgstr "소스 및 권한"
+
+#: src/ui/pages.cpp
+msgid "Asks for no special access."
+msgstr "특별한 접근 권한을 요청하지 않습니다."
+
+#: src/ui/pages.cpp
+msgid "No tracking"
+msgstr "추적 없음"
+
+#: src/ui/pages.cpp
+msgid "No non-free deps"
+msgstr "비자유 의존성 없음"
+
+#: src/ui/pages.cpp
+msgid "Free software"
+msgstr "자유 소프트웨어"
+
+#: src/ui/pages.cpp
+msgid "of"
+msgstr "/"
+
+#: src/ui/pages.cpp
+msgid "Waiting"
+msgstr "대기 중"
+
+#: src/ui/pages.cpp
+msgid "paused"
+msgstr "일시 중지됨"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "QUEUED"
+msgstr "대기열"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "UPDATE"
+msgstr "업데이트"
+
+#: src/ui/pages.cpp
+msgid "Open"
+msgstr "열기"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Uninstall"
+msgstr "제거"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Updates"
+msgstr "업데이트"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Installed"
+msgstr "설치됨"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Recent"
+msgstr "최근"
+
+#: src/ui/pages.cpp
+msgid "Downloads"
+msgstr "다운로드"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Last checked {when}"
+msgstr "마지막 확인 {when}"
+
+#: src/ui/pages.cpp
+msgid "Check"
+msgstr "확인"
+
+#: src/ui/pages.cpp
+msgid "Library"
+msgstr "라이브러리"
+
+#: src/ui/pages.cpp
+msgid "from Flathub and F-Droid"
+msgstr "Flathub와 F-Droid에서"
+
+#: src/ui/pages.cpp
+msgid "from Flathub"
+msgstr "Flathub에서"
+
+#: src/ui/pages.cpp
+msgid "from F-Droid"
+msgstr "F-Droid에서"
+
+#: src/ui/pages.cpp
+msgid "Everything is up to date"
+msgstr "모두 최신 상태입니다"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} update available"
+msgid_plural "{n} updates available"
+msgstr[0] "업데이트 {n}개 사용 가능"
+
+#: src/ui/pages.cpp
+msgid "Updates install in the background as they arrive."
+msgstr "업데이트는 도착하는 대로 백그라운드에서 설치됩니다."
+
+#: src/ui/pages.cpp
+msgid "total"
+msgstr "합계"
+
+#: src/ui/pages.cpp
+msgid "installs in the background"
+msgstr "백그라운드에서 설치"
+
+#: src/ui/pages.cpp
+msgid "Update all"
+msgstr "모두 업데이트"
+
+#: src/ui/pages.cpp
+msgid "Manage"
+msgstr "관리"
+
+#: src/ui/pages.cpp
+msgid "App storage"
+msgstr "앱 저장 공간"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{used} of {total} used"
+msgstr "{total} 중 {used} 사용"
+
+#: src/ui/pages.cpp
+msgid "Runtimes"
+msgstr "런타임"
+
+#: src/ui/pages.cpp
+msgid "Cache"
+msgstr "캐시"
+
+#: src/ui/pages.cpp
+msgid "Free"
+msgstr "여유"
+
+#: src/ui/pages.cpp
+msgid "Recently installed"
+msgstr "최근 설치됨"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} app installed"
+msgid_plural "{n} apps installed"
+msgstr[0] "앱 {n}개 설치됨"
+
+#: src/ui/pages.cpp
+msgid "Installs and updates, newest first"
+msgstr "설치 및 업데이트, 최신순"
+
+#: src/ui/pages.cpp
+msgid "From Flathub and F-Droid"
+msgstr "Flathub와 F-Droid에서"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "installed {when}"
+msgstr "{when} 설치됨"
+
+#: src/ui/pages.cpp
+msgid "Nothing installed from the store yet."
+msgstr "스토어에서 설치한 항목이 아직 없습니다."
+
+#: src/ui/pages.cpp
+msgid "Nothing is downloading."
+msgstr "다운로드 중인 항목이 없습니다."
+
+#: src/ui/pages.cpp
+msgid "One at a time, in the background"
+msgstr "백그라운드에서 하나씩 진행"
+
+#: src/ui/pages.cpp
+msgid "Search"
+msgstr "검색"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Results for “{text}”"
+msgstr "“{text}” 검색 결과"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps across Flathub and F-Droid · {time}"
+msgstr "Flathub와 F-Droid의 앱 {n}개 · {time}"
+
+#: src/ui/pages.cpp
+msgid "No apps match. Try fewer or other words."
+msgstr "일치하는 앱이 없습니다. 더 적거나 다른 단어로 검색해 보세요."
+
+#: src/ui/pages.cpp
+msgid "Related searches"
+msgstr "관련 검색어"
+
+#: src/ui/pages.cpp
+msgid "Top developers"
+msgstr "인기 개발자"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} app"
+msgid_plural "{n} apps"
+msgstr[0] "앱 {n}개"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Store settings"
+msgstr "스토어 설정"
+
+#: src/ui/pages.cpp
+msgid "Where apps come from and how they stay up to date"
+msgstr "앱의 출처와 최신 상태 유지 방법"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "SOURCES"
+msgstr "소스"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps · refreshed {when}"
+msgstr "앱 {n}개 · {when} 새로 고침"
+
+#: src/ui/pages.cpp
+msgid "Refresh the catalog"
+msgstr "카탈로그 새로 고침"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "ANDROID APPS"
+msgstr "Android 앱"
+
+#: src/ui/pages.cpp
+msgid "Android is running"
+msgstr "Android 실행 중"
+
+#: src/ui/pages.cpp
+msgid "F-Droid apps install into Android (lapis) and open in their own windows."
+msgstr "F-Droid 앱은 Android(lapis)에 설치되며 자체 창에서 열립니다."
+
+#: src/ui/pages.cpp
+msgid "Turn on Android (lapis) to install apps from F-Droid. It downloads Android once, about 1.3 GB."
+msgstr "F-Droid에서 앱을 설치하려면 Android(lapis)를 켜세요. Android를 한 번 다운로드하며 약 1.3GB입니다."
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Turn on"
+msgstr "켜기"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Android apps could not be turned on"
+msgstr "Android 앱을 켤 수 없습니다"
+
+#: src/ui/pages.cpp
+msgid "Show apps built only for ARM"
+msgstr "ARM 전용으로 빌드된 앱 표시"
+
+#: src/ui/pages.cpp
+msgid "They run through ARM translation (libhoudini), slower and not always well"
+msgstr "ARM 변환(libhoudini)을 통해 실행되며 느리고 항상 잘 작동하지는 않습니다"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "UPDATES"
+msgstr "업데이트"
+
+#: src/ui/pages.cpp
+msgid "Install updates automatically"
+msgstr "업데이트 자동 설치"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "In the background · last checked {when}"
+msgstr "백그라운드에서 · 마지막 확인 {when}"
+
+#: src/ui/pages.cpp
+msgid "STORAGE"
+msgstr "저장 공간"
+
+#: src/ui/pages.cpp
+msgid "Downloaded pictures and packages"
+msgstr "다운로드한 사진 및 패키지"
+
+#: src/ui/pages.cpp
+msgid "Clear cache"
+msgstr "캐시 지우기"
+
+#: src/ui/pages.cpp
+msgid "Settings"
+msgstr "설정"
+
+#: src/ui/store_widgets.cpp src/ui/store_window.cpp
+msgid "INSTALL"
+msgstr "설치"
+
+#: src/ui/store_widgets.cpp
+msgid "APP OF THE DAY"
+msgstr "오늘의 앱"
+
+#: src/ui/store_widgets.cpp
+msgid "Install"
+msgstr "설치"
+
+#: src/ui/store_window.cpp
+msgid "BROWSE"
+msgstr "둘러보기"
+
+#: src/ui/store_window.cpp
+msgid "Creative"
+msgstr "크리에이티브"
+
+#: src/ui/store_window.cpp
+msgid "Developer"
+msgstr "개발자"
+
+#: src/ui/store_window.cpp
+msgid "LIBRARY"
+msgstr "라이브러리"
+
+#: src/ui/store_window.cpp
+msgid "Search apps and games"
+msgstr "앱과 게임 검색"
+
+#: src/ui/store_window.cpp data/bayu-store.desktop
+msgid "Bayu Store"
+msgstr "Bayu Store"
+
+#: src/ui/store_window.cpp
+msgid "Check for updates"
+msgstr "업데이트 확인"
+
+#: src/ui/store_window.cpp
+msgid "Quit"
+msgstr "종료"
+
+#: src/ui/store_window.cpp
+msgid "That did not work"
+msgstr "작동하지 않았습니다"
+
+#: src/ui/store_window.cpp
+msgid "PAUSED"
+msgstr "일시 중지됨"
+
+#: src/ui/store_window.cpp
+msgid "OPEN"
+msgstr "열기"
+
+#: src/ui/store_window.cpp
+#, python-brace-format
+msgid "Uninstall {name}?"
+msgstr "{name}을(를) 제거하시겠습니까?"
+
+#: src/ui/store_window.cpp
+msgid "The app and everything it saved in Android are removed."
+msgstr "앱과 앱이 Android에 저장한 모든 내용이 제거됩니다."
+
+#: src/ui/store_window.cpp
+msgid "You can install it again from the store at any time."
+msgstr "언제든지 스토어에서 다시 설치할 수 있습니다."
+
+#: src/ui/store_window.cpp
+msgid "Turn on Android apps?"
+msgstr "Android 앱을 켜시겠습니까?"
+
+#: src/ui/store_window.cpp
+msgid "F-Droid apps are Android apps: they run in Android (lapis) beside the desktop. Turning it on downloads Android once (about 1.3 GB) and may ask for your password."
+msgstr "F-Droid 앱은 Android 앱으로, 데스크톱 옆의 Android(lapis)에서 실행됩니다. 켜면 Android를 한 번 다운로드하며(약 1.3GB) 비밀번호를 물을 수 있습니다."
+
+#: src/ui/store_window.cpp
+msgid "OK"
+msgstr "확인"
+
+#: src/ui/widgets.cpp
+msgid "Edit"
+msgstr "편집"
+
+#: src/welcome/main.cpp
+msgid "Skip"
+msgstr "건너뛰기"
+
+#: src/welcome/main.cpp
+msgid "Back"
+msgstr "뒤로"
+
+#: src/welcome/main.cpp
+msgid "Start the tour"
+msgstr "둘러보기 시작"
+
+#: src/welcome/main.cpp
+msgid "Get started"
+msgstr "시작하기"
+
+#: src/welcome/main.cpp
+msgid "Next"
+msgstr "다음"
+
+#: src/welcome/main.cpp
+msgid "WELCOME"
+msgstr "환영합니다"
+
+#: src/welcome/main.cpp
+msgid "Welcome to IGN 26"
+msgstr "IGN 26에 오신 것을 환영합니다"
+
+#: src/welcome/main.cpp
+msgid "Bayu is ready to use. Take a short tour, under a minute, to find your way around."
+msgstr "Bayu를 바로 사용할 수 있습니다. 1분도 걸리지 않는 짧은 둘러보기로 사용법을 익혀 보세요."
+
+#: src/welcome/main.cpp
+msgid "BAYU STORE"
+msgstr "BAYU STORE"
+
+#: src/welcome/main.cpp
+msgid "Install your first app"
+msgstr "첫 번째 앱 설치하기"
+
+#: src/welcome/main.cpp
+msgid "Bayu Store brings thousands of apps from Flathub and F-Droid together. Search, click Install, and it is done. Some to start with:"
+msgstr "Bayu Store는 Flathub와 F-Droid의 수천 개 앱을 한곳에 모았습니다. 검색하고 설치를 누르면 끝입니다. 먼저 이런 앱은 어떨까요:"
+
+#: src/welcome/main.cpp
+msgid "Browse the web"
+msgstr "웹 탐색"
+
+#: src/welcome/main.cpp
+msgid "Documents, spreadsheets and slides"
+msgstr "문서, 스프레드시트, 슬라이드"
+
+#: src/welcome/main.cpp
+msgid "Plays any video or music"
+msgstr "모든 동영상과 음악 재생"
+
+#: src/welcome/main.cpp
+msgid "Open Bayu Store"
+msgstr "Bayu Store 열기"
+
+#: src/welcome/main.cpp
+msgid "LAUNCHER AND DOCK"
+msgstr "런처와 독"
+
+#: src/welcome/main.cpp
+msgid "Find every app"
+msgstr "모든 앱 찾기"
+
+#: src/welcome/main.cpp
+msgid "Click the rocket in the dock to see all your apps, and type to search. Apps you install appear there at once. Drag one to the dock to keep it at hand."
+msgstr "독의 로켓을 클릭하면 모든 앱이 표시되며, 입력하여 검색할 수 있습니다. 설치한 앱은 바로 여기에 나타납니다. 앱을 독으로 끌어다 놓으면 가까이 둘 수 있습니다."
+
+#: src/welcome/main.cpp
+msgid "Run Android apps"
+msgstr "Android 앱 실행"
+
+#: src/welcome/main.cpp
+msgid "Android apps run in their own windows, next to your other apps, through lapis. Turning it on downloads Android once, about 1.3 GB."
+msgstr "Android 앱은 lapis를 통해 다른 앱 옆에서 각자의 창으로 실행됩니다. 켜면 Android를 한 번 다운로드하며, 약 1.3GB입니다."
+
+#: src/welcome/main.cpp
+msgid "APPEARANCE"
+msgstr "모양"
+
+#: src/welcome/main.cpp
+msgid "Make it yours"
+msgstr "나만의 스타일로"
+
+#: src/welcome/main.cpp
+msgid "Choose light or dark, and a wallpaper. More choices are in Settings."
+msgstr "라이트 또는 다크 모드와 배경화면을 선택하세요. 더 많은 옵션은 설정에 있습니다."
+
+#: src/welcome/main.cpp
+msgid "Stay up to date"
+msgstr "항상 최신 상태로"
+
+#: src/welcome/main.cpp
+msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
+msgstr "앱 업데이트는 Bayu Store의 업데이트에 있습니다. 시스템은 터미널에서 \"sudo dnf upgrade\"를 실행하세요."
+
+#: src/welcome/main.cpp
+msgid "Open Updates"
+msgstr "업데이트 열기"
+
+#: src/welcome/main.cpp
+msgid "Report a problem"
+msgstr "문제 신고"
+
+#: src/welcome/main.cpp
+msgid "ALL SET"
+msgstr "준비 완료"
+
+#: src/welcome/main.cpp
+msgid "Enjoy IGN 26"
+msgstr "IGN 26을 즐겨 보세요"
+
+#: src/welcome/main.cpp
+msgid "Open this tour again any time from the launcher: look for Welcome."
+msgstr "이 둘러보기는 언제든지 런처에서 다시 열 수 있습니다. 환영합니다를 찾아 보세요."
+
+#: src/welcome/main.cpp
+msgid "Show at login"
+msgstr "로그인할 때 표시"
+
+#: src/welcome/main.cpp
+msgid "Open Welcome each time you sign in"
+msgstr "로그인할 때마다 환영합니다 열기"
+
+#: src/welcome/main.cpp
+msgid "Android apps are not available on this system."
+msgstr "이 시스템에서는 Android 앱을 사용할 수 없습니다."
+
+#: src/welcome/main.cpp
+msgid "Turn on Android apps"
+msgstr "Android 앱 켜기"
+
+#: src/welcome/main.cpp
+msgid "Android apps are on. Find them in Bayu Store under F-Droid."
+msgstr "Android 앱이 켜졌습니다. Bayu Store의 F-Droid에서 찾을 수 있습니다."
+
+#: src/welcome/main.cpp
+msgid "Setting up Android"
+msgstr "Android 설정 중"
+
+#: src/welcome/main.cpp
+msgid "Android could not be set up. Try again from Bayu Store."
+msgstr "Android를 설정할 수 없습니다. Bayu Store에서 다시 시도하세요."
+
+#: src/welcome/main.cpp
+msgid "Dark mode"
+msgstr "다크 모드"
+
+#: src/welcome/main.cpp
+msgid "Open Settings"
+msgstr "설정 열기"
+
+#: src/welcome/main.cpp data/bayu-welcome.desktop
+msgid "Welcome"
+msgstr "환영합니다"
+
+#: data/bayu-store.desktop
+msgid "App Store"
+msgstr "앱 스토어"
+
+#: data/bayu-store.desktop
+msgid "Find and install apps from Flathub and F-Droid"
+msgstr "Flathub와 F-Droid에서 앱 찾기 및 설치"
+
+#: data/bayu-store.desktop
+msgid "apps;install;flatpak;flathub;fdroid;android;store;"
+msgstr "앱;설치;flatpak;flathub;fdroid;android;스토어;apps;install;store;"
+
+#: data/bayu-welcome.desktop
+msgid "A short tour of IGN 26 and its apps"
+msgstr "IGN 26과 앱을 둘러보는 짧은 투어"
+
+#: data/bayu-welcome.desktop
+msgid "tour;welcome;help;getting started;"
+msgstr "투어;환영;도움말;시작하기;tour;welcome;help;getting started;"

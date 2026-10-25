@@ -1,0 +1,498 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-system-monitor\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-19 22:12+0800\n"
+"PO-Revision-Date: 2026-10-25 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: su\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. TRANSLATORS: a browser's helper process, such as "Chromium (Renderer)".
+#: src/monitor.cpp src/processlist.cpp
+#, python-brace-format
+msgid "{name} ({helper})"
+msgstr "{name} ({helper})"
+
+#: src/monitor.cpp
+msgid "The process has already exited."
+msgstr "Prosés parantos réngsé."
+
+#: src/monitor.cpp
+msgid "The application has already quit."
+msgstr "Aplikasi parantos kaluar."
+
+#: src/monitor.cpp
+msgid "This application cannot be quit here."
+msgstr "Aplikasi ieu teu tiasa ditutup di dieu."
+
+#: src/monitor.cpp
+msgid "This process cannot be ended here."
+msgstr "Prosés ieu teu tiasa dieureunkeun di dieu."
+
+#: src/monitor.cpp
+#, python-brace-format
+msgid "Unable to open the process: {error}"
+msgstr "Teu tiasa muka prosés: {error}"
+
+#: src/monitor.cpp
+msgid "You can only end your own processes."
+msgstr "Ibu/Bapa ngan tiasa ngeureunkeun prosés sorangan."
+
+#: src/monitor.cpp
+#, python-brace-format
+msgid "Unable to end the process: {error}"
+msgstr "Teu tiasa ngeureunkeun prosés: {error}"
+
+#: src/monitor.cpp
+msgid "B"
+msgstr "B"
+
+#: src/monitor.cpp
+msgid "KiB"
+msgstr "KiB"
+
+#: src/monitor.cpp
+msgid "MiB"
+msgstr "MiB"
+
+#: src/monitor.cpp
+msgid "GiB"
+msgstr "GiB"
+
+#: src/monitor.cpp
+msgid "TiB"
+msgstr "TiB"
+
+#. TRANSLATORS: a size, such as "1.5 MiB".
+#: src/monitor.cpp
+#, python-brace-format
+msgid "{value} {unit}"
+msgstr "{value} {unit}"
+
+#: src/monitor.cpp
+#, python-brace-format
+msgid "{size}/s"
+msgstr "{size}/d"
+
+#: src/procreader.cpp
+msgid "Running"
+msgstr "Jalan"
+
+#: src/procreader.cpp
+msgid "Sleeping"
+msgstr "Anteng"
+
+#: src/procreader.cpp
+msgid "Waiting for I/O"
+msgstr "Ngantosan I/O"
+
+#: src/procreader.cpp
+msgid "Stopped"
+msgstr "Eureun"
+
+#: src/procreader.cpp
+msgid "Zombie"
+msgstr "Zombie"
+
+#: src/procreader.cpp
+msgid "Renderer"
+msgstr "Renderer"
+
+#: src/procreader.cpp
+msgid "Extension"
+msgstr "Éksténsi"
+
+#: src/procreader.cpp src/views/mainwindow.cpp
+msgid "GPU"
+msgstr "GPU"
+
+#: src/procreader.cpp
+msgid "Zygote"
+msgstr "Zygote"
+
+#: src/procreader.cpp src/views/mainwindow.cpp
+msgid "Network"
+msgstr "Jaringan"
+
+#: src/procreader.cpp
+msgid "Audio"
+msgstr "Audio"
+
+#: src/procreader.cpp src/views/resourcepage.cpp
+msgid "Storage"
+msgstr "Panyimpenan"
+
+#: src/procreader.cpp
+msgid "Video Capture"
+msgstr "Pangrékam Vidéo"
+
+#: src/procreader.cpp
+msgid "Utility"
+msgstr "Utilitas"
+
+#: src/procreader.cpp
+msgid "System information is unavailable."
+msgstr "Inpormasi sistem teu sayogi."
+
+#: src/views/chartcard.cpp
+msgid "Now"
+msgstr "Ayeuna"
+
+#: src/views/mainwindow.cpp src/views/processdetails.cpp
+#: src/views/summarycard.cpp
+msgid "Processes"
+msgstr "Prosés"
+
+#: src/views/mainwindow.cpp src/views/processdetails.cpp
+#: src/views/processespage.cpp
+msgid "CPU"
+msgstr "CPU"
+
+#: src/views/mainwindow.cpp src/views/processdetails.cpp
+#: src/views/processespage.cpp
+msgid "Memory"
+msgstr "Mémori"
+
+#: src/views/mainwindow.cpp
+msgid "Disk"
+msgstr "Disk"
+
+#: src/views/mainwindow.cpp bayu-system-monitor.desktop
+msgid "System Monitor"
+msgstr "Monitor Sistem"
+
+#: src/views/mainwindow.cpp
+msgid "Update Every Second"
+msgstr "Ropéa Unggal Detik"
+
+#: src/views/mainwindow.cpp
+msgid "Update Every 2 Seconds"
+msgstr "Ropéa Unggal 2 Detik"
+
+#: src/views/mainwindow.cpp
+msgid "Update Every 5 Seconds"
+msgstr "Ropéa Unggal 5 Detik"
+
+#: src/views/mainwindow.cpp
+msgid "Details"
+msgstr "Rincian"
+
+#: src/views/mainwindow.cpp
+msgid "Copy Process ID"
+msgstr "Salin ID Prosés"
+
+#: src/views/mainwindow.cpp
+msgid "Quit"
+msgstr "Kaluar"
+
+#: src/views/mainwindow.cpp
+msgid "Force Quit"
+msgstr "Paksa Kaluar"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Force quit {name}?"
+msgstr "Paksa kaluar {name}?"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Quit {name}?"
+msgstr "Kaluar tina {name}?"
+
+#: src/views/mainwindow.cpp
+msgid "All of its processes will stop immediately. Unsaved work may be lost."
+msgstr "Sakabéh prosésna bakal eureun langsung. Padamelan nu can disimpen meureun leungit."
+
+#: src/views/mainwindow.cpp
+msgid "The application will be asked to quit. Unsaved work may be lost."
+msgstr "Aplikasi bakal dipénta kaluar. Padamelan nu can disimpen meureun leungit."
+
+#: src/views/mainwindow.cpp
+msgid "The process will stop immediately. Unsaved work may be lost."
+msgstr "Prosés bakal eureun langsung. Padamelan nu can disimpen meureun leungit."
+
+#: src/views/mainwindow.cpp
+msgid "The process will be asked to quit. Unsaved work may be lost."
+msgstr "Prosés bakal dipénta kaluar. Padamelan nu can disimpen meureun leungit."
+
+#: src/views/mainwindow.cpp src/views/summarycard.cpp
+msgid "Collecting data…"
+msgstr "Nuju ngumpulkeun data…"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "{n} logical processor"
+msgid_plural "{n} logical processors"
+msgstr[0] "{n} prosesor logis"
+
+#: src/views/mainwindow.cpp
+#, python-brace-format
+msgid "Write {rate}"
+msgstr "Tulis {rate}"
+
+#: src/views/processdetails.cpp
+msgid "User"
+msgstr "Pamaké"
+
+#: src/views/processdetails.cpp src/views/resourcepage.cpp
+msgid "State"
+msgstr "Kaayaan"
+
+#: src/views/processdetails.cpp
+msgid "Threads"
+msgstr "Thread"
+
+#: src/views/processdetails.cpp
+msgid "Nice value"
+msgstr "Nilai nice"
+
+#: src/views/processdetails.cpp
+msgid "Parent process"
+msgstr "Prosés indung"
+
+#: src/views/processdetails.cpp
+msgid "Command"
+msgstr "Command"
+
+#: src/views/processdetails.cpp
+msgid "Application quit"
+msgstr "Aplikasi kaluar"
+
+#: src/views/processdetails.cpp
+msgid "Process exited"
+msgstr "Prosés réngsé"
+
+#: src/views/processdetails.cpp
+msgid "Exited"
+msgstr "Réngsé"
+
+#: src/views/processdetails.cpp
+#, python-brace-format
+msgid "PID {pid}"
+msgstr "PID {pid}"
+
+#: src/views/processdetails.cpp
+msgid "Application Details"
+msgstr "Rincian Aplikasi"
+
+#: src/views/processdetails.cpp
+msgid "Process Details"
+msgstr "Rincian Prosés"
+
+#: src/views/processespage.cpp
+msgid "Name"
+msgstr "Ngaran"
+
+#: src/views/processespage.cpp src/views/resourcepage.cpp
+msgid "Read"
+msgstr "Baca"
+
+#: src/views/processespage.cpp src/views/resourcepage.cpp
+msgid "Write"
+msgstr "Tulis"
+
+#: src/views/processespage.cpp
+msgid "PID"
+msgstr "PID"
+
+#: src/views/processespage.cpp
+msgid "Applications"
+msgstr "Aplikasi"
+
+#: src/views/processespage.cpp
+msgid "My Processes"
+msgstr "Prosés Kuring"
+
+#: src/views/processespage.cpp
+msgid "All Processes"
+msgstr "Sakabéh Prosés"
+
+#: src/views/processespage.cpp
+msgid "Search processes"
+msgstr "Téangan prosés"
+
+#: src/views/processespage.cpp
+msgid "No applications found"
+msgstr "Teu aya aplikasi kapendak"
+
+#: src/views/processespage.cpp
+msgid "No processes found"
+msgstr "Teu aya prosés kapendak"
+
+#: src/views/processespage.cpp
+msgid "Try a different name, user, or process ID."
+msgstr "Cobian ngaran, pamaké, atanapi ID prosés séjén."
+
+#: src/views/resourcepage.cpp
+msgid "Logical processors"
+msgstr "Prosesor logis"
+
+#: src/views/resourcepage.cpp
+msgid "In use"
+msgstr "Dipaké"
+
+#: src/views/resourcepage.cpp
+msgid "Available"
+msgstr "Sayogi"
+
+#: src/views/resourcepage.cpp
+msgid "Cached"
+msgstr "Cache"
+
+#: src/views/resourcepage.cpp
+msgid "Total memory"
+msgstr "Total mémori"
+
+#: src/views/resourcepage.cpp
+msgid "Swap"
+msgstr "Swap"
+
+#: src/views/resourcepage.cpp
+msgid "Download"
+msgstr "Undeuran"
+
+#: src/views/resourcepage.cpp
+msgid "Upload"
+msgstr "Unggah"
+
+#: src/views/resourcepage.cpp
+msgid "Total received"
+msgstr "Total katampi"
+
+#: src/views/resourcepage.cpp
+msgid "Total sent"
+msgstr "Total dikirim"
+
+#: src/views/resourcepage.cpp
+msgid "Network interfaces"
+msgstr "Antarmuka jaringan"
+
+#: src/views/resourcepage.cpp
+msgid "Hardware address"
+msgstr "Alamat hardware"
+
+#: src/views/resourcepage.cpp
+msgid "Device"
+msgstr "Parangkat"
+
+#: src/views/resourcepage.cpp
+msgid "Capacity"
+msgstr "Kapasitas"
+
+#: src/views/resourcepage.cpp
+msgid "Used"
+msgstr "Kapaké"
+
+#: src/views/resourcepage.cpp
+msgid "File system"
+msgstr "Sistem berkas"
+
+#: src/views/resourcepage.cpp
+msgid "Driver"
+msgstr "Supir"
+
+#: src/views/resourcepage.cpp
+msgid "Activity"
+msgstr "Aktivitas"
+
+#: src/views/resourcepage.cpp
+msgid "Temperature"
+msgstr "Suhu"
+
+#: src/views/resourcepage.cpp
+msgid "Clock speed"
+msgstr "Laju jam"
+
+#: src/views/resourcepage.cpp
+msgid "Video memory"
+msgstr "Mémori vidéo"
+
+#: src/views/resourcepage.cpp
+msgid "Processor activity"
+msgstr "Aktivitas prosesor"
+
+#: src/views/resourcepage.cpp
+msgid "Memory usage"
+msgstr "Pamakéan mémori"
+
+#: src/views/resourcepage.cpp
+msgid "Network activity"
+msgstr "Aktivitas jaringan"
+
+#: src/views/resourcepage.cpp
+msgid "Disk activity"
+msgstr "Aktivitas disk"
+
+#: src/views/resourcepage.cpp
+msgid "Graphics activity"
+msgstr "Aktivitas grafis"
+
+#: src/views/resourcepage.cpp
+msgid "Graphics temperature"
+msgstr "Suhu grafis"
+
+#: src/views/resourcepage.cpp
+#, python-brace-format
+msgid "{used} of {total} in use"
+msgstr "{used} tina {total} kapaké"
+
+#: src/views/resourcepage.cpp
+msgid "Physical network interfaces"
+msgstr "Antarmuka jaringan fisik"
+
+#: src/views/resourcepage.cpp
+msgid "Physical disks"
+msgstr "Disk fisik"
+
+#: src/views/resourcepage.cpp
+#, python-brace-format
+msgid "{n} second"
+msgid_plural "{n} seconds"
+msgstr[0] "{n} detik"
+
+#: src/views/resourcepage.cpp
+#, python-brace-format
+msgid "CPU {number}"
+msgstr "CPU {number}"
+
+#: src/views/resourcepage.cpp
+msgid "Not configured"
+msgstr "Can disetél"
+
+#: src/views/resourcepage.cpp
+msgid "Connected"
+msgstr "Nyambung"
+
+#: src/views/resourcepage.cpp
+msgid "Disconnected"
+msgstr "Teu nyambung"
+
+#: src/views/resourcepage.cpp
+msgid "Unknown"
+msgstr "Teu dipikanyaho"
+
+#: src/views/resourcepage.cpp
+#, python-brace-format
+msgid "{used} of {total}"
+msgstr "{used} tina {total}"
+
+#: src/views/resourcepage.cpp
+msgid "Active"
+msgstr "Aktip"
+
+#: src/views/resourcepage.cpp
+msgid "Powered off"
+msgstr "Pareum"
+
+#: bayu-system-monitor.desktop
+msgid "View resource usage and manage running processes"
+msgstr "Tingali pamakéan sumber daya jeung kokolakeun prosés nu keur jalan"
+
+#: bayu-system-monitor.desktop
+msgid "CPU;Memory;Network;Disk;Processes;"
+msgstr "CPU;Mémori;Jaringan;Disk;Prosés;Memory;Network;Processes;"

@@ -1,0 +1,856 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bayu-store\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-25 03:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: jv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ui/pages.cpp
+msgid "never"
+msgstr "ora tau"
+
+#: src/ui/pages.cpp
+msgid "just now"
+msgstr "lagi wae"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} min ago"
+msgstr "{n} menit kepungkur"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} h ago"
+msgstr "{n} jam kepungkur"
+
+#: src/ui/pages.cpp
+msgid "yesterday"
+msgstr "wingi"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} days ago"
+msgstr "{n} dina kepungkur"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} months ago"
+msgstr "{n} wulan kepungkur"
+
+#: src/ui/pages.cpp
+msgid "Most popular"
+msgstr "Paling populer"
+
+#: src/ui/pages.cpp
+msgid "Recently updated"
+msgstr "Anyar dianyari"
+
+#: src/ui/pages.cpp
+msgid "Name"
+msgstr "Jeneng"
+
+#: src/ui/pages.cpp
+msgid "Relevance"
+msgstr "Relevansi"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Sort: {order}"
+msgstr "Urut: {order}"
+
+#: src/ui/pages.cpp
+msgid "apps for drawing, photo, audio, and video work"
+msgstr "aplikasi kanggo nggambar, foto, audio, lan video"
+
+#: src/ui/pages.cpp
+msgid "games, from puzzles to racing"
+msgstr "game, saka teka-teki nganti balapan"
+
+#: src/ui/pages.cpp
+msgid "tools for writing, testing and shipping code"
+msgstr "piranti kanggo nulis, nyoba lan ngirim kode"
+
+#: src/ui/pages.cpp
+msgid "apps for mail, notes, money and the office"
+msgstr "aplikasi kanggo layang, cathetan, dhuwit lan kantor"
+
+#: src/ui/pages.cpp
+msgid "players, podcasts and audio tools"
+msgstr "pamutar, podcast lan piranti audio"
+
+#: src/ui/pages.cpp
+msgid "cameras, galleries and video players"
+msgstr "kamera, galeri lan pamutar video"
+
+#: src/ui/pages.cpp
+msgid "apps for learning, reading and science"
+msgstr "aplikasi kanggo sinau, maca lan sains"
+
+#: src/ui/pages.cpp
+msgid "tools that keep the computer tidy and safe"
+msgstr "piranti sing njaga komputer tetep rapi lan aman"
+
+#: src/ui/pages.cpp
+msgid "The catalog could not be refreshed"
+msgstr "Katalog ora bisa disegerake"
+
+#: src/ui/pages.cpp
+msgid "What the store had before is shown; it tries again later."
+msgstr "Sing diduweni toko sadurunge ditampilake; bakal dicoba maneh mengko."
+
+#: src/ui/pages.cpp
+msgid "Popular on Flathub"
+msgstr "Populer ing Flathub"
+
+#: src/ui/pages.cpp
+msgid "See all"
+msgstr "Deleng kabeh"
+
+#: src/ui/pages.cpp
+msgid "Fresh on F-Droid"
+msgstr "Anyar ing F-Droid"
+
+#: src/ui/pages.cpp
+msgid "Browse"
+msgstr "Jelajah"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Discover"
+msgstr "Temokake"
+
+#: src/ui/pages.cpp
+msgid "Getting the catalog"
+msgstr "Njupuk katalog"
+
+#: src/ui/pages.cpp
+msgid "Apps from Flathub and F-Droid appear in a moment. This happens once; later the store opens instantly, offline too."
+msgstr "Aplikasi saka Flathub lan F-Droid bakal katon sedhela maneh. Iki mung sepisan; mengko toko bukak cepet, offline uga."
+
+#: src/ui/pages.cpp
+msgid "Trending this week"
+msgstr "Tren minggu iki"
+
+#: src/ui/pages.cpp
+msgid "What people install, and what changed"
+msgstr "Sing dipasang wong, lan sing owah"
+
+#: src/ui/pages.cpp
+msgid "Apps"
+msgstr "Aplikasi"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Games"
+msgstr "Game"
+
+#: src/ui/pages.cpp
+msgid "Most installed"
+msgstr "Paling akeh dipasang"
+
+#: src/ui/pages.cpp
+msgid "Open source picks"
+msgstr "Pilihan open source"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Trending"
+msgstr "Tren"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps"
+msgstr "{n} aplikasi"
+
+#: src/ui/pages.cpp
+msgid "Find your next app by category"
+msgstr "Temokake aplikasi sabanjure miturut kategori"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps from Flathub and F-Droid"
+msgstr "{n} aplikasi saka Flathub lan F-Droid"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Categories"
+msgstr "Kategori"
+
+#: src/ui/pages.cpp
+msgid "All"
+msgstr "Kabeh"
+
+#: src/ui/pages.cpp
+msgid "Open source"
+msgstr "Open source"
+
+#: src/ui/pages.cpp
+msgid "Verified"
+msgstr "Diverifikasi"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps, sandboxed with Flatpak"
+msgstr "{n} aplikasi, ing-sandbox nganggo Flatpak"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} free Android apps, built from source"
+msgstr "{n} aplikasi Android gratis, dibangun saka sumber"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} {what}"
+msgstr "{n} {what}"
+
+#: src/ui/pages.cpp
+msgid "Android apps are off"
+msgstr "Aplikasi Android mati"
+
+#: src/ui/pages.cpp
+msgid "F-Droid apps run in Android (lapis). Installing one offers to turn it on."
+msgstr "Aplikasi F-Droid mlaku ing Android (lapis). Masang siji bakal nawakake ngurupake."
+
+#: src/ui/pages.cpp
+msgid "Nothing here yet."
+msgstr "Durung ana apa-apa ing kene."
+
+#: src/ui/pages.cpp
+msgid "Not found"
+msgstr "Ora ditemokake"
+
+#: src/ui/pages.cpp
+msgid "This app is no longer in the catalog."
+msgstr "Aplikasi iki wis ora ana ing katalog."
+
+#: src/ui/pages.cpp
+msgid "Unknown developer"
+msgstr "Pangembang ora dikenal"
+
+#: src/ui/pages.cpp
+msgid "· Verified publisher"
+msgstr "· Penerbit diverifikasi"
+
+#: src/ui/pages.cpp
+msgid "· Built from source by F-Droid"
+msgstr "· Dibangun saka sumber dening F-Droid"
+
+#: src/ui/pages.cpp
+msgid "Sandboxed"
+msgstr "Ing-sandbox"
+
+#: src/ui/pages.cpp
+msgid "No ads"
+msgstr "Tanpa iklan"
+
+#: src/ui/pages.cpp
+msgid "Link copied"
+msgstr "Pranala disalin"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "needs {size} free"
+msgstr "butuh {size} kosong"
+
+#: src/ui/pages.cpp
+msgid "needs ARM translation"
+msgstr "butuh terjemahan ARM"
+
+#: src/ui/pages.cpp
+msgid "verified publisher"
+msgstr "penerbit diverifikasi"
+
+#: src/ui/pages.cpp
+msgid "free software"
+msgstr "piranti lunak bebas"
+
+#: src/ui/pages.cpp
+msgid "community"
+msgstr "komunitas"
+
+#: src/ui/pages.cpp
+msgid "Unknown"
+msgstr "Ora dikenal"
+
+#: src/ui/pages.cpp
+msgid "proprietary"
+msgstr "proprietari"
+
+#: src/ui/pages.cpp
+msgid "installs"
+msgstr "instalasi"
+
+#: src/ui/pages.cpp
+msgid "download size"
+msgstr "ukuran undhuhan"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "updated {when}"
+msgstr "dianyari {when}"
+
+#: src/ui/pages.cpp
+msgid "About this app"
+msgstr "Bab aplikasi iki"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "What's new in {version}"
+msgstr "Anyar ing {version}"
+
+#: src/ui/pages.cpp
+msgid "Source & permissions"
+msgstr "Sumber & ijin"
+
+#: src/ui/pages.cpp
+msgid "Asks for no special access."
+msgstr "Ora njaluk akses khusus."
+
+#: src/ui/pages.cpp
+msgid "No tracking"
+msgstr "Ora ana pelacakan"
+
+#: src/ui/pages.cpp
+msgid "No non-free deps"
+msgstr "Ora ana dependensi non-bebas"
+
+#: src/ui/pages.cpp
+msgid "Free software"
+msgstr "Piranti lunak bebas"
+
+#: src/ui/pages.cpp
+msgid "of"
+msgstr "saka"
+
+#: src/ui/pages.cpp
+msgid "Waiting"
+msgstr "Nenggak"
+
+#: src/ui/pages.cpp
+msgid "paused"
+msgstr "dijeda"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "QUEUED"
+msgstr "ANTRIAN"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "UPDATE"
+msgstr "NYANYARI"
+
+#: src/ui/pages.cpp
+msgid "Open"
+msgstr "Bukak"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Uninstall"
+msgstr "Copot"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Updates"
+msgstr "Nganyari"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Installed"
+msgstr "Dipasang"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Recent"
+msgstr "Anyar"
+
+#: src/ui/pages.cpp
+msgid "Downloads"
+msgstr "Undhuhan"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Last checked {when}"
+msgstr "Pungkasan dipriksa {when}"
+
+#: src/ui/pages.cpp
+msgid "Check"
+msgstr "Priksa"
+
+#: src/ui/pages.cpp
+msgid "Library"
+msgstr "Pustaka"
+
+#: src/ui/pages.cpp
+msgid "from Flathub and F-Droid"
+msgstr "saka Flathub lan F-Droid"
+
+#: src/ui/pages.cpp
+msgid "from Flathub"
+msgstr "saka Flathub"
+
+#: src/ui/pages.cpp
+msgid "from F-Droid"
+msgstr "saka F-Droid"
+
+#: src/ui/pages.cpp
+msgid "Everything is up to date"
+msgstr "Kabeh wis anyar"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} update available"
+msgid_plural "{n} updates available"
+msgstr[0] "{n} nganyari kasedhiya"
+
+#: src/ui/pages.cpp
+msgid "Updates install in the background as they arrive."
+msgstr "Nganyari dipasang ing latar mburi nalika teka."
+
+#: src/ui/pages.cpp
+msgid "total"
+msgstr "total"
+
+#: src/ui/pages.cpp
+msgid "installs in the background"
+msgstr "masang ing latar mburi"
+
+#: src/ui/pages.cpp
+msgid "Update all"
+msgstr "Nganyari kabeh"
+
+#: src/ui/pages.cpp
+msgid "Manage"
+msgstr "Kelola"
+
+#: src/ui/pages.cpp
+msgid "App storage"
+msgstr "Panyimpenan aplikasi"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{used} of {total} used"
+msgstr "{used} saka {total} digunakake"
+
+#: src/ui/pages.cpp
+msgid "Runtimes"
+msgstr "Runtime"
+
+#: src/ui/pages.cpp
+msgid "Cache"
+msgstr "Cache"
+
+#: src/ui/pages.cpp
+msgid "Free"
+msgstr "Kosong"
+
+#: src/ui/pages.cpp
+msgid "Recently installed"
+msgstr "Anyar dipasang"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} app installed"
+msgid_plural "{n} apps installed"
+msgstr[0] "{n} aplikasi dipasang"
+
+#: src/ui/pages.cpp
+msgid "Installs and updates, newest first"
+msgstr "Instalasi lan nganyari, sing paling anyar dhisik"
+
+#: src/ui/pages.cpp
+msgid "From Flathub and F-Droid"
+msgstr "Saka Flathub lan F-Droid"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "installed {when}"
+msgstr "dipasang {when}"
+
+#: src/ui/pages.cpp
+msgid "Nothing installed from the store yet."
+msgstr "Durung ana sing dipasang saka toko."
+
+#: src/ui/pages.cpp
+msgid "Nothing is downloading."
+msgstr "Ora ana sing ngundhuh."
+
+#: src/ui/pages.cpp
+msgid "One at a time, in the background"
+msgstr "Siji-siji, ing latar mburi"
+
+#: src/ui/pages.cpp
+msgid "Search"
+msgstr "Golek"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "Results for “{text}”"
+msgstr "Asil kanggo “{text}”"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps across Flathub and F-Droid · {time}"
+msgstr "{n} aplikasi ing Flathub lan F-Droid · {time}"
+
+#: src/ui/pages.cpp
+msgid "No apps match. Try fewer or other words."
+msgstr "Ora ana aplikasi sing cocog. Coba tembung sing luwih sithik utawa liyane."
+
+#: src/ui/pages.cpp
+msgid "Related searches"
+msgstr "Panelusuran sing gegandhengan"
+
+#: src/ui/pages.cpp
+msgid "Top developers"
+msgstr "Pangembang paling dhuwur"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} app"
+msgid_plural "{n} apps"
+msgstr[0] "{n} aplikasi"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Store settings"
+msgstr "Setelan toko"
+
+#: src/ui/pages.cpp
+msgid "Where apps come from and how they stay up to date"
+msgstr "Saka ngendi aplikasi teka lan carane tetep anyar"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "SOURCES"
+msgstr "SUMBER"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{n} apps · refreshed {when}"
+msgstr "{n} aplikasi · disegerake {when}"
+
+#: src/ui/pages.cpp
+msgid "Refresh the catalog"
+msgstr "Segerake katalog"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "ANDROID APPS"
+msgstr "APLIKASI ANDROID"
+
+#: src/ui/pages.cpp
+msgid "Android is running"
+msgstr "Android lagi mlaku"
+
+#: src/ui/pages.cpp
+msgid "F-Droid apps install into Android (lapis) and open in their own windows."
+msgstr "Aplikasi F-Droid dipasang ing Android (lapis) lan mbukak ing jendhela dhewe."
+
+#: src/ui/pages.cpp
+msgid "Turn on Android (lapis) to install apps from F-Droid. It downloads Android once, about 1.3 GB."
+msgstr "Urupake Android (lapis) kanggo masang aplikasi saka F-Droid. Ngundhuh Android sepisan, kira-kira 1,3 GB."
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Turn on"
+msgstr "Urupake"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Android apps could not be turned on"
+msgstr "Aplikasi Android ora bisa diurupake"
+
+#: src/ui/pages.cpp
+msgid "Show apps built only for ARM"
+msgstr "Tuduhna aplikasi sing mung digawe kanggo ARM"
+
+#: src/ui/pages.cpp
+msgid "They run through ARM translation (libhoudini), slower and not always well"
+msgstr "Mlaku liwat terjemahan ARM (libhoudini), luwih alon lan ora mesthi apik"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "UPDATES"
+msgstr "NYANYARI"
+
+#: src/ui/pages.cpp
+msgid "Install updates automatically"
+msgstr "Pasang nganyari kanthi otomatis"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "In the background · last checked {when}"
+msgstr "Ing latar mburi · pungkasan dipriksa {when}"
+
+#: src/ui/pages.cpp
+msgid "STORAGE"
+msgstr "PANYIMPENAN"
+
+#: src/ui/pages.cpp
+msgid "Downloaded pictures and packages"
+msgstr "Gambar lan paket sing diundhuh"
+
+#: src/ui/pages.cpp
+msgid "Clear cache"
+msgstr "Resiki cache"
+
+#: src/ui/pages.cpp
+msgid "Settings"
+msgstr "Setelan"
+
+#: src/ui/store_widgets.cpp src/ui/store_window.cpp
+msgid "INSTALL"
+msgstr "PASANG"
+
+#: src/ui/store_widgets.cpp
+msgid "APP OF THE DAY"
+msgstr "APLIKASI SAKA DINA IKI"
+
+#: src/ui/store_widgets.cpp
+msgid "Install"
+msgstr "Pasang"
+
+#: src/ui/store_window.cpp
+msgid "BROWSE"
+msgstr "JELAJAH"
+
+#: src/ui/store_window.cpp
+msgid "Creative"
+msgstr "Kreatif"
+
+#: src/ui/store_window.cpp
+msgid "Developer"
+msgstr "Pangembang"
+
+#: src/ui/store_window.cpp
+msgid "LIBRARY"
+msgstr "PUSTAKA"
+
+#: src/ui/store_window.cpp
+msgid "Search apps and games"
+msgstr "Goleki aplikasi lan game"
+
+#: src/ui/store_window.cpp data/bayu-store.desktop
+msgid "Bayu Store"
+msgstr "Bayu Store"
+
+#: src/ui/store_window.cpp
+msgid "Check for updates"
+msgstr "Priksa nganyari"
+
+#: src/ui/store_window.cpp
+msgid "Quit"
+msgstr "Metu"
+
+#: src/ui/store_window.cpp
+msgid "That did not work"
+msgstr "Ora kasil"
+
+#: src/ui/store_window.cpp
+msgid "PAUSED"
+msgstr "DIJEDA"
+
+#: src/ui/store_window.cpp
+msgid "OPEN"
+msgstr "BUKAK"
+
+#: src/ui/store_window.cpp
+#, python-brace-format
+msgid "Uninstall {name}?"
+msgstr "Copot {name}?"
+
+#: src/ui/store_window.cpp
+msgid "The app and everything it saved in Android are removed."
+msgstr "Aplikasi lan kabeh sing disimpen ing Android dibusak."
+
+#: src/ui/store_window.cpp
+msgid "You can install it again from the store at any time."
+msgstr "Sampeyan bisa masang maneh saka toko kapan wae."
+
+#: src/ui/store_window.cpp
+msgid "Turn on Android apps?"
+msgstr "Urupake aplikasi Android?"
+
+#: src/ui/store_window.cpp
+msgid "F-Droid apps are Android apps: they run in Android (lapis) beside the desktop. Turning it on downloads Android once (about 1.3 GB) and may ask for your password."
+msgstr "Aplikasi F-Droid yaiku aplikasi Android: mlaku ing Android (lapis) ing jejere desktop. Ngurupake bakal ngundhuh Android sepisan (kira-kira 1,3 GB) lan bisa njaluk tembung sandhi sampeyan."
+
+#: src/ui/store_window.cpp
+msgid "OK"
+msgstr "OK"
+
+#: src/ui/widgets.cpp
+msgid "Edit"
+msgstr "Sunting"
+
+#: src/welcome/main.cpp
+msgid "Skip"
+msgstr "Lewati"
+
+#: src/welcome/main.cpp
+msgid "Back"
+msgstr "Bali"
+
+#: src/welcome/main.cpp
+msgid "Start the tour"
+msgstr "Miwiti tur"
+
+#: src/welcome/main.cpp
+msgid "Get started"
+msgstr "Miwiti"
+
+#: src/welcome/main.cpp
+msgid "Next"
+msgstr "Candhake"
+
+#: src/welcome/main.cpp
+msgid "WELCOME"
+msgstr "SUGENG RAWUH"
+
+#: src/welcome/main.cpp
+msgid "Welcome to IGN 26"
+msgstr "Sugeng rawuh ing IGN 26"
+
+#: src/welcome/main.cpp
+msgid "Bayu is ready to use. Take a short tour, under a minute, to find your way around."
+msgstr "Bayu wis siap dienggo. Tutugna tur cendhak, kurang saka sak menit, supaya ngerti dununge."
+
+#: src/welcome/main.cpp
+msgid "BAYU STORE"
+msgstr "BAYU STORE"
+
+#: src/welcome/main.cpp
+msgid "Install your first app"
+msgstr "Pasang aplikasi sepisanan"
+
+#: src/welcome/main.cpp
+msgid "Bayu Store brings thousands of apps from Flathub and F-Droid together. Search, click Install, and it is done. Some to start with:"
+msgstr "Bayu Store nglumpukake ewonan aplikasi saka Flathub lan F-Droid. Golek, klik Pasang, rampung. Sawetara kanggo miwiti:"
+
+#: src/welcome/main.cpp
+msgid "Browse the web"
+msgstr "Njelajah web"
+
+#: src/welcome/main.cpp
+msgid "Documents, spreadsheets and slides"
+msgstr "Dokumen, lembar kerja, lan slide"
+
+#: src/welcome/main.cpp
+msgid "Plays any video or music"
+msgstr "Muter video utawa musik apa wae"
+
+#: src/welcome/main.cpp
+msgid "Open Bayu Store"
+msgstr "Bukak Bayu Store"
+
+#: src/welcome/main.cpp
+msgid "LAUNCHER AND DOCK"
+msgstr "LAUNCHER LAN DOCK"
+
+#: src/welcome/main.cpp
+msgid "Find every app"
+msgstr "Golek kabeh aplikasi"
+
+#: src/welcome/main.cpp
+msgid "Click the rocket in the dock to see all your apps, and type to search. Apps you install appear there at once. Drag one to the dock to keep it at hand."
+msgstr "Klik roket ing dock kanggo ndeleng kabeh aplikasimu, banjur ketik kanggo golek. Aplikasi sing mbok pasang langsung metu ing kana. Seret salah siji menyang dock supaya gampang digayuh."
+
+#: src/welcome/main.cpp
+msgid "Run Android apps"
+msgstr "Jalanake aplikasi Android"
+
+#: src/welcome/main.cpp
+msgid "Android apps run in their own windows, next to your other apps, through lapis. Turning it on downloads Android once, about 1.3 GB."
+msgstr "Aplikasi Android mlaku ing jendela dhewe, bebarengan karo aplikasi liyane, liwat lapis. Nguripake iki ngundhuh Android sepisan, kira-kira 1,3 GB."
+
+#: src/welcome/main.cpp
+msgid "APPEARANCE"
+msgstr "TAMPILAN"
+
+#: src/welcome/main.cpp
+msgid "Make it yours"
+msgstr "Gawe cocog karo selerane"
+
+#: src/welcome/main.cpp
+msgid "Choose light or dark, and a wallpaper. More choices are in Settings."
+msgstr "Pilih padhang utawa peteng, lan wallpaper. Pilihan liyane ana ing Setelan."
+
+#: src/welcome/main.cpp
+msgid "Stay up to date"
+msgstr "Tansah anyar"
+
+#: src/welcome/main.cpp
+msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
+msgstr "Nganyari aplikasi ana ing Bayu Store, ing Nganyari. Kanggo sistem, jalanake \"sudo dnf upgrade\" ing Terminal."
+
+#: src/welcome/main.cpp
+msgid "Open Updates"
+msgstr "Bukak Nganyari"
+
+#: src/welcome/main.cpp
+msgid "Report a problem"
+msgstr "Laporake masalah"
+
+#: src/welcome/main.cpp
+msgid "ALL SET"
+msgstr "KABEH WIS SIAP"
+
+#: src/welcome/main.cpp
+msgid "Enjoy IGN 26"
+msgstr "Sugeng nyoba IGN 26"
+
+#: src/welcome/main.cpp
+msgid "Open this tour again any time from the launcher: look for Welcome."
+msgstr "Bukak tur iki maneh kapan wae saka launcher: goleka Sugeng Rawuh."
+
+#: src/welcome/main.cpp
+msgid "Show at login"
+msgstr "Tampilake nalika mlebu"
+
+#: src/welcome/main.cpp
+msgid "Open Welcome each time you sign in"
+msgstr "Bukak Sugeng Rawuh saben mlebu"
+
+#: src/welcome/main.cpp
+msgid "Android apps are not available on this system."
+msgstr "Aplikasi Android ora kasedhiya ing sistem iki."
+
+#: src/welcome/main.cpp
+msgid "Turn on Android apps"
+msgstr "Uripake aplikasi Android"
+
+#: src/welcome/main.cpp
+msgid "Android apps are on. Find them in Bayu Store under F-Droid."
+msgstr "Aplikasi Android wis diuripake. Golekana ing Bayu Store ing F-Droid."
+
+#: src/welcome/main.cpp
+msgid "Setting up Android"
+msgstr "Nyiyapake Android"
+
+#: src/welcome/main.cpp
+msgid "Android could not be set up. Try again from Bayu Store."
+msgstr "Android ora bisa disiyapake. Cobanen maneh saka Bayu Store."
+
+#: src/welcome/main.cpp
+msgid "Dark mode"
+msgstr "Mode peteng"
+
+#: src/welcome/main.cpp
+msgid "Open Settings"
+msgstr "Bukak Setelan"
+
+#: src/welcome/main.cpp data/bayu-welcome.desktop
+msgid "Welcome"
+msgstr "Sugeng Rawuh"
+
+#: data/bayu-store.desktop
+msgid "App Store"
+msgstr "Toko Aplikasi"
+
+#: data/bayu-store.desktop
+msgid "Find and install apps from Flathub and F-Droid"
+msgstr "Temokake lan pasang aplikasi saka Flathub lan F-Droid"
+
+#: data/bayu-store.desktop
+msgid "apps;install;flatpak;flathub;fdroid;android;store;"
+msgstr "apps;install;flatpak;flathub;fdroid;android;store;aplikasi;pasang;toko;"
+
+#: data/bayu-welcome.desktop
+msgid "A short tour of IGN 26 and its apps"
+msgstr "Tur cekak IGN 26 lan aplikasiné"
+
+#: data/bayu-welcome.desktop
+msgid "tour;welcome;help;getting started;"
+msgstr "tur;sugeng rawuh;pitulung;miwiti;tour;welcome;help;getting started;"

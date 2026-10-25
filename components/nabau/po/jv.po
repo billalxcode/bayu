@@ -1,0 +1,1381 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: nabau\n"
+"Report-Msgid-Bugs-To: https://github.com/bayuos\n"
+"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: jv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/anaconda_backend.cpp
+msgid "Starting the installation backend"
+msgstr "Miwiti backend instalasi"
+
+#: src/anaconda_backend.cpp
+msgid "The installer needs administrator rights, which were not given."
+msgstr "Installer mbutuhake hak administrator, sing ora diwenehake."
+
+#: src/anaconda_backend.cpp
+msgid "The installation backend stopped unexpectedly. Its log is in /tmp/anaconda.log."
+msgstr "Backend instalasi mandheg dumadakan. Log-e ana ing /tmp/anaconda.log."
+
+#: src/anaconda_backend.cpp
+msgid "Cannot start the installation backend (pkexec is missing)."
+msgstr "Backend instalasi ora bisa diwiwiti (pkexec ora ana)."
+
+#: src/anaconda_backend.cpp
+msgid "This partition holds LVM or Btrfs volumes. Delete it to use its space."
+msgstr "Partisi iki isi volume LVM utawa Btrfs. Busak kanggo nggunakake ruwange."
+
+#: src/anaconda_backend.cpp
+msgid "This partition cannot be resized."
+msgstr "Partisi iki ora bisa diowahi ukurane."
+
+#: src/anaconda_backend.cpp
+msgid "Choose a disk first."
+msgstr "Pilih disk dhisik."
+
+#: src/anaconda_backend.cpp
+msgid "This disk already has a root (/) mount point."
+msgstr "Disk iki wis duwe titik mount root (/)."
+
+#: src/anaconda_backend.cpp
+msgid "There is not enough free space left for the system."
+msgstr "Ruang kosong ora cukup kanggo sistem."
+
+#: src/anaconda_backend.cpp
+msgid "This live system"
+msgstr "Sistem live iki"
+
+#: src/anaconda_backend.cpp
+msgid "The desktop on this media, as you see it now: Files, Terminal, Settings"
+msgstr "Desktop ing media iki, kaya sing katon saiki: Berkas, Terminal, Setelan"
+
+#: src/anaconda_backend.cpp
+msgid "Development Tools"
+msgstr "Piranti Pengembangan"
+
+#: src/anaconda_backend.cpp
+msgid "gcc, make, git, headers"
+msgstr "gcc, make, git, header"
+
+#: src/anaconda_backend.cpp
+msgid "Container Tools"
+msgstr "Piranti Kontainer"
+
+#: src/anaconda_backend.cpp
+msgid "podman, buildah, skopeo"
+msgstr "podman, buildah, skopeo"
+
+#: src/anaconda_backend.cpp
+msgid "RPM Development"
+msgstr "Pengembangan RPM"
+
+#: src/anaconda_backend.cpp
+msgid "rpmbuild, mock"
+msgstr "rpmbuild, mock"
+
+#: src/anaconda_backend.cpp
+msgid "Headless Management"
+msgstr "Manajemen Headless"
+
+#: src/anaconda_backend.cpp
+msgid "cockpit, remote administration"
+msgstr "cockpit, administrasi remot"
+
+#: src/anaconda_backend.cpp
+msgid "Scientific Support"
+msgstr "Dhukungan Ilmiah"
+
+#: src/anaconda_backend.cpp
+msgid "Math and science libraries"
+msgstr "Pustaka matematika lan sains"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "==> {path} <=="
+msgstr "==> {path} <=="
+
+#: src/anaconda_backend.cpp
+msgid "(cannot be read)"
+msgstr "(ora bisa diwaca)"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "Cannot connect to the installation backend at {address}."
+msgstr "Ora bisa nyambung menyang backend instalasi ing {address}."
+
+#: src/anaconda_backend.cpp
+msgid "Reading the disks"
+msgstr "Maca disk"
+
+#: src/anaconda_backend.cpp
+msgid "Lay out the disk first."
+msgstr "Atur disk dhisik."
+
+#: src/anaconda_backend.cpp
+msgid "Finishing the installed system"
+msgstr "Ngrampungake sistem sing wis dipasang"
+
+#: src/anaconda_backend.cpp
+msgid "Finishing the system did not complete; see /tmp/nabau-post.log"
+msgstr "Ngrampungake sistem ora rampung; deleng /tmp/nabau-post.log"
+
+#: src/anaconda_backend.cpp
+msgid "Complete"
+msgstr "Rampung"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "Wired · {name}"
+msgstr "Kabel · {name}"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "Connected · {rate}"
+msgstr "Nyambung · {rate}"
+
+#: src/network_manager.cpp
+msgid "Connected"
+msgstr "Nyambung"
+
+#: src/network_manager.cpp
+msgid "Cable connected · not set up"
+msgstr "Kabel disambungake · durung disetel"
+
+#: src/network_manager.cpp
+msgid "Cable unplugged"
+msgstr "Kabel dicopot"
+
+#: src/network_manager.cpp
+#, python-brace-format
+msgid "{security} · secured"
+msgstr "{security} · diamanake"
+
+#: src/network_manager.cpp
+msgid "Open network"
+msgstr "Jaringan mbukak"
+
+#: src/network_manager.cpp
+msgid "Personal hotspot"
+msgstr "Hotspot pribadi"
+
+#: src/network_manager.cpp
+msgid "NetworkManager is not running."
+msgstr "NetworkManager ora mlaku."
+
+#: src/ui/disk_editor.cpp
+msgid "unformatted"
+msgstr "durung diformat"
+
+#: src/ui/disk_editor.cpp
+msgid "encrypted"
+msgstr "ter-enkripsi"
+
+#: src/ui/disk_editor.cpp
+msgid "Free space"
+msgstr "Ruang kosong"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "From {min} to {max}"
+msgstr "Saka {min} nganti {max}"
+
+#: src/ui/disk_editor.cpp
+msgid "MOUNT POINTS"
+msgstr "TITIK MOUNT"
+
+#: src/ui/disk_editor.cpp
+msgid "PENDING CHANGES"
+msgstr "OWAH-OWAHAN SING TUNDHA"
+
+#: src/ui/disk_editor.cpp
+msgid "Reset all"
+msgstr "Reset kabeh"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "{size} free"
+msgstr "{size} kosong"
+
+#: src/ui/disk_editor.cpp
+msgid "Select a part of a disk above."
+msgstr "Pilih bagean disk ing ndhuwur."
+
+#: src/ui/disk_editor.cpp
+msgid "Too small to hold a mount point."
+msgstr "Cilik banget kanggo nyekel titik mount."
+
+#: src/ui/disk_editor.cpp
+msgid "Create the recommended layout here"
+msgstr "Gawe tata letak sing disaranake ing kene"
+
+#: src/ui/disk_editor.cpp
+msgid "or add a mount point yourself:"
+msgstr "utawa tambah titik mount dhewe:"
+
+#: src/ui/disk_editor.cpp
+msgid "Mount point"
+msgstr "Titik mount"
+
+#: src/ui/disk_editor.cpp
+msgid "Size"
+msgstr "Ukuran"
+
+#: src/ui/disk_editor.cpp
+msgid "File system"
+msgstr "Sistem berkas"
+
+#: src/ui/disk_editor.cpp
+msgid "Device type"
+msgstr "Jinis piranti"
+
+#: src/ui/disk_editor.cpp
+msgid "LVM"
+msgstr "LVM"
+
+#: src/ui/disk_editor.cpp
+msgid "LVM thin provisioning"
+msgstr "LVM thin provisioning"
+
+#: src/ui/disk_editor.cpp
+msgid "Btrfs"
+msgstr "Btrfs"
+
+#: src/ui/disk_editor.cpp
+msgid "Standard partition"
+msgstr "Partisi standar"
+
+#: src/ui/disk_editor.cpp
+msgid "Encrypt"
+msgstr "Enkripsi"
+
+#: src/ui/disk_editor.cpp
+msgid "Add mount point"
+msgstr "Tambah titik mount"
+
+#: src/ui/disk_editor.cpp src/ui/pages/review_page.cpp
+msgid "Device"
+msgstr "Piranti"
+
+#: src/ui/disk_editor.cpp
+msgid "Format"
+msgstr "Format"
+
+#: src/ui/disk_editor.cpp
+msgid "Label"
+msgstr "Label"
+
+#: src/ui/disk_editor.cpp src/ui/pages/destination_page.cpp
+msgid "none"
+msgstr "ora ana"
+
+#: src/ui/disk_editor.cpp
+msgid "State"
+msgstr "Status"
+
+#: src/ui/disk_editor.cpp
+msgid "on the disk now"
+msgstr "ana ing disk saiki"
+
+#: src/ui/disk_editor.cpp
+msgid "to be created"
+msgstr "arep digawe"
+
+#: src/ui/disk_editor.cpp
+msgid "Use…"
+msgstr "Gunakake…"
+
+#: src/ui/disk_editor.cpp
+msgid "Change…"
+msgstr "Ganti…"
+
+#: src/ui/disk_editor.cpp
+msgid "Resize…"
+msgstr "Owahi ukuran…"
+
+#: src/ui/disk_editor.cpp
+msgid "Delete"
+msgstr "Busak"
+
+#: src/ui/disk_editor.cpp
+msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
+msgstr "Isine volume LVM utawa Btrfs. Busak kanggo nggunakake ruwange."
+
+#: src/ui/disk_editor.cpp
+msgid "Volumes in it:"
+msgstr "Volume ing njerone:"
+
+#: src/ui/disk_editor.cpp
+msgid "USE THIS PARTITION"
+msgstr "GUNAKAKE PARTISI IKI"
+
+#: src/ui/disk_editor.cpp
+msgid "CHANGE THIS MOUNT POINT"
+msgstr "GANTI TITIK MOUNT IKI"
+
+#: src/ui/disk_editor.cpp
+msgid "Format it (erases what is on it)"
+msgstr "Format (mbusak isine)"
+
+#: src/ui/disk_editor.cpp src/ui/pages/install_page.cpp
+#: src/ui/pages/network_page.cpp
+msgid "Cancel"
+msgstr "Batal"
+
+#: src/ui/disk_editor.cpp
+msgid "Apply"
+msgstr "Terapake"
+
+#: src/ui/disk_editor.cpp
+msgid "RESIZE"
+msgstr "OWAHI UKURAN"
+
+#: src/ui/disk_editor.cpp
+msgid "Shrinking keeps the data on it and frees the rest of the space for the new system."
+msgstr "Nyilikake njaga datane lan mbebasake ruang liyane kanggo sistem anyar."
+
+#: src/ui/disk_editor.cpp
+msgid "The size the new partition will have."
+msgstr "Ukuran sing bakal diduweni partisi anyar."
+
+#: src/ui/disk_editor.cpp
+msgid "Resize"
+msgstr "Owahi Ukuran"
+
+#: src/ui/disk_editor.cpp
+#, python-brace-format
+msgid "Delete {name}?"
+msgstr "Busak {name}?"
+
+#: src/ui/disk_editor.cpp
+msgid "Everything on it is lost when the installation starts. Until then, Reset all brings it back."
+msgstr "Kabeh sing ana ing njerone ilang nalika instalasi diwiwiti. Nganti kuwi, Reset kabeh bisa mbalekake."
+
+#: src/ui/disk_editor.cpp
+msgid "The planned partition is removed from the layout."
+msgstr "Partisi sing direncanakake dibusak saka tata letak."
+
+#: src/ui/disk_editor.cpp
+msgid "That change could not be made"
+msgstr "Owah-owahan kuwi ora bisa ditindakake"
+
+#: src/ui/disk_editor.cpp
+msgid "No mount points yet. Pick free space above and add “/”, or create the recommended layout."
+msgstr "Durung ana titik mount. Pilih ruang kosong ing ndhuwur lan tambah “/”, utawa gawe tata letak sing disaranake."
+
+#: src/ui/disk_editor.cpp
+msgid "Nothing changes on the disks yet."
+msgstr "Durung ana sing owah ing disk."
+
+#: src/ui/disk_editor.cpp src/ui/pages/review_page.cpp
+msgid "Check before installing"
+msgstr "Priksa sadurunge masang"
+
+#: src/ui/disk_editor.cpp
+msgid "This layout cannot be installed"
+msgstr "Tata letak iki ora bisa dipasang"
+
+#: src/ui/installer.cpp
+msgid "Guided installation"
+msgstr "Instalasi terpandu"
+
+#: src/ui/installer.cpp
+msgid "SETUP"
+msgstr "SETEL"
+
+#: src/ui/installer.cpp
+msgid "All steps complete"
+msgstr "Kabeh langkah rampung"
+
+#: src/ui/installer.cpp
+#, python-brace-format
+msgid "Step {n} of {count}"
+msgstr "Langkah {n} saka {count}"
+
+#: src/ui/installer.cpp
+msgid "F1 Help   ·   F12 Console"
+msgstr "F1 Bantuan   ·   F12 Konsol"
+
+#: src/ui/installer.cpp
+msgid "Back"
+msgstr "Bali"
+
+#: src/ui/installer.cpp
+msgid "Continue"
+msgstr "Lanjut"
+
+#: src/ui/installer.cpp
+msgid "Preparing the installer"
+msgstr "Nyiapake installer"
+
+#: src/ui/installer.cpp src/ui/pages/install_page.cpp
+msgid "Quit"
+msgstr "Metu"
+
+#: src/ui/installer.cpp
+msgid "The installer cannot start"
+msgstr "Installer ora bisa diwiwiti"
+
+#: src/ui/installer.cpp
+msgid "Help"
+msgstr "Bantuan"
+
+#: src/ui/installer.cpp
+msgid "Installation log"
+msgstr "Log instalasi"
+
+#: src/ui/installer.cpp
+msgid "Open a terminal"
+msgstr "Bukak terminal"
+
+#: src/ui/installer.cpp
+msgid "Quit the installer"
+msgstr "Metu saka installer"
+
+#: src/ui/installer.cpp
+#, python-brace-format
+msgid "STEP {n} — {name}"
+msgstr "LANGKAH {n} — {name}"
+
+#: src/ui/installer.cpp
+msgid "Quit the installer?"
+msgstr "Metu saka installer?"
+
+#: src/ui/installer.cpp
+msgid "Nothing has been written to your disks yet."
+msgstr "Durung ana sing ditulis ing disk sampeyan."
+
+#: src/ui/installer.cpp
+msgid "The installation is running; stopping it now leaves the disk unusable until you install again."
+msgstr "Instalasi lagi mlaku; mandhegake saiki gawe disk ora bisa digunakake nganti sampeyan masang maneh."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a user name."
+msgstr "Pilih jeneng pangguna."
+
+#: src/ui/pages/account_page.cpp
+msgid "At most 32 characters."
+msgstr "Paling akeh 32 karakter."
+
+#: src/ui/pages/account_page.cpp
+msgid "Start with a lower-case letter."
+msgstr "Wiwiti nganggo aksara cilik."
+
+#: src/ui/pages/account_page.cpp
+msgid "Use lower-case letters, digits, “-” and “_” only."
+msgstr "Gunakake aksara cilik, angka, “-” lan “_” wae."
+
+#: src/ui/pages/account_page.cpp
+msgid "That name belongs to the system."
+msgstr "Jeneng kuwi darbeke sistem."
+
+#: src/ui/pages/account_page.cpp
+msgid "Profile picture"
+msgstr "Foto profil"
+
+#: src/ui/pages/account_page.cpp
+msgid "Generated from your initials · click to change"
+msgstr "Digawe saka inisial sampeyan · klik kanggo ngganti"
+
+#: src/ui/pages/account_page.cpp
+msgid "Full name"
+msgstr "Jeneng lengkap"
+
+#: src/ui/pages/account_page.cpp
+msgid "User name"
+msgstr "Jeneng pangguna"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/network_page.cpp
+msgid "Password"
+msgstr "Tembung sandhi"
+
+#: src/ui/pages/account_page.cpp
+msgid "Confirm password"
+msgstr "Konfirmasi tembung sandhi"
+
+#: src/ui/pages/account_page.cpp
+msgid "Four random words beat one short complex password"
+msgstr "Patang tembung acak luwih becik tinimbang siji tembung sandhi cendhak sing rumit"
+
+#: src/ui/pages/account_page.cpp
+msgid "PERMISSIONS"
+msgstr "IJIN"
+
+#: src/ui/pages/account_page.cpp
+msgid "Make this user an administrator"
+msgstr "Dadekake pangguna iki administrator"
+
+#: src/ui/pages/account_page.cpp
+msgid "Require a password to sign in"
+msgstr "Mbutuhake tembung sandhi kanggo mlebu"
+
+#: src/ui/pages/account_page.cpp
+msgid "Disable only on a physically secure machine"
+msgstr "Pateni mung ing mesin sing aman sacara fisik"
+
+#: src/ui/pages/account_page.cpp
+msgid "ROOT ACCOUNT"
+msgstr "AKUN ROOT"
+
+#: src/ui/pages/account_page.cpp
+msgid "Lock the root account"
+msgstr "Kunci akun root"
+
+#: src/ui/pages/account_page.cpp
+msgid "Administer with sudo instead — safer by default"
+msgstr "Administrasi nganggo sudo tinimbang - luwih aman kanthi bawaan"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/destination_page.cpp
+msgid "recommended"
+msgstr "disaranake"
+
+#: src/ui/pages/account_page.cpp
+msgid "Set a root password"
+msgstr "Setel tembung sandhi root"
+
+#: src/ui/pages/account_page.cpp
+msgid "Enables direct root sign-in on console and SSH"
+msgstr "Ngaktifake mlebu root langsung ing konsol lan SSH"
+
+#: src/ui/pages/account_page.cpp
+msgid "Root password"
+msgstr "Tembung sandhi root"
+
+#: src/ui/pages/account_page.cpp
+msgid "Confirm root password"
+msgstr "Konfirmasi tembung sandhi root"
+
+#: src/ui/pages/account_page.cpp src/ui/pages/review_page.cpp
+msgid "Account"
+msgstr "Akun"
+
+#: src/ui/pages/account_page.cpp
+msgid "Create your account."
+msgstr "Gawe akun sampeyan."
+
+#: src/ui/pages/account_page.cpp
+msgid "This is the account you will sign in with on first boot. Pick a strong passphrase — it also unlocks your encrypted disk."
+msgstr "Iki akun sing bakal sampeyan gunakake kanggo mlebu nalika boot pisanan. Pilih passphrase sing kuwat - uga mbukak disk ter-enkripsi sampeyan."
+
+#: src/ui/pages/account_page.cpp
+msgid "This is the account you will sign in with on first boot. Pick a strong passphrase you will remember."
+msgstr "Iki akun sing bakal sampeyan gunakake kanggo mlebu nalika boot pisanan. Pilih passphrase sing kuwat sing bisa sampeyan elingi."
+
+#: src/ui/pages/account_page.cpp
+msgid "Enter your full name."
+msgstr "Lebokna jeneng lengkap sampeyan."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a password."
+msgstr "Pilih tembung sandhi."
+
+#: src/ui/pages/account_page.cpp
+msgid "The passwords do not match."
+msgstr "Tembung sandhi ora padha."
+
+#: src/ui/pages/account_page.cpp
+msgid "A disk passphrase needs at least 8 characters."
+msgstr "Passphrase disk mbutuhake paling sethithik 8 karakter."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a root password."
+msgstr "Pilih tembung sandhi root."
+
+#: src/ui/pages/account_page.cpp
+msgid "The root passwords do not match."
+msgstr "Tembung sandhi root ora padha."
+
+#: src/ui/pages/account_page.cpp
+msgid "With root locked, this user must be an administrator."
+msgstr "Yen root dikunci, pangguna iki kudu dadi administrator."
+
+#: src/ui/pages/account_page.cpp
+msgid "this user"
+msgstr "pangguna iki"
+
+#: src/ui/pages/account_page.cpp
+#, python-brace-format
+msgid "Adds {user} to the wheel group and allows sudo"
+msgstr "Nambahake {user} menyang grup wheel lan ngidini sudo"
+
+#: src/ui/pages/account_page.cpp
+#, python-brace-format
+msgid "{n} character"
+msgid_plural "{n} characters"
+msgstr[0] "{n} karakter"
+
+#: src/ui/pages/account_page.cpp
+msgid "Your passphrase unlocks LUKS2 at every boot. It is never written to the kickstart file or to installation logs."
+msgstr "Passphrase sampeyan mbukak LUKS2 saben boot. Ora tau ditulis ing berkas kickstart utawa log instalasi."
+
+#: src/ui/pages/account_page.cpp
+msgid "The password is stored only as a hash on the new system and never written to the installation logs."
+msgstr "Tembung sandhi mung disimpen minangka hash ing sistem anyar lan ora tau ditulis ing log instalasi."
+
+#: src/ui/pages/account_page.cpp
+msgid "Choose a profile picture"
+msgstr "Pilih foto profil"
+
+#: src/ui/pages/account_page.cpp
+msgid "Images (*.png *.jpg *.jpeg *.webp *.svg)"
+msgstr "Gambar (*.png *.jpg *.jpeg *.webp *.svg)"
+
+#: src/ui/pages/account_page.cpp
+msgid "Click to choose another"
+msgstr "Klik kanggo milih liyane"
+
+#: src/ui/pages/destination_page.cpp
+msgid "installation media"
+msgstr "media instalasi"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{system} detected"
+msgstr "{system} ditemokake"
+
+#: src/ui/pages/destination_page.cpp
+msgid "empty"
+msgstr "kosong"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{n} partition"
+msgid_plural "{n} partitions"
+msgstr[0] "{n} partisi"
+
+#: src/ui/pages/destination_page.cpp
+msgid "the data on it"
+msgstr "data ing njerone"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{disk} already holds data"
+msgstr "{disk} wis isi data"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Erase everything on {path}"
+msgstr "Busak kabeh ing {path}"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Install alongside {system}"
+msgstr "Pasang bareng {system}"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Install alongside {system} (it cannot be shrunk now)"
+msgstr "Pasang bareng {system} (saiki ora bisa dicilikake)"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Use the free space only ({size})"
+msgstr "Gunakake ruang kosong wae ({size})"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "{system}: {keep}   ·   {product}: {new}"
+msgstr "{system}: {keep}   ·   {product}: {new}"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LOCAL STANDARD DISKS"
+msgstr "DISK STANDAR LOKAL"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Add iSCSI, FCoE or multipath device"
+msgstr "Tambah piranti iSCSI, FCoE utawa multipath"
+
+#: src/ui/pages/destination_page.cpp
+msgid "STORAGE CONFIGURATION"
+msgstr "KONFIGURASI PANYIMPENAN"
+
+#: src/ui/pages/destination_page.cpp src/ui/pages/review_page.cpp
+msgid "Automatic"
+msgstr "Otomatis"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Laid out for you, safely"
+msgstr "Diatur kanggo sampeyan, kanthi aman"
+
+#: src/ui/pages/destination_page.cpp src/ui/pages/review_page.cpp
+msgid "Custom"
+msgstr "Kustom"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Your own mount points"
+msgstr "Titik mount dhewe"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Advanced"
+msgstr "Lanjutan"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LVM or Btrfs volumes, by hand"
+msgstr "Volume LVM utawa Btrfs, kanthi manual"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Encrypt my data"
+msgstr "Enkripsi data kula"
+
+#: src/ui/pages/destination_page.cpp
+msgid "LUKS2 · passphrase at next step"
+msgstr "LUKS2 · passphrase ing langkah sabanjure"
+
+#: src/ui/pages/destination_page.cpp
+msgid "RESULTING LAYOUT"
+msgstr "TATA LETAK HASIL"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Destination"
+msgstr "Tujuan"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Lay out the disk yourself."
+msgstr "Atur disk dhewe."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Where should it live?"
+msgstr "Arep dipasang ing ngendi?"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Click a part of a disk to use it, resize it or delete it. Changes are only planned here; nothing is written until you confirm on the review screen."
+msgstr "Klik bagean disk kanggo nggunakake, ngowahi ukuran utawa mbusak. Owah-owahan mung direncanakake ing kene; ora ana sing ditulis nganti sampeyan konfirmasi ing layar tinjauan."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Pick a disk, then decide how it is laid out. Nothing is written to any device until you confirm on the review screen."
+msgstr "Pilih disk, banjur tentokake carane diatur. Ora ana sing ditulis ing piranti apa wae nganti sampeyan konfirmasi ing layar tinjauan."
+
+#: src/ui/pages/destination_page.cpp
+msgid ""
+"Automatic lays the system out for you: a boot partition, the system, your files and swap. If the disk already holds Windows or another system, you can install beside it; drag the slider to share the space.\n"
+"\n"
+"Custom opens the disk editor: click free space to add a mount point (at least “/”), or click a partition to use it, resize it or delete it. Advanced also offers LVM, RAID and Btrfs volumes.\n"
+"\n"
+"Nothing is written to the disks until you begin the installation on the review screen."
+msgstr ""
+"Otomatis ngatur sistem kanggo sampeyan: partisi boot, sistem, berkas sampeyan lan swap. Yen disk wis isi Windows utawa sistem liyane, sampeyan bisa masang ing jejere; seret slider kanggo mbagi ruang.\n"
+"\n"
+"Kustom mbukak editor disk: klik ruang kosong kanggo nambah titik mount (paling ora “/”), utawa klik partisi kanggo nggunakake, ngowahi ukuran utawa mbusak. Lanjutan uga nawakake volume LVM, RAID lan Btrfs.\n"
+"\n"
+"Ora ana sing ditulis ing disk nganti sampeyan miwiti instalasi ing layar tinjauan."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Selected"
+msgstr "Dipilih"
+
+#: src/ui/pages/destination_page.cpp
+msgid "1 disk"
+msgstr "1 disk"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Capacity"
+msgstr "Kapasitas"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Free"
+msgstr "Kosong"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Reclaimable"
+msgstr "Bisa dijaluk maneh"
+
+#: src/ui/pages/destination_page.cpp
+msgid "You lay the disk out yourself on the next screen."
+msgstr "Sampeyan ngatur disk dhewe ing layar sabanjure."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Working out the layout…"
+msgstr "Ngitung tata letak…"
+
+#: src/ui/pages/destination_page.cpp
+msgid "kept"
+msgstr "disimpen"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Specialized disks"
+msgstr "Disk khusus"
+
+#: src/ui/pages/destination_page.cpp
+msgid "iSCSI, FCoE and multipath devices are set up from the network installation image, which has the tools to discover them. This live system installs to the disks attached to this computer."
+msgstr "Piranti iSCSI, FCoE lan multipath disetel saka image instalasi jaringan, sing duwe piranti kanggo nemokake. Sistem live iki masang menyang disk sing disambungake menyang komputer iki."
+
+#: src/ui/pages/install_page.cpp
+msgid "WHILE YOU WAIT"
+msgstr "NALIKA NENGGAK"
+
+#: src/ui/pages/install_page.cpp
+msgid "Estimated remaining"
+msgstr "Prakiraan isih"
+
+#: src/ui/pages/install_page.cpp
+msgid "Starting the installation…"
+msgstr "Miwiti instalasi…"
+
+#: src/ui/pages/install_page.cpp
+msgid "Ten years of updates"
+msgstr "Sepuluh taun nganyari"
+
+#: src/ui/pages/install_page.cpp
+msgid "Every release is supported until 2035, with security errata published alongside upstream. Switch between minor versions without reinstalling."
+msgstr "Saben rilis didhukung nganti 2035, kanthi errata keamanan diterbitake bareng karo upstream. Ngalih antarane versi minor tanpa masang maneh."
+
+#: src/ui/pages/install_page.cpp
+msgid "A desktop of its own"
+msgstr "Desktop dhewe"
+
+#: src/ui/pages/install_page.cpp
+msgid "Bayu brings Files, Terminal, Settings and a dock that stays out of your way, all drawn by one toolkit."
+msgstr "Bayu nggawa Berkas, Terminal, Setelan lan dock sing ora ngganggu, kabeh digambar dening siji toolkit."
+
+#: src/ui/pages/install_page.cpp
+msgid "Android apps, when you want them"
+msgstr "Aplikasi Android, yen sampeyan butuh"
+
+#: src/ui/pages/install_page.cpp
+msgid "Lapis runs Android apps beside your desktop ones. It is installed and stays off until you turn it on."
+msgstr "Lapis mlakokake aplikasi Android ing jejere aplikasi desktop. Wis dipasang lan mati nganti sampeyan urupake."
+
+#: src/ui/pages/install_page.cpp
+msgid "Safe by default"
+msgstr "Aman kanthi bawaan"
+
+#: src/ui/pages/install_page.cpp
+msgid "SELinux, a firewall and signed packages from the start; full-disk encryption when you ask for it."
+msgstr "SELinux, firewall lan paket sing ditandatangani wiwit awal; enkripsi disk kebak yen sampeyan njaluk."
+
+#: src/ui/pages/install_page.cpp
+msgid "Install"
+msgstr "Pasang"
+
+#: src/ui/pages/install_page.cpp
+msgid "INSTALLATION COMPLETE"
+msgstr "INSTALASI RAMPUNG"
+
+#: src/ui/pages/install_page.cpp
+msgid "INSTALLATION FAILED"
+msgstr "INSTALASI GAGAL"
+
+#: src/ui/pages/install_page.cpp
+msgid "STEP 08 — INSTALLING"
+msgstr "LANGKAH 08 — MASANG"
+
+#: src/ui/pages/install_page.cpp
+msgid "You're all set."
+msgstr "Wis rampung kabeh."
+
+#: src/ui/pages/install_page.cpp
+msgid "The installation stopped."
+msgstr "Instalasi mandheg."
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "Installing {product}."
+msgstr "Masang {product}."
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "{product} is on your disk. Remove the installation media, restart, and sign in with the account you just created."
+msgstr "{product} wis ana ing disk sampeyan. Copot media instalasi, wiwiti maneh, lan mlebu nganggo akun sing lagi wae digawe."
+
+#: src/ui/pages/install_page.cpp
+msgid "Nothing more is written. The log has the details; you can start the installer again."
+msgstr "Ora ana sing ditulis maneh. Log duwe rincian; sampeyan bisa miwiti installer maneh."
+
+#: src/ui/pages/install_page.cpp
+msgid "Everything is set. Sit back — the installer is writing packages to disk and will tell you when it is safe to restart."
+msgstr "Wis siyap kabeh. Lungguh santai — installer lagi nulis paket menyang disk lan bakal ngandhani yen wis aman kanggo miwiti maneh."
+
+#: src/ui/pages/install_page.cpp
+msgid "The installation could not finish"
+msgstr "Instalasi ora bisa rampung"
+
+#: src/ui/pages/install_page.cpp
+msgid "Install time"
+msgstr "Wektu instalasi"
+
+#: src/ui/pages/install_page.cpp
+msgid "Packages written"
+msgstr "Paket sing ditulis"
+
+#: src/ui/pages/install_page.cpp
+msgid "None"
+msgstr "Ora ana"
+
+#: src/ui/pages/install_page.cpp
+msgid "Disk encryption"
+msgstr "Enkripsi disk"
+
+#: src/ui/pages/install_page.cpp
+msgid "Remove the USB installation media before restarting."
+msgstr "Copot media instalasi USB sadurunge miwiti maneh."
+
+#: src/ui/pages/install_page.cpp
+#, python-brace-format
+msgid "Sign in as {user}; your settings start fresh."
+msgstr "Mlebu minangka {user}; setelan sampeyan diwiwiti saka awal."
+
+#: src/ui/pages/install_page.cpp
+msgid "Run sudo dnf upgrade to pull any errata published since this ISO."
+msgstr "Jalanake sudo dnf upgrade kanggo njupuk errata sing diterbitake wiwit ISO iki."
+
+#: src/ui/pages/install_page.cpp
+msgid "View log"
+msgstr "Deleng log"
+
+#: src/ui/pages/install_page.cpp
+msgid "Installing…"
+msgstr "Masang…"
+
+#: src/ui/pages/install_page.cpp
+msgid "View installation log"
+msgstr "Deleng log instalasi"
+
+#: src/ui/pages/install_page.cpp
+msgid "Restart now"
+msgstr "Wiwiti maneh saiki"
+
+#: src/ui/pages/language_page.cpp
+msgid "REGIONAL FORMAT"
+msgstr "FORMAT REGIONAL"
+
+#: src/ui/pages/language_page.cpp
+msgid "Preview"
+msgstr "Pratinjau"
+
+#: src/ui/pages/language_page.cpp
+#, python-brace-format
+msgid "Search {n} languages"
+msgstr "Goleki {n} basa"
+
+#: src/ui/pages/language_page.cpp src/ui/pages/review_page.cpp
+msgid "Language"
+msgstr "Basa"
+
+#: src/ui/pages/language_page.cpp
+msgid "Welcome. Let's pick your language."
+msgstr "Sugeng rawuh. Ayo pilih basa sampeyan."
+
+#: src/ui/pages/language_page.cpp
+msgid "This language will be used during installation and set as the system default. You can change it later in Settings."
+msgstr "Basa iki bakal digunakake nalika instalasi lan disetel minangka bawaan sistem. Sampeyan bisa ngganti mengko ing Setelan."
+
+#: src/ui/pages/language_page.cpp
+msgid "Date"
+msgstr "Tanggal"
+
+#: src/ui/pages/language_page.cpp
+msgid "Time"
+msgstr "Wektu"
+
+#: src/ui/pages/language_page.cpp
+msgid "Numbers"
+msgstr "Angka"
+
+#: src/ui/pages/language_page.cpp
+msgid "Currency"
+msgstr "Mata uang"
+
+#: src/ui/pages/localization_page.cpp
+msgid "KEYBOARD LAYOUT"
+msgstr "TATA LETAK PAPAN TOMBOL"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Test the layout"
+msgstr "Coba tata letak"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Type here to test the layout"
+msgstr "Ketik ing kene kanggo nyoba tata letak"
+
+#: src/ui/pages/localization_page.cpp
+msgid "TIME & DATE"
+msgstr "WEKTU & TANGGAL"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Region"
+msgstr "Wilayah"
+
+#: src/ui/pages/localization_page.cpp
+msgid "City"
+msgstr "Kutha"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Network time (NTP)"
+msgstr "Wektu jaringan (NTP)"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Keep the clock in sync automatically"
+msgstr "Tansah sinkron jam kanthi otomatis"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Detect time zone from network"
+msgstr "Deteksi zona wektu saka jaringan"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Uses your IP address, never your location"
+msgstr "Nggunakake alamat IP sampeyan, ora tau panggonan sampeyan"
+
+#: src/ui/pages/localization_page.cpp src/ui/pages/review_page.cpp
+msgid "Localization"
+msgstr "Lokalisasi"
+
+#: src/ui/pages/localization_page.cpp
+msgid "Keyboard and time."
+msgstr "Papan tombol lan wektu."
+
+#: src/ui/pages/localization_page.cpp
+msgid "Choose the layout you actually type with and confirm your time zone. Both take effect immediately, including on this screen."
+msgstr "Pilih tata letak sing sampeyan gunakake kanggo ngetik lan konfirmasi zona wektu. Loro-lorone langsung ditrapake, kalebu ing layar iki."
+
+#: src/ui/pages/localization_page.cpp
+msgid "Network time is off · the clock is set by hand"
+msgstr "Wektu jaringan mati · jam disetel kanthi manual"
+
+#: src/ui/pages/localization_page.cpp
+#, python-brace-format
+msgid "{server} · synchronised"
+msgstr "{server} · sinkron"
+
+#: src/ui/pages/localization_page.cpp
+#, python-brace-format
+msgid "{server} · waits for a connection"
+msgstr "{server} · ngenteni sambungan"
+
+#: src/ui/pages/network_page.cpp
+msgid "AVAILABLE CONNECTIONS"
+msgstr "SAMBUNGAN SING ANA"
+
+#: src/ui/pages/network_page.cpp
+msgid "HOST IDENTITY"
+msgstr "IDENTITAS HOST"
+
+#: src/ui/pages/network_page.cpp src/ui/pages/review_page.cpp
+msgid "Host name"
+msgstr "Jeneng host"
+
+#: src/ui/pages/network_page.cpp
+msgid "Connect automatically"
+msgstr "Sambungake otomatis"
+
+#: src/ui/pages/network_page.cpp
+msgid "Bring this interface up at every boot"
+msgstr "Urupake antarmuka iki saben boot"
+
+#: src/ui/pages/network_page.cpp src/ui/pages/review_page.cpp
+msgid "Network"
+msgstr "Jaringan"
+
+#: src/ui/pages/network_page.cpp
+msgid "Get connected."
+msgstr "Sambungake."
+
+#: src/ui/pages/network_page.cpp
+msgid "A connection is optional, but it lets the installer fetch updates, verify packages and sync the clock while you continue."
+msgstr "Sambungan iku opsional, nanging ngidini installer njupuk nganyari, verifikasi paket lan sinkron jam nalika sampeyan nerusake."
+
+#: src/ui/pages/network_page.cpp
+msgid "Secure Boot enabled · packages verified with GPG"
+msgstr "Secure Boot aktif · paket diverifikasi nganggo GPG"
+
+#: src/ui/pages/network_page.cpp
+msgid "Packages verified with GPG"
+msgstr "Paket diverifikasi nganggo GPG"
+
+#: src/ui/pages/network_page.cpp
+msgid "Connecting…"
+msgstr "Nyambung…"
+
+#: src/ui/pages/network_page.cpp
+msgid "IPv4 address"
+msgstr "Alamat IPv4"
+
+#: src/ui/pages/network_page.cpp
+msgid "Gateway"
+msgstr "Gateway"
+
+#: src/ui/pages/network_page.cpp
+msgid "DNS"
+msgstr "DNS"
+
+#: src/ui/pages/network_page.cpp
+msgid "Link speed"
+msgstr "Kecepatan link"
+
+#: src/ui/pages/network_page.cpp
+msgid "Hardware"
+msgstr "Hardware"
+
+#: src/ui/pages/network_page.cpp
+msgid "Status"
+msgstr "Status"
+
+#: src/ui/pages/network_page.cpp
+msgid "Not connected"
+msgstr "Ora nyambung"
+
+#: src/ui/pages/network_page.cpp
+#, python-brace-format
+msgid "Join “{name}”"
+msgstr "Gabung ing “{name}”"
+
+#: src/ui/pages/network_page.cpp
+msgid "Enter the network's password."
+msgstr "Lebokna tembung sandhi jaringan."
+
+#: src/ui/pages/network_page.cpp
+msgid "Join"
+msgstr "Gabung"
+
+#: src/ui/pages/network_page.cpp
+msgid "Could not connect"
+msgstr "Ora bisa nyambung"
+
+#: src/ui/pages/review_page.cpp
+msgid "SUMMARY"
+msgstr "RINGKESAN"
+
+#: src/ui/pages/review_page.cpp
+msgid "TARGET"
+msgstr "TARGET"
+
+#: src/ui/pages/review_page.cpp
+msgid "Storage"
+msgstr "Panyimpenan"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "Software"
+msgstr "Piranti lunak"
+
+#: src/ui/pages/review_page.cpp
+msgid "Review"
+msgstr "Tinjau"
+
+#: src/ui/pages/review_page.cpp
+msgid "Checking the plan…"
+msgstr "Mriksa rencana…"
+
+#: src/ui/pages/review_page.cpp
+msgid "Everything checks out."
+msgstr "Kabeh wis bener."
+
+#: src/ui/pages/review_page.cpp
+msgid "Something needs a look."
+msgstr "Ana sing perlu dideleng."
+
+#: src/ui/pages/review_page.cpp
+msgid "The disk layout cannot be installed as it is. Edit the storage settings and come back here."
+msgstr "Tata letak disk ora bisa dipasang kaya mangkene. Sunting setelan panyimpenan lan bali ing kene."
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — after you begin, the partitions you deleted are erased."
+msgstr "Durung ana sing ditulis. Deleng sepisan maneh — sawise miwiti, partisi sing sampeyan busak bakal dibusak."
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — what else is on the disk is kept."
+msgstr "Durung ana sing ditulis. Deleng sepisan maneh — apa wae liyane ing disk bakal disimpen."
+
+#: src/ui/pages/review_page.cpp
+msgid "Nothing has been written yet. Take one last look — after you begin, the selected disk is reformatted."
+msgstr "Durung ana sing ditulis. Deleng sepisan maneh — sawise miwiti, disk sing dipilih bakal diformat ulang."
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{n} item"
+msgid_plural "{n} items"
+msgstr[0] "{n} item"
+
+#: src/ui/pages/review_page.cpp
+msgid "Begin installation"
+msgstr "Wiwiti instalasi"
+
+#: src/ui/pages/review_page.cpp
+msgid "Keyboard"
+msgstr "Papan tombol"
+
+#: src/ui/pages/review_page.cpp
+msgid "Time zone"
+msgstr "Zona wektu"
+
+#: src/ui/pages/review_page.cpp
+msgid "not connected"
+msgstr "ora nyambung"
+
+#: src/ui/pages/review_page.cpp
+msgid "Connection"
+msgstr "Sambungan"
+
+#: src/ui/pages/review_page.cpp
+msgid "IPv4"
+msgstr "IPv4"
+
+#: src/ui/pages/review_page.cpp
+msgid "User"
+msgstr "Pangguna"
+
+#: src/ui/pages/review_page.cpp
+msgid "Administrator"
+msgstr "Administrator"
+
+#: src/ui/pages/review_page.cpp
+msgid "yes · wheel"
+msgstr "ya · wheel"
+
+#: src/ui/pages/review_page.cpp
+msgid "no"
+msgstr "ora"
+
+#: src/ui/pages/review_page.cpp
+msgid "Root account"
+msgstr "Akun root"
+
+#: src/ui/pages/review_page.cpp
+msgid "locked"
+msgstr "dikunci"
+
+#: src/ui/pages/review_page.cpp
+msgid "password set"
+msgstr "tembung sandhi disetel"
+
+#: src/ui/pages/review_page.cpp
+msgid "Scheme"
+msgstr "Skema"
+
+#: src/ui/pages/review_page.cpp
+msgid "Encryption"
+msgstr "Enkripsi"
+
+#: src/ui/pages/review_page.cpp
+msgid "LUKS2 enabled"
+msgstr "LUKS2 aktif"
+
+#: src/ui/pages/review_page.cpp
+msgid "off"
+msgstr "mati"
+
+#: src/ui/pages/review_page.cpp
+msgid "Layout"
+msgstr "Tata letak"
+
+#: src/ui/pages/review_page.cpp
+msgid "Environment"
+msgstr "Lingkungan"
+
+#: src/ui/pages/review_page.cpp
+msgid "Add-ons"
+msgstr "Add-on"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{n} selected"
+msgid_plural "{n} selected"
+msgstr[0] "{n} dipilih"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "Packages"
+msgstr "Paket"
+
+#: src/ui/pages/review_page.cpp
+msgid "Download"
+msgstr "Undhuh"
+
+#: src/ui/pages/review_page.cpp src/ui/pages/software_page.cpp
+msgid "nothing"
+msgstr "ora ana"
+
+#: src/ui/pages/review_page.cpp
+msgid "The disk layout cannot be installed"
+msgstr "Tata letak disk ora bisa dipasang"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "{disk} will be erased"
+msgstr "{disk} bakal dibusak"
+
+#: src/ui/pages/review_page.cpp
+#, python-brace-format
+msgid "All {size} on this device is reformatted. Other disks are left untouched."
+msgstr "Kabeh {size} ing piranti iki diformat ulang. Disk liyane ora disenggol."
+
+#: src/ui/pages/review_page.cpp
+msgid "Partitions will be deleted"
+msgstr "Partisi bakal dibusak"
+
+#: src/ui/pages/review_page.cpp
+msgid "What the custom layout deletes is lost once the installation starts. Edit the storage to check the pending changes."
+msgstr "Sing dibusak dening tata letak kustom ilang yen instalasi wis diwiwiti. Sunting panyimpenan kanggo mriksa owah-owahan sing tundha."
+
+#: src/ui/pages/review_page.cpp
+msgid "Your existing data is kept"
+msgstr "Data sampeyan sing ana disimpen"
+
+#: src/ui/pages/review_page.cpp
+msgid "Only the space chosen on the destination step is changed."
+msgstr "Mung ruang sing dipilih ing langkah tujuan sing diowahi."
+
+#: src/ui/pages/software_page.cpp
+msgid "BASE ENVIRONMENT"
+msgstr "LINGKUNGAN DASAR"
+
+#: src/ui/pages/software_page.cpp
+msgid "Choose what to install."
+msgstr "Pilih sing arep dipasang."
+
+#: src/ui/pages/software_page.cpp
+msgid "Start from a base environment, then add only what you need. You can install or remove anything later with dnf."
+msgstr "Wiwiti saka lingkungan dasar, banjur tambah mung sing dibutuhake. Sampeyan bisa masang utawa mbusak apa wae mengko nganggo dnf."
+
+#: src/ui/pages/software_page.cpp
+msgid "Installing from this live system"
+msgstr "Masang saka sistem live iki"
+
+#: src/ui/pages/software_page.cpp
+msgid "The live system is copied to the disk as it is. The other environments come from the network installation image."
+msgstr "Sistem live disalin menyang disk kaya sing ana. Lingkungan liyane teka saka image instalasi jaringan."
+
+#: src/ui/pages/software_page.cpp
+#, python-brace-format
+msgid "ADD-ONS FOR {name}"
+msgstr "ADD-ON KANGGO {name}"
+
+#: src/ui/pages/software_page.cpp
+msgid "Add-ons are downloaded: connect to a network to choose them."
+msgstr "Add-on diundhuh: sambungake menyang jaringan kanggo milih."
+
+#: src/ui/pages/software_page.cpp
+msgid "Download size"
+msgstr "Ukuran undhuhan"
+
+#: src/ui/pages/software_page.cpp
+msgid "Installed size"
+msgstr "Ukuran sing dipasang"
+
+#: src/ui/pages/software_page.cpp
+msgid "Est. install time"
+msgstr "Prakiraan wektu instalasi"
+
+#: src/ui/pages/software_page.cpp
+#, python-brace-format
+msgid "~{n} min"
+msgstr "~{n} menit"
+
+#: src/ui/widgets.cpp
+msgid "Edit"
+msgstr "Sunting"
+
+#: data/nabau.desktop
+msgid "Nabau"
+msgstr "Nabau"
+
+#: data/nabau.desktop
+msgid "Install to Disk"
+msgstr "Pasang menyang Disk"
+
+#: data/nabau.desktop
+msgid "Install this system on the computer's disk"
+msgstr "Pasang sistem iki ing disk komputer"

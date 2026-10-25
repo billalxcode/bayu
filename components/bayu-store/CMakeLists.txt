@@ -37,11 +37,23 @@ target_link_libraries(store-ui PUBLIC Bayu::Toolkit PkgConfig::CURL PkgConfig::F
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE store-ui)
 
+# The tour after the first login, in the store's look and catalog.
+set(WELCOME_DATA_DIR ${CMAKE_INSTALL_FULL_DATADIR}/bayu-store/welcome CACHE PATH "The tour's installed screenshots")
+find_package(BayuClients REQUIRED COMPONENTS appearance)
+add_executable(bayu-welcome src/welcome/main.cpp)
+target_compile_definitions(bayu-welcome PRIVATE WELCOME_DATA_DIR="${WELCOME_DATA_DIR}")
+target_link_libraries(bayu-welcome PRIVATE store-ui Bayu::AppearanceClient)
+
 add_executable(store-fdroid-test tests/fdroid_test.cpp)
 target_link_libraries(store-fdroid-test PRIVATE store-ui)
 
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS ${PROJECT_NAME} bayu-welcome RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(PROGRAMS data/android-setup DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/bayu-store)
 install(FILES data/flathub.flatpakrepo DESTINATION ${CMAKE_INSTALL_DATADIR}/bayu-store)
 install(FILES data/org.bayu.store.policy DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/actions)
-install(FILES data/bayu-store.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+bayu_add_translations(bayu-store SOURCES src DESKTOP_FILES data/bayu-store.desktop data/bayu-welcome.desktop)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bayu-store.desktop ${CMAKE_CURRENT_BINARY_DIR}/bayu-welcome.desktop
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+install(FILES data/bayu-welcome-autostart.desktop DESTINATION ${CMAKE_INSTALL_FULL_SYSCONFDIR}/xdg/autostart
+    RENAME bayu-welcome.desktop)
+install(DIRECTORY data/welcome/ DESTINATION ${WELCOME_DATA_DIR})

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-text-editor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-19 22:27+0800\n"
+"POT-Creation-Date: 2026-10-25 03:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -703,6 +703,13 @@ msgid "This file mixes line endings. Saving will use {ending} throughout."
 msgstr ""
 
 #: src/pagebars.cpp
+#, python-brace-format
+msgid "Replaced {n} occurrence"
+msgid_plural "Replaced {n} occurrences"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/pagebars.cpp
 msgid "Find"
 msgstr ""
 
@@ -733,13 +740,6 @@ msgstr ""
 #: src/pagebars.cpp
 msgid "Replace All"
 msgstr ""
-
-#: src/pagebars.cpp
-#, python-brace-format
-msgid "Replaced {n} occurrence"
-msgid_plural "Replaced {n} occurrences"
-msgstr[0] ""
-msgstr[1] ""
 
 #. TRANSLATORS: beside the find field, when the search is not a valid regular expression.
 #: src/pagebars.cpp

@@ -115,6 +115,23 @@ and interaction states drawn by both toolkits:
 | GTK 3 and GTK 4 | The `Bayu` and `Bayu-dark` themes (`components/gtk-theme`), switched with dark mode |
 | libadwaita | Dark mode only; libadwaita keeps its own style |
 
+## First login
+
+After the first login, Welcome (`bayu-welcome`, part of Bayu Store) offers a
+short tour: Bayu Store and a first app to install, the launcher and dock,
+Android apps (with a button that turns lapis on), dark mode and wallpapers,
+and updates. It is not shown again unless asked to, and it stays off on
+live media, where Nabau starts instead; the launcher opens it any time.
+
+## Languages
+
+Every component is translated into Indonesian, Javanese, Sundanese, Malay,
+Simplified Chinese, Japanese, Korean, Spanish, French, German, Brazilian
+Portuguese and Russian, with US English as the source. The catalogs are
+`components/<component>/po/<language>.po`; after changing strings, run the
+component's `update-translations` target to refresh its `.pot` and
+merge it into each catalog.
+
 ## Hardware
 
 Both profiles include the Broadcom `wl` driver (`broadcom-wl`,
