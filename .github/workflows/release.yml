@@ -67,10 +67,13 @@ jobs:
           files: out/rpms/*.rpm
           generate_release_notes: true
 
-      # AlmaLinux's kernel with binder, into out/repo: the ISO boots it, and a
-      # tag publishes it with the other RPMs.
+      # AlmaLinux's kernel with binder, and akmod-wl that builds for it, into
+      # out/repo: the ISO boots them, and a tag publishes them with the other
+      # RPMs.
       - name: Build kernel
-        run: packaging/kernel/build-kernel.sh
+        run: |
+          packaging/kernel/build-kernel.sh
+          packaging/wl/build-wl.sh
 
       - name: Build ISO
         env:
