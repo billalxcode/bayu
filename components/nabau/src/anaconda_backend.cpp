@@ -1060,6 +1060,9 @@ private:
         uint64_t payload = 0;
         module("Payloads").call("CalculateRequiredSpace").read(payload);
         viewer(kAppliedTree).call("GetRequiredDeviceSize", payload).read(m_required);
+        // Anaconda counts the live image's compressed size (1.4 GB); the
+        // copy takes 2.5 GB, and the new system room to start.
+        m_required = std::max<uint64_t>(m_required, 4000 * MiB);
         m_packageCount = std::atoi(command("rpm -qa | wc -l").c_str());
 
         loadDisks();
