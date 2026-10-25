@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"POT-Creation-Date: 2026-10-25 19:00+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -758,7 +758,12 @@ msgid ""
 "Custom opens the disk editor: click free space to add a mount point (at least “/”), or click a partition to use it, resize it or delete it. Advanced also offers LVM, RAID and Btrfs volumes.\n"
 "\n"
 "Nothing is written to the disks until you begin the installation on the review screen."
-msgstr "“自动”会为您规划系统布局：引导分区、系统、您的文件和交换空间。如果磁盘上已有 Windows 或其他系统，您可以并存安装；拖动滑块来分配空间。\n\n“自定义”会打开磁盘编辑器：点击可用空间以添加挂载点（至少需要“/”），或点击某个分区以使用、调整大小或删除它。“高级”还提供 LVM、RAID 和 Btrfs 卷。\n\n在确认界面上开始安装之前，不会向磁盘写入任何内容。"
+msgstr ""
+"“自动”会为您规划系统布局：引导分区、系统、您的文件和交换空间。如果磁盘上已有 Windows 或其他系统，您可以并存安装；拖动滑块来分配空间。\n"
+"\n"
+"“自定义”会打开磁盘编辑器：点击可用空间以添加挂载点（至少需要“/”），或点击某个分区以使用、调整大小或删除它。“高级”还提供 LVM、RAID 和 Btrfs 卷。\n"
+"\n"
+"在确认界面上开始安装之前，不会向磁盘写入任何内容。"
 
 #: src/ui/pages/destination_page.cpp
 msgid "Selected"
@@ -791,6 +796,11 @@ msgstr "正在计算布局…"
 #: src/ui/pages/destination_page.cpp
 msgid "kept"
 msgstr "保留"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Too little space: {product} needs at least {size} for its system."
+msgstr "空间不足：{product} 的系统至少需要 {size}。"
 
 #: src/ui/pages/destination_page.cpp
 msgid "Specialized disks"

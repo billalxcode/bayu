@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"POT-Creation-Date: 2026-10-25 19:00+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -754,8 +754,18 @@ msgid "Pick a disk, then decide how it is laid out. Nothing is written to any de
 msgstr "Wählen Sie einen Datenträger und legen Sie fest, wie er eingerichtet wird. Auf kein Gerät wird etwas geschrieben, bis Sie auf der Übersichtsseite bestätigen."
 
 #: src/ui/pages/destination_page.cpp
-msgid "Automatic lays the system out for you: a boot partition, the system, your files and swap. If the disk already holds Windows or another system, you can install beside it; drag the slider to share the space.\n\nCustom opens the disk editor: click free space to add a mount point (at least “/”), or click a partition to use it, resize it or delete it. Advanced also offers LVM, RAID and Btrfs volumes.\n\nNothing is written to the disks until you begin the installation on the review screen."
-msgstr "Automatisch richtet das System für Sie ein: eine Boot-Partition, das System, Ihre Dateien und Swap. Enthält der Datenträger bereits Windows oder ein anderes System, können Sie daneben installieren; ziehen Sie den Regler, um den Platz aufzuteilen.\n\nBenutzerdefiniert öffnet den Datenträger-Editor: Klicken Sie auf freien Speicherplatz, um einen Einhängepunkt hinzuzufügen (mindestens „/“), oder auf eine Partition, um sie zu verwenden, ihre Größe zu ändern oder sie zu löschen. Erweitert bietet zusätzlich LVM-, RAID- und Btrfs-Volumes.\n\nAuf die Datenträger wird nichts geschrieben, bis Sie die Installation auf der Übersichtsseite beginnen."
+msgid ""
+"Automatic lays the system out for you: a boot partition, the system, your files and swap. If the disk already holds Windows or another system, you can install beside it; drag the slider to share the space.\n"
+"\n"
+"Custom opens the disk editor: click free space to add a mount point (at least “/”), or click a partition to use it, resize it or delete it. Advanced also offers LVM, RAID and Btrfs volumes.\n"
+"\n"
+"Nothing is written to the disks until you begin the installation on the review screen."
+msgstr ""
+"Automatisch richtet das System für Sie ein: eine Boot-Partition, das System, Ihre Dateien und Swap. Enthält der Datenträger bereits Windows oder ein anderes System, können Sie daneben installieren; ziehen Sie den Regler, um den Platz aufzuteilen.\n"
+"\n"
+"Benutzerdefiniert öffnet den Datenträger-Editor: Klicken Sie auf freien Speicherplatz, um einen Einhängepunkt hinzuzufügen (mindestens „/“), oder auf eine Partition, um sie zu verwenden, ihre Größe zu ändern oder sie zu löschen. Erweitert bietet zusätzlich LVM-, RAID- und Btrfs-Volumes.\n"
+"\n"
+"Auf die Datenträger wird nichts geschrieben, bis Sie die Installation auf der Übersichtsseite beginnen."
 
 #: src/ui/pages/destination_page.cpp
 msgid "Selected"
@@ -788,6 +798,11 @@ msgstr "Layout wird ermittelt …"
 #: src/ui/pages/destination_page.cpp
 msgid "kept"
 msgstr "behalten"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Too little space: {product} needs at least {size} for its system."
+msgstr "Zu wenig Platz: {product} braucht mindestens {size} für sein System."
 
 #: src/ui/pages/destination_page.cpp
 msgid "Specialized disks"

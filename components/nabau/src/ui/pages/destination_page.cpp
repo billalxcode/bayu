@@ -300,7 +300,8 @@ public:
     {
         if (m_editing)
             return m_editor->hasRoot();
-        return selectedDisk() != nullptr && !m_planning && (!m_existing->isVisible() || m_existing->chosen());
+        return selectedDisk() != nullptr && !m_planning && !m_tooSmall
+            && (!m_existing->isVisible() || m_existing->chosen());
     }
 
     bool handleBack() override
@@ -511,13 +512,24 @@ private:
         for (LayoutBar::Part& part : parts)
             part.fraction = total > 0 ? part.fraction / total : 0;
         m_layout->setParts(std::move(parts));
-        if (!report.errors.empty())
+        // The system has to fit in "/": Anaconda would only find out while
+        // copying it.
+        uint64_t root = 0;
+        for (const LayoutPart& part : layout)
+            root = part.mountPoint == "/" ? part.size : root;
+        m_tooSmall = !layout.empty() && root < m_required;
+        if (m_tooSmall)
+            m_layoutNote->setText(format(tr("Too little space: {product} needs at least {size} for its system."),
+                                         {{"product", installer().backend().systemInfo().productShortName},
+                                          {"size", style::formatSize(m_required)}}));
+        else if (!report.errors.empty())
             m_layoutNote->setText(report.errors.front());
         else if (!report.warnings.empty())
             m_layoutNote->setText(report.warnings.front());
         else
             m_layoutNote->setText({});
-        m_layoutNote->setColor(report.errors.empty() ? style::color(Role::SecondaryText) : style::color(Role::Danger));
+        m_layoutNote->setColor(report.errors.empty() && !m_tooSmall ? style::color(Role::SecondaryText)
+                                                                    : style::color(Role::Danger));
     }
 
     void explainSpecialized()
@@ -555,6 +567,7 @@ private:
     bool m_editing = false;
     bool m_planning = false;
     uint64_t m_required = 0;
+    bool m_tooSmall = false;
     bayu::base::Timer m_replan;
     std::unique_ptr<DialogWindow> m_dialog;
 };
