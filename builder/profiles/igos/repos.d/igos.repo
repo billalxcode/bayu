@@ -1,10 +1,8 @@
-# IGOS Nusantara 26 (AlmaLinux 10 based). dnf tries each baseurl in turn:
-# r2 first, then the repo2 mirror, which only serves plain HTTP and so is
-# listed only for GPG-checked repos. Repos left disabled can be enabled.
+# IGOS Nusantara 26 (AlmaLinux 10 based), all from R2. Repos left disabled
+# can be enabled.
 [igos-baseos]
 name=IGOS Nusantara 26 - BaseOS
 baseurl=https://r2.igos-nusantara.or.id/26/BaseOS/
-        http://repo2.igos-nusantara.or.id/26/BaseOS/
 enabled=1
 gpgcheck=1
 gpgkey=https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-10
@@ -12,7 +10,6 @@ gpgkey=https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-10
 [igos-appstream]
 name=IGOS Nusantara 26 - AppStream
 baseurl=https://r2.igos-nusantara.or.id/26/AppStream/
-        http://repo2.igos-nusantara.or.id/26/AppStream/
 enabled=1
 gpgcheck=1
 gpgkey=https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-10
@@ -20,7 +17,6 @@ gpgkey=https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-10
 [igos-crb]
 name=IGOS Nusantara 26 - CRB
 baseurl=https://r2.igos-nusantara.or.id/26/CRB/
-        http://repo2.igos-nusantara.or.id/26/CRB/
 enabled=1
 gpgcheck=1
 gpgkey=https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-10
@@ -28,7 +24,6 @@ gpgkey=https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-10
 [igos-extras]
 name=IGOS Nusantara 26 - Extras
 baseurl=https://r2.igos-nusantara.or.id/26/extras/
-        http://repo2.igos-nusantara.or.id/26/extras/
 enabled=1
 gpgcheck=1
 gpgkey=https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-10
@@ -45,7 +40,6 @@ skip_if_unavailable=1
 [igos-epel]
 name=IGOS Nusantara 26 - EPEL
 baseurl=https://r2.igos-nusantara.or.id/26/epel/
-        http://repo2.igos-nusantara.or.id/26/epel/
 enabled=1
 gpgcheck=1
 gpgkey=https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-10
@@ -54,7 +48,6 @@ gpgkey=https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-10
 [igos-rpmfusion]
 name=IGOS Nusantara 26 - RPM Fusion
 baseurl=https://r2.igos-nusantara.or.id/26/rpmfusion/
-        http://repo2.igos-nusantara.or.id/26/rpmfusion/
 enabled=1
 gpgcheck=1
 gpgkey=https://download1.rpmfusion.org/free/el/RPM-GPG-KEY-rpmfusion-free-el-10
@@ -63,7 +56,6 @@ gpgkey=https://download1.rpmfusion.org/free/el/RPM-GPG-KEY-rpmfusion-free-el-10
 [igos-elrepo]
 name=IGOS Nusantara 26 - ELRepo
 baseurl=https://r2.igos-nusantara.or.id/26/elrepo/
-        http://repo2.igos-nusantara.or.id/26/elrepo/
 enabled=0
 gpgcheck=1
 gpgkey=https://www.elrepo.org/RPM-GPG-KEY-v2-elrepo.org
@@ -77,7 +69,6 @@ gpgcheck=0
 [igos-plus]
 name=IGOS Nusantara 26 - Plus
 baseurl=https://r2.igos-nusantara.or.id/26/plus/
-        http://repo2.igos-nusantara.or.id/26/plus/
 enabled=0
 gpgcheck=1
 gpgkey=https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-10
