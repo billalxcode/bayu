@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"POT-Creation-Date: 2026-10-25 19:00+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -759,7 +759,12 @@ msgid ""
 "Custom opens the disk editor: click free space to add a mount point (at least “/”), or click a partition to use it, resize it or delete it. Advanced also offers LVM, RAID and Btrfs volumes.\n"
 "\n"
 "Nothing is written to the disks until you begin the installation on the review screen."
-msgstr "「自動」は、ブートパーティション、システム、ファイル、スワップをまとめてレイアウトします。ディスクに Windows などのシステムがすでにある場合は、スライダーをドラッグして領域を分け合い、並べてインストールできます。\n\n「カスタム」はディスクエディタを開きます。空き領域をクリックしてマウントポイント (少なくとも「/」) を追加するか、パーティションをクリックして使用、サイズ変更、削除ができます。「詳細設定」では LVM、RAID、Btrfs ボリュームも使えます。\n\n確認画面でインストールを開始するまで、ディスクには何も書き込まれません。"
+msgstr ""
+"「自動」は、ブートパーティション、システム、ファイル、スワップをまとめてレイアウトします。ディスクに Windows などのシステムがすでにある場合は、スライダーをドラッグして領域を分け合い、並べてインストールできます。\n"
+"\n"
+"「カスタム」はディスクエディタを開きます。空き領域をクリックしてマウントポイント (少なくとも「/」) を追加するか、パーティションをクリックして使用、サイズ変更、削除ができます。「詳細設定」では LVM、RAID、Btrfs ボリュームも使えます。\n"
+"\n"
+"確認画面でインストールを開始するまで、ディスクには何も書き込まれません。"
 
 #: src/ui/pages/destination_page.cpp
 msgid "Selected"
@@ -792,6 +797,11 @@ msgstr "レイアウトを計算中…"
 #: src/ui/pages/destination_page.cpp
 msgid "kept"
 msgstr "保持"
+
+#: src/ui/pages/destination_page.cpp
+#, python-brace-format
+msgid "Too little space: {product} needs at least {size} for its system."
+msgstr "空き容量が足りません。{product} のシステムには少なくとも {size} が必要です。"
 
 #: src/ui/pages/destination_page.cpp
 msgid "Specialized disks"
