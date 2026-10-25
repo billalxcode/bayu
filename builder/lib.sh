@@ -55,6 +55,17 @@ install_root() {
 configure_root() {
   local dir=$1
   chr() { chroot "$dir" "$@"; }
+  # wl, the Broadcom Wi-Fi driver of older MacBooks, built for the image's
+  # kernels now: akmods would build it at the first boot only, too late for
+  # the live session and for that boot's Wi-Fi.
+  if chr rpm -q akmod-wl >/dev/null 2>&1; then
+    local kernel
+    for kernel in $(chr rpm -q --qf '%{VERSION}-%{RELEASE}.%{ARCH}\n' kernel-core); do
+      chr akmods --force --kernels "$kernel" >/dev/null 2>&1 &&
+        ls "$dir"/lib/modules/"$kernel"/extra/wl/wl.ko* >/dev/null 2>&1 ||
+        echo "WARNING: wl did not build for $kernel; MacBook Wi-Fi waits for akmods at boot." >&2
+    done
+  fi
   echo "$HOSTNAME" > "$dir/etc/hostname"
   echo "LANG=$LOCALE" > "$dir/etc/locale.conf"
   echo "KEYMAP=$KEYMAP" > "$dir/etc/vconsole.conf"

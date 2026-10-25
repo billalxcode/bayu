@@ -1,0 +1,18 @@
+From: Eka Tresna Irawan <anak10thn@gmail.com>
+Subject: [PATCH] linuxver.h: net/lib80211.h only where the kernel has it
+
+EL10's 6.12 kernel dropped lib80211 as 6.13 did, so the version check of
+the 6.13 adaptation still includes the missing header. Ask the kernel
+instead of its version.
+
+--- a/src/include/linuxver.h
++++ b/src/include/linuxver.h
+@@ -147,7 +147,7 @@ typedef irqreturn_t(*FN_ISR) (int irq, void *dev_id, struct pt_regs *ptregs);
+ #include <linux/sched.h>
+ #endif
+
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 29) && LINUX_VERSION_CODE < KERNEL_VERSION(6, 13, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 29) && __has_include(<net/lib80211.h>)
+ #include <net/lib80211.h>
+ #endif
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 29)
