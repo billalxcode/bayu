@@ -35,8 +35,9 @@ inline std::vector<std::unique_ptr<Page>> createPages(Installer& installer)
 {
     std::vector<std::unique_ptr<Page>> pages;
     pages.push_back(createLanguagePage(installer));
-    pages.push_back(createLocalizationPage(installer));
+    // Network before localization: once online, the time zone can come from it.
     pages.push_back(createNetworkPage(installer));
+    pages.push_back(createLocalizationPage(installer));
     pages.push_back(createDestinationPage(installer));
     pages.push_back(createSoftwarePage(installer));
     pages.push_back(createAccountPage(installer));
