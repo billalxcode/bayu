@@ -13,6 +13,7 @@
 #include "ui/dialog_window.h"
 #include "ui/header_button.h"
 #include "ui/icon.h"
+#include "ui/image_view.h"
 #include "ui/keys.h"
 #include "ui/label.h"
 #include "ui/menu.h"
@@ -137,12 +138,19 @@ private:
     State m_state = State::Pending;
 };
 
-// The product's mark: a letter on an accent tile.
+// The product's mark: the distribution's logo, or a letter on an accent tile
+// without one.
 class LogoTile : public View
 {
 public:
     explicit LogoTile(std::string letter)
     {
+        const std::string logo = themeIconPath(distributorLogo(), 30, 2);
+        if (!logo.empty()) {
+            m_image = addChild<ImageView>(logo);
+            m_image->setFillMode(ImageView::FillMode::PreserveAspectFit);
+            return;
+        }
         m_letter = addText(this, std::move(letter), 17, 500);
         m_letter->setColor(ColorRecipe(Color::rgb(0xFFFFFF)));
         m_letter->setTextAlignment(Label::TextAlignment::Center);
@@ -151,9 +159,11 @@ public:
     SizeF sizeHint() const override { return {30, 30}; }
 
 protected:
-    void layout() override { m_letter->setGeometry(localRect()); }
+    void layout() override { (m_image ? static_cast<View*>(m_image) : m_letter)->setGeometry(localRect()); }
     void paint(Painter& painter) override
     {
+        if (m_image)
+            return;
         const Color accent = Theme::current().highlight;
         Path tile;
         tile.addRoundedRect(localRect(), 7, 7);
@@ -161,7 +171,8 @@ protected:
     }
 
 private:
-    Label* m_letter;
+    ImageView* m_image = nullptr;
+    Label* m_letter = nullptr;
 };
 
 class Sidebar : public View

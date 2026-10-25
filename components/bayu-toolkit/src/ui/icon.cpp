@@ -10,6 +10,8 @@
 #include "include/core/SkCanvas.h"
 #include "include/core/SkColorFilter.h"
 
+#include "base/file.h"
+#include "base/strings.h"
 #include "ui/icon_loader.h"
 #include "ui/painter.h"
 #include "ui/theme.h"
@@ -91,6 +93,26 @@ void ThemeIcon::setSize(double size)
 std::string themeIconPath(const std::string& name, int size, double scale)
 {
     return IconLoader::instance().themeIconPath(name, size, scale);
+}
+
+std::string distributorLogo()
+{
+    for (const char* path : {"/etc/bayu/branding.conf", "/etc/os-release"}) {
+        const std::optional<std::string> contents = base::file::read(path);
+        if (!contents)
+            continue;
+        for (const std::string& line : base::strings::split(*contents, '\n')) {
+            std::string value(base::strings::trimmed(line));
+            if (!value.starts_with("LOGO="))
+                continue;
+            value.erase(0, 5);
+            if (value.size() >= 2 && (value.front() == '"' || value.front() == '\'') && value.back() == value.front())
+                value = value.substr(1, value.size() - 2);
+            if (!value.empty())
+                return value;
+        }
+    }
+    return "distributor-logo";
 }
 
 void preloadThemeIcons(std::vector<std::string> names, int size, double scale, std::function<void()> done)

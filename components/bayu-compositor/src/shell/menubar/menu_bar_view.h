@@ -13,10 +13,6 @@
 #include "shell/menubar/menu_bar_model.h"
 #include "shell/statusbar/status_bar_menu_bar.h"
 
-namespace bayu::accounts {
-class UserAccount;
-}
-
 namespace bayu::ui {
 class Menu;
 }
@@ -59,8 +55,6 @@ public:
     ui::Menu *openMenu() const { return m_openMenu; }
     MenuBarModel &model() { return *m_model; }
     BarItem *entry(size_t index) const;
-    // The avatar's file; empty takes the theme's default-user picture.
-    void setUserIcon(const std::string &file);
 
 protected:
     void layout() override;
@@ -73,9 +67,9 @@ private:
 
     StatusBarMenuBarHost m_host;
     std::unique_ptr<MenuBarModel> m_model;
-    std::unique_ptr<accounts::UserAccount> m_account;
     std::vector<Entry *> m_entries;
-    std::string m_userIcon;
+    // The first entry's picture.
+    std::string m_logo;
     int m_currentIndex = -1;
     ui::Menu *m_openMenu = nullptr;
     // A switch closes one menu to open the next: that close is not the

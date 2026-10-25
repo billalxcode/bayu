@@ -83,7 +83,7 @@ repo file (see `packaging/serve-repo.sh`).
 
 | Profile | Base | Repositories |
 |---|---|---|
-| `igos` (default) | IGOS Nusantara 26 | IGOS mirror (`r2`, with `repo2` as fallback) |
+| `igos` (default) | IGOS Nusantara 26 | IGOS mirror on R2 |
 | `almalinux` | AlmaLinux 10 | AlmaLinux, EPEL, RPM Fusion |
 
 Both ship the same desktop, drivers and Android support. A profile is a
@@ -94,6 +94,11 @@ directory in `builder/profiles/`:
 | `profile.conf` | Packages, user, locale, image and ISO names |
 | `repos.d/` | dnf repositories to install from, plus Bayu's `out/repo` |
 | `rootfs/` | Files copied over the system |
+
+The logo Bayu shows in the panel, in Settings' About and in Nabau is the
+theme icon that `LOGO=` names in `rootfs/etc/bayu/branding.conf`, its files
+under `rootfs/usr/share/icons/hicolor/`; without it, `LOGO=` of
+`/etc/os-release`. The `igos` profile ships the IGOS Nusantara logo.
 
 The repository files are installed into the system too, so it updates from
 the same place. To use another mirror or an internal repository, edit

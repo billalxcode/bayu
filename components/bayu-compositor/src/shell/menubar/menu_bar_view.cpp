@@ -5,7 +5,6 @@
 #include "shell/menubar/menu_bar_view.h"
 
 #include "core/main_loop.h"
-#include "bayu/accounts/user_account.h"
 #include "shell/shell.h"
 #include "shell/statusbar/bar_item.h"
 #include "shell/statusbar/status_bar.h"
@@ -16,7 +15,7 @@
 
 namespace bayu::shell {
 
-// One entry of the bar: the user's avatar, or a title in the bar's text.
+// One entry of the bar: the distribution's logo, or a title in the bar's text.
 // Spaced like the status items on the right; the user's entry reaches the
 // screen edge and mirrors the clock there.
 class MenuBarView::Entry final : public BarItem
@@ -30,8 +29,7 @@ public:
             setInsets(BarContext::kEdgeMargin - (BarContext::kItemGap - BarContext::kHighlightGap) / 2,
                       BarContext::kHighlightGap / 2);
             setGlyphWidth(BarContext::kIconSize);
-            // A circular avatar decoded at its device size, as the Image
-            // with sourceSize and an OpacityMask of a circle.
+            // The logo decoded at its device size, cut to a circle.
             m_avatar = addChild<ui::ImageView>();
             m_avatar->setFillMode(ui::ImageView::FillMode::Stretch);
             m_avatar->setMipmap(true);
@@ -108,14 +106,8 @@ MenuBarView::MenuBarView(Shell *shell, StatusBarMenuBarHost host)
             m_model->activationRequested.connect([this](size_t row) { open(int(row), true); }));
     m_subscriptions.push_back(m_model->menuClosed.connect([this] { onMenuClosed(); }));
 
-    setUserIcon({});
-    if (shell->bus()) {
-        if (base::dbus::Connection *system = base::dbus::Connection::system(core::mainLoop())) {
-            m_account = std::make_unique<accounts::UserAccount>(system);
-            m_subscriptions.push_back(m_account->changed.connect([this] { setUserIcon(m_account->iconFileName()); }));
-            setUserIcon(m_account->iconFileName());
-        }
-    }
+    // Twice the size, for screens that scale.
+    m_logo = ui::themeIconPath(ui::distributorLogo(), int(BarContext::kIconSize), 2);
     rebuildEntries();
 }
 
@@ -132,14 +124,6 @@ MenuBarView::~MenuBarView()
 BarItem *MenuBarView::entry(size_t index) const
 {
     return index < m_entries.size() ? m_entries[index] : nullptr;
-}
-
-void MenuBarView::setUserIcon(const std::string &file)
-{
-    // The theme's picture stands in for an account without one.
-    m_userIcon = file.empty() ? ui::themeIconPath("default-user", int(BarContext::kIconSize)) : file;
-    if (!m_entries.empty())
-        m_entries.front()->setAvatar(m_userIcon);
 }
 
 void MenuBarView::barChanged()
@@ -185,7 +169,7 @@ void MenuBarView::rebuildEntries()
         m_entries.push_back(entry);
     }
     if (!m_entries.empty())
-        m_entries.front()->setAvatar(m_userIcon);
+        m_entries.front()->setAvatar(m_logo);
 
     // The open menu stays while its entry does.
     if (m_currentIndex >= 0) {
