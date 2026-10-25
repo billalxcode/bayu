@@ -21,6 +21,18 @@ cp "${rpms[@]}" "$repo/"
 podman run --rm -v "$repo":/repo:Z bayu-builder createrepo_c -q --update /repo
 rclone sync "$repo" r2:repo/26/bayu --exclude index.html --checksum --stats-one-line -v
 
+# Its index.html pages, as builder/mkindex.py draws the bucket's; paths from
+# the bucket root.
+idx=$(mktemp -d) && trap 'rm -rf "$repo" "$idx"' EXIT
+rclone lsjson -R --files-only --use-server-modtime --no-mimetype r2:repo/26/bayu |
+  python3 -c 'import json, sys
+entries = json.load(sys.stdin)
+for e in entries:
+    e["Path"] = "26/bayu/" + e["Path"]
+json.dump(entries, sys.stdout)' |
+  python3 "$ROOT/builder/mkindex.py" "$idx"
+rclone copy "$idx/26/bayu" r2:repo/26/bayu --include index.html --checksum -v
+
 ssh -o BatchMode=yes "$HOST" \
   "rclone sync r2:repo/26/bayu /var/www/html/26/bayu --exclude index.html --checksum --stats-one-line -v 2>&1 | tail -1"
 echo "Published ${#rpms[@]} RPMs to repo/26/bayu"
