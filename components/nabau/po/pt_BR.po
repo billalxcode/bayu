@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 19:00+0000\n"
+"POT-Creation-Date: 2026-10-25 19:56+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -188,6 +188,10 @@ msgid "From {min} to {max}"
 msgstr "De {min} a {max}"
 
 #: src/ui/disk_editor.cpp
+msgid "PARTITIONS"
+msgstr "PARTIÇÕES"
+
+#: src/ui/disk_editor.cpp
 msgid "MOUNT POINTS"
 msgstr "PONTOS DE MONTAGEM"
 
@@ -303,6 +307,10 @@ msgstr "Redimensionar…"
 #: src/ui/disk_editor.cpp
 msgid "Delete"
 msgstr "Excluir"
+
+#: src/ui/disk_editor.cpp
+msgid "It cannot be shrunk now. Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart)."
+msgstr "Não é possível reduzi-la agora. Primeiro é preciso desligar o Windows por completo: no Windows, desative a Inicialização Rápida, libere algum espaço e desligue-o (não reinicie)."
 
 #: src/ui/disk_editor.cpp
 msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
@@ -606,6 +614,22 @@ msgid "Adds {user} to the wheel group and allows sudo"
 msgstr "Adiciona {user} ao grupo wheel e permite sudo"
 
 #: src/ui/pages/account_page.cpp
+msgid "Weak passphrase"
+msgstr "Frase-senha fraca"
+
+#: src/ui/pages/account_page.cpp
+msgid "Fair passphrase"
+msgstr "Frase-senha razoável"
+
+#: src/ui/pages/account_page.cpp
+msgid "Good passphrase"
+msgstr "Frase-senha boa"
+
+#: src/ui/pages/account_page.cpp
+msgid "Strong passphrase"
+msgstr "Frase-senha forte"
+
+#: src/ui/pages/account_page.cpp
 #, python-brace-format
 msgid "{n} character"
 msgid_plural "{n} characters"
@@ -651,6 +675,10 @@ msgid "{n} partition"
 msgid_plural "{n} partitions"
 msgstr[0] "{n} partição"
 msgstr[1] "{n} partições"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart) and start the installer again."
+msgstr "Primeiro é preciso desligar o Windows por completo: no Windows, desative a Inicialização Rápida, libere algum espaço, desligue-o (não reinicie) e abra o instalador de novo."
 
 #: src/ui/pages/destination_page.cpp
 msgid "the data on it"
@@ -727,8 +755,8 @@ msgid "Encrypt my data"
 msgstr "Criptografar meus dados"
 
 #: src/ui/pages/destination_page.cpp
-msgid "LUKS2 · passphrase at next step"
-msgstr "LUKS2 · senha na próxima etapa"
+msgid "LUKS2 · unlocked with your password"
+msgstr "LUKS2 · desbloqueado com sua senha"
 
 #: src/ui/pages/destination_page.cpp
 msgid "RESULTING LAYOUT"
@@ -804,6 +832,10 @@ msgstr "mantido"
 #, python-brace-format
 msgid "Too little space: {product} needs at least {size} for its system."
 msgstr "Espaço insuficiente: {product} precisa de pelo menos {size} para o sistema."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Choose a larger disk, or free space on this one."
+msgstr "Escolha um disco maior ou libere espaço neste."
 
 #: src/ui/pages/destination_page.cpp
 msgid "Specialized disks"
@@ -1389,3 +1421,6 @@ msgstr "Instalar no disco"
 #: data/nabau.desktop
 msgid "Install this system on the computer's disk"
 msgstr "Instalar este sistema no disco do computador"
+
+#~ msgid "LUKS2 · passphrase at next step"
+#~ msgstr "LUKS2 · senha na próxima etapa"

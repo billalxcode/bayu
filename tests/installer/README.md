@@ -33,6 +33,7 @@ Each scenario:
 | `win-full` | Windows filling the disk | *Install alongside Windows* |
 | `win-mbr` | Windows on MBR, BIOS | *Use the free space* |
 | `two-disks` | Windows, and an empty disk | defaults: the empty disk must be picked |
+| `custom-free` | as `win-free` | *Custom*: the recommended layout in the free space |
 | `too-small` | 4 GB | must refuse |
 
 Results are in `out/e2e/<scenario>/`: `result.txt`, the screenshots, the

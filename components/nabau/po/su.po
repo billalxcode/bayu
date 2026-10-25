@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 19:00+0000\n"
+"POT-Creation-Date: 2026-10-25 19:56+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -187,6 +187,10 @@ msgid "From {min} to {max}"
 msgstr "Ti {min} nepi ka {max}"
 
 #: src/ui/disk_editor.cpp
+msgid "PARTITIONS"
+msgstr "PARTISI"
+
+#: src/ui/disk_editor.cpp
 msgid "MOUNT POINTS"
 msgstr "TITIK PAMASANGAN"
 
@@ -302,6 +306,10 @@ msgstr "Réskalakeun…"
 #: src/ui/disk_editor.cpp
 msgid "Delete"
 msgstr "Hapus"
+
+#: src/ui/disk_editor.cpp
+msgid "It cannot be shrunk now. Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart)."
+msgstr "Ayeuna teu tiasa dileutikan. Windows kedah dipareuman sapinuhna heula: di Windows pareuman Fast Startup, kosongkeun sababaraha rohangan, teras pareuman (sanés ngamimitian deui)."
 
 #: src/ui/disk_editor.cpp
 msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
@@ -605,6 +613,22 @@ msgid "Adds {user} to the wheel group and allows sudo"
 msgstr "Nambahkeun {user} kana grup wheel sarta ngidinan sudo"
 
 #: src/ui/pages/account_page.cpp
+msgid "Weak passphrase"
+msgstr "Frasa sandi lemah"
+
+#: src/ui/pages/account_page.cpp
+msgid "Fair passphrase"
+msgstr "Frasa sandi cekap"
+
+#: src/ui/pages/account_page.cpp
+msgid "Good passphrase"
+msgstr "Frasa sandi saé"
+
+#: src/ui/pages/account_page.cpp
+msgid "Strong passphrase"
+msgstr "Frasa sandi kuat"
+
+#: src/ui/pages/account_page.cpp
 #, python-brace-format
 msgid "{n} character"
 msgid_plural "{n} characters"
@@ -648,6 +672,10 @@ msgstr "kosong"
 msgid "{n} partition"
 msgid_plural "{n} partitions"
 msgstr[0] "{n} partisi"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart) and start the installer again."
+msgstr "Windows kedah dipareuman sapinuhna heula: di Windows pareuman Fast Startup, kosongkeun sababaraha rohangan, teras pareuman (sanés ngamimitian deui) sareng jalankeun deui pamasang."
 
 #: src/ui/pages/destination_page.cpp
 msgid "the data on it"
@@ -724,8 +752,8 @@ msgid "Encrypt my data"
 msgstr "Énkripsi data kuring"
 
 #: src/ui/pages/destination_page.cpp
-msgid "LUKS2 · passphrase at next step"
-msgstr "LUKS2 · frasa sandi dina léngkah saterusna"
+msgid "LUKS2 · unlocked with your password"
+msgstr "LUKS2 · dibuka ku kecap konci anjeun"
 
 #: src/ui/pages/destination_page.cpp
 msgid "RESULTING LAYOUT"
@@ -801,6 +829,10 @@ msgstr "dijaga"
 #, python-brace-format
 msgid "Too little space: {product} needs at least {size} for its system."
 msgstr "Rohangan teu cekap: {product} peryogi sahenteuna {size} kanggo sistemna."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Choose a larger disk, or free space on this one."
+msgstr "Pilih disk anu langkung ageung, atanapi kosongkeun rohangan dina disk ieu."
 
 #: src/ui/pages/destination_page.cpp
 msgid "Specialized disks"
@@ -1384,3 +1416,6 @@ msgstr "Pasang ka Disk"
 #: data/nabau.desktop
 msgid "Install this system on the computer's disk"
 msgstr "Pasang sistem ieu dina disk komputer"
+
+#~ msgid "LUKS2 · passphrase at next step"
+#~ msgstr "LUKS2 · frasa sandi dina léngkah saterusna"

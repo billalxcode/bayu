@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 19:00+0000\n"
+"POT-Creation-Date: 2026-10-25 19:56+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -187,6 +187,10 @@ msgid "From {min} to {max}"
 msgstr "{min}에서 {max}까지"
 
 #: src/ui/disk_editor.cpp
+msgid "PARTITIONS"
+msgstr "파티션"
+
+#: src/ui/disk_editor.cpp
 msgid "MOUNT POINTS"
 msgstr "마운트 지점"
 
@@ -302,6 +306,10 @@ msgstr "크기 조정…"
 #: src/ui/disk_editor.cpp
 msgid "Delete"
 msgstr "삭제"
+
+#: src/ui/disk_editor.cpp
+msgid "It cannot be shrunk now. Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart)."
+msgstr "지금은 축소할 수 없습니다. 먼저 Windows를 완전히 종료해야 합니다. Windows에서 빠른 시작을 끄고, 공간을 확보한 다음, 종료(다시 시작이 아님)하세요."
 
 #: src/ui/disk_editor.cpp
 msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
@@ -605,6 +613,22 @@ msgid "Adds {user} to the wheel group and allows sudo"
 msgstr "{user}을(를) wheel 그룹에 추가하고 sudo를 허용합니다"
 
 #: src/ui/pages/account_page.cpp
+msgid "Weak passphrase"
+msgstr "약한 암호 문구"
+
+#: src/ui/pages/account_page.cpp
+msgid "Fair passphrase"
+msgstr "보통 암호 문구"
+
+#: src/ui/pages/account_page.cpp
+msgid "Good passphrase"
+msgstr "좋은 암호 문구"
+
+#: src/ui/pages/account_page.cpp
+msgid "Strong passphrase"
+msgstr "강력한 암호 문구"
+
+#: src/ui/pages/account_page.cpp
 #, python-brace-format
 msgid "{n} character"
 msgid_plural "{n} characters"
@@ -648,6 +672,10 @@ msgstr "비어 있음"
 msgid "{n} partition"
 msgid_plural "{n} partitions"
 msgstr[0] "파티션 {n}개"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart) and start the installer again."
+msgstr "먼저 Windows를 완전히 종료해야 합니다. Windows에서 빠른 시작을 끄고, 공간을 확보한 다음, 종료(다시 시작이 아님)한 후 설치 프로그램을 다시 시작하세요."
 
 #: src/ui/pages/destination_page.cpp
 msgid "the data on it"
@@ -724,8 +752,8 @@ msgid "Encrypt my data"
 msgstr "내 데이터 암호화"
 
 #: src/ui/pages/destination_page.cpp
-msgid "LUKS2 · passphrase at next step"
-msgstr "LUKS2 · 다음 단계에서 암호문 설정"
+msgid "LUKS2 · unlocked with your password"
+msgstr "LUKS2 · 암호로 잠금 해제"
 
 #: src/ui/pages/destination_page.cpp
 msgid "RESULTING LAYOUT"
@@ -801,6 +829,10 @@ msgstr "유지됨"
 #, python-brace-format
 msgid "Too little space: {product} needs at least {size} for its system."
 msgstr "공간이 부족합니다. {product} 시스템에는 최소 {size}이(가) 필요합니다."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Choose a larger disk, or free space on this one."
+msgstr "더 큰 디스크를 선택하거나 이 디스크의 공간을 확보하세요."
 
 #: src/ui/pages/destination_page.cpp
 msgid "Specialized disks"
@@ -1384,3 +1416,6 @@ msgstr "디스크에 설치"
 #: data/nabau.desktop
 msgid "Install this system on the computer's disk"
 msgstr "이 시스템을 컴퓨터 디스크에 설치합니다"
+
+#~ msgid "LUKS2 · passphrase at next step"
+#~ msgstr "LUKS2 · 다음 단계에서 암호문 설정"

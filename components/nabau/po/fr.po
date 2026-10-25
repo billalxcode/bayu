@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 19:00+0000\n"
+"POT-Creation-Date: 2026-10-25 19:56+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -187,6 +187,10 @@ msgid "From {min} to {max}"
 msgstr "De {min} à {max}"
 
 #: src/ui/disk_editor.cpp
+msgid "PARTITIONS"
+msgstr "PARTITIONS"
+
+#: src/ui/disk_editor.cpp
 msgid "MOUNT POINTS"
 msgstr "POINTS DE MONTAGE"
 
@@ -302,6 +306,10 @@ msgstr "Redimensionner…"
 #: src/ui/disk_editor.cpp
 msgid "Delete"
 msgstr "Supprimer"
+
+#: src/ui/disk_editor.cpp
+msgid "It cannot be shrunk now. Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart)."
+msgstr "Elle ne peut pas être réduite pour l’instant. Windows doit d’abord être complètement arrêté : dans Windows, désactivez le démarrage rapide, libérez de l’espace, puis arrêtez-le (sans redémarrer)."
 
 #: src/ui/disk_editor.cpp
 msgid "It holds LVM or Btrfs volumes. Delete it to use its space."
@@ -605,6 +613,22 @@ msgid "Adds {user} to the wheel group and allows sudo"
 msgstr "Ajoute {user} au groupe wheel et autorise sudo"
 
 #: src/ui/pages/account_page.cpp
+msgid "Weak passphrase"
+msgstr "Phrase de passe faible"
+
+#: src/ui/pages/account_page.cpp
+msgid "Fair passphrase"
+msgstr "Phrase de passe correcte"
+
+#: src/ui/pages/account_page.cpp
+msgid "Good passphrase"
+msgstr "Bonne phrase de passe"
+
+#: src/ui/pages/account_page.cpp
+msgid "Strong passphrase"
+msgstr "Phrase de passe forte"
+
+#: src/ui/pages/account_page.cpp
 #, python-brace-format
 msgid "{n} character"
 msgid_plural "{n} characters"
@@ -650,6 +674,10 @@ msgid "{n} partition"
 msgid_plural "{n} partitions"
 msgstr[0] "{n} partition"
 msgstr[1] "{n} partitions"
+
+#: src/ui/pages/destination_page.cpp
+msgid "Windows has to be shut down fully first: in Windows turn off Fast Startup, free some space, then shut it down (not restart) and start the installer again."
+msgstr "Windows doit d’abord être complètement arrêté : dans Windows, désactivez le démarrage rapide, libérez de l’espace, puis arrêtez-le (sans redémarrer) et relancez l’installateur."
 
 #: src/ui/pages/destination_page.cpp
 msgid "the data on it"
@@ -726,8 +754,8 @@ msgid "Encrypt my data"
 msgstr "Chiffrer mes données"
 
 #: src/ui/pages/destination_page.cpp
-msgid "LUKS2 · passphrase at next step"
-msgstr "LUKS2 · phrase secrète à l’étape suivante"
+msgid "LUKS2 · unlocked with your password"
+msgstr "LUKS2 · déverrouillé avec votre mot de passe"
 
 #: src/ui/pages/destination_page.cpp
 msgid "RESULTING LAYOUT"
@@ -803,6 +831,10 @@ msgstr "conservé"
 #, python-brace-format
 msgid "Too little space: {product} needs at least {size} for its system."
 msgstr "Pas assez d’espace : {product} a besoin d’au moins {size} pour son système."
+
+#: src/ui/pages/destination_page.cpp
+msgid "Choose a larger disk, or free space on this one."
+msgstr "Choisissez un disque plus grand ou libérez de l’espace sur celui-ci."
 
 #: src/ui/pages/destination_page.cpp
 msgid "Specialized disks"
@@ -1388,3 +1420,6 @@ msgstr "Installer sur le disque"
 #: data/nabau.desktop
 msgid "Install this system on the computer's disk"
 msgstr "Installer ce système sur le disque de l’ordinateur"
+
+#~ msgid "LUKS2 · passphrase at next step"
+#~ msgstr "LUKS2 · phrase secrète à l’étape suivante"

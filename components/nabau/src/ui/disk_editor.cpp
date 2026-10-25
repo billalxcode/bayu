@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <cctype>
 #include <cstdio>
 
 #include "base/i18n.h"
@@ -77,7 +78,11 @@ std::string segmentTitle(const DiskSegment& segment)
         return tr("Free space");
     if (!segment.mountPoint.empty())
         return segment.mountPoint;
-    if (!segment.description.empty())
+    // A description that only names the file system says less than a label.
+    const bool generic = segment.description.empty()
+        || std::equal(segment.description.begin(), segment.description.end(), segment.format.begin(),
+                      segment.format.end(), [](char a, char b) { return std::tolower(a) == std::tolower(b); });
+    if (!generic)
         return segment.description;
     if (!segment.label.empty())
         return segment.label;
@@ -187,8 +192,9 @@ private:
             total += double(segment.size);
         if (total <= 0)
             return;
-        // Every piece at least 10 wide; the rest shared by size.
-        const double minimum = 10;
+        // Every piece at least wide enough to click (an EFI partition is a
+        // sliver of a disk); the rest shared by size.
+        const double minimum = 24;
         const double free = std::max(0.0, width - minimum * double(m_disk.segments.size()));
         double x = 0;
         for (const DiskSegment& segment : m_disk.segments) {
@@ -349,6 +355,9 @@ DiskEditor::DiskEditor(Installer& installer)
     lists->setSpacing(10);
     m_error = lists->addChild<Banner>(Banner::Kind::Error, std::string(), std::string());
     m_error->setVisible(false);
+    addSectionLabel(lists, tr("PARTITIONS"));
+    m_partitions = lists->addChild<Card>(6);
+    m_partitions->setSpacing(2);
     addSectionLabel(lists, tr("MOUNT POINTS"));
     m_mounts = lists->addChild<Card>(16);
     m_mounts->setSpacing(8);
@@ -423,6 +432,7 @@ void DiskEditor::reload()
             m_selectedSegment = 0;
         }
     }
+    fillPartitions();
     select(m_selectedDisk, m_selectedSegment);
     fillLists();
     if (onChanged)
@@ -435,6 +445,11 @@ void DiskEditor::select(const std::string& disk, size_t segment)
     m_selectedSegment = segment;
     for (DiskMap* map : m_diskMaps)
         map->setSelected(map->disk().id == disk ? int(segment) : -1);
+    size_t row = 0;
+    for (const Disk& each : m_disks) {
+        for (size_t i = 0; i < each.segments.size() && row < m_partitionRows.size(); ++i, ++row)
+            m_partitionRows[row]->setSelected(each.id == disk && i == segment);
+    }
     m_error->setVisible(false);
     showPanel();
 }
@@ -568,7 +583,8 @@ void DiskEditor::showPartitionPanel(const Disk& disk, const DiskSegment& segment
     details->addLine(tr("State"), segment.existing ? tr("on the disk now") : tr("to be created"),
                      segment.existing ? std::nullopt : std::optional<Role>(Role::Success));
 
-    Row* actions = m_panel->addChild<Row>();
+    // One under another: three across the panel cut their labels short.
+    Column* actions = m_panel->addChild<Column>();
     actions->setSpacing(8);
     actions->setLayoutHints({.fillWidth = true, .margins = {0, 6, 0, 0}});
     ActionButton* mount = actions->addChild<ActionButton>(segment.mountPoint.empty() ? tr("Use…") : tr("Change…"));
@@ -584,11 +600,18 @@ void DiskEditor::showPartitionPanel(const Disk& disk, const DiskSegment& segment
     mount->onClicked = [this, diskCopy, segmentCopy] { showMountForm(diskCopy, segmentCopy); };
     resize->onClicked = [this, segmentCopy] { showResizeForm(segmentCopy); };
     remove->onClicked = [this, segmentCopy] { confirmDelete(segmentCopy); };
-    // Three equal buttons across the panel.
     for (ActionButton* button : {mount, resize, remove})
-        button->setLayoutHints({.fillWidth = true, .preferredWidth = 0});
+        button->setLayoutHints({.fillWidth = true});
     if (!segment.existing && segment.mountPoint.empty() && segment.format.empty())
         mount->setEnabled(false);
+    if (segment.existing && segment.format == "ntfs" && limits.first >= limits.second) {
+        Label* why = addText(m_panel,
+                             tr("It cannot be shrunk now. Windows has to be shut down fully first: in Windows turn "
+                                "off Fast Startup, free some space, then shut it down (not restart)."),
+                             12, 400, Role::SecondaryText);
+        why->setWrap(true);
+        why->setLayoutHints({.fillWidth = true});
+    }
     // Volumes inside it are not edited one by one here.
     if (segment.format == "lvmpv" || segment.format == "btrfs") {
         mount->setEnabled(false);
@@ -710,6 +733,44 @@ void DiskEditor::apply(const std::string& error)
     }
     m_error->setVisible(false);
     reload();
+}
+
+void DiskEditor::fillPartitions()
+{
+    while (!m_partitions->children().empty())
+        m_partitions->takeChild(m_partitions->children().back().get());
+    m_partitionRows.clear();
+    for (const Disk& disk : m_disks) {
+        for (size_t i = 0; i < disk.segments.size(); ++i) {
+            const DiskSegment& segment = disk.segments[i];
+            ListRow* row = m_partitions->addChild<ListRow>();
+            // Its number on the disk, as in /dev/nvme0n1p3.
+            const size_t digits = segment.device.find_last_not_of("0123456789") + 1;
+            if (segment.free || !segment.existing || digits >= segment.device.size())
+                row->setGlyph(segment.free ? "square-dashed" : "plus");
+            else
+                row->setBadge(segment.device.substr(digits));
+            row->setTitle(segmentTitle(segment) + "   " + style::formatSize(segment.size));
+            std::vector<std::string> details;
+            if (!segment.free)
+                details.push_back(segment.existing ? "/dev/" + segment.device : tr("to be created"));
+            else if (m_disks.size() > 1)
+                details.push_back(disk.path);
+            if (!segment.free && !segment.format.empty())
+                details.push_back(formatName(segment.format) + (segment.encrypted ? " · LUKS" : ""));
+            if (!segment.label.empty() && segment.label != segmentTitle(segment))
+                details.push_back(segment.label);
+            if (!segment.mountPoint.empty() && segment.mountPoint != segmentTitle(segment))
+                details.push_back(segment.mountPoint);
+            std::string detail;
+            for (const std::string& part : details)
+                detail += (detail.empty() ? "" : "  ·  ") + part;
+            row->setDetail(detail);
+            const std::string id = disk.id;
+            row->onClicked = [this, id, i] { select(id, i); };
+            m_partitionRows.push_back(row);
+        }
+    }
 }
 
 void DiskEditor::fillLists()

@@ -48,6 +48,8 @@ SCENARIOS = {
     "win-mbr": dict(disks=[("win-mbr", None)], keep=[(0, 1), (0, 2)], windows=True, flow="default", bios=True),
     "two-disks": dict(disks=[("win-full", None), ("blank", "40G")], keep=[(0, 1), (0, 2), (0, 3)], windows=True,
                       flow="second-disk"),
+    "custom-free": dict(disks=[("win-free", None)], keep=[(0, 1), (0, 2), (0, 3), (0, 4)], windows=True,
+                        flow="custom"),
     "too-small": dict(disks=[("blank", "4G")], keep=[], windows=False, flow="refused"),
 }
 
@@ -299,6 +301,13 @@ class Test:
             if not b > r + 10:
                 raise RuntimeError("the empty disk is not the one picked")
             self.shot("second-disk")
+        elif kind == "custom":
+            # The editor: the free space is picked first; the recommended
+            # layout goes in it.
+            q.click(975, 340); time.sleep(2)
+            self.next("editor")
+            q.click(590, 392); time.sleep(4)
+            self.shot("custom-layout")
         elif kind == "encrypt":
             q.click(1113, 491); time.sleep(2); q.wait(self.ready); self.shot("encrypt")
         self.next("software")
