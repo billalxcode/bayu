@@ -1,3 +1,4 @@
 build/
 out/
 components/bayu-toolkit/third_party/
+__pycache__/

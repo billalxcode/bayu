@@ -375,10 +375,16 @@ private:
         while (!m_disksColumn->children().empty())
             m_disksColumn->takeChild(m_disksColumn->children().back().get());
         m_diskCards.clear();
-        // The largest usable disk first.
+        // An empty disk first, so that nothing on another has to give way
+        // (Windows beside a second, empty drive); then the largest one.
+        const auto rank = [](const Disk& disk) {
+            const bool empty = std::all_of(disk.segments.begin(), disk.segments.end(),
+                                           [](const DiskSegment& segment) { return segment.free; });
+            return std::pair(empty, disk.size);
+        };
         const Disk* best = nullptr;
         for (const Disk& disk : m_disks) {
-            if (!disk.installationMedia && (!best || disk.size > best->size))
+            if (!disk.installationMedia && (!best || rank(disk) > rank(*best)))
                 best = &disk;
         }
         if (m_selected.empty() && best)
