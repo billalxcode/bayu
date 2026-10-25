@@ -6,7 +6,8 @@
 # the IGOS mirror host pulls it (builder/publish-repo.sh, over the runner
 # user's SSH key).
 #
-# Secrets: R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_ENDPOINT.
+# Secrets: R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_ENDPOINT, and
+# BAYU_REPO_GPG_KEY (the IGOS repository key, to sign the RPMs).
 name: Release
 
 on:
@@ -45,6 +46,12 @@ jobs:
       - name: Build RPMs
         run: packaging/build-rpm.sh
 
+      # With the IGOS repository key, which installed systems check them against.
+      - name: Sign RPMs
+        env:
+          BAYU_REPO_GPG_KEY: ${{ secrets.BAYU_REPO_GPG_KEY }}
+        run: builder/sign-rpms.sh
+
       - name: Publish release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
@@ -54,8 +61,11 @@ jobs:
           generate_release_notes: true
 
       - name: Build ISO
+        env:
+          BAYU_REPO_GPG_KEY: ${{ secrets.BAYU_REPO_GPG_KEY }}
         run: |
           packaging/fetch-lapis.sh
+          builder/sign-rpms.sh
           PROFILE=igos builder/build-iso.sh
 
       - name: Publish ISO

@@ -1,7 +1,9 @@
 # Bayu packages: out/repo (mounted at /repo) while the image is built; the
-# installed system gets BAYU_REPO_URL of profile.conf instead.
+# installed system gets BAYU_REPO_URL of profile.conf instead, its packages
+# signed with the IGOS repository key.
 [bayu]
 name=Bayu
 baseurl=file:///repo
 enabled=1
-gpgcheck=0
+gpgcheck=1
+gpgkey=https://r2.igos-nusantara.or.id/26/RPM-GPG-KEY-IGN-REPO

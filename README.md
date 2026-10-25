@@ -175,11 +175,13 @@ pulls into its `/var/www/html/26/bayu` (`builder/publish-repo.sh`):
 git tag -a v0.2.0 -m "Bayu 0.2.0" && git push origin v0.2.0
 ```
 
-Systems installed from an image update Bayu with `sudo dnf upgrade`. One
+The RPMs are signed with the IGOS repository key (`builder/sign-rpms.sh`,
+fingerprint 4618 0BAE 950B 37E7 DCB6 0D38 8C6B F134 0021 5CA3). Systems
+installed from an image update Bayu with `sudo dnf upgrade`. One
 installed before the repository existed needs it added once:
 
 ```shell
-printf '[bayu]\nname=Bayu\nbaseurl=https://r2.igos-nusantara.or.id/26/bayu/\nenabled=1\ngpgcheck=0\n' |
+printf '[bayu]\nname=Bayu\nbaseurl=https://r2.igos-nusantara.or.id/26/bayu/\nenabled=1\ngpgcheck=1\ngpgkey=https://r2.igos-nusantara.or.id/26/RPM-GPG-KEY-IGN-REPO\n' |
   sudo tee /etc/yum.repos.d/bayu.repo
 sudo dnf upgrade
 ```
