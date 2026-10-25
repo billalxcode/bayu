@@ -2,6 +2,9 @@
 # and the live ISO to R2 (repo/iso/nightly/ign-26-harian-latest.iso, with
 # the index pages rebuilt). Runs on the self-hosted runner on sj (label
 # bayu-builder): the ISO needs a privileged container, loop devices and disk.
+# A tag also adds its RPMs to the Bayu dnf repository on R2, repo/26/bayu, and
+# the IGOS mirror host pulls it (builder/publish-repo.sh, over the runner
+# user's SSH key).
 #
 # Secrets: R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_ENDPOINT.
 name: Release
@@ -57,6 +60,11 @@ jobs:
 
       - name: Publish ISO
         run: builder/publish-nightly.sh
+
+      # The dnf repository installed systems update Bayu from.
+      - name: Publish to the Bayu repository
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: builder/publish-repo.sh
 
       - name: Clean up
         if: always()

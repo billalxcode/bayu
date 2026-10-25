@@ -166,10 +166,22 @@ Set `LAPIS_ENABLED=yes` in `profile.conf` to ship it enabled.
 Pushing a `vX.Y.Z` tag builds `bayu-desktop` X.Y.Z on AlmaLinux 10 and
 attaches the `.rpm` and `.src.rpm` to a GitHub release. It also builds
 the live ISO and uploads it to `repo/iso/nightly/ign-26-harian-latest.iso`
-on R2 (`.github/workflows/release.yml`, on the self-hosted runner):
+on R2 (`.github/workflows/release.yml`, on the self-hosted runner). It also
+adds the RPMs to the Bayu dnf repository on R2,
+https://r2.igos-nusantara.or.id/26/bayu/, which the IGOS mirror host then
+pulls into its `/var/www/html/26/bayu` (`builder/publish-repo.sh`):
 
 ```shell
 git tag -a v0.2.0 -m "Bayu 0.2.0" && git push origin v0.2.0
+```
+
+Systems installed from an image update Bayu with `sudo dnf upgrade`. One
+installed before the repository existed needs it added once:
+
+```shell
+printf '[bayu]\nname=Bayu\nbaseurl=https://r2.igos-nusantara.or.id/26/bayu/\nenabled=1\ngpgcheck=0\n' |
+  sudo tee /etc/yum.repos.d/bayu.repo
+sudo dnf upgrade
 ```
 
 ## License
