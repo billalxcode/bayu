@@ -37,7 +37,7 @@ Each scenario:
 | `too-small` | 4 GB | must refuse |
 
 Results are in `out/e2e/<scenario>/`: `result.txt`, the screenshots, the
-installation logs and `system.txt`.
+installation logs and `system.txt`; the disks too when the scenario failed.
 
 Needs `qemu-system-x86_64` with KVM, OVMF, `qemu-nbd`, `sgdisk`, `sfdisk`,
 `mkntfs`, `mkfs.exfat`, `sshpass`, and sudo for the disks. `E2E_VNC` (default

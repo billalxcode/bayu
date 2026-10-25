@@ -419,6 +419,11 @@ class Test:
         result = ("PASS" if self.ok else "FAIL") + f" {self.name}\n" + "\n".join(self.notes) + "\n"
         open(f"{self.out}/result.txt", "w").write(result)
         print(result, flush=True)
+        # An installed disk takes gigabytes: kept only to look into a failure.
+        if self.ok:
+            for disk in self.disks:
+                if os.path.exists(disk):
+                    os.unlink(disk)
         return 0 if self.ok else 1
 
 
