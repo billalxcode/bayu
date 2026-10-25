@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // F-Droid's catalog: its index-v2.json, read as a stream (it is tens of
 // megabytes), each package's newest version that runs here.
 

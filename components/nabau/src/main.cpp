@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // nabau: installs the system from the live session, a native
 // frontend for Anaconda's installation modules.
 

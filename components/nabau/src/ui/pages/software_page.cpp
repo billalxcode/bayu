@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Step 5: the base environment and the add-ons installed with it.
 
 #include <algorithm>

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // The catalog kept on disk between runs (~/.cache/bayu-store), so the store
 // opens at once and offline: one app per line, as JSON.
 

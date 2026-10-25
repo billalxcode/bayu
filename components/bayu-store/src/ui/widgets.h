@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // The store's building blocks, drawn as designed: cards, selectable
 // rows and option cards, buttons, fields, drop-downs and the layout bar.
 

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // The store's pages: Discover, Trending, Categories, a category or source,
 // an app, the library, search results and the settings.
 

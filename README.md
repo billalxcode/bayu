@@ -10,6 +10,15 @@ upstream repository and revision of each component are listed in
 [FORK.md](FORK.md). Nabau (the installer), Bayu Store and the packaging and
 image builder are Bayu's own.
 
+## Screenshots
+
+| | |
+|---|---|
+| ![Bayu Store](docs/screenshots/store.png) | ![An app in Bayu Store](docs/screenshots/app.png) |
+| Bayu Store: apps from Flathub and F-Droid | An app page in Bayu Store |
+| ![Launcher](docs/screenshots/launcher.png) | ![Nabau](docs/screenshots/nabau.png) |
+| The launcher, with Flatpak and Android apps | Nabau after an installation |
+
 ## Contents
 
 | Path | Purpose |

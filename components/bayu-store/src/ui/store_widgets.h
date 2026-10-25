@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // The store's own building blocks (the design's components sheet): app
 // icons, cards and rows, pill buttons, filter chips, the banner and the
 // pieces of an app's page.

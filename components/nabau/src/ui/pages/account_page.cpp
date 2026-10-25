@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Step 6: the user account, its permissions and the root account.
 
 #include <algorithm>

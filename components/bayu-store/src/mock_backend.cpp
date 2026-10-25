@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Sample apps shaped like the design, for the pages and screenshots
 // without a network: bayu-store --mock.
 

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD-3-Clause
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Step 2: the keyboard layout, and the time zone and clock.
 
 #include <algorithm>
