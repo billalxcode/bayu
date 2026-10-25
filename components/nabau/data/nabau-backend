@@ -39,6 +39,14 @@ export ANACONDA_PRODUCTNAME ANACONDA_PRODUCTVERSION ANACONDA_ISFINAL=true
 selinux=()
 sestatus 2>/dev/null | grep -q enabled || selinux=(--noselinux)
 anaconda-cleanup anaconda >>"$log" 2>&1
+# Anaconda's modules log to the journal only: their lines go to a file the
+# installer can show.
+journal=/tmp/nabau-install.log
+: > "$journal" && chmod a+r "$journal"
+journalctl -f -n 0 -o short-precise --no-hostname 2>/dev/null |
+    grep --line-buffered -E "anaconda|Anaconda|program:" >>"$journal" &
+follower=$!
+trap 'kill "$follower" 2>/dev/null' EXIT
 anaconda --liveinst --graphical "${selinux[@]}" >>"$log" 2>&1 </dev/null &
 anaconda=$!
 until [[ -e /run/anaconda/backend_ready && -s /run/anaconda/bus.address ]]; do

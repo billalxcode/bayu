@@ -210,7 +210,12 @@ public:
 
     double heightForWidth(double width) const override
     {
-        const double content = m_content ? m_content->heightForWidth(width - 2 * kContentPadding) : 0;
+        double content = 0;
+        if (m_content) {
+            // A scroll view has no height of its own: its preferred one counts.
+            const double preferred = m_content->layoutHints().preferredHeight;
+            content = preferred >= 0 ? preferred : m_content->heightForWidth(width - 2 * kContentPadding);
+        }
         return kHeaderHeight + content + kContentPadding;
     }
 
