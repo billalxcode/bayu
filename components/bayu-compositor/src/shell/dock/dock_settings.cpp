@@ -54,11 +54,11 @@ DockSettings::Values DockSettings::load(const std::string &path)
     base::Settings settings(path);
     // Missing keys are written with their defaults.
     if (!settings.contains("Dock/IconSize"))
-        settings.setValue("Dock/IconSize", kBaseIconSize);
+        settings.setValue("Dock/IconSize", kDefaultIconSize);
     if (!settings.contains("Dock/Direction"))
         settings.setValue("Dock/Direction", int(Bottom));
     if (!settings.contains("Dock/Visibility"))
-        settings.setValue("Dock/Visibility", int(AlwaysShow));
+        settings.setValue("Dock/Visibility", int(kDefaultVisibility));
     if (!settings.contains("Dock/EdgeMargins"))
         settings.setValue("Dock/EdgeMargins", 10);
     if (!settings.contains("Dock/GlassTint"))
@@ -68,9 +68,9 @@ DockSettings::Values DockSettings::load(const std::string &path)
     settings.sync();
 
     Values values;
-    values.iconSize = int(settings.intValue("Dock/IconSize", kBaseIconSize));
+    values.iconSize = int(settings.intValue("Dock/IconSize", kDefaultIconSize));
     values.direction = Direction(settings.intValue("Dock/Direction", Bottom));
-    values.visibility = Visibility(settings.intValue("Dock/Visibility", AlwaysShow));
+    values.visibility = Visibility(settings.intValue("Dock/Visibility", kDefaultVisibility));
     values.edgeMargins = int(settings.intValue("Dock/EdgeMargins", 10));
     values.glassTint = std::clamp(settings.doubleValue("Dock/GlassTint", 0.5), 0.0, 1.0);
     values.minimizedArea = settings.boolValue("Dock/MinimizedArea", true);

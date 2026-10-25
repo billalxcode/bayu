@@ -93,7 +93,11 @@ configure_root() {
     done
   fi
 
-  cp -a /overlay/. "$dir/"
+  # Owned by root, without group or other write, and without touching the
+  # directories the system already has: cp -a gave / and /etc the owner and
+  # mode of the overlay checkout, which a later user with that UID would own.
+  tar -C /overlay -cf - --owner=0 --group=0 --numeric-owner --mode=go-w . |
+    tar -C "$dir" -xf - --no-overwrite-dir --same-owner
   # A profile's own icons, such as its logo, join the hicolor cache.
   [[ -x $dir/usr/bin/gtk-update-icon-cache ]] &&
     chroot "$dir" gtk-update-icon-cache -qf /usr/share/icons/hicolor
