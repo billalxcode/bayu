@@ -16,24 +16,24 @@ rpms=("$ROOT"/out/repo/*.x86_64.rpm "$ROOT"/out/repo/*.noarch.rpm)
 ((${#rpms[@]})) || { echo "No RPMs in out/repo" >&2; exit 1; }
 
 repo=$(mktemp -d) && trap 'rm -rf "$repo"' EXIT
-rclone copy r2:repo/26/bayu "$repo" --exclude index.html
+"$ROOT/builder/rclone.sh" copy r2:repo/26/bayu "$repo" --exclude index.html
 cp "${rpms[@]}" "$repo/"
 # Every package in it signed, earlier releases included.
 "$ROOT/builder/sign-rpms.sh" "$repo"
 podman run --rm -v "$repo":/repo:Z bayu-builder createrepo_c -q --update /repo
-rclone sync "$repo" r2:repo/26/bayu --exclude index.html --checksum --stats-one-line -v
+"$ROOT/builder/rclone.sh" sync "$repo" r2:repo/26/bayu --exclude index.html --checksum --stats-one-line -v
 
 # Its index.html pages, as builder/mkindex.py draws the bucket's; paths from
 # the bucket root.
 idx=$(mktemp -d) && trap 'rm -rf "$repo" "$idx"' EXIT
-rclone lsjson -R --files-only --use-server-modtime --no-mimetype r2:repo/26/bayu |
+"$ROOT/builder/rclone.sh" lsjson -R --files-only --use-server-modtime --no-mimetype r2:repo/26/bayu |
   python3 -c 'import json, sys
 entries = json.load(sys.stdin)
 for e in entries:
     e["Path"] = "26/bayu/" + e["Path"]
 json.dump(entries, sys.stdout)' |
   python3 "$ROOT/builder/mkindex.py" "$idx"
-rclone copy "$idx/26/bayu" r2:repo/26/bayu --include index.html --checksum -v
+"$ROOT/builder/rclone.sh" copy "$idx/26/bayu" r2:repo/26/bayu --include index.html --checksum -v
 
 ssh -o BatchMode=yes "$HOST" \
   "rclone sync r2:repo/26/bayu /var/www/html/26/bayu --exclude index.html --checksum --stats-one-line -v 2>&1 | tail -1"
