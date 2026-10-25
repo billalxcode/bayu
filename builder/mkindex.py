@@ -6,6 +6,21 @@ Links are relative and point at dir/index.html, so it works on any static host.
 """
 import html, json, os, sys
 from collections import defaultdict
+from datetime import datetime, timedelta, timezone
+
+# Without JavaScript the times read in Jakarta's (WIB); the page's script
+# shows them in the visitor's own time zone.
+WIB = timezone(timedelta(hours=7), "WIB")
+
+
+def modified(stamp):
+    """rclone's ModTime: an ISO time with Z or an offset, nanoseconds maybe."""
+    day, _, rest = stamp.partition("T")
+    clock = rest[:8]
+    zone = rest[8:].lstrip("0123456789.")
+    zone = "+00:00" if zone in ("", "Z") else zone
+    when = datetime.fromisoformat(f"{day}T{clock}{zone}").astimezone(timezone.utc)
+    return when.strftime("%Y-%m-%dT%H:%M:%SZ"), when.astimezone(WIB).strftime("%Y-%m-%d %H:%M WIB")
 
 out = sys.argv[1]
 files, dirs = defaultdict(list), defaultdict(set)
@@ -14,7 +29,7 @@ for e in json.load(sys.stdin):
     if p == "index.html" or p.endswith("/index.html"):
         continue
     d, name = os.path.split(p)
-    files[d].append((name, e["Size"], e["ModTime"][:16].replace("T", " ")))
+    files[d].append((name, e["Size"], *modified(e["ModTime"])))
     while d:  # register every ancestor so empty-of-files dirs still get a page
         parent, child = os.path.split(d)
         dirs[parent].add(child)
@@ -38,8 +53,10 @@ h1{{font-size:18px;word-break:break-all}}input{{width:100%;padding:8px;box-sizin
 table{{width:100%;border-collapse:collapse}}td{{padding:4px 6px;border-bottom:1px solid #8883}}
 td:nth-child(n+2){{text-align:right;white-space:nowrap;color:#888}}td a{{word-break:break-all}}tr:hover{{background:#f4f4f4}}</style>
 </head><body><h1>{crumbs}</h1><input id=q placeholder="Filter…" autofocus>
-<table id=t><tr><th align=left>Name</th><th>Size</th><th>Modified (UTC)</th></tr>{rows}</table>
-<script>q.oninput=()=>{{const v=q.value.toLowerCase();for(const r of t.rows)if(r.dataset.n!==undefined)r.hidden=!r.dataset.n.includes(v)}}</script>
+<table id=t><tr><th align=left>Name</th><th>Size</th><th>Modified</th></tr>{rows}</table>
+<script>q.oninput=()=>{{const v=q.value.toLowerCase();for(const r of t.rows)if(r.dataset.n!==undefined)r.hidden=!r.dataset.n.includes(v)}}
+try{{const f=new Intl.DateTimeFormat(undefined,{{year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false,timeZoneName:"short"}});
+for(const c of document.querySelectorAll("td[data-t]")){{const d=new Date(c.dataset.t);c.textContent=f.format(d);c.title=d.toISOString()}}}}catch(e){{}}</script>
 </body></html>"""
 
 for d in sorted(set(dirs) | set(files)):
@@ -52,9 +69,10 @@ for d in sorted(set(dirs) | set(files)):
     for c in sorted(dirs[d]):
         q = html.escape(c, quote=True)
         rows.append(f'<tr data-n="{q.lower()}"><td><a href="{q}/index.html">{q}/</a></td><td>-</td><td></td></tr>')
-    for name, n, m in sorted(files[d]):
+    for name, n, utc, wib in sorted(files[d]):
         q = html.escape(name, quote=True)
-        rows.append(f'<tr data-n="{q.lower()}"><td><a href="{q}">{q}</a></td><td>{size(n)}</td><td>{m}</td></tr>')
+        rows.append(f'<tr data-n="{q.lower()}"><td><a href="{q}">{q}</a></td><td>{size(n)}</td>'
+                    f'<td data-t="{utc}">{wib}</td></tr>')
     target = os.path.join(out, d)
     os.makedirs(target, exist_ok=True)
     with open(os.path.join(target, "index.html"), "w") as f:
