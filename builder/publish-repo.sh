@@ -4,8 +4,8 @@
 # then has the IGOS mirror host pull it into /var/www/html/26/bayu. R2 is the
 # source: the host's own daily sync of 26/ leaves bayu/ alone. Earlier
 # versions stay, for downgrades.
-# Needs an rclone remote "r2" (RCLONE_CONFIG_R2_*, see release.yml) and SSH
-# to the host.
+# Needs an rclone remote "r2" (RCLONE_CONFIG_R2_*, see release.yml), the
+# signing key (BAYU_REPO_GPG_KEY, see sign-rpms.sh) and SSH to the host.
 #   BAYU_REPO_HOST=user@host   default igos@103.175.219.85
 set -Eeuo pipefail
 ROOT=$(realpath "$(dirname "$0")/..")
@@ -18,6 +18,8 @@ rpms=("$ROOT"/out/repo/*.x86_64.rpm "$ROOT"/out/repo/*.noarch.rpm)
 repo=$(mktemp -d) && trap 'rm -rf "$repo"' EXIT
 rclone copy r2:repo/26/bayu "$repo" --exclude index.html
 cp "${rpms[@]}" "$repo/"
+# Every package in it signed, earlier releases included.
+"$ROOT/builder/sign-rpms.sh" "$repo"
 podman run --rm -v "$repo":/repo:Z bayu-builder createrepo_c -q --update /repo
 rclone sync "$repo" r2:repo/26/bayu --exclude index.html --checksum --stats-one-line -v
 
