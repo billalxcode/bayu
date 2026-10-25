@@ -53,7 +53,7 @@ DockPreferences::DockPreferences(DockLayoutManager &layout, WindowManager &manag
 void DockPreferences::reload()
 {
     m_settings.reload();
-    m_layout.setBehavior(behaviorFromSetting(int(m_settings.intValue("Dock/Visibility", 0))));
+    m_layout.setBehavior(behaviorFromSetting(int(m_settings.intValue("Dock/Visibility", 2))));
     m_manager.setDockTransitionsAbovePanels(m_settings.boolValue("Dock/MinimizedArea", true));
 }
 

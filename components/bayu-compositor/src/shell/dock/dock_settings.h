@@ -34,6 +34,9 @@ public:
 
     // The icon size the dock's metrics scale from.
     static constexpr int kBaseIconSize = 54;
+    // A new user's: medium, and the dock hides when a window needs its room.
+    static constexpr int kDefaultIconSize = 44;
+    static constexpr Visibility kDefaultVisibility = IntellHide;
 
     // `path` is shell.conf.
     explicit DockSettings(std::string path);
@@ -64,9 +67,9 @@ public:
 
 private:
     struct Values {
-        int iconSize = kBaseIconSize;
+        int iconSize = kDefaultIconSize;
         Direction direction = Bottom;
-        Visibility visibility = AlwaysShow;
+        Visibility visibility = kDefaultVisibility;
         int edgeMargins = 10;
         double glassTint = 0.5;
         bool minimizedArea = true;
@@ -77,9 +80,9 @@ private:
 
     std::string m_path;
     bool m_ready = false;
-    int m_iconSize = kBaseIconSize;
+    int m_iconSize = kDefaultIconSize;
     Direction m_direction = Bottom;
-    Visibility m_visibility = AlwaysShow;
+    Visibility m_visibility = kDefaultVisibility;
     int m_edgeMargins = 10;
     double m_glassTint = 0.5;
     bool m_minimizedArea = true;

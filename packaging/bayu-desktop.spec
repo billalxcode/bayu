@@ -92,6 +92,15 @@ getent passwd bayu-greeter >/dev/null || \
 :
 
 %post
+# Images up to 0.3.2 copied their profile overlay with its owner: / and /etc,
+# and the overlay's files, belonged to the UID that built the image, which a
+# later user could get. Back to root; then the boot-only directories
+# systemd-tmpfiles skipped over the unsafe / (/tmp/.X11-unix for Xwayland).
+if [ "$(stat -c %%u /)" != 0 ]; then
+    chown root:root / && chmod go-w /
+fi
+find /etc /usr/share/icons/hicolor -xdev -uid +999 -exec chown root:root {} + -exec chmod go-w {} + 2>/dev/null || :
+systemd-tmpfiles --create --boot /usr/lib/tmpfiles.d/x11.conf >/dev/null 2>&1 || :
 # The store installs Flathub apps system-wide.
 flatpak remote-add --system --if-not-exists flathub %{_datadir}/bayu-store/flathub.flatpakrepo >/dev/null 2>&1 || :
 gtk-update-icon-cache -q -f /usr/share/icons/* 2>/dev/null || :
