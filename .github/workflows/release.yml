@@ -60,6 +60,11 @@ jobs:
           files: out/rpms/*.rpm
           generate_release_notes: true
 
+      # AlmaLinux's kernel with binder, into out/repo: the ISO boots it, and a
+      # tag publishes it with the other RPMs.
+      - name: Build kernel
+        run: packaging/kernel/build-kernel.sh
+
       - name: Build ISO
         env:
           BAYU_REPO_GPG_KEY: ${{ secrets.BAYU_REPO_GPG_KEY }}
