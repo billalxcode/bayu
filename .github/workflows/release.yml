@@ -1,0 +1,63 @@
+# A vX.Y.Z tag publishes the bayu-desktop .rpm and .src.rpm as a GitHub release
+# and the live ISO to R2 (repo/iso/nightly/ign-26-harian-<timestamp>.iso, with
+# the index pages rebuilt). Runs on the self-hosted runner on sj (label
+# bayu-builder): the ISO needs a privileged container, loop devices and disk.
+#
+# Secrets: R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_ENDPOINT.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency: release
+
+jobs:
+  release:
+    runs-on: [self-hosted, bayu-builder]
+    timeout-minutes: 240
+    env:
+      RCLONE_CONFIG_R2_TYPE: s3
+      RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+      RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+      RCLONE_CONFIG_R2_ACL: private
+      RCLONE_CONFIG_R2_NO_CHECK_BUCKET: 'true'
+    steps:
+      # The ISO build writes out/ as root.
+      - name: Clear the last build
+        run: sudo rm -rf out
+
+      # clean: false keeps the downloaded Skia between runs.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          clean: false
+
+      - name: Build RPMs
+        run: packaging/build-rpm.sh
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Bayu ${{ github.ref_name }}
+          files: out/rpms/*.rpm
+          generate_release_notes: true
+
+      - name: Build ISO
+        run: |
+          packaging/fetch-lapis.sh
+          PROFILE=igos builder/build-iso.sh
+
+      - name: Publish ISO
+        run: builder/publish-nightly.sh
+
+      - name: Clean up
+        if: always()
+        run: sudo rm -rf out
