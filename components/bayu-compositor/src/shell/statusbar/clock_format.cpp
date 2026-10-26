@@ -47,6 +47,8 @@ static std::string localeFormatField(char32_t letter, int count)
         return std::string(size_t(std::min(count, 2)), 'H');
     case 'm':
         return std::string(size_t(std::min(count, 2)), 'm');
+    case 's':
+        return std::string(size_t(std::min(count, 2)), 's');
     case 'a':
     case 'b':
     case 'B':
@@ -123,19 +125,22 @@ bool showsSeconds(const std::string &format)
     return false;
 }
 
-std::string pattern(const std::string &localeName, bool twentyFourHour)
+std::string pattern(const std::string &localeName, bool twentyFourHour, bool seconds)
 {
+    static const char *const skeletons[2][2] = {{"hmm", "hmmss"}, {"Hmm", "Hmmss"}};
+    static const char *const fallbacks[2][2] = {{"ddd MMM d h:mm AP", "ddd MMM d h:mm:ss AP"},
+                                                {"ddd MMM d HH:mm", "ddd MMM d HH:mm:ss"}};
     const std::string name = base::Locale(localeName).name();
     UErrorCode status = U_ZERO_ERROR;
     std::unique_ptr<icu::DateTimePatternGenerator> generator(
             icu::DateTimePatternGenerator::createInstance(icu::Locale(name.c_str()), status));
     if (U_SUCCESS(status)) {
         const std::string date = toLocaleFormat(bestPattern(generator.get(), "EEEMMMd"));
-        const std::string time = toLocaleFormat(bestPattern(generator.get(), twentyFourHour ? "Hmm" : "hmm"));
+        const std::string time = toLocaleFormat(bestPattern(generator.get(), skeletons[twentyFourHour][seconds]));
         if (!date.empty() && !time.empty())
             return date + ' ' + time;
     }
-    return twentyFourHour ? "ddd MMM d HH:mm" : "ddd MMM d h:mm AP";
+    return fallbacks[twentyFourHour][seconds];
 }
 
 } // namespace bayu::shell::clock_format

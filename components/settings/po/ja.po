@@ -570,6 +570,10 @@ msgid "24-hour time"
 msgstr "24 時間表示"
 
 #: src/pages/datetime/datetimepage.cpp
+msgid "Show seconds"
+msgstr "秒を表示"
+
+#: src/pages/datetime/datetimepage.cpp
 msgid "Time zone"
 msgstr "タイムゾーン"
 
@@ -2354,8 +2358,8 @@ msgid "region, locale, system language"
 msgstr "地域, ロケール, システム言語, region, locale, system language"
 
 #: src/window/pagelist.cpp
-msgid "clock, time zone, 24-hour time, NTP, sync"
-msgstr "時計, タイムゾーン, 24 時間表示, NTP, 同期, clock, time zone, 24-hour time, sync"
+msgid "clock, time zone, 24-hour time, seconds, NTP, sync"
+msgstr "時計, タイムゾーン, 24 時間表示, 秒, NTP, 同期, clock, time zone, 24-hour time, seconds, sync"
 
 #: src/window/pagelist.cpp
 msgid "web browser, email client, terminal"

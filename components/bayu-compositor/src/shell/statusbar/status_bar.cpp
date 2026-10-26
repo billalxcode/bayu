@@ -4,6 +4,8 @@
 
 #include "shell/statusbar/status_bar.h"
 
+#include <utility>
+
 #include "base/desktop_entry.h"
 #include "base/logging.h"
 #include "base/settings.h"
@@ -35,16 +37,27 @@ StatusBar::StatusBar(dbus::Connection *sessionBus, dbus::Connection *systemBus, 
     m_battery->followService(sessionBus, [sessionBus, systemBus] {
         return std::make_shared<upower::BatteryStatus>(sessionBus, systemBus);
     });
-    m_timeFormat = clock_format::pattern(m_timeLocale, m_twentyFourTime);
+    m_timeFormat = clock_format::pattern(m_timeLocale, m_twentyFourTime, m_showSeconds);
 
     m_load = runOnFileThread(
-            [path = m_settingsPath] { return base::Settings(path).boolValue("Statusbar/TwentyFourTime", false); },
-            [this](bool enabled) {
+            [path = m_settingsPath] {
+                const base::Settings settings(path);
+                return std::pair(settings.boolValue("Statusbar/TwentyFourTime", false),
+                                 settings.boolValue("Statusbar/ShowSeconds", false));
+            },
+            [this](std::pair<bool, bool> saved) {
                 // A choice made while the file was read stays.
-                if (m_twentyFourTimeSet || enabled == m_twentyFourTime)
-                    return;
-                m_twentyFourTime = enabled;
-                updateTimeFormat();
+                bool changed = false;
+                if (!m_twentyFourTimeSet && saved.first != m_twentyFourTime) {
+                    m_twentyFourTime = saved.first;
+                    changed = true;
+                }
+                if (!m_showSecondsSet && saved.second != m_showSeconds) {
+                    m_showSeconds = saved.second;
+                    changed = true;
+                }
+                if (changed)
+                    updateTimeFormat();
             });
 
     if (m_bus) {
@@ -74,6 +87,8 @@ bool StatusBar::registerServices()
                           dbus::ArgumentNames{{"batteryPercentage"}, {}});
         object->addMethod("setTwentyFourTime", [this](bool enabled) { setTwentyFourTime(enabled); },
                           dbus::ArgumentNames{{"t"}, {}});
+        object->addMethod("setShowSeconds", [this](bool enabled) { setShowSeconds(enabled); },
+                          dbus::ArgumentNames{{"showSeconds"}, {}});
         // The same as the menu's: the user is asked first. The session's
         // own methods act at once.
         object->addMethod("requestLogout", [this] { m_powerActions.request(PowerActions::Logout); });
@@ -102,6 +117,18 @@ void StatusBar::setTwentyFourTime(bool enabled)
     updateTimeFormat();
 }
 
+void StatusBar::setShowSeconds(bool enabled)
+{
+    m_showSecondsSet = true;
+    if (m_showSeconds == enabled)
+        return;
+    m_showSeconds = enabled;
+    writeSettings(m_settingsPath, [enabled](base::Settings &settings) {
+        settings.setValue("Statusbar/ShowSeconds", enabled);
+    });
+    updateTimeFormat();
+}
+
 void StatusBar::reloadLanguage()
 {
     // The session language lives in bayu-services' settings.
@@ -116,7 +143,7 @@ void StatusBar::reloadLanguage()
 
 void StatusBar::updateTimeFormat()
 {
-    m_timeFormat = clock_format::pattern(m_timeLocale, m_twentyFourTime);
+    m_timeFormat = clock_format::pattern(m_timeLocale, m_twentyFourTime, m_showSeconds);
     timeFormatChanged();
 }
 

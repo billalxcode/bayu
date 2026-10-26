@@ -52,6 +52,7 @@ struct TimeSettingsFixture : ::testing::Test
         statusBar = std::make_unique<ServiceThread>("org.bayu.Statusbar", [this](dbus::Connection& bus) {
             auto object = std::make_shared<dbus::Object>(&bus, "/Statusbar", "org.bayu.Statusbar");
             object->addMethod("setTwentyFourTime", [this](bool enabled) { twentyFour = enabled ? 1 : 0; });
+            object->addMethod("setShowSeconds", [this](bool enabled) { showSeconds = enabled ? 1 : 0; });
             object->publish();
             return std::shared_ptr<void>(object);
         });
@@ -74,6 +75,7 @@ struct TimeSettingsFixture : ::testing::Test
     std::unique_ptr<ServiceThread> statusBar;
     std::atomic<bool> ntp = true;
     std::atomic<int> twentyFour = -1;
+    std::atomic<int> showSeconds = -1;
 };
 
 } // namespace
@@ -102,4 +104,15 @@ TEST_F(TimeSettingsFixture, TheTwentyFourHourClockGoesToTheStatusBar)
     EXPECT_EQ(time.twentyFour(), !was);
     ASSERT_TRUE(waitFor([&] { return twentyFour != -1; }));
     EXPECT_EQ(twentyFour.load(), was ? 0 : 1);
+}
+
+TEST_F(TimeSettingsFixture, TheSecondsGoToTheStatusBar)
+{
+    timedate::TimeDate timeDate(dbus::Connection::session());
+    settings::TimeSettings time(timeDate);
+    const bool was = time.showSeconds();
+    time.setShowSeconds(!was);
+    EXPECT_EQ(time.showSeconds(), !was);
+    ASSERT_TRUE(waitFor([&] { return showSeconds != -1; }));
+    EXPECT_EQ(showSeconds.load(), was ? 0 : 1);
 }

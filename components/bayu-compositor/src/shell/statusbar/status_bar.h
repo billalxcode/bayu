@@ -61,6 +61,8 @@ public:
     const std::string &timeFormat() const { return m_timeFormat; }
     bool twentyFourTime() const { return m_twentyFourTime; }
     void setTwentyFourTime(bool enabled);
+    bool showSeconds() const { return m_showSeconds; }
+    void setShowSeconds(bool enabled);
 
     base::Signal<> timeFormatChanged;
 
@@ -84,6 +86,8 @@ private:
     base::Job m_language;
     bool m_twentyFourTime = false;
     bool m_twentyFourTimeSet = false;
+    bool m_showSeconds = false;
+    bool m_showSecondsSet = false;
     std::string m_timeLocale;
     std::string m_timeFormat;
 };

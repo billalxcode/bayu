@@ -8,6 +8,8 @@
 #include <functional>
 #include <optional>
 #include <string>
+#include <utility>
+#include <vector>
 
 #include "ui/geometry.h"
 #include "ui/blurred_copy.h"
@@ -159,6 +161,8 @@ public:
     void setText(std::string text);
     const std::string &text() const;
     void setWeight(int weight);
+    // As ui::Label's, for the text and its shadow.
+    void setFontFeatures(std::vector<std::pair<std::string, int>> features);
     void setDropShadow(bool shadow);
     void setTextColor(ui::Color color);
 

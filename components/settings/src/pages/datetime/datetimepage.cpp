@@ -42,6 +42,8 @@ public:
         m_autoSync->onToggled = [this](bool checked) { m_time.setUseNtp(checked); };
         m_twentyFour = card->addChild<SwitchRow>(tr("24-hour time"));
         m_twentyFour->onToggled = [this](bool checked) { m_time.setTwentyFour(checked); };
+        m_showSeconds = card->addChild<SwitchRow>(tr("Show seconds"));
+        m_showSeconds->onToggled = [this](bool checked) { m_time.setShowSeconds(checked); };
         m_timeZone = card->addChild<NavigationItem>(tr("Time zone"));
         m_timeZone->onClicked = [this] {
             if (m_dialog)
@@ -60,6 +62,7 @@ public:
 
         m_subscriptions.push_back(m_time.useNtpChanged.connect([this] { update(); }));
         m_subscriptions.push_back(m_time.twentyFourChanged.connect([this] { update(); }));
+        m_subscriptions.push_back(m_time.showSecondsChanged.connect([this] { update(); }));
         m_subscriptions.push_back(m_map.currentTimeZoneChanged.connect([this] { update(); }));
         update();
     }
@@ -69,6 +72,7 @@ private:
     {
         m_autoSync->setChecked(m_time.useNtp());
         m_twentyFour->setChecked(m_time.twentyFour());
+        m_showSeconds->setChecked(m_time.showSeconds());
         m_timeZone->setValue(m_map.currentTimeZone());
     }
 
@@ -78,6 +82,7 @@ private:
     std::vector<base::Subscription> m_subscriptions;
     SwitchRow* m_autoSync;
     SwitchRow* m_twentyFour;
+    SwitchRow* m_showSeconds;
     NavigationItem* m_timeZone;
     std::unique_ptr<TimeZoneDialog> m_dialog;
 };

@@ -570,6 +570,10 @@ msgid "24-hour time"
 msgstr ""
 
 #: src/pages/datetime/datetimepage.cpp
+msgid "Show seconds"
+msgstr ""
+
+#: src/pages/datetime/datetimepage.cpp
 msgid "Time zone"
 msgstr ""
 
@@ -2360,7 +2364,7 @@ msgid "region, locale, system language"
 msgstr ""
 
 #: src/window/pagelist.cpp
-msgid "clock, time zone, 24-hour time, NTP, sync"
+msgid "clock, time zone, 24-hour time, seconds, NTP, sync"
 msgstr ""
 
 #: src/window/pagelist.cpp

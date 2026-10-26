@@ -18,7 +18,9 @@ TimeSettings::TimeSettings(timedate::TimeDate& timeDate)
     , m_canNtp(timeDate.canNtp())
     , m_useNtp(timeDate.ntp())
 {
-    m_twentyFour = Settings(paths::bayuConfig("shell")).boolValue("Statusbar/TwentyFourTime", false);
+    const Settings shell(paths::bayuConfig("shell"));
+    m_twentyFour = shell.boolValue("Statusbar/TwentyFourTime", false);
+    m_showSeconds = shell.boolValue("Statusbar/ShowSeconds", false);
     m_timeDateChanged = m_timeDate.changed.connect([this] {
         if (m_timeDate.ntp() != m_useNtp) {
             m_useNtp = m_timeDate.ntp();
@@ -50,6 +52,15 @@ void TimeSettings::setTwentyFour(bool enabled)
     // The status bar keeps the setting; it writes shell.conf itself.
     m_statusBar.send("setTwentyFourTime", enabled);
     twentyFourChanged.emit();
+}
+
+void TimeSettings::setShowSeconds(bool enabled)
+{
+    if (m_showSeconds == enabled)
+        return;
+    m_showSeconds = enabled;
+    m_statusBar.send("setShowSeconds", enabled);
+    showSecondsChanged.emit();
 }
 
 } // namespace settings
