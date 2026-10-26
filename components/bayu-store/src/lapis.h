@@ -13,7 +13,8 @@
 namespace store::lapis {
 
 enum class State {
-    // lapis is not installed or its control socket is off.
+    // lapis is not installed, its control socket is off, or Android's
+    // images are not all there (their download did not finish).
     Missing,
     // Installed, Android not started for this session.
     Stopped,

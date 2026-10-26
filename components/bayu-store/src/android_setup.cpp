@@ -104,7 +104,12 @@ void readSetupLine(std::string_view line, AndroidSetup& state)
 
 AndroidSetupRun::AndroidSetupRun() = default;
 
-AndroidSetupRun::~AndroidSetupRun() = default;
+AndroidSetupRun::~AndroidSetupRun()
+{
+    // android-setup stops at the end of its input; ~Process then waits for it.
+    if (m_process)
+        m_process->closeStandardInput();
+}
 
 void AndroidSetupRun::start()
 {
@@ -123,9 +128,10 @@ void AndroidSetupRun::start()
         m_process->onStandardOutput = [this](std::string_view data) { readOutput(data); };
         m_process->onStandardError = [this](std::string_view data) { m_errors.append(data); };
         m_process->onFinished = [this](int exitCode, bool crashed) { setupFinished(exitCode, crashed); };
-        // pkexec goes on as root, where this process cannot kill it: the
-        // shell can be, and the download stops with its output.
-        if (!m_process->start("sh", {"-c", "pkexec /usr/libexec/bayu-store/android-setup"})) {
+        // pkexec goes on as root, where this process cannot kill it: an
+        // input left open, and closed with this process, stops it.
+        m_process->setStandardInputOpen(true);
+        if (!m_process->start("pkexec", {"/usr/libexec/bayu-store/android-setup"})) {
             finish(tr("Android could not be set up: pkexec is missing."));
             return;
         }
