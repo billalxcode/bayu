@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 14:30+0000\n"
+"POT-Creation-Date: 2026-10-26 23:25+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -107,6 +107,26 @@ msgstr "Sora"
 #: src/flathub.cpp
 msgid "Play & record"
 msgstr "Puter & rékam"
+
+#: src/lapis.cpp
+msgid "Android started but did not finish booting. It needs graphics with 3D acceleration (OpenGL; in a virtual machine, virgl), which this computer may not have."
+msgstr "Android parantos jalan tapi henteu réngsé ngamimitian. Android peryogi grafis kalayan akselerasi 3D (OpenGL; dina mesin virtual, virgl), anu panginten teu aya dina komputer ieu."
+
+#: src/lapis.cpp
+msgid "lapis-session could not be started."
+msgstr "lapis-session teu tiasa dijalankeun."
+
+#: src/lapis.cpp
+msgid "lapis is not available."
+msgstr "lapis teu sayogi."
+
+#: src/lapis.cpp
+msgid "Android did not start in time."
+msgstr "Android teu jalan dina waktosna."
+
+#: src/lapis.cpp
+msgid "lapis-session could not be stopped."
+msgstr "lapis-session teu tiasa dieureunkeun."
 
 #: src/launch/main.cpp src/ui/pages.cpp src/welcome/main.cpp
 msgid "Starting Android"
