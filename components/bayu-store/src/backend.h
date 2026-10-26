@@ -27,10 +27,17 @@ public:
     // Why the catalog could not be refreshed, for a quiet note.
     virtual std::string syncError() const = 0;
 
-    // Android apps install through lapis, when it runs.
-    virtual bool androidAvailable() const = 0;
-    // Starts Android for this session (lapis), or sets it up.
-    virtual void enableAndroid(std::function<void(const std::string& error)> done) = 0;
+    // Android apps install through lapis, once it is set up.
+    virtual bool androidAvailable() const { return androidState() != AndroidState::Missing; }
+    virtual AndroidState androidState() const = 0;
+    // Sets lapis up when it is not, then starts Android for this session;
+    // `then`, when given, installs once Android runs. Reported through
+    // androidSetup() and onChanged.
+    virtual void enableAndroid(std::optional<App> then = std::nullopt) = 0;
+    virtual AndroidSetup androidSetup() const = 0;
+    // Stops Android, also at the next logins, until an Android app is opened
+    // or Android is turned on again.
+    virtual void disableAndroid() = 0;
 
     virtual int count(Source source) const = 0;
     virtual std::vector<Category> categories() const = 0;

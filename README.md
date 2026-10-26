@@ -161,6 +161,13 @@ lapis restart                             # start it now; later logins start it
 
 Set `LAPIS_ENABLED=yes` in `profile.conf` to ship it enabled.
 
+Bayu Store does the same from **Store settings → Android apps** (or when an
+F-Droid app is installed), showing the download as it goes. Its **Turn off**
+stops Android, also at later logins, until an Android app is opened again:
+the app menu's Android entries go through
+`/usr/libexec/bayu-store/android-launch`, which shows a dialog while Android
+starts.
+
 ## Releases
 
 Pushing a `vX.Y.Z` tag builds `bayu-desktop` X.Y.Z on AlmaLinux 10 and

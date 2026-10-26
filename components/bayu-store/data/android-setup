@@ -3,6 +3,20 @@
 # the control service, and Android's images on first use.
 set -e
 systemctl enable --now lapis-control.socket
-if ! ls /var/lib/lapis/images/system.img >/dev/null 2>&1; then
-    lapis init -type VANILLA
+if [ -e /var/lib/lapis/images/system.img ] && [ -e /var/lib/lapis/images/vendor.img ]; then
+    exit 0
 fi
+if [ ! -p /dev/stdin ]; then
+    exec lapis init -type VANILLA
+fi
+# The store holds a pipe on the input and cannot signal this root process: the
+# pipe's end, the store closing, stops the download, which `lapis init` resumes
+# the next time.
+lapis init -type VANILLA &
+init=$!
+{ while read -r _; do :; done; kill "$init" 2>/dev/null; } <&0 &
+watch=$!
+status=0
+wait "$init" || status=$?
+kill "$watch" 2>/dev/null || true
+exit "$status"

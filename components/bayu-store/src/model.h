@@ -111,6 +111,45 @@ struct Job
     uint64_t bytesTotal = 0;
     uint64_t bytesPerSecond = 0;
     bool paused = false;
+    // An Android app waiting for Android to start.
+    bool startingAndroid = false;
+};
+
+// Where Android apps stand: lapis not set up, set up but not running in
+// this session, or running (frozen while idle included).
+enum class AndroidState {
+    Missing,
+    Off,
+    Running,
+};
+
+// Turning Android apps on: lapis' setup as root (its control service, and
+// Android's images downloaded once), then Android for this session.
+struct AndroidSetup
+{
+    enum class Stage {
+        Idle,
+        // pkexec asks for the password; nothing from lapis yet.
+        Authorizing,
+        Preparing,
+        Downloading,
+        Extracting,
+        Starting,
+        Failed,
+    };
+    Stage stage = Stage::Idle;
+    // Downloading and Extracting: "system" or "vendor".
+    std::string image;
+    // 0 to 1, negative while unknown.
+    double progress = -1;
+    uint64_t bytesDone = 0;
+    uint64_t bytesTotal = 0;
+    // Failed: why.
+    std::string error;
+    // The app installed once Android runs; empty for none.
+    std::string pendingApp;
+
+    bool busy() const { return stage != Stage::Idle && stage != Stage::Failed; }
 };
 
 struct StorageUsage

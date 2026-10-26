@@ -4,6 +4,8 @@
 
 #include "shell/common/app_launcher.h"
 
+#include <unistd.h>
+
 #include <chrono>
 
 #include "base/desktop_entry.h"
@@ -21,6 +23,23 @@ ApplicationLauncher::ApplicationLauncher(base::dbus::Connection *bus)
     m_runtime.setTimeout(kRuntimeTimeout);
 }
 
+std::vector<std::string> androidLaunchCommand(const std::vector<std::string> &command, const std::string &opener)
+{
+    if (command.size() != 4 || command[1] != "app" || command[2] != "launch")
+        return {};
+    const std::string &program = command[0];
+    if (program != "lapis" && !program.ends_with("/lapis"))
+        return {};
+    return {opener, command[3]};
+}
+
+// lapis' entries through the store's opener, when it is installed.
+static std::vector<std::string> throughAndroidLaunch(const std::vector<std::string> &command)
+{
+    std::vector<std::string> android = androidLaunchCommand(command);
+    return !android.empty() && ::access(kAndroidLaunch, X_OK) == 0 ? android : command;
+}
+
 static bool startHere(const std::vector<std::string> &command, const std::string &workingDirectory)
 {
     if (command.empty() || command.front().empty())
@@ -35,7 +54,9 @@ void ApplicationLauncher::launch(const base::DesktopEntry &entry, const std::vec
     const std::vector<std::string> command = entry.commandForArguments(arguments);
     const std::string workingDirectory = entry.workingDirectory;
     const std::string id = entry.id;
-    if (!m_runtime.isValid() || id.empty()) {
+    // The runtime would run the entry's own command: lapis' go through
+    // launchCommand(), which opens them through the store.
+    if (!m_runtime.isValid() || id.empty() || !androidLaunchCommand(command).empty()) {
         launchCommand(command, workingDirectory, id, std::move(done));
         return;
     }
@@ -56,9 +77,10 @@ void ApplicationLauncher::launch(const base::DesktopEntry &entry, const std::vec
     });
 }
 
-void ApplicationLauncher::launchCommand(const std::vector<std::string> &command,
+void ApplicationLauncher::launchCommand(const std::vector<std::string> &requested,
                                         const std::string &workingDirectory, const std::string &appId, Done done)
 {
+    const std::vector<std::string> command = throughAndroidLaunch(requested);
     if (command.empty() || command.front().empty()) {
         if (done)
             done(false);

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 03:39+0000\n"
+"POT-Creation-Date: 2026-10-26 16:38+0700\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,6 +11,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/android_setup.cpp
+msgid "Android could not be set up: pkexec is missing."
+msgstr "No se pudo configurar Android: falta pkexec."
+
+#: src/android_setup.cpp
+msgid "Android was not set up: the password was not given."
+msgstr "Android no se configuró: no se introdujo la contraseña."
+
+#: src/android_setup.cpp
+msgid "Android could not be set up (lapis init failed)."
+msgstr "No se pudo configurar Android (lapis init falló)."
+
+#: src/launch/main.cpp src/ui/pages.cpp src/welcome/main.cpp
+msgid "Starting Android"
+msgstr "Iniciando Android"
+
+#: src/launch/main.cpp
+#, python-brace-format
+msgid "Opening {name}. Android was off and starts again; the first start takes a minute."
+msgstr "Abriendo {name}. Android estaba apagado y se inicia de nuevo; el primer inicio tarda un minuto."
+
+#: src/launch/main.cpp
+msgid "The app did not open."
+msgstr "La aplicación no se abrió."
+
+#: src/launch/main.cpp
+msgid "lapis is missing."
+msgstr "Falta lapis."
+
+#: src/launch/main.cpp
+msgid "Android did not start"
+msgstr "Android no se inició"
 
 #: src/ui/pages.cpp
 msgid "never"
@@ -322,6 +355,10 @@ msgid "Free software"
 msgstr "Software libre"
 
 #: src/ui/pages.cpp
+msgid "Starting Android…"
+msgstr "Iniciando Android…"
+
+#: src/ui/pages.cpp
 msgid "of"
 msgstr "de"
 
@@ -537,26 +574,6 @@ msgid "ANDROID APPS"
 msgstr "APLICACIONES ANDROID"
 
 #: src/ui/pages.cpp
-msgid "Android is running"
-msgstr "Android se está ejecutando"
-
-#: src/ui/pages.cpp
-msgid "F-Droid apps install into Android (lapis) and open in their own windows."
-msgstr "Las aplicaciones de F-Droid se instalan en Android (lapis) y se abren en sus propias ventanas."
-
-#: src/ui/pages.cpp
-msgid "Turn on Android (lapis) to install apps from F-Droid. It downloads Android once, about 1.3 GB."
-msgstr "Activa Android (lapis) para instalar aplicaciones de F-Droid. Descarga Android una sola vez, unos 1,3 GB."
-
-#: src/ui/pages.cpp src/ui/store_window.cpp
-msgid "Turn on"
-msgstr "Activar"
-
-#: src/ui/pages.cpp src/ui/store_window.cpp
-msgid "Android apps could not be turned on"
-msgstr "No se pudieron activar las aplicaciones Android"
-
-#: src/ui/pages.cpp
 msgid "Show apps built only for ARM"
 msgstr "Mostrar aplicaciones creadas solo para ARM"
 
@@ -592,6 +609,92 @@ msgstr "Borrar caché"
 #: src/ui/pages.cpp
 msgid "Settings"
 msgstr "Ajustes"
+
+#: src/ui/pages.cpp
+msgid "Waiting for your password"
+msgstr "Esperando tu contraseña"
+
+#: src/ui/pages.cpp
+msgid "Setting Android up needs administrator rights, once."
+msgstr "Configurar Android necesita permisos de administrador, una sola vez."
+
+#: src/ui/pages.cpp
+msgid "Downloading Android's vendor image"
+msgstr "Descargando la imagen vendor de Android"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "Downloading Android"
+msgstr "Descargando Android"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{done} of {total}"
+msgstr "{done} de {total}"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "Unpacking Android"
+msgstr "Descomprimiendo Android"
+
+#: src/ui/pages.cpp
+msgid "Almost there."
+msgstr "Ya casi está."
+
+#: src/ui/pages.cpp
+msgid "The first start takes a minute or two."
+msgstr "El primer inicio tarda uno o dos minutos."
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "Getting Android ready"
+msgstr "Preparando Android"
+
+#: src/ui/pages.cpp
+msgid "Android is downloaded once, about 1.3 GB. You can keep using the store meanwhile."
+msgstr "Android se descarga una sola vez, unos 1,3 GB. Mientras tanto puedes seguir usando la tienda."
+
+#: src/ui/pages.cpp
+msgid "Android could not be turned on"
+msgstr "No se pudo activar Android"
+
+#: src/ui/pages.cpp
+msgid "Android is running"
+msgstr "Android se está ejecutando"
+
+#: src/ui/pages.cpp
+msgid "F-Droid apps install into Android (lapis) and open in their own windows."
+msgstr "Las aplicaciones de F-Droid se instalan en Android (lapis) y se abren en sus propias ventanas."
+
+#: src/ui/pages.cpp
+msgid "Android is off"
+msgstr "Android está apagado"
+
+#: src/ui/pages.cpp
+msgid "Opening an Android app starts it again."
+msgstr "Al abrir una aplicación de Android se vuelve a iniciar."
+
+#: src/ui/pages.cpp
+msgid "Turn on Android (lapis) to install apps from F-Droid. It downloads Android once, about 1.3 GB."
+msgstr "Activa Android (lapis) para instalar aplicaciones de F-Droid. Descarga Android una sola vez, unos 1,3 GB."
+
+#: src/ui/pages.cpp
+msgid "Turning on"
+msgstr "Activando"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{name} installs once Android runs."
+msgstr "{name} se instalará cuando Android esté en marcha."
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Turn off"
+msgstr "Apagar"
+
+#: src/ui/pages.cpp
+msgid "Try again"
+msgstr "Reintentar"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Turn on"
+msgstr "Activar"
 
 #: src/ui/store_widgets.cpp src/ui/store_window.cpp
 msgid "INSTALL"
@@ -646,8 +749,16 @@ msgid "PAUSED"
 msgstr "EN PAUSA"
 
 #: src/ui/store_window.cpp
+msgid "STARTING"
+msgstr "INICIANDO"
+
+#: src/ui/store_window.cpp
 msgid "OPEN"
 msgstr "ABRIR"
+
+#: src/ui/store_window.cpp
+msgid "SETTING UP"
+msgstr "CONFIGURANDO"
 
 #: src/ui/store_window.cpp
 #, python-brace-format
@@ -663,12 +774,20 @@ msgid "You can install it again from the store at any time."
 msgstr "Puedes volver a instalarla desde la tienda en cualquier momento."
 
 #: src/ui/store_window.cpp
+msgid "Turn off Android?"
+msgstr "¿Apagar Android?"
+
+#: src/ui/store_window.cpp
+msgid "Android apps that are open close. Android stays off, also after you log in again, until you open an Android app or turn it on here."
+msgstr "Las aplicaciones de Android abiertas se cierran. Android sigue apagado, también al volver a iniciar sesión, hasta que abras una aplicación de Android o lo actives aquí."
+
+#: src/ui/store_window.cpp
 msgid "Turn on Android apps?"
 msgstr "¿Activar las aplicaciones Android?"
 
 #: src/ui/store_window.cpp
-msgid "F-Droid apps are Android apps: they run in Android (lapis) beside the desktop. Turning it on downloads Android once (about 1.3 GB) and may ask for your password."
-msgstr "Las aplicaciones de F-Droid son aplicaciones Android: se ejecutan en Android (lapis) junto al escritorio. Al activarlo se descarga Android una sola vez (unos 1,3 GB) y puede que se pida tu contraseña."
+msgid "F-Droid apps are Android apps: they run in Android (lapis) beside the desktop. Turning it on downloads Android once (about 1.3 GB) and may ask for your password. Store settings show how it goes."
+msgstr "Las aplicaciones de F-Droid son aplicaciones de Android: se ejecutan en Android (lapis) junto al escritorio. Al activarlo se descarga Android una sola vez (unos 1,3 GB) y puede que se pida tu contraseña. La configuración de la tienda muestra el progreso."
 
 #: src/ui/store_window.cpp
 msgid "OK"
@@ -823,8 +942,13 @@ msgid "Setting up Android"
 msgstr "Configurando Android"
 
 #: src/welcome/main.cpp
-msgid "Android could not be set up. Try again from Bayu Store."
-msgstr "No se pudo configurar Android. Inténtalo de nuevo desde Bayu Store."
+msgid "Waiting for your password."
+msgstr "Esperando tu contraseña."
+
+#: src/welcome/main.cpp
+#, python-brace-format
+msgid "Downloading Android: {done} of {total}"
+msgstr "Descargando Android: {done} de {total}"
 
 #: src/welcome/main.cpp
 msgid "Dark mode"

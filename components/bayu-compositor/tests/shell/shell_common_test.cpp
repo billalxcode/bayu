@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 
 #include "dbus_test_client.h"
+#include "shell/common/app_launcher.h"
 #include "shell/common/application_badges.h"
 #include "shell/common/count_badge.h"
 #include "shell/common/task_manager.h"
@@ -155,6 +156,17 @@ TEST_F(TaskManagerTest, FindsTheEntryOfAProcessThroughItsAncestors)
     commands[200] = {"/usr/bin/org.example.Editor", "org.example.Editor"};
     EXPECT_EQ(tasks->resolveProcess({}, 200, {})->id, "org.example.Editor");
     EXPECT_EQ(tasks->entryForProcess(300), nullptr);
+}
+
+TEST(ApplicationLauncherTest, OpensLapisEntriesThroughTheStore)
+{
+    EXPECT_EQ(shell::androidLaunchCommand({"/usr/bin/lapis", "app", "launch", "org.fdroid.fdroid"}, "/opener"),
+              (std::vector<std::string>{"/opener", "org.fdroid.fdroid"}));
+    EXPECT_EQ(shell::androidLaunchCommand({"lapis", "app", "launch", "org.fdroid.fdroid"}, "/opener"),
+              (std::vector<std::string>{"/opener", "org.fdroid.fdroid"}));
+    EXPECT_TRUE(shell::androidLaunchCommand({"/usr/bin/lapis", "app", "intent", "a", "b"}, "/opener").empty());
+    EXPECT_TRUE(shell::androidLaunchCommand({"/usr/bin/notlapis", "app", "launch", "x"}, "/opener").empty());
+    EXPECT_TRUE(shell::androidLaunchCommand({"firefox"}, "/opener").empty());
 }
 
 TEST(ApplicationBadgesTest, NamesTheDesktopIdOfALauncherUri)

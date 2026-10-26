@@ -7,9 +7,14 @@
 #include <sys/un.h>
 #include <unistd.h>
 
+#include <cstdlib>
 #include <cstring>
+#include <filesystem>
+#include <fstream>
+#include <thread>
 
 #include "base/json.h"
+#include "base/paths.h"
 
 using bayu::base::json::Value;
 
@@ -18,6 +23,17 @@ namespace store::lapis {
 namespace {
 
 constexpr const char* kSocket = "/run/lapis/control.sock";
+// Android's images, where android-setup has `lapis init` put them.
+constexpr const char* kSystemImage = "/var/lib/lapis/images/system.img";
+constexpr const char* kVendorImage = "/var/lib/lapis/images/vendor.img";
+
+// lapis-session.service does not start while it is there (Bayu Store's
+// drop-in, %h/.config/bayu-store/android-off): the same place whatever
+// XDG_CONFIG_HOME says.
+std::string offMark()
+{
+    return bayu::base::paths::home() + "/.config/bayu-store/android-off";
+}
 
 // One request, its answer; an error text in `error` when it failed.
 Value call(const Value& request, std::string* error, int timeoutSeconds = 180)
@@ -87,6 +103,10 @@ std::string simple(const char* op, const char* field, const std::string& value)
 
 State state()
 {
+    // Not set up until its images are there: lapis answers once its control
+    // socket is on, also while (or after) their download stopped half way.
+    if (::access(kSystemImage, F_OK) != 0 || ::access(kVendorImage, F_OK) != 0)
+        return State::Missing;
     std::string error;
     const Value answer = call(request("status"), &error, 10);
     if (!error.empty())
@@ -133,6 +153,55 @@ std::string launch(const std::string& package)
 std::string unfreeze()
 {
     return simple("unfreeze", nullptr, {});
+}
+
+static bool booted()
+{
+    Value r = request("getprop");
+    r.insert("prop", "sys.boot_completed");
+    std::string error;
+    return call(r, &error, 10)["value"].toString() == "1";
+}
+
+std::string startSession(std::chrono::seconds timeout)
+{
+    std::error_code ignored;
+    std::filesystem::remove(offMark(), ignored);
+    // lapis-session.desktop imports these at login only when lapis was set
+    // up then; Android's windows need them.
+    std::system("systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE");
+    if (std::system("systemctl --user --no-block start lapis-session.service") != 0)
+        return "lapis-session could not be started.";
+    const auto deadline = std::chrono::steady_clock::now() + timeout;
+    while (true) {
+        const State now = state();
+        if (now == State::Missing)
+            return "lapis is not available.";
+        // Running is the container: apps open, and install, once Android
+        // has booted in it ("has no launcher activity" before). Frozen it
+        // booted already, and answers no queries.
+        if (now == State::Frozen || (now == State::Running && booted()))
+            return {};
+        if (std::chrono::steady_clock::now() >= deadline)
+            return "Android did not start in time.";
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+}
+
+std::string stopSession()
+{
+    const std::string mark = offMark();
+    std::error_code ignored;
+    std::filesystem::create_directories(std::filesystem::path(mark).parent_path(), ignored);
+    std::ofstream(mark).flush();
+    if (std::system("systemctl --user stop lapis-session.service") != 0)
+        return "lapis-session could not be stopped.";
+    return {};
+}
+
+bool turnedOff()
+{
+    return ::access(offMark().c_str(), F_OK) == 0;
 }
 
 } // namespace store::lapis
