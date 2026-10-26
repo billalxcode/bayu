@@ -1,0 +1,64 @@
+--- a/pyanaconda/modules/payloads/payload/live_image/installation.py	2026-10-26 20:58:27
++++ b/pyanaconda/modules/payloads/payload/live_image/installation.py	2026-10-26 20:58:27
+@@ -378,6 +378,26 @@
+         except (OSError, RuntimeError) as e:
+             msg = "Failed to install tar: {}".format(e)
+             raise PayloadInstallationError(msg) from None
++
++
++def rsync_failure(rc, errors):
++    """Why copying the system stopped, for the user: rsync's exit and its last errors."""
++    text = "\n".join(errors)
++    if rc < 0:
++        why = "rsync was stopped by signal {}".format(-rc)
++        if rc == -9:
++            why += ", probably for lack of memory"
++    else:
++        why = "rsync exited with code {}".format(rc)
++    if "No space left on device" in text:
++        hint = "The target disk or partition is full."
++    elif "Input/output error" in text:
++        hint = "A disk could not be read or written: the installation medium (write the " \
++               "image again, or use another USB drive) or the target disk."
++    else:
++        hint = ""
++    return " ".join(part for part in (
++        "Copying the system to the disk failed ({}).".format(why), hint, text) if part)
+ 
+ 
+ class InstallFromImageTask(Task):
+@@ -435,21 +455,29 @@
+             self._sysroot
+         ]
+ 
++        errors = []
+         try:
+             self.report_progress(_("Installing software..."))
+             reader = execReadlines(cmd, args, raise_on_nozero=False)
+             for line in reader:
+                 self._parse_rsync_update(line)
++                # rsync's own errors ("rsync: [receiver] write failed ...:
++                # No space left on device (28)"), the last few.
++                line = line.rsplit("\r", 1)[-1].strip()
++                if line.startswith(("rsync:", "rsync error:")):
++                    log.error("rsync: %s", line)
++                    errors = (errors + [line])[-3:]
+ 
+         except (OSError, RuntimeError) as e:
+             msg = "Failed to install image: {}".format(e)
+             raise PayloadInstallationError(msg) from None
+ 
+-        if reader.rc == 11:
+-            raise PayloadInstallationError(
+-                "Failed to install image: "
+-                "{} exited with code {}".format(cmd, reader.rc)
+-            )
++        # Bayu: any failure, not only 11. A system copied in part went on
++        # and failed later, at systemd-machine-id-setup (rhbz#1963778),
++        # without what stopped the copy. 24: files that vanished from the
++        # source, nothing missing in the system.
++        if reader.rc not in (0, 24):
++            raise PayloadInstallationError(rsync_failure(reader.rc, errors))
+ 
+     def _parse_rsync_update(self, line):
+         """Try to extract progress from rsync output.
