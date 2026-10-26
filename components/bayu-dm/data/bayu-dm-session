@@ -1,6 +1,18 @@
 #!/bin/sh
 # Runs the session through the login shell so profiles apply (sddm's wayland-session).
 
+# pam_gnome_keyring makes the login keyring from the password typed at the login
+# screen. An automatic login has none, so the first app storing a secret (Geary)
+# stops at an "Unlock Login Keyring" prompt. For the automatic login's account,
+# start it as gnome-keyring's plain-text keyring, which never locks, like the
+# account itself.
+keyrings=${XDG_DATA_HOME:-$HOME/.local/share}/keyrings
+if [ ! -e "$keyrings/login.keyring" ] && grep -qsx "User=$USER" /etc/bayu-dm.conf; then
+    mkdir -p -m 700 "$keyrings"
+    (umask 077 && printf '[keyring]\ndisplay-name=Login\nctime=0\nmtime=0\nlock-on-idle=false\nlock-after=false\n' >"$keyrings/login.keyring")
+    [ -e "$keyrings/default" ] || echo login >"$keyrings/default"
+fi
+
 case $SHELL in
   */bash|*/zsh)
     exec "$SHELL" --login -c 'exec "$@"' - "$@"
