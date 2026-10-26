@@ -36,7 +36,9 @@ Requires:       accountsservice polkit gsettings-desktop-schemas xdg-user-dirs
 Requires:       flatpak flatpak-libs redhat-display-fonts redhat-text-fonts
 Requires:       NetworkManager NetworkManager-wifi bluez upower (power-profiles-daemon or tuned-ppd) udisks2 fuse3
 Requires:       pipewire pipewire-pulseaudio wireplumber gnome-keyring gnome-keyring-pam
-Requires:       xdg-desktop-portal xorg-x11-server-Xwayland adwaita-icon-theme
+# xdg-desktop-portal offers OpenURI, how Flatpak apps open links and show a
+# file in its folder, only with an AppChooser backend: the GTK portal's.
+Requires:       xdg-desktop-portal xdg-desktop-portal-gtk xorg-x11-server-Xwayland adwaita-icon-theme
 Requires:       mesa-dri-drivers mesa-libEGL mesa-libgbm glibc-langpack-en
 # dbus-update-activation-environment: the session hands its environment
 # (WAYLAND_DISPLAY, XDG_CURRENT_DESKTOP) to D-Bus and systemd services.
