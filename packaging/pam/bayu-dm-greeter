@@ -9,3 +9,5 @@ session    required     pam_loginuid.so
 session    required     pam_selinux.so open
 session    optional     pam_keyinit.so force revoke
 session    include      password-auth
+# The login screen in the system's language, as the session (bayu-dm).
+session    optional     pam_env.so envfile=/etc/locale.conf
