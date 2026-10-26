@@ -1,6 +1,7 @@
 # Builds the whole Bayu monorepo. Sources come from packaging/rpmbuild.sh:
 # Source0 is `git archive` of the repository, Source1 the pinned Skia checkout
-# that bayu-toolkit builds (components/bayu-toolkit/scripts/fetch-skia.sh).
+# that bayu-toolkit builds (components/bayu-toolkit/scripts/fetch-skia.sh),
+# Source2 the crates bayu-computer-use builds with (cargo vendor).
 %global debug_package %{nil}
 %global __brp_mangle_shebangs %{nil}
 
@@ -12,6 +13,7 @@ License:        GPL-3.0-or-later AND BSD-3-Clause
 URL:            https://github.com/igos-nusantara/bayu
 Source0:        bayu-%{version}.tar.gz
 Source1:        skia.tar.gz
+Source2:        computer-use-vendor.tar.gz
 
 BuildRequires:  git cmake ninja-build pkgconf clang gcc-c++ python3 gettext
 BuildRequires:  gtk-update-icon-cache libxcrypt-devel libzip-devel pam-devel
@@ -29,6 +31,7 @@ BuildRequires:  pkgconfig(xcb-sync) pkgconfig(xcursor) pkgconfig(libpcre2-16) pk
 BuildRequires:  pkgconfig(libarchive) pkgconfig(fuse3) pkgconfig(libmtp) pkgconfig(smbclient)
 BuildRequires:  pkgconfig(libssh) pkgconfig(libcurl) pkgconfig(libical) pkgconfig(librsvg-2.0)
 BuildRequires:  flatpak-devel
+BuildRequires:  cargo rust
 BuildRequires:  qt6-qtbase-devel qt6-qtbase-private-devel qt6-qtdeclarative-devel
 
 # Runtime services, from upstream's getting-started step 4.
@@ -71,12 +74,28 @@ manager, file manager, settings, terminal and the apps around them.
 %autosetup -n bayu-%{version}
 mkdir -p components/bayu-toolkit/third_party
 tar -xzf %{SOURCE1} -C components/bayu-toolkit/third_party
+# The vendored crates instead of Debian's, offline.
+tar -xzf %{SOURCE2} -C components/bayu-computer-use
+cat > components/bayu-computer-use/.cargo/config.toml <<'EOF'
+[source.crates-io]
+replace-with = "vendored"
+
+[source.vendored]
+directory = "vendor"
+
+[net]
+offline = true
+EOF
 
 %build
 BUILD=$PWD/_build STAGE=$PWD/_stage ./build.sh
+(cd components/bayu-computer-use && cargo build --release --locked)
 
 %install
 cp -a _stage/. %{buildroot}/
+# The only path the compositor lets drive the desktop (computerControlClients).
+install -Dm 755 components/bayu-computer-use/target/release/bayu-computer-use \
+  %{buildroot}%{_bindir}/bayu-computer-use
 install -m 644 packaging/pam/bayu-dm packaging/pam/bayu-dm-greeter packaging/pam/bayu-auth \
   %{buildroot}%{_sysconfdir}/pam.d/
 install -Dm 644 packaging/fontconfig/60-bayu-noto-mono.conf \

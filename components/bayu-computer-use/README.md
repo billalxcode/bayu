@@ -26,6 +26,9 @@ cargo build --release
 
 ## Install
 
+The bayu-desktop RPM installs it (packaging/bayu-desktop.spec, with the crates
+packaging/rpmbuild.sh vendors). From a checkout:
+
 ```shell
 sudo install -m 755 target/release/bayu-computer-use /usr/bin/
 ```
