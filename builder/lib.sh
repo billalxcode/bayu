@@ -113,6 +113,18 @@ configure_root() {
   [[ -x $dir/usr/bin/gtk-update-icon-cache ]] &&
     chroot "$dir" gtk-update-icon-cache -qf /usr/share/icons/hicolor
 
+  # Anaconda goes on when rsync fails with any code but 11, and stops later at
+  # systemd-machine-id-setup without saying why (rhbz#1963778): installs say
+  # what stopped the copy (a full disk, a USB drive that cannot be read).
+  local site
+  for site in "$dir"/usr/lib64/python3*/site-packages; do
+    [[ -d $site/pyanaconda ]] || continue
+    patch -d "$site" -p1 --forward --quiet < /builder/patches/anaconda-rsync-failures.patch || {
+      echo "ERROR: builder/patches/anaconda-rsync-failures.patch does not apply to this anaconda." >&2
+      return 1
+    }
+  done
+
   # Each boot of a copy of this system gets its own machine-id.
   : > "$dir/etc/machine-id"
 }
