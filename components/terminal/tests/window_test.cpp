@@ -27,6 +27,7 @@
 #include "tools.h"
 
 #include "terminalpage.h"
+#include "terminalpane.h"
 #include "terminalsettings.h"
 #include "terminalwindow.h"
 #include "windows.h"
@@ -386,4 +387,74 @@ TEST(TerminalFontTest, ShapedClustersStayBounded)
     window.grab();
 
     EXPECT_LE(font.cachedClusters(), 8192u + 100u);
+}
+
+TEST_F(WindowTest, SplitAddsAShellBesideAndItsExitGivesTheSpaceBack)
+{
+    Windows windows(m_settings);
+    TerminalWindow* window = windows.create(shell());
+    TerminalPage* page = window->currentPage();
+    TerminalPane* first = page->currentPane();
+    page->split(first, TerminalPage::Direction::Right);
+    ASSERT_EQ(page->paneCount(), 2);
+    TerminalPane* second = page->currentPane();
+    ASSERT_NE(second, first);
+    EXPECT_EQ(&page->session(), &second->session());
+
+    window->window().show();
+    window->window().grab();
+    EXPECT_LT(first->geometry().x + first->geometry().width, second->geometry().x + 1);
+    EXPECT_EQ(first->geometry().y, second->geometry().y);
+
+    // Alt and an arrow moves between them.
+    EXPECT_TRUE(page->focusNeighbour(second, TerminalPage::Direction::Left));
+    EXPECT_EQ(page->currentPane(), first);
+    EXPECT_FALSE(page->focusNeighbour(first, TerminalPage::Direction::Left));
+
+    second->session().sendText("exit\n");
+    ASSERT_TRUE(waitFor([&] { return page->paneCount() == 1; }));
+    EXPECT_EQ(window->tabCount(), 1);
+    EXPECT_EQ(page->currentPane(), first);
+    window->window().grab();
+    EXPECT_EQ(first->geometry().width, page->geometry().width);
+}
+
+TEST_F(WindowTest, SplitBelowStacksAndTheLastPaneClosesTheTab)
+{
+    Windows windows(m_settings);
+    TerminalWindow* window = windows.create(shell());
+    window->openTab(m_directory.path(), {"/bin/sh"});
+    ASSERT_EQ(window->tabCount(), 2);
+    TerminalPage* page = window->currentPage();
+    TerminalPane* top = page->currentPane();
+    page->split(top, TerminalPage::Direction::Down);
+    TerminalPane* bottom = page->currentPane();
+    window->window().show();
+    window->window().grab();
+    EXPECT_EQ(top->geometry().x, bottom->geometry().x);
+    EXPECT_LT(top->geometry().y + top->geometry().height, bottom->geometry().y + 1);
+
+    window->closeCurrentPane();
+    ASSERT_TRUE(waitFor([&] { return page->paneCount() == 1; }));
+    EXPECT_EQ(window->tabCount(), 2);
+    window->closeCurrentPane();
+    EXPECT_TRUE(waitFor([&] { return window->tabCount() == 1; }));
+}
+
+TEST_F(WindowTest, ClosingABusyPaneAsksFirst)
+{
+    Windows windows(m_settings);
+    TerminalWindow* window = windows.create(shell());
+    TerminalPage* page = window->currentPage();
+    page->split(page->currentPane(), TerminalPage::Direction::Right);
+    TerminalPane* busy = page->currentPane();
+    busy->session().sendText("sleep 30\n");
+    ASSERT_TRUE(waitFor([&] { return busy->session().hasActiveProcess(); }));
+    EXPECT_TRUE(page->hasActiveProcess());
+
+    window->closeCurrentPane();
+    EXPECT_EQ(page->paneCount(), 2);
+    confirmLastDialog(window);
+    ASSERT_TRUE(waitFor([&] { return page->paneCount() == 1; }));
+    EXPECT_FALSE(page->hasActiveProcess());
 }

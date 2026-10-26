@@ -30,6 +30,7 @@
 #include "processhelper.h"
 #include "settingsdialog.h"
 #include "terminalpage.h"
+#include "terminalpane.h"
 #include "terminalsettings.h"
 #include "windows.h"
 
@@ -655,11 +656,9 @@ void TerminalWindow::closeTab(int index)
     }
 }
 
-// Asks before running action when a process is still running in one of pages.
-void TerminalWindow::confirmClose(const std::vector<TerminalPage*>& pages, std::function<void()> action)
+// Asks before running action when a process is still running in what it closes.
+void TerminalWindow::confirmClose(bool active, std::function<void()> action)
 {
-    const bool active = std::any_of(pages.begin(), pages.end(),
-                                    [](TerminalPage* page) { return page->session().hasActiveProcess(); });
     if (!active) {
         action();
         return;
@@ -690,12 +689,34 @@ void TerminalWindow::closeProtection(int index)
     if (index < 0 || index >= tabCount())
         return;
     TerminalPage* page = m_pages[size_t(index)];
-    confirmClose({page}, [this, page] { closeTab(indexOfPage(page)); });
+    confirmClose(page->hasActiveProcess(), [this, page] { closeTab(indexOfPage(page)); });
 }
 
 void TerminalWindow::closeCurrentTab()
 {
     closeProtection(m_currentIndex);
+}
+
+void TerminalWindow::closeCurrentPane()
+{
+    TerminalPage* page = currentPage();
+    if (!page)
+        return;
+    if (page->paneCount() < 2) {
+        closeProtection(m_currentIndex);
+        return;
+    }
+    closePane(page, page->currentPane());
+}
+
+void TerminalWindow::closePane(TerminalPage* page, TerminalPane* pane)
+{
+    // The tab can close, or the pane's shell end, while the dialog is open;
+    // the page then finds no such pane.
+    confirmClose(pane->session().hasActiveProcess(), [this, page, pane] {
+        if (indexOfPage(page) >= 0)
+            page->closePane(pane);
+    });
 }
 
 void TerminalWindow::closeOtherTabs(int index)
@@ -708,7 +729,9 @@ void TerminalWindow::closeOtherTabs(int index)
         if (page != keep)
             others.push_back(page);
     }
-    confirmClose(others, [this, keep, others] {
+    const bool active = std::any_of(others.begin(), others.end(),
+                                    [](TerminalPage* page) { return page->hasActiveProcess(); });
+    confirmClose(active, [this, keep, others] {
         // The kept tab's shell may have ended while the dialog was open; the
         // other tabs then stay rather than leave the window empty.
         if (indexOfPage(keep) < 0)
@@ -765,8 +788,8 @@ void TerminalWindow::close()
 {
     if (!m_quitting) {
         if (std::any_of(m_pages.begin(), m_pages.end(),
-                        [](TerminalPage* page) { return page->session().hasActiveProcess(); })) {
-            confirmClose(m_pages, [this] {
+                        [](TerminalPage* page) { return page->hasActiveProcess(); })) {
+            confirmClose(true, [this] {
                 m_quitting = true;
                 close();
             });

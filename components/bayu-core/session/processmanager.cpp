@@ -145,6 +145,36 @@ void ProcessManager::start()
     };
     m_compositorProcess->start(kCompositor, m_waylandSocket, m_controlSocket, 15000,
                                m_xwaylandEnvironment->readinessFile());
+
+    startKeyring();
+}
+
+void ProcessManager::startKeyring()
+{
+    // pam_gnome_keyring leaves a daemon holding the login password, and that
+    // daemon quits unless --start reaches it within two minutes. Without it the
+    // Secret Service is activated later with no password, there is no "login"
+    // collection, and the Secret portal fails every Flatpak application that
+    // asks it. GNOME's autostart entries for this are not shown in Bayu.
+    auto starter = std::make_unique<Publisher>();
+    Publisher *raw = starter.get();
+    raw->process.setStandardErrorForwarded(true);
+    // Without a PAM daemon, --start leaves one of its own running.
+    raw->process.setOomProtectionDropped(true);
+    raw->process.onFinished = [](int code, bool crashed) {
+        if (code != 0 || crashed)
+            CF_WARNING(sessionLog()) << "gnome-keyring-daemon --start failed:" << code;
+    };
+    raw->deadline.setSingleShot(true);
+    raw->deadline.onTimeout = [raw] {
+        raw->process.kill();
+    };
+    if (!raw->process.start("gnome-keyring-daemon", {"--start", "--components=secrets"})) {
+        CF_DEBUG(sessionLog()) << "gnome-keyring-daemon is unavailable";
+        return;
+    }
+    raw->deadline.start(10s);
+    m_keyringStarter = std::move(starter);
 }
 
 void ProcessManager::publishXwaylandEnvironment(bool startDesktop)

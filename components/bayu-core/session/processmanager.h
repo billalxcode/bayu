@@ -56,6 +56,7 @@ private:
     void notifyEndingStopped(Ending ending, const std::string &outcome, const std::string &applicationId);
     void startAfterCompositorReady();
     void publishXwaylandEnvironment(bool startDesktop);
+    void startKeyring();
     void startShell();
     void onShellFinished(int code, bool crashed);
     // Started once and restarted by the same bounded rule as the shell.
@@ -76,6 +77,7 @@ private:
     bayu::base::Timer m_autostartTimer;
     bayu::base::Timer m_exitTimer;
     std::vector<std::unique_ptr<Publisher>> m_publishers;
+    std::unique_ptr<Publisher> m_keyringStarter;
     bool m_started = false;
     bool m_compositorReady = false;
     bool m_desktopStarted = false;

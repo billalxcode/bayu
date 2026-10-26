@@ -6,89 +6,120 @@
 #include <algorithm>
 #include <cmath>
 
-#include "base/i18n.h"
-#include "base/strings.h"
-#include "base/url.h"
-#include "ui/clipboard.h"
-#include "ui/drag.h"
-#include "ui/keys.h"
-#include "ui/menu.h"
-#include "ui/scroll_bar.h"
-#include "ui/theme.h"
-#include "ui/window.h"
+#include "base/event_loop.h"
+#include "ui/painter.h"
 
 #include "TerminalSession.h"
 #include "TerminalView.h"
-#include "Vt102Emulation.h"
 
-#include "findbar.h"
-#include "processhelper.h"
-#include "terminalsettings.h"
+#include "terminalpane.h"
 #include "terminalwindow.h"
 
 using namespace bayu::ui;
-using bayu::i18n::format;
-using bayu::i18n::tr;
-namespace strings = bayu::base::strings;
 
-// The terminal's margins inside the page; the top is the header's line.
-static constexpr double kTerminalMargin = 6;
+// The gap between two panes, where the divider takes the pointer.
+static constexpr double kDividerGrip = 6;
+// The smallest a pane gets while a divider is dragged.
+static constexpr double kMinimumPane = 80;
+
+// A pane, or two halves of the space, first left of or above the second.
+struct TerminalPage::Split
+{
+    TerminalPane* pane = nullptr;
+    bool stacked = false;
+    double ratio = 0.5;
+    std::unique_ptr<Split> first;
+    std::unique_ptr<Split> second;
+    Split* parent = nullptr;
+    Divider* divider = nullptr;
+    RectF rect;
+};
+
+// The line between the two halves of a split, dragged to share the space differently.
+class TerminalPage::Divider : public View
+{
+public:
+    Divider(TerminalPage* page, Split* split)
+        : m_page(page)
+    {
+        setName("splitDivider");
+        setSplit(split);
+    }
+
+    // The split it divides, moved up the tree when a pane closes.
+    void setSplit(Split* split)
+    {
+        m_split = split;
+        setCursorShape(split->stacked ? CursorShape::ResizeVertical : CursorShape::ResizeHorizontal);
+    }
+
+    bool acceptsPointer() const override { return true; }
+
+    void pointerPress(const PointerEvent&) override { m_dragging = true; }
+
+    void pointerMove(const PointerEvent& event) override
+    {
+        if (!m_dragging)
+            return;
+        const RectF& rect = m_split->rect;
+        const double length = m_split->stacked ? rect.height : rect.width;
+        if (length <= 2 * kMinimumPane)
+            return;
+        // Where the pointer is in the page, across the split.
+        const double at = m_split->stacked ? geometry().y + event.position.y - rect.y
+                                           : geometry().x + event.position.x - rect.x;
+        m_split->ratio = std::clamp(at, kMinimumPane, length - kMinimumPane) / length;
+        m_page->requestLayout();
+    }
+
+    void pointerRelease(const PointerEvent&) override { m_dragging = false; }
+
+protected:
+    void paint(Painter& painter) override
+    {
+        const RectF bounds = localRect();
+        const Color color = m_page->terminalWindow()->chromeForeground().withAlpha(0.15);
+        if (m_split->stacked)
+            painter.fillRect({0, std::floor(bounds.height / 2), bounds.width, 1}, color);
+        else
+            painter.fillRect({std::floor(bounds.width / 2), 0, 1, bounds.height}, color);
+    }
+
+private:
+    TerminalPage* m_page;
+    Split* m_split = nullptr;
+    bool m_dragging = false;
+};
 
 TerminalPage::TerminalPage(TerminalWindow* window, const std::string& path, const std::vector<std::string>& command)
     : m_window(window)
-    , m_command(command)
-    , m_session(std::make_unique<Konsole::TerminalSession>())
-    , m_terminal(addChild<Konsole::TerminalView>())
-    , m_scrollBar(addChild<ScrollBar>(ScrollBar::Orientation::Vertical))
+    , m_root(std::make_unique<Split>())
 {
     setName("terminalPage");
-    m_session->setInitialWorkingDirectory(path);
-    if (!command.empty()) {
-        m_session->setShellProgram(command.front());
-        m_session->setShellProgramArguments(std::vector<std::string>(command.begin() + 1, command.end()));
-    }
-
-    m_terminal->setFullCursorHeight(true);
-    m_terminal->setBackgroundOpacity(0);
-    m_terminal->setSession(m_session.get());
-
-    m_terminal->onShortcut = [this](const bayu::ui::KeyEvent& event) { return handleShortcut(event); };
-    m_terminal->onContextMenu = [this](double x, double y) { openMenu(x, y); };
-    m_terminal->onLinkActivated = [this](const std::string& url) { m_window->openLink(url); };
-
-    m_connections.push_back(m_session->finished.connect([this] { terminalClosed(); }));
-    m_connections.push_back(m_session->titleChanged.connect([this] { titleChanged(); }));
-    m_connections.push_back(m_terminal->notifyBell.connect([this] { m_window->flashBell(); }));
-    m_connections.push_back(m_terminal->multilinePasteRequested.connect([this](const std::string& text) {
-        // The shell can exit and close the tab while the dialog is open.
-        m_window->confirmPaste(text, [this, alive = std::weak_ptr<bool>(m_alive)] {
-            if (!alive.expired())
-                m_terminal->confirmPaste();
-        });
-    }));
-    m_connections.push_back(m_terminal->scrollbarParamsChanged.connect([this] { updateScrollBar(); }));
-    m_connections.push_back(m_terminal->sizeChanged.connect([this] { updateScrollBar(); }));
-    m_connections.push_back(m_terminal->scrollbarValueChanged.connect([this] {
-        m_scrollActivity.start();
-        m_scrollBar->setMoving(true);
-    }));
-
-    // Shown while scrolling or under the pointer.
-    m_scrollActivity.setSingleShot(true);
-    m_scrollActivity.setInterval(std::chrono::milliseconds(800));
-    m_scrollActivity.onTimeout = [this] { m_scrollBar->setMoving(false); };
-    m_scrollBar->onPositionRequested = [this](double position) {
-        m_terminal->setScrollbarValue(int(std::lround(position)) + m_terminal->scrollbarMinimum());
-    };
-
-    applySettings();
+    m_root->pane = addPane(path, command);
+    m_current = m_root->pane;
 }
 
 TerminalPage::~TerminalPage()
 {
-    m_connections.clear();
-    // The view goes before the session it shows.
-    takeChild(m_terminal).reset();
+    *m_alive = false;
+    m_paneConnections.clear();
+}
+
+Konsole::TerminalSession& TerminalPage::session() const
+{
+    return m_current->session();
+}
+
+Konsole::TerminalView* TerminalPage::terminal() const
+{
+    return m_current->terminal();
+}
+
+bool TerminalPage::hasActiveProcess() const
+{
+    return std::any_of(m_panes.begin(), m_panes.end(),
+                       [](const TerminalPane* pane) { return pane->session().hasActiveProcess(); });
 }
 
 void TerminalPage::setTerminalWindow(TerminalWindow* window)
@@ -105,343 +136,232 @@ void TerminalPage::setCustomTitle(const std::string& title)
 
 std::string TerminalPage::title() const
 {
-    return !m_customTitle.empty() ? m_customTitle : m_session->title();
+    return !m_customTitle.empty() ? m_customTitle : m_current->session().title();
 }
 
 void TerminalPage::applySettings()
 {
-    const TerminalSettings& settings = m_window->settings();
-    m_terminal->setColorScheme(m_window->colorScheme());
-    m_terminal->setTerminalFont(settings.fontName(), m_window->fontPointSize());
-    m_terminal->setBlinkingCursor(settings.blinkingCursor());
-    m_terminal->setTerminalCursorShape(settings.cursorShape());
-    // NotifyBell hands the bell to the window; NoBell ignores it.
-    m_terminal->setBellMode(settings.visualBell() ? Konsole::TerminalView::NotifyBell : Konsole::TerminalView::NoBell);
-    m_terminal->setConfirmMultilinePaste(settings.confirmMultilinePaste());
-    m_terminal->setLinkColor(m_window->chromeForeground());
-    m_scrollBar->setDarkMode(m_window->chromeDark());
-    m_session->setHistorySize(settings.scrollbackLines());
-    if (m_findBar)
-        m_findBar->setColors(m_window->terminalBackground(), m_window->chromeForeground(), m_window->chromeDark(),
-                             m_window->schemeColor(1, accent::red), m_window->schemeColor(4, Theme::current().highlight));
+    for (TerminalPane* pane : m_panes)
+        pane->applySettings();
+    requestPaint();
 }
 
 void TerminalPage::retranslate()
 {
-    if (m_menu)
-        m_menu->close();
-    m_menu.reset();
-    if (m_findBar)
-        m_findBar->retranslate();
+    for (TerminalPane* pane : m_panes)
+        pane->retranslate();
 }
 
 void TerminalPage::startShell()
 {
-    m_session->startShellProgram();
-    m_terminal->setFocus();
+    m_current->startShell();
+}
+
+void TerminalPage::openFind()
+{
+    m_current->openFind();
 }
 
 void TerminalPage::focusTerminal()
 {
-    m_terminal->setFocus();
-}
-
-void TerminalPage::layout()
-{
-    const RectF bounds = localRect();
-    m_terminal->setGeometry({kTerminalMargin, 0, std::max(0.0, bounds.width - 2 * kTerminalMargin),
-                             std::max(0.0, bounds.height - kTerminalMargin)});
-    // Overlays the right margin, the terminal's height.
-    m_scrollBar->setGeometry({bounds.width - ScrollBar::thickness, 0, ScrollBar::thickness,
-                              std::max(0.0, bounds.height - kTerminalMargin)});
-    if (m_findBar) {
-        const Theme& theme = Theme::current();
-        const SizeF size = m_findBar->sizeHint();
-        m_findBar->setGeometry({bounds.width - theme.largeSpacing - size.width, theme.smallSpacing, size.width,
-                                size.height});
-    }
-    updateScrollBar();
-}
-
-void TerminalPage::updateScrollBar()
-{
-    const int lines = m_terminal->lines();
-    const int totalLines = lines + m_terminal->scrollbarMaximum() - m_terminal->scrollbarMinimum();
-    m_scrollBar->setRange(lines, totalLines, m_terminal->scrollbarValue() - m_terminal->scrollbarMinimum());
-}
-
-// Dropped files and links arrive as one shell word each.
-static std::string shellQuote(const std::string& text)
-{
-    const bool plain = !text.empty() && std::all_of(text.begin(), text.end(), [](char c) {
-        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')
-                || std::string_view("_@%+=:,./-").find(c) != std::string_view::npos;
-    });
-    if (plain)
-        return text;
-    return "'" + strings::replaceAll(text, "'", "'\\''") + "'";
+    m_current->focusTerminal();
 }
 
 void TerminalPage::dropUrls(const std::vector<std::string>& urls)
 {
-    std::vector<std::string> words;
-    for (const std::string& url : urls) {
-        // A local file as its path, "file://localhost/" too; other links as they are.
-        words.push_back(shellQuote(bayu::base::url::toLocalFile(url).value_or(url)));
-    }
-    // As a paste: bracketed for a shell that asks, so control characters in
-    // a name are inserted rather than run as editing keys.
-    m_terminal->pasteText(strings::join(words, " ") + " ");
+    m_current->dropUrls(urls);
 }
 
-static bool hasUrls(const DropOffer& offer)
+TerminalPane* TerminalPage::addPane(const std::string& path, const std::vector<std::string>& command)
 {
-    return offer.hasMimeType("text/uri-list");
+    TerminalPane* pane = addChild<TerminalPane>(this, path, command);
+    m_panes.push_back(pane);
+    attach(pane);
+    return pane;
 }
 
-static std::string textType(const DropOffer& offer)
+void TerminalPage::attach(TerminalPane* pane)
 {
-    for (const char* type : {"text/plain;charset=utf-8", "text/plain"}) {
-        if (offer.hasMimeType(type))
-            return type;
-    }
-    return std::string();
-}
-
-// A tab dragged over the terminal is not something to paste.
-bool TerminalPage::canDrop(const DropOffer& offer) const
-{
-    return hasUrls(offer) || !textType(offer).empty();
-}
-
-uint32_t TerminalPage::dragUpdate(const DragEvent&)
-{
-    return CopyAction;
-}
-
-uint32_t TerminalPage::drop(const DragEvent& event)
-{
-    std::weak_ptr<bool> alive = m_alive;
-    if (hasUrls(*event.offer)) {
-        event.offer->read("text/uri-list", [this, alive](std::string data) {
-            if (!alive.lock())
-                return;
-            // RFC 2483: one URI a line, CRLF ends, # starts a comment.
-            std::vector<std::string> urls;
-            for (std::string_view line : strings::split(data, '\n')) {
-                line = strings::trimmed(line);
-                if (!line.empty() && line.front() != '#')
-                    urls.emplace_back(line);
-            }
-            if (!urls.empty())
-                dropUrls(urls);
+    std::vector<bayu::base::Subscription>& connections = m_paneConnections[pane];
+    connections.push_back(pane->focused.connect([this, pane] { setCurrent(pane); }));
+    connections.push_back(pane->titleChanged.connect([this, pane] {
+        if (pane == m_current)
+            titleChanged();
+    }));
+    // Later, not from inside the session's own signal.
+    connections.push_back(pane->terminalClosed.connect([this, pane] {
+        bayu::base::EventLoop::current()->post([this, alive = std::weak_ptr<bool>(m_alive), pane] {
+            if (alive.lock())
+                closePane(pane);
         });
-        return CopyAction;
-    }
-
-    event.offer->read(textType(*event.offer), [this, alive](std::string data) {
-        if (alive.lock())
-            m_terminal->pasteText(data);
-    });
-    return CopyAction;
+    }));
 }
 
-// Starts from the selection when it is a single line, as a search term would be.
-void TerminalPage::openFind()
+void TerminalPage::setCurrent(TerminalPane* pane)
 {
-    const std::string selection = m_terminal->hasSelection()
-            ? std::string(strings::trimmed(m_terminal->selectedText()))
-            : std::string();
-    if (!m_findBar) {
-        m_findBar = addChild<FindBar>(m_terminal);
-        m_findBar->onClosed = [this] { m_terminal->setFocus(); };
-        applySettings();
-        requestLayout();
-    }
-    m_findBar->open(selection.find('\n') == std::string::npos ? selection : std::string());
+    if (pane == m_current)
+        return;
+    m_current = pane;
+    titleChanged();
 }
 
-bool TerminalPage::handleShortcut(const bayu::ui::KeyEvent& event)
+TerminalPage::Split* TerminalPage::leafOf(const TerminalPane* pane) const
 {
-    const uint32_t mods = event.modifiers;
-    const bool ctrl = mods & bayu::ui::ControlModifier;
-    const bool shift = mods & bayu::ui::ShiftModifier;
-    const bool alt = mods & bayu::ui::AltModifier;
-    const uint32_t key = event.key;
-    bool accepted = false;
+    std::vector<Split*> pending {m_root.get()};
+    while (!pending.empty()) {
+        Split* split = pending.back();
+        pending.pop_back();
+        if (split->pane == pane)
+            return split;
+        if (split->first)
+            pending.push_back(split->first.get());
+        if (split->second)
+            pending.push_back(split->second.get());
+    }
+    return nullptr;
+}
 
-    if (key == key::letter('a') && ctrl && shift) {
-        m_terminal->selectAll();
-        accepted = true;
-    }
-    if (key == key::letter('c') && ctrl && shift) {
-        m_terminal->copyClipboard();
-        accepted = true;
-    }
-    if (key == key::letter('v') && ctrl && shift) {
-        m_terminal->pasteClipboard();
-        accepted = true;
-    }
-    if (key == key::letter('q') && ctrl && shift) {
-        m_window->close();
-        return true;
-    }
-    if (key == key::letter('n') && ctrl && shift) {
-        m_window->newWindow();
-        accepted = true;
-    }
-    if (key == key::letter('t') && ctrl && shift) {
-        m_window->openNewTab();
-        accepted = true;
-    }
-    if (key == key::letter('w') && ctrl && shift) {
-        m_window->closeCurrentTab();
-        return true;
+void TerminalPage::split(TerminalPane* pane, Direction direction)
+{
+    Split* leaf = leafOf(pane);
+    if (!leaf)
+        return;
+
+    const std::string directory = pane->session().currentDir();
+    TerminalPane* created = addPane(directory.empty() ? "$HOME" : directory, {});
+
+    auto kept = std::make_unique<Split>();
+    kept->pane = pane;
+    auto added = std::make_unique<Split>();
+    added->pane = created;
+    const bool before = direction == Direction::Left || direction == Direction::Up;
+    leaf->first = before ? std::move(added) : std::move(kept);
+    leaf->second = before ? std::move(kept) : std::move(added);
+    leaf->first->parent = leaf;
+    leaf->second->parent = leaf;
+    leaf->pane = nullptr;
+    leaf->stacked = direction == Direction::Up || direction == Direction::Down;
+    leaf->ratio = 0.5;
+    leaf->divider = addChild<Divider>(this, leaf);
+
+    requestLayout();
+    created->startShell();
+    setCurrent(created);
+}
+
+void TerminalPage::closePane(TerminalPane* pane)
+{
+    Split* leaf = leafOf(pane);
+    if (!leaf)
+        return;
+    if (leaf == m_root.get()) {
+        terminalClosed();
+        return;
     }
 
-    // Tabs: Ctrl+Tab and Ctrl+PgDn go right, Ctrl+Shift+Tab and Ctrl+PgUp left;
-    // with Shift, Ctrl+PgUp and Ctrl+PgDn move the tab instead.
-    if (ctrl) {
-        if (key == key::Tab && !shift) {
-            m_window->cycleTab(1);
-            accepted = true;
-        } else if (key == key::Tab && shift) {
-            m_window->cycleTab(-1);
-            accepted = true;
-        } else if (key == key::PageDown) {
-            shift ? m_window->moveCurrentTab(1) : m_window->cycleTab(1);
-            accepted = true;
-        } else if (key == key::PageUp) {
-            shift ? m_window->moveCurrentTab(-1) : m_window->cycleTab(-1);
-            accepted = true;
+    // The other half takes the parent's place, and with it all of the space.
+    Split* parent = leaf->parent;
+    std::unique_ptr<Split> sibling = parent->first.get() == leaf ? std::move(parent->second)
+                                                                 : std::move(parent->first);
+    takeChild(parent->divider).reset();
+    parent->pane = sibling->pane;
+    parent->stacked = sibling->stacked;
+    parent->ratio = sibling->ratio;
+    parent->first = std::move(sibling->first);
+    parent->second = std::move(sibling->second);
+    parent->divider = sibling->divider;
+    if (parent->first)
+        parent->first->parent = parent;
+    if (parent->second)
+        parent->second->parent = parent;
+    if (parent->divider)
+        parent->divider->setSplit(parent);
+
+    m_panes.erase(std::find(m_panes.begin(), m_panes.end(), pane));
+    m_paneConnections.erase(pane);
+    // It may be closing from its own menu or shortcut: it goes once that returns.
+    std::shared_ptr<View> closed(takeChild(pane));
+    bayu::base::EventLoop::current()->post([closed] {});
+
+    if (pane == m_current) {
+        Split* next = parent;
+        while (!next->pane)
+            next = next->first.get();
+        setCurrent(next->pane);
+        next->pane->focusTerminal();
+    }
+    requestLayout();
+}
+
+bool TerminalPage::focusNeighbour(TerminalPane* pane, Direction direction)
+{
+    const RectF from = pane->geometry();
+    TerminalPane* best = nullptr;
+    double bestDistance = 0;
+    double bestOverlap = 0;
+    for (TerminalPane* other : m_panes) {
+        if (other == pane)
+            continue;
+        const RectF to = other->geometry();
+        const bool across = direction == Direction::Left || direction == Direction::Right;
+        // How far it is that way, and how much of this pane's side it faces.
+        double distance = 0;
+        switch (direction) {
+        case Direction::Left:
+            distance = from.x - (to.x + to.width);
+            break;
+        case Direction::Right:
+            distance = to.x - (from.x + from.width);
+            break;
+        case Direction::Up:
+            distance = from.y - (to.y + to.height);
+            break;
+        case Direction::Down:
+            distance = to.y - (from.y + from.height);
+            break;
+        }
+        const double overlap = across
+                ? std::min(from.y + from.height, to.y + to.height) - std::max(from.y, to.y)
+                : std::min(from.x + from.width, to.x + to.width) - std::max(from.x, to.x);
+        if (distance < -1 || overlap <= 0)
+            continue;
+        if (!best || distance < bestDistance || (distance == bestDistance && overlap > bestOverlap)) {
+            best = other;
+            bestDistance = distance;
+            bestOverlap = overlap;
         }
     }
-
-    // Alt+1 to Alt+8 pick a tab, Alt+9 the last one.
-    if (alt && !ctrl && key >= '1' && key <= '9' && m_window->tabCount() > 1) {
-        m_window->selectTab(key == '9' ? m_window->tabCount() - 1 : int(key - '1'));
-        accepted = true;
-    }
-
-    if (key == key::letter('f') && ctrl && shift) {
-        openFind();
-        accepted = true;
-    }
-
-    if (key == key::letter('k') && ctrl && shift)
-        accepted = m_session->clearScreenAndScrollback();
-
-    // Zoom: Ctrl+= (or Ctrl++), Ctrl+-, Ctrl+0.
-    if (ctrl && !alt) {
-        if (key == '=' || key == '+') {
-            m_window->zoom(1);
-            accepted = true;
-        } else if (key == '-' && !shift) {
-            m_window->zoom(-1);
-            accepted = true;
-        } else if (key == '0' && !shift) {
-            m_window->zoom(0);
-            accepted = true;
-        }
-    }
-
-    if (key == key::F1 + 10) {
-        m_window->toggleFullScreen();
-        accepted = true;
-    }
-
-    return accepted;
-}
-
-static std::string elided(const std::string& text, size_t length)
-{
-    const std::u16string utf16 = strings::utf8ToUtf16(text);
-    if (utf16.size() <= length)
-        return text;
-    return strings::utf16ToUtf8(utf16.substr(0, length - 1)) + "\xe2\x80\xa6";
-}
-
-// /^[a-z][a-z0-9+.-]*:\/\/\S+$/i
-static bool isLink(const std::string& text)
-{
-    const size_t scheme = text.find("://");
-    if (scheme == std::string::npos || scheme == 0 || scheme + 3 >= text.size())
+    if (!best)
         return false;
-    if (!std::isalpha(static_cast<unsigned char>(text[0])))
-        return false;
-    for (size_t i = 1; i < scheme; ++i) {
-        const char c = text[i];
-        if (!std::isalnum(static_cast<unsigned char>(c)) && c != '+' && c != '.' && c != '-')
-            return false;
-    }
-    for (size_t i = scheme + 3; i < text.size(); ++i) {
-        if (std::isspace(static_cast<unsigned char>(text[i])))
-            return false;
-    }
+    best->focusTerminal();
     return true;
 }
 
-void TerminalPage::openMenu(double x, double y)
+void TerminalPage::layout()
 {
-    // A right click on a word outside the selection selects that word first,
-    // so Copy and the file and link items act on what was clicked.
-    if (!m_terminal->isSelectedAt(x, y))
-        m_terminal->selectWordAt(x, y);
+    layoutSplit(*m_root, localRect());
+}
 
-    const std::string selection = m_terminal->hasSelection()
-            ? std::string(strings::trimmed(m_terminal->selectedText()))
-            : std::string();
-    const bool selectionIsLink = isLink(selection);
+void TerminalPage::layoutSplit(Split& split, RectF rect)
+{
+    split.rect = rect;
+    if (split.pane) {
+        split.pane->setGeometry(rect);
+        return;
+    }
 
-    std::string link = m_terminal->linkAt(x, y);
-    if (link.empty() && selectionIsLink)
-        link = selection;
-    m_menuLink = link;
-    m_menuPath = link.empty() ? ProcessHelper::existingPath(selection, m_session->currentDir()) : std::string();
-
-    const PointF position = m_terminal->mapToWindow({x, y});
-    std::weak_ptr<bool> alive = m_alive;
-    Clipboard::requestText([this, alive, position](std::string text) {
-        if (!alive.lock())
-            return;
-        m_menuCanPaste = !text.empty();
-
-        // The menu is a window of its own, made on the first right click.
-        if (!m_menu)
-            m_menu = std::make_unique<Menu>();
-        m_menu->clear();
-
-        if (!m_menuLink.empty()) {
-            m_menu->addItem(tr("Open Link"), [this] { m_window->openLink(m_menuLink); });
-            m_menu->addItem(tr("Copy Link"), [this] { Clipboard::setText(m_menuLink); });
-            m_menu->addSeparator();
-        }
-        if (!m_menuPath.empty()) {
-            const std::string name = m_menuPath.substr(m_menuPath.rfind('/') + 1);
-            m_menu->addItem(format(tr("Open “{name}”"), {{"name", elided(name.empty() ? m_menuPath : name, 30)}}),
-                            [this] { ProcessHelper::openUrl(m_menuPath); });
-            m_menu->addItem(tr("Show in File Manager"), [this] { ProcessHelper::showInFileManager(m_menuPath); });
-            m_menu->addSeparator();
-        }
-        if (m_terminal->hasSelection())
-            m_menu->addItem(tr("Copy"), [this] { m_terminal->copyClipboard(); });
-        if (m_menuCanPaste)
-            m_menu->addItem(tr("Paste"), [this] { m_terminal->pasteClipboard(); });
-        m_menu->addItem(tr("Select All"), [this] { m_terminal->selectAll(); });
-        m_menu->addItem(tr("Find…"), [this] { openFind(); });
-        if (m_terminal->scrollbarMaximum() > 0)
-            m_menu->addItem(tr("Clear Scrollback"), [this] { m_session->clearScrollback(); });
-        m_menu->addItem(tr("Reset Terminal"), [this] { m_session->resetTerminal(); });
-        m_menu->addSeparator();
-        m_menu->addItem(tr("New Tab"), [this] { m_window->openNewTab(); });
-        m_menu->addItem(tr("New Window"), [this] { m_window->newWindow(); });
-        m_menu->addItem(tr("Open File Manager"), [this] { ProcessHelper::openFileManager(m_session->currentDir()); });
-        m_menu->addSeparator();
-        m_menu->addItem(m_window->isFullScreen() ? tr("Exit full screen") : tr("Full screen"),
-                        [this] { m_window->toggleFullScreen(); });
-        m_menu->addItem(tr("Settings"), [this] { m_window->showSettings(); });
-
-        if (Window* window = this->window())
-            m_menu->popup(window, position);
-    });
+    // The divider has a gap of its own between the halves, so a pane added
+    // later never covers it.
+    const double length = split.stacked ? rect.height : rect.width;
+    const double firstLength = std::round(length * split.ratio - kDividerGrip / 2);
+    const double secondStart = firstLength + kDividerGrip;
+    if (split.stacked) {
+        layoutSplit(*split.first, {rect.x, rect.y, rect.width, firstLength});
+        layoutSplit(*split.second, {rect.x, rect.y + secondStart, rect.width, rect.height - secondStart});
+        split.divider->setGeometry({rect.x, rect.y + firstLength, rect.width, kDividerGrip});
+    } else {
+        layoutSplit(*split.first, {rect.x, rect.y, firstLength, rect.height});
+        layoutSplit(*split.second, {rect.x + secondStart, rect.y, rect.width - secondStart, rect.height});
+        split.divider->setGeometry({rect.x + firstLength, rect.y, kDividerGrip, rect.height});
+    }
 }

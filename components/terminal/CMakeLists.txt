@@ -20,6 +20,7 @@ add_executable(${PROJECT_NAME}
     src/processhelper.cpp
     src/settingsdialog.cpp
     src/terminalpage.cpp
+    src/terminalpane.cpp
     src/terminalsettings.cpp
     src/terminalwindow.cpp
     src/windows.cpp

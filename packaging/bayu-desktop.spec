@@ -41,6 +41,10 @@ Requires:       mesa-dri-drivers mesa-libEGL mesa-libgbm glibc-langpack-en
 # dbus-update-activation-environment: the session hands its environment
 # (WAYLAND_DISPLAY, XDG_CURRENT_DESKTOP) to D-Bus and systemd services.
 Requires:       dbus-tools
+# xdg-open opens links, from the terminal's Ctrl+click and from command-line
+# programs; wl-copy is how those programs copy to the clipboard (Claude Code's
+# own selection does). Without them both fail silently.
+Requires:       xdg-utils wl-clipboard
 # Default UI and fixed-width fonts.
 Requires:       google-noto-sans-vf-fonts google-noto-sans-mono-vf-fonts
 Requires(pre):  shadow-utils
