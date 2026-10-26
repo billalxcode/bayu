@@ -22,6 +22,14 @@ git archive --format=tar.gz --prefix="bayu-$version/" -o "$top/SOURCES/bayu-$ver
 skia=components/bayu-toolkit/third_party
 [[ -d $skia/skia ]] || components/bayu-toolkit/scripts/fetch-skia.sh
 tar -C "$skia" --exclude=.git -czf "$top/SOURCES/skia.tar.gz" skia
+# bayu-computer-use's crates, with the Cargo.lock that pins them, so the
+# .src.rpm builds offline. Its .cargo/config.toml is for Debian's packages.
+cu=$(mktemp -d)
+cp -a components/bayu-computer-use/. "$cu"
+rm -rf "$cu/.cargo" "$cu/target"
+(cd "$cu" && cargo vendor --quiet vendor >/dev/null)
+tar -C "$cu" -czf "$top/SOURCES/computer-use-vendor.tar.gz" vendor Cargo.lock
+rm -rf "$cu"
 
 rpmbuild -ba packaging/bayu-desktop.spec --define "_topdir $top" \
   --define "bayu_version $version" --define "bayu_release $release"
