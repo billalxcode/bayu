@@ -20,6 +20,7 @@
 #include <set>
 #include <thread>
 
+#include "android_setup.h"
 #include "backend.h"
 #include "base/event_loop.h"
 #include "base/hash.h"
@@ -46,6 +47,7 @@ using bayu::base::ThreadPool;
 
 constexpr int64_t kSyncAge = 6 * 3600;
 constexpr int kIconDownloads = 6;
+constexpr const char* kAndroidLaunch = "/usr/libexec/bayu-store/android-launch";
 
 int64_t now()
 {
@@ -127,6 +129,18 @@ public:
                 m_androidPackages[entry.substr(0, colon)] = std::atoll(entry.c_str() + colon + 1);
         }
         m_poll.onTimeout = [this] { refreshLibrary(); };
+        m_setup.onChanged = [this] { changed(); };
+        m_setup.onFinished = [this](const std::string& error) {
+            std::optional<App> then = std::move(m_afterSetup);
+            m_afterSetup.reset();
+            if (error.empty()) {
+                // Android runs: no need to wait for the next refresh.
+                m_android = lapis::State::Running;
+                if (then)
+                    install(*then);
+            }
+            refreshLibrary();
+        };
     }
 
     ~RealBackend() override
@@ -164,29 +178,38 @@ public:
     bool isLoading() const override { return m_loading; }
     std::string syncError() const override { return m_syncError; }
 
-    bool androidAvailable() const override { return m_android != lapis::State::Missing; }
-
-    void enableAndroid(std::function<void(const std::string&)> done) override
+    AndroidState androidState() const override
     {
-        // The control socket and Android's images need root once; the session
-        // is the user's.
-        async(
-            [] {
-                if (lapis::state() == lapis::State::Missing) {
-                    const int status = std::system("pkexec /usr/libexec/bayu-store/android-setup");
-                    if (status != 0)
-                        return std::string("Android could not be set up (lapis init failed or was refused).");
-                }
-                std::system("systemctl --user start lapis-session");
-                for (int i = 0; i < 120 && lapis::state() == lapis::State::Stopped; ++i)
-                    std::this_thread::sleep_for(std::chrono::seconds(1));
-                return lapis::state() == lapis::State::Missing ? std::string("lapis is not available.")
-                                                               : std::string();
-            },
-            [this, done](std::string error) {
-                refreshLibrary();
-                done(error);
-            });
+        return m_android == lapis::State::Missing ? AndroidState::Missing
+               : m_android == lapis::State::Stopped ? AndroidState::Off
+                                                    : AndroidState::Running;
+    }
+
+    void enableAndroid(std::optional<App> then) override
+    {
+        if (then)
+            m_afterSetup = then;
+        if (!m_setup.isRunning())
+            m_setup.start();
+        changed();
+    }
+
+    AndroidSetup androidSetup() const override
+    {
+        AndroidSetup setup = m_setup.state();
+        if (m_afterSetup)
+            setup.pendingApp = m_afterSetup->name.empty() ? m_afterSetup->id : m_afterSetup->name;
+        return setup;
+    }
+
+    void disableAndroid() override
+    {
+        async([] { return lapis::stopSession(); },
+              [this](std::string error) {
+                  if (!error.empty())
+                      m_error = error;
+                  refreshLibrary();
+              });
     }
 
     int count(Source source) const override { return m_catalog.count(source); }
@@ -409,7 +432,8 @@ public:
     void launch(const std::string& id, Source source) override
     {
         if (source == Source::FDroid) {
-            bayu::base::Process::startDetached("lapis", {"app", "launch", id});
+            // Shows that Android starts, when it does not run.
+            bayu::base::Process::startDetached(kAndroidLaunch, {id});
             return;
         }
         async([id] { return flatpak::launch(id); },
@@ -800,9 +824,18 @@ private:
         if (lapis::state() == lapis::State::Frozen)
             lapis::unfreeze();
         if (lapis::state() == lapis::State::Stopped) {
-            std::system("systemctl --user start lapis-session");
-            for (int i = 0; i < 90 && lapis::state() == lapis::State::Stopped; ++i)
-                std::this_thread::sleep_for(std::chrono::seconds(1));
+            Work* waiting = &work;
+            m_loop.post([this, waiting] {
+                waiting->job.startingAndroid = true;
+                changed();
+            });
+            const std::string error = lapis::startSession(std::chrono::minutes(3));
+            m_loop.post([this, waiting] {
+                waiting->job.startingAndroid = false;
+                changed();
+            });
+            if (!error.empty())
+                return error;
         }
         if (work.job.kind == Job::Kind::Remove)
             return lapis::uninstall(app.id);
@@ -883,6 +916,8 @@ private:
     std::set<std::string> m_flatpakUpdates;
     std::map<std::string, int64_t> m_androidPackages;
     lapis::State m_android = lapis::State::Missing;
+    AndroidSetupRun m_setup;
+    std::optional<App> m_afterSetup;
     StorageUsage m_usage;
     uint64_t m_cacheSize = 0;
     int64_t m_lastChecked = 0;

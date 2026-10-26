@@ -164,8 +164,14 @@ public:
     void start() override {}
     bool isLoading() const override { return false; }
     std::string syncError() const override { return {}; }
-    bool androidAvailable() const override { return true; }
-    void enableAndroid(std::function<void(const std::string&)> done) override { done({}); }
+    AndroidState androidState() const override { return AndroidState::Running; }
+    void enableAndroid(std::optional<App> then) override
+    {
+        if (then)
+            install(*then);
+    }
+    AndroidSetup androidSetup() const override { return {}; }
+    void disableAndroid() override {}
 
     int count(Source source) const override { return source == Source::Flathub ? 8420 : 4060; }
     std::vector<Category> categories() const override

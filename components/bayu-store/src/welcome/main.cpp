@@ -18,6 +18,7 @@
 #include "base/i18n.h"
 #include "base/paths.h"
 #include "base/process.h"
+#include "android_setup.h"
 #include "bayu/appearance/appearance.h"
 #include "lapis.h"
 #include "ui/application.h"
@@ -326,16 +327,20 @@ private:
         m_androidButton = extra->addChild<ActionButton>(tr("Turn on Android apps"), ActionButton::Kind::Primary);
         m_androidButton->setLeadingGlyph("smartphone");
         m_androidButton->onClicked = [this] { enableAndroid(); };
-        updateAndroid({});
+        updateAndroid();
     }
 
-    void updateAndroid(const std::string& error)
+    void updateAndroid()
     {
-        const bool on = store::lapis::state() != store::lapis::State::Missing;
-        const bool busy = m_androidSetup && m_androidSetup->isRunning();
-        m_androidStatus->setText(on ? tr("Android apps are on. Find them in Bayu Store under F-Droid.") : error);
-        m_androidStatus->setColor(store::style::color(on ? Role::Success : Role::Danger));
-        m_androidStatus->setVisible(on || !error.empty());
+        const store::AndroidSetup& setup = m_androidSetup.state();
+        const bool busy = setup.busy();
+        const bool failed = setup.stage == store::AndroidSetup::Stage::Failed;
+        const bool on = !busy && !failed && store::lapis::state() != store::lapis::State::Missing;
+        m_androidStatus->setText(on       ? std::string(tr("Android apps are on. Find them in Bayu Store under F-Droid."))
+                                 : failed ? setup.error
+                                          : setupText(setup));
+        m_androidStatus->setColor(store::style::color(on ? Role::Success : failed ? Role::Danger : Role::SecondaryText));
+        m_androidStatus->setVisible(on || failed || busy);
         m_androidButton->setVisible(!on);
         m_androidButton->setBusy(busy);
         m_androidButton->setText(busy ? tr("Setting up Android") : tr("Turn on Android apps"));
@@ -346,16 +351,34 @@ private:
     // then Android for this session.
     void enableAndroid()
     {
-        m_androidSetup = std::make_unique<Process>();
-        m_androidSetup->onFinished = [this](int exitCode, bool crashed) {
-            if (exitCode == 0 && !crashed)
-                run("systemctl", {"--user", "start", "lapis-session"});
+        m_androidSetup.onChanged = [this] {
             if (m_androidButton)
-                updateAndroid(exitCode == 0 && !crashed ? std::string()
-                                                        : tr("Android could not be set up. Try again from Bayu Store."));
+                updateAndroid();
         };
-        m_androidSetup->start("pkexec", {"/usr/libexec/bayu-store/android-setup"});
-        updateAndroid({});
+        m_androidSetup.start();
+    }
+
+    static std::string setupText(const store::AndroidSetup& setup)
+    {
+        using Stage = store::AndroidSetup::Stage;
+        switch (setup.stage) {
+        case Stage::Authorizing:
+            return tr("Waiting for your password.");
+        case Stage::Downloading:
+            if (setup.bytesTotal)
+                return bayu::i18n::format(tr("Downloading Android: {done} of {total}"),
+                                          {{"done", store::style::formatSize(setup.bytesDone)},
+                                           {"total", store::style::formatSize(setup.bytesTotal)}});
+            return tr("Downloading Android");
+        case Stage::Extracting:
+            return tr("Unpacking Android");
+        case Stage::Starting:
+            return tr("Starting Android");
+        case Stage::Preparing:
+            return tr("Getting Android ready");
+        default:
+            return {};
+        }
     }
 
     void buildAppearance(Column* extra)
@@ -415,7 +438,7 @@ private:
     std::vector<std::pair<std::string, WallpaperTile*>> m_wallpapers;
     Label* m_androidStatus = nullptr;
     ActionButton* m_androidButton = nullptr;
-    std::unique_ptr<Process> m_androidSetup;
+    store::AndroidSetupRun m_androidSetup;
 };
 
 bool isLive()

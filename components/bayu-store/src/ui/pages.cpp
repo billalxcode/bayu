@@ -981,9 +981,10 @@ public:
             ThinProgress* bar = m_text->addChild<ThinProgress>();
             bar->setLayoutHints({.fillWidth = true, .margins = {0, 6, 0, 4}});
             bar->setValue(std::max(0.0, job->progress));
-            std::string bytes = job->bytesTotal ? style::formatSize(job->bytesDone) + " " + tr("of") + " "
-                                                      + style::formatSize(job->bytesTotal)
-                                                : std::string(tr("Waiting"));
+            std::string bytes = job->startingAndroid ? std::string(tr("Starting Android…"))
+                                : job->bytesTotal  ? style::formatSize(job->bytesDone) + " " + tr("of") + " "
+                                                         + style::formatSize(job->bytesTotal)
+                                                   : std::string(tr("Waiting"));
             if (job->paused)
                 bytes += " · " + std::string(tr("paused"));
             else if (job->bytesPerSecond)
@@ -1428,33 +1429,7 @@ public:
         refresh->onClicked = [&backend] { backend.sync(); };
 
         group = section(tr("ANDROID APPS"));
-        Card* android = group->addChild<Card>(20);
-        android->setSpacing(12);
-        android->setLayoutHints({.fillWidth = true});
-        const bool running = backend.androidAvailable();
-        Row* status = android->addChild<Row>();
-        status->setSpacing(12);
-        Icon* dot = status->addChild<Icon>(running ? "circle-check" : "smartphone-off", 20);
-        dot->setColor(running ? style::color(Role::Success) : style::color(Role::SecondaryText));
-        Column* text = status->addChild<Column>();
-        text->setLayoutHints({.fillWidth = true});
-        addText(text, running ? tr("Android is running") : tr("Android apps are off"), 16, 600);
-        Label* detail = addText(text,
-                                running ? tr("F-Droid apps install into Android (lapis) and open in their own "
-                                             "windows.")
-                                        : tr("Turn on Android (lapis) to install apps from F-Droid. It downloads "
-                                             "Android once, about 1.3 GB."),
-                                14, 400, Role::SecondaryText);
-        detail->setWrap(true);
-        if (!running) {
-            ActionButton* enable = status->addChild<ActionButton>(tr("Turn on"), ActionButton::Kind::Primary);
-            enable->onClicked = [this, &backend] {
-                backend.enableAndroid([this](const std::string& error) {
-                    if (!error.empty())
-                        this->store().showError(tr("Android apps could not be turned on"), error);
-                });
-            };
-        }
+        addAndroidCard(group, backend);
         ToggleCard* arm = group->addChild<ToggleCard>(tr("Show apps built only for ARM"),
                                                tr("They run through ARM translation (libhoudini), slower and not "
                                                   "always well"));
@@ -1486,6 +1461,102 @@ public:
     std::string title() const override { return tr("Settings"); }
 
 private:
+    // Android: how its setup goes, or whether it runs, with the button
+    // that turns it on or off.
+    void addAndroidCard(Column* group, Backend& backend)
+    {
+        const AndroidSetup setup = backend.androidSetup();
+        const AndroidState state = backend.androidState();
+        Card* android = group->addChild<Card>(20);
+        android->setSpacing(12);
+        android->setLayoutHints({.fillWidth = true});
+        Row* status = android->addChild<Row>();
+        status->setSpacing(12);
+        status->setLayoutHints({.fillWidth = true});
+
+        std::string glyph = "smartphone-off";
+        Role color = Role::SecondaryText;
+        std::string title;
+        std::string detail;
+        if (setup.busy()) {
+            glyph = setup.stage == AndroidSetup::Stage::Downloading ? "download" : "smartphone";
+            color = Role::SecondaryText;
+            switch (setup.stage) {
+            case AndroidSetup::Stage::Authorizing:
+                title = tr("Waiting for your password");
+                detail = tr("Setting Android up needs administrator rights, once.");
+                break;
+            case AndroidSetup::Stage::Downloading:
+                title = setup.image == "vendor" ? tr("Downloading Android's vendor image")
+                                                : tr("Downloading Android");
+                detail = setup.bytesTotal ? format(tr("{done} of {total}"), {{"done", style::formatSize(setup.bytesDone)},
+                                                                              {"total", style::formatSize(setup.bytesTotal)}})
+                                          : style::formatSize(setup.bytesDone);
+                if (setup.progress >= 0)
+                    detail += " · " + std::to_string(int(setup.progress * 100)) + "%";
+                break;
+            case AndroidSetup::Stage::Extracting:
+                title = tr("Unpacking Android");
+                detail = tr("Almost there.");
+                break;
+            case AndroidSetup::Stage::Starting:
+                title = tr("Starting Android");
+                detail = tr("The first start takes a minute or two.");
+                break;
+            default:
+                title = tr("Getting Android ready");
+                detail = tr("Android is downloaded once, about 1.3 GB. You can keep using the store meanwhile.");
+                break;
+            }
+        } else if (setup.stage == AndroidSetup::Stage::Failed) {
+            glyph = "alert";
+            color = Role::Danger;
+            title = tr("Android could not be turned on");
+            detail = setup.error;
+        } else if (state == AndroidState::Running) {
+            glyph = "circle-check";
+            color = Role::Success;
+            title = tr("Android is running");
+            detail = tr("F-Droid apps install into Android (lapis) and open in their own windows.");
+        } else if (state == AndroidState::Off) {
+            title = tr("Android is off");
+            detail = tr("Opening an Android app starts it again.");
+        } else {
+            title = tr("Android apps are off");
+            detail = tr("Turn on Android (lapis) to install apps from F-Droid. It downloads Android once, about 1.3 GB.");
+        }
+
+        Icon* icon = status->addChild<Icon>(glyph, 20);
+        icon->setColor(style::color(color));
+        Column* text = status->addChild<Column>();
+        text->setSpacing(2);
+        text->setLayoutHints({.fillWidth = true});
+        addText(text, title, 16, 600);
+        Label* note = addText(text, detail, 14, 400, setup.stage == AndroidSetup::Stage::Failed ? Role::Danger
+                                                                                                  : Role::SecondaryText);
+        note->setWrap(true);
+
+        if (setup.busy()) {
+            ActionButton* busy = status->addChild<ActionButton>(tr("Turning on"), ActionButton::Kind::Primary);
+            busy->setBusy(true);
+            ThinProgress* bar = android->addChild<ThinProgress>();
+            bar->setLayoutHints({.fillWidth = true});
+            bar->setValue(std::max(0.0, setup.progress));
+            bar->setVisible(setup.progress >= 0);
+            if (!setup.pendingApp.empty())
+                addText(android, format(tr("{name} installs once Android runs."), {{"name", setup.pendingApp}}), 14,
+                        400, Role::SecondaryText);
+        } else if (state == AndroidState::Running) {
+            ActionButton* off = status->addChild<ActionButton>(tr("Turn off"));
+            off->setLeadingGlyph("power");
+            off->onClicked = [this] { this->store().askToDisableAndroid(); };
+        } else {
+            ActionButton* on = status->addChild<ActionButton>(
+                setup.stage == AndroidSetup::Stage::Failed ? tr("Try again") : tr("Turn on"), ActionButton::Kind::Primary);
+            on->onClicked = [&backend] { backend.enableAndroid(); };
+        }
+    }
+
     Column* section(std::string title)
     {
         Column* group = addChild<Column>();

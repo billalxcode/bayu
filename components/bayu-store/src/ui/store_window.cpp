@@ -400,9 +400,10 @@ AppAction StoreWindow::actionFor(const App& app) const
     AppAction action;
     if (const std::optional<Job> job = m_backend.job(app.id, app.source)) {
         action.progress = std::max(0.0, job->progress);
-        action.text = job->paused ? tr("PAUSED")
-                      : job->progress >= 0 ? std::to_string(int(job->progress * 100)) + "%"
-                                           : tr("QUEUED");
+        action.text = job->paused            ? tr("PAUSED")
+                      : job->startingAndroid ? tr("STARTING")
+                      : job->progress >= 0   ? std::to_string(int(job->progress * 100)) + "%"
+                                             : tr("QUEUED");
         action.does = AppAction::Does::Pause;
         return action;
     }
@@ -420,6 +421,8 @@ AppAction StoreWindow::actionFor(const App& app) const
     action.text = tr("INSTALL");
     action.does = app.source == Source::FDroid && !m_backend.androidAvailable() ? AppAction::Does::EnableAndroid
                                                                                 : AppAction::Does::Install;
+    if (action.does == AppAction::Does::EnableAndroid && m_backend.androidSetup().busy())
+        action.text = tr("SETTING UP");
     return action;
 }
 
@@ -463,21 +466,34 @@ void StoreWindow::askToRemove(const std::string& id, Source source)
     m_confirm->show();
 }
 
+void StoreWindow::askToDisableAndroid()
+{
+    m_confirm = std::make_unique<ConfirmDialog>(
+        m_window.get(), tr("Turn off Android?"),
+        tr("Android apps that are open close. Android stays off, also after you log in again, until you open an "
+           "Android app or turn it on here."));
+    m_confirm->setConfirmText(tr("Turn off"));
+    m_confirm->onAccepted = [this] { m_backend.disableAndroid(); };
+    m_confirm->show();
+}
+
 void StoreWindow::askToEnableAndroid(const App& app)
 {
+    // Store settings show how the setup goes, and the app installs after.
+    const auto enable = [this, app] {
+        m_backend.enableAndroid(app);
+        go({Route::Kind::Settings});
+    };
+    if (m_backend.androidSetup().busy()) {
+        enable();
+        return;
+    }
     m_confirm = std::make_unique<ConfirmDialog>(
         m_window.get(), tr("Turn on Android apps?"),
         tr("F-Droid apps are Android apps: they run in Android (lapis) beside the desktop. Turning it on downloads "
-           "Android once (about 1.3 GB) and may ask for your password."));
+           "Android once (about 1.3 GB) and may ask for your password. Store settings show how it goes."));
     m_confirm->setConfirmText(tr("Turn on"));
-    m_confirm->onAccepted = [this, app] {
-        m_backend.enableAndroid([this, app](const std::string& error) {
-            if (!error.empty())
-                showError(tr("Android apps could not be turned on"), error);
-            else
-                m_backend.install(app);
-        });
-    };
+    m_confirm->onAccepted = enable;
     m_confirm->show();
 }
 

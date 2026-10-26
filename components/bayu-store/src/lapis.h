@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include <chrono>
 #include <cstdint>
 #include <map>
 #include <string>
@@ -28,5 +29,14 @@ std::string install(const std::string& apk);
 std::string uninstall(const std::string& package);
 std::string launch(const std::string& package);
 std::string unfreeze();
+
+// Android for this session, through the lapis-session user unit. Starting
+// waits, at most `timeout`, for Android to run; an error text when it does
+// not. Stopping keeps Android off at the next logins too, until it starts
+// again: lapis-session does not start while the mark turnedOff() reads is
+// there.
+std::string startSession(std::chrono::seconds timeout);
+std::string stopSession();
+bool turnedOff();
 
 } // namespace store::lapis

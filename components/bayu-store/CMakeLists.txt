@@ -16,6 +16,7 @@ pkg_check_modules(CURL REQUIRED IMPORTED_TARGET libcurl)
 pkg_check_modules(FLATPAK REQUIRED IMPORTED_TARGET flatpak)
 
 add_library(store-ui OBJECT
+    src/android_setup.cpp
     src/cache.cpp
     src/catalog.cpp
     src/fdroid.cpp
@@ -44,11 +45,23 @@ add_executable(bayu-welcome src/welcome/main.cpp)
 target_compile_definitions(bayu-welcome PRIVATE WELCOME_DATA_DIR="${WELCOME_DATA_DIR}")
 target_link_libraries(bayu-welcome PRIVATE store-ui Bayu::AppearanceClient)
 
+# Opens an Android app, with a dialog while Android starts again.
+add_executable(android-launch src/launch/main.cpp)
+target_link_libraries(android-launch PRIVATE store-ui)
+
 add_executable(store-fdroid-test tests/fdroid_test.cpp)
 target_link_libraries(store-fdroid-test PRIVATE store-ui)
 
+add_executable(store-android-setup-test tests/android_setup_test.cpp)
+target_link_libraries(store-android-setup-test PRIVATE store-ui)
+enable_testing()
+add_test(NAME store-android-setup-test COMMAND store-android-setup-test)
+
 install(TARGETS ${PROJECT_NAME} bayu-welcome RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(PROGRAMS data/android-setup DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/bayu-store)
+install(TARGETS android-launch RUNTIME DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/bayu-store)
+install(FILES data/lapis-session-off.conf DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/systemd/user/lapis-session.service.d
+    RENAME bayu-store.conf)
 install(FILES data/flathub.flatpakrepo DESTINATION ${CMAKE_INSTALL_DATADIR}/bayu-store)
 install(FILES data/org.bayu.store.policy DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/actions)
 bayu_add_translations(bayu-store SOURCES src DESKTOP_FILES data/bayu-store.desktop data/bayu-welcome.desktop)

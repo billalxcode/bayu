@@ -18,6 +18,15 @@ struct DesktopEntry;
 
 namespace bayu::shell {
 
+// Bayu Store's opener of Android apps: it shows that Android starts again
+// when it was turned off.
+inline constexpr const char *kAndroidLaunch = "/usr/libexec/bayu-store/android-launch";
+
+// The command an entry of lapis' runs instead, `lapis app launch <package>`
+// through `opener`; empty for any other command.
+std::vector<std::string> androidLaunchCommand(const std::vector<std::string> &command,
+                                              const std::string &opener = kAndroidLaunch);
+
 // Starts applications the way every start in the session goes: through the
 // session's AppRuntime (org.bayu.AppRuntime), which puts each in a scope
 // of its own, or here when the runtime does not answer. Nothing waits: the

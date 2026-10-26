@@ -4,6 +4,8 @@
 
 #include "shell/common/app_launcher.h"
 
+#include <unistd.h>
+
 #include <chrono>
 
 #include "base/desktop_entry.h"
@@ -21,6 +23,16 @@ ApplicationLauncher::ApplicationLauncher(base::dbus::Connection *bus)
     m_runtime.setTimeout(kRuntimeTimeout);
 }
 
+std::vector<std::string> androidLaunchCommand(const std::vector<std::string> &command, const std::string &opener)
+{
+    if (command.size() != 4 || command[1] != "app" || command[2] != "launch")
+        return {};
+    const std::string &program = command[0];
+    if (program != "lapis" && !program.ends_with("/lapis"))
+        return {};
+    return {opener, command[3]};
+}
+
 static bool startHere(const std::vector<std::string> &command, const std::string &workingDirectory)
 {
     if (command.empty() || command.front().empty())
@@ -35,6 +47,11 @@ void ApplicationLauncher::launch(const base::DesktopEntry &entry, const std::vec
     const std::vector<std::string> command = entry.commandForArguments(arguments);
     const std::string workingDirectory = entry.workingDirectory;
     const std::string id = entry.id;
+    if (std::vector<std::string> android = androidLaunchCommand(command);
+        !android.empty() && ::access(kAndroidLaunch, X_OK) == 0) {
+        launchCommand(android, workingDirectory, id, std::move(done));
+        return;
+    }
     if (!m_runtime.isValid() || id.empty()) {
         launchCommand(command, workingDirectory, id, std::move(done));
         return;

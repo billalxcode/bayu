@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 03:39+0000\n"
+"POT-Creation-Date: 2026-10-26 16:38+0700\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,6 +11,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/android_setup.cpp
+msgid "Android could not be set up: pkexec is missing."
+msgstr "Android teu tiasa disiapkeun: pkexec teu aya."
+
+#: src/android_setup.cpp
+msgid "Android was not set up: the password was not given."
+msgstr "Android teu disiapkeun: kecap konci teu dipasihkeun."
+
+#: src/android_setup.cpp
+msgid "Android could not be set up (lapis init failed)."
+msgstr "Android teu tiasa disiapkeun (lapis init gagal)."
+
+#: src/launch/main.cpp src/ui/pages.cpp src/welcome/main.cpp
+msgid "Starting Android"
+msgstr "Ngajalankeun Android"
+
+#: src/launch/main.cpp
+#, python-brace-format
+msgid "Opening {name}. Android was off and starts again; the first start takes a minute."
+msgstr "Muka {name}. Android nuju pareum sareng dijalankeun deui; ngamimitian munggaran butuh kira-kira samenit."
+
+#: src/launch/main.cpp
+msgid "The app did not open."
+msgstr "Aplikasina teu kabuka."
+
+#: src/launch/main.cpp
+msgid "lapis is missing."
+msgstr "lapis teu aya."
+
+#: src/launch/main.cpp
+msgid "Android did not start"
+msgstr "Android teu jalan"
 
 #: src/ui/pages.cpp
 msgid "never"
@@ -322,6 +355,10 @@ msgid "Free software"
 msgstr "Parangkat lunak bébas"
 
 #: src/ui/pages.cpp
+msgid "Starting Android…"
+msgstr "Ngajalankeun Android…"
+
+#: src/ui/pages.cpp
 msgid "of"
 msgstr "ti"
 
@@ -534,26 +571,6 @@ msgid "ANDROID APPS"
 msgstr "APLIKASI ANDROID"
 
 #: src/ui/pages.cpp
-msgid "Android is running"
-msgstr "Android nuju jalan"
-
-#: src/ui/pages.cpp
-msgid "F-Droid apps install into Android (lapis) and open in their own windows."
-msgstr "Aplikasi F-Droid dipasang ka Android (lapis) sarta muka dina jandéla sorangan."
-
-#: src/ui/pages.cpp
-msgid "Turn on Android (lapis) to install apps from F-Droid. It downloads Android once, about 1.3 GB."
-msgstr "Hurungkeun Android (lapis) pikeun masang aplikasi ti F-Droid. Android diundeur sakali, kira-kira 1,3 GB."
-
-#: src/ui/pages.cpp src/ui/store_window.cpp
-msgid "Turn on"
-msgstr "Hurungkeun"
-
-#: src/ui/pages.cpp src/ui/store_window.cpp
-msgid "Android apps could not be turned on"
-msgstr "Aplikasi Android teu tiasa dihurungkeun"
-
-#: src/ui/pages.cpp
 msgid "Show apps built only for ARM"
 msgstr "Témbongkeun aplikasi nu ngan dijieun pikeun ARM"
 
@@ -589,6 +606,92 @@ msgstr "Pupus cache"
 #: src/ui/pages.cpp
 msgid "Settings"
 msgstr "Setélan"
+
+#: src/ui/pages.cpp
+msgid "Waiting for your password"
+msgstr "Ngantosan kecap konci anjeun"
+
+#: src/ui/pages.cpp
+msgid "Setting Android up needs administrator rights, once."
+msgstr "Nyiapkeun Android butuh hak administrator, sakali wungkul."
+
+#: src/ui/pages.cpp
+msgid "Downloading Android's vendor image"
+msgstr "Ngundeur gambar vendor Android"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "Downloading Android"
+msgstr "Ngundeur Android"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{done} of {total}"
+msgstr "{done} tina {total}"
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "Unpacking Android"
+msgstr "Ngabongkar Android"
+
+#: src/ui/pages.cpp
+msgid "Almost there."
+msgstr "Sakedap deui."
+
+#: src/ui/pages.cpp
+msgid "The first start takes a minute or two."
+msgstr "Ngamimitian munggaran butuh hiji atanapi dua menit."
+
+#: src/ui/pages.cpp src/welcome/main.cpp
+msgid "Getting Android ready"
+msgstr "Nyiapkeun Android"
+
+#: src/ui/pages.cpp
+msgid "Android is downloaded once, about 1.3 GB. You can keep using the store meanwhile."
+msgstr "Android diundeur sakali, kira-kira 1,3 GB. Anjeun tetep tiasa nganggo toko salami éta."
+
+#: src/ui/pages.cpp
+msgid "Android could not be turned on"
+msgstr "Android teu tiasa dihurungkeun"
+
+#: src/ui/pages.cpp
+msgid "Android is running"
+msgstr "Android nuju jalan"
+
+#: src/ui/pages.cpp
+msgid "F-Droid apps install into Android (lapis) and open in their own windows."
+msgstr "Aplikasi F-Droid dipasang ka Android (lapis) sarta muka dina jandéla sorangan."
+
+#: src/ui/pages.cpp
+msgid "Android is off"
+msgstr "Android pareum"
+
+#: src/ui/pages.cpp
+msgid "Opening an Android app starts it again."
+msgstr "Muka aplikasi Android bakal ngajalankeun deui."
+
+#: src/ui/pages.cpp
+msgid "Turn on Android (lapis) to install apps from F-Droid. It downloads Android once, about 1.3 GB."
+msgstr "Hurungkeun Android (lapis) pikeun masang aplikasi ti F-Droid. Android diundeur sakali, kira-kira 1,3 GB."
+
+#: src/ui/pages.cpp
+msgid "Turning on"
+msgstr "Ngahurungkeun"
+
+#: src/ui/pages.cpp
+#, python-brace-format
+msgid "{name} installs once Android runs."
+msgstr "{name} dipasang saparantos Android jalan."
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Turn off"
+msgstr "Pareuman"
+
+#: src/ui/pages.cpp
+msgid "Try again"
+msgstr "Cobian deui"
+
+#: src/ui/pages.cpp src/ui/store_window.cpp
+msgid "Turn on"
+msgstr "Hurungkeun"
 
 #: src/ui/store_widgets.cpp src/ui/store_window.cpp
 msgid "INSTALL"
@@ -643,8 +746,16 @@ msgid "PAUSED"
 msgstr "DITAHAN"
 
 #: src/ui/store_window.cpp
+msgid "STARTING"
+msgstr "NGAJALANKEUN"
+
+#: src/ui/store_window.cpp
 msgid "OPEN"
 msgstr "BUKA"
+
+#: src/ui/store_window.cpp
+msgid "SETTING UP"
+msgstr "NYIAPKEUN"
 
 #: src/ui/store_window.cpp
 #, python-brace-format
@@ -660,12 +771,20 @@ msgid "You can install it again from the store at any time."
 msgstr "Ibu/Bapa tiasa masang deui tina toko iraha waé."
 
 #: src/ui/store_window.cpp
+msgid "Turn off Android?"
+msgstr "Pareuman Android?"
+
+#: src/ui/store_window.cpp
+msgid "Android apps that are open close. Android stays off, also after you log in again, until you open an Android app or turn it on here."
+msgstr "Aplikasi Android anu kabuka bakal ditutup. Android tetep pareum, ogé saatos anjeun asup deui, dugi ka anjeun muka aplikasi Android atanapi ngahurungkeunana di dieu."
+
+#: src/ui/store_window.cpp
 msgid "Turn on Android apps?"
 msgstr "Hurungkeun aplikasi Android?"
 
 #: src/ui/store_window.cpp
-msgid "F-Droid apps are Android apps: they run in Android (lapis) beside the desktop. Turning it on downloads Android once (about 1.3 GB) and may ask for your password."
-msgstr "Aplikasi F-Droid nyaéta aplikasi Android: jalan di Android (lapis) gigireun dékstop. Ngahurungkeunana bakal ngundeur Android sakali (kira-kira 1,3 GB) sarta meureun menta kecap sandi."
+msgid "F-Droid apps are Android apps: they run in Android (lapis) beside the desktop. Turning it on downloads Android once (about 1.3 GB) and may ask for your password. Store settings show how it goes."
+msgstr "Aplikasi F-Droid téh aplikasi Android: jalan di Android (lapis) di gigireun desktop. Ngahurungkeunana ngundeur Android sakali (kira-kira 1,3 GB) sareng tiasa naroskeun kecap konci anjeun. Setélan toko nunjukkeun kamajuanana."
 
 #: src/ui/store_window.cpp
 msgid "OK"
@@ -820,8 +939,13 @@ msgid "Setting up Android"
 msgstr "Nyiapkeun Android"
 
 #: src/welcome/main.cpp
-msgid "Android could not be set up. Try again from Bayu Store."
-msgstr "Android teu tiasa disiapkeun. Cobian deui ti Bayu Store."
+msgid "Waiting for your password."
+msgstr "Ngantosan kecap konci anjeun."
+
+#: src/welcome/main.cpp
+#, python-brace-format
+msgid "Downloading Android: {done} of {total}"
+msgstr "Ngundeur Android: {done} tina {total}"
 
 #: src/welcome/main.cpp
 msgid "Dark mode"

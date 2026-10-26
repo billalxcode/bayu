@@ -7,9 +7,14 @@
 #include <sys/un.h>
 #include <unistd.h>
 
+#include <cstdlib>
 #include <cstring>
+#include <filesystem>
+#include <fstream>
+#include <thread>
 
 #include "base/json.h"
+#include "base/paths.h"
 
 using bayu::base::json::Value;
 
@@ -18,6 +23,14 @@ namespace store::lapis {
 namespace {
 
 constexpr const char* kSocket = "/run/lapis/control.sock";
+
+// lapis-session.service does not start while it is there (Bayu Store's
+// drop-in, %h/.config/bayu-store/android-off): the same place whatever
+// XDG_CONFIG_HOME says.
+std::string offMark()
+{
+    return bayu::base::paths::home() + "/.config/bayu-store/android-off";
+}
 
 // One request, its answer; an error text in `error` when it failed.
 Value call(const Value& request, std::string* error, int timeoutSeconds = 180)
@@ -133,6 +146,44 @@ std::string launch(const std::string& package)
 std::string unfreeze()
 {
     return simple("unfreeze", nullptr, {});
+}
+
+std::string startSession(std::chrono::seconds timeout)
+{
+    std::error_code ignored;
+    std::filesystem::remove(offMark(), ignored);
+    // lapis-session.desktop imports these at login only when lapis was set
+    // up then; Android's windows need them.
+    std::system("systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE");
+    if (std::system("systemctl --user --no-block start lapis-session.service") != 0)
+        return "lapis-session could not be started.";
+    const auto deadline = std::chrono::steady_clock::now() + timeout;
+    while (true) {
+        const State now = state();
+        if (now == State::Missing)
+            return "lapis is not available.";
+        if (now != State::Stopped)
+            return {};
+        if (std::chrono::steady_clock::now() >= deadline)
+            return "Android did not start in time.";
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+}
+
+std::string stopSession()
+{
+    const std::string mark = offMark();
+    std::error_code ignored;
+    std::filesystem::create_directories(std::filesystem::path(mark).parent_path(), ignored);
+    std::ofstream(mark).flush();
+    if (std::system("systemctl --user stop lapis-session.service") != 0)
+        return "lapis-session could not be stopped.";
+    return {};
+}
+
+bool turnedOff()
+{
+    return ::access(offMark().c_str(), F_OK) == 0;
 }
 
 } // namespace store::lapis

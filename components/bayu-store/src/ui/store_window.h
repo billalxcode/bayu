@@ -94,6 +94,8 @@ public:
     void showError(const std::string& title, const std::string& text);
     // Uninstalls after the user agrees.
     void askToRemove(const std::string& id, Source source);
+    // Stops Android after the user agrees.
+    void askToDisableAndroid();
 
     // Renders the main pages into PNGs, for screenshots of the design.
     int capture(const std::string& directory);
