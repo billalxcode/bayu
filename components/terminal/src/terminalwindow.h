@@ -27,6 +27,7 @@ class WindowHeader;
 #include "terminalpage.h"
 
 class SettingsDialog;
+class TerminalPane;
 class TerminalSettings;
 class Windows;
 
@@ -74,6 +75,9 @@ public:
     void insertTab(std::unique_ptr<TerminalPage> page, int index);
     std::unique_ptr<TerminalPage> takeTab(int index);
     void closeCurrentTab();
+    // The current tab's current pane; the tab, when it has no other.
+    void closeCurrentPane();
+    void closePane(TerminalPage* page, TerminalPane* pane);
     void closeTab(int index);
     void closeOtherTabs(int index);
     void selectTab(int index);
@@ -103,7 +107,7 @@ private:
     void retranslate();
     void updateBackground();
     void updateTitle();
-    void confirmClose(const std::vector<TerminalPage*>& pages, std::function<void()> action);
+    void confirmClose(bool active, std::function<void()> action);
     void showExitPrompt();
     void showLinkConfirm();
     void showPasteConfirm();

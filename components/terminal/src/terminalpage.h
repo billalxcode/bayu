@@ -3,12 +3,12 @@
 
 #pragma once
 
+#include <map>
 #include <memory>
 #include <string>
 #include <vector>
 
 #include "base/signal.h"
-#include "base/timer.h"
 #include "ui/view.h"
 
 namespace Konsole {
@@ -16,39 +16,42 @@ class TerminalSession;
 class TerminalView;
 }
 
-namespace bayu::ui {
-class Menu;
-class ScrollBar;
-}
-
-class FindBar;
+class TerminalPane;
 class TerminalWindow;
 
-// One tab: a shell on a pty, its terminal view with the scroll bar over its
-// right margin, the find bar and the context menu.
+// One tab: a shell, or several split side by side and above one another. One
+// of them is current, the one that last had the keyboard; the tab's title and
+// what the window asks of the tab are its.
 class TerminalPage : public bayu::ui::View
 {
 public:
+    enum class Direction { Left, Right, Up, Down };
+
     // `path` is where the shell starts ("$PWD", "$HOME" or a directory),
     // `command` a program and its arguments to run instead.
     TerminalPage(TerminalWindow* window, const std::string& path, const std::vector<std::string>& command);
     ~TerminalPage() override;
 
-    Konsole::TerminalSession& session() const { return *m_session; }
-    Konsole::TerminalView* terminal() const { return m_terminal; }
+    // The current pane's.
+    Konsole::TerminalSession& session() const;
+    Konsole::TerminalView* terminal() const;
 
-    // The tab is in this window now, moved there with its shell.
+    // A program runs in one of the panes.
+    bool hasActiveProcess() const;
+    int paneCount() const { return int(m_panes.size()); }
+    TerminalPane* currentPane() const { return m_current; }
+
+    // The tab is in this window now, moved there with its shells.
     void setTerminalWindow(TerminalWindow* window);
     TerminalWindow* terminalWindow() const { return m_window; }
 
-    // Set by renaming the tab; empty follows the session.
+    // Set by renaming the tab; empty follows the current pane's session.
     void setCustomTitle(const std::string& title);
     std::string title() const;
 
     // The settings and the window's zoom and colours, applied again.
     void applySettings();
-    // The menu closes and the find bar takes the new language, keeping its
-    // search; the shell and its output stay as they are.
+    // The menus close and the find bars take the new language.
     void retranslate();
 
     void startShell();
@@ -57,36 +60,36 @@ public:
     // A drop: paths and links as one shell word each, text pasted.
     void dropUrls(const std::vector<std::string>& urls);
 
+    // A new shell next to `pane`, in its directory, half of its space.
+    void split(TerminalPane* pane, Direction direction);
+    // The pane goes, its neighbour takes its space; the last one closes the tab.
+    void closePane(TerminalPane* pane);
+    // The keyboard to the pane on that side of `pane`; false without one.
+    bool focusNeighbour(TerminalPane* pane, Direction direction);
+
     bayu::base::Signal<> titleChanged;
-    // The shell ended.
+    // The last shell ended.
     bayu::base::Signal<> terminalClosed;
 
 protected:
     void layout() override;
-    bool canDrop(const bayu::ui::DropOffer& offer) const override;
-    uint32_t dragUpdate(const bayu::ui::DragEvent& event) override;
-    uint32_t drop(const bayu::ui::DragEvent& event) override;
 
 private:
-    bool handleShortcut(const bayu::ui::KeyEvent& event);
-    void openMenu(double x, double y);
-    void updateScrollBar();
+    struct Split;
+    class Divider;
+
+    TerminalPane* addPane(const std::string& path, const std::vector<std::string>& command);
+    void attach(TerminalPane* pane);
+    void setCurrent(TerminalPane* pane);
+    Split* leafOf(const TerminalPane* pane) const;
+    void layoutSplit(Split& split, bayu::ui::RectF rect);
 
     TerminalWindow* m_window;
     std::string m_customTitle;
-    std::vector<std::string> m_command;
-    std::unique_ptr<Konsole::TerminalSession> m_session;
-    Konsole::TerminalView* m_terminal;
-    bayu::ui::ScrollBar* m_scrollBar;
-    FindBar* m_findBar = nullptr;
-    std::unique_ptr<bayu::ui::Menu> m_menu;
-    bayu::base::Timer m_scrollActivity;
-    std::vector<bayu::base::Subscription> m_connections;
-
+    std::unique_ptr<Split> m_root;
+    std::vector<TerminalPane*> m_panes;
+    TerminalPane* m_current = nullptr;
+    // Dropped when the pane closes.
+    std::map<const TerminalPane*, std::vector<bayu::base::Subscription>> m_paneConnections;
     std::shared_ptr<bool> m_alive = std::make_shared<bool>(true);
-
-    // What the menu was opened over.
-    std::string m_menuLink;
-    std::string m_menuPath;
-    bool m_menuCanPaste = false;
 };

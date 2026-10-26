@@ -169,6 +169,8 @@ public:
     bayu::base::Signal<bool> findResult;
     bayu::base::Signal<> sizeChanged;
     bayu::base::Signal<> fontMetricsChanged;
+    // Keyboard focus came in, so a split knows which of its terminals is current.
+    bayu::base::Signal<> focused;
 
     // What the item's MouseArea and key handler in the page did around it:
     // the window's shortcuts see keys first, a right click (or Shift+right

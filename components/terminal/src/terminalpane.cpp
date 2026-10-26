@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Reion Wong <reionwong@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "terminalpage.h"
+#include "terminalpane.h"
 
 #include <algorithm>
 #include <cmath>
@@ -23,6 +23,7 @@
 
 #include "findbar.h"
 #include "processhelper.h"
+#include "terminalpage.h"
 #include "terminalsettings.h"
 #include "terminalwindow.h"
 
@@ -31,17 +32,16 @@ using bayu::i18n::format;
 using bayu::i18n::tr;
 namespace strings = bayu::base::strings;
 
-// The terminal's margins inside the page; the top is the header's line.
+// The terminal's margins inside the pane; the top is the header's line.
 static constexpr double kTerminalMargin = 6;
 
-TerminalPage::TerminalPage(TerminalWindow* window, const std::string& path, const std::vector<std::string>& command)
-    : m_window(window)
-    , m_command(command)
+TerminalPane::TerminalPane(TerminalPage* page, const std::string& path, const std::vector<std::string>& command)
+    : m_page(page)
     , m_session(std::make_unique<Konsole::TerminalSession>())
     , m_terminal(addChild<Konsole::TerminalView>())
     , m_scrollBar(addChild<ScrollBar>(ScrollBar::Orientation::Vertical))
 {
-    setName("terminalPage");
+    setName("terminalPane");
     m_session->setInitialWorkingDirectory(path);
     if (!command.empty()) {
         m_session->setShellProgram(command.front());
@@ -54,14 +54,15 @@ TerminalPage::TerminalPage(TerminalWindow* window, const std::string& path, cons
 
     m_terminal->onShortcut = [this](const bayu::ui::KeyEvent& event) { return handleShortcut(event); };
     m_terminal->onContextMenu = [this](double x, double y) { openMenu(x, y); };
-    m_terminal->onLinkActivated = [this](const std::string& url) { m_window->openLink(url); };
+    m_terminal->onLinkActivated = [this](const std::string& url) { terminalWindow()->openLink(url); };
 
     m_connections.push_back(m_session->finished.connect([this] { terminalClosed(); }));
     m_connections.push_back(m_session->titleChanged.connect([this] { titleChanged(); }));
-    m_connections.push_back(m_terminal->notifyBell.connect([this] { m_window->flashBell(); }));
+    m_connections.push_back(m_terminal->notifyBell.connect([this] { terminalWindow()->flashBell(); }));
+    m_connections.push_back(m_terminal->focused.connect([this] { focused(); }));
     m_connections.push_back(m_terminal->multilinePasteRequested.connect([this](const std::string& text) {
-        // The shell can exit and close the tab while the dialog is open.
-        m_window->confirmPaste(text, [this, alive = std::weak_ptr<bool>(m_alive)] {
+        // The shell can exit and close the pane while the dialog is open.
+        terminalWindow()->confirmPaste(text, [this, alive = std::weak_ptr<bool>(m_alive)] {
             if (!alive.expired())
                 m_terminal->confirmPaste();
         });
@@ -84,49 +85,38 @@ TerminalPage::TerminalPage(TerminalWindow* window, const std::string& path, cons
     applySettings();
 }
 
-TerminalPage::~TerminalPage()
+TerminalPane::~TerminalPane()
 {
     m_connections.clear();
     // The view goes before the session it shows.
     takeChild(m_terminal).reset();
 }
 
-void TerminalPage::setTerminalWindow(TerminalWindow* window)
+TerminalWindow* TerminalPane::terminalWindow() const
 {
-    m_window = window;
-    applySettings();
+    return m_page->terminalWindow();
 }
 
-void TerminalPage::setCustomTitle(const std::string& title)
+void TerminalPane::applySettings()
 {
-    m_customTitle = title;
-    titleChanged();
-}
-
-std::string TerminalPage::title() const
-{
-    return !m_customTitle.empty() ? m_customTitle : m_session->title();
-}
-
-void TerminalPage::applySettings()
-{
-    const TerminalSettings& settings = m_window->settings();
-    m_terminal->setColorScheme(m_window->colorScheme());
-    m_terminal->setTerminalFont(settings.fontName(), m_window->fontPointSize());
+    TerminalWindow* window = terminalWindow();
+    const TerminalSettings& settings = window->settings();
+    m_terminal->setColorScheme(window->colorScheme());
+    m_terminal->setTerminalFont(settings.fontName(), window->fontPointSize());
     m_terminal->setBlinkingCursor(settings.blinkingCursor());
     m_terminal->setTerminalCursorShape(settings.cursorShape());
     // NotifyBell hands the bell to the window; NoBell ignores it.
     m_terminal->setBellMode(settings.visualBell() ? Konsole::TerminalView::NotifyBell : Konsole::TerminalView::NoBell);
     m_terminal->setConfirmMultilinePaste(settings.confirmMultilinePaste());
-    m_terminal->setLinkColor(m_window->chromeForeground());
-    m_scrollBar->setDarkMode(m_window->chromeDark());
+    m_terminal->setLinkColor(window->chromeForeground());
+    m_scrollBar->setDarkMode(window->chromeDark());
     m_session->setHistorySize(settings.scrollbackLines());
     if (m_findBar)
-        m_findBar->setColors(m_window->terminalBackground(), m_window->chromeForeground(), m_window->chromeDark(),
-                             m_window->schemeColor(1, accent::red), m_window->schemeColor(4, Theme::current().highlight));
+        m_findBar->setColors(window->terminalBackground(), window->chromeForeground(), window->chromeDark(),
+                             window->schemeColor(1, accent::red), window->schemeColor(4, Theme::current().highlight));
 }
 
-void TerminalPage::retranslate()
+void TerminalPane::retranslate()
 {
     if (m_menu)
         m_menu->close();
@@ -135,18 +125,18 @@ void TerminalPage::retranslate()
         m_findBar->retranslate();
 }
 
-void TerminalPage::startShell()
+void TerminalPane::startShell()
 {
     m_session->startShellProgram();
     m_terminal->setFocus();
 }
 
-void TerminalPage::focusTerminal()
+void TerminalPane::focusTerminal()
 {
     m_terminal->setFocus();
 }
 
-void TerminalPage::layout()
+void TerminalPane::layout()
 {
     const RectF bounds = localRect();
     m_terminal->setGeometry({kTerminalMargin, 0, std::max(0.0, bounds.width - 2 * kTerminalMargin),
@@ -163,7 +153,7 @@ void TerminalPage::layout()
     updateScrollBar();
 }
 
-void TerminalPage::updateScrollBar()
+void TerminalPane::updateScrollBar()
 {
     const int lines = m_terminal->lines();
     const int totalLines = lines + m_terminal->scrollbarMaximum() - m_terminal->scrollbarMinimum();
@@ -182,7 +172,7 @@ static std::string shellQuote(const std::string& text)
     return "'" + strings::replaceAll(text, "'", "'\\''") + "'";
 }
 
-void TerminalPage::dropUrls(const std::vector<std::string>& urls)
+void TerminalPane::dropUrls(const std::vector<std::string>& urls)
 {
     std::vector<std::string> words;
     for (const std::string& url : urls) {
@@ -209,17 +199,17 @@ static std::string textType(const DropOffer& offer)
 }
 
 // A tab dragged over the terminal is not something to paste.
-bool TerminalPage::canDrop(const DropOffer& offer) const
+bool TerminalPane::canDrop(const DropOffer& offer) const
 {
     return hasUrls(offer) || !textType(offer).empty();
 }
 
-uint32_t TerminalPage::dragUpdate(const DragEvent&)
+uint32_t TerminalPane::dragUpdate(const DragEvent&)
 {
     return CopyAction;
 }
 
-uint32_t TerminalPage::drop(const DragEvent& event)
+uint32_t TerminalPane::drop(const DragEvent& event)
 {
     std::weak_ptr<bool> alive = m_alive;
     if (hasUrls(*event.offer)) {
@@ -247,7 +237,7 @@ uint32_t TerminalPage::drop(const DragEvent& event)
 }
 
 // Starts from the selection when it is a single line, as a search term would be.
-void TerminalPage::openFind()
+void TerminalPane::openFind()
 {
     const std::string selection = m_terminal->hasSelection()
             ? std::string(strings::trimmed(m_terminal->selectedText()))
@@ -261,7 +251,7 @@ void TerminalPage::openFind()
     m_findBar->open(selection.find('\n') == std::string::npos ? selection : std::string());
 }
 
-bool TerminalPage::handleShortcut(const bayu::ui::KeyEvent& event)
+bool TerminalPane::handleShortcut(const bayu::ui::KeyEvent& event)
 {
     const uint32_t mods = event.modifiers;
     const bool ctrl = mods & bayu::ui::ControlModifier;
@@ -283,43 +273,64 @@ bool TerminalPage::handleShortcut(const bayu::ui::KeyEvent& event)
         accepted = true;
     }
     if (key == key::letter('q') && ctrl && shift) {
-        m_window->close();
+        terminalWindow()->close();
         return true;
     }
     if (key == key::letter('n') && ctrl && shift) {
-        m_window->newWindow();
+        terminalWindow()->newWindow();
         accepted = true;
     }
     if (key == key::letter('t') && ctrl && shift) {
-        m_window->openNewTab();
+        terminalWindow()->openNewTab();
         accepted = true;
     }
     if (key == key::letter('w') && ctrl && shift) {
-        m_window->closeCurrentTab();
+        terminalWindow()->closeCurrentPane();
         return true;
+    }
+
+    // Splits: Ctrl+Shift+E to the right, Ctrl+Shift+O below; Alt and an
+    // arrow moves between the panes, and goes to the shell with only one.
+    if (key == key::letter('e') && ctrl && shift) {
+        m_page->split(this, TerminalPage::Direction::Right);
+        accepted = true;
+    }
+    if (key == key::letter('o') && ctrl && shift) {
+        m_page->split(this, TerminalPage::Direction::Down);
+        accepted = true;
+    }
+    if (alt && !ctrl && !shift && m_page->paneCount() > 1) {
+        if (key == key::Left)
+            accepted = m_page->focusNeighbour(this, TerminalPage::Direction::Left);
+        else if (key == key::Right)
+            accepted = m_page->focusNeighbour(this, TerminalPage::Direction::Right);
+        else if (key == key::Up)
+            accepted = m_page->focusNeighbour(this, TerminalPage::Direction::Up);
+        else if (key == key::Down)
+            accepted = m_page->focusNeighbour(this, TerminalPage::Direction::Down);
     }
 
     // Tabs: Ctrl+Tab and Ctrl+PgDn go right, Ctrl+Shift+Tab and Ctrl+PgUp left;
     // with Shift, Ctrl+PgUp and Ctrl+PgDn move the tab instead.
     if (ctrl) {
         if (key == key::Tab && !shift) {
-            m_window->cycleTab(1);
+            terminalWindow()->cycleTab(1);
             accepted = true;
         } else if (key == key::Tab && shift) {
-            m_window->cycleTab(-1);
+            terminalWindow()->cycleTab(-1);
             accepted = true;
         } else if (key == key::PageDown) {
-            shift ? m_window->moveCurrentTab(1) : m_window->cycleTab(1);
+            shift ? terminalWindow()->moveCurrentTab(1) : terminalWindow()->cycleTab(1);
             accepted = true;
         } else if (key == key::PageUp) {
-            shift ? m_window->moveCurrentTab(-1) : m_window->cycleTab(-1);
+            shift ? terminalWindow()->moveCurrentTab(-1) : terminalWindow()->cycleTab(-1);
             accepted = true;
         }
     }
 
     // Alt+1 to Alt+8 pick a tab, Alt+9 the last one.
-    if (alt && !ctrl && key >= '1' && key <= '9' && m_window->tabCount() > 1) {
-        m_window->selectTab(key == '9' ? m_window->tabCount() - 1 : int(key - '1'));
+    if (alt && !ctrl && key >= '1' && key <= '9' && terminalWindow()->tabCount() > 1) {
+        terminalWindow()->selectTab(key == '9' ? terminalWindow()->tabCount() - 1 : int(key - '1'));
         accepted = true;
     }
 
@@ -334,19 +345,19 @@ bool TerminalPage::handleShortcut(const bayu::ui::KeyEvent& event)
     // Zoom: Ctrl+= (or Ctrl++), Ctrl+-, Ctrl+0.
     if (ctrl && !alt) {
         if (key == '=' || key == '+') {
-            m_window->zoom(1);
+            terminalWindow()->zoom(1);
             accepted = true;
         } else if (key == '-' && !shift) {
-            m_window->zoom(-1);
+            terminalWindow()->zoom(-1);
             accepted = true;
         } else if (key == '0' && !shift) {
-            m_window->zoom(0);
+            terminalWindow()->zoom(0);
             accepted = true;
         }
     }
 
     if (key == key::F1 + 10) {
-        m_window->toggleFullScreen();
+        terminalWindow()->toggleFullScreen();
         accepted = true;
     }
 
@@ -381,7 +392,7 @@ static bool isLink(const std::string& text)
     return true;
 }
 
-void TerminalPage::openMenu(double x, double y)
+void TerminalPane::openMenu(double x, double y)
 {
     // A right click on a word outside the selection selects that word first,
     // so Copy and the file and link items act on what was clicked.
@@ -412,7 +423,7 @@ void TerminalPage::openMenu(double x, double y)
         m_menu->clear();
 
         if (!m_menuLink.empty()) {
-            m_menu->addItem(tr("Open Link"), [this] { m_window->openLink(m_menuLink); });
+            m_menu->addItem(tr("Open Link"), [this] { terminalWindow()->openLink(m_menuLink); });
             m_menu->addItem(tr("Copy Link"), [this] { Clipboard::setText(m_menuLink); });
             m_menu->addSeparator();
         }
@@ -433,13 +444,18 @@ void TerminalPage::openMenu(double x, double y)
             m_menu->addItem(tr("Clear Scrollback"), [this] { m_session->clearScrollback(); });
         m_menu->addItem(tr("Reset Terminal"), [this] { m_session->resetTerminal(); });
         m_menu->addSeparator();
-        m_menu->addItem(tr("New Tab"), [this] { m_window->openNewTab(); });
-        m_menu->addItem(tr("New Window"), [this] { m_window->newWindow(); });
+        m_menu->addItem(tr("Split Right"), [this] { m_page->split(this, TerminalPage::Direction::Right); });
+        m_menu->addItem(tr("Split Down"), [this] { m_page->split(this, TerminalPage::Direction::Down); });
+        if (m_page->paneCount() > 1)
+            m_menu->addItem(tr("Close Pane"), [this] { terminalWindow()->closePane(m_page, this); });
+        m_menu->addSeparator();
+        m_menu->addItem(tr("New Tab"), [this] { terminalWindow()->openNewTab(); });
+        m_menu->addItem(tr("New Window"), [this] { terminalWindow()->newWindow(); });
         m_menu->addItem(tr("Open File Manager"), [this] { ProcessHelper::openFileManager(m_session->currentDir()); });
         m_menu->addSeparator();
-        m_menu->addItem(m_window->isFullScreen() ? tr("Exit full screen") : tr("Full screen"),
-                        [this] { m_window->toggleFullScreen(); });
-        m_menu->addItem(tr("Settings"), [this] { m_window->showSettings(); });
+        m_menu->addItem(terminalWindow()->isFullScreen() ? tr("Exit full screen") : tr("Full screen"),
+                        [this] { terminalWindow()->toggleFullScreen(); });
+        m_menu->addItem(tr("Settings"), [this] { terminalWindow()->showSettings(); });
 
         if (Window* window = this->window())
             m_menu->popup(window, position);

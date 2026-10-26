@@ -20,6 +20,7 @@ add_executable(terminal-window-tests
     ../src/processhelper.cpp
     ../src/settingsdialog.cpp
     ../src/terminalpage.cpp
+    ../src/terminalpane.cpp
     ../src/terminalsettings.cpp
     ../src/terminalwindow.cpp
     ../src/windows.cpp

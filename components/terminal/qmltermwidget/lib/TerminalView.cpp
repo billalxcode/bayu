@@ -327,6 +327,7 @@ bool TerminalView::hasKeyboard() const
 
 void TerminalView::focusIn(ui::FocusReason)
 {
+    focused();
     if (_hasBlinkingCursor && hasKeyboard())
         _blinkCursorTimer.start(std::chrono::milliseconds(CURSOR_BLINK_INTERVAL));
     requestPaint();
