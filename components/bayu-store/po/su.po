@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 16:38+0700\n"
+"POT-Creation-Date: 2026-10-26 14:30+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,6 +23,90 @@ msgstr "Android teu disiapkeun: kecap konci teu dipasihkeun."
 #: src/android_setup.cpp
 msgid "Android could not be set up (lapis init failed)."
 msgstr "Android teu tiasa disiapkeun (lapis init gagal)."
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Network access"
+msgstr "Aksés jaringan"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Required"
+msgstr "Diperyogikeun"
+
+#: src/fdroid.cpp
+msgid "Camera"
+msgstr "Kaméra"
+
+#: src/fdroid.cpp
+msgid "Asks"
+msgstr "Ménta idin"
+
+#: src/fdroid.cpp
+msgid "Microphone"
+msgstr "Mikropon"
+
+#: src/fdroid.cpp
+msgid "Location"
+msgstr "Lokasi"
+
+#: src/fdroid.cpp
+msgid "Contacts"
+msgstr "Kontak"
+
+#: src/fdroid.cpp src/mock_backend.cpp
+msgid "Storage"
+msgstr "Panyimpenan"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Read & write"
+msgstr "Maca & nulis"
+
+#: src/fdroid.cpp
+msgid "Read"
+msgstr "Maca"
+
+#: src/fdroid.cpp
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: src/fdroid.cpp
+msgid "Notifications"
+msgstr "Bewara"
+
+#: src/flathub.cpp
+msgid "All files"
+msgstr "Sadaya berkas"
+
+#: src/flathub.cpp
+msgid "Read only"
+msgstr "Ngan maca"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "Home folder"
+msgstr "Folder imah"
+
+#: src/flathub.cpp
+msgid "Downloads folder"
+msgstr "Folder Undeuran"
+
+#: src/flathub.cpp
+msgid "All devices"
+msgstr "Sadaya alat"
+
+#: src/flathub.cpp
+msgid "Camera, USB, GPU"
+msgstr "Kaméra, USB, GPU"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "GPU acceleration"
+msgstr "Akselerasi GPU"
+
+#: src/flathub.cpp
+msgid "Sound"
+msgstr "Sora"
+
+#: src/flathub.cpp
+msgid "Play & record"
+msgstr "Puter & rékam"
 
 #: src/launch/main.cpp src/ui/pages.cpp src/welcome/main.cpp
 msgid "Starting Android"

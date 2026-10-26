@@ -81,15 +81,20 @@ public:
 
     void add(const InstallLogLine& line)
     {
-        // The running line before this one is done by now.
-        if (m_running) {
-            m_running->setText("[ ok ] " + m_runningText);
-            m_running->setColor(style::color(Role::LogText));
-            m_running = nullptr;
-        }
         const char* mark = line.state == InstallLogLine::State::Done      ? "[ ok ] "
                            : line.state == InstallLogLine::State::Failed ? "[fail] "
                                                                          : "[ .. ] ";
+        // The running line before this one is done by now. The backend says
+        // so too, for the same step: its line changes, no second one.
+        if (m_running) {
+            const bool same = line.state != InstallLogLine::State::Running && line.text == m_runningText;
+            m_running->setText((same ? mark : "[ ok ] ") + m_runningText);
+            m_running->setColor(same && line.state == InstallLogLine::State::Failed ? style::color(Role::Danger)
+                                                                                   : style::color(Role::LogText));
+            m_running = nullptr;
+            if (same)
+                return;
+        }
         Label* label = addText(m_lines, mark + line.text, 13);
         label->setWrap(true);
         label->setWrapAnywhere(true);

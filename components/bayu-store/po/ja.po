@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 16:38+0700\n"
+"POT-Creation-Date: 2026-10-26 14:30+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -24,6 +24,90 @@ msgstr "Android はセットアップされませんでした: パスワード�
 #: src/android_setup.cpp
 msgid "Android could not be set up (lapis init failed)."
 msgstr "Android をセットアップできませんでした (lapis init が失敗しました)。"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Network access"
+msgstr "ネットワークアクセス"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Required"
+msgstr "必須"
+
+#: src/fdroid.cpp
+msgid "Camera"
+msgstr "カメラ"
+
+#: src/fdroid.cpp
+msgid "Asks"
+msgstr "確認あり"
+
+#: src/fdroid.cpp
+msgid "Microphone"
+msgstr "マイク"
+
+#: src/fdroid.cpp
+msgid "Location"
+msgstr "位置情報"
+
+#: src/fdroid.cpp
+msgid "Contacts"
+msgstr "連絡先"
+
+#: src/fdroid.cpp src/mock_backend.cpp
+msgid "Storage"
+msgstr "ストレージ"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Read & write"
+msgstr "読み書き"
+
+#: src/fdroid.cpp
+msgid "Read"
+msgstr "読み取り"
+
+#: src/fdroid.cpp
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: src/fdroid.cpp
+msgid "Notifications"
+msgstr "通知"
+
+#: src/flathub.cpp
+msgid "All files"
+msgstr "すべてのファイル"
+
+#: src/flathub.cpp
+msgid "Read only"
+msgstr "読み取り専用"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "Home folder"
+msgstr "ホームフォルダー"
+
+#: src/flathub.cpp
+msgid "Downloads folder"
+msgstr "ダウンロードフォルダー"
+
+#: src/flathub.cpp
+msgid "All devices"
+msgstr "すべてのデバイス"
+
+#: src/flathub.cpp
+msgid "Camera, USB, GPU"
+msgstr "カメラ、USB、GPU"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "GPU acceleration"
+msgstr "GPU アクセラレーション"
+
+#: src/flathub.cpp
+msgid "Sound"
+msgstr "サウンド"
+
+#: src/flathub.cpp
+msgid "Play & record"
+msgstr "再生と録音"
 
 #: src/launch/main.cpp src/ui/pages.cpp src/welcome/main.cpp
 msgid "Starting Android"

@@ -242,6 +242,17 @@ bool DockLayoutManager::hasVisibleWindow(const base::Rect &output) const
     });
 }
 
+// A window over the dock's place: the dock makes room for it, as Cutefish's
+// intellihide did. Upstream only counts maximized windows.
+bool DockLayoutManager::isObstructed(const Window *dock, const base::Rect &output) const
+{
+    const auto &windows = m_manager->windows();
+    return std::any_of(windows.begin(), windows.end(), [&](const Window *window) {
+        return isWorkspaceWindow(window) && m_manager->outputBoundsFor(window) == output
+                && window->bounds().intersects(dock->bounds());
+    });
+}
+
 bool DockLayoutManager::isLauncherShowing(const base::Rect &output) const
 {
     const auto &windows = m_manager->windows();
@@ -269,8 +280,9 @@ DockVisibilityState DockLayoutManager::computeVisibility(const Window *dock,
     case DockAutoHideBehavior::Always:
         return DockVisibilityState::AutoHide;
     case DockAutoHideBehavior::WhenObstructed:
-        return workspace == WorkspaceState::Maximized ? DockVisibilityState::AutoHide
-                                                      : DockVisibilityState::Visible;
+        return workspace == WorkspaceState::Maximized || isObstructed(dock, output)
+                ? DockVisibilityState::AutoHide
+                : DockVisibilityState::Visible;
     }
     return DockVisibilityState::Visible;
 }

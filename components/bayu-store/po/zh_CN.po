@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 16:38+0700\n"
+"POT-Creation-Date: 2026-10-26 14:30+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,6 +23,90 @@ msgstr "未设置 Android：未输入密码。"
 #: src/android_setup.cpp
 msgid "Android could not be set up (lapis init failed)."
 msgstr "无法设置 Android（lapis init 失败）。"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Network access"
+msgstr "网络访问"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Required"
+msgstr "必需"
+
+#: src/fdroid.cpp
+msgid "Camera"
+msgstr "摄像头"
+
+#: src/fdroid.cpp
+msgid "Asks"
+msgstr "询问"
+
+#: src/fdroid.cpp
+msgid "Microphone"
+msgstr "麦克风"
+
+#: src/fdroid.cpp
+msgid "Location"
+msgstr "位置"
+
+#: src/fdroid.cpp
+msgid "Contacts"
+msgstr "联系人"
+
+#: src/fdroid.cpp src/mock_backend.cpp
+msgid "Storage"
+msgstr "存储"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Read & write"
+msgstr "读写"
+
+#: src/fdroid.cpp
+msgid "Read"
+msgstr "只读取"
+
+#: src/fdroid.cpp
+msgid "Bluetooth"
+msgstr "蓝牙"
+
+#: src/fdroid.cpp
+msgid "Notifications"
+msgstr "通知"
+
+#: src/flathub.cpp
+msgid "All files"
+msgstr "所有文件"
+
+#: src/flathub.cpp
+msgid "Read only"
+msgstr "只读"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "Home folder"
+msgstr "主文件夹"
+
+#: src/flathub.cpp
+msgid "Downloads folder"
+msgstr "下载文件夹"
+
+#: src/flathub.cpp
+msgid "All devices"
+msgstr "所有设备"
+
+#: src/flathub.cpp
+msgid "Camera, USB, GPU"
+msgstr "摄像头、USB、GPU"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "GPU acceleration"
+msgstr "GPU 加速"
+
+#: src/flathub.cpp
+msgid "Sound"
+msgstr "声音"
+
+#: src/flathub.cpp
+msgid "Play & record"
+msgstr "播放和录音"
 
 #: src/launch/main.cpp src/ui/pages.cpp src/welcome/main.cpp
 msgid "Starting Android"

@@ -3,7 +3,9 @@
 #include "ui/installer.h"
 
 #include <cmath>
+#include <clocale>
 #include <cstdio>
+#include <cstdlib>
 
 #include "base/event_loop.h"
 #include "base/i18n.h"
@@ -493,13 +495,19 @@ Installer::Installer(std::unique_ptr<Backend> backend)
 
 void Installer::build()
 {
-    auto root = std::make_unique<Root>(*this);
-    m_root = root.get();
-    m_window->setContentView(std::move(root));
     m_window->onCloseRequested = [this] { requestQuit(); };
     m_window->addShortcut(NoModifier, key::F1, [this] { showHelp(); });
     m_window->addShortcut(NoModifier, kF12, [this] { openConsole(); });
     m_window->addShortcut(AltModifier, key::Left, [this] { back(); });
+    buildRoot();
+}
+
+void Installer::buildRoot()
+{
+    m_pages.clear();
+    auto root = std::make_unique<Root>(*this);
+    m_root = root.get();
+    m_window->setContentView(std::move(root));
     m_root->footer->back->onClicked = [this] { back(); };
     m_root->footer->next->onClicked = [this] { next(); };
     m_root->menu->onClicked = [this] {
@@ -603,6 +611,22 @@ void Installer::updateChrome()
 void Installer::pageChanged(Page*)
 {
     updateChrome();
+}
+
+void Installer::setLanguage(const std::string& locale)
+{
+    const char* current = std::setlocale(LC_MESSAGES, nullptr);
+    if (locale.empty() || (current && locale == current))
+        return;
+    // gettext reads LANGUAGE before the locale; ll_CC, then ll.
+    const std::string language = locale.substr(0, locale.find_first_of(".@"));
+    setenv("LANGUAGE", (language + ":" + language.substr(0, language.find('_'))).c_str(), 1);
+    std::setlocale(LC_MESSAGES, locale.c_str());
+    // After the page that called this has finished with its own views.
+    bayu::base::EventLoop::current()->post([this] {
+        buildRoot();
+        show(m_current);
+    });
 }
 
 void Installer::next()
