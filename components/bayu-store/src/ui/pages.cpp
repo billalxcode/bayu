@@ -827,9 +827,9 @@ public:
             line->setLayoutHints({.fillWidth = true});
             Icon* glyph = line->addChild<Icon>(permission.glyph, 18);
             glyph->setColor(style::color(Role::SecondaryText));
-            Label* label = addText(line, permission.name, 16, 500);
+            Label* label = addText(line, tr(permission.name.c_str()), 16, 500);
             label->setLayoutHints({.fillWidth = true});
-            addText(line, permission.detail, 14, 400, Role::SecondaryText);
+            addText(line, tr(permission.detail.c_str()), 14, 400, Role::SecondaryText);
         }
         addDivider(permissions);
         Flow* badges = permissions->addChild<Flow>(10);

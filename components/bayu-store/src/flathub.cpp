@@ -7,11 +7,13 @@
 #include <ctime>
 #include <future>
 
+#include "base/i18n.h"
 #include "base/json.h"
 #include "catalog.h"
 #include "net.h"
 
 using bayu::base::json::Value;
+using bayu::i18n::trNoop;
 
 namespace store::flathub {
 
@@ -222,28 +224,31 @@ void fetchDetails(App& app)
         app.permissions.clear();
         const std::vector<std::string> shared = strings(permissions["shared"]);
         if (std::find(shared.begin(), shared.end(), "network") != shared.end())
-            app.permissions.push_back({"wifi", "Network access", "Required"});
+            app.permissions.push_back({"wifi", trNoop("Network access"), trNoop("Required")});
         std::string files;
         for (const std::string& filesystem : strings(permissions["filesystems"])) {
             const bool readOnly = filesystem.ends_with(":ro");
             if (filesystem.starts_with("host") && files.empty())
-                app.permissions.push_back({"folder", "All files", readOnly ? "Read only" : "Read & write"});
+                app.permissions.push_back({"folder", trNoop("All files"),
+                                           readOnly ? trNoop("Read only") : trNoop("Read & write")});
             else if (filesystem.starts_with("home") && files.empty())
-                app.permissions.push_back({"folder", "Home folder", readOnly ? "Read only" : "Read & write"});
+                app.permissions.push_back({"folder", trNoop("Home folder"),
+                                           readOnly ? trNoop("Read only") : trNoop("Read & write")});
             else if (filesystem.starts_with("xdg-download"))
-                app.permissions.push_back({"download", "Downloads folder", readOnly ? "Read only" : "Read & write"});
+                app.permissions.push_back({"download", trNoop("Downloads folder"),
+                                           readOnly ? trNoop("Read only") : trNoop("Read & write")});
             else
                 continue;
             files = filesystem;
         }
         const std::vector<std::string> devices = strings(permissions["devices"]);
         if (std::find(devices.begin(), devices.end(), "all") != devices.end())
-            app.permissions.push_back({"cpu", "All devices", "Camera, USB, GPU"});
+            app.permissions.push_back({"cpu", trNoop("All devices"), trNoop("Camera, USB, GPU")});
         else if (std::find(devices.begin(), devices.end(), "dri") != devices.end())
-            app.permissions.push_back({"cpu", "GPU acceleration", "Required"});
+            app.permissions.push_back({"cpu", trNoop("GPU acceleration"), trNoop("Required")});
         const std::vector<std::string> sockets = strings(permissions["sockets"]);
         if (std::find(sockets.begin(), sockets.end(), "pulseaudio") != sockets.end())
-            app.permissions.push_back({"music", "Sound", "Play & record"});
+            app.permissions.push_back({"music", trNoop("Sound"), trNoop("Play & record")});
     }
 
     const Value counts = parse(stats.get());

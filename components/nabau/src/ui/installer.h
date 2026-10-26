@@ -85,9 +85,15 @@ public:
     // A page changed its state.
     void pageChanged(Page* page);
 
+    // The installer in the language chosen in step 01: its pages are made
+    // again in it, after the step that chose it has moved on.
+    void setLanguage(const std::string& locale);
+
 private:
     // The window's content, once the backend has started.
     void build();
+    // The sidebar, the pages and the footer, in the current language.
+    void buildRoot();
     void show(size_t index);
     void updateChrome();
 

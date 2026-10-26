@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 16:38+0700\n"
+"POT-Creation-Date: 2026-10-26 14:30+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,6 +23,90 @@ msgstr "Android wurde nicht eingerichtet: Das Passwort wurde nicht eingegeben."
 #: src/android_setup.cpp
 msgid "Android could not be set up (lapis init failed)."
 msgstr "Android konnte nicht eingerichtet werden (lapis init ist fehlgeschlagen)."
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Network access"
+msgstr "Netzwerkzugriff"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Required"
+msgstr "Erforderlich"
+
+#: src/fdroid.cpp
+msgid "Camera"
+msgstr "Kamera"
+
+#: src/fdroid.cpp
+msgid "Asks"
+msgstr "Fragt nach"
+
+#: src/fdroid.cpp
+msgid "Microphone"
+msgstr "Mikrofon"
+
+#: src/fdroid.cpp
+msgid "Location"
+msgstr "Standort"
+
+#: src/fdroid.cpp
+msgid "Contacts"
+msgstr "Kontakte"
+
+#: src/fdroid.cpp src/mock_backend.cpp
+msgid "Storage"
+msgstr "Speicher"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Read & write"
+msgstr "Lesen und schreiben"
+
+#: src/fdroid.cpp
+msgid "Read"
+msgstr "Lesen"
+
+#: src/fdroid.cpp
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: src/fdroid.cpp
+msgid "Notifications"
+msgstr "Benachrichtigungen"
+
+#: src/flathub.cpp
+msgid "All files"
+msgstr "Alle Dateien"
+
+#: src/flathub.cpp
+msgid "Read only"
+msgstr "Nur lesen"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "Home folder"
+msgstr "Persönlicher Ordner"
+
+#: src/flathub.cpp
+msgid "Downloads folder"
+msgstr "Download-Ordner"
+
+#: src/flathub.cpp
+msgid "All devices"
+msgstr "Alle Geräte"
+
+#: src/flathub.cpp
+msgid "Camera, USB, GPU"
+msgstr "Kamera, USB, GPU"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "GPU acceleration"
+msgstr "GPU-Beschleunigung"
+
+#: src/flathub.cpp
+msgid "Sound"
+msgstr "Ton"
+
+#: src/flathub.cpp
+msgid "Play & record"
+msgstr "Abspielen und aufnehmen"
 
 #: src/launch/main.cpp src/ui/pages.cpp src/welcome/main.cpp
 msgid "Starting Android"

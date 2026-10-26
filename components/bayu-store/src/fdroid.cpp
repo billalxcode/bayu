@@ -6,7 +6,10 @@
 #include <cstdlib>
 #include <map>
 
+#include "base/i18n.h"
 #include "catalog.h"
+
+using bayu::i18n::trNoop;
 
 namespace store::fdroid {
 
@@ -249,23 +252,23 @@ Permission permissionFor(const std::string& name)
 {
     const std::string short_ = name.substr(name.rfind('.') + 1);
     if (short_ == "INTERNET")
-        return {"wifi", "Network access", "Required"};
+        return {"wifi", trNoop("Network access"), trNoop("Required")};
     if (short_ == "CAMERA")
-        return {"camera", "Camera", "Asks"};
+        return {"camera", trNoop("Camera"), trNoop("Asks")};
     if (short_ == "RECORD_AUDIO")
-        return {"mic", "Microphone", "Asks"};
+        return {"mic", trNoop("Microphone"), trNoop("Asks")};
     if (short_ == "ACCESS_FINE_LOCATION" || short_ == "ACCESS_COARSE_LOCATION")
-        return {"map-pin", "Location", "Asks"};
+        return {"map-pin", trNoop("Location"), trNoop("Asks")};
     if (short_ == "READ_CONTACTS" || short_ == "WRITE_CONTACTS")
-        return {"contact", "Contacts", "Asks"};
+        return {"contact", trNoop("Contacts"), trNoop("Asks")};
     if (short_.starts_with("READ_MEDIA") || short_ == "READ_EXTERNAL_STORAGE" || short_ == "WRITE_EXTERNAL_STORAGE"
         || short_ == "MANAGE_EXTERNAL_STORAGE")
-        return {"folder", "Storage", short_.starts_with("WRITE") || short_.starts_with("MANAGE") ? "Read & write"
-                                                                                                  : "Read"};
+        return {"folder", trNoop("Storage"),
+                short_.starts_with("WRITE") || short_.starts_with("MANAGE") ? trNoop("Read & write") : trNoop("Read")};
     if (short_.starts_with("BLUETOOTH"))
-        return {"bluetooth", "Bluetooth", "Required"};
+        return {"bluetooth", trNoop("Bluetooth"), trNoop("Required")};
     if (short_ == "POST_NOTIFICATIONS")
-        return {"bell", "Notifications", "Asks"};
+        return {"bell", trNoop("Notifications"), trNoop("Asks")};
     return {};
 }
 

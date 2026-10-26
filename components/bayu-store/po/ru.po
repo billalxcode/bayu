@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 16:38+0700\n"
+"POT-Creation-Date: 2026-10-26 14:30+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,6 +23,90 @@ msgstr "Android не настроен: пароль не был введён."
 #: src/android_setup.cpp
 msgid "Android could not be set up (lapis init failed)."
 msgstr "Не удалось настроить Android (ошибка lapis init)."
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Network access"
+msgstr "Доступ к сети"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Required"
+msgstr "Обязательно"
+
+#: src/fdroid.cpp
+msgid "Camera"
+msgstr "Камера"
+
+#: src/fdroid.cpp
+msgid "Asks"
+msgstr "Запрашивает"
+
+#: src/fdroid.cpp
+msgid "Microphone"
+msgstr "Микрофон"
+
+#: src/fdroid.cpp
+msgid "Location"
+msgstr "Местоположение"
+
+#: src/fdroid.cpp
+msgid "Contacts"
+msgstr "Контакты"
+
+#: src/fdroid.cpp src/mock_backend.cpp
+msgid "Storage"
+msgstr "Хранилище"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Read & write"
+msgstr "Чтение и запись"
+
+#: src/fdroid.cpp
+msgid "Read"
+msgstr "Чтение"
+
+#: src/fdroid.cpp
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: src/fdroid.cpp
+msgid "Notifications"
+msgstr "Уведомления"
+
+#: src/flathub.cpp
+msgid "All files"
+msgstr "Все файлы"
+
+#: src/flathub.cpp
+msgid "Read only"
+msgstr "Только чтение"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "Home folder"
+msgstr "Домашняя папка"
+
+#: src/flathub.cpp
+msgid "Downloads folder"
+msgstr "Папка «Загрузки»"
+
+#: src/flathub.cpp
+msgid "All devices"
+msgstr "Все устройства"
+
+#: src/flathub.cpp
+msgid "Camera, USB, GPU"
+msgstr "Камера, USB, GPU"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "GPU acceleration"
+msgstr "Ускорение GPU"
+
+#: src/flathub.cpp
+msgid "Sound"
+msgstr "Звук"
+
+#: src/flathub.cpp
+msgid "Play & record"
+msgstr "Воспроизведение и запись"
 
 #: src/launch/main.cpp src/ui/pages.cpp src/welcome/main.cpp
 msgid "Starting Android"

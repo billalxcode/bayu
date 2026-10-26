@@ -7,8 +7,11 @@
 #include <set>
 
 #include "backend.h"
+#include "base/i18n.h"
 #include "base/timer.h"
 #include "catalog.h"
+
+using bayu::i18n::trNoop;
 
 namespace store {
 
@@ -58,9 +61,11 @@ App appFrom(const Sample& s, int64_t now)
     app.version = "1.0";
     app.description = std::string(s.summary) + ".";
     if (s.source == Source::FDroid)
-        app.permissions = {{"wifi", "Network access", "Required"}, {"folder", "Storage", "Read & write"}};
+        app.permissions = {{"wifi", trNoop("Network access"), trNoop("Required")},
+                           {"folder", trNoop("Storage"), trNoop("Read & write")}};
     else
-        app.permissions = {{"wifi", "Network access", "Required"}, {"folder", "Home folder", "Read & write"}};
+        app.permissions = {{"wifi", trNoop("Network access"), trNoop("Required")},
+                           {"folder", trNoop("Home folder"), trNoop("Read & write")}};
     return app;
 }
 
@@ -138,7 +143,7 @@ public:
                 app.releaseNotes = "Relight engine is 2.4× faster on AMD GPUs\nNew masking brush with edge "
                                    "detection\nFixes HEIF import on Wayland sessions";
                 app.screenshots = {{"", "Library"}, {"", "Develop"}, {"", "Masks"}, {"", "Export"}};
-                app.permissions.push_back({"cpu", "GPU acceleration", "Required"});
+                app.permissions.push_back({"cpu", trNoop("GPU acceleration"), trNoop("Required")});
                 app.ref = "app/org.northlight.Lumen/x86_64/stable";
             }
         }

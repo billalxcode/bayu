@@ -121,6 +121,7 @@ public:
         choices.language = m_language;
         choices.locale = m_locale;
         installer().backend().setLocale(m_locale);
+        installer().setLanguage(m_locale);
         done(true);
     }
 

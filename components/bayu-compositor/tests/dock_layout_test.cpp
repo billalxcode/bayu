@@ -315,6 +315,22 @@ TEST_F(DockLayoutTest, WhenObstructedFollowsMaximizedWindows)
     EXPECT_TRUE(isShown());
 }
 
+TEST_F(DockLayoutTest, WhenObstructedMakesRoomForAWindowOverIt)
+{
+    layout.setBehavior(DockAutoHideBehavior::WhenObstructed);
+    Window *window = makeWindow(base::Rect(100, 100, 800, 500));
+    EXPECT_TRUE(isShown());
+
+    // Down to the dock's place, as an installer window at 1280x800.
+    window->setBounds(base::Rect(100, 100, 800, 650));
+    EXPECT_EQ(DockVisibilityState::AutoHide, layout.visibilityState(dock));
+    EXPECT_FALSE(isShown());
+
+    window->setBounds(base::Rect(100, 100, 800, 500));
+    waitForReveal();
+    EXPECT_TRUE(isShown());
+}
+
 TEST_F(DockLayoutTest, AlwaysHideStaysShownWithNothingToMakeRoomFor)
 {
     layout.setBehavior(DockAutoHideBehavior::Always);

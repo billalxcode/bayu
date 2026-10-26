@@ -156,6 +156,7 @@ private:
     bool isAwayForSession() const { return m_sessionStarting || m_sessionEnding; }
     bool hasVisibleWindow(const base::Rect &output) const;
     bool isLauncherShowing(const base::Rect &output) const;
+    bool isObstructed(const Window *dock, const base::Rect &output) const;
     void applyAutoHideState(Window *dock, Dock &entry, DockAutoHideState state);
     // Aims the dock at where its current state puts it: on screen, or just
     // past its edge. Animated unless the dock is already parked there.

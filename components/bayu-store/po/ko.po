@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 16:38+0700\n"
+"POT-Creation-Date: 2026-10-26 14:30+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,6 +23,90 @@ msgstr "Android를 설정하지 않았습니다: 암호가 입력되지 않았�
 #: src/android_setup.cpp
 msgid "Android could not be set up (lapis init failed)."
 msgstr "Android를 설정할 수 없습니다(lapis init 실패)."
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Network access"
+msgstr "네트워크 접근"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Required"
+msgstr "필수"
+
+#: src/fdroid.cpp
+msgid "Camera"
+msgstr "카메라"
+
+#: src/fdroid.cpp
+msgid "Asks"
+msgstr "요청함"
+
+#: src/fdroid.cpp
+msgid "Microphone"
+msgstr "마이크"
+
+#: src/fdroid.cpp
+msgid "Location"
+msgstr "위치"
+
+#: src/fdroid.cpp
+msgid "Contacts"
+msgstr "연락처"
+
+#: src/fdroid.cpp src/mock_backend.cpp
+msgid "Storage"
+msgstr "저장소"
+
+#: src/fdroid.cpp src/flathub.cpp src/mock_backend.cpp
+msgid "Read & write"
+msgstr "읽기 및 쓰기"
+
+#: src/fdroid.cpp
+msgid "Read"
+msgstr "읽기"
+
+#: src/fdroid.cpp
+msgid "Bluetooth"
+msgstr "블루투스"
+
+#: src/fdroid.cpp
+msgid "Notifications"
+msgstr "알림"
+
+#: src/flathub.cpp
+msgid "All files"
+msgstr "모든 파일"
+
+#: src/flathub.cpp
+msgid "Read only"
+msgstr "읽기 전용"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "Home folder"
+msgstr "홈 폴더"
+
+#: src/flathub.cpp
+msgid "Downloads folder"
+msgstr "다운로드 폴더"
+
+#: src/flathub.cpp
+msgid "All devices"
+msgstr "모든 장치"
+
+#: src/flathub.cpp
+msgid "Camera, USB, GPU"
+msgstr "카메라, USB, GPU"
+
+#: src/flathub.cpp src/mock_backend.cpp
+msgid "GPU acceleration"
+msgstr "GPU 가속"
+
+#: src/flathub.cpp
+msgid "Sound"
+msgstr "소리"
+
+#: src/flathub.cpp
+msgid "Play & record"
+msgstr "재생 및 녹음"
 
 #: src/launch/main.cpp src/ui/pages.cpp src/welcome/main.cpp
 msgid "Starting Android"
