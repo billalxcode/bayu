@@ -70,7 +70,7 @@ static std::vector<PageInfo> makePages()
          .keywords = trNoop("region, locale, system language")});
     add({.id = "datetime", .name = "datetime", .title = trNoop("Date & Time"), .icon = "datetime.svg",
          .iconColor = Color::rgb(0x418CFF), .category = trNoop("System"),
-         .keywords = trNoop("clock, time zone, 24-hour time, NTP, sync")});
+         .keywords = trNoop("clock, time zone, 24-hour time, seconds, NTP, sync")});
     add({.id = "defaultapps", .name = "defaultapps", .title = trNoop("Default Applications"),
          .icon = "defaultapps.svg", .iconColor = Color::rgb(0x418CFF), .category = trNoop("System"),
          .keywords = trNoop("web browser, email client, terminal")});

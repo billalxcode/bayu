@@ -569,6 +569,10 @@ msgid "24-hour time"
 msgstr "Waktos 24 jam"
 
 #: src/pages/datetime/datetimepage.cpp
+msgid "Show seconds"
+msgstr "Témbongkeun detik"
+
+#: src/pages/datetime/datetimepage.cpp
 msgid "Time zone"
 msgstr "Zona waktos"
 
@@ -2353,8 +2357,8 @@ msgid "region, locale, system language"
 msgstr "wewengkon, lokal, basa sistem, region, locale, system language"
 
 #: src/window/pagelist.cpp
-msgid "clock, time zone, 24-hour time, NTP, sync"
-msgstr "jam, zona waktos, waktos 24 jam, NTP, sinkron, clock, time zone, 24-hour time, sync"
+msgid "clock, time zone, 24-hour time, seconds, NTP, sync"
+msgstr "jam, zona waktos, waktos 24 jam, detik, NTP, sinkron, clock, time zone, 24-hour time, seconds, sync"
 
 #: src/window/pagelist.cpp
 msgid "web browser, email client, terminal"

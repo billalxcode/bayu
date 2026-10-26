@@ -12,7 +12,8 @@ class TimeDate;
 
 namespace settings {
 
-// Network time, through timedated, and the status bar's 24-hour clock.
+// Network time, through timedated, and the status bar's 24-hour clock and
+// seconds.
 class TimeSettings
 {
 public:
@@ -27,8 +28,12 @@ public:
     bool twentyFour() const { return m_twentyFour; }
     void setTwentyFour(bool enabled);
 
+    bool showSeconds() const { return m_showSeconds; }
+    void setShowSeconds(bool enabled);
+
     bayu::base::Signal<> useNtpChanged;
     bayu::base::Signal<> twentyFourChanged;
+    bayu::base::Signal<> showSecondsChanged;
 
 private:
     bayu::timedate::TimeDate& m_timeDate;
@@ -37,6 +42,7 @@ private:
     bool m_canNtp;
     bool m_useNtp;
     bool m_twentyFour;
+    bool m_showSeconds;
 };
 
 } // namespace settings

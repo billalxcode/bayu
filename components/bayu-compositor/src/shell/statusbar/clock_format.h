@@ -12,8 +12,8 @@ namespace bayu::shell::clock_format {
 // The status bar clock's format, as base::Locale::toString takes it: the
 // weekday, abbreviated month, day and time in the order and words CLDR gives
 // the locale, without the commas of its written-out form ("Sat Sep 26 1:40
-// PM").
-std::string pattern(const std::string &localeName, bool twentyFourHour);
+// PM"), with the seconds when `seconds` is set.
+std::string pattern(const std::string &localeName, bool twentyFourHour, bool seconds = false);
 
 // From a CLDR (ICU) pattern; empty when it has a field that format cannot show.
 std::string toLocaleFormat(const std::string &icuPattern);

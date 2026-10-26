@@ -446,6 +446,10 @@ TEST(ClockFormatTest, FollowsTheLocalesOrderWithoutCommas)
               "Sat Sep 26 1:40\u202fPM");
     EXPECT_EQ(base::Locale("en_US").toString(time, shell::clock_format::pattern("en_US", true)),
               "Sat Sep 26 13:40");
+    EXPECT_EQ(base::Locale("en_US").toString(time, shell::clock_format::pattern("en_US", false, true)),
+              "Sat Sep 26 1:40:00\u202fPM");
+    EXPECT_EQ(base::Locale("en_US").toString(time, shell::clock_format::pattern("en_US", true, true)),
+              "Sat Sep 26 13:40:00");
     EXPECT_EQ(base::Locale("zh_CN").toString(time, shell::clock_format::pattern("zh_CN", false)),
               "9\xe6\x9c\x88"
               "26\xe6\x97\xa5\xe5\x91\xa8\xe5\x85\xad \xe4\xb8\x8b\xe5\x8d\x88"
@@ -454,6 +458,8 @@ TEST(ClockFormatTest, FollowsTheLocalesOrderWithoutCommas)
     EXPECT_EQ(shell::clock_format::toLocaleFormat("G y"), "");
 
     EXPECT_FALSE(shell::clock_format::showsSeconds(shell::clock_format::pattern("en_US", false)));
+    EXPECT_TRUE(shell::clock_format::showsSeconds(shell::clock_format::pattern("en_US", false, true)));
+    EXPECT_TRUE(shell::clock_format::showsSeconds(shell::clock_format::pattern("zh_CN", true, true)));
     EXPECT_FALSE(shell::clock_format::showsSeconds("H:mm' Uhr 'ddd"));
     EXPECT_FALSE(shell::clock_format::showsSeconds("H:mm' secs'"));
     EXPECT_TRUE(shell::clock_format::showsSeconds("H:mm:ss"));
@@ -497,17 +503,22 @@ TEST(BatteryTest, ShowsOnceTheServiceComesUp)
 TEST(StatusBarTest, ServesOrgBayuStatusbar)
 {
     test::TemporaryDirectory directory;
-    directory.write("shell.conf", "[Statusbar]\nTwentyFourTime=true\n");
+    directory.write("shell.conf", "[Statusbar]\nTwentyFourTime=true\nShowSeconds=true\n");
     shell::StatusBar statusBar(sessionBus(), dbus::Connection::system(core::mainLoop()), nullptr,
                                directory.filePath("shell.conf"));
     ASSERT_TRUE(statusBar.registerServices());
     ASSERT_TRUE(test::runUntil([&] { return statusBar.twentyFourTime(); }));
     EXPECT_NE(statusBar.timeFormat().find('H'), std::string::npos);
+    EXPECT_TRUE(statusBar.showSeconds());
+    EXPECT_TRUE(shell::clock_format::showsSeconds(statusBar.timeFormat()));
 
     test::DBusTestClient settings;
     settings.call("org.bayu.Statusbar", "/Statusbar", "org.bayu.Statusbar", "setTwentyFourTime", false);
+    settings.call("org.bayu.Statusbar", "/Statusbar", "org.bayu.Statusbar", "setShowSeconds", false);
     settings.call("org.bayu.Statusbar", "/Statusbar", "org.bayu.Statusbar", "setBatteryPercentage", true);
     EXPECT_FALSE(statusBar.twentyFourTime());
+    EXPECT_FALSE(statusBar.showSeconds());
+    EXPECT_FALSE(shell::clock_format::showsSeconds(statusBar.timeFormat()));
     EXPECT_TRUE(statusBar.battery().showPercentage());
     EXPECT_EQ(statusBar.timeFormat().find('H'), std::string::npos);
 
@@ -523,10 +534,12 @@ TEST(StatusBarTest, ServesOrgBayuStatusbar)
     shell::waitForFileThread();
     base::Settings saved(directory.filePath("shell.conf"));
     EXPECT_FALSE(saved.boolValue("Statusbar/TwentyFourTime", true));
+    EXPECT_FALSE(saved.boolValue("Statusbar/ShowSeconds", true));
     EXPECT_TRUE(saved.boolValue("Statusbar/BatteryPercentage", false));
 
     const std::string xml = settings.introspect("org.bayu.Statusbar", "/Statusbar");
     EXPECT_NE(xml.find("name=\"batteryPercentage\""), std::string::npos);
+    EXPECT_NE(xml.find("name=\"showSeconds\""), std::string::npos);
 }
 
 TEST(VpnNotifierTest, TellsAFailedVpnAndOpensItsPage)
