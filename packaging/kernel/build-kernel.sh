@@ -10,7 +10,9 @@
 set -Eeuo pipefail
 ROOT=$(realpath "$(dirname "$0")/../..")
 KERNEL=${KERNEL:-6.12.0-211.68.1.el10_2}
-SRPM_URL=${SRPM_URL:-https://vault.almalinux.org/10.2/BaseOS/Source/Packages/kernel-$KERNEL.src.rpm}
+# The AlmaLinux minor release the kernel is of: el10_2 is 10.2.
+MINOR=$(sed -n 's/.*\.el10_\([0-9]*\).*/10.\1/p' <<<"$KERNEL")
+SRPM_URL=${SRPM_URL:-https://vault.almalinux.org/${MINOR:-10.2}/BaseOS/Source/Packages/kernel-$KERNEL.src.rpm}
 CACHE=${KERNEL_CACHE:-$HOME/.cache/bayu-kernel}/$KERNEL
 mkdir -p "$CACHE" "$ROOT/out/repo"
 

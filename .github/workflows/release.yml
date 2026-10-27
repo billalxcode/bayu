@@ -75,6 +75,20 @@ jobs:
           packaging/kernel/build-kernel.sh
           packaging/wl/build-wl.sh
 
+      # Binder, PSI, the Wi-Fi drivers and wl, before an ISO boots the kernel.
+      # A pass is kept with the build, so a kernel is tested once.
+      - name: Test kernel
+        run: |
+          kernel=$(sed -n 's/^KERNEL=${KERNEL:-\(.*\)}$/\1/p' packaging/kernel/build-kernel.sh)
+          wl=$(sed -n 's/^WL=${WL:-\(.*\)}$/\1/p' packaging/wl/build-wl.sh)
+          stamp="$HOME/.cache/bayu-kernel/$kernel/tested-wl-$wl"
+          if [ -f "$stamp" ]; then
+            echo "$kernel with wl $wl passed before"
+          else
+            packaging/kernel/test-kernel.sh "$HOME/.cache/bayu-kernel/$kernel" "$HOME/.cache/bayu-wl/$wl"
+            touch "$stamp"
+          fi
+
       - name: Build ISO
         env:
           BAYU_REPO_GPG_KEY: ${{ secrets.BAYU_REPO_GPG_KEY }}
