@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:03+0000\n"
+"POT-Creation-Date: 2026-10-27 07:55+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -141,7 +141,7 @@ msgstr "今すぐシャットダウンしますか?"
 msgid "Log out now?"
 msgstr "今すぐログアウトしますか?"
 
-#: src/shell/controlcenter/power_dialog.cpp
+#: src/shell/controlcenter/power_dialog.cpp src/shell/controlcenter/tiles.cpp
 #: src/shell/menubar/menu_bar_model.cpp
 msgid "Restart"
 msgstr "再起動"
@@ -240,6 +240,22 @@ msgstr "がマイクを使用しています"
 msgid "is recording system audio"
 msgstr "がシステムオーディオを録音しています"
 
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Lock screen"
+msgstr "画面をロック"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Suspend"
+msgstr "スリープ"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Log out"
+msgstr "ログアウト"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Shutdown"
+msgstr "シャットダウン"
+
 #: src/shell/dock/dock_model.cpp
 msgid "Launcher"
 msgstr "ランチャー"
@@ -249,18 +265,20 @@ msgid "Trash"
 msgstr "ゴミ箱"
 
 #: src/shell/dock/dock_window.cpp src/shell/launcher/launcher_view.cpp
+#: src/shell/statusbar/panel_tasks.cpp
 msgid "Open"
 msgstr "開く"
 
-#: src/shell/dock/dock_window.cpp
+#: src/shell/dock/dock_window.cpp src/shell/statusbar/panel_tasks.cpp
 msgid "Unpin"
 msgstr "固定を解除"
 
-#: src/shell/dock/dock_window.cpp
+#: src/shell/dock/dock_window.cpp src/shell/statusbar/panel_tasks.cpp
 msgid "Pin"
 msgstr "固定"
 
 #: src/shell/dock/dock_window.cpp src/shell/menubar/menu_bar_model.cpp
+#: src/shell/statusbar/panel_tasks.cpp
 msgid "Quit"
 msgstr "終了"
 
@@ -303,22 +321,6 @@ msgstr "情報"
 #: src/shell/menubar/menu_bar_model.cpp
 msgid "Settings"
 msgstr "設定"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Suspend"
-msgstr "スリープ"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Shutdown"
-msgstr "シャットダウン"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Lock screen"
-msgstr "画面をロック"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Log out"
-msgstr "ログアウト"
 
 #: src/shell/menubar/menu_bar_model.cpp
 #, python-brace-format

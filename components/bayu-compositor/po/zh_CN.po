@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:03+0000\n"
+"POT-Creation-Date: 2026-10-27 07:55+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -140,7 +140,7 @@ msgstr "现在关机吗？"
 msgid "Log out now?"
 msgstr "现在注销吗？"
 
-#: src/shell/controlcenter/power_dialog.cpp
+#: src/shell/controlcenter/power_dialog.cpp src/shell/controlcenter/tiles.cpp
 #: src/shell/menubar/menu_bar_model.cpp
 msgid "Restart"
 msgstr "重启"
@@ -239,6 +239,22 @@ msgstr "正在使用麦克风"
 msgid "is recording system audio"
 msgstr "正在录制系统音频"
 
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Lock screen"
+msgstr "锁定屏幕"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Suspend"
+msgstr "挂起"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Log out"
+msgstr "注销"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Shutdown"
+msgstr "关机"
+
 #: src/shell/dock/dock_model.cpp
 msgid "Launcher"
 msgstr "启动台"
@@ -248,18 +264,20 @@ msgid "Trash"
 msgstr "回收站"
 
 #: src/shell/dock/dock_window.cpp src/shell/launcher/launcher_view.cpp
+#: src/shell/statusbar/panel_tasks.cpp
 msgid "Open"
 msgstr "打开"
 
-#: src/shell/dock/dock_window.cpp
+#: src/shell/dock/dock_window.cpp src/shell/statusbar/panel_tasks.cpp
 msgid "Unpin"
 msgstr "取消固定"
 
-#: src/shell/dock/dock_window.cpp
+#: src/shell/dock/dock_window.cpp src/shell/statusbar/panel_tasks.cpp
 msgid "Pin"
 msgstr "固定"
 
 #: src/shell/dock/dock_window.cpp src/shell/menubar/menu_bar_model.cpp
+#: src/shell/statusbar/panel_tasks.cpp
 msgid "Quit"
 msgstr "退出"
 
@@ -302,22 +320,6 @@ msgstr "关于"
 #: src/shell/menubar/menu_bar_model.cpp
 msgid "Settings"
 msgstr "设置"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Suspend"
-msgstr "挂起"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Shutdown"
-msgstr "关机"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Lock screen"
-msgstr "锁定屏幕"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Log out"
-msgstr "注销"
 
 #: src/shell/menubar/menu_bar_model.cpp
 #, python-brace-format

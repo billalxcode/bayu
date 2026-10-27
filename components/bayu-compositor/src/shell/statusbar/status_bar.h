@@ -83,6 +83,10 @@ public:
     // Panel/GlassTint, from clear (0) to tinted (1), as the dock's.
     double panelGlassTint() const { return m_panelGlassTint; }
     void setPanelGlassTint(double tint);
+    // Panel/WindowTitles: a button with its title for each window, instead
+    // of the applications' icons.
+    bool panelWindowTitles() const { return m_panelWindowTitles; }
+    void setPanelWindowTitles(bool titles);
 
     base::Signal<> layoutChanged;
     base::Signal<> panelChanged;
@@ -115,6 +119,7 @@ private:
     bool m_panelFloating = true;
     int m_panelIconSize = kMediumPanelIcons;
     double m_panelGlassTint = 0.5;
+    bool m_panelWindowTitles = false;
 };
 
 } // namespace bayu::shell

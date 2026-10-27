@@ -50,6 +50,7 @@ StatusBar::StatusBar(dbus::Connection *sessionBus, dbus::Connection *systemBus, 
                 ? kSmallPanelIcons
                 : kMediumPanelIcons;
         m_panelGlassTint = std::clamp(settings.doubleValue("Panel/GlassTint", 0.5), 0.0, 1.0);
+        m_panelWindowTitles = settings.boolValue("Panel/WindowTitles", false);
     }
 
     m_load = runOnFileThread(
@@ -112,6 +113,8 @@ bool StatusBar::registerServices()
                           dbus::ArgumentNames{{"size"}, {}});
         object->addMethod("setPanelGlassTint", [this](double tint) { setPanelGlassTint(tint); },
                           dbus::ArgumentNames{{"tint"}, {}});
+        object->addMethod("setPanelWindowTitles", [this](bool titles) { setPanelWindowTitles(titles); },
+                          dbus::ArgumentNames{{"titles"}, {}});
         // The same as the menu's: the user is asked first. The session's
         // own methods act at once.
         object->addMethod("requestLogout", [this] { m_powerActions.request(PowerActions::Logout); });
@@ -197,6 +200,17 @@ void StatusBar::setPanelGlassTint(double tint)
         return;
     m_panelGlassTint = tint;
     writeSettings(m_settingsPath, [tint](base::Settings &settings) { settings.setValue("Panel/GlassTint", tint); });
+    panelChanged();
+}
+
+void StatusBar::setPanelWindowTitles(bool titles)
+{
+    if (m_panelWindowTitles == titles)
+        return;
+    m_panelWindowTitles = titles;
+    writeSettings(m_settingsPath, [titles](base::Settings &settings) {
+        settings.setValue("Panel/WindowTitles", titles);
+    });
     panelChanged();
 }
 

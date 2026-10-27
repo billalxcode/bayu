@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:03+0000\n"
+"POT-Creation-Date: 2026-10-27 07:55+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -140,7 +140,7 @@ msgstr "지금 종료하시겠습니까?"
 msgid "Log out now?"
 msgstr "지금 로그아웃하시겠습니까?"
 
-#: src/shell/controlcenter/power_dialog.cpp
+#: src/shell/controlcenter/power_dialog.cpp src/shell/controlcenter/tiles.cpp
 #: src/shell/menubar/menu_bar_model.cpp
 msgid "Restart"
 msgstr "다시 시작"
@@ -239,6 +239,22 @@ msgstr "마이크를 사용 중입니다"
 msgid "is recording system audio"
 msgstr "시스템 오디오를 녹음 중입니다"
 
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Lock screen"
+msgstr "화면 잠금"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Suspend"
+msgstr "절전"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Log out"
+msgstr "로그아웃"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Shutdown"
+msgstr "시스템 종료"
+
 #: src/shell/dock/dock_model.cpp
 msgid "Launcher"
 msgstr "런처"
@@ -248,18 +264,20 @@ msgid "Trash"
 msgstr "휴지통"
 
 #: src/shell/dock/dock_window.cpp src/shell/launcher/launcher_view.cpp
+#: src/shell/statusbar/panel_tasks.cpp
 msgid "Open"
 msgstr "열기"
 
-#: src/shell/dock/dock_window.cpp
+#: src/shell/dock/dock_window.cpp src/shell/statusbar/panel_tasks.cpp
 msgid "Unpin"
 msgstr "고정 해제"
 
-#: src/shell/dock/dock_window.cpp
+#: src/shell/dock/dock_window.cpp src/shell/statusbar/panel_tasks.cpp
 msgid "Pin"
 msgstr "고정"
 
 #: src/shell/dock/dock_window.cpp src/shell/menubar/menu_bar_model.cpp
+#: src/shell/statusbar/panel_tasks.cpp
 msgid "Quit"
 msgstr "종료"
 
@@ -302,22 +320,6 @@ msgstr "정보"
 #: src/shell/menubar/menu_bar_model.cpp
 msgid "Settings"
 msgstr "설정"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Suspend"
-msgstr "절전"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Shutdown"
-msgstr "시스템 종료"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Lock screen"
-msgstr "화면 잠금"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Log out"
-msgstr "로그아웃"
 
 #: src/shell/menubar/menu_bar_model.cpp
 #, python-brace-format

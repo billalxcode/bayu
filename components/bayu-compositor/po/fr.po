@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:03+0000\n"
+"POT-Creation-Date: 2026-10-27 07:55+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -141,7 +141,7 @@ msgstr "Éteindre maintenant ?"
 msgid "Log out now?"
 msgstr "Se déconnecter maintenant ?"
 
-#: src/shell/controlcenter/power_dialog.cpp
+#: src/shell/controlcenter/power_dialog.cpp src/shell/controlcenter/tiles.cpp
 #: src/shell/menubar/menu_bar_model.cpp
 msgid "Restart"
 msgstr "Redémarrer"
@@ -240,6 +240,22 @@ msgstr "utilise le microphone"
 msgid "is recording system audio"
 msgstr "enregistre l’audio du système"
 
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Lock screen"
+msgstr "Verrouiller l’écran"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Suspend"
+msgstr "Mettre en veille"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Log out"
+msgstr "Se déconnecter"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Shutdown"
+msgstr "Éteindre"
+
 #: src/shell/dock/dock_model.cpp
 msgid "Launcher"
 msgstr "Lanceur"
@@ -249,18 +265,20 @@ msgid "Trash"
 msgstr "Corbeille"
 
 #: src/shell/dock/dock_window.cpp src/shell/launcher/launcher_view.cpp
+#: src/shell/statusbar/panel_tasks.cpp
 msgid "Open"
 msgstr "Ouvrir"
 
-#: src/shell/dock/dock_window.cpp
+#: src/shell/dock/dock_window.cpp src/shell/statusbar/panel_tasks.cpp
 msgid "Unpin"
 msgstr "Détacher"
 
-#: src/shell/dock/dock_window.cpp
+#: src/shell/dock/dock_window.cpp src/shell/statusbar/panel_tasks.cpp
 msgid "Pin"
 msgstr "Épingler"
 
 #: src/shell/dock/dock_window.cpp src/shell/menubar/menu_bar_model.cpp
+#: src/shell/statusbar/panel_tasks.cpp
 msgid "Quit"
 msgstr "Quitter"
 
@@ -303,22 +321,6 @@ msgstr "À propos"
 #: src/shell/menubar/menu_bar_model.cpp
 msgid "Settings"
 msgstr "Paramètres"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Suspend"
-msgstr "Mettre en veille"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Shutdown"
-msgstr "Éteindre"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Lock screen"
-msgstr "Verrouiller l’écran"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Log out"
-msgstr "Se déconnecter"
 
 #: src/shell/menubar/menu_bar_model.cpp
 #, python-brace-format

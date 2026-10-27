@@ -42,6 +42,9 @@ public:
     void setPanelIconSize(int size);
     double panelGlassTint() const { return m_panelGlassTint; }
     void setPanelGlassTint(double tint);
+    // The open applications as icons (false) or a button with each window's title.
+    bool panelWindowTitles() const { return m_panelWindowTitles; }
+    void setPanelWindowTitles(bool titles);
 
 private:
     bayu::base::dbus::Proxy m_dock;
@@ -50,6 +53,7 @@ private:
     bool m_panelFloating = true;
     int m_panelIconSize = 36;
     double m_panelGlassTint = 0.5;
+    bool m_panelWindowTitles = false;
     int m_iconSize = 0;
     int m_direction = 0;
     int m_visibility = 0;

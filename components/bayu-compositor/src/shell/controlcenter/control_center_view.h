@@ -20,6 +20,7 @@ class CardItem;
 class ControlCenterServices;
 class DeviceUsersTile;
 class MediaTile;
+class PowerTile;
 class TileSlider;
 
 // The control centre's content without its window: the title, the
@@ -76,6 +77,7 @@ private:
     MediaTile *m_media;
     TileSlider *m_brightness;
     TileSlider *m_sound;
+    PowerTile *m_power;
     base::Timer m_brightnessTimer;
     bool m_darkModeShown = false;
 };

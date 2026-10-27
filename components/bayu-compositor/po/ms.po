@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:03+0000\n"
+"POT-Creation-Date: 2026-10-27 07:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -140,7 +140,7 @@ msgstr "Matikan sekarang?"
 msgid "Log out now?"
 msgstr "Log keluar sekarang?"
 
-#: src/shell/controlcenter/power_dialog.cpp
+#: src/shell/controlcenter/power_dialog.cpp src/shell/controlcenter/tiles.cpp
 #: src/shell/menubar/menu_bar_model.cpp
 msgid "Restart"
 msgstr "Mula Semula"
@@ -239,6 +239,22 @@ msgstr "sedang menggunakan mikrofon"
 msgid "is recording system audio"
 msgstr "sedang merakam audio sistem"
 
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Lock screen"
+msgstr "Kunci skrin"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Suspend"
+msgstr "Tangguh"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Log out"
+msgstr "Log keluar"
+
+#: src/shell/controlcenter/tiles.cpp src/shell/menubar/menu_bar_model.cpp
+msgid "Shutdown"
+msgstr "Matikan"
+
 #: src/shell/dock/dock_model.cpp
 msgid "Launcher"
 msgstr "Pelancar"
@@ -248,18 +264,20 @@ msgid "Trash"
 msgstr "Tong Sampah"
 
 #: src/shell/dock/dock_window.cpp src/shell/launcher/launcher_view.cpp
+#: src/shell/statusbar/panel_tasks.cpp
 msgid "Open"
 msgstr "Buka"
 
-#: src/shell/dock/dock_window.cpp
+#: src/shell/dock/dock_window.cpp src/shell/statusbar/panel_tasks.cpp
 msgid "Unpin"
 msgstr "Nyahpin"
 
-#: src/shell/dock/dock_window.cpp
+#: src/shell/dock/dock_window.cpp src/shell/statusbar/panel_tasks.cpp
 msgid "Pin"
 msgstr "Pin"
 
 #: src/shell/dock/dock_window.cpp src/shell/menubar/menu_bar_model.cpp
+#: src/shell/statusbar/panel_tasks.cpp
 msgid "Quit"
 msgstr "Keluar"
 
@@ -302,22 +320,6 @@ msgstr "Perihal"
 #: src/shell/menubar/menu_bar_model.cpp
 msgid "Settings"
 msgstr "Tetapan"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Suspend"
-msgstr "Tangguh"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Shutdown"
-msgstr "Matikan"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Lock screen"
-msgstr "Kunci skrin"
-
-#: src/shell/menubar/menu_bar_model.cpp
-msgid "Log out"
-msgstr "Log keluar"
 
 #: src/shell/menubar/menu_bar_model.cpp
 #, python-brace-format

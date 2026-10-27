@@ -6,6 +6,7 @@
 #define BAYU_SHELL_CONTROLCENTER_TILES_H_
 
 #include <functional>
+#include <vector>
 #include <optional>
 #include <string>
 #include <vector>
@@ -115,6 +116,33 @@ private:
     ui::Color m_surface;
     bool m_pressed = false;
     bool m_inside = false;
+};
+
+// The session's actions in a row on one tile: lock, suspend, log out,
+// restart and shut down, each a round plate with its glyph over a caption;
+// shut down on Pitaloka's danger red.
+class PowerTile : public ui::View
+{
+public:
+    static constexpr double kPlateSize = 36;
+    static constexpr double kHeight = 12 + kPlateSize + 6 + 14 + 10;
+
+    PowerTile();
+    ~PowerTile() override;
+
+    void retranslate();
+    // The action's index: lock, suspend, log out, restart, shut down.
+    std::function<void(int)> onTriggered;
+
+    ui::SizeF sizeHint() const override { return {0, kHeight}; }
+
+protected:
+    void layout() override;
+    void paint(ui::Painter &painter) override;
+
+private:
+    class Action;
+    std::vector<Action *> m_actions;
 };
 
 // The media card, 60 tall. Always shown; without a
