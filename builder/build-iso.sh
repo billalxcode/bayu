@@ -11,7 +11,7 @@ source "$(dirname "$0")/lib.sh"
 # --- inside the container ---------------------------------------------------
 source /profile.conf
 dnf -y -q install grub2-tools grub2-tools-extra grub2-efi-x64-modules grub2-pc-modules \
-  xorriso mtools squashfs-tools >/dev/null
+  xorriso mtools squashfs-tools isomd5sum >/dev/null
 
 WORK=/var/tmp/live
 ROOTFS=$WORK/rootfs
@@ -73,4 +73,7 @@ EOF
 # the HFS+ partition carries the same label as the ISO, so the initramfs
 # could pick it and fail to mount it (EL kernels have no hfsplus).
 grub2-mkrescue -o "$ISO" "$TREE" -- -volid "$ISO_LABEL" -hfsplus off
+# Its checksum inside it: the installer checks the medium against it before it
+# changes a disk (checkisomd5), as a copy on a USB stick can be damaged.
+implantisomd5 --force "$ISO" >/dev/null
 echo "Built $ISO ($(du -h "$ISO" | cut -f1), kernel $KVER)"

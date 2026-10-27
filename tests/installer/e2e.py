@@ -50,6 +50,13 @@ SCENARIOS = {
                       flow="second-disk"),
     "custom-free": dict(disks=[("win-free", None)], keep=[(0, 1), (0, 2), (0, 3), (0, 4)], windows=True,
                         flow="custom"),
+    # Issue #65: Windows, another Linux, free space in the middle, data after it.
+    "triple-mid": dict(disks=[("triple-mid", None)], keep=[(0, n) for n in range(1, 7)], windows=True,
+                       flow="default"),
+    # Next to Arch Linux (GRUB, or systemd-boot with the EFI partition at /boot):
+    # the GRUB IGN installs must boot, and list Arch through os-prober.
+    "arch-grub": dict(disks=[("arch-grub", None)], keep=[(0, 1), (0, 2)], windows=True, flow="default"),
+    "arch-sdboot": dict(disks=[("arch-sdboot", None)], keep=[(0, 1), (0, 2)], windows=True, flow="default"),
     "too-small": dict(disks=[("blank", "4G")], keep=[], windows=False, flow="refused"),
 }
 
@@ -167,11 +174,15 @@ class Vm:
             "-drive", "if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE_4M.fd",
             "-drive", f"if=pflash,format=raw,file={self.vars}"]
         cd = ["-cdrom", iso, "-boot", "order=dc"] if iso else []
+        if iso and iso.endswith(".img"):
+            # A USB stick image, such as Ventoy's with the ISO on it; left unchanged.
+            cd = ["-drive", f"file={iso},if=none,id=usb,format=raw,snapshot=on"]
         cmd = ["qemu-system-x86_64", "-name", "bayu-e2e", "-machine", "q35,accel=kvm", "-cpu", "host",
                "-smp", "4", "-m", "6G", *fw, *cd, *drives,
                "-nic", f"user,model=virtio-net-pci,hostfwd=tcp:127.0.0.1:{SSH_PORT}-:22",
                "-device", "virtio-vga", "-display", "none", "-vnc", VNC,
-               "-device", "qemu-xhci", "-device", "usb-tablet",
+               "-device", "qemu-xhci,id=xhci", "-device", "usb-tablet",
+               *(["-device", "usb-storage,bus=xhci.0,drive=usb,bootindex=0"] if iso and iso.endswith(".img") else []),
                "-serial", f"file:{self.out}/serial.log", "-qmp", f"unix:{self.qmp_path},server,nowait"]
         self.proc = subprocess.Popen(cmd, stdout=open(f"{self.out}/qemu.log", "a"), stderr=subprocess.STDOUT)
         time.sleep(1)
@@ -411,6 +422,10 @@ class Test:
         self.note(binder == "1", "kernel with binder")
         open(f"{self.out}/system.txt", "w").write(sh(
             "uname -r; lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINTS; head -2 /etc/os-release"))
+        # What GRUB offers next to IGN, and the firmware's boot entries.
+        open(f"{self.out}/boot.txt", "w").write(sudo(
+            "sh -c 'sed -n \"/30_os-prober/,/END .*30_os-prober/p\" /boot/grub2/grub.cfg; echo ===; "
+            "efibootmgr -v; echo ===; find /boot/efi -maxdepth 4 | sort'"))
         self.shot("installed")
         return self.finish()
 

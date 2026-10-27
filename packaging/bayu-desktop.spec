@@ -58,6 +58,8 @@ Requires(pre):  shadow-utils
 Summary:        Installs the system from Bayu live media
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 Requires:       anaconda-live anaconda-core polkit redhat-mono-fonts rsync kbd chrony
+# checkisomd5: the medium is checked before a disk is changed.
+Requires:       isomd5sum
 Requires:       libblockdev-lvm libblockdev-dm libblockdev-mpath libblockdev-mdraid lvm2
 Requires:       dosfstools e2fsprogs xfsprogs efibootmgr cryptsetup
 Recommends:     ntfsprogs

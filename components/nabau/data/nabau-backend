@@ -3,9 +3,10 @@
 # as root through pkexec and talks to the installer over stdin and stdout:
 #   nabau-backend <installer pid>
 # Out: "status <text>", "error <text>", "ready <bus address>", then the
-# post-install's "progress <text>", "packages <n>" and "done <status>".
-# In: "set <key> <value>" lines, "postinstall", "reboot"; end of input once
-# the installer leaves.
+# post-install's "progress <text>", "packages <n>" and "done <status>"; the
+# medium check's "mediaprogress <percent>" and "media ok|bad|none".
+# In: "set <key> <value>" lines, "checkmedia", "postinstall", "reboot"; end of
+# input once the installer leaves.
 set -u
 installer=$1
 log=/tmp/nabau-backend.log
@@ -65,6 +66,28 @@ declare -A settings
 while read -r command key value; do
     case $command in
     set) settings[$key]=$value ;;
+    checkmedia)
+        # The live medium against the checksum in it: a copy of the image
+        # damaged on a USB stick (Ventoy's too) fails only once the system
+        # is copied, after the disks have changed (issue #65). "none" where
+        # the medium has no checksum or is not an image.
+        medium=$(findmnt -n -o SOURCE /run/initramfs/live 2>/dev/null)
+        if [[ -z $medium ]] || ! command -v checkisomd5 >/dev/null; then
+            echo "media none"
+        else
+            out=/tmp/nabau-checkmedia.log
+            checkisomd5 --verbose "$medium" 2>&1 | tee "$out" | tr '\r' '\n' |
+                sed -un 's/.*Checking: *\([0-9]*\)\..*/mediaprogress \1/p'
+            status=${PIPESTATUS[0]}
+            if grep -q "No checksum information" "$out"; then
+                echo "media none"
+            elif [[ $status == 0 ]]; then
+                echo "media ok"
+            else
+                echo "media bad"
+            fi
+        fi
+        ;;
     postinstall)
         USER_NAME=${settings[user]-} AUTOLOGIN=${settings[autologin]-0} PICTURE=${settings[picture]-} \
             AUTOCONNECT=${settings[autoconnect]-1} ADDONS=${settings[groups]-} \
