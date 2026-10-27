@@ -34,7 +34,12 @@ Each scenario:
 | `win-mbr` | Windows on MBR, BIOS | *Use the free space* |
 | `two-disks` | Windows, and an empty disk | defaults: the empty disk must be picked |
 | `custom-free` | as `win-free` | *Custom*: the recommended layout in the free space |
+| `triple-mid` | Windows, another Linux, 27 GiB free in the middle, exFAT data (issue #65) | *Use the free space* |
+| `arch-grub`, `arch-sdboot` | Arch Linux with GRUB, or with systemd-boot and the EFI partition at `/boot` | *Use the free space* |
 | `too-small` | 4 GB | must refuse |
+
+`--iso` also takes a USB stick image (`*.img`), such as a Ventoy stick with
+the ISO on it, which boots as a USB drive.
 
 Results are in `out/e2e/<scenario>/`: `result.txt`, the screenshots, the
 installation logs and `system.txt`; the disks too when the scenario failed.

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 19:56+0000\n"
+"POT-Creation-Date: 2026-10-27 15:23+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -97,6 +97,14 @@ msgid "Math and science libraries"
 msgstr "Bibliotecas de matemáticas y ciencias"
 
 #: src/anaconda_backend.cpp
+msgid "Checking the installation medium"
+msgstr "Comprobando el medio de instalación"
+
+#: src/anaconda_backend.cpp
+msgid "The installation medium is damaged: part of it cannot be read as it was made. Nothing on the disks has changed. Copy the image to the USB drive again, check its SHA-256, or use another USB drive."
+msgstr "El medio de instalación está dañado: una parte no se puede leer tal como se creó. No se ha cambiado nada en los discos. Copie de nuevo la imagen a la unidad USB, compruebe su SHA-256 o use otra unidad USB."
+
+#: src/anaconda_backend.cpp
 #, python-brace-format
 msgid "==> {path} <=="
 msgstr "==> {path} <=="
@@ -104,6 +112,11 @@ msgstr "==> {path} <=="
 #: src/anaconda_backend.cpp
 msgid "(cannot be read)"
 msgstr "(no se puede leer)"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "Checking the installation medium · {percent}%"
+msgstr "Comprobando el medio de instalación · {percent}%"
 
 #: src/anaconda_backend.cpp
 #, python-brace-format

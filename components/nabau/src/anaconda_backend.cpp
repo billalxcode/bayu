@@ -845,6 +845,28 @@ public:
         m_log = std::move(log);
         m_done = std::move(done);
         m_started = std::chrono::steady_clock::now();
+        // The medium first: a damaged copy of the image would fail while the
+        // system is copied, after the disks have changed (issue #65).
+        logStep(tr("Checking the installation medium"));
+        report(0, tr("Checking the installation medium"));
+        m_checkingMedia = true;
+        m_helper.writeStandardInput("checkmedia\n");
+    }
+
+    void mediaChecked(const std::string& verdict)
+    {
+        m_checkingMedia = false;
+        if (verdict == "bad") {
+            finish(false, tr("The installation medium is damaged: part of it cannot be read as it was made. "
+                             "Nothing on the disks has changed. Copy the image to the USB drive again, check "
+                             "its SHA-256, or use another USB drive."));
+            return;
+        }
+        startInstallation();
+    }
+
+    void startInstallation()
+    {
         // Anaconda would start initial-setup on the first boot: the account
         // exists already.
         module("Services").setProperty("SetupOnBoot", int32_t(0));
@@ -944,6 +966,13 @@ private:
             m_startError = rest;
         } else if (word == "ready") {
             connectBus(rest);
+        } else if (word == "mediaprogress" && m_checkingMedia) {
+            const int percent = std::clamp(std::atoi(rest.c_str()), 0, 100);
+            // The check takes the first 5% of the bar.
+            report(0.05 * percent / 100, format(tr("Checking the installation medium · {percent}%"),
+                                               {{"percent", std::to_string(percent)}}));
+        } else if (word == "media" && m_checkingMedia) {
+            mediaChecked(rest);
         } else if (word == "progress" && m_postDone) {
             logStep(rest);
             report(std::min(0.99, m_fraction + 0.01), rest);
@@ -1778,6 +1807,7 @@ private:
     int m_softwareStep = -1;
     std::string m_running;
     bool m_postDone = false;
+    bool m_checkingMedia = false;
 };
 
 } // namespace

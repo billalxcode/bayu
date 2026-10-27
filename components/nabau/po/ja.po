@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nabau\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 19:56+0000\n"
+"POT-Creation-Date: 2026-10-27 15:23+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -98,6 +98,14 @@ msgid "Math and science libraries"
 msgstr "数学・科学ライブラリ"
 
 #: src/anaconda_backend.cpp
+msgid "Checking the installation medium"
+msgstr "インストールメディアを確認しています"
+
+#: src/anaconda_backend.cpp
+msgid "The installation medium is damaged: part of it cannot be read as it was made. Nothing on the disks has changed. Copy the image to the USB drive again, check its SHA-256, or use another USB drive."
+msgstr "インストールメディアが破損しています。一部を作成時のとおりに読み取れません。ディスクはまだ変更されていません。イメージを USB ドライブにもう一度コピーし、SHA-256 を確認するか、別の USB ドライブを使ってください。"
+
+#: src/anaconda_backend.cpp
 #, python-brace-format
 msgid "==> {path} <=="
 msgstr "==> {path} <=="
@@ -105,6 +113,11 @@ msgstr "==> {path} <=="
 #: src/anaconda_backend.cpp
 msgid "(cannot be read)"
 msgstr "(読み取れません)"
+
+#: src/anaconda_backend.cpp
+#, python-brace-format
+msgid "Checking the installation medium · {percent}%"
+msgstr "インストールメディアを確認しています · {percent}%"
 
 #: src/anaconda_backend.cpp
 #, python-brace-format
