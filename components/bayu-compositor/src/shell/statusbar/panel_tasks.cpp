@@ -50,6 +50,8 @@ constexpr double kDividerGap = PITALOKA_SPACE_2;
 constexpr double kMaxWindowWidth = 200;
 constexpr double kDot = 5;
 constexpr double kFontSize = 13;
+// The theme size the applications' icons are looked up at.
+constexpr int kAppArtwork = 48;
 
 // Takes the button out now and lets it go on the next turn: its own click
 // may be what changed the list.
@@ -159,6 +161,9 @@ public:
         : id(item.id)
     {
         m_icon = addChild<ui::ThemeIcon>(std::string(), 24);
+        // The application artwork at any size: the theme has small action
+        // glyphs under some applications' names (utilities-terminal at 24).
+        m_icon->setThemeSize(kAppArtwork);
         update(item);
     }
 
@@ -210,6 +215,7 @@ public:
         : id(window)
     {
         m_icon = addChild<ui::ThemeIcon>(std::string(), kIcon);
+        m_icon->setThemeSize(kAppArtwork);
         m_title = addChild<ui::Label>();
         m_title->setFontSize(kFontSize);
         m_title->setElide(ui::Label::Elide::Right);
