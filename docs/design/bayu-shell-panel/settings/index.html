@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pengaturan Desktop</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pitaloka/pitaloka-web.css">
+<link rel="stylesheet" href="pitaloka/pitaloka-ui.css">
+<style>
+/* Papan presentasi: bukan bagian dari halaman Pengaturan. */
+body { margin: 0; background: var(--pit-bg-window); color: var(--pit-text-primary); font-family: var(--pit-font-ui); }
+.board { max-width: 1480px; margin: 0 auto; padding: 40px 32px 64px; }
+.board > header { margin-bottom: 28px; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--pit-text-secondary); }
+.brand b { color: var(--pit-text-primary); }
+.eyebrow { margin: 18px 0 6px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--pit-accent); }
+h1 { margin: 0 0 10px; font-size: 40px; line-height: 1.1; letter-spacing: -.02em; }
+.intro { max-width: 760px; margin: 0; color: var(--pit-text-secondary); font-size: 15px; line-height: 1.55; }
+.frame { display: grid; grid-template-columns: 980px 1fr; gap: 28px; align-items: start; margin-top: 40px; }
+.frame h2 { grid-column: 1 / -1; margin: 0; font-size: 15px; font-weight: 600; }
+.frame h2 span { font-weight: 400; color: var(--pit-text-secondary); margin-left: 8px; }
+.stage { padding: 28px; border-radius: 16px; background: linear-gradient(160deg, #2a3350, #11141d); }
+.stage--light { background: linear-gradient(160deg, #cfdcf3, #9fb2d6); }
+.notes { display: flex; flex-direction: column; gap: 12px; font-size: 13.5px; line-height: 1.5; color: var(--pit-text-secondary); }
+.note { display: flex; gap: 10px; }
+.note .pit-tile { margin-top: 1px; }
+.note b { color: var(--pit-text-primary); font-weight: 600; }
+.keys { margin-top: 6px; }
+.keys .pit-row { font-size: 13px; min-height: 36px; padding: 8px 14px; }
+.keys code { font-family: var(--pit-font-mono); font-size: 12px; color: var(--pit-text-primary); }
+
+/* Halaman Desktop: hanya kelas Pitaloka, ditambah pratinjau tata letak di bawah. */
+.win { min-height: 720px; }
+.win .pit-window__content > * { flex: none; }
+.win .pit-window__content { gap: var(--pit-space-3); }
+.sub { display: block; font-size: 13px; color: var(--pit-text-secondary); margin-top: 2px; }
+.pit-row__lead > span:last-child { min-width: 0; }
+
+/* Pratinjau tata letak: perluasan .pit-option__dock, warna dan radius dari token. */
+.layout-preview {
+  position: relative; width: 100%; height: 76px; border-radius: var(--pit-radius-control);
+  background: linear-gradient(135deg, #5AC8F5, #2D7CF6); overflow: hidden;
+}
+.pit-option[aria-pressed='true'] .layout-preview { outline: 2px solid var(--pit-accent); outline-offset: -2px; }
+.layout-preview .bar { position: absolute; left: 0; right: 0; top: 0; height: 7px; background: rgba(255,255,255,.85); }
+.layout-preview .dock { position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); display: flex; gap: 3px;
+  padding: 3px; border-radius: 4px; background: rgba(255,255,255,.45); }
+.layout-preview .dock i, .layout-preview .panel i { width: 9px; height: 9px; border-radius: 2px; background: rgba(255,255,255,.95); }
+.layout-preview .panel { position: absolute; left: 6px; right: 6px; bottom: 5px; height: 15px; display: flex; align-items: center; gap: 3px;
+  padding: 0 3px; border-radius: 4px; background: rgba(255,255,255,.5); }
+.layout-preview .panel i:first-child { width: 14px; background: var(--pit-accent); }
+.layout-preview .panel em { margin-left: auto; width: 16px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.95); }
+.pit-option { width: 150px; }
+.pit-option small { display: block; margin-top: -4px; font-size: 12px; color: var(--pit-text-secondary); font-weight: 400; }
+.picker { gap: 16px; justify-content: flex-start; padding: 18px 20px; }
+
+.only .board > header, .only .frame > h2, .only .notes { display: none; }
+.only .board { padding: 0; max-width: none; }
+.only .frame { display: block; margin: 0; }
+.only .frame:not(.shown) { display: none; }
+.only .stage { border-radius: 0; }
+</style>
+</head>
+<body>
+<div class="board">
+  <header>
+    <div class="brand"><span class="pit-tile pit pit-tile--blue" data-icon="panel-bottom"></span><b>BAYU</b> Shell Desktop</div>
+    <div class="eyebrow">Rancangan Pengaturan · issue #58</div>
+    <h1>Satu halaman Desktop, dua tata letak</h1>
+    <p class="intro">Halaman <b>Dock</b> menjadi <b>Desktop</b>. Bagian atasnya memilih tata letak: <b>Klasik</b> (bilah atas + dock, seperti sekarang) atau <b>Panel</b> (satu panel di bawah). Pilihan di bawahnya mengikuti tata letak yang dipilih, dan perubahan langsung berlaku tanpa keluar sesi. Semua komponen memakai kelas Pitaloka apa adanya.</p>
+  </header>
+
+  <!-- ===================================================== A. Panel, terang -->
+  <section class="frame" id="panel-light">
+    <h2>A · Tata letak Panel<span>tema terang</span></h2>
+    <div class="stage stage--light">
+      <div class="pit-window pit win" data-page="panel"></div>
+    </div>
+    <aside class="notes">
+      <div class="note"><span class="pit-tile pit-tile--sm pit-tile--blue" data-icon="grid"></span><div><b>Tata letak</b> memakai pola pemilih posisi Dock Pitaloka (<code>.pit-option</code>), dengan pratinjau kecil tiap tata letak.</div></div>
+      <div class="note"><span class="pit-tile pit-tile--sm pit-tile--purple" data-icon="panel-bottom"></span><div><b>Mengambang</b> aktif secara bawaan. Saat mati, panel selalu menempel 48 px (<code>--pit-headerbar-height</code>).</div></div>
+      <div class="note"><span class="pit-tile pit-tile--sm pit-tile--orange" data-icon="grid"></span><div><b>Ukuran ikon</b> hanya dua: Sedang 36 px dan Kecil 32 px, sesuai spesifikasi mengambang dan menempel.</div></div>
+      <div class="note"><span class="pit-tile pit-tile--sm pit-tile--cyan" data-icon="info"></span><div><b>Banner menu aplikasi</b>: tanpa bilah atas tidak ada menu global, jadi aplikasi Qt/KDE menampilkan menunya di dalam jendela.</div></div>
+      <div class="pit-card keys pit">
+        <div class="pit-row"><code>Shell/Layout</code><span class="pit-row__muted">0 Klasik · 1 Panel</span></div>
+        <div class="pit-row"><code>Panel/Floating</code><span class="pit-row__muted">true</span></div>
+        <div class="pit-row"><code>Panel/IconSize</code><span class="pit-row__muted">36 · 32</span></div>
+        <div class="pit-row"><code>Panel/GlassTint</code><span class="pit-row__muted">0.5</span></div>
+        <div class="pit-row"><code>Dock/Pinned</code><span class="pit-row__muted">dipakai bersama</span></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- ===================================================== B. Panel, gelap -->
+  <section class="frame" id="panel-dark">
+    <h2>B · Tata letak Panel<span>tema gelap, token yang sama</span></h2>
+    <div class="stage" data-theme="dark">
+      <div class="pit-window pit win" data-page="panel" data-floating="false"></div>
+    </div>
+    <aside class="notes">
+      <div class="note"><span class="pit-tile pit-tile--sm pit-tile--gray" data-icon="contrast"></span><div>Tidak ada aturan khusus untuk tema gelap: satu token, dua nilai dari <code>tokens.json</code>.</div></div>
+      <div class="note"><span class="pit-tile pit-tile--sm pit-tile--purple" data-icon="panel-bottom"></span><div>Contoh saat <b>Mengambang</b> dimatikan: keterangannya berubah, panel selalu menempel.</div></div>
+    </aside>
+  </section>
+
+  <!-- ===================================================== C. Klasik -->
+  <section class="frame" id="classic-light">
+    <h2>C · Tata letak Klasik<span>bagian Dock yang sudah ada, tidak berubah</span></h2>
+    <div class="stage stage--light">
+      <div class="pit-window pit win" data-page="classic"></div>
+    </div>
+    <aside class="notes">
+      <div class="note"><span class="pit-tile pit-tile--sm pit-tile--blue" data-icon="grid"></span><div>Memilih <b>Klasik</b> memunculkan kembali pengaturan Dock yang ada sekarang: Posisi, Ukuran, Efek kaca, Mode tampil, Sudut Aktif, dan Area jendela diminimalkan.</div></div>
+      <div class="note"><span class="pit-tile pit-tile--sm pit-tile--green" data-icon="circle-check"></span><div>Ikon yang disematkan sama di kedua tata letak, jadi berpindah tidak menghilangkan apa pun.</div></div>
+    </aside>
+  </section>
+</div>
+
+<script src="pitaloka/icons.js"></script>
+<script>
+(function () {
+  const sidebar = (active) => {
+    const groups = [
+      ['Jaringan', [['wifi', 'Wi-Fi', ''], ['globe', 'Jaringan', 'pit-tile--cyan']]],
+      ['Desktop', [['contrast', 'Tampilan', 'pit-tile--cyan'], ['image', 'Latar Belakang', 'pit-tile--green'],
+                   ['panel-bottom', 'Desktop', 'pit-tile--purple'], ['bell', 'Notifikasi', 'pit-tile--red']]],
+      ['Perangkat', [['monitor', 'Layar', ''], ['volume-2', 'Suara', 'pit-tile--red'],
+                     ['keyboard', 'Papan Ketik', 'pit-tile--indigo'], ['pointer', 'Tetikus', '']]],
+    ];
+    let html = '<div class="pit-sidebar__title">Pengaturan</div>' +
+      `<div class="pit-search">${icon('search')}<input placeholder="Cari"></div>`;
+    for (const [title, items] of groups) {
+      html += `<div class="pit-sidebar__section">${title}</div>`;
+      for (const [ic, label, mod] of items)
+        html += `<button class="pit-sidebar__item"${label === active ? ' aria-current="page"' : ''}>` +
+          `<span class="pit-tile pit-tile--sm ${mod}">${icon(ic)}</span>${label}</button>`;
+    }
+    return `<aside class="pit-sidebar">${html}</aside>`;
+  };
+
+  const slider = (label, value, lo, hi) => `
+    <div class="pit-row"><span>${label}</span>
+      <span class="pit-row__grow" style="max-width:400px">
+        <input class="pit-slider" type="range" value="${value}">
+        <span class="pit-row__caps"><span>${lo}</span><span>${hi}</span></span>
+      </span></div>`;
+  const toggle = (on) => `<label class="pit-switch"><input type="checkbox"${on ? ' checked' : ''}><span></span></label>`;
+  const nav = (label) => `<div class="pit-row"><span>${label}</span><span class="pit-row__trail">${icon('chevron-right')}</span></div>`;
+
+  const layoutPicker = (layout) => `
+    <div class="pit-caption">Tata letak</div>
+    <div class="pit-card"><div class="pit-row picker" data-picker>
+      <button class="pit-option" data-layout="classic" aria-pressed="${layout === 'classic'}">
+        <span class="layout-preview"><span class="bar"></span><span class="dock"><i></i><i></i><i></i><i></i></span></span>
+        Klasik<small>Bilah atas dan dock</small></button>
+      <button class="pit-option" data-layout="panel" aria-pressed="${layout === 'panel'}">
+        <span class="layout-preview"><span class="panel"><i></i><i></i><i></i><i></i><em></em></span></span>
+        Panel<small>Satu panel di bawah</small></button>
+    </div></div>
+    <p class="pit-helper" style="margin:0">Berlaku langsung, tanpa keluar sesi.</p>`;
+
+  const panelSection = (floating) => `
+    <div class="pit-caption">Panel</div>
+    <div class="pit-card">
+      <div class="pit-row"><span class="pit-row__grow"><span>Mengambang saat tidak ada jendela</span>
+        <span class="sub">${floating
+          ? 'Panel naik 16 px dari tepi layar dan membulat ketika desktop kosong, lalu menempel begitu ada jendela.'
+          : 'Panel selalu menempel di tepi bawah layar.'}</span></span><label class="pit-switch"><input type="checkbox" data-floating${floating ? ' checked' : ''}><span></span></label></div>
+      <div class="pit-row"><span>Ukuran ikon</span>
+        <div class="pit-segmented" role="tablist">
+          <button role="tab" aria-selected="false">Kecil</button>
+          <button role="tab" aria-selected="true">Sedang</button>
+        </div></div>
+      ${slider('Efek kaca', 50, 'Lebih bening', 'Lebih pekat')}
+    </div>
+    <div class="pit-card">${nav('Sudut Aktif')}</div>
+    <div class="pit-banner">${icon('info')}<span>Tata letak Panel tidak punya bilah atas, jadi menu aplikasi tampil di dalam jendelanya masing-masing. Aplikasi yang sudah terbuka mungkin perlu dibuka ulang.</span></div>`;
+
+  const dockSection = () => `
+    <div class="pit-caption">Posisi dock</div>
+    <div class="pit-card"><div class="pit-row picker" data-picker>
+      <button class="pit-option pit-option--left" aria-pressed="false"><span class="pit-option__dock"><i></i><i></i><i></i></span>Kiri</button>
+      <button class="pit-option" aria-pressed="true"><span class="pit-option__dock"><i></i><i></i><i></i></span>Bawah</button>
+      <button class="pit-option pit-option--right" aria-pressed="false"><span class="pit-option__dock"><i></i><i></i><i></i></span>Kanan</button>
+    </div></div>
+    <div class="pit-card">
+      ${slider('Ukuran', 30, 'Kecil', 'Besar')}
+      ${slider('Efek kaca', 50, 'Lebih bening', 'Lebih pekat')}
+    </div>
+    <div class="pit-caption">Mode tampil</div>
+    <div class="pit-card"><div class="pit-row" style="padding:14px 16px">
+      <div class="pit-segmented" style="width:100%" role="tablist">
+        <button role="tab" aria-selected="false">Selalu tampil</button>
+        <button role="tab" aria-selected="false">Selalu sembunyi</button>
+        <button role="tab" aria-selected="true">Sembunyi cerdas</button>
+      </div></div></div>
+    <div class="pit-card">${nav('Sudut Aktif')}
+      <div class="pit-row"><span>Area jendela diminimalkan</span>${toggle(true)}</div></div>`;
+
+  const render = (win, layout, floating) => {
+    win.innerHTML = `
+      <div class="pit-window__body" style="height:100%">
+        ${sidebar('Desktop')}
+        <div class="pit-window__main">
+          <div class="pit-headerbar">
+            <div class="pit-headerbar__lead">${icon('chevron-left')}${icon('chevron-right')}<span class="pit-headerbar__title">Desktop</span></div>
+            <div class="pit-wincontrols">${icon('minus')}${icon('square')}${icon('x')}</div>
+          </div>
+          <div class="pit-window__content">
+            ${layoutPicker(layout)}
+            ${layout === 'panel' ? panelSection(floating) : dockSection()}
+          </div>
+        </div>
+      </div>`;
+    for (const s of win.querySelectorAll('.pit-slider')) s.style.setProperty('--pit-fill', s.value + '%');
+    win.querySelector('[data-picker]').onclick = (e) => {
+      const b = e.target.closest('[data-layout]');
+      if (b) render(win, b.dataset.layout, floating);
+    };
+    const sw = win.querySelector('input[data-floating]');
+    if (sw) sw.onchange = () => render(win, layout, sw.checked);
+    for (const g of win.querySelectorAll('.pit-segmented')) g.onclick = (e) => {
+      const b = e.target.closest('button');
+      if (b) for (const o of g.children) o.setAttribute('aria-selected', String(o === b));
+    };
+  };
+
+  for (const w of document.querySelectorAll('[data-page]'))
+    render(w, w.dataset.page, w.dataset.floating !== 'false');
+  for (const el of [...document.querySelectorAll('[data-icon]')].reverse())
+    el.innerHTML = icon(el.dataset.icon) + el.innerHTML;
+
+  const only = new URLSearchParams(location.search).get('only');
+  if (only) { document.documentElement.classList.add('only'); document.getElementById(only).classList.add('shown'); }
+})();
+</script>
+</body>
+</html>
