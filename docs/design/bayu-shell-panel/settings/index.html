@@ -68,7 +68,7 @@ h1 { margin: 0 0 10px; font-size: 40px; line-height: 1.1; letter-spacing: -.02em
     <div class="brand"><span class="pit-tile pit pit-tile--blue" data-icon="panel-bottom"></span><b>BAYU</b> Shell Desktop</div>
     <div class="eyebrow">Rancangan Pengaturan · issue #58</div>
     <h1>Satu halaman Desktop, dua tata letak</h1>
-    <p class="intro">Halaman <b>Dock</b> menjadi <b>Desktop</b>. Bagian atasnya memilih tata letak: <b>Klasik</b> (bilah atas + dock, seperti sekarang) atau <b>Panel</b> (satu panel di bawah). Pilihan di bawahnya mengikuti tata letak yang dipilih, dan perubahan langsung berlaku tanpa keluar sesi. Semua komponen memakai kelas Pitaloka apa adanya.</p>
+    <p class="intro">Halaman <b>Dock</b> menjadi <b>Desktop</b>. Bagian atasnya memilih tata letak: <b>Dock</b> (bilah atas + dock, seperti sekarang) atau <b>Panel</b> (satu panel di bawah). Pilihan di bawahnya mengikuti tata letak yang dipilih, dan perubahan langsung berlaku tanpa keluar sesi. Semua komponen memakai kelas Pitaloka apa adanya.</p>
   </header>
 
   <!-- ===================================================== A. Panel, terang -->
@@ -83,7 +83,7 @@ h1 { margin: 0 0 10px; font-size: 40px; line-height: 1.1; letter-spacing: -.02em
       <div class="note"><span class="pit-tile pit-tile--sm pit-tile--orange" data-icon="grid"></span><div><b>Ukuran ikon</b> hanya dua: Sedang 36 px dan Kecil 32 px, sesuai spesifikasi mengambang dan menempel.</div></div>
       <div class="note"><span class="pit-tile pit-tile--sm pit-tile--cyan" data-icon="info"></span><div><b>Banner menu aplikasi</b>: tanpa bilah atas tidak ada menu global, jadi aplikasi Qt/KDE menampilkan menunya di dalam jendela.</div></div>
       <div class="pit-card keys pit">
-        <div class="pit-row"><code>Shell/Layout</code><span class="pit-row__muted">0 Klasik · 1 Panel</span></div>
+        <div class="pit-row"><code>Shell/Layout</code><span class="pit-row__muted">0 Dock · 1 Panel</span></div>
         <div class="pit-row"><code>Panel/Floating</code><span class="pit-row__muted">true</span></div>
         <div class="pit-row"><code>Panel/IconSize</code><span class="pit-row__muted">36 · 32</span></div>
         <div class="pit-row"><code>Panel/GlassTint</code><span class="pit-row__muted">0.5</span></div>
@@ -104,14 +104,14 @@ h1 { margin: 0 0 10px; font-size: 40px; line-height: 1.1; letter-spacing: -.02em
     </aside>
   </section>
 
-  <!-- ===================================================== C. Klasik -->
+  <!-- ===================================================== C. Dock -->
   <section class="frame" id="classic-light">
-    <h2>C · Tata letak Klasik<span>bagian Dock yang sudah ada, tidak berubah</span></h2>
+    <h2>C · Tata letak Dock<span>bagian Dock yang sudah ada, tidak berubah</span></h2>
     <div class="stage stage--light">
       <div class="pit-window pit win" data-page="classic"></div>
     </div>
     <aside class="notes">
-      <div class="note"><span class="pit-tile pit-tile--sm pit-tile--blue" data-icon="grid"></span><div>Memilih <b>Klasik</b> memunculkan kembali pengaturan Dock yang ada sekarang: Posisi, Ukuran, Efek kaca, Mode tampil, Sudut Aktif, dan Area jendela diminimalkan.</div></div>
+      <div class="note"><span class="pit-tile pit-tile--sm pit-tile--blue" data-icon="grid"></span><div>Memilih <b>Dock</b> memunculkan kembali pengaturan Dock yang ada sekarang: Posisi, Ukuran, Efek kaca, Mode tampil, Sudut Aktif, dan Area jendela diminimalkan.</div></div>
       <div class="note"><span class="pit-tile pit-tile--sm pit-tile--green" data-icon="circle-check"></span><div>Ikon yang disematkan sama di kedua tata letak, jadi berpindah tidak menghilangkan apa pun.</div></div>
     </aside>
   </section>
@@ -153,7 +153,7 @@ h1 { margin: 0 0 10px; font-size: 40px; line-height: 1.1; letter-spacing: -.02em
     <div class="pit-card"><div class="pit-row picker" data-picker>
       <button class="pit-option" data-layout="classic" aria-pressed="${layout === 'classic'}">
         <span class="layout-preview"><span class="bar"></span><span class="dock"><i></i><i></i><i></i><i></i></span></span>
-        Klasik<small>Bilah atas dan dock</small></button>
+        Dock<small>Bilah atas dan dock</small></button>
       <button class="pit-option" data-layout="panel" aria-pressed="${layout === 'panel'}">
         <span class="layout-preview"><span class="panel"><i></i><i></i><i></i><i></i><em></em></span></span>
         Panel<small>Satu panel di bawah</small></button>
