@@ -33,5 +33,6 @@ for e in entries:
     e["Path"] = "iso/" + e["Path"]
 json.dump(entries, sys.stdout)' |
   python3 "$ROOT/builder/mkindex.py" "$idx"
-"$ROOT/builder/rclone.sh" copy "$idx/iso" r2:repo/iso --include index.html --checksum -v
+# beta/ has its own, hand-made page.
+"$ROOT/builder/rclone.sh" copy "$idx/iso" r2:repo/iso --filter "- /beta/index.html" --filter "+ index.html" --filter "- *" --checksum -v
 echo "Published $DIR/$NAME and $DIR/$LATEST"
