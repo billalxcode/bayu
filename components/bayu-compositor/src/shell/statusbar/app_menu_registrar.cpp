@@ -75,6 +75,14 @@ bool AppMenuRegistrar::registerService()
     return true;
 }
 
+void AppMenuRegistrar::unregisterService()
+{
+    if (!m_object)
+        return;
+    m_bus->releaseName(kService);
+    m_object.reset();
+}
+
 const AppMenuRegistrar::Registration *AppMenuRegistrar::newestFor(uint32_t pid, bool desktop) const
 {
     if (pid == 0)

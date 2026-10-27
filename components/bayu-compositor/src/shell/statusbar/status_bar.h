@@ -66,6 +66,27 @@ public:
 
     base::Signal<> timeFormatChanged;
 
+    // Shell/Layout: the top bar with the dock, or this bar alone along the
+    // bottom of the screen as the panel, with the menus in the windows.
+    enum class Layout { Dock = 0, Panel = 1 };
+    Layout layout() const { return m_layout; }
+    void setLayout(Layout layout);
+    // Panel/Floating: the panel stands off the screen's edge while no window
+    // is open.
+    bool panelFloating() const { return m_panelFloating; }
+    void setPanelFloating(bool floating);
+    // Panel/IconSize: kPanelIconSizes' small or medium.
+    static constexpr int kSmallPanelIcons = 32;
+    static constexpr int kMediumPanelIcons = 36;
+    int panelIconSize() const { return m_panelIconSize; }
+    void setPanelIconSize(int size);
+    // Panel/GlassTint, from clear (0) to tinted (1), as the dock's.
+    double panelGlassTint() const { return m_panelGlassTint; }
+    void setPanelGlassTint(double tint);
+
+    base::Signal<> layoutChanged;
+    base::Signal<> panelChanged;
+
 private:
     void reloadLanguage();
     void updateTimeFormat();
@@ -90,6 +111,10 @@ private:
     bool m_showSecondsSet = false;
     std::string m_timeLocale;
     std::string m_timeFormat;
+    Layout m_layout = Layout::Dock;
+    bool m_panelFloating = true;
+    int m_panelIconSize = kMediumPanelIcons;
+    double m_panelGlassTint = 0.5;
 };
 
 } // namespace bayu::shell

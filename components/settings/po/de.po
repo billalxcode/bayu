@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 00:58+0000\n"
+"POT-Creation-Date: 2026-10-27 05:39+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -814,8 +814,62 @@ msgid "Keep"
 msgstr "Beibehalten"
 
 #: src/pages/dock/dockpage.cpp src/window/pagelist.cpp
+msgid "Desktop"
+msgstr "Arbeitsfläche"
+
+#: src/pages/dock/dockpage.cpp src/pages/keyboard/keyboardpage.cpp
+#: src/pages/keyboard/layoutpage.cpp
+msgid "Layout"
+msgstr "Layout"
+
+#: src/pages/dock/dockpage.cpp
 msgid "Dock"
 msgstr "Dock"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Panel"
+msgstr "Panel"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Takes effect right away."
+msgstr "Wird sofort übernommen."
+
+#: src/pages/dock/dockpage.cpp
+msgid "Float when no window is open"
+msgstr "Schweben, wenn kein Fenster offen ist"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Icon size"
+msgstr "Symbolgröße"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Small"
+msgstr "Klein"
+
+#: src/pages/dock/dockpage.cpp src/pages/fonts/fontspage.cpp
+msgid "Medium"
+msgstr "Mittel"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Glass effect"
+msgstr "Glaseffekt"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More clear"
+msgstr "Klarer"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More tinted"
+msgstr "Stärker getönt"
+
+#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
+#: src/window/pagelist.cpp
+msgid "Hot Corners"
+msgstr "Aktive Ecken"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel has no top bar, so applications show their menus in their windows. Applications already open may need to be opened again."
+msgstr "Das Panel hat keine obere Leiste, daher zeigen Anwendungen ihre Menüs in ihren Fenstern. Bereits geöffnete Anwendungen müssen eventuell neu geöffnet werden."
 
 #: src/pages/dock/dockpage.cpp
 msgid "Position on screen"
@@ -838,24 +892,8 @@ msgid "Size"
 msgstr "Größe"
 
 #: src/pages/dock/dockpage.cpp
-msgid "Small"
-msgstr "Klein"
-
-#: src/pages/dock/dockpage.cpp
 msgid "Huge"
 msgstr "Riesig"
-
-#: src/pages/dock/dockpage.cpp
-msgid "Glass effect"
-msgstr "Glaseffekt"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More clear"
-msgstr "Klarer"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More tinted"
-msgstr "Stärker getönt"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Display mode"
@@ -873,14 +911,17 @@ msgstr "Immer ausblenden"
 msgid "Smart hide"
 msgstr "Intelligent ausblenden"
 
-#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
-#: src/window/pagelist.cpp
-msgid "Hot Corners"
-msgstr "Aktive Ecken"
-
 #: src/pages/dock/dockpage.cpp
 msgid "Minimized windows area"
 msgstr "Bereich für minimierte Fenster"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel stands 16 px off the screen's edge with round corners while the desktop is empty, and lies on the edge once a window is open."
+msgstr "Bei leerem Schreibtisch schwebt das Panel 16 px über dem Bildschirmrand mit runden Ecken und liegt am Rand an, sobald ein Fenster offen ist."
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel always lies on the bottom edge of the screen."
+msgstr "Das Panel liegt immer am unteren Bildschirmrand an."
 
 #. TRANSLATORS: a font size in points, such as "9pt".
 #: src/pages/fonts/fontspage.cpp
@@ -912,10 +953,6 @@ msgstr "Hinting"
 #: src/pages/fonts/fontspage.cpp
 msgid "Slight"
 msgstr "Leicht"
-
-#: src/pages/fonts/fontspage.cpp
-msgid "Medium"
-msgstr "Mittel"
 
 #: src/pages/fonts/fontspage.cpp
 msgid "Full"
@@ -1031,10 +1068,6 @@ msgstr "Vor der Eingabemethode gestartete Anwendungen müssen möglicherweise ne
 #: src/pages/keyboard/keyboardpage.cpp
 msgid "Shortcut key"
 msgstr "Kurzbefehltaste"
-
-#: src/pages/keyboard/keyboardpage.cpp src/pages/keyboard/layoutpage.cpp
-msgid "Layout"
-msgstr "Layout"
 
 #: src/pages/keyboard/keyboardpage.cpp src/pages/shortcuts/shortcutspage.cpp
 #: src/window/pagelist.cpp
@@ -2340,10 +2373,6 @@ msgid "VPN, proxy, hotspot, tethering, internet"
 msgstr "VPN, Proxy, Hotspot, Tethering, Internet"
 
 #: src/window/pagelist.cpp
-msgid "Desktop"
-msgstr "Arbeitsfläche"
-
-#: src/window/pagelist.cpp
 msgid "theme, dark mode, light mode, accent color, dim wallpaper"
 msgstr "Design, Dunkelmodus, Hellmodus, Akzentfarbe, Hintergrund abdunkeln, theme, dark mode"
 
@@ -2352,8 +2381,8 @@ msgid "background, desktop picture, image"
 msgstr "Hintergrund, Desktophintergrund, Bild, background, wallpaper"
 
 #: src/window/pagelist.cpp
-msgid "taskbar, position, size, auto hide, glass effect"
-msgstr "Taskleiste, Position, Größe, automatisch ausblenden, Glaseffekt, dock"
+msgid "dock, panel, layout, taskbar, start, position, size, auto hide, glass effect"
+msgstr "Dock, Panel, Anordnung, Taskleiste, Start, Position, Größe, automatisch ausblenden, Glaseffekt, layout, taskbar, start"
 
 #: src/window/pagelist.cpp
 msgid "do not disturb, banners, alerts"

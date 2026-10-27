@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 00:58+0000\n"
+"POT-Creation-Date: 2026-10-27 05:39+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -809,8 +809,62 @@ msgid "Keep"
 msgstr "유지"
 
 #: src/pages/dock/dockpage.cpp src/window/pagelist.cpp
+msgid "Desktop"
+msgstr "바탕 화면"
+
+#: src/pages/dock/dockpage.cpp src/pages/keyboard/keyboardpage.cpp
+#: src/pages/keyboard/layoutpage.cpp
+msgid "Layout"
+msgstr "레이아웃"
+
+#: src/pages/dock/dockpage.cpp
 msgid "Dock"
 msgstr "Dock"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Panel"
+msgstr "패널"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Takes effect right away."
+msgstr "바로 적용됩니다."
+
+#: src/pages/dock/dockpage.cpp
+msgid "Float when no window is open"
+msgstr "창이 없을 때 띄우기"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Icon size"
+msgstr "아이콘 크기"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Small"
+msgstr "작게"
+
+#: src/pages/dock/dockpage.cpp src/pages/fonts/fontspage.cpp
+msgid "Medium"
+msgstr "보통"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Glass effect"
+msgstr "유리 효과"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More clear"
+msgstr "더 투명하게"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More tinted"
+msgstr "더 짙게"
+
+#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
+#: src/window/pagelist.cpp
+msgid "Hot Corners"
+msgstr "핫 코너"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel has no top bar, so applications show their menus in their windows. Applications already open may need to be opened again."
+msgstr "패널 레이아웃에는 상단 바가 없으므로 앱의 메뉴가 각 창 안에 표시됩니다. 이미 열린 앱은 다시 열어야 할 수 있습니다."
 
 #: src/pages/dock/dockpage.cpp
 msgid "Position on screen"
@@ -833,24 +887,8 @@ msgid "Size"
 msgstr "크기"
 
 #: src/pages/dock/dockpage.cpp
-msgid "Small"
-msgstr "작게"
-
-#: src/pages/dock/dockpage.cpp
 msgid "Huge"
 msgstr "매우 크게"
-
-#: src/pages/dock/dockpage.cpp
-msgid "Glass effect"
-msgstr "유리 효과"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More clear"
-msgstr "더 투명하게"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More tinted"
-msgstr "더 짙게"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Display mode"
@@ -868,14 +906,17 @@ msgstr "항상 숨김"
 msgid "Smart hide"
 msgstr "스마트 숨김"
 
-#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
-#: src/window/pagelist.cpp
-msgid "Hot Corners"
-msgstr "핫 코너"
-
 #: src/pages/dock/dockpage.cpp
 msgid "Minimized windows area"
 msgstr "최소화된 창 영역"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel stands 16 px off the screen's edge with round corners while the desktop is empty, and lies on the edge once a window is open."
+msgstr "데스크톱에 창이 없으면 패널이 화면 가장자리에서 16px 떠 있고 모서리가 둥글어지며, 창을 열면 가장자리에 붙습니다."
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel always lies on the bottom edge of the screen."
+msgstr "패널이 항상 화면 아래쪽 가장자리에 붙어 있습니다."
 
 #. TRANSLATORS: a font size in points, such as "9pt".
 #: src/pages/fonts/fontspage.cpp
@@ -907,10 +948,6 @@ msgstr "힌팅"
 #: src/pages/fonts/fontspage.cpp
 msgid "Slight"
 msgstr "약하게"
-
-#: src/pages/fonts/fontspage.cpp
-msgid "Medium"
-msgstr "보통"
 
 #: src/pages/fonts/fontspage.cpp
 msgid "Full"
@@ -1026,10 +1063,6 @@ msgstr "입력기보다 먼저 시작된 앱은 다시 시작해야 할 수 있�
 #: src/pages/keyboard/keyboardpage.cpp
 msgid "Shortcut key"
 msgstr "단축키"
-
-#: src/pages/keyboard/keyboardpage.cpp src/pages/keyboard/layoutpage.cpp
-msgid "Layout"
-msgstr "레이아웃"
 
 #: src/pages/keyboard/keyboardpage.cpp src/pages/shortcuts/shortcutspage.cpp
 #: src/window/pagelist.cpp
@@ -2334,10 +2367,6 @@ msgid "VPN, proxy, hotspot, tethering, internet"
 msgstr "VPN, 프록시, 핫스폿, 테더링, 인터넷"
 
 #: src/window/pagelist.cpp
-msgid "Desktop"
-msgstr "바탕 화면"
-
-#: src/window/pagelist.cpp
 msgid "theme, dark mode, light mode, accent color, dim wallpaper"
 msgstr "테마, 다크 모드, 라이트 모드, 강조 색상, 배경화면 어둡게"
 
@@ -2346,8 +2375,8 @@ msgid "background, desktop picture, image"
 msgstr "배경, 바탕 화면 사진, 이미지"
 
 #: src/window/pagelist.cpp
-msgid "taskbar, position, size, auto hide, glass effect"
-msgstr "작업 표시줄, 위치, 크기, 자동 숨김, 유리 효과"
+msgid "dock, panel, layout, taskbar, start, position, size, auto hide, glass effect"
+msgstr "독, 패널, 레이아웃, 작업 표시줄, 시작, 위치, 크기, 자동 숨기기, 유리 효과, dock, panel, layout, taskbar, start"
 
 #: src/window/pagelist.cpp
 msgid "do not disturb, banners, alerts"

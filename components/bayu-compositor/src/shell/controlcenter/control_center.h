@@ -16,6 +16,7 @@
 #include "shell/statusbar/status_bar_panels.h"
 
 namespace bayu::ui {
+struct PopupPlacement;
 class Window;
 } // namespace bayu::ui
 
@@ -70,6 +71,8 @@ public:
 
     // Where a panel opened from `anchor` on `bar` goes, global logical.
     base::Rect panelGeometry(Panel panel, ShellWindow *bar, const base::Rect &anchor) const;
+    // Where the panel's popup hangs from the bar, as it is open now.
+    ui::PopupPlacement placement(Panel panel) const;
 
 private:
     class PopupRoot;

@@ -727,6 +727,14 @@ void CompositorShell::initShell()
                 usage->applicationsChanged.connect([controlCenter] { controlCenter->deviceUsersChanged(); }));
     }
     bar->addPanels(notifications);
+    // The panel layout: the bar alone, along the bottom, in the dock's place.
+    bar->setPanelSources(&dockService->applications(), [launcherService] { launcherService->toggle(); },
+                         [](double tint) { return shell::DockWindow::glassFor(tint); });
+    const auto followLayout = [dockWindow, statusBarService] {
+        dockWindow->setEnabled(statusBarService->layout() == shell::StatusBar::Layout::Dock);
+    };
+    followLayout();
+    m_shellSubscriptions.push_back(statusBarService->layoutChanged.connect(followLayout));
     // A development instance must not take the session's services over.
     if (!m_options.noDrm) {
         osd->registerService();

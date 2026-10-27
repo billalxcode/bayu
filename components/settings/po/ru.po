@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 00:58+0000\n"
+"POT-Creation-Date: 2026-10-27 05:39+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -819,8 +819,62 @@ msgid "Keep"
 msgstr "Сохранить"
 
 #: src/pages/dock/dockpage.cpp src/window/pagelist.cpp
+msgid "Desktop"
+msgstr "Рабочий стол"
+
+#: src/pages/dock/dockpage.cpp src/pages/keyboard/keyboardpage.cpp
+#: src/pages/keyboard/layoutpage.cpp
+msgid "Layout"
+msgstr "Раскладка"
+
+#: src/pages/dock/dockpage.cpp
 msgid "Dock"
 msgstr "Панель Dock"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Panel"
+msgstr "Панель"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Takes effect right away."
+msgstr "Применяется сразу."
+
+#: src/pages/dock/dockpage.cpp
+msgid "Float when no window is open"
+msgstr "Парить, когда нет открытых окон"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Icon size"
+msgstr "Размер значков"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Small"
+msgstr "Маленький"
+
+#: src/pages/dock/dockpage.cpp src/pages/fonts/fontspage.cpp
+msgid "Medium"
+msgstr "Средний"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Glass effect"
+msgstr "Эффект стекла"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More clear"
+msgstr "Прозрачнее"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More tinted"
+msgstr "Темнее"
+
+#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
+#: src/window/pagelist.cpp
+msgid "Hot Corners"
+msgstr "Активные углы"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel has no top bar, so applications show their menus in their windows. Applications already open may need to be opened again."
+msgstr "У панели нет верхней строки, поэтому приложения показывают меню в своих окнах. Уже открытые приложения, возможно, придётся открыть заново."
 
 #: src/pages/dock/dockpage.cpp
 msgid "Position on screen"
@@ -843,24 +897,8 @@ msgid "Size"
 msgstr "Размер"
 
 #: src/pages/dock/dockpage.cpp
-msgid "Small"
-msgstr "Маленький"
-
-#: src/pages/dock/dockpage.cpp
 msgid "Huge"
 msgstr "Огромный"
-
-#: src/pages/dock/dockpage.cpp
-msgid "Glass effect"
-msgstr "Эффект стекла"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More clear"
-msgstr "Прозрачнее"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More tinted"
-msgstr "Темнее"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Display mode"
@@ -878,14 +916,17 @@ msgstr "Всегда скрывать"
 msgid "Smart hide"
 msgstr "Умное скрытие"
 
-#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
-#: src/window/pagelist.cpp
-msgid "Hot Corners"
-msgstr "Активные углы"
-
 #: src/pages/dock/dockpage.cpp
 msgid "Minimized windows area"
 msgstr "Область свёрнутых окон"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel stands 16 px off the screen's edge with round corners while the desktop is empty, and lies on the edge once a window is open."
+msgstr "Пока рабочий стол пуст, панель отстоит от края экрана на 16 px и скругляет углы, а когда открыто окно — прилегает к краю."
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel always lies on the bottom edge of the screen."
+msgstr "Панель всегда прилегает к нижнему краю экрана."
 
 #. TRANSLATORS: a font size in points, such as "9pt".
 #: src/pages/fonts/fontspage.cpp
@@ -917,10 +958,6 @@ msgstr "Хинтинг"
 #: src/pages/fonts/fontspage.cpp
 msgid "Slight"
 msgstr "Слабый"
-
-#: src/pages/fonts/fontspage.cpp
-msgid "Medium"
-msgstr "Средний"
 
 #: src/pages/fonts/fontspage.cpp
 msgid "Full"
@@ -1036,10 +1073,6 @@ msgstr "Приложения, запущенные до метода ввода,
 #: src/pages/keyboard/keyboardpage.cpp
 msgid "Shortcut key"
 msgstr "Клавиша быстрых команд"
-
-#: src/pages/keyboard/keyboardpage.cpp src/pages/keyboard/layoutpage.cpp
-msgid "Layout"
-msgstr "Раскладка"
 
 #: src/pages/keyboard/keyboardpage.cpp src/pages/shortcuts/shortcutspage.cpp
 #: src/window/pagelist.cpp
@@ -2346,10 +2379,6 @@ msgid "VPN, proxy, hotspot, tethering, internet"
 msgstr "VPN, прокси, точка доступа, модем, интернет, proxy, hotspot, tethering, internet"
 
 #: src/window/pagelist.cpp
-msgid "Desktop"
-msgstr "Рабочий стол"
-
-#: src/window/pagelist.cpp
 msgid "theme, dark mode, light mode, accent color, dim wallpaper"
 msgstr "тема, тёмный режим, светлый режим, цвет акцента, затемнение обоев, theme, dark mode, light mode, accent color"
 
@@ -2358,8 +2387,8 @@ msgid "background, desktop picture, image"
 msgstr "фон, обои рабочего стола, изображение, background, desktop picture, image"
 
 #: src/window/pagelist.cpp
-msgid "taskbar, position, size, auto hide, glass effect"
-msgstr "панель задач, положение, размер, автоскрытие, эффект стекла, taskbar, position, size, auto hide, glass effect"
+msgid "dock, panel, layout, taskbar, start, position, size, auto hide, glass effect"
+msgstr "док, панель, раскладка, панель задач, пуск, положение, размер, автоскрытие, эффект стекла, dock, panel, layout, taskbar, start"
 
 #: src/window/pagelist.cpp
 msgid "do not disturb, banners, alerts"

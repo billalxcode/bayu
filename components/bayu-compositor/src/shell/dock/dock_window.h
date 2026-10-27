@@ -58,6 +58,12 @@ public:
     base::Rect windowRect(int thickness) const;
     // The glass the compositor draws behind the panel.
     render::GlassParams glass() const;
+    // The glass for a GlassTint, as the panel layout's panel takes it too.
+    static render::GlassParams glassFor(double tint);
+    // Off while the panel stands in for the dock (Shell/Layout): hidden, its
+    // reservation given back, and no window minimized into it.
+    void setEnabled(bool enabled);
+    bool isEnabled() const { return m_enabled; }
     double cornerRadius() const;
 
     // The items in order along the dock: applications, minimized windows,
@@ -240,6 +246,7 @@ private:
     // stop drawing them once that frame is composed.
     std::vector<uint64_t> m_landed;
     std::map<uint64_t, base::Rect> m_sentTargets;
+    bool m_enabled = true;
     base::Timer m_strutSettle;
     std::vector<base::Subscription> m_subscriptions;
 };

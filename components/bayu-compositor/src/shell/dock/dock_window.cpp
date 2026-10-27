@@ -371,7 +371,27 @@ double DockWindow::pixelRatio() const
 
 base::Rect DockWindow::primaryGeometry() const
 {
+    if (!m_enabled)
+        return {};
     return m_panelRect.translated(m_windowRect.topLeft());
+}
+
+void DockWindow::setEnabled(bool enabled)
+{
+    if (m_enabled == enabled)
+        return;
+    m_enabled = enabled;
+    m_sentTargets.clear();
+    if (enabled) {
+        m_window->show();
+        updateStrut();
+        updateMinimizeTargets();
+    } else {
+        hideTooltip();
+        m_window->clearExclusiveZone();
+        m_window->hide();
+    }
+    m_dock->notifyPrimaryGeometryChanged();
 }
 
 double DockWindow::cornerRadius() const
@@ -409,7 +429,12 @@ base::Rect DockWindow::windowRect(int thickness) const
 
 render::GlassParams DockWindow::glass() const
 {
-    const double amount = glassAmount(m_dock->settings().glassTint());
+    return glassFor(m_dock->settings().glassTint());
+}
+
+render::GlassParams DockWindow::glassFor(double tint)
+{
+    const double amount = glassAmount(tint);
     const auto blend = [amount](double clear, double middle, double tinted) {
         return glassBlend(amount, clear, middle, tinted);
     };
@@ -864,6 +889,8 @@ void DockWindow::updateGlass()
 
 void DockWindow::updateStrut()
 {
+    if (!m_enabled)
+        return;
     const DockSettings &settings = m_dock->settings();
     const Shell::Output *output = m_shell->output({});
     if (!output)
@@ -931,7 +958,7 @@ base::Rect DockWindow::applicationSlot(double position) const
 void DockWindow::updateMinimizeTargets()
 {
     wm::Window *panel = m_window->wmWindow();
-    if (!panel)
+    if (!panel || !m_enabled)
         return;
     wm::WindowManager *manager = m_shell->windowManager();
     TaskWindows &windows = m_shell->taskWindows();
