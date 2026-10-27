@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -142,7 +142,7 @@ msgstr "Padam pengguna “{name}”? Direktori utama dan kandungannya akan dipad
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
-#: src/pages/shortcuts/shortcutspage.cpp
+#: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
 msgstr "Batal"
 
@@ -1644,6 +1644,7 @@ msgid "Do Not Disturb"
 msgstr "Jangan Ganggu"
 
 #: src/pages/notifications/notificationspage.cpp
+#: src/pages/updates/updatespage.cpp
 msgid "Applications"
 msgstr "Aplikasi"
 
@@ -2275,6 +2276,120 @@ msgstr "Kelajuan tatal"
 msgid "Touchscreen"
 msgstr "Skrin sentuh"
 
+#: src/pages/updates/updatespage.cpp src/window/pagelist.cpp
+msgid "System Update"
+msgstr "Kemas Kini Sistem"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates"
+msgstr "Kemas kini"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Application updates"
+msgstr "Kemas kini aplikasi"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download updates automatically"
+msgstr "Muat turun kemas kini secara automatik"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates are downloaded in the background and installed when you restart. You are always asked before they are installed."
+msgstr "Kemas kini dimuat turun di latar belakang dan dipasang apabila anda mula semula. Anda sentiasa ditanya sebelum ia dipasang."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Up to date"
+msgstr "Terkini"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{name} (security)"
+msgstr "{name} (keselamatan)"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "And {n} more"
+msgid_plural "And {n} more"
+msgstr[0] "Dan {n} lagi"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Preparing…"
+msgstr "Menyediakan…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Downloading {package}…"
+msgstr "Memuat turun {package}…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Checking for updates…"
+msgstr "Menyemak kemas kini…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Your system is up to date"
+msgstr "Sistem anda sudah terkini"
+
+#: src/pages/updates/updatespage.cpp
+msgid "There are no updates for the system."
+msgstr "Tiada kemas kini untuk sistem."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check for Updates"
+msgstr "Semak Kemas Kini"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update available"
+msgid_plural "{n} updates available"
+msgstr[0] "{n} kemas kini tersedia"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Including {n} security update."
+msgid_plural "Including {n} security updates."
+msgstr[0] "Termasuk {n} kemas kini keselamatan."
+
+#: src/pages/updates/updatespage.cpp
+msgid "They are downloaded now and installed when you restart."
+msgstr "Ia dimuat turun sekarang dan dipasang apabila anda mula semula."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download"
+msgstr "Muat Turun"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Downloading updates…"
+msgstr "Memuat turun kemas kini…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update"
+msgid_plural "{n} updates"
+msgstr[0] "{n} kemas kini"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates ready to install"
+msgstr "Kemas kini sedia dipasang"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart to install the downloaded updates. Save your work first."
+msgstr "Mula semula untuk memasang kemas kini yang dimuat turun. Simpan kerja anda dahulu."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart and Install"
+msgstr "Mula Semula dan Pasang"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Could not check for updates"
+msgstr "Tidak dapat menyemak kemas kini"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check your internet connection and try again."
+msgstr "Semak sambungan internet anda dan cuba lagi."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Try Again"
+msgstr "Cuba Lagi"
+
 #: src/pages/wallpaper/wallpapergrid.cpp src/pages/wallpaper/wallpaperpage.cpp
 msgid "Add wallpaper"
 msgstr "Tambah kertas dinding"
@@ -2449,6 +2564,10 @@ msgstr "cas, had pengecasan, kesihatan bateri, kapasiti, sejarah, peratusan"
 #: src/window/pagelist.cpp
 msgid "energy, performance, power saving, sleep, turn off display"
 msgstr "tenaga, prestasi, jimat kuasa, tidur, matikan paparan"
+
+#: src/window/pagelist.cpp
+msgid "update, upgrade, dnf, packages, security, download, restart"
+msgstr "kemas kini, naik taraf, dnf, pakej, keselamatan, muat turun, mula semula, update, upgrade"
 
 #: src/window/pagelist.cpp
 msgid "system, version, kernel, processor, memory, storage, hardware"

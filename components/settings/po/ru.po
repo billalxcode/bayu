@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -142,7 +142,7 @@ msgstr "Удалить пользователя «{name}»? Его домашн�
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
-#: src/pages/shortcuts/shortcutspage.cpp
+#: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -1654,6 +1654,7 @@ msgid "Do Not Disturb"
 msgstr "Не беспокоить"
 
 #: src/pages/notifications/notificationspage.cpp
+#: src/pages/updates/updatespage.cpp
 msgid "Applications"
 msgstr "Приложения"
 
@@ -2287,6 +2288,128 @@ msgstr "Скорость прокрутки"
 msgid "Touchscreen"
 msgstr "Сенсорный экран"
 
+#: src/pages/updates/updatespage.cpp src/window/pagelist.cpp
+msgid "System Update"
+msgstr "Обновление системы"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates"
+msgstr "Обновления"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Application updates"
+msgstr "Обновления приложений"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download updates automatically"
+msgstr "Скачивать обновления автоматически"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates are downloaded in the background and installed when you restart. You are always asked before they are installed."
+msgstr "Обновления скачиваются в фоне и устанавливаются при перезагрузке. Перед установкой вас всегда спросят."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Up to date"
+msgstr "Актуально"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{name} (security)"
+msgstr "{name} (безопасность)"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "And {n} more"
+msgid_plural "And {n} more"
+msgstr[0] "И ещё {n}"
+msgstr[1] "И ещё {n}"
+msgstr[2] "И ещё {n}"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Preparing…"
+msgstr "Подготовка…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Downloading {package}…"
+msgstr "Скачивается {package}…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Checking for updates…"
+msgstr "Поиск обновлений…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Your system is up to date"
+msgstr "Система обновлена"
+
+#: src/pages/updates/updatespage.cpp
+msgid "There are no updates for the system."
+msgstr "Обновлений для системы нет."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check for Updates"
+msgstr "Проверить обновления"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update available"
+msgid_plural "{n} updates available"
+msgstr[0] "Доступно {n} обновление"
+msgstr[1] "Доступно {n} обновления"
+msgstr[2] "Доступно {n} обновлений"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Including {n} security update."
+msgid_plural "Including {n} security updates."
+msgstr[0] "В том числе {n} обновление безопасности."
+msgstr[1] "В том числе {n} обновления безопасности."
+msgstr[2] "В том числе {n} обновлений безопасности."
+
+#: src/pages/updates/updatespage.cpp
+msgid "They are downloaded now and installed when you restart."
+msgstr "Они скачиваются сейчас и устанавливаются при перезагрузке."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download"
+msgstr "Скачать"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Downloading updates…"
+msgstr "Скачиваются обновления…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update"
+msgid_plural "{n} updates"
+msgstr[0] "{n} обновление"
+msgstr[1] "{n} обновления"
+msgstr[2] "{n} обновлений"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates ready to install"
+msgstr "Обновления готовы к установке"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart to install the downloaded updates. Save your work first."
+msgstr "Перезагрузите компьютер, чтобы установить скачанные обновления. Сначала сохраните работу."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart and Install"
+msgstr "Перезагрузить и установить"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Could not check for updates"
+msgstr "Не удалось проверить обновления"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check your internet connection and try again."
+msgstr "Проверьте подключение к интернету и повторите попытку."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Try Again"
+msgstr "Повторить"
+
 #: src/pages/wallpaper/wallpapergrid.cpp src/pages/wallpaper/wallpaperpage.cpp
 msgid "Add wallpaper"
 msgstr "Добавить обои"
@@ -2461,6 +2584,10 @@ msgstr "заряд, зарядка, предел заряда, состояни�
 #: src/window/pagelist.cpp
 msgid "energy, performance, power saving, sleep, turn off display"
 msgstr "энергия, производительность, энергосбережение, сон, отключение дисплея, energy, performance, power saving, sleep, turn off display"
+
+#: src/window/pagelist.cpp
+msgid "update, upgrade, dnf, packages, security, download, restart"
+msgstr "обновление, обновить, dnf, пакеты, безопасность, скачать, перезагрузка, update, upgrade"
 
 #: src/window/pagelist.cpp
 msgid "system, version, kernel, processor, memory, storage, hardware"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -142,7 +142,7 @@ msgstr "Supprimer l’utilisateur « {name} » ? Son dossier personnel et son co
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
-#: src/pages/shortcuts/shortcutspage.cpp
+#: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -1649,6 +1649,7 @@ msgid "Do Not Disturb"
 msgstr "Ne pas déranger"
 
 #: src/pages/notifications/notificationspage.cpp
+#: src/pages/updates/updatespage.cpp
 msgid "Applications"
 msgstr "Applications"
 
@@ -2281,6 +2282,124 @@ msgstr "Vitesse de défilement"
 msgid "Touchscreen"
 msgstr "Écran tactile"
 
+#: src/pages/updates/updatespage.cpp src/window/pagelist.cpp
+msgid "System Update"
+msgstr "Mise à jour du système"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates"
+msgstr "Mises à jour"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Application updates"
+msgstr "Mises à jour des applications"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download updates automatically"
+msgstr "Télécharger les mises à jour automatiquement"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates are downloaded in the background and installed when you restart. You are always asked before they are installed."
+msgstr "Les mises à jour sont téléchargées en arrière-plan et installées au redémarrage. Votre accord est toujours demandé avant l’installation."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Up to date"
+msgstr "À jour"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{name} (security)"
+msgstr "{name} (sécurité)"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "And {n} more"
+msgid_plural "And {n} more"
+msgstr[0] "Et {n} autre"
+msgstr[1] "Et {n} autres"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Preparing…"
+msgstr "Préparation…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Downloading {package}…"
+msgstr "Téléchargement de {package}…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Checking for updates…"
+msgstr "Recherche de mises à jour…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Your system is up to date"
+msgstr "Votre système est à jour"
+
+#: src/pages/updates/updatespage.cpp
+msgid "There are no updates for the system."
+msgstr "Aucune mise à jour pour le système."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check for Updates"
+msgstr "Rechercher des mises à jour"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update available"
+msgid_plural "{n} updates available"
+msgstr[0] "{n} mise à jour disponible"
+msgstr[1] "{n} mises à jour disponibles"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Including {n} security update."
+msgid_plural "Including {n} security updates."
+msgstr[0] "Dont {n} mise à jour de sécurité."
+msgstr[1] "Dont {n} mises à jour de sécurité."
+
+#: src/pages/updates/updatespage.cpp
+msgid "They are downloaded now and installed when you restart."
+msgstr "Elles sont téléchargées maintenant et installées au redémarrage."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download"
+msgstr "Télécharger"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Downloading updates…"
+msgstr "Téléchargement des mises à jour…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update"
+msgid_plural "{n} updates"
+msgstr[0] "{n} mise à jour"
+msgstr[1] "{n} mises à jour"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates ready to install"
+msgstr "Mises à jour prêtes à installer"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart to install the downloaded updates. Save your work first."
+msgstr "Redémarrez pour installer les mises à jour téléchargées. Enregistrez d’abord votre travail."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart and Install"
+msgstr "Redémarrer et installer"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Could not check for updates"
+msgstr "Impossible de rechercher des mises à jour"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check your internet connection and try again."
+msgstr "Vérifiez votre connexion Internet et réessayez."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Try Again"
+msgstr "Réessayer"
+
 #: src/pages/wallpaper/wallpapergrid.cpp src/pages/wallpaper/wallpaperpage.cpp
 msgid "Add wallpaper"
 msgstr "Ajouter un fond d’écran"
@@ -2455,6 +2574,10 @@ msgstr "charge, limite de charge, santé de la batterie, capacité, historique, 
 #: src/window/pagelist.cpp
 msgid "energy, performance, power saving, sleep, turn off display"
 msgstr "énergie, performances, économie d’énergie, veille, éteindre l’écran"
+
+#: src/window/pagelist.cpp
+msgid "update, upgrade, dnf, packages, security, download, restart"
+msgstr "mise à jour, mettre à jour, dnf, paquets, sécurité, télécharger, redémarrer, update, upgrade"
 
 #: src/window/pagelist.cpp
 msgid "system, version, kernel, processor, memory, storage, hardware"

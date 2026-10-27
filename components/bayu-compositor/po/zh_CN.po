@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -693,6 +693,26 @@ msgstr "组密码"
 msgid "One-time password"
 msgstr "一次性密码"
 
+#: src/shell/statusbar/status_bar_window.cpp
+msgid "Restart to install the updates"
+msgstr "重启以安装更新"
+
+#: src/shell/statusbar/status_bar_window.cpp
+#, python-brace-format
+msgid "{n} system update"
+msgid_plural "{n} system updates"
+msgstr[0] "{n} 个系统更新"
+
+#: src/shell/statusbar/status_bar_window.cpp
+#, python-brace-format
+msgid "{n} application update"
+msgid_plural "{n} application updates"
+msgstr[0] "{n} 个应用更新"
+
+#: src/shell/statusbar/status_bar_window.cpp
+msgid "Check for Updates"
+msgstr "检查更新"
+
 #. TRANSLATORS: {reason} is a sentence of its own, such as "The VPN service stopped."
 #: src/shell/statusbar/vpn_notifier.cpp
 #, python-brace-format
@@ -702,6 +722,47 @@ msgstr "无法连接“{name}”。{reason}"
 #: src/shell/statusbar/vpn_notifier.cpp
 msgid "VPN connection failed"
 msgstr "VPN 连接失败"
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{system} system updates and {apps} application updates are available."
+msgstr "有 {system} 个系统更新和 {apps} 个应用更新。"
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{n} system update is available."
+msgid_plural "{n} system updates are available."
+msgstr[0] "有 {n} 个系统更新。"
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{n} application update is available."
+msgid_plural "{n} application updates are available."
+msgstr[0] "有 {n} 个应用更新。"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Updates available"
+msgstr "有可用更新"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "View"
+msgstr "查看"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Updates ready to install"
+msgstr "更新已可安装"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "The updates were downloaded. Restart to install them."
+msgstr "更新已下载。重启以安装。"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Restart and Install"
+msgstr "重启并安装"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Later"
+msgstr "稍后"
 
 #. TRANSLATORS: the name of a desk that has none of its own, such as "Desk 2".
 #: src/wm/overview/overview_controller.cpp

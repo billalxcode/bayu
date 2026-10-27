@@ -1,0 +1,11 @@
+// Administrators at the machine download system updates and arm the offline
+// update without a password: the background download asks nobody, and the
+// updates are only installed at a restart the user chooses.
+polkit.addRule(function(action, subject) {
+    if ((action.id == "org.freedesktop.packagekit.system-update" ||
+         action.id == "org.freedesktop.packagekit.trigger-offline-update") &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("wheel")) {
+            return polkit.Result.YES;
+    }
+});

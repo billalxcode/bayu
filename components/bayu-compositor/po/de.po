@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -700,6 +700,28 @@ msgstr "Gruppenpasswort"
 msgid "One-time password"
 msgstr "Einmalpasswort"
 
+#: src/shell/statusbar/status_bar_window.cpp
+msgid "Restart to install the updates"
+msgstr "Neu starten, um die Aktualisierungen zu installieren"
+
+#: src/shell/statusbar/status_bar_window.cpp
+#, python-brace-format
+msgid "{n} system update"
+msgid_plural "{n} system updates"
+msgstr[0] "{n} Systemaktualisierung"
+msgstr[1] "{n} Systemaktualisierungen"
+
+#: src/shell/statusbar/status_bar_window.cpp
+#, python-brace-format
+msgid "{n} application update"
+msgid_plural "{n} application updates"
+msgstr[0] "{n} Anwendungsaktualisierung"
+msgstr[1] "{n} Anwendungsaktualisierungen"
+
+#: src/shell/statusbar/status_bar_window.cpp
+msgid "Check for Updates"
+msgstr "Nach Aktualisierungen suchen"
+
 #. TRANSLATORS: {reason} is a sentence of its own, such as "The VPN service stopped."
 #: src/shell/statusbar/vpn_notifier.cpp
 #, python-brace-format
@@ -709,6 +731,49 @@ msgstr "Verbindung mit „{name}“ nicht möglich. {reason}"
 #: src/shell/statusbar/vpn_notifier.cpp
 msgid "VPN connection failed"
 msgstr "VPN-Verbindung fehlgeschlagen"
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{system} system updates and {apps} application updates are available."
+msgstr "{system} Systemaktualisierungen und {apps} Anwendungsaktualisierungen sind verfügbar."
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{n} system update is available."
+msgid_plural "{n} system updates are available."
+msgstr[0] "{n} Systemaktualisierung ist verfügbar."
+msgstr[1] "{n} Systemaktualisierungen sind verfügbar."
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{n} application update is available."
+msgid_plural "{n} application updates are available."
+msgstr[0] "{n} Anwendungsaktualisierung ist verfügbar."
+msgstr[1] "{n} Anwendungsaktualisierungen sind verfügbar."
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Updates available"
+msgstr "Aktualisierungen verfügbar"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "View"
+msgstr "Anzeigen"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Updates ready to install"
+msgstr "Aktualisierungen bereit zur Installation"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "The updates were downloaded. Restart to install them."
+msgstr "Die Aktualisierungen wurden heruntergeladen. Starten Sie neu, um sie zu installieren."
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Restart and Install"
+msgstr "Neu starten und installieren"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Later"
+msgstr "Später"
 
 #. TRANSLATORS: the name of a desk that has none of its own, such as "Desk 2".
 #: src/wm/overview/overview_controller.cpp

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -142,7 +142,7 @@ msgstr "要删除用户“{name}”吗？其主目录及其中的内容将被永
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
-#: src/pages/shortcuts/shortcutspage.cpp
+#: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
 msgstr "取消"
 
@@ -1644,6 +1644,7 @@ msgid "Do Not Disturb"
 msgstr "勿扰模式"
 
 #: src/pages/notifications/notificationspage.cpp
+#: src/pages/updates/updatespage.cpp
 msgid "Applications"
 msgstr "应用"
 
@@ -2275,6 +2276,120 @@ msgstr "滚动速度"
 msgid "Touchscreen"
 msgstr "触摸屏"
 
+#: src/pages/updates/updatespage.cpp src/window/pagelist.cpp
+msgid "System Update"
+msgstr "系统更新"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates"
+msgstr "更新"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Application updates"
+msgstr "应用更新"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download updates automatically"
+msgstr "自动下载更新"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates are downloaded in the background and installed when you restart. You are always asked before they are installed."
+msgstr "更新会在后台下载，并在重启时安装。安装前总会先询问您。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Up to date"
+msgstr "已是最新"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{name} (security)"
+msgstr "{name}（安全）"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "And {n} more"
+msgid_plural "And {n} more"
+msgstr[0] "还有 {n} 个"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Preparing…"
+msgstr "正在准备…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Downloading {package}…"
+msgstr "正在下载 {package}…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Checking for updates…"
+msgstr "正在检查更新…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Your system is up to date"
+msgstr "系统已是最新"
+
+#: src/pages/updates/updatespage.cpp
+msgid "There are no updates for the system."
+msgstr "系统没有可用更新。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check for Updates"
+msgstr "检查更新"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update available"
+msgid_plural "{n} updates available"
+msgstr[0] "有 {n} 个可用更新"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Including {n} security update."
+msgid_plural "Including {n} security updates."
+msgstr[0] "其中包括 {n} 个安全更新。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "They are downloaded now and installed when you restart."
+msgstr "更新将立即下载，并在重启时安装。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download"
+msgstr "下载"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Downloading updates…"
+msgstr "正在下载更新…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update"
+msgid_plural "{n} updates"
+msgstr[0] "{n} 个更新"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates ready to install"
+msgstr "更新已可安装"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart to install the downloaded updates. Save your work first."
+msgstr "重启以安装已下载的更新。请先保存您的工作。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart and Install"
+msgstr "重启并安装"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Could not check for updates"
+msgstr "无法检查更新"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check your internet connection and try again."
+msgstr "请检查网络连接后重试。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Try Again"
+msgstr "重试"
+
 #: src/pages/wallpaper/wallpapergrid.cpp src/pages/wallpaper/wallpaperpage.cpp
 msgid "Add wallpaper"
 msgstr "添加壁纸"
@@ -2449,6 +2564,10 @@ msgstr "charge, charging limit, battery health, capacity, history, percentage, �
 #: src/window/pagelist.cpp
 msgid "energy, performance, power saving, sleep, turn off display"
 msgstr "energy, performance, power saving, sleep, turn off display, 能耗, 性能, 省电, 睡眠, 关闭显示器"
+
+#: src/window/pagelist.cpp
+msgid "update, upgrade, dnf, packages, security, download, restart"
+msgstr "更新, 升级, dnf, 软件包, 安全, 下载, 重启, update, upgrade"
 
 #: src/window/pagelist.cpp
 msgid "system, version, kernel, processor, memory, storage, hardware"

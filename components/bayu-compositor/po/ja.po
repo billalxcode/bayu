@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -694,6 +694,26 @@ msgstr "グループパスワード"
 msgid "One-time password"
 msgstr "ワンタイムパスワード"
 
+#: src/shell/statusbar/status_bar_window.cpp
+msgid "Restart to install the updates"
+msgstr "再起動してアップデートをインストール"
+
+#: src/shell/statusbar/status_bar_window.cpp
+#, python-brace-format
+msgid "{n} system update"
+msgid_plural "{n} system updates"
+msgstr[0] "システムアップデート {n} 件"
+
+#: src/shell/statusbar/status_bar_window.cpp
+#, python-brace-format
+msgid "{n} application update"
+msgid_plural "{n} application updates"
+msgstr[0] "アプリのアップデート {n} 件"
+
+#: src/shell/statusbar/status_bar_window.cpp
+msgid "Check for Updates"
+msgstr "アップデートを確認"
+
 #. TRANSLATORS: {reason} is a sentence of its own, such as "The VPN service stopped."
 #: src/shell/statusbar/vpn_notifier.cpp
 #, python-brace-format
@@ -703,6 +723,47 @@ msgstr "「{name}」に接続できませんでした。{reason}"
 #: src/shell/statusbar/vpn_notifier.cpp
 msgid "VPN connection failed"
 msgstr "VPN 接続に失敗しました"
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{system} system updates and {apps} application updates are available."
+msgstr "システムアップデート {system} 件とアプリのアップデート {apps} 件があります。"
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{n} system update is available."
+msgid_plural "{n} system updates are available."
+msgstr[0] "システムアップデートが {n} 件あります。"
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{n} application update is available."
+msgid_plural "{n} application updates are available."
+msgstr[0] "アプリのアップデートが {n} 件あります。"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Updates available"
+msgstr "アップデートがあります"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "View"
+msgstr "表示"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Updates ready to install"
+msgstr "アップデートをインストールする準備ができました"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "The updates were downloaded. Restart to install them."
+msgstr "アップデートをダウンロードしました。再起動してインストールしてください。"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Restart and Install"
+msgstr "再起動してインストール"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Later"
+msgstr "後で"
 
 #. TRANSLATORS: the name of a desk that has none of its own, such as "Desk 2".
 #: src/wm/overview/overview_controller.cpp

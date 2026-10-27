@@ -71,6 +71,8 @@
 #include "shell/statusbar/status_bar.h"
 #include "shell/statusbar/status_bar_window.h"
 #include "shell/statusbar/vpn_notifier.h"
+#include "shell/updates/update_monitor.h"
+#include "shell/common/app_launcher.h"
 #include "shell/wallpaper/wallpaper.h"
 #include "switcher/switcher_view.h"
 #include "wayland/idle_inhibition.h"
@@ -735,6 +737,16 @@ void CompositorShell::initShell()
     };
     followLayout();
     m_shellSubscriptions.push_back(statusBarService->layoutChanged.connect(followLayout));
+
+    // The updates waiting, with their icon on the bar.
+    m_updates = std::make_unique<shell::UpdateMonitor>(
+            environment.bus, environment.bus ? base::dbus::Connection::system(mainLoop()) : nullptr,
+            preferencesFile("shell"));
+    shell::Shell *shellPointer = m_shell.get();
+    m_updates->openSystemUpdates = [shellPointer] { shellPointer->openSettings({"-m", "updates"}); };
+    m_updates->openAppUpdates = [] { shell::ApplicationLauncher::startDetached("bayu-store", {"--updates"}); };
+    m_updates->restart = [statusBarService] { statusBarService->powerActions().reboot(); };
+    bar->setUpdates(m_updates.get());
     // A development instance must not take the session's services over.
     if (!m_options.noDrm) {
         osd->registerService();
@@ -745,6 +757,8 @@ void CompositorShell::initShell()
         notifications->registerServices();
         launcherService->registerService();
         statusBarService->registerServices();
+        m_updates->registerService();
+        m_updates->start();
     }
 }
 

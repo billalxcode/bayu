@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -693,6 +693,26 @@ msgstr "그룹 비밀번호"
 msgid "One-time password"
 msgstr "일회용 비밀번호"
 
+#: src/shell/statusbar/status_bar_window.cpp
+msgid "Restart to install the updates"
+msgstr "다시 시작하여 업데이트 설치"
+
+#: src/shell/statusbar/status_bar_window.cpp
+#, python-brace-format
+msgid "{n} system update"
+msgid_plural "{n} system updates"
+msgstr[0] "시스템 업데이트 {n}개"
+
+#: src/shell/statusbar/status_bar_window.cpp
+#, python-brace-format
+msgid "{n} application update"
+msgid_plural "{n} application updates"
+msgstr[0] "앱 업데이트 {n}개"
+
+#: src/shell/statusbar/status_bar_window.cpp
+msgid "Check for Updates"
+msgstr "업데이트 확인"
+
 #. TRANSLATORS: {reason} is a sentence of its own, such as "The VPN service stopped."
 #: src/shell/statusbar/vpn_notifier.cpp
 #, python-brace-format
@@ -702,6 +722,47 @@ msgstr "“{name}”에 연결할 수 없습니다. {reason}"
 #: src/shell/statusbar/vpn_notifier.cpp
 msgid "VPN connection failed"
 msgstr "VPN 연결 실패"
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{system} system updates and {apps} application updates are available."
+msgstr "시스템 업데이트 {system}개와 앱 업데이트 {apps}개가 있습니다."
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{n} system update is available."
+msgid_plural "{n} system updates are available."
+msgstr[0] "시스템 업데이트 {n}개가 있습니다."
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{n} application update is available."
+msgid_plural "{n} application updates are available."
+msgstr[0] "앱 업데이트 {n}개가 있습니다."
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Updates available"
+msgstr "업데이트 있음"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "View"
+msgstr "보기"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Updates ready to install"
+msgstr "업데이트 설치 준비 완료"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "The updates were downloaded. Restart to install them."
+msgstr "업데이트를 다운로드했습니다. 다시 시작하여 설치하십시오."
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Restart and Install"
+msgstr "다시 시작하고 설치"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Later"
+msgstr "나중에"
 
 #. TRANSLATORS: the name of a desk that has none of its own, such as "Desk 2".
 #: src/wm/overview/overview_controller.cpp

@@ -28,6 +28,9 @@
 #include "shell/statusbar/status_icon.h"
 #include "shell/statusbar/system_tray_view.h"
 #include "shell/statusbar/vpn_notifier.h"
+#include "shell/updates/update_monitor.h"
+#include "base/i18n.h"
+#include "ui/menu.h"
 #include "ui/animation.h"
 #include "ui/embedded_window.h"
 #include "ui/painter.h"
@@ -171,6 +174,14 @@ StatusBarWindow::StatusBarWindow(Shell *shell, std::unique_ptr<StatusBar> status
     m_tray->setName("tray");
     m_tray->onCountChanged = [this] { layoutRow(); };
 
+    // Shown while updates wait (setUpdates).
+    m_updates = m_root->addChild<StatusIcon>(this);
+    m_updates->setName("updates");
+    m_updates->setIconName("updates");
+    m_updates->setVisible(false);
+    m_updates->onClicked = [this](const ui::PointerEvent &) { showUpdatesMenu(); };
+    m_updates->onPreferredWidthChanged = [this] { layoutRow(); };
+
     const auto statusIcon = [this](const char *name, Panel panel) {
         StatusIcon *icon = m_root->addChild<StatusIcon>(this);
         icon->setName(name);
@@ -234,6 +245,9 @@ StatusBarWindow::StatusBarWindow(Shell *shell, std::unique_ptr<StatusBar> status
 
 StatusBarWindow::~StatusBarWindow()
 {
+    m_updatesChanged.reset();
+    if (m_updatesMenu)
+        m_updatesMenu->close();
     m_floatAnimation.reset();
     m_panelLayoutSubscriptions.clear();
     m_subscriptions.clear();
@@ -265,6 +279,72 @@ void StatusBarWindow::updateGeometry()
     }
     m_window->setGeometry(base::Rect(output->bounds.x(), output->bounds.y(), output->bounds.width(), kHeight));
     m_window->setExclusiveZone(wm::ScreenEdge::Top, kHeight);
+}
+
+void StatusBarWindow::setUpdates(UpdateMonitor *updates)
+{
+    m_updatesChanged.reset();
+    m_updateMonitor = updates;
+    if (updates)
+        m_updatesChanged = updates->changed.connect([this] { updateUpdates(); });
+    updateUpdates();
+}
+
+void StatusBarWindow::updateUpdates()
+{
+    const bool shown = m_updateMonitor
+            && (m_updateMonitor->total() > 0 || m_updateMonitor->state() == UpdateMonitor::State::Ready);
+    // A dot of red for a security update, as Pitaloka's danger.
+    m_updates->setIndicatorColor(shown && m_updateMonitor->securityUpdates() > 0
+                                         ? std::optional<ui::Color>(ui::accent::red)
+                                         : std::nullopt);
+    if (m_updates->isVisible() != shown) {
+        if (!shown && m_updatesMenu)
+            m_updatesMenu->close();
+        m_updates->setVisible(shown);
+    }
+    layoutRow();
+}
+
+void StatusBarWindow::showUpdatesMenu()
+{
+    if (!m_updateMonitor)
+        return;
+    const bool open = m_updatesMenu && m_updatesMenu->isOpen();
+    closePopups();
+    if (open)
+        return;
+    using bayu::i18n::tr;
+    using bayu::i18n::trn;
+    UpdateMonitor *monitor = m_updateMonitor;
+    m_updatesMenu = std::make_unique<ui::Menu>();
+    if (monitor->state() == UpdateMonitor::State::Ready) {
+        m_updatesMenu->addItem(tr("Restart to install the updates"), [monitor] {
+            if (monitor->openSystemUpdates)
+                monitor->openSystemUpdates();
+        });
+    } else if (monitor->systemUpdates() > 0) {
+        const size_t index = m_updatesMenu->addItem(
+                trn("{n} system update", "{n} system updates", uint64_t(monitor->systemUpdates())), [monitor] {
+                    if (monitor->openSystemUpdates)
+                        monitor->openSystemUpdates();
+                });
+        m_updatesMenu->setItemIcon(index, "system-software-update");
+    }
+    if (monitor->appUpdates() > 0) {
+        const size_t index = m_updatesMenu->addItem(
+                trn("{n} application update", "{n} application updates", uint64_t(monitor->appUpdates())), [monitor] {
+                    if (monitor->openAppUpdates)
+                        monitor->openAppUpdates();
+                });
+        m_updatesMenu->setItemIcon(index, "bayu-store");
+    }
+    m_updatesMenu->addSeparator();
+    m_updatesMenu->addItem(tr("Check for Updates"), [monitor] { monitor->check(); });
+    m_updates->setChecked(true);
+    m_updatesMenu->onClosed = [this] { m_updates->setChecked(false); };
+    m_updatesMenu->setAvailableGeometry(availableGeometry());
+    m_updatesMenu->popupFor(m_updates);
 }
 
 bool StatusBarWindow::isPanel() const
@@ -302,7 +382,7 @@ void StatusBarWindow::updateLayoutMode()
     closePopups();
     m_panelShown = panel;
     if (panel && !m_panelTasks) {
-        auto tasks = std::make_unique<PanelTasks>(m_shell->taskWindows(), *m_applications);
+        auto tasks = std::make_unique<PanelTasks>(m_shell->taskWindows(), *m_applications, &m_shell->badges());
         m_panelTasks = tasks.get();
         m_panelTasks->onStart = [this] {
             closePopups();
@@ -471,7 +551,7 @@ void StatusBarWindow::updateLook()
     if (m_menuBar)
         m_menuBar->barChanged();
     m_tray->barChanged();
-    for (StatusIcon *icon : {m_volume, m_network, m_battery, m_control})
+    for (StatusIcon *icon : {m_updates, m_volume, m_network, m_battery, m_control})
         icon->updateLook();
     m_clock->updateLook();
     m_recording->updateLook();
@@ -610,6 +690,7 @@ void StatusBarWindow::layoutRow()
     preferred(m_agentControl, m_agentControl->preferredWidth());
     m_tray->setVisible(m_tray->count() > 0);
     preferred(m_tray, m_tray->preferredWidth());
+    preferred(m_updates, m_updates->preferredWidth());
     for (StatusIcon *icon : {m_volume, m_network, m_battery, m_control})
         preferred(icon, icon->preferredWidth());
     preferred(m_clock, m_clock->preferredWidth());
@@ -719,6 +800,8 @@ void StatusBarWindow::closePopups()
     if (m_menuBar)
         m_menuBar->closeMenu();
     m_tray->closeMenu();
+    if (m_updatesMenu)
+        m_updatesMenu->close();
 }
 
 StatusBarMenuBarHost StatusBarWindow::menuBarHost()

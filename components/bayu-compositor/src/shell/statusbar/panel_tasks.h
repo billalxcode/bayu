@@ -19,6 +19,7 @@ class Menu;
 
 namespace bayu::shell {
 
+class ApplicationBadges;
 class DockModel;
 class TaskWindows;
 
@@ -32,7 +33,8 @@ class TaskWindows;
 class PanelTasks : public ui::View
 {
 public:
-    PanelTasks(TaskWindows &windows, DockModel &applications);
+    // `badges`, the counts applications put on their icons, may be null.
+    PanelTasks(TaskWindows &windows, DockModel &applications, ApplicationBadges *badges = nullptr);
     ~PanelTasks() override;
 
     // The Start button.
@@ -80,6 +82,7 @@ private:
 
     TaskWindows &m_windows;
     DockModel &m_applications;
+    ApplicationBadges *m_badges = nullptr;
     double m_tileSize = 36;
     bool m_windowTitles = false;
     StartButton *m_start = nullptr;

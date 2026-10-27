@@ -192,9 +192,12 @@ add_library(bayu-shell-statusbar-view STATIC
     src/shell/statusbar/status_bar_window.h
     src/shell/statusbar/system_tray_view.cpp
     src/shell/statusbar/system_tray_view.h
+    src/shell/updates/update_monitor.cpp
+    src/shell/updates/update_monitor.h
 )
+find_package(BayuClients REQUIRED COMPONENTS packagekit)
 target_link_libraries(bayu-shell-statusbar-view PUBLIC bayu-shell bayu-shell-bar-items
-    bayu-shell-statusbar bayu-shell-wallpaper bayu-shell-dock Bayu::AudioClient)
+    bayu-shell-statusbar bayu-shell-wallpaper bayu-shell-dock Bayu::AudioClient Bayu::PackageKitClient)
 target_link_libraries(bayu-compositor PRIVATE bayu-shell-statusbar-view)
 # The status bar's menu bar.
 include(src/shell/menubar/menubar.cmake)

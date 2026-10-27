@@ -37,6 +37,9 @@ BuildRequires:  qt6-qtbase-devel qt6-qtbase-private-devel qt6-qtdeclarative-deve
 # Runtime services, from upstream's getting-started step 4.
 Requires:       accountsservice polkit gsettings-desktop-schemas xdg-user-dirs
 Requires:       flatpak flatpak-libs redhat-display-fonts redhat-text-fonts
+# Settings > System Update and the bar's updates: the system's updates and
+# the offline update that installs them at a restart.
+Requires:       PackageKit
 Requires:       NetworkManager NetworkManager-wifi bluez upower (power-profiles-daemon or tuned-ppd) udisks2 fuse3
 Requires:       pipewire pipewire-pulseaudio wireplumber gnome-keyring gnome-keyring-pam
 # xdg-desktop-portal offers OpenURI, how Flatpak apps open links and show a
