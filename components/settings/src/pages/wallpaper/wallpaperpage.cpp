@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "base/i18n.h"
+#include "base/locale.h"
 #include "bayu/appearance/appearance.h"
 #include "pages/wallpaper/wallpapergrid.h"
 #include "pages/wallpaper/wallpapers.h"
@@ -14,8 +15,11 @@
 #include "ui/layout.h"
 #include "ui/menu.h"
 #include "ui/cell_layout.h"
+#include "ui/theme.h"
 #include "widgets/card.h"
+#include "widgets/listrow.h"
 #include "widgets/metrics.h"
+#include "widgets/rowcombobox.h"
 #include "window/page.h"
 #include "window/pagelist.h"
 #include "window/settingswindow.h"
@@ -28,6 +32,32 @@ using bayu::i18n::tr;
 namespace settings {
 
 namespace {
+
+class SecondaryLabel : public Label
+{
+public:
+    using Label::Label;
+
+protected:
+    void layout() override
+    {
+        setColor(Theme::current().disabledText);
+        Label::layout();
+    }
+};
+
+static std::string timeOfDay(int minutes)
+{
+    minutes = (minutes % (24 * 60) + 24 * 60) % (24 * 60);
+    return base::Locale::system().toString(base::ClockTime{minutes / 60, minutes % 60},
+                                           base::Locale::FormatType::Short);
+}
+
+static std::string folderOf(const std::string& path)
+{
+    const size_t slash = path.rfind('/');
+    return slash == std::string::npos ? path : path.substr(0, slash);
+}
 
 class WallpaperPage : public Page
 {
@@ -46,6 +76,32 @@ public:
         m_user->onSelected = [this](const std::string& path) { select(path); };
         m_user->onAddRequested = [this](PointF position) { m_addMenu.popup(&settingsWindow().window(), position); };
         m_user->onRemoveRequested = [this](const std::string& path) { m_appearance.removeUserWallpaper(path); };
+
+        // Dynamic wallpapers show by their day picture; picking one picks its folder.
+        m_dynamic = card->addChild<WallpaperGrid>(tr("Dynamic"));
+        m_dynamic->setName("wallpaper:dynamic");
+        m_dynamic->setLayoutHints({.fillWidth = true});
+        std::vector<std::string> previews;
+        for (const std::string& set : wallpapers::dynamic())
+            previews.push_back(wallpapers::dynamicPreview(set));
+        m_dynamic->setWallpapers(previews);
+        m_dynamic->setVisible(!previews.empty());
+        m_dynamic->onSelected = [this](const std::string& preview) { select(folderOf(preview)); };
+
+        m_dynamicOptions = card->addChild<ColumnLayout>();
+        m_dynamicOptions->setLayoutHints({.fillWidth = true});
+        ListRow* followsRow = m_dynamicOptions->addChild<ListRow>(tr("Changes with"));
+        followsRow->setInteractive(false);
+        m_follows = followsRow->addContent<RowComboBox>(std::vector<std::string>{tr("Time of day"), tr("Theme")});
+        m_follows->setName("wallpaper:follows");
+        m_follows->onActivated = [this](int index) { m_appearance.setWallpaperFollows(index); };
+        // TRANSLATORS: when each of a dynamic wallpaper's pictures shows, by where the sun is.
+        for (const char* phase : {tr("Morning"), tr("Day"), tr("Evening"), tr("Night")}) {
+            ListRow* row = m_dynamicOptions->addChild<ListRow>(phase);
+            row->setInteractive(false);
+            m_timeRows.push_back(row);
+            m_times.push_back(row->addContent<SecondaryLabel>());
+        }
 
         m_system = card->addChild<WallpaperGrid>(tr("System"));
         m_system->setName("wallpaper:system");
@@ -146,8 +202,20 @@ private:
 
         const bool imageSelected = m_appearance.backgroundType() == 0;
         const std::string current = m_appearance.wallpaper();
+        const std::string dynamic = m_appearance.dynamicWallpaper();
         m_user->setCurrent(current, imageSelected);
+        m_dynamic->setCurrent(dynamic.empty() ? std::string() : wallpapers::dynamicPreview(dynamic), imageSelected);
         m_system->setCurrent(current, imageSelected);
+
+        const bool followsTime = m_appearance.wallpaperFollows() == appearance::Appearance::FollowsTime;
+        const std::vector<int> times = m_appearance.wallpaperTimes();
+        m_dynamicOptions->setVisible(imageSelected && !dynamic.empty());
+        m_follows->setCurrentIndex(m_appearance.wallpaperFollows());
+        for (size_t i = 0; i < m_timeRows.size(); ++i) {
+            m_timeRows[i]->setVisible(followsTime && times.size() == m_timeRows.size());
+            if (i < times.size())
+                m_times[i]->setText(timeOfDay(times[i]));
+        }
         for (WallpaperGrid* grid : m_folderGrids)
             grid->setCurrent(current, imageSelected);
         m_swatches->setCurrent(m_appearance.backgroundColor(), m_appearance.backgroundType() == 1);
@@ -157,6 +225,11 @@ private:
     base::Subscription m_changed;
     base::Subscription m_folderImagesChanged;
     WallpaperGrid* m_user;
+    WallpaperGrid* m_dynamic;
+    ColumnLayout* m_dynamicOptions;
+    RowComboBox* m_follows;
+    std::vector<ListRow*> m_timeRows;
+    std::vector<Label*> m_times;
     WallpaperGrid* m_system;
     ColumnLayout* m_folderColumn;
     std::vector<std::string> m_folders;

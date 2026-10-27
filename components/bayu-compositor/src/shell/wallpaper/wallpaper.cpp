@@ -23,7 +23,7 @@
 
 namespace bayu::shell {
 
-static const char kDefaultWallpaper[] = "/usr/share/backgrounds/bayuos/default.jpg";
+static const char kDefaultWallpaper[] = "/usr/share/backgrounds/bayuos/dynamic/bromo/day.jpg";
 static const char kDefaultBackgroundColor[] = "#2B8ADA";
 // What a desktop shows while it has nothing else: the desktop window's
 // colour.

@@ -45,6 +45,11 @@ static void collect(const fs::path& directory, std::vector<std::string>& out)
     }
 }
 
+static bool inDynamic(const std::string& path)
+{
+    return path.find("/backgrounds/bayuos/dynamic/") != std::string::npos;
+}
+
 std::vector<std::string> system()
 {
     const std::string userData = fs::path(bayu::base::paths::dataHome()).lexically_normal().string();
@@ -59,11 +64,35 @@ std::vector<std::string> system()
     }
     std::vector<std::string> unique;
     for (std::string& path : result) {
-        if (std::find(unique.begin(), unique.end(), path) == unique.end())
+        if (!inDynamic(path) && std::find(unique.begin(), unique.end(), path) == unique.end())
             unique.push_back(std::move(path));
     }
     sortByFileName(unique);
     return unique;
+}
+
+std::vector<std::string> dynamic()
+{
+    const std::string userData = fs::path(bayu::base::paths::dataHome()).lexically_normal().string();
+    std::vector<std::string> result;
+    for (const std::string& dataPath : bayu::base::paths::dataDirectories()) {
+        if (fs::path(dataPath).lexically_normal().string() == userData)
+            continue;
+        std::error_code error;
+        for (const auto& entry : fs::directory_iterator(fs::path(dataPath) / "backgrounds/bayuos/dynamic", error)) {
+            const std::string set = entry.path().lexically_normal().string();
+            if (fs::is_regular_file(dynamicPreview(set), error)
+                && std::find(result.begin(), result.end(), set) == result.end())
+                result.push_back(set);
+        }
+    }
+    std::sort(result.begin(), result.end());
+    return result;
+}
+
+std::string dynamicPreview(const std::string& set)
+{
+    return set + "/day.jpg";
 }
 
 void sortByFileName(std::vector<std::string>& paths)

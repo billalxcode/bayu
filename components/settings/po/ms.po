@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"POT-Creation-Date: 2026-10-27 00:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2255,6 +2255,39 @@ msgstr "Kertas dinding"
 #: src/pages/wallpaper/wallpaperpage.cpp
 msgid "Your wallpapers"
 msgstr "Kertas dinding anda"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Dynamic"
+msgstr "Dinamik"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Changes with"
+msgstr "Berubah mengikut"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Time of day"
+msgstr "Waktu"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Theme"
+msgstr "Tema"
+
+#. TRANSLATORS: when each of a dynamic wallpaper's pictures shows, by where the sun is.
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Morning"
+msgstr "Pagi"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Day"
+msgstr "Tengah hari"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Evening"
+msgstr "Petang"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Night"
+msgstr "Malam"
 
 #: src/pages/wallpaper/wallpaperpage.cpp src/window/pagelist.cpp
 msgid "System"

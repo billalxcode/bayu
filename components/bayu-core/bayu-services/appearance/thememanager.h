@@ -6,6 +6,7 @@
 
 #include "fontconfigwriter.h"
 
+#include <cstdint>
 #include <memory>
 #include <string>
 #include <vector>
@@ -53,6 +54,10 @@ public:
 
     std::string wallpaper();
     void setWallpaper(const std::string &path);
+    std::string dynamicWallpaper() const;
+    int wallpaperFollows() const;
+    void setWallpaperFollows(int follows);
+    std::vector<int32_t> wallpaperTimes() const;
     std::vector<std::string> userWallpapers() const;
     void removeUserWallpaper(const std::string &path);
 
