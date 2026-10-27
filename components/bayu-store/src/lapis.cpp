@@ -13,10 +13,12 @@
 #include <fstream>
 #include <thread>
 
+#include "base/i18n.h"
 #include "base/json.h"
 #include "base/paths.h"
 
 using bayu::base::json::Value;
+using bayu::i18n::tr;
 
 namespace store::lapis {
 
@@ -102,9 +104,11 @@ std::string simple(const char* op, const char* field, const std::string& value)
 // Android's container runs, but Android in it never finished booting: without
 // a GPU that renders (OpenGL, or virgl in a virtual machine) its surfaceflinger
 // aborts and Android starts over (#46). Its services, "package" first, never come.
-constexpr const char* kNotBooted =
-        "Android started but did not finish booting. It needs graphics with 3D acceleration "
-        "(OpenGL; in a virtual machine, virgl), which this computer may not have.";
+const char* notBooted()
+{
+    return tr("Android started but did not finish booting. It needs graphics with 3D acceleration "
+              "(OpenGL; in a virtual machine, virgl), which this computer may not have.");
+}
 
 } // namespace
 
@@ -145,7 +149,7 @@ std::map<std::string, int64_t> packages(std::string* error)
 std::string install(const std::string& apk)
 {
     const std::string error = simple("install", "path", apk);
-    return error.find("Can't find service") != std::string::npos ? kNotBooted : error;
+    return error.find("Can't find service") != std::string::npos ? notBooted() : error;
 }
 
 std::string uninstall(const std::string& package)
@@ -179,13 +183,13 @@ std::string startSession(std::chrono::seconds timeout)
     // up then; Android's windows need them.
     std::system("systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE");
     if (std::system("systemctl --user --no-block start lapis-session.service") != 0)
-        return "lapis-session could not be started.";
+        return tr("lapis-session could not be started.");
     const auto deadline = std::chrono::steady_clock::now() + timeout;
     bool ran = false;
     while (true) {
         const State now = state();
         if (now == State::Missing)
-            return "lapis is not available.";
+            return tr("lapis is not available.");
         ran = ran || now == State::Running;
         // Running is the container: apps open, and install, once Android
         // has booted in it ("has no launcher activity" before). Frozen it
@@ -193,7 +197,7 @@ std::string startSession(std::chrono::seconds timeout)
         if (now == State::Frozen || (now == State::Running && booted()))
             return {};
         if (std::chrono::steady_clock::now() >= deadline)
-            return ran ? kNotBooted : "Android did not start in time.";
+            return ran ? notBooted() : tr("Android did not start in time.");
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
@@ -205,7 +209,7 @@ std::string stopSession()
     std::filesystem::create_directories(std::filesystem::path(mark).parent_path(), ignored);
     std::ofstream(mark).flush();
     if (std::system("systemctl --user stop lapis-session.service") != 0)
-        return "lapis-session could not be stopped.";
+        return tr("lapis-session could not be stopped.");
     return {};
 }
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 14:30+0000\n"
+"POT-Creation-Date: 2026-10-26 23:25+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -108,6 +108,26 @@ msgstr "Som"
 #: src/flathub.cpp
 msgid "Play & record"
 msgstr "Reproduzir e gravar"
+
+#: src/lapis.cpp
+msgid "Android started but did not finish booting. It needs graphics with 3D acceleration (OpenGL; in a virtual machine, virgl), which this computer may not have."
+msgstr "O Android foi iniciado, mas não terminou de inicializar. Ele precisa de gráficos com aceleração 3D (OpenGL; em uma máquina virtual, virgl), que este computador talvez não tenha."
+
+#: src/lapis.cpp
+msgid "lapis-session could not be started."
+msgstr "Não foi possível iniciar o lapis-session."
+
+#: src/lapis.cpp
+msgid "lapis is not available."
+msgstr "O lapis não está disponível."
+
+#: src/lapis.cpp
+msgid "Android did not start in time."
+msgstr "O Android não iniciou a tempo."
+
+#: src/lapis.cpp
+msgid "lapis-session could not be stopped."
+msgstr "Não foi possível parar o lapis-session."
 
 #: src/launch/main.cpp src/ui/pages.cpp src/welcome/main.cpp
 msgid "Starting Android"
