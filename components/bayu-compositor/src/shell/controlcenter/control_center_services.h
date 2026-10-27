@@ -155,6 +155,12 @@ public:
     // `bayu-settings` with these arguments.
     virtual void openSettings(const std::vector<std::string> &arguments) = 0;
 
+    // --- The session: shown in the panel layout, which has no user menu ---
+    enum class PowerAction { Lock, Suspend, Logout, Reboot, Shutdown };
+    virtual bool showsPowerActions() const { return false; }
+    // Log out, restart and shut down ask first, as the user menu's do.
+    virtual void powerAction(PowerAction) {}
+
     // Anything above changed.
     base::Signal<> changed;
     // A VPN went down on its own, with the profile's name and why.

@@ -562,19 +562,22 @@ TEST(StatusBarTest, ChoosesThePanelLayout)
     test::DBusTestClient settings;
     settings.call("org.bayu.Statusbar", "/Statusbar", "org.bayu.Statusbar", "setPanelFloating", false);
     settings.call("org.bayu.Statusbar", "/Statusbar", "org.bayu.Statusbar", "setPanelIconSize", int32_t(40));
+    settings.call("org.bayu.Statusbar", "/Statusbar", "org.bayu.Statusbar", "setPanelWindowTitles", true);
     settings.call("org.bayu.Statusbar", "/Statusbar", "org.bayu.Statusbar", "setLayout", int32_t(0));
     EXPECT_FALSE(statusBar.panelFloating());
     // Only the two sizes.
     EXPECT_EQ(statusBar.panelIconSize(), shell::StatusBar::kMediumPanelIcons);
     EXPECT_EQ(statusBar.layout(), shell::StatusBar::Layout::Dock);
     EXPECT_EQ(layoutChanges, 1);
-    EXPECT_EQ(panelChanges, 2);
+    EXPECT_TRUE(statusBar.panelWindowTitles());
+    EXPECT_EQ(panelChanges, 3);
 
     shell::waitForFileThread();
     base::Settings saved(directory.filePath("shell.conf"));
     EXPECT_EQ(saved.intValue("Shell/Layout", -1), 0);
     EXPECT_FALSE(saved.boolValue("Panel/Floating", true));
     EXPECT_EQ(saved.intValue("Panel/IconSize", 0), 36);
+    EXPECT_TRUE(saved.boolValue("Panel/WindowTitles", false));
 }
 
 TEST(VpnNotifierTest, TellsAFailedVpnAndOpensItsPage)

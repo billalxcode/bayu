@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 05:39+0000\n"
+"POT-Creation-Date: 2026-10-27 07:55+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -844,6 +844,18 @@ msgstr "Kecil"
 #: src/pages/dock/dockpage.cpp src/pages/fonts/fontspage.cpp
 msgid "Medium"
 msgstr "Sedang"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Open applications"
+msgstr "Aplikasi terbuka"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Icons"
+msgstr "Ikon"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Titles"
+msgstr "Ikon dan judul"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Glass effect"

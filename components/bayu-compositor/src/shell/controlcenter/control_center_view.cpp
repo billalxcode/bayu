@@ -105,6 +105,14 @@ ControlCenterView::ControlCenterView(ControlCenterServices &services)
         m_services.setMuted(value == 0);
     };
 
+    m_power = addChild<PowerTile>();
+    m_power->onTriggered = [this](int index) {
+        // The confirmation, or the lock, is in front of the control centre.
+        if (onHideRequested)
+            onHideRequested();
+        m_services.powerAction(ControlCenterServices::PowerAction(index));
+    };
+
     refresh();
 }
 
@@ -123,6 +131,7 @@ void ControlCenterView::retranslate()
     m_brightness->setTitle(tr("Display"));
     m_sound->setTitle(tr("Sound"));
     m_users->retranslate();
+    m_power->retranslate();
     refresh();
 }
 
@@ -161,6 +170,8 @@ void ControlCenterView::refresh()
     m_sound->slider()->setValue(sink ? m_services.volume() : 0);
     m_sound->slider()->setIcon(panel::artwork(volumeIconName(sink, m_services.volume()), false));
 
+    m_power->setVisible(m_services.showsPowerActions());
+
     requestLayout();
     if (layoutHeight() != before && onHeightChanged)
         onHeightChanged();
@@ -191,6 +202,8 @@ double ControlCenterView::layoutHeight() const
         heights.push_back(m_brightness->heightForWidth(width));
     if (m_sound->isVisible())
         heights.push_back(m_sound->heightForWidth(width));
+    if (m_power->isVisible())
+        heights.push_back(PowerTile::kHeight);
     double height = 0;
     for (double value : heights)
         height += value;
@@ -257,6 +270,9 @@ void ControlCenterView::layout()
         slider->setGeometry({kGap, y, width, height});
         y += height + kGap;
     }
+
+    if (m_power->isVisible())
+        m_power->setGeometry({kGap, y, width, PowerTile::kHeight});
 }
 
 std::string volumeIconName(bool hasSink, double volume)

@@ -71,6 +71,13 @@ public:
         sizes->setLayoutHints({.preferredWidth = std::max(220.0, sizes->sizeHint().width)});
         sizes->setCurrentIndex(m_settings.panelIconSize() == 32 ? 0 : 1);
         sizes->onCurrentChanged = [this](int index) { m_settings.setPanelIconSize(index == 0 ? 32 : 36); };
+        ListRow* openApps = panelCard->addChild<ListRow>(tr("Open applications"));
+        openApps->setInteractive(false);
+        auto* styles = openApps->addContent<SegmentedControl>(std::vector<std::string>{tr("Icons"), tr("Titles")});
+        styles->setName("panel:window-titles");
+        styles->setLayoutHints({.preferredWidth = std::max(220.0, styles->sizeHint().width)});
+        styles->setCurrentIndex(m_settings.panelWindowTitles() ? 1 : 0);
+        styles->onCurrentChanged = [this](int index) { m_settings.setPanelWindowTitles(index == 1); };
         SliderRow* panelGlass = panelCard->addChild<SliderRow>(tr("Glass effect"));
         panelGlass->setName("panel:glass");
         panelGlass->setCaptions(tr("More clear"), tr("More tinted"));

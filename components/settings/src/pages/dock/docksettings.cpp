@@ -27,6 +27,7 @@ DockSettings::DockSettings()
     m_panelFloating = shell.boolValue("Panel/Floating", true);
     m_panelIconSize = shell.intValue("Panel/IconSize", 36) == 32 ? 32 : 36;
     m_panelGlassTint = std::clamp(shell.doubleValue("Panel/GlassTint", 0.5), 0.0, 1.0);
+    m_panelWindowTitles = shell.boolValue("Panel/WindowTitles", false);
 }
 
 // Called on every slider move; none of these waits for the dock.
@@ -102,6 +103,14 @@ void DockSettings::setPanelGlassTint(double tint)
         return;
     m_statusbar.send("setPanelGlassTint", tint);
     m_panelGlassTint = tint;
+}
+
+void DockSettings::setPanelWindowTitles(bool titles)
+{
+    if (titles == m_panelWindowTitles)
+        return;
+    m_statusbar.send("setPanelWindowTitles", titles);
+    m_panelWindowTitles = titles;
 }
 
 } // namespace settings

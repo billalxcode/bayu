@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
 
 #include "base/i18n.h"
 #include "base/url.h"
@@ -15,6 +16,7 @@
 #include "ui/image_view.h"
 #include "ui/label.h"
 #include "ui/painter.h"
+#include "shell/statusbar/pitaloka.h"
 #include "ui/theme.h"
 
 using bayu::i18n::tr;
@@ -512,6 +514,120 @@ void DeviceUsersTile::paint(ui::Painter &painter)
         painter.fillRoundedRect({geometry().width - inset() - 6, y + (height - 6) / 2, 6, 6}, 3, row.dot);
         y += height + spacing;
     }
+}
+
+// One of PowerTile's actions.
+class PowerTile::Action final : public ui::View
+{
+public:
+    Action(std::string icon, bool danger)
+        : m_danger(danger)
+    {
+        setTracksHover(true);
+        m_icon = addChild<ui::ThemeIcon>(std::move(icon), 18);
+        m_caption = addChild<ui::Label>();
+        m_caption->setFontSize(10);
+        m_caption->setTextAlignment(ui::Label::TextAlignment::Center);
+        m_caption->setElide(ui::Label::Elide::Right);
+    }
+
+    void setCaption(std::string caption) { m_caption->setText(std::move(caption)); }
+    std::function<void()> onClicked;
+    bool acceptsPointer() const override { return true; }
+
+protected:
+    void layout() override
+    {
+        const ui::RectF bounds = localRect();
+        const double left = std::round((bounds.width - kPlateSize) / 2);
+        m_plate = {left, 0, kPlateSize, kPlateSize};
+        m_icon->setGeometry({left + 9, 9, 18, 18});
+        const double height = m_caption->sizeHint().height;
+        m_caption->setGeometry({0, kPlateSize + 6, bounds.width, height});
+    }
+
+    void paint(ui::Painter &painter) override
+    {
+        const ui::Color surface = panel::tileInkColor();
+        const bool dark = panel::isDark(surface);
+        ui::Color plate;
+        if (m_danger) {
+            const char *hex = dark ? PITALOKA_DANGER_DARK : PITALOKA_DANGER_LIGHT;
+            const ui::Color red = ui::Color::rgb(uint32_t(std::strtoul(hex + 1, nullptr, 16)));
+            plate = m_pressed ? panel::shade(red, 0.2) : isHovered() ? panel::shade(red, 0.1) : red;
+        } else {
+            const double alpha = m_pressed ? (dark ? 0.3 : 0.22) : isHovered() ? (dark ? 0.22 : 0.15)
+                                                                               : (dark ? 0.12 : 0.08);
+            plate = panel::on(surface, alpha);
+        }
+        painter.fillRoundedRect(m_plate, kPlateSize / 2, plate);
+        m_icon->setColor(m_danger ? ui::Color::rgb(0xFFFFFF) : panel::textColor());
+        m_caption->setColor(panel::secondaryTextColor());
+    }
+
+    void hoverChanged() override { requestPaint(); }
+    void pointerPress(const ui::PointerEvent &event) override
+    {
+        if (event.button != ui::MouseButton::Left)
+            return;
+        m_pressed = true;
+        requestPaint();
+    }
+    void pointerRelease(const ui::PointerEvent &event) override
+    {
+        if (!m_pressed)
+            return;
+        m_pressed = false;
+        requestPaint();
+        if (localRect().contains(event.position) && onClicked)
+            onClicked();
+    }
+
+private:
+    bool m_danger;
+    bool m_pressed = false;
+    ui::RectF m_plate;
+    ui::ThemeIcon *m_icon = nullptr;
+    ui::Label *m_caption = nullptr;
+};
+
+PowerTile::PowerTile()
+{
+    const char *icons[] = {"system-lock-screen-symbolic", "system-suspend-symbolic", "system-log-out-symbolic",
+                           "system-reboot-symbolic", "system-shutdown-symbolic"};
+    for (int i = 0; i < 5; ++i) {
+        Action *action = addChild<Action>(icons[i], i == 4);
+        action->onClicked = [this, i] {
+            if (onTriggered)
+                onTriggered(i);
+        };
+        m_actions.push_back(action);
+    }
+    retranslate();
+}
+
+PowerTile::~PowerTile() = default;
+
+void PowerTile::retranslate()
+{
+    // The user menu's words.
+    const std::string captions[] = {tr("Lock screen"), tr("Suspend"), tr("Log out"), tr("Restart"), tr("Shutdown")};
+    for (size_t i = 0; i < m_actions.size(); ++i)
+        m_actions[i]->setCaption(captions[i]);
+}
+
+void PowerTile::layout()
+{
+    const ui::RectF bounds = localRect();
+    const double padding = 2;
+    const double width = (bounds.width - padding * 2) / double(m_actions.size());
+    for (size_t i = 0; i < m_actions.size(); ++i)
+        m_actions[i]->setGeometry({padding + i * width, 12, width, kPlateSize + 6 + 14});
+}
+
+void PowerTile::paint(ui::Painter &painter)
+{
+    panel::paintTile(painter, localRect());
 }
 
 } // namespace bayu::shell

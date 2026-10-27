@@ -205,8 +205,10 @@ StatusBarWindow::StatusBarWindow(Shell *shell, std::unique_ptr<StatusBar> status
     m_subscriptions.push_back(m_statusBar->panelChanged.connect([this] {
         if (!isPanel())
             return;
-        if (m_panelTasks)
+        if (m_panelTasks) {
             m_panelTasks->setTileSize(m_statusBar->panelIconSize() - (m_floating ? 0 : 4));
+            m_panelTasks->setWindowTitles(m_statusBar->panelWindowTitles());
+        }
         updatePanelGlass();
         updateFloating(true);
     }));
@@ -308,6 +310,7 @@ void StatusBarWindow::updateLayoutMode()
                 m_toggleLauncher();
         };
         m_panelTasks->onActivated = [this] { closePopups(); };
+        m_panelTasks->availableGeometry = [this] { return availableGeometry(); };
         m_panelLayoutSubscriptions.push_back(m_panelTasks->targetsChanged.connect([this] { updateMinimizeTargets(); }));
         m_panelSlot->addChild(std::move(tasks));
     }
@@ -322,6 +325,7 @@ void StatusBarWindow::updateLayoutMode()
         m_floating = m_statusBar->panelFloating() && !anyWindowOpen();
         m_floatProgress = m_floating ? 1 : 0;
         m_panelTasks->setTileSize(m_statusBar->panelIconSize() - (m_floating ? 0 : 4));
+        m_panelTasks->setWindowTitles(m_statusBar->panelWindowTitles());
     }
     updateGeometry();
     updateLook();

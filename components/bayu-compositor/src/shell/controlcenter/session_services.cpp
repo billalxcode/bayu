@@ -103,6 +103,7 @@ public:
         m_subscriptions.push_back(m_statusBar.battery().changed.connect(notify));
         m_subscriptions.push_back(m_statusBar.powerProfiles().profilesChanged.connect(notify));
         m_subscriptions.push_back(m_statusBar.powerProfiles().activeProfileChanged.connect(notify));
+        m_subscriptions.push_back(m_statusBar.layoutChanged.connect(notify));
 
         m_matches.push_back(m_privacy.onSignal("cameraEnabledChanged", [this](const dbus::Message &message) {
             bool enabled = true;
@@ -381,6 +382,29 @@ public:
     }
 
     // --- Battery ---
+
+    bool showsPowerActions() const override { return m_statusBar.layout() == StatusBar::Layout::Panel; }
+    void powerAction(PowerAction action) override
+    {
+        PowerActions &power = m_statusBar.powerActions();
+        switch (action) {
+        case PowerAction::Lock:
+            power.lockScreen();
+            break;
+        case PowerAction::Suspend:
+            power.suspend();
+            break;
+        case PowerAction::Logout:
+            power.request(PowerActions::Logout);
+            break;
+        case PowerAction::Reboot:
+            power.request(PowerActions::Reboot);
+            break;
+        case PowerAction::Shutdown:
+            power.request(PowerActions::Shutdown);
+            break;
+        }
+    }
 
     int chargePercent() const override { return m_statusBar.battery().chargePercent(); }
     bool onBattery() const override { return m_statusBar.battery().onBattery(); }
