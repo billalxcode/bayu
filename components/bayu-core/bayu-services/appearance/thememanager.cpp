@@ -43,6 +43,9 @@ ThemeManager::ThemeManager(Settings &settings, dbus::Connection *session, dbus::
     m_subscriptions.push_back(wallpapers.backgroundColorChanged.connect([this] {
         emitSignal("backgroundColorChanged");
     }));
+    m_subscriptions.push_back(wallpapers.dynamicWallpaperChanged.connect([this] {
+        emitSignal("dynamicWallpaperChanged");
+    }));
 
     // init value
     m_continuousCorners = m_settings.boolValue("Appearance/ContinuousCorners", true);
@@ -67,6 +70,7 @@ ThemeManager::ThemeManager(Settings &settings, dbus::Connection *session, dbus::
             ScheduledFeature::Keys {"Appearance", "DarkMode", "DarkModeSchedule", "DarkModeHoldUntil", {}, {}},
             settings, ScheduleUtils::currentDateTime);
     m_subscriptions.push_back(m_darkMode->enabledChanged.connect([this](bool darkMode) {
+        m_wallpaperManager->setDarkMode(darkMode);
         updateGtk3Config();
         emitSignal("darkModeChanged", darkMode);
     }));
@@ -74,6 +78,7 @@ ThemeManager::ThemeManager(Settings &settings, dbus::Connection *session, dbus::
         emitSignal("darkModeScheduleChanged", int32_t(schedule));
     }));
     m_darkMode->start();
+    m_wallpaperManager->setDarkMode(m_darkMode->enabled());
 
     // Update fontconfig after login.
     updateFontConfig();
@@ -102,6 +107,7 @@ bool ThemeManager::publish()
     o.addMethod("setSystemFontPointSize", [this](double value) { setSystemFontPointSize(value); },
                 {{"fontSize"}, {}});
     o.addMethod("setWallpaper", [this](const std::string &value) { setWallpaper(value); }, {{"path"}, {}});
+    o.addMethod("setWallpaperFollows", [this](int32_t value) { setWallpaperFollows(value); }, {{"follows"}, {}});
     o.addMethod("removeUserWallpaper", [this](const std::string &value) { removeUserWallpaper(value); },
                 {{"path"}, {}});
     o.addMethod("addWallpaperFolder", [this](const std::string &value) { addWallpaperFolder(value); },
@@ -129,6 +135,9 @@ bool ThemeManager::publish()
     o.addProperty("systemFixedFont", [this] { return systemFixedFont(); });
     o.addProperty("systemFontPointSize", [this] { return systemFontPointSize(); });
     o.addProperty("wallpaper", [this] { return wallpaper(); });
+    o.addProperty("dynamicWallpaper", [this] { return dynamicWallpaper(); });
+    o.addProperty("wallpaperFollows", [this] { return int32_t(wallpaperFollows()); });
+    o.addProperty("wallpaperTimes", [this] { return wallpaperTimes(); });
     o.addProperty("userWallpapers", [this] { return userWallpapers(); });
     o.addProperty("wallpaperFolders", [this] { return wallpaperFolders(); });
     o.addProperty("accentColor", [this] { return int32_t(accentColor()); });
@@ -141,6 +150,7 @@ bool ThemeManager::publish()
     o.addSignal("darkModeChanged", "b");
     o.addSignal("darkModeScheduleChanged", "i");
     o.addSignal("wallpaperChanged", "s");
+    o.addSignal("dynamicWallpaperChanged", "");
     o.addSignal("userWallpapersChanged", "");
     o.addSignal("wallpaperFoldersChanged", "");
     o.addSignal("wallpaperFolderImagesChanged", "s");
@@ -306,6 +316,26 @@ std::string ThemeManager::wallpaper()
 void ThemeManager::setWallpaper(const std::string &path)
 {
     m_wallpaperManager->setWallpaper(path);
+}
+
+std::string ThemeManager::dynamicWallpaper() const
+{
+    return m_wallpaperManager->dynamicWallpaper();
+}
+
+int ThemeManager::wallpaperFollows() const
+{
+    return m_wallpaperManager->wallpaperFollows();
+}
+
+void ThemeManager::setWallpaperFollows(int follows)
+{
+    m_wallpaperManager->setWallpaperFollows(follows);
+}
+
+std::vector<int32_t> ThemeManager::wallpaperTimes() const
+{
+    return m_wallpaperManager->wallpaperTimes();
 }
 
 std::vector<std::string> ThemeManager::userWallpapers() const

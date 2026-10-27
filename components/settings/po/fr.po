@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"POT-Creation-Date: 2026-10-27 00:58+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2261,6 +2261,39 @@ msgstr "Fond d’écran"
 #: src/pages/wallpaper/wallpaperpage.cpp
 msgid "Your wallpapers"
 msgstr "Vos fonds d’écran"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Dynamic"
+msgstr "Dynamiques"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Changes with"
+msgstr "Change selon"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Time of day"
+msgstr "Moment de la journée"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Theme"
+msgstr "Thème"
+
+#. TRANSLATORS: when each of a dynamic wallpaper's pictures shows, by where the sun is.
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Morning"
+msgstr "Matin"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Day"
+msgstr "Journée"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Evening"
+msgstr "Soir"
+
+#: src/pages/wallpaper/wallpaperpage.cpp
+msgid "Night"
+msgstr "Nuit"
 
 #: src/pages/wallpaper/wallpaperpage.cpp src/window/pagelist.cpp
 msgid "System"

@@ -61,7 +61,7 @@ double easeOut(double t)
     return 1 - (1 - t) * (1 - t);
 }
 
-const std::string kDefaultWallpaper = "/usr/share/backgrounds/bayuos/default.jpg";
+const std::string kDefaultWallpaper = "/usr/share/backgrounds/bayuos/dynamic/bromo/day.jpg";
 const std::string kDefaultBackgroundColor = "#2B8ADA";
 
 // The file a wallpaper setting names: a path, or a file: URL.

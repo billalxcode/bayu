@@ -391,16 +391,28 @@ private:
         };
         auto* tiles = extra->addChild<Row>();
         tiles->setSpacing(6);
-        std::vector<std::string> paths;
+        // The dynamic wallpapers first, shown by their day picture; then pictures.
+        std::vector<std::string> sets;
+        std::vector<std::string> pictures;
         for (const std::string& data : bayu::base::paths::dataDirectories()) {
             std::error_code error;
-            for (const auto& entry : fs::directory_iterator(data + "/backgrounds/bayuos", error))
-                paths.push_back(entry.path().string());
+            for (const auto& entry : fs::directory_iterator(data + "/backgrounds/bayuos/dynamic", error)) {
+                if (fs::is_regular_file(entry.path() / "day.jpg", error))
+                    sets.push_back(entry.path().lexically_normal().string());
+            }
+            for (const auto& entry : fs::directory_iterator(data + "/backgrounds/bayuos", error)) {
+                if (entry.is_regular_file(error))
+                    pictures.push_back(entry.path().string());
+            }
         }
-        std::sort(paths.begin(), paths.end());
+        std::sort(sets.begin(), sets.end());
+        std::sort(pictures.begin(), pictures.end());
+        std::vector<std::string> paths = sets;
+        paths.insert(paths.end(), pictures.begin(), pictures.end());
         paths.resize(std::min<size_t>(paths.size(), 4));
         for (const std::string& path : paths) {
-            auto* tile = tiles->addChild<WallpaperTile>(path);
+            const bool set = std::find(sets.begin(), sets.end(), path) != sets.end();
+            auto* tile = tiles->addChild<WallpaperTile>(set ? path + "/day.jpg" : path);
             tile->onClicked = [this, path] { m_appearance.setWallpaper(path); };
             m_wallpapers.push_back({path, tile});
         }
@@ -413,7 +425,8 @@ private:
     {
         if (m_dark)
             m_dark->setChecked(m_appearance.darkMode());
-        const std::string current = m_appearance.wallpaper();
+        const std::string dynamic = m_appearance.dynamicWallpaper();
+        const std::string current = dynamic.empty() ? m_appearance.wallpaper() : dynamic;
         for (const auto& [path, tile] : m_wallpapers)
             tile->setSelected(path == current);
     }

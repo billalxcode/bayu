@@ -24,6 +24,12 @@ public:
         SunsetToSunrise = 1,
     };
 
+    // What a dynamic wallpaper's picture follows.
+    enum WallpaperFollows {
+        FollowsTime = 0,
+        FollowsTheme = 1,
+    };
+
     Appearance();
     ~Appearance();
 
@@ -62,8 +68,17 @@ public:
     int cursorSize() const;
     void setCursorSize(int size);
 
+    // The picture shown, a dynamic wallpaper's too.
     std::string wallpaper() const;
+    // A picture, or a dynamic wallpaper's folder.
     void setWallpaper(const std::string& path);
+    // The dynamic wallpaper's folder; empty for a picture.
+    std::string dynamicWallpaper() const;
+    int wallpaperFollows() const;
+    void setWallpaperFollows(int follows);
+    // When today's morning, day, evening and night start, in minutes after
+    // midnight; empty without a dynamic wallpaper.
+    std::vector<int> wallpaperTimes() const;
     std::vector<std::string> userWallpapers() const;
     void removeUserWallpaper(const std::string& path);
     std::vector<std::string> wallpaperFolders() const;

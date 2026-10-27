@@ -8,8 +8,14 @@
 
 namespace settings::wallpapers {
 
-// The images under backgrounds/bayuos in the system's data directories.
+// The images under backgrounds/bayuos in the system's data directories,
+// without the dynamic wallpapers' pictures.
 std::vector<std::string> system();
+// The dynamic wallpapers under backgrounds/bayuos/dynamic: folders of a
+// morning, day, evening and night picture.
+std::vector<std::string> dynamic();
+// The picture a dynamic wallpaper is shown by.
+std::string dynamicPreview(const std::string& set);
 // Sorted by file name, not by path: a wallpaper library may hold
 // subdirectories, and what is read in the grid is the name.
 void sortByFileName(std::vector<std::string>& paths);

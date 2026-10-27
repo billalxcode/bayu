@@ -1,6 +1,7 @@
 #include "wallpapermanager.h"
 
 #include <algorithm>
+#include <chrono>
 #include <filesystem>
 #include <set>
 
@@ -8,6 +9,7 @@
 #include "base/hash.h"
 #include "base/paths.h"
 #include "base/strings.h"
+#include "dynamicwallpaper.h"
 
 using namespace bayu::base;
 using namespace bayu::base::strings;
@@ -178,9 +180,14 @@ static std::string importUserWallpaper(const std::string &path)
     return copyWallpaperInto(path, userWallpaperDirectory());
 }
 
-WallpaperManager::WallpaperManager(Settings &settings)
+// What a user who never chose a wallpaper gets.
+static const char kDefaultDynamicWallpaper[] = "/usr/share/backgrounds/bayuos/dynamic/bromo";
+
+WallpaperManager::WallpaperManager(Settings &settings, Clock clock)
     : m_settings(settings)
+    , m_clock(std::move(clock))
 {
+    const bool chosen = m_settings.contains("Appearance/Wallpaper");
     m_wallpaperPath = m_settings.stringValue("Appearance/Wallpaper", "/usr/share/backgrounds/bayuos/default.jpg");
     // A folder stays in the list even when its source is gone: what the list
     // shows is the copy taken when the folder was added.
@@ -218,6 +225,22 @@ WallpaperManager::WallpaperManager(Settings &settings)
     m_settings.sync();
     m_backgroundType = int(m_settings.intValue("Appearance/BackgroundType", 0));
     m_backgroundColor = m_settings.stringValue("Appearance/BackgroundColor", "#2B8ADA");
+
+    m_follows = std::clamp(int(m_settings.intValue("Appearance/WallpaperFollows", DynamicWallpaper::Time)),
+                           int(DynamicWallpaper::Time), int(DynamicWallpaper::Theme));
+    m_darkMode = m_settings.boolValue("Appearance/DarkMode", false);
+    const std::string dynamic =
+            chosen ? m_settings.stringValue("Appearance/DynamicWallpaper", "") : kDefaultDynamicWallpaper;
+    if (DynamicWallpaper::isSet(dynamic)) {
+        m_dynamic = absolutePath(dynamic);
+        // Kept for the next login, when the wallpaper counts as chosen.
+        write("DynamicWallpaper", m_dynamic);
+    }
+    updateDynamic();
+    m_minute.onTimeout = [this] {
+        updateDynamic();
+    };
+    m_minute.start(std::chrono::minutes(1));
 }
 
 WallpaperManager::~WallpaperManager() = default;
@@ -236,6 +259,22 @@ std::string WallpaperManager::wallpaper() const
 
 void WallpaperManager::setWallpaper(const std::string &path)
 {
+    if (DynamicWallpaper::isSet(path)) {
+        const std::string set = absolutePath(path);
+        if (set != m_dynamic) {
+            m_dynamic = set;
+            write("DynamicWallpaper", set);
+            dynamicWallpaperChanged.emit();
+        }
+        updateDynamic();
+        return;
+    }
+    if (!m_dynamic.empty()) {
+        m_dynamic.clear();
+        write("DynamicWallpaper", std::string());
+        dynamicWallpaperChanged.emit();
+    }
+
     const std::string wallpaperPath =
             isManagedFolderWallpaper(path) ? absolutePath(path) : importUserWallpaper(path);
     if (exists(wallpaperPath) && isManagedUserWallpaper(wallpaperPath)
@@ -250,6 +289,66 @@ void WallpaperManager::setWallpaper(const std::string &path)
         write("Wallpaper", wallpaperPath);
         wallpaperChanged.emit(wallpaperPath);
     }
+}
+
+std::string WallpaperManager::dynamicWallpaper() const
+{
+    return m_dynamic;
+}
+
+int WallpaperManager::wallpaperFollows() const
+{
+    return m_follows;
+}
+
+void WallpaperManager::setWallpaperFollows(int follows)
+{
+    if (follows < DynamicWallpaper::Time || follows > DynamicWallpaper::Theme || follows == m_follows)
+        return;
+    m_follows = follows;
+    write("WallpaperFollows", follows);
+    dynamicWallpaperChanged.emit();
+    updateDynamic();
+}
+
+std::vector<int32_t> WallpaperManager::wallpaperTimes() const
+{
+    return {m_times.begin(), m_times.end()};
+}
+
+void WallpaperManager::setDarkMode(bool dark)
+{
+    if (dark == m_darkMode)
+        return;
+    m_darkMode = dark;
+    if (m_follows == DynamicWallpaper::Theme)
+        updateDynamic();
+}
+
+// A dynamic wallpaper's picture is the system's: it is shown, not imported.
+void WallpaperManager::showPicture(const std::string &path)
+{
+    if (path == m_wallpaperPath)
+        return;
+    m_wallpaperPath = path;
+    write("Wallpaper", path);
+    wallpaperChanged.emit(path);
+}
+
+void WallpaperManager::updateDynamic()
+{
+    if (m_dynamic.empty())
+        return;
+    const ScheduleUtils::DateTime now = m_clock();
+    const std::array<int, 4> times = DynamicWallpaper::times(now);
+    if (times != m_times) {
+        m_times = times;
+        dynamicWallpaperChanged.emit();
+    }
+    DynamicWallpaper::Phase phase = DynamicWallpaper::phase(now);
+    if (m_follows == DynamicWallpaper::Theme)
+        phase = m_darkMode ? DynamicWallpaper::Night : DynamicWallpaper::Day;
+    showPicture(DynamicWallpaper::picture(m_dynamic, phase));
 }
 
 std::vector<std::string> WallpaperManager::userWallpapers() const

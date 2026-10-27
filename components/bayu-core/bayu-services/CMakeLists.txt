@@ -23,6 +23,8 @@ add_executable(${TARGET}
     log.h
     notification.cpp
     notification.h
+    appearance/dynamicwallpaper.cpp
+    appearance/dynamicwallpaper.h
     appearance/fontconfigwriter.cpp
     appearance/fontconfigwriter.h
     appearance/gtksettings.cpp

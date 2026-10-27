@@ -22,6 +22,9 @@
     <method name="setWallpaper">
         <arg name="path" type="s" direction="in"/>
     </method>
+    <method name="setWallpaperFollows">
+        <arg name="follows" type="i" direction="in"/>
+    </method>
     <method name="removeUserWallpaper">
         <arg name="path" type="s" direction="in"/>
     </method>
@@ -67,6 +70,9 @@
     <property name="systemFixedFont" type="s" access="read"/>
     <property name="systemFontPointSize" type="d" access="read"/>
     <property name="wallpaper" type="s" access="read"/>
+    <property name="dynamicWallpaper" type="s" access="read"/>
+    <property name="wallpaperFollows" type="i" access="read"/>
+    <property name="wallpaperTimes" type="ai" access="read"/>
     <property name="userWallpapers" type="as" access="read"/>
     <property name="wallpaperFolders" type="as" access="read"/>
     <property name="accentColor" type="i" access="read"/>
@@ -85,6 +91,7 @@
     <signal name="wallpaperChanged">
         <arg type="s"/>
     </signal>
+    <signal name="dynamicWallpaperChanged"></signal>
     <signal name="userWallpapersChanged"></signal>
     <signal name="wallpaperFoldersChanged"></signal>
     <signal name="wallpaperFolderImagesChanged">

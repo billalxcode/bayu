@@ -25,6 +25,7 @@ Appearance::Appearance()
         m_available = true;
     }
     for (const char* member : {"darkModeChanged", "darkModeScheduleChanged", "wallpaperChanged",
+                               "dynamicWallpaperChanged",
                                "userWallpapersChanged", "wallpaperFoldersChanged", "continuousCornersChanged",
                                "accentColorChanged", "backgroundTypeChanged",
                                "backgroundColorChanged", "cursorThemeChanged", "cursorSizeChanged",
@@ -198,6 +199,29 @@ void Appearance::setWallpaper(const std::string& path)
     if (path.empty())
         return;
     m_service.send("setWallpaper", path);
+}
+
+std::string Appearance::dynamicWallpaper() const
+{
+    return value<std::string>("dynamicWallpaper", {});
+}
+
+int Appearance::wallpaperFollows() const
+{
+    return value<int32_t>("wallpaperFollows", FollowsTime);
+}
+
+void Appearance::setWallpaperFollows(int follows)
+{
+    m_service.send("setWallpaperFollows", int32_t(follows));
+}
+
+std::vector<int> Appearance::wallpaperTimes() const
+{
+    if (dynamicWallpaper().empty())
+        return {};
+    const auto times = value<std::vector<int32_t>>("wallpaperTimes", {});
+    return {times.begin(), times.end()};
 }
 
 std::vector<std::string> Appearance::userWallpapers() const

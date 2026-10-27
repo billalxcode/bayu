@@ -15,3 +15,6 @@ set(BACKGROUNDS
 )
 
 install(FILES ${BACKGROUNDS} DESTINATION /usr/share/backgrounds/bayuos)
+# Sets of a picture for the morning, the day, the evening and the night; the
+# Appearance service shows the one for the time of day or the theme.
+install(DIRECTORY dynamic DESTINATION /usr/share/backgrounds/bayuos)
