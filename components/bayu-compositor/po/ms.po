@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 05:39+0000\n"
+"POT-Creation-Date: 2026-10-27 07:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -691,10 +691,6 @@ msgstr "Kata laluan kumpulan"
 msgid "One-time password"
 msgstr "Kata laluan sekali guna"
 
-#: src/shell/statusbar/panel_tasks.cpp
-msgid "Start"
-msgstr "Mula"
-
 #. TRANSLATORS: {reason} is a sentence of its own, such as "The VPN service stopped."
 #: src/shell/statusbar/vpn_notifier.cpp
 #, python-brace-format
@@ -718,3 +714,6 @@ msgstr "Tangkap atau rakam skrin, tetingkap atau bahagian terpilih"
 #: data/bayu-screenshot.desktop
 msgid "screenshot;screen recording;capture;record;"
 msgstr "tangkapan skrin;rakaman skrin;tangkap;rakam;"
+
+#~ msgid "Start"
+#~ msgstr "Mula"

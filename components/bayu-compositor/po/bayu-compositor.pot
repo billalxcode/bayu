@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 05:39+0000\n"
+"POT-Creation-Date: 2026-10-27 07:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -697,10 +697,6 @@ msgstr ""
 
 #: src/shell/secrets/vpn_secret_fields.cpp
 msgid "One-time password"
-msgstr ""
-
-#: src/shell/statusbar/panel_tasks.cpp
-msgid "Start"
 msgstr ""
 
 #. TRANSLATORS: {reason} is a sentence of its own, such as "The VPN service stopped."

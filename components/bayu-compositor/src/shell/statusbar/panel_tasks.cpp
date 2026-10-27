@@ -7,7 +7,6 @@
 #include <cstdlib>
 #include <string>
 
-#include "base/i18n.h"
 #include "core/main_loop.h"
 #include "shell/common/task_windows.h"
 #include "shell/dock/dock_model.h"
@@ -18,8 +17,6 @@
 #include "ui/theme.h"
 
 namespace bayu::shell {
-
-using bayu::i18n::tr;
 
 namespace {
 
@@ -109,38 +106,18 @@ protected:
     }
 };
 
-// Start: the launcher, in the accent with a grid glyph.
+// Start: the launcher, a square in the accent with the launcher's grid.
 class PanelTasks::StartButton final : public PanelTasks::Button
 {
-public:
-    StartButton()
-    {
-        m_label = addChild<ui::Label>(tr("Start"));
-        m_label->setFontSize(kFontSize);
-        m_label->setWeight(600);
-        m_label->setColor(token(PITALOKA_TEXT_ON_ACCENT_LIGHT, PITALOKA_TEXT_ON_ACCENT_DARK));
-        m_label->setElide(ui::Label::Elide::None);
-    }
-
-    double preferredWidth() const { return PITALOKA_SPACE_3 * 2 + kGlyph + PITALOKA_SPACE_2 + m_label->sizeHint().width; }
-    void retranslate() { m_label->setText(tr("Start")); }
-
 protected:
     static constexpr double kGlyph = 16;
-
-    void layout() override
-    {
-        const ui::SizeF size = m_label->sizeHint();
-        m_label->setGeometry({PITALOKA_SPACE_3 + kGlyph + PITALOKA_SPACE_2, (localRect().height - size.height) / 2,
-                              size.width, size.height});
-    }
 
     void paint(ui::Painter &painter) override
     {
         painter.fillRoundedRect(localRect(), PITALOKA_RADIUS_CONTROL, accent(isHovered() || m_pressed));
-        // Four rounded squares, as the launcher's grid.
+        // Four rounded squares, centred.
         const ui::Color ink = token(PITALOKA_TEXT_ON_ACCENT_LIGHT, PITALOKA_TEXT_ON_ACCENT_DARK);
-        const double left = PITALOKA_SPACE_3;
+        const double left = std::round((localRect().width - kGlyph) / 2);
         const double top = std::round((localRect().height - kGlyph) / 2);
         const double cell = 7;
         for (int row = 0; row < 2; ++row) {
@@ -149,9 +126,6 @@ protected:
                                           2);
         }
     }
-
-private:
-    ui::Label *m_label = nullptr;
 };
 
 // A pinned application: its icon on a tile.
@@ -364,8 +338,8 @@ void PanelTasks::layout()
     const double top = std::round((bounds.height - tile) / 2);
     m_dividers.clear();
     double x = 0;
-    m_start->setGeometry({x, top, m_start->preferredWidth(), tile});
-    x += m_start->preferredWidth() + kDividerGap;
+    m_start->setGeometry({x, top, tile, tile});
+    x += tile + kDividerGap;
     m_dividers.push_back(x);
     x += kDividerGap + 1;
     for (PinButton *pin : m_pins) {
