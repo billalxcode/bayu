@@ -92,8 +92,11 @@ if [[ $scenario == triple-mid ]]; then
     -n 3:0:+37G -t 3:0700 -c "3:Basic data partition" \
     -n 4:0:+10G -t 4:8300 "$dev" >/dev/null
   end=$(sudo sgdisk -i 4 "$dev" | awk '/Last sector/ {print $3}')
-  sudo sgdisk -n "5:$((end + 1 + 27 * GiB / 512)):+20G" -t 5:0700 \
-    -n 6:0:0 -t 6:0700 -c 6:ntfs "$dev" >/dev/null
+  sudo sgdisk -n "5:$((end + 1 + 27 * GiB / 512)):+20G" -t 5:0700 "$dev" >/dev/null
+  # After the data partition, not in the free space before it, where the first
+  # free sector would put it.
+  end=$(sudo sgdisk -i 5 "$dev" | awk '/Last sector/ {print $3}')
+  sudo sgdisk -n "6:$((end + 1)):$(sudo sgdisk -p "$dev" | awk '/last usable sector/ {print $NF}')" -t 6:0700 -c 6:ntfs "$dev" >/dev/null
   sudo mkfs.vfat -F 32 -n SYSTEM "$(part 1)" >/dev/null
   put "$(part 1)" EFI/Microsoft/Boot/bootmgfw.efi EFI/Microsoft/Boot/BCD EFI/Boot/bootx64.efi
   windows "$(part 3)"
