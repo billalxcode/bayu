@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Reion Wong <reionwong@gmail.com>
 // SPDX-License-Identifier: BSD-3-Clause
 
+#include <algorithm>
 #include <cmath>
 #include <vector>
 
@@ -66,6 +67,8 @@ public:
         iconSize->setInteractive(false);
         auto* sizes = iconSize->addContent<SegmentedControl>(std::vector<std::string>{tr("Small"), tr("Medium")});
         sizes->setName("panel:icon-size");
+        // Both words whole, beside the row's label.
+        sizes->setLayoutHints({.preferredWidth = std::max(220.0, sizes->sizeHint().width)});
         sizes->setCurrentIndex(m_settings.panelIconSize() == 32 ? 0 : 1);
         sizes->onCurrentChanged = [this](int index) { m_settings.setPanelIconSize(index == 0 ? 32 : 36); };
         SliderRow* panelGlass = panelCard->addChild<SliderRow>(tr("Glass effect"));

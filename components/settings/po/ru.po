@@ -829,7 +829,7 @@ msgstr "Раскладка"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Dock"
-msgstr "Панель Dock"
+msgstr "Dock"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Panel"

@@ -819,7 +819,7 @@ msgstr "Tata letak"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Dock"
-msgstr "Dok"
+msgstr "Dock"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Panel"

@@ -199,14 +199,14 @@ public:
         m_icon->setIconName(icon.empty() ? "application-x-desktop" : icon);
         m_title->setText(title);
         m_title->setWeight(active ? 500 : 400);
-        m_title->setColor(PIT_COLOR(TEXT_PRIMARY));
         setSelected(active);
         requestPaint();
     }
 
     double preferredWidth() const
     {
-        return std::min(kMaxWindowWidth, kTextStart + m_title->sizeHint().width + PITALOKA_SPACE_3);
+        // Whole pixels up: the layout floors the width, which would elide the title.
+        return std::min(kMaxWindowWidth, kTextStart + std::ceil(m_title->sizeHint().width) + 1 + PITALOKA_SPACE_3);
     }
     // The icon, in the window's coordinates.
     ui::RectF iconTarget() const
