@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 00:58+0000\n"
+"POT-Creation-Date: 2026-10-27 05:39+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -809,8 +809,62 @@ msgid "Keep"
 msgstr "保留"
 
 #: src/pages/dock/dockpage.cpp src/window/pagelist.cpp
+msgid "Desktop"
+msgstr "桌面"
+
+#: src/pages/dock/dockpage.cpp src/pages/keyboard/keyboardpage.cpp
+#: src/pages/keyboard/layoutpage.cpp
+msgid "Layout"
+msgstr "布局"
+
+#: src/pages/dock/dockpage.cpp
 msgid "Dock"
 msgstr "程序坞"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Panel"
+msgstr "面板"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Takes effect right away."
+msgstr "立即生效。"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Float when no window is open"
+msgstr "没有窗口时悬浮"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Icon size"
+msgstr "图标大小"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Small"
+msgstr "小"
+
+#: src/pages/dock/dockpage.cpp src/pages/fonts/fontspage.cpp
+msgid "Medium"
+msgstr "中等"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Glass effect"
+msgstr "玻璃效果"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More clear"
+msgstr "更清透"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More tinted"
+msgstr "更有色调"
+
+#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
+#: src/window/pagelist.cpp
+msgid "Hot Corners"
+msgstr "热角"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel has no top bar, so applications show their menus in their windows. Applications already open may need to be opened again."
+msgstr "面板布局没有顶栏，应用会在各自的窗口中显示菜单。已打开的应用可能需要重新打开。"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Position on screen"
@@ -833,24 +887,8 @@ msgid "Size"
 msgstr "大小"
 
 #: src/pages/dock/dockpage.cpp
-msgid "Small"
-msgstr "小"
-
-#: src/pages/dock/dockpage.cpp
 msgid "Huge"
 msgstr "超大"
-
-#: src/pages/dock/dockpage.cpp
-msgid "Glass effect"
-msgstr "玻璃效果"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More clear"
-msgstr "更清透"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More tinted"
-msgstr "更有色调"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Display mode"
@@ -868,14 +906,17 @@ msgstr "始终隐藏"
 msgid "Smart hide"
 msgstr "智能隐藏"
 
-#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
-#: src/window/pagelist.cpp
-msgid "Hot Corners"
-msgstr "热角"
-
 #: src/pages/dock/dockpage.cpp
 msgid "Minimized windows area"
 msgstr "最小化窗口区域"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel stands 16 px off the screen's edge with round corners while the desktop is empty, and lies on the edge once a window is open."
+msgstr "桌面没有窗口时，面板离屏幕边缘 16 像素并带圆角；打开窗口后贴靠到边缘。"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel always lies on the bottom edge of the screen."
+msgstr "面板始终贴靠屏幕底部边缘。"
 
 #. TRANSLATORS: a font size in points, such as "9pt".
 #: src/pages/fonts/fontspage.cpp
@@ -907,10 +948,6 @@ msgstr "微调"
 #: src/pages/fonts/fontspage.cpp
 msgid "Slight"
 msgstr "轻微"
-
-#: src/pages/fonts/fontspage.cpp
-msgid "Medium"
-msgstr "中等"
 
 #: src/pages/fonts/fontspage.cpp
 msgid "Full"
@@ -1026,10 +1063,6 @@ msgstr "在输入法之前启动的应用可能需要重启。"
 #: src/pages/keyboard/keyboardpage.cpp
 msgid "Shortcut key"
 msgstr "快捷键"
-
-#: src/pages/keyboard/keyboardpage.cpp src/pages/keyboard/layoutpage.cpp
-msgid "Layout"
-msgstr "布局"
 
 #: src/pages/keyboard/keyboardpage.cpp src/pages/shortcuts/shortcutspage.cpp
 #: src/window/pagelist.cpp
@@ -2334,10 +2367,6 @@ msgid "VPN, proxy, hotspot, tethering, internet"
 msgstr "VPN, proxy, hotspot, tethering, internet, 代理, 热点, 共享网络, 互联网"
 
 #: src/window/pagelist.cpp
-msgid "Desktop"
-msgstr "桌面"
-
-#: src/window/pagelist.cpp
 msgid "theme, dark mode, light mode, accent color, dim wallpaper"
 msgstr "theme, dark mode, light mode, accent color, dim wallpaper, 主题, 深色模式, 浅色模式, 强调色, 壁纸变暗"
 
@@ -2346,8 +2375,8 @@ msgid "background, desktop picture, image"
 msgstr "background, desktop picture, image, 背景, 桌面图片, 图像"
 
 #: src/window/pagelist.cpp
-msgid "taskbar, position, size, auto hide, glass effect"
-msgstr "taskbar, position, size, auto hide, glass effect, 任务栏, 位置, 大小, 自动隐藏, 玻璃效果"
+msgid "dock, panel, layout, taskbar, start, position, size, auto hide, glass effect"
+msgstr "程序坞, 面板, 布局, 任务栏, 开始, 位置, 大小, 自动隐藏, 玻璃效果, dock, panel, layout, taskbar, start"
 
 #: src/window/pagelist.cpp
 msgid "do not disturb, banners, alerts"

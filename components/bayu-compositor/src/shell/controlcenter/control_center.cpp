@@ -155,6 +155,12 @@ ShellWindow *ControlCenter::popupWindow(Panel panel) const
     return window ? m_shell->host()->windowFor(static_cast<ui::EmbeddedWindow *>(window)) : nullptr;
 }
 
+// The panel layout's bar: along the bottom of its screen.
+static bool atBottom(ShellWindow *bar, const base::Rect &screen)
+{
+    return bar && bar->geometry().y() > screen.y() + screen.height() / 2;
+}
+
 base::Rect ControlCenter::panelGeometry(Panel panel, ShellWindow *bar, const base::Rect &anchor) const
 {
     const base::Point barOrigin = bar ? bar->geometry().topLeft() : base::Point();
@@ -172,11 +178,16 @@ base::Rect ControlCenter::panelGeometry(Panel panel, ShellWindow *bar, const bas
         if (x + width >= screen.x() + screen.width())
             x = screen.x() + screen.width() - width - margin;
         x = std::max(x, screen.x() + margin);
+        // The panel layout's bar is along the bottom: the centre stands on it.
+        if (atBottom(bar, screen))
+            return base::Rect(x, bar->geometry().y() - margin - height, width, height);
         // The bar sits at the top of its own screen, which need not be at y 0.
         return base::Rect(x, screen.y() + kBarHeight + margin, width, height);
     }
 
-    const base::Rect area = output ? m_shell->workArea(*output) : screen;
+    base::Rect area = output ? m_shell->workArea(*output) : screen;
+    if (atBottom(bar, screen))
+        area.setHeight(std::min(area.height(), bar->geometry().y() - area.y()));
     const int width = int(status_panel::kWidth);
     // As tall as the work area allows the panel to grow; the window is as
     // tall as the panel is drawn.
@@ -227,15 +238,7 @@ void ControlCenter::openPanel(Panel panel, ShellWindow *bar, const base::Rect &a
     open.geometry = panelGeometry(panel, bar, anchor);
     if (open.panel)
         open.panel->setMaximumHeight(open.geometry.height());
-    const base::Point origin = bar->geometry().topLeft();
-    ui::PopupPlacement placement;
-    placement.anchorRect = {double(open.geometry.x() - origin.x()), double(open.geometry.y() - origin.y()), 1, 1};
-    placement.anchor = ui::PopupAnchor::TopLeft;
-    placement.gravity = ui::PopupAnchor::BottomRight;
-    placement.flipX = false;
-    placement.flipY = false;
-    placement.slide = false;
-    open.window = ui::Window::createPopup(bar->window(), placement, true);
+    open.window = ui::Window::createPopup(bar->window(), placement(panel), true);
     auto root = std::make_unique<PopupRoot>(std::move(content));
     open.root = root.get();
     open.root->onEscape = [this, panel] { close(panel); };
@@ -278,6 +281,29 @@ void ControlCenter::openPanel(Panel panel, ShellWindow *bar, const base::Rect &a
     panelsChanged();
 }
 
+ui::PopupPlacement ControlCenter::placement(Panel panel) const
+{
+    const Open &open = m_open[index(panel)];
+    const base::Point origin = open.bar->geometry().topLeft();
+    const Shell::Output *output = m_shell->output(open.bar->outputName());
+    ui::PopupPlacement result;
+    result.flipX = false;
+    result.flipY = false;
+    result.slide = false;
+    if (output && atBottom(open.bar, output->bounds)) {
+        // Grows up from its bottom edge, above the panel, however tall it is.
+        result.anchorRect = {double(open.geometry.x() - origin.x()), double(open.geometry.bottom() - origin.y()),
+                                1, 1};
+        result.anchor = ui::PopupAnchor::TopLeft;
+        result.gravity = ui::PopupAnchor::TopRight;
+        return result;
+    }
+    result.anchorRect = {double(open.geometry.x() - origin.x()), double(open.geometry.y() - origin.y()), 1, 1};
+    result.anchor = ui::PopupAnchor::TopLeft;
+    result.gravity = ui::PopupAnchor::BottomRight;
+    return result;
+}
+
 void ControlCenter::updateWindow(Panel panel)
 {
     Open &open = m_open[index(panel)];
@@ -292,6 +318,9 @@ void ControlCenter::updateWindow(Panel panel)
         height = std::max(1, int(std::lround(open.panel->shownBottom())));
         open.window->resize({double(open.geometry.width()), double(height)});
     }
+    // Above the panel layout's bar, it keeps its bottom edge as it grows.
+    if (open.bar)
+        open.window->setPopupPlacement(placement(panel));
     window->setBackgroundBlur(base::Rect(0, 0, open.geometry.width(), height), int(panel::kTileRadius),
                               panel::panelGlass());
 }

@@ -33,6 +33,9 @@ public:
     AppMenuRegistrar &operator=(const AppMenuRegistrar &) = delete;
 
     bool registerService();
+    // Lets com.canonical.AppMenu.Registrar go: applications then show their
+    // menus in their windows.
+    void unregisterService();
 
     // The newest registration of the process: an application that opened a
     // second window registers again, and the last is the one in front.

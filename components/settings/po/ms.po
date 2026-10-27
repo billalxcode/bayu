@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 00:58+0000\n"
+"POT-Creation-Date: 2026-10-27 05:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -809,8 +809,62 @@ msgid "Keep"
 msgstr "Kekalkan"
 
 #: src/pages/dock/dockpage.cpp src/window/pagelist.cpp
+msgid "Desktop"
+msgstr "Desktop"
+
+#: src/pages/dock/dockpage.cpp src/pages/keyboard/keyboardpage.cpp
+#: src/pages/keyboard/layoutpage.cpp
+msgid "Layout"
+msgstr "Susun atur"
+
+#: src/pages/dock/dockpage.cpp
 msgid "Dock"
-msgstr "Dok"
+msgstr "Dock"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Panel"
+msgstr "Panel"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Takes effect right away."
+msgstr "Berkuat kuasa serta-merta."
+
+#: src/pages/dock/dockpage.cpp
+msgid "Float when no window is open"
+msgstr "Terapung apabila tiada tetingkap dibuka"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Icon size"
+msgstr "Saiz ikon"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Small"
+msgstr "Kecil"
+
+#: src/pages/dock/dockpage.cpp src/pages/fonts/fontspage.cpp
+msgid "Medium"
+msgstr "Sederhana"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Glass effect"
+msgstr "Kesan kaca"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More clear"
+msgstr "Lebih jernih"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More tinted"
+msgstr "Lebih berwarna"
+
+#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
+#: src/window/pagelist.cpp
+msgid "Hot Corners"
+msgstr "Sudut Panas"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel has no top bar, so applications show their menus in their windows. Applications already open may need to be opened again."
+msgstr "Panel tidak mempunyai bar atas, jadi aplikasi memaparkan menunya dalam tetingkap masing-masing. Aplikasi yang sudah dibuka mungkin perlu dibuka semula."
 
 #: src/pages/dock/dockpage.cpp
 msgid "Position on screen"
@@ -833,24 +887,8 @@ msgid "Size"
 msgstr "Saiz"
 
 #: src/pages/dock/dockpage.cpp
-msgid "Small"
-msgstr "Kecil"
-
-#: src/pages/dock/dockpage.cpp
 msgid "Huge"
 msgstr "Besar sekali"
-
-#: src/pages/dock/dockpage.cpp
-msgid "Glass effect"
-msgstr "Kesan kaca"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More clear"
-msgstr "Lebih jernih"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More tinted"
-msgstr "Lebih berwarna"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Display mode"
@@ -868,14 +906,17 @@ msgstr "Sentiasa sembunyi"
 msgid "Smart hide"
 msgstr "Sembunyi pintar"
 
-#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
-#: src/window/pagelist.cpp
-msgid "Hot Corners"
-msgstr "Sudut Panas"
-
 #: src/pages/dock/dockpage.cpp
 msgid "Minimized windows area"
 msgstr "Kawasan tetingkap yang diminimumkan"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel stands 16 px off the screen's edge with round corners while the desktop is empty, and lies on the edge once a window is open."
+msgstr "Panel terangkat 16 px dari tepi skrin dengan sudut bulat semasa desktop kosong, dan melekat pada tepi apabila tetingkap dibuka."
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel always lies on the bottom edge of the screen."
+msgstr "Panel sentiasa melekat pada tepi bawah skrin."
 
 #. TRANSLATORS: a font size in points, such as "9pt".
 #: src/pages/fonts/fontspage.cpp
@@ -907,10 +948,6 @@ msgstr "Pembayang"
 #: src/pages/fonts/fontspage.cpp
 msgid "Slight"
 msgstr "Sedikit"
-
-#: src/pages/fonts/fontspage.cpp
-msgid "Medium"
-msgstr "Sederhana"
 
 #: src/pages/fonts/fontspage.cpp
 msgid "Full"
@@ -1026,10 +1063,6 @@ msgstr "Aplikasi yang dimulakan sebelum kaedah input mungkin perlu dimulakan sem
 #: src/pages/keyboard/keyboardpage.cpp
 msgid "Shortcut key"
 msgstr "Kekunci pintasan"
-
-#: src/pages/keyboard/keyboardpage.cpp src/pages/keyboard/layoutpage.cpp
-msgid "Layout"
-msgstr "Susun atur"
 
 #: src/pages/keyboard/keyboardpage.cpp src/pages/shortcuts/shortcutspage.cpp
 #: src/window/pagelist.cpp
@@ -2334,10 +2367,6 @@ msgid "VPN, proxy, hotspot, tethering, internet"
 msgstr "VPN, proksi, hotspot, penambatan, internet"
 
 #: src/window/pagelist.cpp
-msgid "Desktop"
-msgstr "Desktop"
-
-#: src/window/pagelist.cpp
 msgid "theme, dark mode, light mode, accent color, dim wallpaper"
 msgstr "tema, mod gelap, mod cerah, warna penekanan, malapkan kertas dinding"
 
@@ -2346,8 +2375,8 @@ msgid "background, desktop picture, image"
 msgstr "latar belakang, gambar desktop, imej"
 
 #: src/window/pagelist.cpp
-msgid "taskbar, position, size, auto hide, glass effect"
-msgstr "bar tugas, kedudukan, saiz, sembunyi auto, kesan kaca"
+msgid "dock, panel, layout, taskbar, start, position, size, auto hide, glass effect"
+msgstr "dok, panel, susun atur, bar tugas, mula, kedudukan, saiz, sembunyi automatik, kesan kaca, dock, layout, taskbar, start"
 
 #: src/window/pagelist.cpp
 msgid "do not disturb, banners, alerts"

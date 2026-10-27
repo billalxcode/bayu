@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 00:58+0000\n"
+"POT-Creation-Date: 2026-10-27 05:39+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -810,8 +810,62 @@ msgid "Keep"
 msgstr "維持"
 
 #: src/pages/dock/dockpage.cpp src/window/pagelist.cpp
+msgid "Desktop"
+msgstr "デスクトップ"
+
+#: src/pages/dock/dockpage.cpp src/pages/keyboard/keyboardpage.cpp
+#: src/pages/keyboard/layoutpage.cpp
+msgid "Layout"
+msgstr "レイアウト"
+
+#: src/pages/dock/dockpage.cpp
 msgid "Dock"
 msgstr "Dock"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Panel"
+msgstr "パネル"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Takes effect right away."
+msgstr "すぐに反映されます。"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Float when no window is open"
+msgstr "ウインドウがないときはフローティング"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Icon size"
+msgstr "アイコンのサイズ"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Small"
+msgstr "小"
+
+#: src/pages/dock/dockpage.cpp src/pages/fonts/fontspage.cpp
+msgid "Medium"
+msgstr "中"
+
+#: src/pages/dock/dockpage.cpp
+msgid "Glass effect"
+msgstr "ガラス効果"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More clear"
+msgstr "より透明"
+
+#: src/pages/dock/dockpage.cpp
+msgid "More tinted"
+msgstr "より色付き"
+
+#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
+#: src/window/pagelist.cpp
+msgid "Hot Corners"
+msgstr "ホットコーナー"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel has no top bar, so applications show their menus in their windows. Applications already open may need to be opened again."
+msgstr "パネルには上部バーがないため、アプリのメニューは各ウインドウ内に表示されます。すでに開いているアプリは開き直す必要がある場合があります。"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Position on screen"
@@ -834,24 +888,8 @@ msgid "Size"
 msgstr "サイズ"
 
 #: src/pages/dock/dockpage.cpp
-msgid "Small"
-msgstr "小"
-
-#: src/pages/dock/dockpage.cpp
 msgid "Huge"
 msgstr "特大"
-
-#: src/pages/dock/dockpage.cpp
-msgid "Glass effect"
-msgstr "ガラス効果"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More clear"
-msgstr "より透明"
-
-#: src/pages/dock/dockpage.cpp
-msgid "More tinted"
-msgstr "より色付き"
 
 #: src/pages/dock/dockpage.cpp
 msgid "Display mode"
@@ -869,14 +907,17 @@ msgstr "常に非表示"
 msgid "Smart hide"
 msgstr "スマート非表示"
 
-#: src/pages/dock/dockpage.cpp src/pages/hotcorners/hotcornerspage.cpp
-#: src/window/pagelist.cpp
-msgid "Hot Corners"
-msgstr "ホットコーナー"
-
 #: src/pages/dock/dockpage.cpp
 msgid "Minimized windows area"
 msgstr "最小化したウィンドウの領域"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel stands 16 px off the screen's edge with round corners while the desktop is empty, and lies on the edge once a window is open."
+msgstr "デスクトップにウインドウがないときは、パネルは画面の端から 16 px 浮いて角が丸くなり、ウインドウを開くと端に付きます。"
+
+#: src/pages/dock/dockpage.cpp
+msgid "The panel always lies on the bottom edge of the screen."
+msgstr "パネルは常に画面の下端に付きます。"
 
 #. TRANSLATORS: a font size in points, such as "9pt".
 #: src/pages/fonts/fontspage.cpp
@@ -908,10 +949,6 @@ msgstr "ヒンティング"
 #: src/pages/fonts/fontspage.cpp
 msgid "Slight"
 msgstr "弱"
-
-#: src/pages/fonts/fontspage.cpp
-msgid "Medium"
-msgstr "中"
 
 #: src/pages/fonts/fontspage.cpp
 msgid "Full"
@@ -1027,10 +1064,6 @@ msgstr "入力方法より前に起動したアプリケーションは、再起
 #: src/pages/keyboard/keyboardpage.cpp
 msgid "Shortcut key"
 msgstr "ショートカットキー"
-
-#: src/pages/keyboard/keyboardpage.cpp src/pages/keyboard/layoutpage.cpp
-msgid "Layout"
-msgstr "レイアウト"
 
 #: src/pages/keyboard/keyboardpage.cpp src/pages/shortcuts/shortcutspage.cpp
 #: src/window/pagelist.cpp
@@ -2335,10 +2368,6 @@ msgid "VPN, proxy, hotspot, tethering, internet"
 msgstr "VPN, プロキシ, ホットスポット, テザリング, インターネット, proxy, hotspot, tethering, internet"
 
 #: src/window/pagelist.cpp
-msgid "Desktop"
-msgstr "デスクトップ"
-
-#: src/window/pagelist.cpp
 msgid "theme, dark mode, light mode, accent color, dim wallpaper"
 msgstr "テーマ, ダークモード, ライトモード, アクセントカラー, 壁紙を暗くする, theme, dark mode, light mode, accent color"
 
@@ -2347,8 +2376,8 @@ msgid "background, desktop picture, image"
 msgstr "背景, デスクトップ画像, 画像, background, desktop picture, image"
 
 #: src/window/pagelist.cpp
-msgid "taskbar, position, size, auto hide, glass effect"
-msgstr "タスクバー, 位置, サイズ, 自動的に隠す, ガラス効果, taskbar, position, size, auto hide, glass effect"
+msgid "dock, panel, layout, taskbar, start, position, size, auto hide, glass effect"
+msgstr "Dock, パネル, レイアウト, タスクバー, スタート, 位置, サイズ, 自動的に隠す, ガラス効果, dock, panel, layout, taskbar, start"
 
 #: src/window/pagelist.cpp
 msgid "do not disturb, banners, alerts"

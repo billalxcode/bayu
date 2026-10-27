@@ -15,6 +15,7 @@ namespace settings {
 
 DockSettings::DockSettings()
     : m_dock(dbus::Connection::session(), "org.bayu.Dock", "/Dock", "org.bayu.Dock")
+    , m_statusbar(dbus::Connection::session(), "org.bayu.Statusbar", "/Statusbar", "org.bayu.Statusbar")
 {
     const Settings shell(paths::bayuConfig("shell"));
     m_iconSize = int(shell.intValue("Dock/IconSize"));
@@ -22,6 +23,10 @@ DockSettings::DockSettings()
     m_visibility = int(shell.intValue("Dock/Visibility"));
     m_glassTint = std::clamp(shell.doubleValue("Dock/GlassTint", 0.5), 0.0, 1.0);
     m_minimizedArea = shell.boolValue("Dock/MinimizedArea", true);
+    m_layout = shell.intValue("Shell/Layout", 0) == 1 ? 1 : 0;
+    m_panelFloating = shell.boolValue("Panel/Floating", true);
+    m_panelIconSize = shell.intValue("Panel/IconSize", 36) == 32 ? 32 : 36;
+    m_panelGlassTint = std::clamp(shell.doubleValue("Panel/GlassTint", 0.5), 0.0, 1.0);
 }
 
 // Called on every slider move; none of these waits for the dock.
@@ -64,6 +69,39 @@ void DockSettings::setMinimizedArea(bool enabled)
         return;
     m_dock.send("setMinimizedArea", enabled);
     m_minimizedArea = enabled;
+}
+
+void DockSettings::setLayout(int layout)
+{
+    if (layout == m_layout)
+        return;
+    m_statusbar.send("setLayout", int32_t(layout));
+    m_layout = layout;
+}
+
+void DockSettings::setPanelFloating(bool floating)
+{
+    if (floating == m_panelFloating)
+        return;
+    m_statusbar.send("setPanelFloating", floating);
+    m_panelFloating = floating;
+}
+
+void DockSettings::setPanelIconSize(int size)
+{
+    if (size == m_panelIconSize)
+        return;
+    m_statusbar.send("setPanelIconSize", int32_t(size));
+    m_panelIconSize = size;
+}
+
+void DockSettings::setPanelGlassTint(double tint)
+{
+    tint = std::clamp(tint, 0.0, 1.0);
+    if (tint == m_panelGlassTint)
+        return;
+    m_statusbar.send("setPanelGlassTint", tint);
+    m_panelGlassTint = tint;
 }
 
 } // namespace settings

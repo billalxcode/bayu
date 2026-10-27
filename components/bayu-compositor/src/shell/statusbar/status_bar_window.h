@@ -6,18 +6,21 @@
 #define BAYU_SHELL_STATUSBAR_STATUS_BAR_WINDOW_H_
 
 #include <functional>
+#include <map>
 #include <memory>
 #include <string>
 #include <vector>
 
 #include "base/geometry.h"
 #include "base/signal.h"
+#include "render/glass.h"
 #include "shell/shell.h"
 #include "shell/statusbar/bar_item.h"
 #include "shell/statusbar/status_bar_menu_bar.h"
 #include "shell/statusbar/status_bar_panels.h"
 
 namespace bayu::ui {
+class Animation;
 class Menu;
 }
 
@@ -25,6 +28,8 @@ namespace bayu::shell {
 
 class ClockItem;
 class DeviceUsage;
+class DockModel;
+class PanelTasks;
 class VpnNotifier;
 class ShellWindow;
 class StatusBar;
@@ -39,10 +44,25 @@ class Wallpaper;
 // bar, the stop buttons of a recording and of an agent's control, the tray, the
 // volume, Wi-Fi, battery and control centre icons, and the clock. Its contents
 // are light or dark by what the wallpaper shows behind it.
+//
+// In the panel layout (Shell/Layout) the bar is the panel instead: the only
+// bar, along the bottom, on its own glass, with the Start button, the pinned
+// applications and the windows in the menu bar's place. It stands off the
+// screen's edge while no window is open (Panel/Floating) and lies on the edge
+// once one is, reserving its height from the work area.
 class StatusBarWindow : public Component, public BarContext
 {
 public:
     static constexpr int kHeight = 32;
+    // The panel on the edge: Pitaloka's headerbar height, so a maximized
+    // window's header bar lines up with it.
+    static constexpr int kPanelHeight = 48;
+    // Standing off the edge.
+    static constexpr int kFloatingHeight = 56;
+    static constexpr int kFloatingBottom = 16;
+    static constexpr int kFloatingSide = 24;
+    static constexpr int kFloatingRadius = 12;
+    static constexpr int kPanelTransitionMs = 180;
 
     // `statusBar` is the backend: tray, registrar, battery, power actions,
     // the clock's format and org.bayu.Statusbar.
@@ -86,6 +106,16 @@ public:
     void setAgentControl(bool active);
     std::function<void()> onStopAgentControl;
 
+    // --- The panel layout ---
+    // The dock's pinned applications, the launcher's toggle and the dock's
+    // glass for a tint: the panel's, from the components that own them.
+    void setPanelSources(DockModel *applications, std::function<void()> toggleLauncher,
+                         std::function<render::GlassParams(double tint)> glass);
+    bool isPanel() const;
+    // The panel stands off the edge (or is on its way there).
+    bool isFloating() const { return m_floating; }
+    PanelTasks *panelTasks() const { return m_panelTasks; }
+
     // --- For tests and the reference render ---
     SystemTrayView *tray() const { return m_tray; }
     StatusIcon *volumeIcon() const { return m_volume; }
@@ -103,7 +133,16 @@ public:
 
 private:
     class Root;
+    class PanelSlot;
 
+    void updateLayoutMode();
+    void updateFloating(bool animate);
+    bool anyWindowOpen() const;
+    // The panel's rect on the screen, `floating` of the way off the edge.
+    base::Rect panelRect(double floating) const;
+    void paintPanel(ui::Painter &painter);
+    void updatePanelGlass();
+    void updateMinimizeTargets();
     void updateGeometry();
     void updateLook();
     void updateIndicators();
@@ -146,6 +185,20 @@ private:
     bool m_lightContents = false;
     // The plate the blur is behind, in window coordinates; empty for none.
     ui::RectF m_blurPlate;
+    // The panel layout's.
+    ui::View *m_panelSlot = nullptr;
+    PanelTasks *m_panelTasks = nullptr;
+    DockModel *m_applications = nullptr;
+    std::function<void()> m_toggleLauncher;
+    std::function<render::GlassParams(double)> m_glass;
+    bool m_panelShown = false;
+    bool m_floating = false;
+    // 0 on the edge, 1 off it.
+    double m_floatProgress = 0;
+    double m_floatFrom = 0;
+    std::unique_ptr<ui::Animation> m_floatAnimation;
+    std::map<uint64_t, base::Rect> m_sentTargets;
+    std::vector<base::Subscription> m_panelLayoutSubscriptions;
     std::vector<base::Subscription> m_subscriptions;
     std::shared_ptr<bool> m_alive = std::make_shared<bool>(true);
 };

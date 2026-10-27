@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <cstdlib>
 #include <ctime>
 
 #include <sys/epoll.h>
@@ -16,7 +17,10 @@
 #include "base/dbus.h"
 #include "base/locale.h"
 #include "core/main_loop.h"
+#include "shell/common/task_windows.h"
 #include "shell/shell_window.h"
+#include "shell/statusbar/panel_tasks.h"
+#include "shell/statusbar/pitaloka.h"
 #include "shell/statusbar/clock_format.h"
 #include "shell/statusbar/status_bar.h"
 #include "shell/statusbar/device_usage.h"
@@ -24,7 +28,9 @@
 #include "shell/statusbar/status_icon.h"
 #include "shell/statusbar/system_tray_view.h"
 #include "shell/statusbar/vpn_notifier.h"
+#include "ui/animation.h"
 #include "ui/embedded_window.h"
+#include "ui/painter.h"
 #include "ui/cell_layout.h"
 #include "ui/path.h"
 #include "ui/theme.h"
@@ -68,6 +74,12 @@ protected:
     // The plate moves with its item, wherever in the row it sits.
     void childrenLaidOut() override { m_bar->updatePlateBlur(); }
 
+    void paint(ui::Painter &painter) override
+    {
+        if (m_bar->isPanel())
+            m_bar->paintPanel(painter);
+    }
+
 private:
     StatusBarWindow *m_bar;
     uint64_t m_themeGeneration = 0;
@@ -81,6 +93,19 @@ protected:
     {
         for (const auto &child : children())
             child->setGeometry(localRect());
+    }
+};
+
+// The panel's left side: what it holds fills it, in from the panel's edge.
+class StatusBarWindow::PanelSlot final : public ui::View
+{
+protected:
+    void layout() override
+    {
+        const ui::RectF bounds = localRect();
+        const double inset = (bounds.height - std::min(bounds.height, 36.0)) / 2 + 2;
+        for (const auto &child : children())
+            child->setGeometry({inset, 0, std::max(0.0, bounds.width - inset), bounds.height});
     }
 };
 
@@ -98,6 +123,10 @@ StatusBarWindow::StatusBarWindow(Shell *shell, std::unique_ptr<StatusBar> status
     auto root = std::make_unique<Root>(this);
     m_root = root.get();
 
+    // Empty until the panel's sources plug in.
+    m_panelSlot = m_root->addChild<PanelSlot>();
+    m_panelSlot->setName("panel");
+    m_panelSlot->setVisible(false);
     // Empty until the menu bar's component plugs in.
     m_menuSlot = m_root->addChild<MenuSlot>();
     m_menuSlot->setName("menubar");
@@ -106,6 +135,8 @@ StatusBarWindow::StatusBarWindow(Shell *shell, std::unique_ptr<StatusBar> status
     fill.fillHeight = true;
     m_menuSlot->setLayoutHints(fill);
     m_menuSlot->setClipsChildren(true);
+    m_panelSlot->setLayoutHints(fill);
+    m_panelSlot->setClipsChildren(true);
 
     m_recording = m_root->addChild<StopItem>(this);
     m_recording->setName("recording");
@@ -170,6 +201,15 @@ StatusBarWindow::StatusBarWindow(Shell *shell, std::unique_ptr<StatusBar> status
         });
     }
     m_subscriptions.push_back(m_statusBar->timeFormatChanged.connect([this] { updateClock(); }));
+    m_subscriptions.push_back(m_statusBar->layoutChanged.connect([this] { updateLayoutMode(); }));
+    m_subscriptions.push_back(m_statusBar->panelChanged.connect([this] {
+        if (!isPanel())
+            return;
+        if (m_panelTasks)
+            m_panelTasks->setTileSize(m_statusBar->panelIconSize() - (m_floating ? 0 : 4));
+        updatePanelGlass();
+        updateFloating(true);
+    }));
 
     Battery &battery = m_statusBar->battery();
     m_subscriptions.push_back(battery.changed.connect([this] { updateBattery(); }));
@@ -192,6 +232,8 @@ StatusBarWindow::StatusBarWindow(Shell *shell, std::unique_ptr<StatusBar> status
 
 StatusBarWindow::~StatusBarWindow()
 {
+    m_floatAnimation.reset();
+    m_panelLayoutSubscriptions.clear();
     m_subscriptions.clear();
     m_panelSubscriptions.clear();
     m_indicatorsChanged.reset();
@@ -211,8 +253,185 @@ void StatusBarWindow::updateGeometry()
     if (!output)
         return;
     m_window->setOutput(output->name);
+    if (isPanel()) {
+        m_window->setGeometry(panelRect(m_floatProgress));
+        // Reserved once on the edge; nothing while standing off it, as no
+        // window is open then.
+        m_window->setExclusiveZone(wm::ScreenEdge::Bottom, m_floating ? 0 : kPanelHeight);
+        updatePanelGlass();
+        return;
+    }
     m_window->setGeometry(base::Rect(output->bounds.x(), output->bounds.y(), output->bounds.width(), kHeight));
     m_window->setExclusiveZone(wm::ScreenEdge::Top, kHeight);
+}
+
+bool StatusBarWindow::isPanel() const
+{
+    return m_panelShown;
+}
+
+void StatusBarWindow::setPanelSources(DockModel *applications, std::function<void()> toggleLauncher,
+                                      std::function<render::GlassParams(double)> glass)
+{
+    m_applications = applications;
+    m_toggleLauncher = std::move(toggleLauncher);
+    m_glass = std::move(glass);
+    TaskWindows &windows = m_shell->taskWindows();
+    const auto changed = [this] { updateFloating(true); };
+    m_panelLayoutSubscriptions.push_back(windows.windowAdded.connect([changed](uint64_t) { changed(); }));
+    m_panelLayoutSubscriptions.push_back(windows.windowRemoved.connect([this, changed](uint64_t id) {
+        m_sentTargets.erase(id);
+        changed();
+    }));
+    m_panelLayoutSubscriptions.push_back(windows.windowChanged.connect([this, changed](uint64_t, uint32_t changes) {
+        if (changes & (kStateChange | kSkipTaskbarChange))
+            changed();
+        if (changes & (kGeometryChange | kStateChange))
+            updateMinimizeTargets();
+    }));
+    updateLayoutMode();
+}
+
+void StatusBarWindow::updateLayoutMode()
+{
+    const bool panel = m_statusBar->layout() == StatusBar::Layout::Panel && m_applications;
+    if (panel == m_panelShown)
+        return;
+    closePopups();
+    m_panelShown = panel;
+    if (panel && !m_panelTasks) {
+        auto tasks = std::make_unique<PanelTasks>(m_shell->taskWindows(), *m_applications);
+        m_panelTasks = tasks.get();
+        m_panelTasks->onStart = [this] {
+            closePopups();
+            if (m_toggleLauncher)
+                m_toggleLauncher();
+        };
+        m_panelTasks->onActivated = [this] { closePopups(); };
+        m_panelLayoutSubscriptions.push_back(m_panelTasks->targetsChanged.connect([this] { updateMinimizeTargets(); }));
+        m_panelSlot->addChild(std::move(tasks));
+    }
+    m_panelSlot->setVisible(panel);
+    m_menuSlot->setVisible(!panel);
+    // The other edge's reservation goes with the other layout.
+    m_window->clearExclusiveZone();
+    m_sentTargets.clear();
+    m_blurPlate = {};
+    m_window->setBackgroundBlur(base::Rect(), 0);
+    if (panel) {
+        m_floating = m_statusBar->panelFloating() && !anyWindowOpen();
+        m_floatProgress = m_floating ? 1 : 0;
+        m_panelTasks->setTileSize(m_statusBar->panelIconSize() - (m_floating ? 0 : 4));
+    }
+    updateGeometry();
+    updateLook();
+    m_root->requestLayout();
+    m_root->requestPaint();
+    updateMinimizeTargets();
+}
+
+bool StatusBarWindow::anyWindowOpen() const
+{
+    const TaskWindows &windows = m_shell->taskWindows();
+    for (uint64_t id : windows.windows()) {
+        const TaskWindow *window = windows.window(id);
+        if (window && window->isTaskListWindow() && !window->minimized && !window->hidden)
+            return true;
+    }
+    return false;
+}
+
+void StatusBarWindow::updateFloating(bool animate)
+{
+    if (!isPanel())
+        return;
+    const bool floating = m_statusBar->panelFloating() && !anyWindowOpen();
+    if (floating == m_floating)
+        return;
+    m_floating = floating;
+    m_panelTasks->setTileSize(m_statusBar->panelIconSize() - (floating ? 0 : 4));
+    // The reservation changes at once, so a window opening is placed in the
+    // work area it will have.
+    updateGeometry();
+    if (!animate || !m_window->window()) {
+        m_floatProgress = floating ? 1 : 0;
+        updateGeometry();
+        return;
+    }
+    if (!m_floatAnimation) {
+        m_floatAnimation = std::make_unique<ui::Animation>(m_window->window());
+        m_floatAnimation->setDuration(std::chrono::milliseconds(kPanelTransitionMs));
+        m_floatAnimation->setEasing(ui::Animation::Easing::OutCubic);
+    }
+    m_floatAnimation->stop();
+    m_floatFrom = m_floatProgress;
+    m_floatAnimation->onUpdate = [this](double value) {
+        const double target = m_floating ? 1 : 0;
+        m_floatProgress = m_floatFrom + (target - m_floatFrom) * value;
+        updateGeometry();
+        m_root->requestPaint();
+    };
+    m_floatAnimation->start();
+}
+
+base::Rect StatusBarWindow::panelRect(double floating) const
+{
+    const Shell::Output *output = m_shell->output({});
+    if (!output)
+        return {};
+    const base::Rect screen = output->bounds;
+    const auto lerp = [floating](double edge, double off) { return int(std::lround(edge + (off - edge) * floating)); };
+    const int side = lerp(0, kFloatingSide);
+    const int height = lerp(kPanelHeight, kFloatingHeight);
+    const int bottom = lerp(0, kFloatingBottom);
+    return base::Rect(screen.x() + side, screen.y() + screen.height() - bottom - height, screen.width() - side * 2,
+                      height);
+}
+
+void StatusBarWindow::paintPanel(ui::Painter &painter)
+{
+    // A 1 px --pit-border: all round while off the edge, along the top on it.
+    const bool dark = ui::Theme::current().darkMode;
+    const char *hex = dark ? PITALOKA_BORDER_DARK : PITALOKA_BORDER_LIGHT;
+    const ui::Color border = ui::Color::rgb(uint32_t(std::strtoul(hex + 1, nullptr, 16))).withAlpha(0.9);
+    const ui::RectF rect = m_root->localRect();
+    const double radius = kFloatingRadius * m_floatProgress;
+    if (m_floatProgress > 0)
+        painter.strokeRoundedRect(rect, radius, border, 1);
+    else
+        painter.fillRect({0, 0, rect.width, 1}, border);
+}
+
+void StatusBarWindow::updatePanelGlass()
+{
+    if (!isPanel() || !m_glass)
+        return;
+    const base::Rect geometry = m_window->geometry();
+    const double radius = kFloatingRadius * m_floatProgress;
+    const ui::RectF rect {0, 0, double(geometry.width()), double(geometry.height())};
+    ui::Path shape;
+    shape.addRoundedRect(rect, radius, radius);
+    m_window->setBackgroundBlur(base::Rect(0, 0, geometry.width(), geometry.height()), int(std::lround(radius)),
+                                m_glass(m_statusBar->panelGlassTint()), shape);
+}
+
+void StatusBarWindow::updateMinimizeTargets()
+{
+    if (!isPanel() || !m_panelTasks)
+        return;
+    wm::Window *panel = m_window->wmWindow();
+    if (!panel)
+        return;
+    wm::WindowManager *manager = m_shell->windowManager();
+    for (const auto &[id, rect] : m_panelTasks->windowTargets()) {
+        const base::Rect target(int(std::lround(rect.x)), int(std::lround(rect.y)), int(std::lround(rect.width)),
+                                int(std::lround(rect.height)));
+        if (m_sentTargets[id] == target)
+            continue;
+        m_sentTargets[id] = target;
+        if (wm::Window *window = manager->windowById(id))
+            window->setMinimizedGeometry(panel, target);
+    }
 }
 
 void StatusBarWindow::setWallpaper(Wallpaper *wallpaper)
@@ -241,7 +460,9 @@ void StatusBarWindow::updateLook()
 {
     // What is behind the bar decides; the system's dark mode while nothing
     // has been judged.
-    const bool light = m_backdrop->isValid() ? m_backdrop->useLightForeground() : ui::Theme::current().darkMode;
+    // The panel is on its own glass, which the theme's mode tints.
+    const bool light = !isPanel() && m_backdrop->isValid() ? m_backdrop->useLightForeground()
+                                                          : ui::Theme::current().darkMode;
     m_lightContents = light;
     if (m_menuBar)
         m_menuBar->barChanged();
@@ -251,6 +472,8 @@ void StatusBarWindow::updateLook()
     m_clock->updateLook();
     m_recording->updateLook();
     m_agentControl->updateLook();
+    // The panel's glass follows the theme's mode.
+    updatePanelGlass();
 }
 
 void StatusBarWindow::platePainted()
@@ -273,7 +496,8 @@ static const BarItem *findPlate(const ui::View *view)
 
 void StatusBarWindow::updatePlateBlur()
 {
-    if (!m_window || !m_root)
+    // The panel's glass is the window's one blur.
+    if (!m_window || !m_root || isPanel())
         return;
     // A surface has one blur, and one plate shows at a time: opening a panel
     // or a menu closes the others.

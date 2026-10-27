@@ -7,8 +7,8 @@
 
 namespace settings {
 
-// The dock's settings: read from the shell's file, changed through the dock,
-// which owns that file.
+// The dock's settings and the desktop's layout: read from the shell's file,
+// changed through the dock and the status bar, which own that file.
 class DockSettings
 {
 public:
@@ -31,8 +31,25 @@ public:
     bool minimizedArea() const { return m_minimizedArea; }
     void setMinimizedArea(bool enabled);
 
+    // Shell/Layout: 0 the top bar with the dock, 1 the panel alone.
+    int layout() const { return m_layout; }
+    void setLayout(int layout);
+    // The panel's: off the screen's edge while no window is open, its icon
+    // size (32 or 36) and its glass.
+    bool panelFloating() const { return m_panelFloating; }
+    void setPanelFloating(bool floating);
+    int panelIconSize() const { return m_panelIconSize; }
+    void setPanelIconSize(int size);
+    double panelGlassTint() const { return m_panelGlassTint; }
+    void setPanelGlassTint(double tint);
+
 private:
     bayu::base::dbus::Proxy m_dock;
+    bayu::base::dbus::Proxy m_statusbar;
+    int m_layout = 0;
+    bool m_panelFloating = true;
+    int m_panelIconSize = 36;
+    double m_panelGlassTint = 0.5;
     int m_iconSize = 0;
     int m_direction = 0;
     int m_visibility = 0;

@@ -181,6 +181,9 @@ add_library(bayu-shell-statusbar-view STATIC
     src/shell/statusbar/dbus_menu_popup.h
     src/shell/statusbar/device_usage.cpp
     src/shell/statusbar/device_usage.h
+    src/shell/statusbar/panel_tasks.cpp
+    src/shell/statusbar/panel_tasks.h
+    src/shell/statusbar/pitaloka.h
     src/shell/statusbar/status_bar_backdrop.cpp
     src/shell/statusbar/status_bar_backdrop.h
     src/shell/statusbar/status_bar_menu_bar.h
@@ -191,7 +194,7 @@ add_library(bayu-shell-statusbar-view STATIC
     src/shell/statusbar/system_tray_view.h
 )
 target_link_libraries(bayu-shell-statusbar-view PUBLIC bayu-shell bayu-shell-bar-items
-    bayu-shell-statusbar bayu-shell-wallpaper Bayu::AudioClient)
+    bayu-shell-statusbar bayu-shell-wallpaper bayu-shell-dock Bayu::AudioClient)
 target_link_libraries(bayu-compositor PRIVATE bayu-shell-statusbar-view)
 # The status bar's menu bar.
 include(src/shell/menubar/menubar.cmake)

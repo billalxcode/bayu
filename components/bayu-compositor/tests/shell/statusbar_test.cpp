@@ -542,6 +542,41 @@ TEST(StatusBarTest, ServesOrgBayuStatusbar)
     EXPECT_NE(xml.find("name=\"showSeconds\""), std::string::npos);
 }
 
+TEST(StatusBarTest, ChoosesThePanelLayout)
+{
+    test::TemporaryDirectory directory;
+    directory.write("shell.conf", "[Shell]\nLayout=1\n[Panel]\nIconSize=32\nGlassTint=3\n");
+    shell::StatusBar statusBar(sessionBus(), dbus::Connection::system(core::mainLoop()), nullptr,
+                               directory.filePath("shell.conf"));
+    // Read at once: the layout decides what the session shows first.
+    EXPECT_EQ(statusBar.layout(), shell::StatusBar::Layout::Panel);
+    EXPECT_TRUE(statusBar.panelFloating());
+    EXPECT_EQ(statusBar.panelIconSize(), shell::StatusBar::kSmallPanelIcons);
+    EXPECT_EQ(statusBar.panelGlassTint(), 1.0);
+    ASSERT_TRUE(statusBar.registerServices());
+
+    int layoutChanges = 0;
+    int panelChanges = 0;
+    auto layout = statusBar.layoutChanged.connect([&] { ++layoutChanges; });
+    auto panel = statusBar.panelChanged.connect([&] { ++panelChanges; });
+    test::DBusTestClient settings;
+    settings.call("org.bayu.Statusbar", "/Statusbar", "org.bayu.Statusbar", "setPanelFloating", false);
+    settings.call("org.bayu.Statusbar", "/Statusbar", "org.bayu.Statusbar", "setPanelIconSize", int32_t(40));
+    settings.call("org.bayu.Statusbar", "/Statusbar", "org.bayu.Statusbar", "setLayout", int32_t(0));
+    EXPECT_FALSE(statusBar.panelFloating());
+    // Only the two sizes.
+    EXPECT_EQ(statusBar.panelIconSize(), shell::StatusBar::kMediumPanelIcons);
+    EXPECT_EQ(statusBar.layout(), shell::StatusBar::Layout::Dock);
+    EXPECT_EQ(layoutChanges, 1);
+    EXPECT_EQ(panelChanges, 2);
+
+    shell::waitForFileThread();
+    base::Settings saved(directory.filePath("shell.conf"));
+    EXPECT_EQ(saved.intValue("Shell/Layout", -1), 0);
+    EXPECT_FALSE(saved.boolValue("Panel/Floating", true));
+    EXPECT_EQ(saved.intValue("Panel/IconSize", 0), 36);
+}
+
 TEST(VpnNotifierTest, TellsAFailedVpnAndOpensItsPage)
 {
     test::DBusTestClient server;

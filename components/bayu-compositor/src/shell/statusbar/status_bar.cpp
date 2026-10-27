@@ -4,6 +4,7 @@
 
 #include "shell/statusbar/status_bar.h"
 
+#include <algorithm>
 #include <utility>
 
 #include "base/desktop_entry.h"
@@ -38,6 +39,18 @@ StatusBar::StatusBar(dbus::Connection *sessionBus, dbus::Connection *systemBus, 
         return std::make_shared<upower::BatteryStatus>(sessionBus, systemBus);
     });
     m_timeFormat = clock_format::pattern(m_timeLocale, m_twentyFourTime, m_showSeconds);
+
+    // Read now, not on the file thread: the layout decides which of the bar
+    // and the dock the session shows first.
+    {
+        const base::Settings settings(m_settingsPath);
+        m_layout = settings.intValue("Shell/Layout", 0) == int(Layout::Panel) ? Layout::Panel : Layout::Dock;
+        m_panelFloating = settings.boolValue("Panel/Floating", true);
+        m_panelIconSize = settings.intValue("Panel/IconSize", kMediumPanelIcons) == kSmallPanelIcons
+                ? kSmallPanelIcons
+                : kMediumPanelIcons;
+        m_panelGlassTint = std::clamp(settings.doubleValue("Panel/GlassTint", 0.5), 0.0, 1.0);
+    }
 
     m_load = runOnFileThread(
             [path = m_settingsPath] {
@@ -89,6 +102,16 @@ bool StatusBar::registerServices()
                           dbus::ArgumentNames{{"t"}, {}});
         object->addMethod("setShowSeconds", [this](bool enabled) { setShowSeconds(enabled); },
                           dbus::ArgumentNames{{"showSeconds"}, {}});
+        object->addMethod("setLayout", [this](int32_t layout) {
+                              setLayout(layout == int(Layout::Panel) ? Layout::Panel : Layout::Dock);
+                          },
+                          dbus::ArgumentNames{{"layout"}, {}});
+        object->addMethod("setPanelFloating", [this](bool floating) { setPanelFloating(floating); },
+                          dbus::ArgumentNames{{"floating"}, {}});
+        object->addMethod("setPanelIconSize", [this](int32_t size) { setPanelIconSize(size); },
+                          dbus::ArgumentNames{{"size"}, {}});
+        object->addMethod("setPanelGlassTint", [this](double tint) { setPanelGlassTint(tint); },
+                          dbus::ArgumentNames{{"tint"}, {}});
         // The same as the menu's: the user is asked first. The session's
         // own methods act at once.
         object->addMethod("requestLogout", [this] { m_powerActions.request(PowerActions::Logout); });
@@ -101,7 +124,9 @@ bool StatusBar::registerServices()
         m_object = std::move(object);
     }
     const bool watcher = m_watcher.registerService();
-    const bool registrar = m_registrar.registerService();
+    // The panel has no menu bar: without the registrar, applications keep
+    // their menus in their windows.
+    const bool registrar = m_layout == Layout::Panel || m_registrar.registerService();
     return watcher && registrar;
 }
 
@@ -127,6 +152,52 @@ void StatusBar::setShowSeconds(bool enabled)
         settings.setValue("Statusbar/ShowSeconds", enabled);
     });
     updateTimeFormat();
+}
+
+void StatusBar::setLayout(Layout layout)
+{
+    if (m_layout == layout)
+        return;
+    m_layout = layout;
+    writeSettings(m_settingsPath, [layout](base::Settings &settings) {
+        settings.setValue("Shell/Layout", int(layout));
+    });
+    if (layout == Layout::Panel)
+        m_registrar.unregisterService();
+    else if (m_object)
+        m_registrar.registerService();
+    layoutChanged();
+}
+
+void StatusBar::setPanelFloating(bool floating)
+{
+    if (m_panelFloating == floating)
+        return;
+    m_panelFloating = floating;
+    writeSettings(m_settingsPath, [floating](base::Settings &settings) {
+        settings.setValue("Panel/Floating", floating);
+    });
+    panelChanged();
+}
+
+void StatusBar::setPanelIconSize(int size)
+{
+    size = size == kSmallPanelIcons ? kSmallPanelIcons : kMediumPanelIcons;
+    if (m_panelIconSize == size)
+        return;
+    m_panelIconSize = size;
+    writeSettings(m_settingsPath, [size](base::Settings &settings) { settings.setValue("Panel/IconSize", size); });
+    panelChanged();
+}
+
+void StatusBar::setPanelGlassTint(double tint)
+{
+    tint = std::clamp(tint, 0.0, 1.0);
+    if (m_panelGlassTint == tint)
+        return;
+    m_panelGlassTint = tint;
+    writeSettings(m_settingsPath, [tint](base::Settings &settings) { settings.setValue("Panel/GlassTint", tint); });
+    panelChanged();
 }
 
 void StatusBar::reloadLanguage()
