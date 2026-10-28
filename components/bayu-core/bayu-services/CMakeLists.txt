@@ -82,6 +82,7 @@ set_target_properties(${TARGET} PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED
 
 target_compile_definitions(${TARGET} PRIVATE
         BAYU_GTK_CSS_DIR="${CMAKE_INSTALL_FULL_DATAROOTDIR}/${TARGET}/gtk"
+        BAYU_GTK_THEMES_DIR="${CMAKE_INSTALL_FULL_DATAROOTDIR}/themes"
 )
 
 target_link_libraries(${TARGET} PRIVATE

@@ -25,4 +25,8 @@ void writeGtkSettings(const GtkSettings &settings);
 // the rest of the file. It is re-added at every login, even after the user removed it.
 void ensureGtkCssImports();
 
+// Copies the Bayu GTK themes to ~/.themes, where GTK in Flatpak applications finds them (the
+// package shares it with every application); they see neither /usr/share/themes nor the host.
+void ensureFlatpakGtkThemes();
+
 #endif
