@@ -397,7 +397,10 @@ class Test:
         self.note(not error, "installation" + (f": {error}" if error else ""))
         if error:
             return self.finish()
-        # Restart now: the computer restarts, Nabau does not only close.
+        # Restart now: the computer restarts, Nabau does not only close. The
+        # log's window goes first, by its close button.
+        self.vm.qmp.click(975, 180); time.sleep(2)
+        self.shot("before-restart")
         self.vm.qmp.click(1043, 730)
         restarted = False
         for _ in range(60):
