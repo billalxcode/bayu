@@ -194,7 +194,8 @@ Printers read(int searchMs)
                 serials.insert(number);
         for (Printer& device : usbDevices()) {
             const std::string number = serial(device.uri);
-            if (search.known.contains(device.uri) || (!number.empty() && serials.contains(number)))
+            if (search.known.contains(device.uri) || (!number.empty() && serials.contains(number))
+                || throughIppUsb(device, printers.found) || throughIppUsb(device, printers.queues))
                 continue;
             search.known.insert(device.uri);
             printers.found.push_back(std::move(device));
@@ -225,6 +226,29 @@ std::string queueName(const std::string& text)
     while (!name.empty() && name.back() == '_')
         name.pop_back();
     return name.empty() ? std::string("Printer") : name.substr(0, 127);
+}
+
+bool throughIppUsb(const Printer& usb, const std::vector<Printer>& printers)
+{
+    const auto lower = [](std::string text) {
+        for (char& c : text)
+            c = char(std::tolower(static_cast<unsigned char>(c)));
+        return text;
+    };
+    const std::string model = lower(usb.model.empty() ? usb.info : usb.model);
+    if (model.empty())
+        return false;
+    constexpr std::string_view suffix = " (usb)";
+    for (const Printer& printer : printers) {
+        const std::string info = lower(printer.info);
+        const std::string uri = lower(printer.uri);
+        if (!info.ends_with(suffix) && uri.find("(usb)") == std::string::npos
+            && uri.find("%28usb%29") == std::string::npos)
+            continue;
+        if (lower(printer.model) == model || info == model + std::string(suffix))
+            return true;
+    }
+    return false;
 }
 
 std::string uniqueName(const std::string& name, const std::set<std::string>& taken)

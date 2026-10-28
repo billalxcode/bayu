@@ -43,6 +43,11 @@ std::string uriForAddress(const std::string& address);
 // A CUPS queue name from a printer's name or address: letters, digits, "-"
 // and "_".
 std::string queueName(const std::string& text);
+// Whether a USB printer is one of `printers` reached through ipp-usb, which
+// names its printers "<model> (USB)": the same printer, printing without a
+// driver, so the USB one is left out.
+bool throughIppUsb(const Printer& usb, const std::vector<Printer>& printers);
+
 // `name`, or with "_2", "_3"... after it while a queue has it.
 std::string uniqueName(const std::string& name, const std::set<std::string>& taken);
 
