@@ -3,6 +3,7 @@
 #pragma once
 
 #include <optional>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -16,6 +17,8 @@ struct Printer
     std::string info;
     std::string model;
     std::string uri;
+    // A USB printer's IEEE 1284 device ID, which picks its driver.
+    std::string deviceId;
     // IPP's printer-state: 3 idle, 4 printing, 5 stopped.
     int state = 3;
     int jobs = 0;
@@ -26,7 +29,7 @@ struct Printers
 {
     // The printers set up.
     std::vector<Printer> queues;
-    // Those on the network, and on USB through ipp-usb, not set up yet.
+    // Those on the network, and on USB, not set up yet.
     std::vector<Printer> found;
 };
 
@@ -40,6 +43,13 @@ std::string uriForAddress(const std::string& address);
 // A CUPS queue name from a printer's name or address: letters, digits, "-"
 // and "_".
 std::string queueName(const std::string& text);
+// `name`, or with "_2", "_3"... after it while a queue has it.
+std::string uniqueName(const std::string& name, const std::set<std::string>& taken);
+
+// Sets the printer up as a new queue: driverless when it prints so, on the
+// network or through ipp-usb; otherwise, a USB printer, with the driver its
+// device ID matches best. Nothing when it worked, else why not. Blocks.
+std::optional<std::string> add(const Printer& printer);
 
 // Runs a CUPS command (lpadmin, lp, lpoptions, cancel): nothing when it
 // succeeded, else what it said. Blocks, so off the UI thread.

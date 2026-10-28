@@ -8,8 +8,12 @@
 #include <cstdlib>
 #include <iterator>
 #include <set>
+#include <string_view>
 
+#include <cups/adminutil.h>
 #include <cups/cups.h>
+
+#include "base/i18n.h"
 
 namespace settings::printers {
 
@@ -80,6 +84,53 @@ std::vector<Printer> queues()
     return printers;
 }
 
+// The USB printers CUPS' usb backend sees, those that print through ipp-usb
+// aside: CUPS finds those on its own, as network printers.
+std::vector<Printer> usbDevices()
+{
+    std::vector<Printer> devices;
+    const auto found = [](const char*, const char* id, const char* info, const char* makeAndModel, const char* uri,
+                          const char*, void* data) {
+        if (!uri || !std::string_view(uri).starts_with("usb://"))
+            return;
+        Printer printer;
+        printer.uri = uri;
+        printer.deviceId = id ? id : "";
+        printer.model = makeAndModel && std::string_view(makeAndModel) != "Unknown" ? makeAndModel : "";
+        printer.info = printer.model.empty() ? (info ? info : uri) : printer.model;
+        printer.name = printer.info;
+        static_cast<std::vector<Printer>*>(data)->push_back(std::move(printer));
+    };
+    cupsGetDevices(CUPS_HTTP_DEFAULT, 5, "usb", CUPS_EXCLUDE_NONE, found, &devices);
+    return devices;
+}
+
+// The serial number in a USB printer's URI, as both usb:// and HPLIP's
+// hp:/usb/ have it; empty without one.
+std::string serial(const std::string& uri)
+{
+    const size_t at = uri.find("serial=");
+    if (at == std::string::npos || !(uri.starts_with("usb:") || uri.starts_with("hp:/usb")))
+        return {};
+    return uri.substr(at + 7, uri.find('&', at) - at - 7);
+}
+
+// The driver that matches the device ID best, as cups-driverd ranks them.
+std::string driverFor(const std::string& deviceId)
+{
+    if (deviceId.empty())
+        return {};
+    ipp_t* request = ippNewRequest(IPP_OP_CUPS_GET_PPDS);
+    ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_TEXT, "ppd-device-id", nullptr, deviceId.c_str());
+    ippAddInteger(request, IPP_TAG_OPERATION, IPP_TAG_INTEGER, "limit", 1);
+    ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_KEYWORD, "requested-attributes", nullptr, "ppd-name");
+    ipp_t* response = cupsDoRequest(CUPS_HTTP_DEFAULT, request, "/");
+    ipp_attribute_t* name = ippFindAttribute(response, "ppd-name", IPP_TAG_NAME);
+    std::string driver = name ? ippGetString(name, 0, nullptr) : "";
+    ippDelete(response);
+    return driver;
+}
+
 struct Search
 {
     std::set<std::string> known;
@@ -133,8 +184,22 @@ Printers read(int searchMs)
         printers.queues.push_back(std::move(printer));
     }
 
-    if (searchMs > 0)
+    if (searchMs > 0) {
         cupsEnumDests(CUPS_DEST_FLAGS_NONE, searchMs, nullptr, 0, 0, foundDest, &search);
+        // USB printers too: one removed is offered again, as udev set it up
+        // only when it was plugged in.
+        std::set<std::string> serials;
+        for (const Printer& queue : printers.queues)
+            if (const std::string number = serial(queue.uri); !number.empty())
+                serials.insert(number);
+        for (Printer& device : usbDevices()) {
+            const std::string number = serial(device.uri);
+            if (search.known.contains(device.uri) || (!number.empty() && serials.contains(number)))
+                continue;
+            search.known.insert(device.uri);
+            printers.found.push_back(std::move(device));
+        }
+    }
     std::ranges::sort(printers.found, {}, &Printer::info);
     return printers;
 }
@@ -160,6 +225,33 @@ std::string queueName(const std::string& text)
     while (!name.empty() && name.back() == '_')
         name.pop_back();
     return name.empty() ? std::string("Printer") : name.substr(0, 127);
+}
+
+std::string uniqueName(const std::string& name, const std::set<std::string>& taken)
+{
+    std::string unique = name;
+    for (int n = 2; taken.contains(unique); ++n)
+        unique = name + "_" + std::to_string(n);
+    return unique;
+}
+
+std::optional<std::string> add(const Printer& printer)
+{
+    std::set<std::string> taken;
+    for (const Printer& queue : queues())
+        taken.insert(queue.name);
+    std::string driver = "everywhere";
+    if (printer.uri.starts_with("usb://")) {
+        driver = driverFor(printer.deviceId);
+        if (driver.empty())
+            return std::string(bayu::i18n::tr("No driver for this printer was found."));
+    }
+    // A second queue of the same printer is told apart by its number, in its
+    // name and in what it is called.
+    const std::string base = queueName(printer.name);
+    const std::string name = uniqueName(base, taken);
+    const std::string info = name == base ? printer.info : printer.info + " (" + name.substr(base.size() + 1) + ")";
+    return run({"lpadmin", "-p", name, "-D", info, "-E", "-v", printer.uri, "-m", driver});
 }
 
 std::optional<std::string> run(const std::vector<std::string>& command)
