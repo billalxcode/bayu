@@ -27,6 +27,7 @@ class AuthController;
 class ChoiceMenu;
 class ErrorLabel;
 class PasswordField;
+class PowerConfirm;
 class RaisedLabel;
 class UserGrid;
 class UserNameField;
@@ -71,6 +72,9 @@ private:
     void updateSwappable();
     void setPickerOpen(bool open);
     void updatePicker();
+    enum class PowerAction { Suspend, Reboot, PowerOff };
+    void updatePowerNames();
+    void runPowerAction(PowerAction action);
 
     ui::Window *m_window;
     AuthController *m_controller;
@@ -87,6 +91,10 @@ private:
     ErrorLabel *m_error = nullptr;
     ChoiceMenu *m_sessions = nullptr;
     UserGrid *m_picker = nullptr;
+    ChoiceMenu *m_power = nullptr;
+    PowerConfirm *m_powerConfirm = nullptr;
+    std::vector<PowerAction> m_powerActions;
+    PowerAction m_pendingPower = PowerAction::Reboot;
     std::unique_ptr<ui::Animation> m_pickerFade;
     bool m_pickerOpen = false;
     double m_pickerProgress = 0;
