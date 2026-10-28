@@ -261,6 +261,12 @@ bool LauncherModel::launch(const std::string &idOrPath)
         return false;
 
     clearNewInstalled({entry->id});
+    // Started again, a running application would only raise a window it has
+    // in sight, so a minimized one looked as though nothing opened (issue #78).
+    if (restoreRunning && restoreRunning(entry->id)) {
+        applicationLaunched();
+        return true;
+    }
     const std::vector<std::string> command = entry->command();
     if (command.empty())
         return false;

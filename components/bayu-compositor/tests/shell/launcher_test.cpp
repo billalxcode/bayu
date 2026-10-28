@@ -172,6 +172,29 @@ TEST_F(LauncherTest, ShowsHidesAndRemembersOpenedApplications)
     EXPECT_TRUE(launcher->takeOpenedApplications().empty());
 }
 
+TEST_F(LauncherTest, RestoresAMinimizedApplicationInPlaceOfStartingIt)
+{
+    applications.scan();
+    start();
+    ASSERT_TRUE(test::runUntil([&] { return model().count() > 0; }));
+    shell::TaskWindow window;
+    window.appId = "zeta";
+    window.minimized = true;
+    const uint64_t id = windows.add(window);
+    int launched = 0;
+    const auto subscription = model().applicationLaunched.connect([&] { ++launched; });
+    windows.requests.clear();
+    EXPECT_TRUE(model().launch("zeta"));
+    EXPECT_EQ(windows.requests, (std::vector<std::string>{"activate " + std::to_string(id)}));
+    EXPECT_EQ(launched, 1);
+
+    // One in sight: the application is started as before, to open its window.
+    windows.change(id, [](shell::TaskWindow &w) { w.minimized = false; }, shell::kStateChange);
+    windows.requests.clear();
+    EXPECT_FALSE(model().restoreRunning("zeta"));
+    EXPECT_TRUE(windows.requests.empty());
+}
+
 // A search for "te" over a typical set of applications, in the en_SG locale:
 // name, generic name, comment and desktop id, as substrings ignoring case,
 // in the user's order.

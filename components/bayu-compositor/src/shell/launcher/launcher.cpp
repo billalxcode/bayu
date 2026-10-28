@@ -8,6 +8,7 @@
 
 #include "base/logging.h"
 #include "shell/common/task_manager.h"
+#include "shell/common/task_windows.h"
 #include "shell/dock/dock.h"
 
 namespace bayu::shell {
@@ -32,6 +33,21 @@ Launcher::Launcher(base::dbus::Connection *bus, TaskManager &tasks, ApplicationL
     m_subscriptions.push_back(m_tasks.readyChanged.connect(noteRunning));
     if (m_tasks.isReady())
         noteRunning();
+
+    m_applications.restoreRunning = [this](const std::string &desktopId) {
+        const std::vector<uint64_t> windows = m_tasks.windows(desktopId);
+        TaskWindows &taskWindows = m_tasks.taskWindows();
+        for (uint64_t id : windows) {
+            const TaskWindow *window = taskWindows.window(id);
+            if (window && !window->minimized && !window->hidden)
+                return false;
+        }
+        if (windows.empty())
+            return false;
+        // Activating restores the window, the last the application opened.
+        taskWindows.activate(windows.back());
+        return true;
+    };
 
     // Opened applications lose their new mark.
     m_subscriptions.push_back(applicationOpened.connect(
