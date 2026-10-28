@@ -733,6 +733,9 @@ private:
                 }
                 m_menu->setOpen(!m_menu->m_open);
                 m_menu->requestLayout();
+                // From the keyboard, the list takes it.
+                if (m_menu->m_open && m_menu->m_iconOnly && hasFocus() && !m_menu->m_popup->children().empty())
+                    m_menu->m_popup->children().front()->setFocus();
             };
         }
 
@@ -773,8 +776,9 @@ private:
 
         void paint(ui::Painter &painter) override
         {
-            const bool lit = containsMouse() || m_menu->m_open || hasVisibleFocus();
-            drawPanelRect(painter, localRect(), geometry().height / 2, white(lit ? 0.24 : 0.16));
+            const bool lit = containsMouse() || m_menu->m_open;
+            drawPanelRect(painter, localRect(), geometry().height / 2,
+                          white(hasVisibleFocus() ? 0.36 : lit ? 0.24 : 0.16));
         }
 
     private:
@@ -808,7 +812,7 @@ private:
         void paint(ui::Painter &painter) override
         {
             if (containsMouse() || hasVisibleFocus())
-                drawPanelRect(painter, localRect(), 8, white(0.16));
+                drawPanelRect(painter, localRect(), 8, white(hasVisibleFocus() ? 0.24 : 0.16));
         }
 
     private:
@@ -935,7 +939,8 @@ public:
         m_cancel->setText(tr("Cancel"));
         m_confirm->setText(action);
         setVisible(true);
-        m_confirm->setFocus();
+        // Cancel first, so that Enter does not end anything by mistake.
+        m_cancel->setFocus();
         requestLayout();
     }
 
@@ -952,7 +957,8 @@ protected:
         m_confirm->setGeometry({16 + width + 8, geometry().height - 16 - 34, width, 34});
     }
 
-    void paint(ui::Painter &painter) override { drawPanelRect(painter, localRect(), 16, kBlack.withAlpha(0.55)); }
+    // Over the login column: dark enough to be read on it.
+    void paint(ui::Painter &painter) override { drawPanelRect(painter, localRect(), 16, kBlack.withAlpha(0.82)); }
 
 private:
     class Pill final : public Clickable
@@ -1716,11 +1722,11 @@ void AuthScreen::layout()
     const double gridTop = std::min(height - 64 - podHeight - UserTile::kHalo, height - 64 - grid.height);
     m_picker->setGeometry({centeredStart(width, grid.width), gridTop, grid.width, grid.height});
 
-    // The power button in the bottom-right corner, its confirmation above it.
+    // The power button under the login column, its confirmation above it.
     const ui::SizeF power = m_power->sizeHint();
-    m_power->setGeometry({width - 24 - power.width, height - 24 - power.height, power.width, power.height});
+    m_power->setGeometry({centeredStart(width, power.width), height - 16 - power.height, power.width, power.height});
     const ui::SizeF confirm = m_powerConfirm->sizeHint();
-    m_powerConfirm->setGeometry({width - 24 - confirm.width, height - 24 - power.height - 8 - confirm.height,
+    m_powerConfirm->setGeometry({centeredStart(width, confirm.width), height - 16 - power.height - 8 - confirm.height,
                                  confirm.width, confirm.height});
 }
 
