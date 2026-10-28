@@ -20,8 +20,6 @@ struct Printer
     int state = 3;
     int jobs = 0;
     bool isDefault = false;
-    // Found by CUPS, not set up: printed on through a temporary queue.
-    bool discovered = false;
 };
 
 struct Printers
