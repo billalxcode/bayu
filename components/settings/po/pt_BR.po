@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 09:18+0000\n"
+"POT-Creation-Date: 2026-10-28 02:45+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/pages/about/aboutinfo.cpp
@@ -142,6 +141,7 @@ msgstr "Excluir o usuário “{name}”? A pasta pessoal e todo o seu conteúdo 
 #: src/pages/network/hotspot/hotspotpage.cpp
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
+#: src/pages/printers/printerspage.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
 #: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
@@ -213,7 +213,7 @@ msgid "User name"
 msgstr "Nome de usuário"
 
 #: src/pages/accounts/userdialogs.cpp src/pages/language/addlanguagedialog.cpp
-#: src/pages/network/vpn/vpndialogs.cpp
+#: src/pages/network/vpn/vpndialogs.cpp src/pages/printers/printerspage.cpp
 msgid "Add"
 msgstr "Adicionar"
 
@@ -445,6 +445,7 @@ msgid "Name"
 msgstr "Nome"
 
 #: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/network/vpn/vpneditor.cpp
+#: src/pages/printers/printerspage.cpp
 msgid "Address"
 msgstr "Endereço"
 
@@ -1506,8 +1507,8 @@ msgstr "Adicionar peer"
 msgid "Peer"
 msgstr "Peer"
 
-#: src/pages/network/vpn/vpneditor.cpp src/pages/privacy/privacypage.cpp
-#: src/pages/shortcuts/shortcuteditdialog.cpp
+#: src/pages/network/vpn/vpneditor.cpp src/pages/printers/printerspage.cpp
+#: src/pages/privacy/privacypage.cpp src/pages/shortcuts/shortcuteditdialog.cpp
 msgid "Remove"
 msgstr "Remover"
 
@@ -1736,6 +1737,78 @@ msgstr "Impedir a suspensão automática na tomada quando a tela estiver desliga
 #: src/pages/power/powerpage.cpp
 msgid "Prevent automatic sleeping when the display is off"
 msgstr "Impedir a suspensão automática quando a tela estiver desligada"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Print Test Page"
+msgstr "Imprimir página de teste"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Set as Default"
+msgstr "Definir como padrão"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Cancel All Jobs"
+msgstr "Cancelar todos os trabalhos"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printing"
+msgstr "Imprimindo"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Stopped"
+msgstr "Parada"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Ready"
+msgstr "Pronta"
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "{n} job"
+msgid_plural "{n} jobs"
+msgstr[0] "{n} trabalho"
+msgstr[1] "{n} trabalhos"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Default"
+msgstr "Padrão"
+
+#: src/pages/printers/printerspage.cpp src/window/pagelist.cpp
+msgid "Printers"
+msgstr "Impressoras"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No printers yet"
+msgstr "Nenhuma impressora ainda"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers Found"
+msgstr "Impressoras encontradas"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Looking for printers…"
+msgstr "Procurando impressoras…"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Add a Printer by Address"
+msgstr "Adicionar uma impressora pelo endereço"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers on this network and those plugged in by USB are found by themselves. USB printers are usually set up as soon as they are plugged in."
+msgstr "As impressoras desta rede e as conectadas por USB são encontradas sozinhas. As impressoras USB costumam ser configuradas assim que são conectadas."
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "Could not change the printers: {error}"
+msgstr "Não foi possível alterar as impressoras: {error}"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No other printers found"
+msgstr "Nenhuma outra impressora encontrada"
+
+#: src/pages/printers/printerspage.cpp
+msgid "The printer's host name or IP address, such as 192.168.1.20, or its IPP address. It has to print without a driver (IPP Everywhere or AirPrint), as most printers made since 2012 do."
+msgstr "O nome do host ou o endereço IP da impressora, como 192.168.1.20, ou seu endereço IPP. Ela precisa imprimir sem driver (IPP Everywhere ou AirPrint), como a maioria das impressoras fabricadas desde 2012."
 
 #: src/pages/privacy/privacypage.cpp src/window/pagelist.cpp
 msgid "Privacy"
@@ -2547,6 +2620,10 @@ msgstr "trackpad, tocar para clicar, rolagem natural, clique secundário, veloci
 #: src/window/pagelist.cpp
 msgid "touch, touch screen, touch panel"
 msgstr "toque, tela sensível ao toque, painel de toque"
+
+#: src/window/pagelist.cpp
+msgid "printer, print, printing, scanner, CUPS, USB, network, default printer, test page"
+msgstr "impressora, imprimir, impressão, scanner, CUPS, USB, rede, impressora padrão, página de teste"
 
 #: src/window/pagelist.cpp
 msgid "accounts, password, login, administrator, avatar"

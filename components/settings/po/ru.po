@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 09:18+0000\n"
+"POT-Creation-Date: 2026-10-28 02:45+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -141,6 +141,7 @@ msgstr "Удалить пользователя «{name}»? Его домашн�
 #: src/pages/network/hotspot/hotspotpage.cpp
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
+#: src/pages/printers/printerspage.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
 #: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
@@ -212,7 +213,7 @@ msgid "User name"
 msgstr "Имя пользователя"
 
 #: src/pages/accounts/userdialogs.cpp src/pages/language/addlanguagedialog.cpp
-#: src/pages/network/vpn/vpndialogs.cpp
+#: src/pages/network/vpn/vpndialogs.cpp src/pages/printers/printerspage.cpp
 msgid "Add"
 msgstr "Добавить"
 
@@ -444,6 +445,7 @@ msgid "Name"
 msgstr "Имя"
 
 #: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/network/vpn/vpneditor.cpp
+#: src/pages/printers/printerspage.cpp
 msgid "Address"
 msgstr "Адрес"
 
@@ -1510,8 +1512,8 @@ msgstr "Добавить пир"
 msgid "Peer"
 msgstr "Пир"
 
-#: src/pages/network/vpn/vpneditor.cpp src/pages/privacy/privacypage.cpp
-#: src/pages/shortcuts/shortcuteditdialog.cpp
+#: src/pages/network/vpn/vpneditor.cpp src/pages/printers/printerspage.cpp
+#: src/pages/privacy/privacypage.cpp src/pages/shortcuts/shortcuteditdialog.cpp
 msgid "Remove"
 msgstr "Удалить"
 
@@ -1741,6 +1743,79 @@ msgstr "Не переходить в спящий режим от сети пр�
 #: src/pages/power/powerpage.cpp
 msgid "Prevent automatic sleeping when the display is off"
 msgstr "Не переходить в спящий режим при выключенном дисплее"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Print Test Page"
+msgstr "Напечатать пробную страницу"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Set as Default"
+msgstr "Использовать по умолчанию"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Cancel All Jobs"
+msgstr "Отменить все задания"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printing"
+msgstr "Печать"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Stopped"
+msgstr "Остановлен"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Ready"
+msgstr "Готов"
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "{n} job"
+msgid_plural "{n} jobs"
+msgstr[0] "{n} задание"
+msgstr[1] "{n} задания"
+msgstr[2] "{n} заданий"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Default"
+msgstr "По умолчанию"
+
+#: src/pages/printers/printerspage.cpp src/window/pagelist.cpp
+msgid "Printers"
+msgstr "Принтеры"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No printers yet"
+msgstr "Принтеров пока нет"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers Found"
+msgstr "Найденные принтеры"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Looking for printers…"
+msgstr "Поиск принтеров…"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Add a Printer by Address"
+msgstr "Добавить принтер по адресу"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers on this network and those plugged in by USB are found by themselves. USB printers are usually set up as soon as they are plugged in."
+msgstr "Принтеры в этой сети и подключённые по USB находятся сами. Принтеры USB обычно настраиваются сразу после подключения."
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "Could not change the printers: {error}"
+msgstr "Не удалось изменить принтеры: {error}"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No other printers found"
+msgstr "Другие принтеры не найдены"
+
+#: src/pages/printers/printerspage.cpp
+msgid "The printer's host name or IP address, such as 192.168.1.20, or its IPP address. It has to print without a driver (IPP Everywhere or AirPrint), as most printers made since 2012 do."
+msgstr "Имя узла или IP-адрес принтера, например 192.168.1.20, или его адрес IPP. Принтер должен печатать без драйвера (IPP Everywhere или AirPrint), как большинство принтеров, выпущенных с 2012 года."
 
 #: src/pages/privacy/privacypage.cpp src/window/pagelist.cpp
 msgid "Privacy"
@@ -2556,6 +2631,10 @@ msgstr "тачпад, касание для щелчка, естественна
 #: src/window/pagelist.cpp
 msgid "touch, touch screen, touch panel"
 msgstr "касание, сенсорный экран, сенсорная панель, touch, touch screen, touch panel"
+
+#: src/window/pagelist.cpp
+msgid "printer, print, printing, scanner, CUPS, USB, network, default printer, test page"
+msgstr "принтер, печать, печатать, сканер, CUPS, USB, сеть, принтер по умолчанию, пробная страница"
 
 #: src/window/pagelist.cpp
 msgid "accounts, password, login, administrator, avatar"

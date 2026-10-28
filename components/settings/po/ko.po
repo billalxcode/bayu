@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 09:18+0000\n"
+"POT-Creation-Date: 2026-10-28 02:45+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -141,6 +141,7 @@ msgstr "사용자 “{name}”을(를) 삭제하시겠습니까? 해당 사용�
 #: src/pages/network/hotspot/hotspotpage.cpp
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
+#: src/pages/printers/printerspage.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
 #: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
@@ -212,7 +213,7 @@ msgid "User name"
 msgstr "사용자 이름"
 
 #: src/pages/accounts/userdialogs.cpp src/pages/language/addlanguagedialog.cpp
-#: src/pages/network/vpn/vpndialogs.cpp
+#: src/pages/network/vpn/vpndialogs.cpp src/pages/printers/printerspage.cpp
 msgid "Add"
 msgstr "추가"
 
@@ -444,6 +445,7 @@ msgid "Name"
 msgstr "이름"
 
 #: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/network/vpn/vpneditor.cpp
+#: src/pages/printers/printerspage.cpp
 msgid "Address"
 msgstr "주소"
 
@@ -1500,8 +1502,8 @@ msgstr "피어 추가"
 msgid "Peer"
 msgstr "피어"
 
-#: src/pages/network/vpn/vpneditor.cpp src/pages/privacy/privacypage.cpp
-#: src/pages/shortcuts/shortcuteditdialog.cpp
+#: src/pages/network/vpn/vpneditor.cpp src/pages/printers/printerspage.cpp
+#: src/pages/privacy/privacypage.cpp src/pages/shortcuts/shortcuteditdialog.cpp
 msgid "Remove"
 msgstr "제거"
 
@@ -1729,6 +1731,77 @@ msgstr "디스플레이가 꺼져 있어도 전원 어댑터 연결 중 자동 �
 #: src/pages/power/powerpage.cpp
 msgid "Prevent automatic sleeping when the display is off"
 msgstr "디스플레이가 꺼져 있어도 자동 절전 방지"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Print Test Page"
+msgstr "테스트 페이지 인쇄"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Set as Default"
+msgstr "기본값으로 설정"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Cancel All Jobs"
+msgstr "모든 작업 취소"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printing"
+msgstr "인쇄 중"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Stopped"
+msgstr "중지됨"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Ready"
+msgstr "준비됨"
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "{n} job"
+msgid_plural "{n} jobs"
+msgstr[0] "작업 {n}개"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Default"
+msgstr "기본값"
+
+#: src/pages/printers/printerspage.cpp src/window/pagelist.cpp
+msgid "Printers"
+msgstr "프린터"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No printers yet"
+msgstr "아직 프린터가 없습니다"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers Found"
+msgstr "찾은 프린터"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Looking for printers…"
+msgstr "프린터를 찾는 중…"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Add a Printer by Address"
+msgstr "주소로 프린터 추가"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers on this network and those plugged in by USB are found by themselves. USB printers are usually set up as soon as they are plugged in."
+msgstr "이 네트워크의 프린터와 USB로 연결한 프린터는 자동으로 찾습니다. USB 프린터는 보통 연결하자마자 설정됩니다."
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "Could not change the printers: {error}"
+msgstr "프린터를 변경할 수 없습니다: {error}"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No other printers found"
+msgstr "다른 프린터를 찾지 못했습니다"
+
+#: src/pages/printers/printerspage.cpp
+msgid "The printer's host name or IP address, such as 192.168.1.20, or its IPP address. It has to print without a driver (IPP Everywhere or AirPrint), as most printers made since 2012 do."
+msgstr "프린터의 호스트 이름 또는 IP 주소(예: 192.168.1.20), 또는 IPP 주소입니다. 드라이버 없이 인쇄할 수 있어야 하며(IPP Everywhere 또는 AirPrint), 2012년 이후 출시된 대부분의 프린터가 지원합니다."
 
 #: src/pages/privacy/privacypage.cpp src/window/pagelist.cpp
 msgid "Privacy"
@@ -2536,6 +2609,10 @@ msgstr "트랙패드, 탭하여 클릭, 자연스러운 스크롤, 보조 클릭
 #: src/window/pagelist.cpp
 msgid "touch, touch screen, touch panel"
 msgstr "터치, 터치스크린, 터치 패널"
+
+#: src/window/pagelist.cpp
+msgid "printer, print, printing, scanner, CUPS, USB, network, default printer, test page"
+msgstr "프린터, 인쇄, 스캐너, CUPS, USB, 네트워크, 기본 프린터, 테스트 페이지"
 
 #: src/window/pagelist.cpp
 msgid "accounts, password, login, administrator, avatar"

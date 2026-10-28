@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 09:18+0000\n"
+"POT-Creation-Date: 2026-10-28 02:45+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -141,6 +141,7 @@ msgstr "要删除用户“{name}”吗？其主目录及其中的内容将被永
 #: src/pages/network/hotspot/hotspotpage.cpp
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
+#: src/pages/printers/printerspage.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
 #: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
@@ -212,7 +213,7 @@ msgid "User name"
 msgstr "用户名"
 
 #: src/pages/accounts/userdialogs.cpp src/pages/language/addlanguagedialog.cpp
-#: src/pages/network/vpn/vpndialogs.cpp
+#: src/pages/network/vpn/vpndialogs.cpp src/pages/printers/printerspage.cpp
 msgid "Add"
 msgstr "添加"
 
@@ -444,6 +445,7 @@ msgid "Name"
 msgstr "名称"
 
 #: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/network/vpn/vpneditor.cpp
+#: src/pages/printers/printerspage.cpp
 msgid "Address"
 msgstr "地址"
 
@@ -1500,8 +1502,8 @@ msgstr "添加对等体"
 msgid "Peer"
 msgstr "对等体"
 
-#: src/pages/network/vpn/vpneditor.cpp src/pages/privacy/privacypage.cpp
-#: src/pages/shortcuts/shortcuteditdialog.cpp
+#: src/pages/network/vpn/vpneditor.cpp src/pages/printers/printerspage.cpp
+#: src/pages/privacy/privacypage.cpp src/pages/shortcuts/shortcuteditdialog.cpp
 msgid "Remove"
 msgstr "移除"
 
@@ -1729,6 +1731,77 @@ msgstr "显示器关闭时，阻止使用电源适配器时自动睡眠"
 #: src/pages/power/powerpage.cpp
 msgid "Prevent automatic sleeping when the display is off"
 msgstr "显示器关闭时，阻止自动睡眠"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Print Test Page"
+msgstr "打印测试页"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Set as Default"
+msgstr "设为默认"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Cancel All Jobs"
+msgstr "取消所有作业"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printing"
+msgstr "正在打印"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Stopped"
+msgstr "已停止"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Ready"
+msgstr "就绪"
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "{n} job"
+msgid_plural "{n} jobs"
+msgstr[0] "{n} 个作业"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Default"
+msgstr "默认"
+
+#: src/pages/printers/printerspage.cpp src/window/pagelist.cpp
+msgid "Printers"
+msgstr "打印机"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No printers yet"
+msgstr "尚无打印机"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers Found"
+msgstr "找到的打印机"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Looking for printers…"
+msgstr "正在查找打印机…"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Add a Printer by Address"
+msgstr "按地址添加打印机"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers on this network and those plugged in by USB are found by themselves. USB printers are usually set up as soon as they are plugged in."
+msgstr "此网络上的打印机以及通过 USB 连接的打印机会被自动找到。USB 打印机通常在插入后即可完成设置。"
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "Could not change the printers: {error}"
+msgstr "无法更改打印机：{error}"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No other printers found"
+msgstr "未找到其他打印机"
+
+#: src/pages/printers/printerspage.cpp
+msgid "The printer's host name or IP address, such as 192.168.1.20, or its IPP address. It has to print without a driver (IPP Everywhere or AirPrint), as most printers made since 2012 do."
+msgstr "打印机的主机名或 IP 地址（如 192.168.1.20），或其 IPP 地址。打印机必须支持无驱动打印（IPP Everywhere 或 AirPrint），2012 年以后生产的大多数打印机都支持。"
 
 #: src/pages/privacy/privacypage.cpp src/window/pagelist.cpp
 msgid "Privacy"
@@ -2536,6 +2609,10 @@ msgstr "trackpad, tap to click, natural scrolling, secondary click, pointer spee
 #: src/window/pagelist.cpp
 msgid "touch, touch screen, touch panel"
 msgstr "touch, touch screen, touch panel, 触摸, 触摸屏, 触控面板"
+
+#: src/window/pagelist.cpp
+msgid "printer, print, printing, scanner, CUPS, USB, network, default printer, test page"
+msgstr "打印机, 打印, 扫描仪, CUPS, USB, 网络, 默认打印机, 测试页"
 
 #: src/window/pagelist.cpp
 msgid "accounts, password, login, administrator, avatar"

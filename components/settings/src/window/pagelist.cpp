@@ -62,6 +62,9 @@ static std::vector<PageInfo> makePages()
     add({.id = "touchscreen", .name = "touchscreen", .title = trNoop("Touchscreen"), .icon = "touchscreen.svg",
          .iconColor = Color::rgb(0x999999), .category = trNoop("Devices"),
          .keywords = trNoop("touch, touch screen, touch panel")});
+    add({.id = "printers", .name = "printers", .title = trNoop("Printers"), .icon = "printer.svg",
+         .iconColor = Color::rgb(0x5E6AD2), .category = trNoop("Devices"),
+         .keywords = trNoop("printer, print, printing, scanner, CUPS, USB, network, default printer, test page")});
     add({.id = "accounts", .name = "accounts", .title = trNoop("Users"), .icon = "accounts.svg",
          .iconColor = Color::rgb(0xDA7C43), .category = trNoop("System"),
          .keywords = trNoop("accounts, password, login, administrator, avatar")});
