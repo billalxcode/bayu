@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 23:25+0000\n"
+"POT-Creation-Date: 2026-10-28 05:19+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -991,16 +991,32 @@ msgid "Choose light or dark, and a wallpaper. More choices are in Settings."
 msgstr "选择浅色或深色,再选一张壁纸。更多选项请在“设置”中查看。"
 
 #: src/welcome/main.cpp
+msgid "DESKTOP LAYOUT"
+msgstr "桌面布局"
+
+#: src/welcome/main.cpp
+msgid "Dock or panel"
+msgstr "程序坞或面板"
+
+#: src/welcome/main.cpp
+msgid "The Dock keeps a bar at the top, with the menus of the app in front, and your apps in a dock. The Panel puts everything in one bar along the bottom, with each app's menus in its window. The desktop changes at once."
+msgstr "程序坞布局在顶部保留一个栏，显示前台应用的菜单，应用放在程序坞中。面板布局把一切放在底部的一个栏中，每个应用的菜单都在其窗口内。桌面会立即改变。"
+
+#: src/welcome/main.cpp
 msgid "Stay up to date"
 msgstr "保持最新"
 
 #: src/welcome/main.cpp
-msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
-msgstr "应用更新在 Bayu Store 的“更新”中。系统更新请在终端中运行“sudo dnf upgrade”。"
+msgid "App updates are in Bayu Store, under Updates. System updates are in Settings, under System Update: they download in the background and install when you restart."
+msgstr "应用更新在 Bayu 商店的“更新”中。系统更新在“设置”的“系统更新”中：它们在后台下载，并在重新启动时安装。"
 
 #: src/welcome/main.cpp
 msgid "Open Updates"
 msgstr "打开“更新”"
+
+#: src/welcome/main.cpp
+msgid "System Update"
+msgstr "系统更新"
 
 #: src/welcome/main.cpp
 msgid "Report a problem"
@@ -1059,6 +1075,14 @@ msgstr "深色模式"
 msgid "Open Settings"
 msgstr "打开“设置”"
 
+#: src/welcome/main.cpp
+msgid "Dock"
+msgstr "程序坞"
+
+#: src/welcome/main.cpp
+msgid "Panel"
+msgstr "面板"
+
 #: src/welcome/main.cpp data/bayu-welcome.desktop
 msgid "Welcome"
 msgstr "欢迎"
@@ -1082,3 +1106,6 @@ msgstr "IGN 26 及其应用的简短导览"
 #: data/bayu-welcome.desktop
 msgid "tour;welcome;help;getting started;"
 msgstr "导览;欢迎;帮助;入门;tour;welcome;help;getting started;"
+
+#~ msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
+#~ msgstr "应用更新在 Bayu Store 的“更新”中。系统更新请在终端中运行“sudo dnf upgrade”。"

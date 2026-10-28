@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 23:25+0000\n"
+"POT-Creation-Date: 2026-10-28 05:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -991,16 +991,32 @@ msgid "Choose light or dark, and a wallpaper. More choices are in Settings."
 msgstr "Pilih cerah atau gelap, dan kertas dinding. Lebih banyak pilihan ada dalam Tetapan."
 
 #: src/welcome/main.cpp
+msgid "DESKTOP LAYOUT"
+msgstr "SUSUN ATUR DESKTOP"
+
+#: src/welcome/main.cpp
+msgid "Dock or panel"
+msgstr "Dock atau panel"
+
+#: src/welcome/main.cpp
+msgid "The Dock keeps a bar at the top, with the menus of the app in front, and your apps in a dock. The Panel puts everything in one bar along the bottom, with each app's menus in its window. The desktop changes at once."
+msgstr "Dock mengekalkan bar di atas, dengan menu aplikasi di hadapan, dan aplikasi anda di dalam dock. Panel meletakkan segala-galanya dalam satu bar di bawah, dengan menu setiap aplikasi di dalam tetingkapnya. Desktop berubah serta-merta."
+
+#: src/welcome/main.cpp
 msgid "Stay up to date"
 msgstr "Sentiasa terkini"
 
 #: src/welcome/main.cpp
-msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
-msgstr "Kemas kini aplikasi ada dalam Bayu Store, di bawah Kemas kini. Untuk sistem, jalankan \"sudo dnf upgrade\" dalam Terminal."
+msgid "App updates are in Bayu Store, under Updates. System updates are in Settings, under System Update: they download in the background and install when you restart."
+msgstr "Kemas kini aplikasi ada dalam Bayu Store, di bawah Kemas Kini. Kemas kini sistem ada dalam Tetapan, di bawah Kemas Kini Sistem: ia dimuat turun di latar belakang dan dipasang apabila anda mulakan semula."
 
 #: src/welcome/main.cpp
 msgid "Open Updates"
 msgstr "Buka Kemas kini"
+
+#: src/welcome/main.cpp
+msgid "System Update"
+msgstr "Kemas Kini Sistem"
 
 #: src/welcome/main.cpp
 msgid "Report a problem"
@@ -1059,6 +1075,14 @@ msgstr "Mod gelap"
 msgid "Open Settings"
 msgstr "Buka Tetapan"
 
+#: src/welcome/main.cpp
+msgid "Dock"
+msgstr "Dock"
+
+#: src/welcome/main.cpp
+msgid "Panel"
+msgstr "Panel"
+
 #: src/welcome/main.cpp data/bayu-welcome.desktop
 msgid "Welcome"
 msgstr "Selamat Datang"
@@ -1082,3 +1106,6 @@ msgstr "Lawatan ringkas IGN 26 dan aplikasinya"
 #: data/bayu-welcome.desktop
 msgid "tour;welcome;help;getting started;"
 msgstr "lawatan;selamat datang;bantuan;bermula;tour;welcome;help;getting started;"
+
+#~ msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
+#~ msgstr "Kemas kini aplikasi ada dalam Bayu Store, di bawah Kemas kini. Untuk sistem, jalankan \"sudo dnf upgrade\" dalam Terminal."

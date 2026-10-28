@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 23:25+0000\n"
+"POT-Creation-Date: 2026-10-28 05:19+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -991,16 +991,32 @@ msgid "Choose light or dark, and a wallpaper. More choices are in Settings."
 msgstr "라이트 또는 다크 모드와 배경화면을 선택하세요. 더 많은 옵션은 설정에 있습니다."
 
 #: src/welcome/main.cpp
+msgid "DESKTOP LAYOUT"
+msgstr "데스크톱 레이아웃"
+
+#: src/welcome/main.cpp
+msgid "Dock or panel"
+msgstr "Dock 또는 패널"
+
+#: src/welcome/main.cpp
+msgid "The Dock keeps a bar at the top, with the menus of the app in front, and your apps in a dock. The Panel puts everything in one bar along the bottom, with each app's menus in its window. The desktop changes at once."
+msgstr "Dock은 위쪽에 막대를 두어 앞에 있는 앱의 메뉴를 표시하고, 앱은 Dock에 둡니다. 패널은 모든 것을 아래쪽 막대 하나에 두며, 각 앱의 메뉴는 앱 창 안에 있습니다. 데스크톱이 바로 바뀝니다."
+
+#: src/welcome/main.cpp
 msgid "Stay up to date"
 msgstr "항상 최신 상태로"
 
 #: src/welcome/main.cpp
-msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
-msgstr "앱 업데이트는 Bayu Store의 업데이트에 있습니다. 시스템은 터미널에서 \"sudo dnf upgrade\"를 실행하세요."
+msgid "App updates are in Bayu Store, under Updates. System updates are in Settings, under System Update: they download in the background and install when you restart."
+msgstr "앱 업데이트는 Bayu Store의 업데이트에 있습니다. 시스템 업데이트는 설정의 시스템 업데이트에 있으며, 백그라운드에서 다운로드되고 다시 시작할 때 설치됩니다."
 
 #: src/welcome/main.cpp
 msgid "Open Updates"
 msgstr "업데이트 열기"
+
+#: src/welcome/main.cpp
+msgid "System Update"
+msgstr "시스템 업데이트"
 
 #: src/welcome/main.cpp
 msgid "Report a problem"
@@ -1059,6 +1075,14 @@ msgstr "다크 모드"
 msgid "Open Settings"
 msgstr "설정 열기"
 
+#: src/welcome/main.cpp
+msgid "Dock"
+msgstr "Dock"
+
+#: src/welcome/main.cpp
+msgid "Panel"
+msgstr "패널"
+
 #: src/welcome/main.cpp data/bayu-welcome.desktop
 msgid "Welcome"
 msgstr "환영합니다"
@@ -1082,3 +1106,6 @@ msgstr "IGN 26과 앱을 둘러보는 짧은 투어"
 #: data/bayu-welcome.desktop
 msgid "tour;welcome;help;getting started;"
 msgstr "투어;환영;도움말;시작하기;tour;welcome;help;getting started;"
+
+#~ msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
+#~ msgstr "앱 업데이트는 Bayu Store의 업데이트에 있습니다. 시스템은 터미널에서 \"sudo dnf upgrade\"를 실행하세요."

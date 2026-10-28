@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 23:25+0000\n"
+"POT-Creation-Date: 2026-10-28 05:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -991,16 +991,32 @@ msgid "Choose light or dark, and a wallpaper. More choices are in Settings."
 msgstr "Pilih padhang utawa peteng, lan wallpaper. Pilihan liyane ana ing Setelan."
 
 #: src/welcome/main.cpp
+msgid "DESKTOP LAYOUT"
+msgstr "TATA LETAK DESKTOP"
+
+#: src/welcome/main.cpp
+msgid "Dock or panel"
+msgstr "Dock utawa panel"
+
+#: src/welcome/main.cpp
+msgid "The Dock keeps a bar at the top, with the menus of the app in front, and your apps in a dock. The Panel puts everything in one bar along the bottom, with each app's menus in its window. The desktop changes at once."
+msgstr "Dock nyimpen bilah ing ndhuwur, isine menu aplikasi sing lagi dienggo, lan aplikasi sampeyan ing dock. Panel nyelehake kabeh ing siji bilah ing ngisor, kanthi menu saben aplikasi ing jendhelane. Desktop langsung owah."
+
+#: src/welcome/main.cpp
 msgid "Stay up to date"
 msgstr "Tansah anyar"
 
 #: src/welcome/main.cpp
-msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
-msgstr "Nganyari aplikasi ana ing Bayu Store, ing Nganyari. Kanggo sistem, jalanake \"sudo dnf upgrade\" ing Terminal."
+msgid "App updates are in Bayu Store, under Updates. System updates are in Settings, under System Update: they download in the background and install when you restart."
+msgstr "Pembaruan aplikasi ana ing Bayu Store, ing bagean Pembaruan. Pembaruan sistem ana ing Setelan, ing bagean Pembaruan Sistem: diundhuh ing latar mburi lan dipasang nalika sampeyan miwiti maneh."
 
 #: src/welcome/main.cpp
 msgid "Open Updates"
 msgstr "Bukak Nganyari"
+
+#: src/welcome/main.cpp
+msgid "System Update"
+msgstr "Pembaruan Sistem"
 
 #: src/welcome/main.cpp
 msgid "Report a problem"
@@ -1059,6 +1075,14 @@ msgstr "Mode peteng"
 msgid "Open Settings"
 msgstr "Bukak Setelan"
 
+#: src/welcome/main.cpp
+msgid "Dock"
+msgstr "Dock"
+
+#: src/welcome/main.cpp
+msgid "Panel"
+msgstr "Panel"
+
 #: src/welcome/main.cpp data/bayu-welcome.desktop
 msgid "Welcome"
 msgstr "Sugeng Rawuh"
@@ -1082,3 +1106,6 @@ msgstr "Tur cekak IGN 26 lan aplikasiné"
 #: data/bayu-welcome.desktop
 msgid "tour;welcome;help;getting started;"
 msgstr "tur;sugeng rawuh;pitulung;miwiti;tour;welcome;help;getting started;"
+
+#~ msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
+#~ msgstr "Nganyari aplikasi ana ing Bayu Store, ing Nganyari. Kanggo sistem, jalanake \"sudo dnf upgrade\" ing Terminal."

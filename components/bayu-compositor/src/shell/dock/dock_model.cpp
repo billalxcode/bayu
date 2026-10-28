@@ -218,6 +218,11 @@ void DockModel::clicked(const std::string &id)
         if (item->currentActive >= item->windows.size())
             item->currentActive = 0;
         m_windows.activate(item->windows[item->currentActive]);
+    } else if (const TaskWindow *front = m_windows.window(item->windows.front());
+               item->windows.size() == 1 && front && m_windows.activeWindow() == front->id && !front->minimized) {
+        // The application in front: its icon minimizes it, and brings it back
+        // at the next click, as the panel's buttons do (issue #77).
+        m_windows.minimize(front->id);
     } else if (item->windows.size() > 1) {
         // Several windows: each click shows the next.
         if (++item->currentActive == item->windows.size())

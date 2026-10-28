@@ -5,6 +5,7 @@
 #ifndef BAYU_SHELL_LAUNCHER_LAUNCHER_MODEL_H_
 #define BAYU_SHELL_LAUNCHER_LAUNCHER_MODEL_H_
 
+#include <functional>
 #include <optional>
 #include <set>
 #include <string>
@@ -75,6 +76,9 @@ public:
     void save();
 
     base::Signal<> applicationLaunched;
+    // Brings back a running application whose windows are all out of sight,
+    // in place of starting it again; false when there is none.
+    std::function<bool(const std::string &desktopId)> restoreRunning;
 
 private:
     struct Stored {

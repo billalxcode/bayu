@@ -42,7 +42,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE store-ui)
 set(WELCOME_DATA_DIR ${CMAKE_INSTALL_FULL_DATADIR}/bayu-store/welcome CACHE PATH "The tour's installed screenshots")
 find_package(BayuClients REQUIRED COMPONENTS appearance)
 add_executable(bayu-welcome src/welcome/main.cpp)
-target_compile_definitions(bayu-welcome PRIVATE WELCOME_DATA_DIR="${WELCOME_DATA_DIR}")
+# The layout pictures of Settings > Desktop, for the tour's layout slide.
+set(LAYOUT_PICTURES_DIR ${CMAKE_INSTALL_FULL_DATADIR}/bayu-settings/images CACHE PATH "Settings' layout pictures")
+target_compile_definitions(bayu-welcome PRIVATE WELCOME_DATA_DIR="${WELCOME_DATA_DIR}"
+    LAYOUT_PICTURES_DIR="${LAYOUT_PICTURES_DIR}")
 target_link_libraries(bayu-welcome PRIVATE store-ui Bayu::AppearanceClient)
 
 # Opens an Android app, with a dialog while Android starts again.

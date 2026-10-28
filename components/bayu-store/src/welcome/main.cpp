@@ -14,10 +14,12 @@
 #include <string>
 #include <vector>
 
+#include "base/dbus.h"
 #include "base/event_loop.h"
 #include "base/i18n.h"
 #include "base/paths.h"
 #include "base/process.h"
+#include "base/settings.h"
 #include "android_setup.h"
 #include "bayu/appearance/appearance.h"
 #include "lapis.h"
@@ -53,7 +55,7 @@ void run(const std::string& program, const std::vector<std::string>& arguments =
     Process::startDetached(program, arguments);
 }
 
-std::string screenshot(const char* name)
+std::string screenshot(const std::string& name)
 {
     return std::string(WELCOME_DATA_DIR) + "/" + name + ".webp";
 }
@@ -120,6 +122,59 @@ private:
     bool m_selected = false;
 };
 
+// A desktop layout to pick: its picture from Settings > Desktop, its name,
+// ringed while it is the current one.
+class LayoutTile : public store::Pressable
+{
+public:
+    LayoutTile(const std::string& picture, std::string name)
+    {
+        m_image = addChild<ImageView>();
+        m_image->setFillMode(ImageView::FillMode::PreserveAspectFit);
+        m_image->setSource(picture);
+        m_name = store::addText(this, std::move(name), 13, 600);
+    }
+    void setSelected(bool selected)
+    {
+        m_selected = selected;
+        requestPaint();
+    }
+    SizeF sizeHint() const override { return {120, 112}; }
+
+protected:
+    void layout() override
+    {
+        m_image->setGeometry({20, 10, 80, 64});
+        const double width = m_name->sizeHint().width;
+        m_name->setGeometry({(120 - width) / 2, 82, width, 20});
+    }
+    void paint(Painter& painter) override
+    {
+        if (m_selected || isHovered() || hasVisibleFocus())
+            painter.drawRoundedRect(localRect(), {12, 0, Corners::Circular}, Color{0, 0, 0, 0}, 2,
+                                    Theme::current().highlight.withAlpha(m_selected ? 1 : 0.4));
+    }
+
+private:
+    ImageView* m_image;
+    Label* m_name;
+    bool m_selected = false;
+};
+
+// Shell/Layout, which the status bar owns: 0 the top bar with the dock, 1 the
+// panel alone.
+int desktopLayout()
+{
+    const bayu::base::Settings shell(bayu::base::paths::bayuConfig("shell"));
+    return shell.intValue("Shell/Layout", 0) == 1 ? 1 : 0;
+}
+
+bayu::base::dbus::Proxy statusBar()
+{
+    return bayu::base::dbus::Proxy(bayu::base::dbus::Connection::session(), "org.bayu.Statusbar", "/Statusbar",
+                                   "org.bayu.Statusbar");
+}
+
 struct Slide
 {
     std::string eyebrow;
@@ -162,6 +217,12 @@ public:
                 Application::instance()->quit();
         };
         m_appearanceChanged = m_appearance.changed.connect([this] { updateAppearance(); });
+        // Settings can change the layout while the tour is open.
+        m_layout = desktopLayout();
+        m_layoutChanged = statusBar().onSignal("LayoutChanged", [this](const bayu::base::dbus::Message& message) {
+            if (const auto layout = message.argument<int32_t>())
+                setLayout(*layout == 1 ? 1 : 0);
+        });
         buildSlides();
     }
 
@@ -175,11 +236,12 @@ public:
         m_eyebrow->setText(slide.eyebrow);
         m_title->setText(slide.title);
         m_text->setText(slide.text);
-        m_image->setSource(screenshot(slide.image));
+        m_image->setSource(screenshot(slideImage(slide)));
         while (!m_extra->children().empty())
             m_extra->takeChild(m_extra->children().back().get());
         m_dark = nullptr;
         m_wallpapers.clear();
+        m_layouts.clear();
         if (slide.extra)
             slide.extra(m_extra);
         updateAppearance();
@@ -287,14 +349,24 @@ private:
                             tr("Choose light or dark, and a wallpaper. More choices are in Settings."), "settings",
                             [this](Column* extra) { buildAppearance(extra); }});
 
+        m_slides.push_back({tr("DESKTOP LAYOUT"), tr("Dock or panel"),
+                            tr("The Dock keeps a bar at the top, with the menus of the app in front, and your apps "
+                               "in a dock. The Panel puts everything in one bar along the bottom, with each app's "
+                               "menus in its window. The desktop changes at once."),
+                            kLayoutImage, [this](Column* extra) { buildLayout(extra); }});
+
         m_slides.push_back({tr("UPDATES"), tr("Stay up to date"),
-                            tr("App updates are in Bayu Store, under Updates. For the system, run "
-                               "\"sudo dnf upgrade\" in Terminal."),
+                            tr("App updates are in Bayu Store, under Updates. System updates are in Settings, "
+                               "under System Update: they download in the background and install when you "
+                               "restart."),
                             "updates", [](Column* extra) {
                                 extra->setSpacing(8);
                                 auto* updates = extra->addChild<ActionButton>(tr("Open Updates"));
                                 updates->setLeadingGlyph("refresh");
                                 updates->onClicked = [] { run("bayu-store", {"--updates"}); };
+                                auto* system = extra->addChild<ActionButton>(tr("System Update"));
+                                system->setLeadingGlyph("settings");
+                                system->onClicked = [] { run("bayu-settings", {"-m", "updates"}); };
                                 auto* issues = extra->addChild<ActionButton>(tr("Report a problem"),
                                                                              ActionButton::Kind::Link);
                                 issues->setTrailingGlyph("external-link");
@@ -421,6 +493,54 @@ private:
         settings->onClicked = [] { run("bayu-settings", {"-m", "appearance"}); };
     }
 
+    // Its screenshot follows the layout picked.
+    static constexpr const char* kLayoutImage = "layout";
+    std::string slideImage(const Slide& slide) const
+    {
+        if (std::string(slide.image) != kLayoutImage)
+            return slide.image;
+        return m_layout == 1 ? "layout-panel" : "layout-dock";
+    }
+
+    void buildLayout(Column* extra)
+    {
+        extra->setSpacing(16);
+        auto* tiles = extra->addChild<Row>();
+        tiles->setSpacing(12);
+        const std::pair<const char*, std::string> layouts[] = {{"layout_dock.svg", tr("Dock")},
+                                                                {"layout_panel.svg", tr("Panel")}};
+        for (int i = 0; i < 2; ++i) {
+            auto* tile = tiles->addChild<LayoutTile>(std::string(LAYOUT_PICTURES_DIR) + "/" + layouts[i].first,
+                                                     layouts[i].second);
+            tile->onClicked = [this, i] {
+                // As Settings > Desktop does: the status bar switches and keeps it.
+                statusBar().send("setLayout", int32_t(i));
+                setLayout(i);
+            };
+            m_layouts.push_back(tile);
+        }
+        updateLayout();
+        auto* settings = extra->addChild<ActionButton>(tr("Open Settings"));
+        settings->setLeadingGlyph("settings");
+        settings->onClicked = [] { run("bayu-settings", {"-m", "dock"}); };
+    }
+
+    void setLayout(int layout)
+    {
+        if (layout == m_layout)
+            return;
+        m_layout = layout;
+        updateLayout();
+        if (std::string(m_slides[m_current].image) == kLayoutImage)
+            m_image->setSource(screenshot(slideImage(m_slides[m_current])));
+    }
+
+    void updateLayout()
+    {
+        for (size_t i = 0; i < m_layouts.size(); ++i)
+            m_layouts[i]->setSelected(int(i) == m_layout);
+    }
+
     void updateAppearance()
     {
         if (m_dark)
@@ -449,6 +569,9 @@ private:
     bayu::base::Subscription m_appearanceChanged;
     Switch* m_dark = nullptr;
     std::vector<std::pair<std::string, WallpaperTile*>> m_wallpapers;
+    int m_layout = 0;
+    bayu::base::dbus::Match m_layoutChanged;
+    std::vector<LayoutTile*> m_layouts;
     Label* m_androidStatus = nullptr;
     ActionButton* m_androidButton = nullptr;
     store::AndroidSetupRun m_androidSetup;

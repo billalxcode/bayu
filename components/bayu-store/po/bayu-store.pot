@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 23:25+0000\n"
+"POT-Creation-Date: 2026-10-28 05:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -995,15 +995,31 @@ msgid "Choose light or dark, and a wallpaper. More choices are in Settings."
 msgstr ""
 
 #: src/welcome/main.cpp
+msgid "DESKTOP LAYOUT"
+msgstr ""
+
+#: src/welcome/main.cpp
+msgid "Dock or panel"
+msgstr ""
+
+#: src/welcome/main.cpp
+msgid "The Dock keeps a bar at the top, with the menus of the app in front, and your apps in a dock. The Panel puts everything in one bar along the bottom, with each app's menus in its window. The desktop changes at once."
+msgstr ""
+
+#: src/welcome/main.cpp
 msgid "Stay up to date"
 msgstr ""
 
 #: src/welcome/main.cpp
-msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
+msgid "App updates are in Bayu Store, under Updates. System updates are in Settings, under System Update: they download in the background and install when you restart."
 msgstr ""
 
 #: src/welcome/main.cpp
 msgid "Open Updates"
+msgstr ""
+
+#: src/welcome/main.cpp
+msgid "System Update"
 msgstr ""
 
 #: src/welcome/main.cpp
@@ -1061,6 +1077,14 @@ msgstr ""
 
 #: src/welcome/main.cpp
 msgid "Open Settings"
+msgstr ""
+
+#: src/welcome/main.cpp
+msgid "Dock"
+msgstr ""
+
+#: src/welcome/main.cpp
+msgid "Panel"
 msgstr ""
 
 #: src/welcome/main.cpp data/bayu-welcome.desktop

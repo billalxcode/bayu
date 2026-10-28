@@ -162,6 +162,18 @@ TEST_F(DockTest, FollowsRunningApplications)
     EXPECT_EQ(windows.requests,
               (std::vector<std::string>{"activate " + std::to_string(first), "activate " + std::to_string(second)}));
 
+    // The only window of the application in front minimizes, and comes back.
+    const uint64_t note = open("editor", "Notes");
+    windows.setActive(note);
+    windows.requests.clear();
+    model().clicked("editor");
+    EXPECT_EQ(windows.requests, (std::vector<std::string>{"minimize " + std::to_string(note)}));
+    windows.change(note, [](shell::TaskWindow &w) { w.minimized = true; }, shell::kStateChange);
+    windows.requests.clear();
+    model().clicked("editor");
+    EXPECT_EQ(windows.requests, (std::vector<std::string>{"activate " + std::to_string(note)}));
+    windows.remove(note);
+
     // A hidden application comes back whole.
     windows.change(first, [](shell::TaskWindow &w) { w.hidden = true; }, shell::kStateChange);
     windows.requests.clear();
