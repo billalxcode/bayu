@@ -12,12 +12,36 @@ image builder are Bayu's own.
 
 ## Screenshots
 
+![The Bayu desktop](docs/screenshots/desktop.webp)
+
+The desktop, with the dynamic Bromo wallpaper (here at night).
+
 | | |
 |---|---|
-| ![Bayu Store](docs/screenshots/store.png) | ![An app in Bayu Store](docs/screenshots/app.png) |
+| ![The Dock layout](docs/screenshots/dock.webp) | ![The Panel layout](docs/screenshots/panel.webp) |
+| **Dock**: the top bar with the menus of the app in front, and the dock | **Panel**: one bar along the bottom, each app's menus in its window |
+| ![Bayu Store](docs/screenshots/store.webp) | ![An app in Bayu Store](docs/screenshots/app.webp) |
 | Bayu Store: apps from Flathub and F-Droid | An app page in Bayu Store |
-| ![Launcher](docs/screenshots/launcher.png) | ![Nabau](docs/screenshots/nabau.png) |
-| The launcher, with Flatpak and Android apps | Nabau after an installation |
+| ![Launcher](docs/screenshots/launcher.webp) | ![An Android app](docs/screenshots/android.webp) |
+| The launcher, with Flatpak and Android apps | An Android app in its own window, through lapis |
+| ![Settings, Printers](docs/screenshots/printers.webp) | ![Settings, System Update](docs/screenshots/updates.webp) |
+| Settings > Printers: printers set up and found on the network or USB | Settings > System Update: downloaded in the background, installed at a restart |
+| ![Welcome](docs/screenshots/welcome.webp) | ![Nabau](docs/screenshots/nabau.webp) |
+| Welcome, choosing the desktop layout | Nabau after an installation |
+
+## Desktop layouts
+
+Settings > Desktop switches between two layouts, at once and without
+logging out:
+
+- **Dock**: a top bar with the menus of the app in front (as on macOS),
+  the clock and the status icons, and a dock of pinned and running apps at
+  the bottom, left or right. Clicking the icon of the app in front
+  minimizes it.
+- **Panel**: one bar along the bottom with the start button, the open apps
+  (as icons, or buttons with their titles), the status icons and the clock;
+  apps keep their menus in their windows. It floats off the screen's edge
+  while no window is open, and the power actions are in the Control Center.
 
 ## Contents
 
@@ -125,7 +149,7 @@ and interaction states drawn by both toolkits:
 After the first login, Welcome (`bayu-welcome`, part of Bayu Store) offers a
 short tour: Bayu Store and a first app to install, the launcher and dock,
 Android apps (with a button that turns lapis on), dark mode and wallpapers,
-and updates. It is not shown again unless asked to, and it stays off on
+the desktop layout (Dock or Panel, switched right there), and updates. It is not shown again unless asked to, and it stays off on
 live media, where Nabau starts instead; the launcher opens it any time.
 
 ## Languages
@@ -147,6 +171,25 @@ firmware, and Intel cards use `iwlwifi`. Apple keyboards, trackpads and the SMC 
 drivers built into the kernel. UEFI Secure Boot must be off, since the Bayu
 kernel is not signed by AlmaLinux.
 
+The Bayu kernel also builds the USB Wi-Fi drivers AlmaLinux leaves out:
+Realtek RTL8811CU/8821CU, 8822CU, 8723DU, 8812AU, 8821AU, 8814AU, 8852BU and
+8851BU, MediaTek MT7921AU, MT7925U and MT7663U, Ralink RT2500 and RT73, and
+Atheros AR9170 and ath10k on USB, as modules loaded only for their hardware
+(`packaging/kernel/kernel-local`; `packaging/kernel/test-kernel.sh` loads
+them before a kernel is released). `usb_modeswitch` switches the adapters
+that first show up as a CD with their Windows driver.
+
+Printers are found by themselves: CUPS with cups-browsed and Avahi sets up
+the printers on the network, `ipp-usb` the USB printers that print without a
+driver, and `system-config-printer-udev` the others when they are plugged
+in, with the HP (HPLIP), Gutenprint and SpliX drivers. Settings > Printers
+lists them, with a test page, the default printer and the jobs, and adds a
+printer found or one by its address. Scanners work through SANE and
+`sane-airscan`.
+
+To see what hardware is there: `lsusb`, `lspci`, `lshw`, `hwinfo`,
+`dmidecode`, `sensors`, `smartctl`, `nvme`, `iw`, `ethtool` and `hdparm`.
+
 ## Android apps
 
 [lapis](https://github.com/igos-nusantara/lapis) runs Android apps with
@@ -155,11 +198,16 @@ which the Bayu kernel provides. It is installed but off; to turn it on:
 
 ```shell
 sudo systemctl enable --now lapis-control.socket
-sudo lapis init                           # downloads Android, about 1.3 GB
-lapis restart                             # start it now; later logins start it
+sudo /usr/libexec/bayu-store/android-setup   # downloads Android, about 1 GB
+lapis restart                                 # start it now; later logins start it
 ```
 
 Set `LAPIS_ENABLED=yes` in `profile.conf` to ship it enabled.
+
+The Android images, Waydroid's LineageOS, come from IGOS Nusantara's copy on
+R2, https://r2.igos-nusantara.or.id/android/ota/, which the **Android images**
+workflow keeps up to date every day (`builder/mirror-android.sh`); Waydroid's
+own server is the fallback.
 
 Bayu Store does the same from **Store settings → Android apps** (or when an
 F-Droid app is installed), showing the download as it goes. Its **Turn off**
