@@ -652,7 +652,8 @@ void TerminalWindow::openTabMenu(int index, PointF position)
     m_tabMenu->addItem(tr("Close Tab"), [this] { closeProtection(m_tabMenuIndex); });
     if (tabCount() > 1)
         m_tabMenu->addItem(tr("Close Other Tabs"), [this] { closeOtherTabs(m_tabMenuIndex); });
-    if (TerminalPane* pane = index == m_currentIndex && currentPage() ? currentPage()->currentPane() : nullptr) {
+    // The window's items, for the pane of the tab clicked.
+    if (TerminalPane* pane = m_pages[size_t(index)]->currentPane()) {
         m_tabMenu->addSeparator();
         pane->addWindowItems(*m_tabMenu);
     }
