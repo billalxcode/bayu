@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 23:25+0000\n"
+"POT-Creation-Date: 2026-10-28 05:19+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: src/android_setup.cpp
 msgid "Android could not be set up: pkexec is missing."
@@ -995,16 +994,32 @@ msgid "Choose light or dark, and a wallpaper. More choices are in Settings."
 msgstr "Escolha o modo claro ou escuro e um papel de parede. Há mais opções em Configurações."
 
 #: src/welcome/main.cpp
+msgid "DESKTOP LAYOUT"
+msgstr "LAYOUT DA ÁREA DE TRABALHO"
+
+#: src/welcome/main.cpp
+msgid "Dock or panel"
+msgstr "Dock ou painel"
+
+#: src/welcome/main.cpp
+msgid "The Dock keeps a bar at the top, with the menus of the app in front, and your apps in a dock. The Panel puts everything in one bar along the bottom, with each app's menus in its window. The desktop changes at once."
+msgstr "O Dock mantém uma barra no topo, com os menus do aplicativo em primeiro plano, e seus aplicativos em um dock. O Painel põe tudo em uma só barra na parte de baixo, com os menus de cada aplicativo na sua janela. A área de trabalho muda na hora."
+
+#: src/welcome/main.cpp
 msgid "Stay up to date"
 msgstr "Mantenha tudo atualizado"
 
 #: src/welcome/main.cpp
-msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
-msgstr "As atualizações de aplicativos ficam na Bayu Store, em Atualizações. Para o sistema, execute \"sudo dnf upgrade\" no Terminal."
+msgid "App updates are in Bayu Store, under Updates. System updates are in Settings, under System Update: they download in the background and install when you restart."
+msgstr "As atualizações de aplicativos estão na Bayu Store, em Atualizações. As do sistema estão em Configurações, em Atualização do sistema: são baixadas em segundo plano e instaladas ao reiniciar."
 
 #: src/welcome/main.cpp
 msgid "Open Updates"
 msgstr "Abrir Atualizações"
+
+#: src/welcome/main.cpp
+msgid "System Update"
+msgstr "Atualização do sistema"
 
 #: src/welcome/main.cpp
 msgid "Report a problem"
@@ -1063,6 +1078,14 @@ msgstr "Modo escuro"
 msgid "Open Settings"
 msgstr "Abrir Configurações"
 
+#: src/welcome/main.cpp
+msgid "Dock"
+msgstr "Dock"
+
+#: src/welcome/main.cpp
+msgid "Panel"
+msgstr "Painel"
+
 #: src/welcome/main.cpp data/bayu-welcome.desktop
 msgid "Welcome"
 msgstr "Boas-vindas"
@@ -1086,3 +1109,6 @@ msgstr "Um tour rápido pelo IGN 26 e seus aplicativos"
 #: data/bayu-welcome.desktop
 msgid "tour;welcome;help;getting started;"
 msgstr "tour;boas-vindas;ajuda;primeiros passos;welcome;help;getting started;"
+
+#~ msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
+#~ msgstr "As atualizações de aplicativos ficam na Bayu Store, em Atualizações. Para o sistema, execute \"sudo dnf upgrade\" no Terminal."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-store\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-26 23:25+0000\n"
+"POT-Creation-Date: 2026-10-28 05:19+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -994,16 +994,32 @@ msgid "Choose light or dark, and a wallpaper. More choices are in Settings."
 msgstr "Wählen Sie Hell oder Dunkel und einen Hintergrund. Weitere Optionen finden Sie in den Einstellungen."
 
 #: src/welcome/main.cpp
+msgid "DESKTOP LAYOUT"
+msgstr "DESKTOP-LAYOUT"
+
+#: src/welcome/main.cpp
+msgid "Dock or panel"
+msgstr "Dock oder Panel"
+
+#: src/welcome/main.cpp
+msgid "The Dock keeps a bar at the top, with the menus of the app in front, and your apps in a dock. The Panel puts everything in one bar along the bottom, with each app's menus in its window. The desktop changes at once."
+msgstr "Das Dock behält oben eine Leiste mit den Menüs der App im Vordergrund und Ihre Apps in einem Dock. Das Panel legt alles in eine Leiste unten, mit den Menüs jeder App in ihrem Fenster. Der Desktop wechselt sofort."
+
+#: src/welcome/main.cpp
 msgid "Stay up to date"
 msgstr "Immer auf dem neuesten Stand"
 
 #: src/welcome/main.cpp
-msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
-msgstr "App-Aktualisierungen finden Sie im Bayu Store unter „Aktualisierungen“. Für das System führen Sie „sudo dnf upgrade“ im Terminal aus."
+msgid "App updates are in Bayu Store, under Updates. System updates are in Settings, under System Update: they download in the background and install when you restart."
+msgstr "App-Aktualisierungen finden Sie im Bayu Store unter Aktualisierungen. Systemaktualisierungen finden Sie in den Einstellungen unter Systemaktualisierung: Sie werden im Hintergrund heruntergeladen und beim Neustart installiert."
 
 #: src/welcome/main.cpp
 msgid "Open Updates"
 msgstr "Aktualisierungen öffnen"
+
+#: src/welcome/main.cpp
+msgid "System Update"
+msgstr "Systemaktualisierung"
 
 #: src/welcome/main.cpp
 msgid "Report a problem"
@@ -1062,6 +1078,14 @@ msgstr "Dunkelmodus"
 msgid "Open Settings"
 msgstr "Einstellungen öffnen"
 
+#: src/welcome/main.cpp
+msgid "Dock"
+msgstr "Dock"
+
+#: src/welcome/main.cpp
+msgid "Panel"
+msgstr "Panel"
+
 #: src/welcome/main.cpp data/bayu-welcome.desktop
 msgid "Welcome"
 msgstr "Willkommen"
@@ -1085,3 +1109,6 @@ msgstr "Eine kurze Tour durch IGN 26 und seine Apps"
 #: data/bayu-welcome.desktop
 msgid "tour;welcome;help;getting started;"
 msgstr "Tour;Willkommen;Hilfe;Erste Schritte;welcome;help;getting started;"
+
+#~ msgid "App updates are in Bayu Store, under Updates. For the system, run \"sudo dnf upgrade\" in Terminal."
+#~ msgstr "App-Aktualisierungen finden Sie im Bayu Store unter „Aktualisierungen“. Für das System führen Sie „sudo dnf upgrade“ im Terminal aus."

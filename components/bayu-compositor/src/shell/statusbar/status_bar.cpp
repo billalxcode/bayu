@@ -107,6 +107,8 @@ bool StatusBar::registerServices()
                               setLayout(layout == int(Layout::Panel) ? Layout::Panel : Layout::Dock);
                           },
                           dbus::ArgumentNames{{"layout"}, {}});
+        // Whoever shows the layout follows it: 0 the dock, 1 the panel.
+        object->addSignal("LayoutChanged", "i", {"layout"});
         object->addMethod("setPanelFloating", [this](bool floating) { setPanelFloating(floating); },
                           dbus::ArgumentNames{{"floating"}, {}});
         object->addMethod("setPanelIconSize", [this](int32_t size) { setPanelIconSize(size); },
@@ -169,6 +171,8 @@ void StatusBar::setLayout(Layout layout)
         m_registrar.unregisterService();
     else if (m_object)
         m_registrar.registerService();
+    if (m_object)
+        m_object->emitSignal("LayoutChanged", int32_t(layout));
     layoutChanged();
 }
 
