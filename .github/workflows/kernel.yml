@@ -63,8 +63,9 @@ jobs:
           KERNEL: ${{ steps.find.outputs.new }}
         run: |
           wl=$(sed -n 's/^WL=${WL:-\(.*\)}$/\1/p' packaging/wl/build-wl.sh)
+          build=$(sed -n 's/^BUILD=${BUILD:-\(.*\)}$/\1/p' packaging/kernel/build-kernel.sh)
           set -o pipefail
-          packaging/kernel/test-kernel.sh "$HOME/.cache/bayu-kernel/$KERNEL" "$HOME/.cache/bayu-wl/$wl" 2>&1 |
+          packaging/kernel/test-kernel.sh "$HOME/.cache/bayu-kernel/$KERNEL.$build" "$HOME/.cache/bayu-wl/$wl" 2>&1 |
             grep -v NOKEY | tee "$RUNNER_TEMP/kernel-test.log"
 
       - name: Propose it

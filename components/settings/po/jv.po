@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 09:18+0000\n"
+"POT-Creation-Date: 2026-10-28 02:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -141,6 +141,7 @@ msgstr "Busak pangguna “{name}”? Direktori ngarep lan isine bakal dibusak pe
 #: src/pages/network/hotspot/hotspotpage.cpp
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
+#: src/pages/printers/printerspage.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
 #: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
@@ -212,7 +213,7 @@ msgid "User name"
 msgstr "Jeneng pangguna"
 
 #: src/pages/accounts/userdialogs.cpp src/pages/language/addlanguagedialog.cpp
-#: src/pages/network/vpn/vpndialogs.cpp
+#: src/pages/network/vpn/vpndialogs.cpp src/pages/printers/printerspage.cpp
 msgid "Add"
 msgstr "Tambah"
 
@@ -444,6 +445,7 @@ msgid "Name"
 msgstr "Jeneng"
 
 #: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/network/vpn/vpneditor.cpp
+#: src/pages/printers/printerspage.cpp
 msgid "Address"
 msgstr "Alamat"
 
@@ -1500,8 +1502,8 @@ msgstr "Tambah peer"
 msgid "Peer"
 msgstr "Peer"
 
-#: src/pages/network/vpn/vpneditor.cpp src/pages/privacy/privacypage.cpp
-#: src/pages/shortcuts/shortcuteditdialog.cpp
+#: src/pages/network/vpn/vpneditor.cpp src/pages/printers/printerspage.cpp
+#: src/pages/privacy/privacypage.cpp src/pages/shortcuts/shortcuteditdialog.cpp
 msgid "Remove"
 msgstr "Busak"
 
@@ -1729,6 +1731,77 @@ msgstr "Cegah turu otomatis ing adaptor daya nalika layar mati"
 #: src/pages/power/powerpage.cpp
 msgid "Prevent automatic sleeping when the display is off"
 msgstr "Cegah turu otomatis nalika layar mati"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Print Test Page"
+msgstr "Cithak Kaca Uji"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Set as Default"
+msgstr "Dadekake Gawan"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Cancel All Jobs"
+msgstr "Batalake Kabeh Gawean"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printing"
+msgstr "Nyithak"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Stopped"
+msgstr "Mandheg"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Ready"
+msgstr "Siap"
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "{n} job"
+msgid_plural "{n} jobs"
+msgstr[0] "{n} gawean"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Default"
+msgstr "Gawan"
+
+#: src/pages/printers/printerspage.cpp src/window/pagelist.cpp
+msgid "Printers"
+msgstr "Printer"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No printers yet"
+msgstr "Durung ana printer"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers Found"
+msgstr "Printer sing Ditemokake"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Looking for printers…"
+msgstr "Nggoleki printer…"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Add a Printer by Address"
+msgstr "Tambah Printer nganggo Alamat"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers on this network and those plugged in by USB are found by themselves. USB printers are usually set up as soon as they are plugged in."
+msgstr "Printer ing jaringan iki lan sing disambung liwat USB ditemokake dhewe. Printer USB biasane langsung disiapake sawise dicolokake."
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "Could not change the printers: {error}"
+msgstr "Ora bisa ngowahi printer: {error}"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No other printers found"
+msgstr "Ora ana printer liyane sing ditemokake"
+
+#: src/pages/printers/printerspage.cpp
+msgid "The printer's host name or IP address, such as 192.168.1.20, or its IPP address. It has to print without a driver (IPP Everywhere or AirPrint), as most printers made since 2012 do."
+msgstr "Jeneng host utawa alamat IP printer, contone 192.168.1.20, utawa alamat IPP-ne. Printer kudu bisa nyithak tanpa driver (IPP Everywhere utawa AirPrint), kaya umume printer gawean wiwit 2012."
 
 #: src/pages/privacy/privacypage.cpp src/window/pagelist.cpp
 msgid "Privacy"
@@ -2536,6 +2609,10 @@ msgstr "trackpad, ketok kanggo klik, gulung alami, klik kapindho, kecepatan penu
 #: src/window/pagelist.cpp
 msgid "touch, touch screen, touch panel"
 msgstr "sentuh, layar sentuh, panel sentuh"
+
+#: src/window/pagelist.cpp
+msgid "printer, print, printing, scanner, CUPS, USB, network, default printer, test page"
+msgstr "printer, cithak, nyithak, pemindai, scanner, CUPS, USB, jaringan, printer gawan, kaca uji"
 
 #: src/window/pagelist.cpp
 msgid "accounts, password, login, administrator, avatar"

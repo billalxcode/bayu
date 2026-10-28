@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 09:18+0000\n"
+"POT-Creation-Date: 2026-10-28 02:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -141,6 +141,7 @@ msgstr "Padam pengguna “{name}”? Direktori utama dan kandungannya akan dipad
 #: src/pages/network/hotspot/hotspotpage.cpp
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
+#: src/pages/printers/printerspage.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
 #: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
@@ -212,7 +213,7 @@ msgid "User name"
 msgstr "Nama pengguna"
 
 #: src/pages/accounts/userdialogs.cpp src/pages/language/addlanguagedialog.cpp
-#: src/pages/network/vpn/vpndialogs.cpp
+#: src/pages/network/vpn/vpndialogs.cpp src/pages/printers/printerspage.cpp
 msgid "Add"
 msgstr "Tambah"
 
@@ -444,6 +445,7 @@ msgid "Name"
 msgstr "Nama"
 
 #: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/network/vpn/vpneditor.cpp
+#: src/pages/printers/printerspage.cpp
 msgid "Address"
 msgstr "Alamat"
 
@@ -1500,8 +1502,8 @@ msgstr "Tambah rakan sebaya"
 msgid "Peer"
 msgstr "Rakan sebaya"
 
-#: src/pages/network/vpn/vpneditor.cpp src/pages/privacy/privacypage.cpp
-#: src/pages/shortcuts/shortcuteditdialog.cpp
+#: src/pages/network/vpn/vpneditor.cpp src/pages/printers/printerspage.cpp
+#: src/pages/privacy/privacypage.cpp src/pages/shortcuts/shortcuteditdialog.cpp
 msgid "Remove"
 msgstr "Alih keluar"
 
@@ -1729,6 +1731,77 @@ msgstr "Halang tidur automatik pada penyesuai kuasa apabila paparan dimatikan"
 #: src/pages/power/powerpage.cpp
 msgid "Prevent automatic sleeping when the display is off"
 msgstr "Halang tidur automatik apabila paparan dimatikan"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Print Test Page"
+msgstr "Cetak Halaman Ujian"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Set as Default"
+msgstr "Jadikan Lalai"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Cancel All Jobs"
+msgstr "Batalkan Semua Kerja"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printing"
+msgstr "Mencetak"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Stopped"
+msgstr "Berhenti"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Ready"
+msgstr "Sedia"
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "{n} job"
+msgid_plural "{n} jobs"
+msgstr[0] "{n} kerja"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Default"
+msgstr "Lalai"
+
+#: src/pages/printers/printerspage.cpp src/window/pagelist.cpp
+msgid "Printers"
+msgstr "Pencetak"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No printers yet"
+msgstr "Belum ada pencetak"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers Found"
+msgstr "Pencetak Ditemui"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Looking for printers…"
+msgstr "Mencari pencetak…"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Add a Printer by Address"
+msgstr "Tambah Pencetak mengikut Alamat"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers on this network and those plugged in by USB are found by themselves. USB printers are usually set up as soon as they are plugged in."
+msgstr "Pencetak pada rangkaian ini dan yang disambungkan melalui USB ditemui dengan sendirinya. Pencetak USB biasanya disediakan sebaik sahaja ia dipasang."
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "Could not change the printers: {error}"
+msgstr "Tidak dapat mengubah pencetak: {error}"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No other printers found"
+msgstr "Tiada pencetak lain ditemui"
+
+#: src/pages/printers/printerspage.cpp
+msgid "The printer's host name or IP address, such as 192.168.1.20, or its IPP address. It has to print without a driver (IPP Everywhere or AirPrint), as most printers made since 2012 do."
+msgstr "Nama hos atau alamat IP pencetak, seperti 192.168.1.20, atau alamat IPPnya. Ia mesti boleh mencetak tanpa pemacu (IPP Everywhere atau AirPrint), seperti kebanyakan pencetak yang dibuat sejak 2012."
 
 #: src/pages/privacy/privacypage.cpp src/window/pagelist.cpp
 msgid "Privacy"
@@ -2536,6 +2609,10 @@ msgstr "pad jejak, ketik untuk klik, tatal semula jadi, klik sekunder, kelajuan 
 #: src/window/pagelist.cpp
 msgid "touch, touch screen, touch panel"
 msgstr "sentuh, skrin sentuh, panel sentuh"
+
+#: src/window/pagelist.cpp
+msgid "printer, print, printing, scanner, CUPS, USB, network, default printer, test page"
+msgstr "pencetak, printer, cetak, mencetak, pengimbas, CUPS, USB, rangkaian, pencetak lalai, halaman ujian"
 
 #: src/window/pagelist.cpp
 msgid "accounts, password, login, administrator, avatar"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 09:18+0000\n"
+"POT-Creation-Date: 2026-10-28 02:45+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -142,6 +142,7 @@ msgstr "ユーザ「{name}」を削除しますか? そのホームディレク�
 #: src/pages/network/hotspot/hotspotpage.cpp
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
+#: src/pages/printers/printerspage.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
 #: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
@@ -213,7 +214,7 @@ msgid "User name"
 msgstr "ユーザ名"
 
 #: src/pages/accounts/userdialogs.cpp src/pages/language/addlanguagedialog.cpp
-#: src/pages/network/vpn/vpndialogs.cpp
+#: src/pages/network/vpn/vpndialogs.cpp src/pages/printers/printerspage.cpp
 msgid "Add"
 msgstr "追加"
 
@@ -445,6 +446,7 @@ msgid "Name"
 msgstr "名前"
 
 #: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/network/vpn/vpneditor.cpp
+#: src/pages/printers/printerspage.cpp
 msgid "Address"
 msgstr "アドレス"
 
@@ -1501,8 +1503,8 @@ msgstr "ピアを追加"
 msgid "Peer"
 msgstr "ピア"
 
-#: src/pages/network/vpn/vpneditor.cpp src/pages/privacy/privacypage.cpp
-#: src/pages/shortcuts/shortcuteditdialog.cpp
+#: src/pages/network/vpn/vpneditor.cpp src/pages/printers/printerspage.cpp
+#: src/pages/privacy/privacypage.cpp src/pages/shortcuts/shortcuteditdialog.cpp
 msgid "Remove"
 msgstr "削除"
 
@@ -1730,6 +1732,77 @@ msgstr "ディスプレイがオフのとき、電源アダプタ接続中の自
 #: src/pages/power/powerpage.cpp
 msgid "Prevent automatic sleeping when the display is off"
 msgstr "ディスプレイがオフのときの自動スリープを防止"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Print Test Page"
+msgstr "テストページを印刷"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Set as Default"
+msgstr "デフォルトに設定"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Cancel All Jobs"
+msgstr "すべてのジョブをキャンセル"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printing"
+msgstr "印刷中"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Stopped"
+msgstr "停止中"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Ready"
+msgstr "準備完了"
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "{n} job"
+msgid_plural "{n} jobs"
+msgstr[0] "{n} 件のジョブ"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Default"
+msgstr "デフォルト"
+
+#: src/pages/printers/printerspage.cpp src/window/pagelist.cpp
+msgid "Printers"
+msgstr "プリンター"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No printers yet"
+msgstr "プリンターはまだありません"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers Found"
+msgstr "見つかったプリンター"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Looking for printers…"
+msgstr "プリンターを探しています…"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Add a Printer by Address"
+msgstr "アドレスでプリンターを追加"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers on this network and those plugged in by USB are found by themselves. USB printers are usually set up as soon as they are plugged in."
+msgstr "このネットワーク上のプリンターと USB で接続したプリンターは自動的に見つかります。USB プリンターは通常、接続するとすぐに設定されます。"
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "Could not change the printers: {error}"
+msgstr "プリンターを変更できませんでした: {error}"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No other printers found"
+msgstr "ほかのプリンターは見つかりません"
+
+#: src/pages/printers/printerspage.cpp
+msgid "The printer's host name or IP address, such as 192.168.1.20, or its IPP address. It has to print without a driver (IPP Everywhere or AirPrint), as most printers made since 2012 do."
+msgstr "プリンターのホスト名または IP アドレス（例: 192.168.1.20）、または IPP アドレス。ドライバーなしで印刷できる（IPP Everywhere または AirPrint）必要があります。2012 年以降のほとんどのプリンターが対応しています。"
 
 #: src/pages/privacy/privacypage.cpp src/window/pagelist.cpp
 msgid "Privacy"
@@ -2537,6 +2610,10 @@ msgstr "トラックパッド, タップでクリック, ナチュラルスク�
 #: src/window/pagelist.cpp
 msgid "touch, touch screen, touch panel"
 msgstr "タッチ, タッチスクリーン, タッチパネル, touch, touch screen, touch panel"
+
+#: src/window/pagelist.cpp
+msgid "printer, print, printing, scanner, CUPS, USB, network, default printer, test page"
+msgstr "プリンター, 印刷, スキャナー, CUPS, USB, ネットワーク, デフォルトのプリンター, テストページ"
 
 #: src/window/pagelist.cpp
 msgid "accounts, password, login, administrator, avatar"

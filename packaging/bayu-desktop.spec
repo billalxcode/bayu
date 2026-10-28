@@ -30,7 +30,7 @@ BuildRequires:  pkgconfig(xcb) pkgconfig(xcb-composite) pkgconfig(xcb-xfixes) pk
 BuildRequires:  pkgconfig(xcb-sync) pkgconfig(xcursor) pkgconfig(libpcre2-16) pkgconfig(libpcre2-8)
 BuildRequires:  pkgconfig(libarchive) pkgconfig(fuse3) pkgconfig(libmtp) pkgconfig(smbclient)
 BuildRequires:  pkgconfig(libssh) pkgconfig(libcurl) pkgconfig(libical) pkgconfig(librsvg-2.0)
-BuildRequires:  flatpak-devel
+BuildRequires:  flatpak-devel cups-devel
 BuildRequires:  cargo rust
 BuildRequires:  qt6-qtbase-devel qt6-qtbase-private-devel qt6-qtdeclarative-devel
 
@@ -53,6 +53,15 @@ Requires:       dbus-tools
 # programs; wl-copy is how those programs copy to the clipboard (Claude Code's
 # own selection does). Without them both fail silently.
 Requires:       xdg-utils wl-clipboard
+# Hardware (issue #73): USB Wi-Fi adapters that first show up as a CD with
+# their driver (usb_modeswitch, from packaging/usb-modeswitch), printers found
+# on USB and on the network and set up with their driver (Settings > Printers),
+# scanners, and the tools that show what hardware is there (lsusb, lspci...).
+Requires:       usb_modeswitch usb_modeswitch-data
+Requires:       cups cups-filters cups-browsed ipp-usb system-config-printer-udev avahi nss-mdns
+Requires:       hplip gutenprint-cups splix
+Requires:       sane-backends sane-airscan
+Requires:       usbutils pciutils lshw dmidecode hwinfo lm_sensors smartmontools nvme-cli iw ethtool hdparm
 # Default UI and fixed-width fonts.
 Requires:       google-noto-sans-vf-fonts google-noto-sans-mono-vf-fonts
 Requires(pre):  shadow-utils
@@ -131,6 +140,18 @@ if [ "$(stat -c %%u /)" != 0 ]; then
 fi
 find /etc /usr/share/icons/hicolor -xdev -uid +999 -exec chown root:root {} + -exec chmod go-w {} + 2>/dev/null || :
 systemd-tmpfiles --create --boot /usr/lib/tmpfiles.d/x11.conf >/dev/null 2>&1 || :
+# Printers on the network (issue #73), once, so that a later change by the
+# administrator stays: cups-browsed makes the printers Avahi finds queues that
+# every application lists, and Avahi needs mDNS through the firewall.
+if [ ! -e /var/lib/bayu-desktop/printing ]; then
+    systemctl enable cups.service cups-browsed.service avahi-daemon.service >/dev/null 2>&1 || :
+    if firewall-cmd --state >/dev/null 2>&1; then
+        firewall-cmd --permanent --add-service=mdns >/dev/null 2>&1 && firewall-cmd --reload >/dev/null 2>&1 || :
+    else
+        firewall-offline-cmd --add-service=mdns >/dev/null 2>&1 || :
+    fi
+    mkdir -p /var/lib/bayu-desktop && touch /var/lib/bayu-desktop/printing
+fi
 # The store installs Flathub apps system-wide.
 flatpak remote-add --system --if-not-exists flathub %{_datadir}/bayu-store/flathub.flatpakrepo >/dev/null 2>&1 || :
 # The Bayu GTK themes, which bayu-services copies to ~/.themes, for every Flatpak application.

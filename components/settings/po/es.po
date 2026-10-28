@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 09:18+0000\n"
+"POT-Creation-Date: 2026-10-28 02:45+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -141,6 +141,7 @@ msgstr "¿Eliminar al usuario «{name}»? Su carpeta personal y todo su contenid
 #: src/pages/network/hotspot/hotspotpage.cpp
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
+#: src/pages/printers/printerspage.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
 #: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
@@ -212,7 +213,7 @@ msgid "User name"
 msgstr "Nombre de usuario"
 
 #: src/pages/accounts/userdialogs.cpp src/pages/language/addlanguagedialog.cpp
-#: src/pages/network/vpn/vpndialogs.cpp
+#: src/pages/network/vpn/vpndialogs.cpp src/pages/printers/printerspage.cpp
 msgid "Add"
 msgstr "Añadir"
 
@@ -444,6 +445,7 @@ msgid "Name"
 msgstr "Nombre"
 
 #: src/pages/bluetooth/bluetoothdialogs.cpp src/pages/network/vpn/vpneditor.cpp
+#: src/pages/printers/printerspage.cpp
 msgid "Address"
 msgstr "Dirección"
 
@@ -1505,8 +1507,8 @@ msgstr "Añadir par"
 msgid "Peer"
 msgstr "Par"
 
-#: src/pages/network/vpn/vpneditor.cpp src/pages/privacy/privacypage.cpp
-#: src/pages/shortcuts/shortcuteditdialog.cpp
+#: src/pages/network/vpn/vpneditor.cpp src/pages/printers/printerspage.cpp
+#: src/pages/privacy/privacypage.cpp src/pages/shortcuts/shortcuteditdialog.cpp
 msgid "Remove"
 msgstr "Quitar"
 
@@ -1735,6 +1737,78 @@ msgstr "Evitar la suspensión automática con el adaptador de corriente cuando l
 #: src/pages/power/powerpage.cpp
 msgid "Prevent automatic sleeping when the display is off"
 msgstr "Evitar la suspensión automática cuando la pantalla esté apagada"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Print Test Page"
+msgstr "Imprimir página de prueba"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Set as Default"
+msgstr "Establecer como predeterminada"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Cancel All Jobs"
+msgstr "Cancelar todos los trabajos"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printing"
+msgstr "Imprimiendo"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Stopped"
+msgstr "Detenida"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Ready"
+msgstr "Lista"
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "{n} job"
+msgid_plural "{n} jobs"
+msgstr[0] "{n} trabajo"
+msgstr[1] "{n} trabajos"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Default"
+msgstr "Predeterminada"
+
+#: src/pages/printers/printerspage.cpp src/window/pagelist.cpp
+msgid "Printers"
+msgstr "Impresoras"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No printers yet"
+msgstr "Aún no hay impresoras"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers Found"
+msgstr "Impresoras encontradas"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Looking for printers…"
+msgstr "Buscando impresoras…"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Add a Printer by Address"
+msgstr "Añadir una impresora por dirección"
+
+#: src/pages/printers/printerspage.cpp
+msgid "Printers on this network and those plugged in by USB are found by themselves. USB printers are usually set up as soon as they are plugged in."
+msgstr "Las impresoras de esta red y las conectadas por USB se encuentran solas. Las impresoras USB suelen configurarse en cuanto se conectan."
+
+#: src/pages/printers/printerspage.cpp
+#, python-brace-format
+msgid "Could not change the printers: {error}"
+msgstr "No se pudieron cambiar las impresoras: {error}"
+
+#: src/pages/printers/printerspage.cpp
+msgid "No other printers found"
+msgstr "No se encontraron otras impresoras"
+
+#: src/pages/printers/printerspage.cpp
+msgid "The printer's host name or IP address, such as 192.168.1.20, or its IPP address. It has to print without a driver (IPP Everywhere or AirPrint), as most printers made since 2012 do."
+msgstr "El nombre de host o la dirección IP de la impresora, como 192.168.1.20, o su dirección IPP. Tiene que imprimir sin controlador (IPP Everywhere o AirPrint), como la mayoría de las impresoras fabricadas desde 2012."
 
 #: src/pages/privacy/privacypage.cpp src/window/pagelist.cpp
 msgid "Privacy"
@@ -2546,6 +2620,10 @@ msgstr "panel táctil, tocar para hacer clic, desplazamiento natural, clic secun
 #: src/window/pagelist.cpp
 msgid "touch, touch screen, touch panel"
 msgstr "táctil, pantalla táctil, panel táctil"
+
+#: src/window/pagelist.cpp
+msgid "printer, print, printing, scanner, CUPS, USB, network, default printer, test page"
+msgstr "impresora, imprimir, impresión, escáner, CUPS, USB, red, impresora predeterminada, página de prueba"
 
 #: src/window/pagelist.cpp
 msgid "accounts, password, login, administrator, avatar"

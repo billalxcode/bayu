@@ -70,7 +70,8 @@ mkdir -p /dev/binderfs
 if mount -t binder binder /dev/binderfs && [ -e /dev/binderfs/binder-control ]; then result "ok binderfs"; else result "FAIL binderfs"; fi
 if [ -r /proc/pressure/memory ]; then result "ok psi"; else result "FAIL psi"; fi
 if modprobe mac80211_hwsim radios=2 && [ -e /sys/class/ieee80211/phy0 ]; then result "ok wifi-stack"; else result "FAIL wifi-stack"; fi
-for module in wl rtw89_8852be rtw89_8852ae rtw88_8822ce rtw88_8821ce rtl8xxxu brcmfmac iwlwifi ath9k ath10k_pci ath11k_pci mt7921e; do
+for module in wl rtw89_8852be rtw89_8852ae rtw88_8822ce rtw88_8821ce rtl8xxxu brcmfmac iwlwifi ath9k ath10k_pci ath11k_pci mt7921e \
+    rtw88_8821cu rtw88_8822cu rtw88_8812au rtw89_8852bu mt7921u mt7925u rt2800usb ath9k_htc; do
   if modprobe "$module" 2>/dev/null; then result "ok load $module"; else result "FAIL load $module"; fi
 done
 result "done"
@@ -81,7 +82,8 @@ CHECK
   # stopping dracut.
   drivers=""
   for module in cfg80211 mac80211 mac80211_hwsim wl rtw89_8852be rtw89_8852ae rtw88_8822ce rtw88_8821ce rtl8xxxu \
-                brcmfmac iwlwifi ath9k ath10k_pci ath11k_pci mt7921e; do
+                brcmfmac iwlwifi ath9k ath10k_pci ath11k_pci mt7921e rtw88_8821cu rtw88_8822cu rtw88_8812au \
+                rtw89_8852bu mt7921u mt7925u rt2800usb ath9k_htc; do
     modinfo -k "$kver" "$module" >/dev/null 2>&1 && drivers="$drivers $module"
   done
   dracut -q --no-hostonly --no-hostonly-cmdline --kver "$kver" --force \
