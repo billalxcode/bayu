@@ -47,6 +47,11 @@ public:
 
     void startShell();
     void openFind();
+    // The items that do not depend on what is under the pointer, acting on
+    // this pane: find, clear, reset, splits, tabs and windows, full screen,
+    // settings. The title bar, the menu button and the tab's menu have them
+    // too, as a program such as htop can take the pane's right click (#83).
+    void addWindowItems(bayu::ui::Menu& menu);
     void focusTerminal();
     // A drop: paths and links as one shell word each, text pasted.
     void dropUrls(const std::vector<std::string>& urls);

@@ -439,25 +439,30 @@ void TerminalPane::openMenu(double x, double y)
         if (m_menuCanPaste)
             m_menu->addItem(tr("Paste"), [this] { m_terminal->pasteClipboard(); });
         m_menu->addItem(tr("Select All"), [this] { m_terminal->selectAll(); });
-        m_menu->addItem(tr("Find…"), [this] { openFind(); });
-        if (m_terminal->scrollbarMaximum() > 0)
-            m_menu->addItem(tr("Clear Scrollback"), [this] { m_session->clearScrollback(); });
-        m_menu->addItem(tr("Reset Terminal"), [this] { m_session->resetTerminal(); });
-        m_menu->addSeparator();
-        m_menu->addItem(tr("Split Right"), [this] { m_page->split(this, TerminalPage::Direction::Right); });
-        m_menu->addItem(tr("Split Down"), [this] { m_page->split(this, TerminalPage::Direction::Down); });
-        if (m_page->paneCount() > 1)
-            m_menu->addItem(tr("Close Pane"), [this] { terminalWindow()->closePane(m_page, this); });
-        m_menu->addSeparator();
-        m_menu->addItem(tr("New Tab"), [this] { terminalWindow()->openNewTab(); });
-        m_menu->addItem(tr("New Window"), [this] { terminalWindow()->newWindow(); });
-        m_menu->addItem(tr("Open File Manager"), [this] { ProcessHelper::openFileManager(m_session->currentDir()); });
-        m_menu->addSeparator();
-        m_menu->addItem(terminalWindow()->isFullScreen() ? tr("Exit full screen") : tr("Full screen"),
-                        [this] { terminalWindow()->toggleFullScreen(); });
-        m_menu->addItem(tr("Settings"), [this] { terminalWindow()->showSettings(); });
+        addWindowItems(*m_menu);
 
         if (Window* window = this->window())
             m_menu->popup(window, position);
     });
+}
+
+void TerminalPane::addWindowItems(Menu& menu)
+{
+    menu.addItem(tr("Find…"), [this] { openFind(); });
+    if (m_terminal->scrollbarMaximum() > 0)
+        menu.addItem(tr("Clear Scrollback"), [this] { m_session->clearScrollback(); });
+    menu.addItem(tr("Reset Terminal"), [this] { m_session->resetTerminal(); });
+    menu.addSeparator();
+    menu.addItem(tr("Split Right"), [this] { m_page->split(this, TerminalPage::Direction::Right); });
+    menu.addItem(tr("Split Down"), [this] { m_page->split(this, TerminalPage::Direction::Down); });
+    if (m_page->paneCount() > 1)
+        menu.addItem(tr("Close Pane"), [this] { terminalWindow()->closePane(m_page, this); });
+    menu.addSeparator();
+    menu.addItem(tr("New Tab"), [this] { terminalWindow()->openNewTab(); });
+    menu.addItem(tr("New Window"), [this] { terminalWindow()->newWindow(); });
+    menu.addItem(tr("Open File Manager"), [this] { ProcessHelper::openFileManager(m_session->currentDir()); });
+    menu.addSeparator();
+    menu.addItem(terminalWindow()->isFullScreen() ? tr("Exit full screen") : tr("Full screen"),
+                 [this] { terminalWindow()->toggleFullScreen(); });
+    menu.addItem(tr("Settings"), [this] { terminalWindow()->showSettings(); });
 }

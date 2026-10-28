@@ -114,6 +114,7 @@ private:
     void closeProtection(int index);
     void detachTab(int index, bayu::ui::PointF position);
     void openTabMenu(int index, bayu::ui::PointF position);
+    void openWindowMenu(bayu::ui::PointF position);
     void attach(TerminalPage* page);
     void showPage(int index);
     int indexOfPage(const TerminalPage* page) const;
@@ -155,6 +156,7 @@ private:
     bool m_detaching = false;
     bool m_incoming = false;
     std::unique_ptr<bayu::ui::Menu> m_tabMenu;
+    std::unique_ptr<bayu::ui::Menu> m_windowMenu;
     int m_tabMenuIndex = -1;
 
     std::vector<bayu::base::Subscription> m_connections;

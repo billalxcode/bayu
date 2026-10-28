@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <functional>
 #include <memory>
 #include <utility>
 
@@ -40,6 +41,10 @@ public:
     // The buttons centred in the bar's height, with no top margin, keeping the
     // end margin.
     void setButtonsCentered(bool centered);
+
+    // A right click on the bar outside its buttons, at that point in the
+    // window: the window's menu.
+    std::function<void(PointF position)> onContextMenuRequested;
 
     SizeF sizeHint() const override { return {0, m_height}; }
     bool acceptsPointer() const override { return true; }

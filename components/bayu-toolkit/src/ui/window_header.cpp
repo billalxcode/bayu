@@ -130,6 +130,10 @@ void WindowHeader::layout()
 void WindowHeader::pointerPress(const PointerEvent& event)
 {
     Window* window = this->window();
+    if (window && event.button == MouseButton::Right && onContextMenuRequested) {
+        onContextMenuRequested(mapToWindow(event.position));
+        return;
+    }
     if (!window || event.button != MouseButton::Left || window->states().fullScreen)
         return;
     if (event.clickCount == 2) {
