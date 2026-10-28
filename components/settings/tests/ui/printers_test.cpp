@@ -20,6 +20,14 @@ TEST(PrintersPage, MakesTheUriOfAnAddress)
     EXPECT_EQ(uriForAddress("  "), "");
 }
 
+TEST(PrintersPage, NamesASecondQueueOfThePrinterApart)
+{
+    using settings::printers::uniqueName;
+    EXPECT_EQ(uniqueName("HP_LaserJet", {}), "HP_LaserJet");
+    EXPECT_EQ(uniqueName("HP_LaserJet", {"HP_LaserJet"}), "HP_LaserJet_2");
+    EXPECT_EQ(uniqueName("HP_LaserJet", {"HP_LaserJet", "HP_LaserJet_2", "Other"}), "HP_LaserJet_3");
+}
+
 TEST(PrintersPage, MakesQueueNames)
 {
     using settings::printers::queueName;

@@ -106,7 +106,10 @@ public:
         setName("printer:" + printer.name);
         m_name->setText(printer.info);
         if (m_add) {
-            m_status->setText(printer.model.empty() ? printer.uri : printer.model);
+            const std::string kind = printer.uri.starts_with("usb://") ? std::string("USB") : std::string();
+            const std::string detail = printer.model.empty() ? printer.uri : printer.model;
+            m_status->setText(kind.empty() || detail == printer.info ? (kind.empty() ? detail : kind)
+                                                                      : detail + " · " + kind);
             return;
         }
         std::string status = printer.state == 4 ? tr("Printing") : printer.state == 5 ? tr("Stopped") : tr("Ready");
@@ -208,11 +211,18 @@ private:
     // A CUPS command for `row`; the page reads the printers again after it.
     void command(PrinterRow* row, std::vector<std::string> arguments)
     {
+        change(row, [arguments = std::move(arguments)] { return printers::run(arguments); });
+    }
+
+    // A change to the printers, off the UI thread: nothing when it worked,
+    // else why not.
+    void change(PrinterRow* row, std::function<std::optional<std::string>()> work)
+    {
         if (row)
             row->setBusy(true);
         const std::string name = row ? row->printer().name : std::string();
         background<std::optional<std::string>>(
-                [arguments = std::move(arguments)](std::shared_ptr<std::optional<std::string>> result) { *result = printers::run(arguments); },
+                [work = std::move(work)](std::shared_ptr<std::optional<std::string>> result) { *result = work(); },
                 [this, name](const std::optional<std::string>& error) {
                     showMessage(error);
                     m_busy.erase(name);
@@ -265,11 +275,7 @@ private:
     void connect(PrinterRow* row)
     {
         if (Button* add = row->addButton()) {
-            add->onClicked = [this, row] {
-                const Printer& printer = row->printer();
-                command(row, {"lpadmin", "-p", printers::queueName(printer.name), "-D", printer.info, "-E", "-v",
-                              printer.uri, "-m", "everywhere"});
-            };
+            add->onClicked = [this, row] { change(row, [printer = row->printer()] { return printers::add(printer); }); };
             return;
         }
         row->testButton()->onClicked = [this, row] { command(row, {"lp", "-d", row->printer().name, kTestPage}); };
@@ -302,8 +308,9 @@ private:
                 return;
             std::string host = uri.substr(uri.find("://") + 3);
             host = host.substr(0, host.find('/'));
-            command(nullptr, {"lpadmin", "-p", printers::queueName(host), "-D", host, "-E", "-v", uri, "-m",
-                              "everywhere"});
+            change(nullptr, [printer = Printer {.name = host, .info = host, .uri = uri}] {
+                return printers::add(printer);
+            });
             m_dialog->close();
         };
         address->onTextChanged = [address, add] { add->setEnabled(!printers::uriForAddress(address->text()).empty()); };
