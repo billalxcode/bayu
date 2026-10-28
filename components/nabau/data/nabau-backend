@@ -98,8 +98,21 @@ while read -r command key value; do
     esac
 done
 
-# The installer is gone: Anaconda unmounts the new system and leaves.
-wait "$anaconda"
+# The installer is gone: Anaconda unmounts the new system and leaves. After a
+# Restart it is given a minute, and the computer restarts in any case, even
+# with an inhibitor left in the live session (issue #89).
 if [[ $reboot == 1 ]]; then
-    systemctl reboot
+    for _ in $(seq 120); do
+        kill -0 "$anaconda" 2>/dev/null || break
+        sleep 0.5
+    done
+    if kill -0 "$anaconda" 2>/dev/null; then
+        echo "Anaconda did not leave; stopping it" >&2
+        kill "$anaconda"
+        sleep 5
+    fi
+    sync
+    systemctl reboot --check-inhibitors=no || systemctl reboot -ff
+else
+    wait "$anaconda"
 fi
