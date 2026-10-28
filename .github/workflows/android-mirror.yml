@@ -1,0 +1,32 @@
+# Keeps R2's copy of the Android images lapis installs (builder/mirror-android.sh)
+# up to date with Waydroid's: Bayu's android-setup downloads them from there
+# first (issue #79).
+name: Android images
+
+on:
+  schedule:
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: android-mirror
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: [self-hosted, bayu-builder]
+    timeout-minutes: 120
+    env:
+      RCLONE_CONFIG_R2_TYPE: s3
+      RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+      RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+      RCLONE_CONFIG_R2_ACL: private
+      RCLONE_CONFIG_R2_NO_CHECK_BUCKET: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: false
+      - name: Mirror the Android images
+        run: builder/mirror-android.sh

@@ -6,17 +6,51 @@ systemctl enable --now lapis-control.socket
 if [ -e /var/lib/lapis/images/system.img ] && [ -e /var/lib/lapis/images/vendor.img ]; then
     exit 0
 fi
-if [ ! -p /dev/stdin ]; then
-    exec lapis init -type VANILLA
-fi
-# The store holds a pipe on the input and cannot signal this root process: the
-# pipe's end, the store closing, stops the download, which `lapis init` resumes
-# the next time.
-lapis init -type VANILLA &
-init=$!
-{ while read -r _; do :; done; kill "$init" 2>/dev/null; } <&0 &
-watch=$!
+
+# The images come from IGOS Nusantara's copy first: Waydroid's server and
+# SourceForge's mirrors are out of reach, or slower than lapis allows, from
+# much of Indonesia (issue #79). Waydroid's own channels are the fallback.
+MIRROR=https://r2.igos-nusantara.or.id/android/ota
+WAYDROID=https://ota.waydro.id
+channels() {
+    local config=/var/lib/lapis/lapis.toml
+    mkdir -p /var/lib/lapis
+    grep -qs '^\[images\]' "$config" || printf '\n[images]\n' >> "$config"
+    sed -i '/^[[:space:]]*system_channel *=/d; /^[[:space:]]*vendor_channel *=/d' "$config"
+    sed -i "/^\[images\]/a system_channel = \"$1/system\"\nvendor_channel = \"$1/vendor\"" "$config"
+}
+
+init() {
+    if [ ! -p /dev/stdin ]; then
+        lapis init -type VANILLA
+        return
+    fi
+    # The store holds a pipe on the input and cannot signal this root process:
+    # the pipe's end, the store closing, stops the download, which
+    # `lapis init` resumes the next time.
+    lapis init -type VANILLA &
+    local pid=$! status=0
+    { while read -r _; do :; done; kill "$pid" 2>/dev/null; } <&0 &
+    local watch=$!
+    wait "$pid" || status=$?
+    # The watch gone: the store closed, nothing to fall back for.
+    kill "$watch" 2>/dev/null || [ "$status" = 0 ] || return 130
+    return "$status"
+}
+
+# An image that is not there is downloaded again, whatever lapis noted of the
+# last one it got.
+for kind in system vendor; do
+    [ -e "/var/lib/lapis/images/$kind.img" ] ||
+        sed -i "s/^\([[:space:]]*\)${kind}_datetime *=.*/\1${kind}_datetime = 0/" /var/lib/lapis/lapis.toml 2>/dev/null || true
+done
+
+channels "$MIRROR"
 status=0
-wait "$init" || status=$?
-kill "$watch" 2>/dev/null || true
-exit "$status"
+init || status=$?
+if [ "$status" != 0 ]; then
+    [ "$status" = 130 ] && exit 1
+    echo "The IGOS Nusantara mirror failed; trying Waydroid's server"
+    channels "$WAYDROID"
+    init
+fi
