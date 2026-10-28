@@ -108,3 +108,34 @@ void ensureGtkCssImports()
     ensureGtkCssImport("gtk-3.0");
     ensureGtkCssImport("gtk-4.0");
 }
+
+static bool sameTree(const fs::path &source, const fs::path &target)
+{
+    std::error_code error;
+    for (const auto &entry : fs::recursive_directory_iterator(source, error)) {
+        if (!entry.is_regular_file())
+            continue;
+        if (file::read(entry.path()) != file::read(target / fs::relative(entry.path(), source)))
+            return false;
+    }
+    return !error;
+}
+
+void ensureFlatpakGtkThemes()
+{
+    // Without the themes GTK in a Flatpak application falls back to light Adwaita, while the
+    // application follows the portal's dark mode: LibreOffice's dark icons on a light window.
+    for (const char *name : {"Bayu", "Bayu-dark"}) {
+        const fs::path source = fs::path(BAYU_GTK_THEMES_DIR) / name;
+        const fs::path target = fs::path(paths::home()) / ".themes" / name;
+        if (sameTree(source, target))
+            continue;
+        std::error_code error;
+        fs::remove_all(target, error);
+        fs::create_directories(target.parent_path(), error);
+        if (!error)
+            fs::copy(source, target, fs::copy_options::recursive, error);
+        if (error)
+            CF_WARNING(services::log()) << "Cannot copy" << source.string() << "to" << target.string();
+    }
+}

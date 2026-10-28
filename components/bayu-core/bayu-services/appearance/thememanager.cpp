@@ -86,6 +86,7 @@ ThemeManager::ThemeManager(Settings &settings, dbus::Connection *session, dbus::
     // GTK on Wayland takes these from gsettings, not settings.ini; sync them at login.
     updateGtk3Config();
     ensureGtkCssImports();
+    ensureFlatpakGtkThemes();
 }
 
 ThemeManager::~ThemeManager() = default;

@@ -133,6 +133,8 @@ find /etc /usr/share/icons/hicolor -xdev -uid +999 -exec chown root:root {} + -e
 systemd-tmpfiles --create --boot /usr/lib/tmpfiles.d/x11.conf >/dev/null 2>&1 || :
 # The store installs Flathub apps system-wide.
 flatpak remote-add --system --if-not-exists flathub %{_datadir}/bayu-store/flathub.flatpakrepo >/dev/null 2>&1 || :
+# The Bayu GTK themes, which bayu-services copies to ~/.themes, for every Flatpak application.
+flatpak override --system --filesystem=~/.themes:ro >/dev/null 2>&1 || :
 gtk-update-icon-cache -q -f /usr/share/icons/* 2>/dev/null || :
 glib-compile-schemas /usr/share/glib-2.0/schemas 2>/dev/null || :
 
