@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -142,7 +142,7 @@ msgstr "사용자 “{name}”을(를) 삭제하시겠습니까? 해당 사용�
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
-#: src/pages/shortcuts/shortcutspage.cpp
+#: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
 msgstr "취소"
 
@@ -1644,6 +1644,7 @@ msgid "Do Not Disturb"
 msgstr "방해 금지"
 
 #: src/pages/notifications/notificationspage.cpp
+#: src/pages/updates/updatespage.cpp
 msgid "Applications"
 msgstr "앱"
 
@@ -2275,6 +2276,120 @@ msgstr "스크롤 속도"
 msgid "Touchscreen"
 msgstr "터치스크린"
 
+#: src/pages/updates/updatespage.cpp src/window/pagelist.cpp
+msgid "System Update"
+msgstr "시스템 업데이트"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates"
+msgstr "업데이트"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Application updates"
+msgstr "앱 업데이트"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download updates automatically"
+msgstr "업데이트 자동 다운로드"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates are downloaded in the background and installed when you restart. You are always asked before they are installed."
+msgstr "업데이트는 백그라운드에서 다운로드되고 다시 시작할 때 설치됩니다. 설치하기 전에 항상 확인합니다."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Up to date"
+msgstr "최신 상태"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{name} (security)"
+msgstr "{name}(보안)"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "And {n} more"
+msgid_plural "And {n} more"
+msgstr[0] "외 {n}개"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Preparing…"
+msgstr "준비 중…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Downloading {package}…"
+msgstr "{package} 다운로드 중…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Checking for updates…"
+msgstr "업데이트 확인 중…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Your system is up to date"
+msgstr "시스템이 최신 상태입니다"
+
+#: src/pages/updates/updatespage.cpp
+msgid "There are no updates for the system."
+msgstr "시스템 업데이트가 없습니다."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check for Updates"
+msgstr "업데이트 확인"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update available"
+msgid_plural "{n} updates available"
+msgstr[0] "업데이트 {n}개 있음"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Including {n} security update."
+msgid_plural "Including {n} security updates."
+msgstr[0] "보안 업데이트 {n}개를 포함합니다."
+
+#: src/pages/updates/updatespage.cpp
+msgid "They are downloaded now and installed when you restart."
+msgstr "지금 다운로드하고 다시 시작할 때 설치합니다."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download"
+msgstr "다운로드"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Downloading updates…"
+msgstr "업데이트 다운로드 중…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update"
+msgid_plural "{n} updates"
+msgstr[0] "업데이트 {n}개"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates ready to install"
+msgstr "업데이트 설치 준비 완료"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart to install the downloaded updates. Save your work first."
+msgstr "다운로드한 업데이트를 설치하려면 다시 시작하십시오. 먼저 작업을 저장하십시오."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart and Install"
+msgstr "다시 시작하고 설치"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Could not check for updates"
+msgstr "업데이트를 확인할 수 없습니다"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check your internet connection and try again."
+msgstr "인터넷 연결을 확인한 후 다시 시도하십시오."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Try Again"
+msgstr "다시 시도"
+
 #: src/pages/wallpaper/wallpapergrid.cpp src/pages/wallpaper/wallpaperpage.cpp
 msgid "Add wallpaper"
 msgstr "배경화면 추가"
@@ -2449,6 +2564,10 @@ msgstr "충전, 충전 제한, 배터리 상태, 용량, 기록, 백분율"
 #: src/window/pagelist.cpp
 msgid "energy, performance, power saving, sleep, turn off display"
 msgstr "에너지, 성능, 절전, 절전 모드, 디스플레이 끄기"
+
+#: src/window/pagelist.cpp
+msgid "update, upgrade, dnf, packages, security, download, restart"
+msgstr "업데이트, 업그레이드, dnf, 패키지, 보안, 다운로드, 다시 시작, update, upgrade"
 
 #: src/window/pagelist.cpp
 msgid "system, version, kernel, processor, memory, storage, hardware"

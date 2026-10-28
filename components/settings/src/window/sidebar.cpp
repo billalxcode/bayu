@@ -48,6 +48,23 @@ public:
         m_title = addChild<Label>(tr(page.title.c_str()));
         m_title->setFontSize(metrics::points(kItemPointSize));
         m_title->setVerticallyCentered(true);
+        // The entry's count, such as the updates waiting: white on red.
+        m_badge = addChild<Label>();
+        m_badge->setFontSize(metrics::points(kItemPointSize - 1));
+        m_badge->setWeight(600);
+        m_badge->setColor(Color::rgb(0xFFFFFF));
+        m_badge->setTextAlignment(Label::TextAlignment::Center);
+        m_badgeChanged = pageBadgesChanged().connect([this] { updateBadge(); });
+        updateBadge();
+    }
+
+    void updateBadge()
+    {
+        const int count = pageBadge(m_page.id);
+        m_badge->setText(count > 0 ? (count > 99 ? std::string("99+") : std::to_string(count)) : std::string());
+        m_badge->setVisible(count > 0);
+        requestLayout();
+        requestPaint();
     }
 
     const PageInfo& page() const { return m_page; }
@@ -71,7 +88,16 @@ protected:
         const double height = geometry().height;
         m_icon->setGeometry({metrics::sidebarItemPadding, (height - kIconTile) / 2, kIconTile, kIconTile});
         const double x = metrics::sidebarItemPadding + kIconTile + metrics::s;
-        m_title->setGeometry({x, 0, std::max(0.0, geometry().width - x), height});
+        double right = geometry().width;
+        if (m_badge->isVisible()) {
+            const double badgeHeight = 18;
+            const double badgeWidth = std::max(badgeHeight, std::ceil(m_badge->sizeHint().width) + 10);
+            m_badgeRect = {geometry().width - metrics::sidebarItemPadding - badgeWidth, (height - badgeHeight) / 2,
+                           badgeWidth, badgeHeight};
+            m_badge->setGeometry(m_badgeRect);
+            right = m_badgeRect.x - metrics::s;
+        }
+        m_title->setGeometry({x, 0, std::max(0.0, right - x), height});
         // 8pt text reads lighter than its colour, so the inactive grey leans
         // towards the text colour.
         const Color text = theme.text;
@@ -97,6 +123,8 @@ protected:
                 localRect(), theme.mediumRadius,
                 m_pressed ? color(ColorId::ItemPressed) : color(SettingsColor::SidebarItemCurrent));
         }
+        if (m_badge->isVisible())
+            painter.fillRoundedRect(m_badgeRect, m_badgeRect.height / 2, Color::rgb(0xE8453C));
     }
 
     void pointerPress(const PointerEvent& event) override
@@ -121,6 +149,9 @@ private:
     const PageInfo& m_page;
     RowIcon* m_icon;
     Label* m_title;
+    Label* m_badge;
+    RectF m_badgeRect;
+    bayu::base::Subscription m_badgeChanged;
     bool m_current = false;
     bool m_pressed = false;
 };

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -143,7 +143,7 @@ msgstr "ユーザ「{name}」を削除しますか? そのホームディレク�
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
-#: src/pages/shortcuts/shortcutspage.cpp
+#: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -1645,6 +1645,7 @@ msgid "Do Not Disturb"
 msgstr "おやすみモード"
 
 #: src/pages/notifications/notificationspage.cpp
+#: src/pages/updates/updatespage.cpp
 msgid "Applications"
 msgstr "アプリケーション"
 
@@ -2276,6 +2277,120 @@ msgstr "スクロール速度"
 msgid "Touchscreen"
 msgstr "タッチスクリーン"
 
+#: src/pages/updates/updatespage.cpp src/window/pagelist.cpp
+msgid "System Update"
+msgstr "システムアップデート"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates"
+msgstr "アップデート"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Application updates"
+msgstr "アプリのアップデート"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download updates automatically"
+msgstr "アップデートを自動的にダウンロード"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates are downloaded in the background and installed when you restart. You are always asked before they are installed."
+msgstr "アップデートはバックグラウンドでダウンロードされ、再起動時にインストールされます。インストールの前に必ず確認します。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Up to date"
+msgstr "最新"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{name} (security)"
+msgstr "{name}（セキュリティ）"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "And {n} more"
+msgid_plural "And {n} more"
+msgstr[0] "ほか {n} 件"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Preparing…"
+msgstr "準備しています…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Downloading {package}…"
+msgstr "{package} をダウンロードしています…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Checking for updates…"
+msgstr "アップデートを確認しています…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Your system is up to date"
+msgstr "システムは最新です"
+
+#: src/pages/updates/updatespage.cpp
+msgid "There are no updates for the system."
+msgstr "システムのアップデートはありません。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check for Updates"
+msgstr "アップデートを確認"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update available"
+msgid_plural "{n} updates available"
+msgstr[0] "{n} 件のアップデートがあります"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Including {n} security update."
+msgid_plural "Including {n} security updates."
+msgstr[0] "セキュリティアップデート {n} 件を含みます。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "They are downloaded now and installed when you restart."
+msgstr "今ダウンロードして、再起動時にインストールします。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download"
+msgstr "ダウンロード"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Downloading updates…"
+msgstr "アップデートをダウンロードしています…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update"
+msgid_plural "{n} updates"
+msgstr[0] "{n} 件のアップデート"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates ready to install"
+msgstr "アップデートをインストールする準備ができました"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart to install the downloaded updates. Save your work first."
+msgstr "再起動してダウンロード済みのアップデートをインストールします。先に作業を保存してください。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart and Install"
+msgstr "再起動してインストール"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Could not check for updates"
+msgstr "アップデートを確認できませんでした"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check your internet connection and try again."
+msgstr "インターネット接続を確認して、もう一度お試しください。"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Try Again"
+msgstr "再試行"
+
 #: src/pages/wallpaper/wallpapergrid.cpp src/pages/wallpaper/wallpaperpage.cpp
 msgid "Add wallpaper"
 msgstr "壁紙を追加"
@@ -2450,6 +2565,10 @@ msgstr "充電, 充電制限, バッテリーのヘルス, 容量, 履歴, パ�
 #: src/window/pagelist.cpp
 msgid "energy, performance, power saving, sleep, turn off display"
 msgstr "エネルギー, パフォーマンス, 省電力, スリープ, ディスプレイをオフ, energy, performance, power saving, sleep, turn off display"
+
+#: src/window/pagelist.cpp
+msgid "update, upgrade, dnf, packages, security, download, restart"
+msgstr "アップデート, 更新, アップグレード, dnf, パッケージ, セキュリティ, ダウンロード, 再起動, update, upgrade"
 
 #: src/window/pagelist.cpp
 msgid "system, version, kernel, processor, memory, storage, hardware"

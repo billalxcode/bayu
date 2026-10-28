@@ -37,6 +37,7 @@ class StatusBarBackdrop;
 class StatusIcon;
 class StopItem;
 class SystemTrayView;
+class UpdateMonitor;
 class Wallpaper;
 
 // The status bar: a 32 px strip along the top of the primary output, reserved
@@ -112,6 +113,9 @@ public:
     void setPanelSources(DockModel *applications, std::function<void()> toggleLauncher,
                          std::function<render::GlassParams(double tint)> glass);
     bool isPanel() const;
+    // The updates waiting: an icon while there are any, with a menu to see
+    // them. Null takes it away (before the monitor goes).
+    void setUpdates(UpdateMonitor *updates);
     // The panel stands off the edge (or is on its way there).
     bool isFloating() const { return m_floating; }
     PanelTasks *panelTasks() const { return m_panelTasks; }
@@ -199,6 +203,12 @@ private:
     std::unique_ptr<ui::Animation> m_floatAnimation;
     std::map<uint64_t, base::Rect> m_sentTargets;
     std::vector<base::Subscription> m_panelLayoutSubscriptions;
+    StatusIcon *m_updates = nullptr;
+    UpdateMonitor *m_updateMonitor = nullptr;
+    base::Subscription m_updatesChanged;
+    std::unique_ptr<ui::Menu> m_updatesMenu;
+    void updateUpdates();
+    void showUpdatesMenu();
     std::vector<base::Subscription> m_subscriptions;
     std::shared_ptr<bool> m_alive = std::make_shared<bool>(true);
 };

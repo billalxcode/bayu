@@ -96,6 +96,7 @@ namespace shell {
 class DockWindow;
 class Wallpaper;
 class Shell;
+class UpdateMonitor;
 struct ScreenCaptureServices;
 }
 
@@ -295,6 +296,8 @@ private:
     std::unique_ptr<wm::WindowCycleController> m_windowCycle;
     std::unique_ptr<switcher::SwitcherView> m_switcherView;
     // The desktop shell drawn by the compositor; none in the greeter.
+    // Outlives the shell, whose bar shows it.
+    std::unique_ptr<shell::UpdateMonitor> m_updates;
     std::unique_ptr<shell::Shell> m_shell;
     // The shell's desktop background; the startup cover waits for it.
     shell::Wallpaper *m_wallpaper = nullptr;

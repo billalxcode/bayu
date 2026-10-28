@@ -59,7 +59,8 @@ add_library(settings-ui OBJECT
 )
 target_include_directories(settings-ui PUBLIC src)
 target_compile_definitions(settings-ui PUBLIC SETTINGS_DATA_DIR="${SETTINGS_DATA_DIR}")
-target_link_libraries(settings-ui PUBLIC Bayu::Toolkit)
+find_package(BayuClients REQUIRED COMPONENTS packagekit)
+target_link_libraries(settings-ui PUBLIC Bayu::Toolkit Bayu::PackageKitClient)
 
 # A page's own dependencies: src/pages/<page>/page.cmake finds and links
 # them to settings-ui.
@@ -83,6 +84,7 @@ install(FILES
 
 install(FILES
     src/datetime/60-bayu-datetime.rules
+    src/pages/updates/60-bayu-updates.rules
     DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/rules.d
 )
 

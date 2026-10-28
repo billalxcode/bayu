@@ -10,6 +10,8 @@
 
 #include "base/i18n.h"
 #include "core/main_loop.h"
+#include "shell/common/application_badges.h"
+#include "shell/common/count_badge.h"
 #include "shell/common/task_windows.h"
 #include "shell/dock/dock_model.h"
 #include "shell/statusbar/pitaloka.h"
@@ -164,8 +166,11 @@ public:
         // The application artwork at any size: the theme has small action
         // glyphs under some applications' names (utilities-terminal at 24).
         m_icon->setThemeSize(kAppArtwork);
+        m_badge = addChild<CountBadge>();
         update(item);
     }
+
+    void setCount(int64_t count) { m_badge->setCount(count); }
 
     std::string id;
 
@@ -191,6 +196,7 @@ protected:
         // A little up, for the dot.
         m_icon->setGeometry({std::round((localRect().width - size) / 2), std::round((localRect().height - size) / 2) - 1,
                              size, size});
+        m_badge->setIconRect(m_icon->geometry());
     }
     void paint(ui::Painter &painter) override
     {
@@ -204,6 +210,7 @@ protected:
 
 private:
     ui::ThemeIcon *m_icon = nullptr;
+    CountBadge *m_badge = nullptr;
     bool m_running = false;
 };
 
@@ -270,10 +277,17 @@ private:
     ui::Label *m_title = nullptr;
 };
 
-PanelTasks::PanelTasks(TaskWindows &windows, DockModel &applications)
+PanelTasks::PanelTasks(TaskWindows &windows, DockModel &applications, ApplicationBadges *badges)
     : m_windows(windows)
     , m_applications(applications)
+    , m_badges(badges)
 {
+    if (m_badges) {
+        m_subscriptions.push_back(m_badges->changed.connect([this] {
+            for (AppButton *button : m_apps)
+                button->setCount(m_badges->count(button->id));
+        }));
+    }
     m_start = addChild<StartButton>();
     m_start->onClicked = [this](const ui::PointerEvent &) {
         if (onStart)
@@ -375,6 +389,8 @@ void PanelTasks::syncApplications()
             m_applications.clicked(id);
         };
         button->onMenuRequested = [this, button, id = item->id] { popupMenu(button, id); };
+        if (m_badges)
+            button->setCount(m_badges->count(item->id));
         m_apps.push_back(button);
     }
     requestLayout();

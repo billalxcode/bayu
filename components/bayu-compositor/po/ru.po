@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-compositor\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -707,6 +707,30 @@ msgstr "Пароль группы"
 msgid "One-time password"
 msgstr "Одноразовый пароль"
 
+#: src/shell/statusbar/status_bar_window.cpp
+msgid "Restart to install the updates"
+msgstr "Перезагрузить для установки обновлений"
+
+#: src/shell/statusbar/status_bar_window.cpp
+#, python-brace-format
+msgid "{n} system update"
+msgid_plural "{n} system updates"
+msgstr[0] "{n} обновление системы"
+msgstr[1] "{n} обновления системы"
+msgstr[2] "{n} обновлений системы"
+
+#: src/shell/statusbar/status_bar_window.cpp
+#, python-brace-format
+msgid "{n} application update"
+msgid_plural "{n} application updates"
+msgstr[0] "{n} обновление приложений"
+msgstr[1] "{n} обновления приложений"
+msgstr[2] "{n} обновлений приложений"
+
+#: src/shell/statusbar/status_bar_window.cpp
+msgid "Check for Updates"
+msgstr "Проверить обновления"
+
 #. TRANSLATORS: {reason} is a sentence of its own, such as "The VPN service stopped."
 #: src/shell/statusbar/vpn_notifier.cpp
 #, python-brace-format
@@ -716,6 +740,51 @@ msgstr "Не удалось подключиться к «{name}». {reason}"
 #: src/shell/statusbar/vpn_notifier.cpp
 msgid "VPN connection failed"
 msgstr "Не удалось установить VPN-подключение"
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{system} system updates and {apps} application updates are available."
+msgstr "Доступны обновления системы ({system}) и приложений ({apps})."
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{n} system update is available."
+msgid_plural "{n} system updates are available."
+msgstr[0] "Доступно {n} обновление системы."
+msgstr[1] "Доступно {n} обновления системы."
+msgstr[2] "Доступно {n} обновлений системы."
+
+#: src/shell/updates/update_monitor.cpp
+#, python-brace-format
+msgid "{n} application update is available."
+msgid_plural "{n} application updates are available."
+msgstr[0] "Доступно {n} обновление приложений."
+msgstr[1] "Доступно {n} обновления приложений."
+msgstr[2] "Доступно {n} обновлений приложений."
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Updates available"
+msgstr "Доступны обновления"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "View"
+msgstr "Показать"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Updates ready to install"
+msgstr "Обновления готовы к установке"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "The updates were downloaded. Restart to install them."
+msgstr "Обновления скачаны. Перезагрузите компьютер, чтобы установить их."
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Restart and Install"
+msgstr "Перезагрузить и установить"
+
+#: src/shell/updates/update_monitor.cpp
+msgid "Later"
+msgstr "Позже"
 
 #. TRANSLATORS: the name of a desk that has none of its own, such as "Desk 2".
 #: src/wm/overview/overview_controller.cpp

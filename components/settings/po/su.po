@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-settings\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-27 07:55+0000\n"
+"POT-Creation-Date: 2026-10-27 09:18+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -142,7 +142,7 @@ msgstr "Hapus pamaké “{name}”? Diréktori imah jeung eusina bakal dihapus p
 #: src/pages/network/vpn/vpndialogs.cpp
 #: src/pages/network/wlan/newnetworkdialog.cpp
 #: src/pages/shortcuts/shortcuteditdialog.cpp
-#: src/pages/shortcuts/shortcutspage.cpp
+#: src/pages/shortcuts/shortcutspage.cpp src/pages/updates/updatespage.cpp
 msgid "Cancel"
 msgstr "Batal"
 
@@ -1644,6 +1644,7 @@ msgid "Do Not Disturb"
 msgstr "Ulah Ngaganggu"
 
 #: src/pages/notifications/notificationspage.cpp
+#: src/pages/updates/updatespage.cpp
 msgid "Applications"
 msgstr "Aplikasi"
 
@@ -2275,6 +2276,120 @@ msgstr "Laju gulung"
 msgid "Touchscreen"
 msgstr "Layar sentuh"
 
+#: src/pages/updates/updatespage.cpp src/window/pagelist.cpp
+msgid "System Update"
+msgstr "Pembaruan Sistem"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates"
+msgstr "Pembaruan"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Application updates"
+msgstr "Pembaruan aplikasi"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download updates automatically"
+msgstr "Unduh pembaruan sacara otomatis"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates are downloaded in the background and installed when you restart. You are always asked before they are installed."
+msgstr "Pembaruan diunduh di tukang sarta dipasang nalika anjeun ngamimitian deui. Anjeun salawasna ditaros saméméh dipasang."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Up to date"
+msgstr "Pangénggalna"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{name} (security)"
+msgstr "{name} (kaamanan)"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "And {n} more"
+msgid_plural "And {n} more"
+msgstr[0] "Jeung {n} deui"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Preparing…"
+msgstr "Nyiapkeun…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Downloading {package}…"
+msgstr "Ngundeur {package}…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Checking for updates…"
+msgstr "Mariksa pembaruan…"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Your system is up to date"
+msgstr "Sistem anjeun parantos pangénggalna"
+
+#: src/pages/updates/updatespage.cpp
+msgid "There are no updates for the system."
+msgstr "Teu aya pembaruan pikeun sistem."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check for Updates"
+msgstr "Pariksa Pembaruan"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update available"
+msgid_plural "{n} updates available"
+msgstr[0] "{n} pembaruan sayogi"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "Including {n} security update."
+msgid_plural "Including {n} security updates."
+msgstr[0] "Kaasup {n} pembaruan kaamanan."
+
+#: src/pages/updates/updatespage.cpp
+msgid "They are downloaded now and installed when you restart."
+msgstr "Diunduh ayeuna sarta dipasang nalika anjeun ngamimitian deui."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Download"
+msgstr "Unduh"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Downloading updates…"
+msgstr "Ngundeur pembaruan…"
+
+#: src/pages/updates/updatespage.cpp
+#, python-brace-format
+msgid "{n} update"
+msgid_plural "{n} updates"
+msgstr[0] "{n} pembaruan"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Updates ready to install"
+msgstr "Pembaruan siap dipasang"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart to install the downloaded updates. Save your work first."
+msgstr "Mimitian deui pikeun masang pembaruan nu parantos diunduh. Simpen heula pagawéan anjeun."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Restart and Install"
+msgstr "Mimitian Deui sarta Pasang"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Could not check for updates"
+msgstr "Teu tiasa mariksa pembaruan"
+
+#: src/pages/updates/updatespage.cpp
+msgid "Check your internet connection and try again."
+msgstr "Pariksa sambungan internét anjeun teras cobian deui."
+
+#: src/pages/updates/updatespage.cpp
+msgid "Try Again"
+msgstr "Cobian Deui"
+
 #: src/pages/wallpaper/wallpapergrid.cpp src/pages/wallpaper/wallpaperpage.cpp
 msgid "Add wallpaper"
 msgstr "Tambahkeun rarapihan"
@@ -2449,6 +2564,10 @@ msgstr "ngecas, watesan ngecas, kaséhatan batré, kapasitas, riwayat, persénta
 #: src/window/pagelist.cpp
 msgid "energy, performance, power saving, sleep, turn off display"
 msgstr "énergi, kinerja, héman daya, anteng, pareuman layar, energy, performance, power saving, sleep, turn off display"
+
+#: src/window/pagelist.cpp
+msgid "update, upgrade, dnf, packages, security, download, restart"
+msgstr "pembaruan, dnf, pakét, kaamanan, unduh, mimitian deui, update, upgrade"
 
 #: src/window/pagelist.cpp
 msgid "system, version, kernel, processor, memory, storage, hardware"

@@ -83,6 +83,9 @@ static std::vector<PageInfo> makePages()
     add({.id = "power", .name = "power", .title = trNoop("Power"), .icon = "power.svg",
          .iconColor = Color::rgb(0xFE8433), .category = trNoop("System"),
          .keywords = trNoop("energy, performance, power saving, sleep, turn off display")});
+    add({.id = "updates", .name = "updates", .title = trNoop("System Update"), .icon = "updates.svg",
+         .iconColor = Color::rgb(0x2EC347), .category = trNoop("System"),
+         .keywords = trNoop("update, upgrade, dnf, packages, security, download, restart")});
     add({.id = "about", .name = "about", .title = trNoop("About"), .icon = "about.svg",
          .iconColor = Color::rgb(0x24A7FD), .category = trNoop("System"),
          .keywords = trNoop("system, version, kernel, processor, memory, storage, hardware")});
@@ -154,6 +157,33 @@ const PageInfo* findPage(const std::string& id)
             return &page;
     }
     return nullptr;
+}
+
+static std::map<std::string, int>& badges()
+{
+    static std::map<std::string, int> counts;
+    return counts;
+}
+
+void setPageBadge(const std::string& id, int count)
+{
+    int& current = badges()[id];
+    if (current == count)
+        return;
+    current = count;
+    pageBadgesChanged().emit();
+}
+
+int pageBadge(const std::string& id)
+{
+    const auto it = badges().find(id);
+    return it != badges().end() ? it->second : 0;
+}
+
+bayu::base::Signal<>& pageBadgesChanged()
+{
+    static bayu::base::Signal<> signal;
+    return signal;
 }
 
 } // namespace settings

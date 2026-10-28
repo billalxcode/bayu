@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+#include "base/signal.h"
 #include "ui/geometry.h"
 
 namespace settings {
@@ -63,6 +64,12 @@ class PageRegistration
 public:
     PageRegistration(const char* id, PageFactory create, AvailabilityFactory watchAvailability = {});
 };
+
+// A count on a sidebar entry, such as the updates waiting; 0 shows none.
+void setPageBadge(const std::string& id, int count);
+int pageBadge(const std::string& id);
+// Some entry's count changed.
+bayu::base::Signal<>& pageBadgesChanged();
 
 // Sidebar pages in sidebar order, then sub pages.
 const std::vector<PageInfo>& pages();
