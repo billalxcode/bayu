@@ -77,6 +77,7 @@ public:
     std::vector<KeyboardTranslator::Command> takeCommands() { return std::exchange(m_commands, {}); }
 
     void keepHistory() { m_emulation.setHistory(HistoryTypeBuffer(1000)); }
+    char eraseChar() const { return m_emulation.eraseChar(); }
     int historyLines() const { return m_window->screen()->getHistLines(); }
     int cursorLine() const { return m_window->screen()->getCursorY(); }
     bool clearAll(bool atPrompt) { return m_emulation.clearScreenAndHistory(atPrompt); }
@@ -157,6 +158,7 @@ TEST(EmulationTest, KeysAreDisambiguated)
         {"tab", Key_Tab, none, "\t", "\t"},
         {"shift+tab", Key_Backtab, shift, "", "\033[9;2u"},
         {"backspace", Key_Backspace, none, "\b", "\x7f"},
+        {"ctrl+backspace", Key_Backspace, ctrl, "\b", "\033[127;5u"},
         {"alt+backspace", Key_Backspace, alt, "\b", "\033[127;3u"},
         {"escape", Key_Escape, none, "\x1b", "\033[27u"},
         {"a", Key_A, none, "a", "a"},
@@ -186,6 +188,17 @@ TEST(EmulationTest, KeysAreDisambiguated)
         terminal.print("\033[>1u");
         EXPECT_EQ(terminal.press(key.key, key.modifiers, key.text), key.sent) << key.name;
     }
+}
+
+// Backspace is ^? with or without the kitty keyboard protocol, and the pty
+// erases with it: fish 4 took ^? for Delete while the erase character was ^H
+// (issue #88).
+TEST(EmulationTest, BackspaceIsDelAsThePtyErases)
+{
+    Terminal terminal;
+    EXPECT_EQ(terminal.press(Key_Backspace, NoModifier, "\b"), "\x7f");
+    EXPECT_EQ(terminal.press(Key_Backspace, ControlModifier, "\b"), "\b");
+    EXPECT_EQ(terminal.eraseChar(), '\x7f');
 }
 
 TEST(EmulationTest, PastedTextGoesOutAsItIs)
