@@ -47,7 +47,7 @@ void Touchpad::setDisableWhileTyping(bool enabled)
 
 bool Touchpad::tapToClick() const
 {
-    return m_service.boolValue("tapToClick", false);
+    return m_service.boolValue("tapToClick", true);
 }
 
 void Touchpad::setTapToClick(bool enabled)
@@ -103,7 +103,7 @@ bool Touchpad::secondaryClickConfigurable() const
 
 bool Touchpad::twoFingerSecondaryClick() const
 {
-    return m_service.boolValue("twoFingerSecondaryClick", true);
+    return m_service.boolValue("twoFingerSecondaryClick", false);
 }
 
 void Touchpad::setTwoFingerSecondaryClick(bool enabled)

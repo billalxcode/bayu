@@ -243,6 +243,44 @@ FolderWindow* Application::openWindow(const std::string& path, const std::vector
     return raw;
 }
 
+void Application::openAsAdministrator(const std::string& path)
+{
+    const std::string local = FolderModel::resolve(path);
+    const auto file = base::url::toLocalFile(local);
+    if (!file)
+        return;
+    if (m_administratorReady) {
+        openWindow(administratorPath(*file));
+        return;
+    }
+    m_administratorPending.push_back(*file);
+    if (m_administrator)
+        return;
+    // It serves as long as this runs: its input closes with this process.
+    m_administrator = std::make_unique<base::Process>();
+    m_administrator->setStandardInputOpen(true);
+    m_administrator->onStandardOutput = [this](std::string_view data) {
+        if (data.find("ready ") == std::string_view::npos)
+            return;
+        m_administratorReady = true;
+        for (const std::string& pending : std::exchange(m_administratorPending, {}))
+            openWindow(administratorPath(pending));
+    };
+    m_administrator->onFinished = [this, alive = m_alive](int, bool) {
+        // Refused, cancelled or gone: asked again next time.
+        base::EventLoop::current()->post([this, alive] {
+            if (!*alive)
+                return;
+            m_administrator.reset();
+            m_administratorReady = false;
+            m_administratorPending.clear();
+            scheduleIdleCheck();
+        });
+    };
+    if (!m_administrator->start("pkexec", {"/usr/libexec/bayu-admin-mount"}))
+        m_administrator.reset();
+}
+
 FolderWindow* Application::openFolderWindow(const FolderPage::Start& start, ui::Window* from)
 {
     auto window = std::make_unique<FolderWindow>(this, start, from ? from->size() : ui::SizeF {});

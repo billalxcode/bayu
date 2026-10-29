@@ -17,7 +17,9 @@ using bayu::input::TouchpadSettings;
 using input_test::RemoteObject;
 using input_test::TemporaryDirectory;
 
-TEST(TouchpadSettings, DefaultsFollowChromiumAndLibinput)
+// Tap to click, tap dragging and the bottom-right corner for a right click
+// (issue #97); the rest as Chromium and libinput have them.
+TEST(TouchpadSettings, Defaults)
 {
     TemporaryDirectory directory;
     ASSERT_TRUE(directory.isValid());
@@ -26,12 +28,12 @@ TEST(TouchpadSettings, DefaultsFollowChromiumAndLibinput)
     EXPECT_TRUE(settings.enabled());
     EXPECT_FALSE(settings.disableWithMouse());
     EXPECT_TRUE(settings.disableWhileTyping());
-    EXPECT_FALSE(settings.tapToClick());
-    EXPECT_FALSE(settings.tapDragging());
+    EXPECT_TRUE(settings.tapToClick());
+    EXPECT_TRUE(settings.tapDragging());
     EXPECT_TRUE(settings.naturalScroll());
     EXPECT_DOUBLE_EQ(settings.pointerAcceleration(), 0);
     EXPECT_DOUBLE_EQ(settings.scrollSpeed(), TouchpadSettings::kDefaultScrollSpeed);
-    EXPECT_TRUE(settings.twoFingerSecondaryClick());
+    EXPECT_FALSE(settings.twoFingerSecondaryClick());
     EXPECT_FALSE(settings.secondaryClickConfigurable());
 }
 
@@ -48,13 +50,13 @@ TEST(TouchpadSettings, PersistsWithoutDevicesAndNotifiesOnlyOnChanges)
         settings.setEnabled(false);
         settings.setDisableWithMouse(true);
         settings.setDisableWhileTyping(false);
-        settings.setTapToClick(true);
-        settings.setTapDragging(true);
+        settings.setTapToClick(false);
+        settings.setTapDragging(false);
         settings.setNaturalScroll(false);
         settings.setPointerAcceleration(0.4);
         settings.setScrollSpeed(0.75);
-        settings.setTwoFingerSecondaryClick(false);
-        settings.setTwoFingerSecondaryClick(false);
+        settings.setTwoFingerSecondaryClick(true);
+        settings.setTwoFingerSecondaryClick(true);
         EXPECT_EQ(changes, 9);
         int availability = 0;
         auto availabilityCounter =
@@ -75,12 +77,12 @@ TEST(TouchpadSettings, PersistsWithoutDevicesAndNotifiesOnlyOnChanges)
     EXPECT_FALSE(restored.enabled());
     EXPECT_TRUE(restored.disableWithMouse());
     EXPECT_FALSE(restored.disableWhileTyping());
-    EXPECT_TRUE(restored.tapToClick());
-    EXPECT_TRUE(restored.tapDragging());
+    EXPECT_FALSE(restored.tapToClick());
+    EXPECT_FALSE(restored.tapDragging());
     EXPECT_FALSE(restored.naturalScroll());
     EXPECT_DOUBLE_EQ(restored.pointerAcceleration(), 0.4);
     EXPECT_DOUBLE_EQ(restored.scrollSpeed(), 0.75);
-    EXPECT_FALSE(restored.twoFingerSecondaryClick());
+    EXPECT_TRUE(restored.twoFingerSecondaryClick());
     EXPECT_FALSE(restored.available());
     EXPECT_FALSE(restored.secondaryClickConfigurable());
 }
@@ -127,7 +129,7 @@ TEST(TouchpadSettings, DBusPropertiesMethodsAndServiceRestart)
         RemoteObject proxy(loop, "org.bayu.Touchpad1", "/org/bayu/Touchpad1",
                            "org.bayu.Touchpad1");
         ASSERT_TRUE(proxy.isValid());
-        EXPECT_EQ(proxy.property<bool>("tapToClick"), iteration != 0);
+        EXPECT_EQ(proxy.property<bool>("tapToClick"), iteration == 0);
         const auto invoke = [&proxy](const std::string &method, auto value) {
             const auto reply = proxy.call(method, value);
             EXPECT_FALSE(reply.isError()) << method << ": " << reply.error().message;
@@ -135,21 +137,21 @@ TEST(TouchpadSettings, DBusPropertiesMethodsAndServiceRestart)
         invoke("setEnabled", false);
         invoke("setDisableWithMouse", true);
         invoke("setDisableWhileTyping", false);
-        invoke("setTapToClick", true);
-        invoke("setTapDragging", true);
+        invoke("setTapToClick", false);
+        invoke("setTapDragging", false);
         invoke("setNaturalScroll", false);
         invoke("setPointerAcceleration", -0.6);
         invoke("setScrollSpeed", 1.25);
-        invoke("setTwoFingerSecondaryClick", false);
+        invoke("setTwoFingerSecondaryClick", true);
         EXPECT_EQ(proxy.property<bool>("enabled"), false);
         EXPECT_EQ(proxy.property<bool>("disableWithMouse"), true);
         EXPECT_EQ(proxy.property<bool>("disableWhileTyping"), false);
-        EXPECT_EQ(proxy.property<bool>("tapToClick"), true);
-        EXPECT_EQ(proxy.property<bool>("tapDragging"), true);
+        EXPECT_EQ(proxy.property<bool>("tapToClick"), false);
+        EXPECT_EQ(proxy.property<bool>("tapDragging"), false);
         EXPECT_EQ(proxy.property<bool>("naturalScroll"), false);
         EXPECT_EQ(proxy.property<double>("pointerAcceleration"), -0.6);
         EXPECT_EQ(proxy.property<double>("scrollSpeed"), 1.25);
-        EXPECT_EQ(proxy.property<bool>("twoFingerSecondaryClick"), false);
+        EXPECT_EQ(proxy.property<bool>("twoFingerSecondaryClick"), true);
         settings.setAvailable(true);
         EXPECT_EQ(proxy.property<bool>("available"), true);
         settings.setSecondaryClickConfigurable(true);

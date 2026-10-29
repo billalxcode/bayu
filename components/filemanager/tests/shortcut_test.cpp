@@ -54,6 +54,7 @@ public:
     void confirmEmptyTrash(ui::Window*) override {}
     void confirmLaunch(const std::string&, ui::Window*) override {}
     void windowClosed(fm::FolderWindow*) override {}
+    void openAsAdministrator(const std::string&) override {}
 };
 
 // The session's keyboard settings, as org.bayu.Keyboard1 publishes them.

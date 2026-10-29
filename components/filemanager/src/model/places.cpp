@@ -102,6 +102,15 @@ PlacesModel::PlacesModel(bool volumes, std::string settingsFile, base::dbus::Con
         place.iconName = icon;
         standard.push_back(place);
     }
+    // Android's shared storage, under lapis' data, which Android's users own:
+    // it opens as an administrator (issue #98).
+    if (const std::string data = homePath() + "/.local/share/lapis/data"; isDirectory(data)) {
+        Place place;
+        place.name = tr("Android");
+        place.url = base::url::fromLocalFile(data + "/media/0");
+        place.iconName = "phone";
+        standard.push_back(place);
+    }
 
     base::Settings settings(m_settingsFile);
     if (settings.contains("Sidebar/favorites")) {

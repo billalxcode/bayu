@@ -7,6 +7,7 @@
 #include "views/folderwindow.h"
 
 #include "base/dbus.h"
+#include "base/process.h"
 #include "base/timer.h"
 
 #include <memory>
@@ -65,6 +66,7 @@ public:
     void confirmEmptyTrash(ui::Window* parent) override;
     void confirmLaunch(const std::string& path, ui::Window* parent) override;
     void windowClosed(FolderWindow* window) override;
+    void openAsAdministrator(const std::string& path) override;
 
     // The paths and URLs of a command line or a D-Bus call as URLs: ~ and relative paths resolved.
     static std::vector<std::string> toUrls(const std::vector<std::string>& inputs);
@@ -96,6 +98,11 @@ private:
     bool m_idleCheckScheduled = false;
     int m_exitCode = 0;
     std::vector<base::Subscription> m_subscriptions;
+    // bayu-admin-mount through pkexec, while this runs; the folders asked
+    // for before it is ready.
+    std::unique_ptr<base::Process> m_administrator;
+    bool m_administratorReady = false;
+    std::vector<std::string> m_administratorPending;
     std::shared_ptr<bool> m_alive = std::make_shared<bool>(true);
 };
 
