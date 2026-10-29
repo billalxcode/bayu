@@ -540,7 +540,7 @@ FolderWindow::FolderWindow(FileManagerHost* host, const FolderPage::Start& start
     , m_window(std::make_unique<ui::Window>())
 {
     m_administrator = [&start] {
-        const auto file = base::url::toLocalFile(start.url);
+        const auto file = base::url::toLocalFile(FolderModel::resolve(start.url));
         return file && isAdministratorPath(*file);
     }();
     m_window->setTitle(title());
@@ -1043,7 +1043,8 @@ void FolderWindow::showOptionsMenu()
         sortItem(tr("Type"), Preferences::Type);
     sortItem(tr("Size"), Preferences::Size);
     if (!trash && !m_administrator) {
-        if (const auto file = base::url::toLocalFile(page->currentUrl())) {
+        // A folder opened by its path has no file:// URL yet.
+        if (const auto file = base::url::toLocalFile(FolderModel::resolve(page->currentUrl()))) {
             m_menu->addSeparator();
             const size_t administrator = m_menu->addItem(tr("Open as Administrator"),
                                                          [this, path = *file] { m_host->openAsAdministrator(path); });
