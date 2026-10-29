@@ -28,6 +28,25 @@ TEST(PrintersPage, NamesASecondQueueOfThePrinterApart)
     EXPECT_EQ(uniqueName("HP_LaserJet", {"HP_LaserJet", "HP_LaserJet_2", "Other"}), "HP_LaserJet_3");
 }
 
+TEST(PrintersPage, LeavesOutAUsbPrinterThatIppUsbOffers)
+{
+    using settings::printers::Printer;
+    using settings::printers::throughIppUsb;
+    const Printer usb {.name = "Canon G1030 series", .info = "Canon G1030 series", .model = "Canon G1030 series",
+                       .uri = "usb://Canon/G1030%20series?serial=123"};
+    // As in issue #90: the same printer, through ipp-usb.
+    EXPECT_TRUE(throughIppUsb(usb, {{.name = "Canon_G1030_series_USB", .info = "Canon G1030 series (USB)",
+                                     .model = "Canon G1030 series",
+                                     .uri = "ipps://Canon%20G1030%20series%20(USB)._ipps._tcp.local/"}}));
+    // Its queue, once that one is added.
+    EXPECT_TRUE(throughIppUsb(usb, {{.name = "Canon_G1030_series_USB", .info = "Canon G1030 series (USB)",
+                                     .uri = "ipps://Canon%20G1030%20series%20%28USB%29._ipps._tcp.local/"}}));
+    // Another printer, or the same model on the network.
+    EXPECT_FALSE(throughIppUsb(usb, {{.info = "HP LaserJet (USB)", .model = "HP LaserJet"}}));
+    EXPECT_FALSE(throughIppUsb(usb, {{.info = "Canon G1030 series", .model = "Canon G1030 series",
+                                      .uri = "ipp://192.168.1.9/ipp/print"}}));
+}
+
 TEST(PrintersPage, MakesQueueNames)
 {
     using settings::printers::queueName;

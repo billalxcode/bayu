@@ -36,10 +36,11 @@ install_root() {
   # the system gets them all.
   rm -f /etc/rpm/macros.image-language-conf
   # out/repo, built here, is trusted unsigned; the installed system checks
-  # Bayu's published packages against the IGOS key.
+  # Bayu's published packages against the IGOS key. With their documentation:
+  # without it `man` has nothing to show (issue #87).
   # shellcheck disable=SC2086
   dnf -y --installroot="$dir" --releasever="$RELEASEVER" --setopt=reposdir=/repos.d \
-    --setopt=install_weak_deps=False --setopt=tsflags=nodocs --setopt=bayu.gpgcheck=0 install $PACKAGES "$@"
+    --setopt=install_weak_deps=False --setopt=bayu.gpgcheck=0 install $PACKAGES "$@"
   # The system updates from the repositories it was built from. A file:///repo
   # source only exists at build time: it points at BAYU_REPO_URL when one is
   # set, and is left disabled otherwise.

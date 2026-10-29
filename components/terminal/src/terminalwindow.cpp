@@ -80,7 +80,7 @@ private:
     TerminalWindow* m_owner;
 };
 
-// The title with one tab, the tab bar with more, and the "+" button.
+// The title with one tab, the tab bar with more, the menu button and the "+" button.
 class TerminalWindow::HeaderContent : public View
 {
 public:
@@ -88,6 +88,7 @@ public:
         : m_owner(owner)
         , title(addChild<Label>())
         , tabBar(addChild<WindowTabBar>())
+        , menu(addChild<HeaderButton>("menu", kNewTabButtonSize))
         , newTab(addChild<HeaderButton>("add", kNewTabButtonSize))
     {
         setName("headerContent");
@@ -97,10 +98,12 @@ public:
         title->setElide(Label::Elide::Middle);
         tabBar->setName("tabBar");
         newTab->setName("newTab");
+        menu->setName("windowMenu");
     }
 
     Label* title;
     WindowTabBar* tabBar;
+    HeaderButton* menu;
     HeaderButton* newTab;
 
 protected:
@@ -115,17 +118,20 @@ protected:
         const double newTabX = width - kNewTabButtonSize;
         newTab->setGeometry({newTabX, rounding::centeredStart(height, kNewTabButtonSize), kNewTabButtonSize,
                              kNewTabButtonSize});
+        const double menuX = newTabX - kNewTabButtonSize;
+        menu->setGeometry({menuX, rounding::centeredStart(height, kNewTabButtonSize), kNewTabButtonSize,
+                           kNewTabButtonSize});
 
         // Width taken by the window buttons, mirrored on the left so the
         // title is centred on the window rather than on this item.
-        const double reservedWidth = windowWidth - width + kNewTabButtonSize;
+        const double reservedWidth = windowWidth - width + 2 * kNewTabButtonSize;
         const SizeF titleSize = title->sizeHint();
         const double titleWidth = std::max(0.0, std::min(titleSize.width, windowWidth - reservedWidth * 2));
         title->setGeometry({(windowWidth - titleWidth) / 2, rounding::centeredStart(height, titleSize.height),
                             titleWidth, titleSize.height});
 
         const double tabLeft = Theme::current().smallSpacing;
-        const double tabRight = newTabX - 4;
+        const double tabRight = menuX - 4;
         const double tabHeight = tabBar->sizeHint().height;
         tabBar->setGeometry({tabLeft, rounding::centeredStart(height, tabHeight), std::max(0.0, tabRight - tabLeft),
                              tabHeight});
@@ -320,6 +326,12 @@ TerminalWindow::TerminalWindow(Windows& windows, TerminalSettings& settings, Opt
     m_overlay = m_window->overlay()->addChild<Overlay>(this);
 
     m_headerContent->newTab->onClicked = [this] { openNewTab(); };
+    m_headerContent->menu->onClicked = [this] {
+        HeaderButton* button = m_headerContent->menu;
+        const RectF box = button->geometry();
+        openWindowMenu(button->parent()->mapToWindow({box.x, box.y + box.height}));
+    };
+    m_header->onContextMenuRequested = [this](PointF position) { openWindowMenu(position); };
     WindowTabBar* tabBar = m_headerContent->tabBar;
     tabBar->onCurrentChanged = [this](int index) { selectTab(index); };
     tabBar->onCloseRequested = [this](int index) { closeProtection(index); };
@@ -640,7 +652,28 @@ void TerminalWindow::openTabMenu(int index, PointF position)
     m_tabMenu->addItem(tr("Close Tab"), [this] { closeProtection(m_tabMenuIndex); });
     if (tabCount() > 1)
         m_tabMenu->addItem(tr("Close Other Tabs"), [this] { closeOtherTabs(m_tabMenuIndex); });
+    // The window's items, for the pane of the tab clicked.
+    if (TerminalPane* pane = m_pages[size_t(index)]->currentPane()) {
+        m_tabMenu->addSeparator();
+        pane->addWindowItems(*m_tabMenu);
+    }
     m_tabMenu->popup(m_window.get(), position);
+}
+
+// The focused pane's window items, at `position` in the window.
+void TerminalWindow::openWindowMenu(PointF position)
+{
+    TerminalPane* pane = currentPage() ? currentPage()->currentPane() : nullptr;
+    if (!pane)
+        return;
+    if (!m_windowMenu) {
+        m_windowMenu = std::make_unique<Menu>();
+        m_windowMenu->onClosed = [this] { m_headerContent->menu->setChecked(false); };
+    }
+    m_windowMenu->clear();
+    pane->addWindowItems(*m_windowMenu);
+    m_headerContent->menu->setChecked(true);
+    m_windowMenu->popup(m_window.get(), position);
 }
 
 void TerminalWindow::closeTab(int index)

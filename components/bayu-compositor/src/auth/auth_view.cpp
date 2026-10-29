@@ -15,10 +15,13 @@
 #include <xkbcommon/xkbcommon-keysyms.h>
 
 #include "auth/auth_controller.h"
+#include "base/dbus.h"
 #include "base/i18n.h"
 #include "base/locale.h"
 #include "ui/animation.h"
 #include "ui/application.h"
+#include "core/main_loop.h"
+#include "ui/icon.h"
 #include "ui/image_view.h"
 #include "ui/label.h"
 #include "ui/painter.h"
@@ -169,11 +172,33 @@ class Clickable : public ui::View
 public:
     bool acceptsPointer() const override { return true; }
     bool containsMouse() const { return m_hovered; }
+    // Tab reaches it and Enter or Space clicks it.
+    void setFocusable(bool focusable) { m_focusable = focusable; }
+    bool acceptsFocus() const override { return m_focusable && isEnabled() && isVisible(); }
 
     std::function<void()> onClicked;
     std::function<void()> onHoverChanged;
 
 protected:
+    bool keyPress(const ui::KeyEvent &event) override
+    {
+        if (!m_focusable || (event.key != XKB_KEY_Return && event.key != XKB_KEY_KP_Enter
+                             && event.key != XKB_KEY_space))
+            return false;
+        if (onClicked)
+            onClicked();
+        return true;
+    }
+    void focusIn(ui::FocusReason) override
+    {
+        if (onHoverChanged)
+            onHoverChanged();
+    }
+    void focusOut() override
+    {
+        if (onHoverChanged)
+            onHoverChanged();
+    }
     void pointerEnter() override { setHovered(true); }
     void pointerLeave() override { setHovered(false); }
     void enabledChanged() override
@@ -205,6 +230,7 @@ private:
 
     bool m_hovered = false;
     bool m_pressed = false;
+    bool m_focusable = false;
 };
 
 // The account's picture cut to a circle on a light disc, or the account's
@@ -658,13 +684,28 @@ public:
         m_popup->setVisible(visible && m_open);
     }
 
-    ui::SizeF sizeHint() const override { return {std::max(m_button->sizeHint().width, 120.0), 30}; }
+    // A round button with the icon, reachable by the keyboard, in place of
+    // the current name; its entries are reachable too.
+    void setIcon(const std::string &name)
+    {
+        m_iconOnly = true;
+        m_button->setIcon(name);
+        m_button->setFocusable(true);
+        m_popup->rebuild();
+    }
+
+    ui::SizeF sizeHint() const override
+    {
+        if (m_iconOnly)
+            return m_button->sizeHint();
+        return {std::max(m_button->sizeHint().width, 120.0), 30};
+    }
 
 protected:
     void layout() override
     {
         const ui::SizeF button = m_button->sizeHint();
-        m_button->setGeometry({centeredStart(geometry().width, button.width), 0, button.width, 30});
+        m_button->setGeometry({centeredStart(geometry().width, button.width), 0, button.width, button.height});
         m_popup->place();
     }
 
@@ -692,6 +733,9 @@ private:
                 }
                 m_menu->setOpen(!m_menu->m_open);
                 m_menu->requestLayout();
+                // From the keyboard, the list takes it.
+                if (m_menu->m_open && m_menu->m_iconOnly && hasFocus() && !m_menu->m_popup->children().empty())
+                    m_menu->m_popup->children().front()->setFocus();
             };
         }
 
@@ -701,11 +745,29 @@ private:
             requestLayout();
         }
 
-        ui::SizeF sizeHint() const override { return {m_label->sizeHint().width + 28, 30}; }
+        void setIcon(const std::string &name)
+        {
+            m_icon = addChild<ui::ThemeIcon>(name, 18);
+            m_icon->setColor(kWhite);
+            m_label->setVisible(false);
+            requestLayout();
+        }
+
+        ui::SizeF sizeHint() const override
+        {
+            if (m_icon)
+                return {36, 36};
+            return {m_label->sizeHint().width + 28, 30};
+        }
 
     protected:
         void layout() override
         {
+            if (m_icon) {
+                m_icon->setGeometry({centeredStart(geometry().width, 18), centeredStart(geometry().height, 18),
+                                     18, 18});
+                return;
+            }
             const ui::SizeF label = m_label->sizeHint();
             m_label->setGeometry({centeredStart(geometry().width, label.width),
                                   centeredStart(geometry().height, label.height), label.width,
@@ -714,13 +776,15 @@ private:
 
         void paint(ui::Painter &painter) override
         {
+            const bool lit = containsMouse() || m_menu->m_open;
             drawPanelRect(painter, localRect(), geometry().height / 2,
-                          white(containsMouse() || m_menu->m_open ? 0.24 : 0.16));
+                          white(hasVisibleFocus() ? 0.36 : lit ? 0.24 : 0.16));
         }
 
     private:
         ChoiceMenu *m_menu;
         ui::Label *m_label;
+        ui::ThemeIcon *m_icon = nullptr;
     };
 
     class Entry final : public Clickable
@@ -747,8 +811,8 @@ private:
 
         void paint(ui::Painter &painter) override
         {
-            if (containsMouse())
-                drawPanelRect(painter, localRect(), 8, white(0.16));
+            if (containsMouse() || hasVisibleFocus())
+                drawPanelRect(painter, localRect(), 8, white(hasVisibleFocus() ? 0.24 : 0.16));
         }
 
     private:
@@ -780,6 +844,7 @@ private:
             m_entryWidth = std::max(160.0, std::ceil(widest) + 24);
             for (size_t i = 0; i < m_menu->m_names.size(); ++i) {
                 auto *entry = addChild<Entry>(m_menu->m_names[i], int(i) == m_menu->m_current);
+                entry->setFocusable(m_menu->m_iconOnly);
                 entry->onClicked = [this, i] {
                     m_menu->setOpen(false);
                     if (m_menu->onActivated)
@@ -801,8 +866,10 @@ private:
             const double menuWidth = m_menu->geometry().width;
             const ui::PointF origin = parent()->mapFromWindow(m_menu->mapToWindow({0, 0}));
             const double y = m_menu->m_upward ? -size.height - 6 : m_menu->geometry().height + 6;
-            setGeometry({origin.x + centeredStart(menuWidth, size.width), origin.y + y, size.width,
-                         size.height});
+            // Within the layer, for a menu by its edge.
+            const double x = std::clamp(origin.x + centeredStart(menuWidth, size.width), 8.0,
+                                        std::max(8.0, parent()->geometry().width - size.width - 8));
+            setGeometry({x, origin.y + y, size.width, size.height});
         }
 
         bool acceptsPointer() const override { return true; }
@@ -838,9 +905,105 @@ private:
     std::vector<std::string> m_names;
     int m_current = -1;
     bool m_open = false;
+    bool m_iconOnly = false;
     // The panel is an image of a fixed size; a list that would run past its
     // bottom opens upward instead of being cut off.
     bool m_upward = false;
+};
+
+// "Restart now?" with Cancel and the action, over the power button.
+class PowerConfirm final : public ui::View
+{
+public:
+    PowerConfirm()
+    {
+        setName("power-confirm");
+        m_title = addChild<RaisedLabel>(15, 600, kWhite, kBlack.withAlpha(0.3));
+        m_cancel = addChild<Pill>(false);
+        m_cancel->setName("power-cancel");
+        m_confirm = addChild<Pill>(true);
+        m_confirm->setName("power-confirm-button");
+        m_cancel->onClicked = [this] { setVisible(false); };
+        m_confirm->onClicked = [this] {
+            setVisible(false);
+            if (onConfirmed)
+                onConfirmed();
+        };
+    }
+
+    std::function<void()> onConfirmed;
+
+    void ask(const std::string &title, const std::string &action)
+    {
+        m_title->setText(title);
+        m_cancel->setText(tr("Cancel"));
+        m_confirm->setText(action);
+        setVisible(true);
+        // Cancel first, so that Enter does not end anything by mistake.
+        m_cancel->setFocus();
+        requestLayout();
+    }
+
+    ui::SizeF sizeHint() const override { return {280, 108}; }
+    bool acceptsPointer() const override { return true; }
+
+protected:
+    void layout() override
+    {
+        const ui::SizeF title = m_title->sizeHint();
+        m_title->setGeometry({16, 16, std::min(title.width, geometry().width - 32), title.height});
+        const double width = (geometry().width - 16 * 2 - 8) / 2;
+        m_cancel->setGeometry({16, geometry().height - 16 - 34, width, 34});
+        m_confirm->setGeometry({16 + width + 8, geometry().height - 16 - 34, width, 34});
+    }
+
+    // Over the login column: dark enough to be read on it.
+    void paint(ui::Painter &painter) override { drawPanelRect(painter, localRect(), 16, kBlack.withAlpha(0.82)); }
+
+private:
+    class Pill final : public Clickable
+    {
+    public:
+        explicit Pill(bool danger)
+            : m_danger(danger)
+        {
+            setFocusable(true);
+            m_label = addChild<ui::Label>();
+            m_label->setFontSize(13);
+            m_label->setWeight(600);
+            m_label->setColor(kWhite);
+            onHoverChanged = [this] { requestPaint(); };
+        }
+
+        void setText(const std::string &text)
+        {
+            m_label->setText(text);
+            requestLayout();
+        }
+
+    protected:
+        void layout() override
+        {
+            const ui::SizeF label = m_label->sizeHint();
+            m_label->setGeometry({centeredStart(geometry().width, label.width),
+                                  centeredStart(geometry().height, label.height), label.width, label.height});
+        }
+
+        void paint(ui::Painter &painter) override
+        {
+            const bool lit = containsMouse() || hasVisibleFocus();
+            const ui::Color fill = m_danger ? ui::Color {230, 64, 64, uint8_t(lit ? 255 : 220)} : white(lit ? 0.24 : 0.16);
+            drawPanelRect(painter, localRect(), geometry().height / 2, fill);
+        }
+
+    private:
+        bool m_danger;
+        ui::Label *m_label;
+    };
+
+    RaisedLabel *m_title;
+    Pill *m_cancel;
+    Pill *m_confirm;
 };
 
 // The password field's TextInput: no frame, no clipboard and no undo. Each of
@@ -1246,6 +1409,48 @@ AuthScreen::AuthScreen(ui::Window *window, AuthController *controller)
     m_sessions = m_pod->addChild<ChoiceMenu>("session-menu", popups);
     m_sessions->setLayoutHints(centred(false));
 
+    // Suspend, Restart and Shut Down at the greeter (issue #91), through
+    // logind, as no session bus is there; each as logind allows it. Not at
+    // the lock screen, where they would end the locked user's session.
+    m_power = addChild<ChoiceMenu>("power-menu", popups);
+    m_power->setIcon("system-shutdown-symbolic");
+    m_powerConfirm = addChild<PowerConfirm>();
+    m_powerConfirm->setVisible(false);
+    if (base::dbus::Connection *bus = controller->mode() == AuthController::Login
+                ? base::dbus::Connection::system(core::mainLoop())
+                : nullptr) {
+        const base::dbus::Proxy logind(bus, "org.freedesktop.login1", "/org/freedesktop/login1",
+                                       "org.freedesktop.login1.Manager");
+        for (PowerAction action : {PowerAction::Suspend, PowerAction::Reboot, PowerAction::PowerOff}) {
+            const char *can = action == PowerAction::Suspend ? "CanSuspend"
+                    : action == PowerAction::Reboot          ? "CanReboot"
+                                                             : "CanPowerOff";
+            if (logind.call(can).value<std::string>().value_or(std::string()) == "yes")
+                m_powerActions.push_back(action);
+        }
+    }
+    m_power->setMenuVisible(!m_powerActions.empty());
+    m_power->onActivated = [this](int index) {
+        if (index < 0 || size_t(index) >= m_powerActions.size())
+            return;
+        const PowerAction action = m_powerActions[size_t(index)];
+        if (action == PowerAction::Suspend) {
+            runPowerAction(action);
+            return;
+        }
+        m_pendingPower = action;
+        if (action == PowerAction::Reboot)
+            m_powerConfirm->ask(tr("Restart now?"), tr("Restart"));
+        else
+            m_powerConfirm->ask(tr("Shut down now?"), tr("Shut Down"));
+        requestLayout();
+    };
+    m_powerConfirm->onConfirmed = [this] {
+        runPowerAction(m_pendingPower);
+        focusPassword();
+    };
+    updatePowerNames();
+
     m_picker = addChild<UserGrid>(window);
     m_picker->setName("user-grid");
     m_picker->setVisible(false);
@@ -1345,8 +1550,30 @@ AuthScreen::~AuthScreen()
 }
 
 // The typed name and password, the account and the session stay.
+void AuthScreen::updatePowerNames()
+{
+    std::vector<std::string> names;
+    for (PowerAction action : m_powerActions)
+        names.push_back(action == PowerAction::Suspend ? tr("Suspend")
+                        : action == PowerAction::Reboot  ? tr("Restart")
+                                                         : tr("Shut Down"));
+    m_power->setNames(names);
+}
+
+void AuthScreen::runPowerAction(PowerAction action)
+{
+    base::dbus::Connection *bus = base::dbus::Connection::system(core::mainLoop());
+    if (!bus)
+        return;
+    const base::dbus::Proxy logind(bus, "org.freedesktop.login1", "/org/freedesktop/login1",
+                                   "org.freedesktop.login1.Manager");
+    logind.send(action == PowerAction::Suspend ? "Suspend" : action == PowerAction::Reboot ? "Reboot" : "PowerOff",
+                false);
+}
+
 void AuthScreen::retranslate()
 {
+    updatePowerNames();
     m_userName->retranslate();
     m_password->setPlaceholder(tr("Enter Password"));
     tick();
@@ -1461,6 +1688,10 @@ void AuthScreen::tick()
 void AuthScreen::closeMenus(ui::PointF position)
 {
     m_sessions->pressedAt(position);
+    m_power->pressedAt(position);
+    if (m_powerConfirm->isVisible()
+        && !m_powerConfirm->localRect().contains(m_powerConfirm->mapFromWindow(position)))
+        m_powerConfirm->setVisible(false);
     if (m_pickerOpen) {
         const ui::PointF local = m_picker->mapFromWindow(position);
         if (!m_picker->localRect().contains(local))
@@ -1490,12 +1721,20 @@ void AuthScreen::layout()
     const ui::SizeF grid = m_picker->sizeFor(width - 48);
     const double gridTop = std::min(height - 64 - podHeight - UserTile::kHalo, height - 64 - grid.height);
     m_picker->setGeometry({centeredStart(width, grid.width), gridTop, grid.width, grid.height});
+
+    // The power button under the login column, its confirmation above it.
+    const ui::SizeF power = m_power->sizeHint();
+    m_power->setGeometry({centeredStart(width, power.width), height - 16 - power.height, power.width, power.height});
+    const ui::SizeF confirm = m_powerConfirm->sizeHint();
+    m_powerConfirm->setGeometry({centeredStart(width, confirm.width), height - 16 - power.height - 8 - confirm.height,
+                                 confirm.width, confirm.height});
 }
 
 // The menu's list lies outside the pod, by its menu wherever the pod placed it.
 void AuthScreen::childrenLaidOut()
 {
     m_sessions->placeList();
+    m_power->placeList();
 }
 
 } // namespace bayu::auth

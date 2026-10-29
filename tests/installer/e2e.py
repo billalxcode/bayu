@@ -11,8 +11,9 @@ For a scenario:
 2. The live ISO boots in QEMU and the installer is driven through its window
    as a person would, by QMP pointer and keys at 1280x800, waiting on what
    the screen shows; a screenshot after each step.
-3. Once Anaconda and the post-install are done the logs are kept, the VM
-   stops and the kept partitions are compared.
+3. Once Anaconda and the post-install are done the logs are kept, Restart
+   is clicked and the VM must restart (issue #89), and the kept partitions
+   are compared.
 4. The disks boot alone: the GRUB menu is captured, the new account logs in
    over SSH and the system is checked (Windows in the menu where expected).
 
@@ -183,7 +184,9 @@ class Vm:
                "-device", "virtio-vga", "-display", "none", "-vnc", VNC,
                "-device", "qemu-xhci,id=xhci", "-device", "usb-tablet",
                *(["-device", "usb-storage,bus=xhci.0,drive=usb,bootindex=0"] if iso and iso.endswith(".img") else []),
-               "-serial", f"file:{self.out}/serial.log", "-qmp", f"unix:{self.qmp_path},server,nowait"]
+               "-serial", f"file:{self.out}/serial.log", "-qmp", f"unix:{self.qmp_path},server,nowait",
+               # A restart ends QEMU, so that the installer's Restart can be told.
+               "-no-reboot"]
         self.proc = subprocess.Popen(cmd, stdout=open(f"{self.out}/qemu.log", "a"), stderr=subprocess.STDOUT)
         time.sleep(1)
         self.qmp = Qmp(self.qmp_path)
@@ -392,9 +395,25 @@ class Test:
         for log in ("nabau-install.log", "anaconda.log", "storage.log", "nabau-post.log", "nabau-backend.log"):
             open(f"{self.out}/{log}", "w").write(self.vm.ssh(f"sudo cat /tmp/{log}").stdout)
         self.note(not error, "installation" + (f": {error}" if error else ""))
-        self.vm.stop()
         if error:
             return self.finish()
+        # Restart now: the computer restarts, Nabau does not only close. The
+        # log's window goes first, by its close button.
+        self.vm.qmp.click(975, 180); time.sleep(2)
+        self.shot("before-restart")
+        self.vm.qmp.click(1043, 730)
+        restarted = False
+        for _ in range(60):
+            time.sleep(3)
+            if self.vm.proc.poll() is not None:
+                restarted = True
+                break
+        if not restarted:
+            self.shot("restart-stuck")
+            open(f"{self.out}/nabau-backend-restart.log", "w").write(
+                self.vm.ssh("sudo cat /tmp/nabau-backend.log; echo ===; ps -ef | grep -E 'nabau|anaconda' | grep -v grep").stdout)
+        self.note(restarted, "Restart restarts the computer")
+        self.vm.stop()
 
         after = [partitions(d) for d in self.disks]
         for disk, n in self.spec["keep"]:

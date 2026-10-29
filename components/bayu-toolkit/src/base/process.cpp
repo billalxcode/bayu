@@ -187,8 +187,10 @@ Process::Process(EventLoop* loop)
 
 Process::~Process()
 {
-    if (m_pid > 0) {
-        ::kill(m_pid, SIGKILL);
+    // A process this one may not signal, such as a program pkexec runs as
+    // root, is not waited for: it would never end on its own while this one
+    // is there to wait (Nabau's Restart, issue #89).
+    if (m_pid > 0 && ::kill(m_pid, SIGKILL) == 0) {
         siginfo_t info{};
         waitid(P_PIDFD, id_t(m_pidfd), &info, WEXITED);
     }
