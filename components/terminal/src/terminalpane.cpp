@@ -430,7 +430,7 @@ void TerminalPane::openMenu(double x, double y)
         if (!m_menuPath.empty()) {
             const std::string name = m_menuPath.substr(m_menuPath.rfind('/') + 1);
             m_menu->addItem(format(tr("Open “{name}”"), {{"name", elided(name.empty() ? m_menuPath : name, 30)}}),
-                            [this] { ProcessHelper::openUrl(m_menuPath); });
+                            [this] { ProcessHelper::openUrl(window(), m_menuPath); });
             m_menu->addItem(tr("Show in File Manager"), [this] { ProcessHelper::showInFileManager(m_menuPath); });
             m_menu->addSeparator();
         }

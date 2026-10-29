@@ -149,7 +149,7 @@ public:
             if (dialog->onLinkActivated)
                 dialog->onLinkActivated(url);
             else
-                base::Process::startDetached("xdg-open", {url});
+                openUrl(dialog->window(), url);
         };
 
         View* filler = m_column->addChild<View>();

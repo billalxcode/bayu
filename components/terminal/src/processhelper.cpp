@@ -11,6 +11,7 @@
 #include "base/process.h"
 #include "base/strings.h"
 #include "base/url.h"
+#include "ui/window.h"
 
 namespace strings = bayu::base::strings;
 
@@ -28,11 +29,12 @@ static std::string fromUserInput(const std::string& text)
     return trimmed;
 }
 
-bool openUrl(const std::string& url)
+bool openUrl(bayu::ui::Window* window, const std::string& url)
 {
     if (url.empty())
         return false;
-    return bayu::base::Process::startDetached("xdg-open", {fromUserInput(url)}) > 0;
+    bayu::ui::openUrl(window, fromUserInput(url));
+    return true;
 }
 
 // Asynchronous, so a file manager that is slow to start never stalls the terminal.

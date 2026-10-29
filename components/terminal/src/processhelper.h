@@ -5,11 +5,16 @@
 
 #include <string>
 
+namespace bayu::ui {
+class Window;
+}
+
 namespace ProcessHelper
 {
 
 // Opens a link or a file with the application the desktop has for it.
-bool openUrl(const std::string& url);
+// With an activation token from `window`, so the browser comes to the front.
+bool openUrl(bayu::ui::Window* window, const std::string& url);
 // The file manager on a folder, or showing a file in its folder; neither waits.
 bool openFileManager(const std::string& path);
 bool showInFileManager(const std::string& path);

@@ -119,4 +119,27 @@ bool ApplicationLauncher::startDetached(const std::string &program, const std::v
     return base::Process::startDetached(program, arguments, {}, environment) > 0;
 }
 
+static std::function<std::string()> &tokenSource()
+{
+    static std::function<std::string()> source;
+    return source;
+}
+
+std::string ApplicationLauncher::activationToken()
+{
+    return tokenSource() ? tokenSource()() : std::string();
+}
+
+void ApplicationLauncher::setActivationTokenSource(std::function<std::string()> source)
+{
+    tokenSource() = std::move(source);
+}
+
+bool ApplicationLauncher::openUrl(const std::string &url)
+{
+    const std::string token = activationToken();
+    return startDetached("xdg-open", {url},
+                         token.empty() ? std::vector<std::string>() : std::vector<std::string> {"XDG_ACTIVATION_TOKEN=" + token});
+}
+
 } // namespace bayu::shell
