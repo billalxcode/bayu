@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-filemanager\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"POT-Creation-Date: 2026-10-29 09:15+0000\n"
 "PO-Revision-Date: 2026-10-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: daemon/archivejob.cpp
 msgid "Unknown ZIP error"
@@ -981,6 +980,10 @@ msgid "Network"
 msgstr "Rede"
 
 #: src/model/places.cpp
+msgid "Android"
+msgstr "Android"
+
+#: src/model/places.cpp
 #, python-brace-format
 msgid "“{address}” is not a server address. Enter one such as smb://server/share or sftp://user@server."
 msgstr "“{address}” não é um endereço de servidor. Digite um como smb://servidor/compartilhamento ou sftp://usuario@servidor."
@@ -1067,6 +1070,10 @@ msgstr "“{name}”"
 msgid "Empty"
 msgstr "Vazio"
 
+#: src/views/folderwindow.cpp
+msgid "Files (Administrator)"
+msgstr "Arquivos (administrador)"
+
 #: src/views/folderwindow.cpp data/bayu-filemanager.desktop
 msgid "Files"
 msgstr "Arquivos"
@@ -1106,6 +1113,10 @@ msgstr "Tipo"
 #: src/views/folderwindow.cpp src/views/listview.cpp
 msgid "Size"
 msgstr "Tamanho"
+
+#: src/views/folderwindow.cpp
+msgid "Open as Administrator"
+msgstr "Abrir como administrador"
 
 #: src/views/listview.cpp
 msgid "Date Modified"

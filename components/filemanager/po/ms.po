@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-filemanager\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-25 03:27+0000\n"
+"POT-Creation-Date: 2026-10-29 09:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -966,6 +966,10 @@ msgid "Network"
 msgstr "Rangkaian"
 
 #: src/model/places.cpp
+msgid "Android"
+msgstr "Android"
+
+#: src/model/places.cpp
 #, python-brace-format
 msgid "“{address}” is not a server address. Enter one such as smb://server/share or sftp://user@server."
 msgstr "“{address}” bukan alamat pelayan. Masukkan alamat seperti smb://server/share atau sftp://user@server."
@@ -1052,6 +1056,10 @@ msgstr "“{name}”"
 msgid "Empty"
 msgstr "Kosong"
 
+#: src/views/folderwindow.cpp
+msgid "Files (Administrator)"
+msgstr "Fail (Pentadbir)"
+
 #: src/views/folderwindow.cpp data/bayu-filemanager.desktop
 msgid "Files"
 msgstr "Fail"
@@ -1091,6 +1099,10 @@ msgstr "Jenis"
 #: src/views/folderwindow.cpp src/views/listview.cpp
 msgid "Size"
 msgstr "Saiz"
+
+#: src/views/folderwindow.cpp
+msgid "Open as Administrator"
+msgstr "Buka sebagai Pentadbir"
 
 #: src/views/listview.cpp
 msgid "Date Modified"

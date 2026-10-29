@@ -45,7 +45,16 @@ public:
     virtual void confirmEmptyTrash(ui::Window* parent) = 0;
     virtual void confirmLaunch(const std::string& path, ui::Window* parent) = 0;
     virtual void windowClosed(class FolderWindow* window) = 0;
+    // A window on `path` as root, through bayu-admin-mount, which asks for
+    // an administrator's password the first time (issue #98).
+    virtual void openAsAdministrator(const std::string& path) = 0;
 };
+
+// Where bayu-admin-mount serves the file system as root for this user.
+std::string administratorRoot();
+// `path` there, or `path` itself when it is there already.
+std::string administratorPath(const std::string& path);
+bool isAdministratorPath(const std::string& path);
 
 // The browser window. The sidebar, the header with back, forward,
 // the path bar, search and the options, the tab bar, the search scope and
@@ -58,6 +67,7 @@ public:
     ~FolderWindow() override;
 
     ui::Window& window() const { return *m_window; }
+    std::string title() const;
     FolderPage* currentPage() const;
     int tabCount() const { return int(m_tabs.size()); }
     int currentTab() const { return m_currentTab; }
@@ -109,6 +119,8 @@ private:
     void addShortcuts();
 
     FileManagerHost* m_host;
+    // Its folders are bayu-admin-mount's, read and written as root.
+    bool m_administrator = false;
     std::unique_ptr<ui::Window> m_window;
     FolderWindowRoot* m_root = nullptr;
     SideBar* m_sidebar = nullptr;

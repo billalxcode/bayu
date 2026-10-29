@@ -26,6 +26,8 @@ static FuseMount *current()
 template <class F> static int call(F function)
 {
     FuseMount *self = current();
+    if (!self->allows(fuse_get_context()->uid))
+        return -EACCES;
     std::lock_guard guard(self->lock());
     return function(self->backend());
 }
@@ -264,6 +266,12 @@ static std::string optionValue(const std::string &value)
     return replaceAll(replaceAll(value, "\\", "\\\\"), ",", "\\,");
 }
 
+void FuseMount::setAccess(std::string options, uid_t user)
+{
+    m_options = std::move(options);
+    m_user = user;
+}
+
 bool FuseMount::start(std::string *message)
 {
     std::error_code error;
@@ -273,7 +281,9 @@ bool FuseMount::start(std::string *message)
         return false;
     }
 
-    const std::string options = "fsname=" + optionValue(m_source) + ",subtype=bayu-mountd";
+    std::string options = "fsname=" + optionValue(m_source) + ",subtype=bayu-mountd";
+    if (!m_options.empty())
+        options += "," + m_options;
     const char *argv[] = {"bayu-mountd", "-o", options.c_str()};
     struct fuse_args args = FUSE_ARGS_INIT(3, const_cast<char **>(argv));
 

@@ -13,6 +13,7 @@
 
 #include "base/event_loop.h"
 #include "base/i18n.h"
+#include "base/url.h"
 #include "ui/application.h"
 #include "ui/color_provider.h"
 #include "ui/progress_bar.h"
@@ -31,6 +32,8 @@
 #include "ui/window_tab_bar.h"
 
 #include <algorithm>
+#include <cerrno>
+#include <unistd.h>
 #include <cmath>
 #include <functional>
 
@@ -516,11 +519,31 @@ private:
     FolderWindow* m_window;
 };
 
+std::string administratorRoot()
+{
+    return "/run/user/" + std::to_string(::getuid()) + "/bayu-admin";
+}
+
+bool isAdministratorPath(const std::string& path)
+{
+    const std::string root = administratorRoot();
+    return path == root || path.starts_with(root + "/");
+}
+
+std::string administratorPath(const std::string& path)
+{
+    return isAdministratorPath(path) ? path : administratorRoot() + (path == "/" ? std::string() : path);
+}
+
 FolderWindow::FolderWindow(FileManagerHost* host, const FolderPage::Start& start, ui::SizeF size)
     : m_host(host)
     , m_window(std::make_unique<ui::Window>())
 {
-    m_window->setTitle(tr("Files"));
+    m_administrator = [&start] {
+        const auto file = base::url::toLocalFile(start.url);
+        return file && isAdministratorPath(*file);
+    }();
+    m_window->setTitle(title());
     m_window->setMinimumSize({kMinimumWidth, 500});
     if (size.width > 0 && size.height > 0) {
         m_window->resize(size);
@@ -533,7 +556,7 @@ FolderWindow::FolderWindow(FileManagerHost* host, const FolderPage::Start& start
     m_root = root.get();
     m_window->setContentView(std::move(root));
     m_sidebar = m_root->sidebar;
-    m_sidebar->setTitle(tr("Files"));
+    m_sidebar->setTitle(title());
     m_pathBar = m_root->row->pathBar;
     m_tabBar = m_root->tabBar;
     m_back = m_root->row->back;
@@ -571,6 +594,12 @@ FolderWindow::FolderWindow(FileManagerHost* host, const FolderPage::Start& start
     };
 
     m_sidebar->onClicked = [this](const std::string& path) {
+        // A folder only root may open, such as Android's: as an administrator.
+        if (!m_administrator && path.starts_with("/") && ::access(path.c_str(), R_OK | X_OK) != 0
+            && errno == EACCES) {
+            m_host->openAsAdministrator(path);
+            return;
+        }
         if (FolderPage* page = currentPage())
             page->openUrl(path);
     };
@@ -626,10 +655,16 @@ FolderPage* FolderWindow::currentPage() const
 
 // Every tab keeps its folder, history, view, selection, scroll position and
 // search, and an open rename or path editor its text.
+std::string FolderWindow::title() const
+{
+    // A window that works as root says so.
+    return m_administrator ? tr("Files (Administrator)") : tr("Files");
+}
+
 void FolderWindow::retranslate()
 {
-    m_window->setTitle(tr("Files"));
-    m_sidebar->setTitle(tr("Files"));
+    m_window->setTitle(title());
+    m_sidebar->setTitle(title());
     m_sidebar->retranslate();
     m_pathBar->retranslate();
     m_root->scopeBar->retranslate();
@@ -1007,6 +1042,14 @@ void FolderWindow::showOptionsMenu()
     if (!trash)
         sortItem(tr("Type"), Preferences::Type);
     sortItem(tr("Size"), Preferences::Size);
+    if (!trash && !m_administrator) {
+        if (const auto file = base::url::toLocalFile(page->currentUrl())) {
+            m_menu->addSeparator();
+            const size_t administrator = m_menu->addItem(tr("Open as Administrator"),
+                                                         [this, path = *file] { m_host->openAsAdministrator(path); });
+            m_menu->setItemGlyph(administrator, "lock");
+        }
+    }
 
     m_options->setChecked(true);
     m_menu->onClosed = [this] { m_options->setChecked(false); };

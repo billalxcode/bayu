@@ -29,6 +29,7 @@ pkg_check_modules(LibUdev REQUIRED IMPORTED_TARGET libudev)
 add_library(mountd-core STATIC
     mountd/fusemount.cpp
     mountd/keyring.cpp
+    mountd/localbackend.cpp
     mountd/mountservice.cpp
     mountd/mtpbackend.cpp
     mountd/mtpmonitor.cpp
@@ -49,6 +50,13 @@ target_link_libraries(mountd-core PUBLIC
 
 add_executable(bayu-mountd mountd/main.cpp)
 target_link_libraries(bayu-mountd PRIVATE mountd-core)
+
+# bayu-admin-mount: the file system as root, for the user who asked through
+# polkit, so the file manager can open folders as an administrator.
+add_executable(bayu-admin-mount mountd/adminmain.cpp)
+target_link_libraries(bayu-admin-mount PRIVATE mountd-core)
+install(TARGETS bayu-admin-mount RUNTIME DESTINATION ${CMAKE_INSTALL_LIBEXECDIR})
+install(FILES data/org.bayu.filemanager.admin.policy DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/actions)
 
 configure_file(mountd/org.bayu.Mounts1.service.in org.bayu.Mounts1.service @ONLY)
 

@@ -11,6 +11,7 @@
 #include <memory>
 #include <mutex>
 #include <thread>
+#include <sys/types.h>
 
 struct fuse;
 
@@ -22,6 +23,10 @@ public:
     FuseMount(std::unique_ptr<Backend> backend, const std::string &mountPoint, const std::string &source,
               std::function<void(FuseMount *)> finished);
     ~FuseMount();
+
+    // Extra mount options, such as allow_other, and the one user, other than
+    // root, whose calls are served; every user's by default.
+    void setAccess(std::string options, uid_t user);
 
     // Mounts and starts serving; false with message when the kernel mount fails.
     bool start(std::string *message);
@@ -47,10 +52,17 @@ public:
         return m_lock;
     }
 
+    bool allows(uid_t user) const
+    {
+        return m_user == uid_t(-1) || user == 0 || user == m_user;
+    }
+
 private:
     std::unique_ptr<Backend> m_backend;
     std::string m_mountPoint;
     std::string m_source;
+    std::string m_options;
+    uid_t m_user = uid_t(-1);
     struct fuse *m_fuse = nullptr;
     std::thread m_thread;
     std::mutex m_lock;
