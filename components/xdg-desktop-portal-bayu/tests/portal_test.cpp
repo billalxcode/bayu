@@ -937,6 +937,23 @@ TEST_F(ScreenCastTest, SelectSourcesValidation)
     EXPECT_EQ(result(select("ok", {}, &other)).first, 2u);
 }
 
+// The prompt reads the lists as aa{sv}, through the same type (issue #93).
+TEST(ScreenCastPromptTest, ListsGoAsDictionaries)
+{
+    const std::vector<VariantMap> monitors {{{"name", Variant(std::string("Virtual-1"))},
+                                             {"width", Variant(int32_t(1280))}}};
+    const std::vector<VariantMap> windows {{{"identifier", Variant(std::string("w1"))}}};
+    const VariantMap options = screenCastPromptOptions(1 | 2, monitors, windows);
+    for (const char *key : {"monitors", "windows"}) {
+        const Variant &list = options.at(key);
+        EXPECT_EQ(list.signature(), "aa{sv}") << key;
+        EXPECT_EQ(list.value<std::vector<VariantMap>>().size(), 1u) << key;
+    }
+    EXPECT_EQ(options.at("monitors").value<std::vector<VariantMap>>().front().at("name").value<std::string>(),
+              "Virtual-1");
+    EXPECT_FALSE(screenCastPromptOptions(1, monitors, windows).contains("windows"));
+}
+
 TEST_F(ScreenCastTest, StartWithoutCompositorFailsCleanly)
 {
     create("start");
