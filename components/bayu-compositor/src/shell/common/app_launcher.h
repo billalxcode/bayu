@@ -51,6 +51,13 @@ public:
     // `environment` holds `NAME=value` entries set over the compositor's.
     static bool startDetached(const std::string &program, const std::vector<std::string> &arguments = {},
                               const std::vector<std::string> &environment = {});
+    // A token from the compositor that lets the next window an application
+    // maps take the focus; empty without the activation protocol.
+    static std::string activationToken();
+    static void setActivationTokenSource(std::function<std::string()> source);
+    // Opens a link or a file with xdg-open, the application it opens in coming
+    // to the front with a token (issue #94).
+    static bool openUrl(const std::string &url);
 
 private:
     base::dbus::Proxy m_runtime;

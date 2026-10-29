@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bayu-core\n"
 "Report-Msgid-Bugs-To: https://github.com/bayuos\n"
-"POT-Creation-Date: 2026-10-20 09:33+0800\n"
+"POT-Creation-Date: 2026-10-29 01:07+0000\n"
 "PO-Revision-Date: 2026-10-25 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -162,6 +162,10 @@ msgstr "Среда выполнения приложений"
 #: bayu-services/locale/language.cpp
 msgid "Some applications may need to be restarted for the change to take effect."
 msgstr "Некоторым приложениям может потребоваться перезапуск, чтобы изменение вступило в силу."
+
+#: bayu-services/permissions/permissionprompt.cpp
+msgid "Share your screen?"
+msgstr "Поделиться экраном?"
 
 #: bayu-services/permissions/permissionprompt.cpp
 #, python-brace-format

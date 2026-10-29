@@ -370,8 +370,8 @@ private:
                                 auto* issues = extra->addChild<ActionButton>(tr("Report a problem"),
                                                                              ActionButton::Kind::Link);
                                 issues->setTrailingGlyph("external-link");
-                                issues->onClicked = [] {
-                                    run("xdg-open", {"https://github.com/igos-nusantara/bayu/issues"});
+                                issues->onClicked = [issues] {
+                                    bayu::ui::openUrl(issues->window(), "https://github.com/igos-nusantara/bayu/issues");
                                 };
                             }});
 

@@ -536,4 +536,9 @@ private:
     int m_nextShortcutId = 1;
 };
 
+// Opens a link or a file with xdg-open, with an activation token from
+// `window` (none for null), so that the application it opens in, a browser
+// already running, comes to the front (issue #94).
+void openUrl(Window* window, const std::string& url);
+
 } // namespace bayu::ui

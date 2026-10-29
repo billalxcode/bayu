@@ -5,11 +5,20 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <vector>
 
 class PipeWireCore;
 class ScreenCastSession;
 class StartRequest;
 class WaylandCapture;
+
+// The screen-recording prompt's options: the source types, and the monitors
+// and windows to choose from as aa{sv}, which bayu-services reads them as. They
+// went as av, which it took for no list, and the prompt had nothing to offer
+// (issue #93).
+bayu::base::dbus::VariantMap screenCastPromptOptions(uint32_t types,
+                                                     const std::vector<bayu::base::dbus::VariantMap> &monitors,
+                                                     const std::vector<bayu::base::dbus::VariantMap> &windows);
 
 class ScreenCastPortal
 {

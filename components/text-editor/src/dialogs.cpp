@@ -740,7 +740,7 @@ protected:
     void pointerRelease(const PointerEvent &event) override
     {
         if (m_link->geometry().contains(event.position))
-            bayu::base::Process::startDetached("xdg-open", {projectLink}, {});
+            bayu::ui::openUrl(window(), projectLink);
     }
 
 private:

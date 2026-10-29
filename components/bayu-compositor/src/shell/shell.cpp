@@ -86,6 +86,7 @@ private:
 Shell::Shell(const ShellEnvironment &environment)
     : m_environment(environment)
 {
+    ApplicationLauncher::setActivationTokenSource(environment.createActivationToken);
     // Before any window: it sets the toolkit up on the main loop.
     ui::Application &application = toolkit::application();
     // The compositor's toolkit has no session bus of its own: the shell's

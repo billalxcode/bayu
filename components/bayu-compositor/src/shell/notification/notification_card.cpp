@@ -8,7 +8,7 @@
 #include <cmath>
 #include <cstdlib>
 
-#include "base/process.h"
+#include "shell/common/app_launcher.h"
 #include "shell/notification/notification_controls.h"
 #include "shell/notification/notification_motion.h"
 #include "ui/icon.h"
@@ -532,7 +532,7 @@ void NotificationCard::pointerRelease(const ui::PointerEvent &event)
         const ui::RectF body = m_body->geometry();
         const std::string link = m_body->linkAt({event.position.x - body.x, event.position.y - body.y});
         if (!link.empty()) {
-            base::Process::startDetached("xdg-open", {link});
+            ApplicationLauncher::openUrl(link);
             return;
         }
     }

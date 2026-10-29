@@ -312,6 +312,9 @@ public:
 
     std::string title() const override
     {
+        // A host application has no app id, so no name to show.
+        if (m_application.name.empty())
+            return tr("Share your screen?");
         return format(tr("Share your screen with “{name}”"), {{"name", m_application.name}});
     }
 

@@ -472,7 +472,7 @@ private:
             m_header->setMaximizeVisible(false);
             m_linkLabel->setSpans({{kLink, 0, ColorId::Highlight, false, true, kLink}});
             m_link->setCursorShape(CursorShape::Pointer);
-            m_link->onClicked = [] { base::Process::startDetached("xdg-open", {kLink}, {}); };
+            m_link->onClicked = [this] { ui::openUrl(window(), kLink); };
         }
 
         double heightForWidth(double) const override

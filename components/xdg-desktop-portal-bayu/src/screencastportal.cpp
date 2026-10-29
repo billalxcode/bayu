@@ -46,6 +46,17 @@ static Variant restoreData(const std::vector<std::string> &monitors)
     return Variant(RestoreData{"Bayu", 1, Variant(VariantMap{{"monitors", Variant(monitors)}})});
 }
 
+VariantMap screenCastPromptOptions(uint32_t types, const std::vector<VariantMap> &monitors,
+                                   const std::vector<VariantMap> &windows)
+{
+    VariantMap options{{"types", Variant(types)}};
+    if (types & sourceMonitor)
+        options["monitors"] = base::dbus::Type<std::vector<VariantMap>>::toVariant(monitors);
+    if (types & sourceWindow)
+        options["windows"] = base::dbus::Type<std::vector<VariantMap>>::toVariant(windows);
+    return options;
+}
+
 static int framerateFor(const CaptureOutput &output)
 {
     return output.refreshMilliHz > 0 ? int(std::ceil(output.refreshMilliHz / 1000.0)) : 60;
@@ -189,29 +200,25 @@ public:
             startStreams(targets, session->persistMode);
             return;
         }
-        std::vector<Variant> windows;
+        std::vector<VariantMap> windows;
         if (session->types & sourceWindow) {
             for (const auto &toplevel : wayland->toplevels()) {
-                windows.push_back(Variant(VariantMap{{"identifier", Variant(toplevel.identifier)},
-                                                     {"title", Variant(toplevel.title)},
-                                                     {"app_id", Variant(toplevel.appId)}}));
+                windows.push_back(VariantMap{{"identifier", Variant(toplevel.identifier)},
+                                             {"title", Variant(toplevel.title)},
+                                             {"app_id", Variant(toplevel.appId)}});
             }
         }
-        std::vector<Variant> monitors;
+        std::vector<VariantMap> monitors;
         for (const auto &output : outputs) {
-            monitors.push_back(Variant(VariantMap{{"name", Variant(output.name)},
-                                                  {"description", Variant(output.description)},
-                                                  {"x", Variant(int32_t(output.logicalPosition.x()))},
-                                                  {"y", Variant(int32_t(output.logicalPosition.y()))},
-                                                  {"width", Variant(int32_t(output.logicalSize.width()))},
-                                                  {"height", Variant(int32_t(output.logicalSize.height()))}}));
+            monitors.push_back(VariantMap{{"name", Variant(output.name)},
+                                          {"description", Variant(output.description)},
+                                          {"x", Variant(int32_t(output.logicalPosition.x()))},
+                                          {"y", Variant(int32_t(output.logicalPosition.y()))},
+                                          {"width", Variant(int32_t(output.logicalSize.width()))},
+                                          {"height", Variant(int32_t(output.logicalSize.height()))}});
         }
         base::dbus::Message prompt = permissionsCall(bus, "Prompt");
-        VariantMap options{{"types", Variant(session->types)}};
-        if (session->types & sourceMonitor)
-            options["monitors"] = base::dbus::Type<std::vector<Variant>>::toVariant(monitors);
-        if (session->types & sourceWindow)
-            options["windows"] = base::dbus::Type<std::vector<Variant>>::toVariant(windows);
+        const VariantMap options = screenCastPromptOptions(session->types, monitors, windows);
         prompt.append(path, std::string("screen-recording"), session->appId, parentWindow, options);
         // The user answers in their own time.
         prompting = true;

@@ -19,6 +19,7 @@
 #include "include/core/SkSurface.h"
 
 #include "base/event_loop.h"
+#include "base/process.h"
 #include "ui/application.h"
 #include "ui/drag.h"
 #include "ui/embedded_platform_window.h"
@@ -1694,6 +1695,22 @@ void Window::interruptFrameClients(int interruption)
         if (std::find(m_frameClients.begin(), m_frameClients.end(), client) != m_frameClients.end())
             client->interrupt(FrameClient::Interruption(interruption));
     }
+}
+
+void openUrl(Window* window, const std::string& url)
+{
+    if (url.empty())
+        return;
+    const auto open = [url](const std::string& token) {
+        std::vector<std::string> environment;
+        if (!token.empty())
+            environment.push_back("XDG_ACTIVATION_TOKEN=" + token);
+        base::Process::startDetached("xdg-open", {url}, {}, environment);
+    };
+    if (window)
+        window->requestActivationToken(open);
+    else
+        open({});
 }
 
 } // namespace bayu::ui

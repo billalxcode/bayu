@@ -870,7 +870,7 @@ void TerminalWindow::openLink(const std::string& url)
 {
     const std::string lower = strings::toAsciiLower(url);
     if (lower.starts_with("http:") || lower.starts_with("https:") || lower.starts_with("mailto:")) {
-        ProcessHelper::openUrl(url);
+        ProcessHelper::openUrl(m_window.get(), url);
         return;
     }
 
@@ -883,7 +883,7 @@ void TerminalWindow::showLinkConfirm()
     if (!m_linkConfirm) {
         m_linkConfirm = std::make_unique<ConfirmDialog>(m_window.get(), tr("Open this link?"));
         m_linkConfirm->setConfirmText(tr("Open"));
-        m_linkConfirm->onAccepted = [this] { ProcessHelper::openUrl(m_pendingLink); };
+        m_linkConfirm->onAccepted = [this] { ProcessHelper::openUrl(m_window.get(), m_pendingLink); };
     }
     const std::u16string utf16 = strings::utf8ToUtf16(m_pendingLink);
     m_linkConfirm->setText(utf16.size() > 300 ? strings::utf16ToUtf8(utf16.substr(0, 299)) + "\xe2\x80\xa6"

@@ -12,6 +12,7 @@
 #include "base/paths.h"
 #include "base/process.h"
 #include "base/url.h"
+#include "shell/common/app_launcher.h"
 
 using bayu::i18n::tr;
 
@@ -196,13 +197,13 @@ void CaptureNotifier::actionInvoked(uint32_t id, const std::string &action)
                     [path, finished](const dbus::Reply &reply) {
                         // Without a running file manager to ask, open the folder instead.
                         if (reply.isError())
-                            base::Process::startDetached("xdg-open", {folderOf(path)});
+                            ApplicationLauncher::openUrl(folderOf(path));
                         finished();
                     },
                     std::vector<std::string> {base::url::fromLocalFile(path)}, std::string());
         });
     } else if (action == "default") {
-        base::Process::startDetached("xdg-open", {path});
+        ApplicationLauncher::openUrl(path);
     }
 }
 

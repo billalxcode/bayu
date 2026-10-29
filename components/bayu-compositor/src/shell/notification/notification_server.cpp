@@ -10,6 +10,7 @@
 #include "base/logging.h"
 #include "base/strings.h"
 #include "base/url.h"
+#include "shell/common/app_launcher.h"
 #include "shell/common/file_thread.h"
 #include "shell/common/task_manager.h"
 #include "shell/notification/notification_settings.h"
@@ -128,6 +129,9 @@ bool NotificationServer::registerService()
             [] { return std::tuple<std::string, std::string, std::string, std::string>("Bayu", "BayuOS", "1.0", "1.2"); },
             dbus::ArgumentNames{{}, {"name", "vendor", "version", "spec_version"}});
     object->addSignal("ActionInvoked", "us");
+    // Spec 1.2: the token the application raises its window with, just before
+    // the action (issue #94).
+    object->addSignal("ActivationToken", "us");
     object->addSignal("NotificationClosed", "uu");
     if (!object->publish()) {
         CF_WARNING(cfNotifications) << "Cannot export" << kPath;
@@ -402,8 +406,11 @@ void NotificationServer::closeFromBus(dbus::MethodCall &call)
 
 void NotificationServer::invokeAction(uint32_t id, const std::string &actionKey)
 {
-    if (m_object)
-        m_object->emitSignal("ActionInvoked", id, actionKey);
+    if (!m_object)
+        return;
+    if (const std::string token = ApplicationLauncher::activationToken(); !token.empty())
+        m_object->emitSignal("ActivationToken", id, token);
+    m_object->emitSignal("ActionInvoked", id, actionKey);
 }
 
 void NotificationServer::closeNotification(uint32_t id, CloseReason reason)
