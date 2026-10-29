@@ -91,13 +91,16 @@ private:
     bool m_enabled = true;
     bool m_disableWithMouse = false;
     bool m_disableWhileTyping = true;
-    bool m_tapToClick = false;
-    bool m_tapDragging = false;
+    // Tapping clicks, a two-finger tap is a right click, and the bottom-right
+    // corner of a clickpad clicks right, as on other systems: users of
+    // laptops such as the Asus X441B found neither working (issue #97).
+    bool m_tapToClick = true;
+    bool m_tapDragging = true;
     bool m_naturalScroll = true;
     double m_pointerAcceleration = 0;
     double m_scrollSpeed = kDefaultScrollSpeed;
     bool m_secondaryClickConfigurable = false;
-    bool m_twoFingerSecondaryClick = true;
+    bool m_twoFingerSecondaryClick = false;
     std::unique_ptr<DBusExport> m_object;
 };
 
