@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Dokumentasi & Cara Build
+    url: https://github.com/igos-nusantara/bayu/blob/main/README.md
+    about: Baca README, syarat Podman, cara build RPM/ISO, dan profil igos/almalinux sebelum melapor.
+  - name: Diskusi / Tanya Jawab
+    url: https://github.com/igos-nusantara/bayu/discussions
+    about: Untuk pertanyaan umum, diskusi desain, atau permintaan bantuan yang bukan bug/fitur.

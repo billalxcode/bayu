@@ -1,0 +1,120 @@
+name: Laporan Bug
+description: Laporkan masalah atau kerusakan pada desktop, aplikasi, installer, ISO, atau driver.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Terima kasih sudah melapor. Isi form ini selengkap mungkin agar mudah direproduksi.
+        Untuk pertanyaan umum, gunakan Discussions.
+
+  - type: textarea
+    id: deskripsi
+    attributes:
+      label: Deskripsi bug
+      description: Penjelasan singkat dan jelas tentang masalahnya.
+      placeholder: "Contoh: Panel bawah tidak muncul setelah login kedua..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: komponen
+    attributes:
+      label: Komponen terkait
+      description: Pilih area yang paling sesuai.
+      multiple: true
+      options:
+        - compositor / shell (dock, panel, launcher, lock)
+        - bayu-core / sesi
+        - bayu-dm (login)
+        - filemanager
+        - settings
+        - terminal
+        - text-editor / video-player / calendar / system-monitor
+        - nabau (installer)
+        - bayu-store / welcome / lapis (Android)
+        - qt-plugins / gtk-theme / icons / wallpapers
+        - kernel / driver (Wi-Fi, Broadcom wl, USB, printer)
+        - builder / ISO / image / packaging RPM
+        - lain-lain
+    validations:
+      required: true
+
+  - type: dropdown
+    id: profil
+    attributes:
+      label: Profil / Sistem
+      description: Di sistem mana bug terjadi?
+      options:
+        - igos (IGOS Nusantara 26)
+        - almalinux (AlmaLinux 10)
+        - build lokal dari source (build.sh)
+        - lain-lain / tidak yakin
+    validations:
+      required: true
+
+  - type: input
+    id: versi
+    attributes:
+      label: Versi / Komit
+      description: Tag rilis (mis. v0.2.0), tanggal ISO nightly, atau hash komit git + output out/repo jika build sendiri.
+      placeholder: v0.2.0 / ign26-bayu-harian-2026-10-28 / fe84bff9
+    validations:
+      required: true
+
+  - type: textarea
+    id: langkah
+    attributes:
+      label: Langkah reproduksi
+      description: Langkah berurutan agar kami bisa mengulang bug.
+      placeholder: |
+        1. Boot live ISO...
+        2. Buka Settings > ...
+        3. Klik ...
+        4. Lihat error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: harapan
+    attributes:
+      label: Hasil yang diharapkan vs aktual
+      description: Apa yang seharusnya terjadi dan apa yang terjadi.
+      placeholder: |
+        Harapan: ...
+        Aktual: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Perangkat keras (jika relevan)
+      description: Untuk bug Wi-Fi, printer, grafis, sentuh. Lampirkan keluaran lsusb / lspci / model laptop jika ada.
+      placeholder: "Contoh: MacBook Pro 2015, BCM43602, lsusb: ... / Printer USB: ..."
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Log / keluaran terminal
+      description: Tempel log relevan (journalctl, ~/.cache, /var/log/anaconda, output terminal). Bungkus dengan blok kode.
+      placeholder: |
+        ```text
+        tempel log di sini
+        ```
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: cek
+    attributes:
+      label: Pemeriksaan awal
+      options:
+        - label: Saya sudah mencari issue lain dengan masalah serupa.
+        - label: Saya bisa melampirkan screenshot/rekaman jika diminta.
+        - label: Saya bersedia menguji perbaikan (mis. via `packaging/serve-repo.sh` + `dnf upgrade`).
