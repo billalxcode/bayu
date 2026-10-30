@@ -1,0 +1,76 @@
+name: Permintaan Fitur
+description: Usulkan fitur baru, perbaikan perilaku, atau dukungan perangkat.
+title: "[Fitur]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Terima kasih atas usulannya. Jelaskan kebutuhan, bukan hanya solusi, agar mudah didiskusikan.
+
+  - type: textarea
+    id: masalah
+    attributes:
+      label: Masalah / kebutuhan
+      description: "Masalah apa yang ingin diselesaikan? Contoh: Saya kesulitan ... karena ..."
+      placeholder: "Contoh: Saya sering berganti layout Dock/Panel tapi harus buka Settings..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: usulan
+    attributes:
+      label: Usulan solusi
+      description: Gambaran fitur yang diinginkan, termasuk perilaku UI jika ada.
+      placeholder: "Contoh: Tambahkan pintasan / tombol cepat di Control Center untuk ganti layout..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatif
+    attributes:
+      label: Alternatif yang dipertimbangkan
+      description: Solusi lain yang sudah dicoba atau dipertimbangkan.
+      placeholder: "Contoh: Edit config manual, pakai aplikasi pihak ketiga..."
+    validations:
+      required: false
+
+  - type: dropdown
+    id: komponen
+    attributes:
+      label: Komponen terkait
+      multiple: true
+      options:
+        - compositor / shell (dock, panel, launcher, lock)
+        - bayu-core / sesi
+        - bayu-dm (login)
+        - filemanager
+        - settings
+        - terminal
+        - text-editor / video-player / calendar / system-monitor
+        - nabau (installer)
+        - bayu-store / welcome / lapis (Android)
+        - qt-plugins / gtk-theme / icons / wallpapers
+        - kernel / driver (Wi-Fi, Broadcom wl, USB, printer)
+        - builder / ISO / image / packaging RPM
+        - dokumentasi
+        - lain-lain
+    validations:
+      required: true
+
+  - type: textarea
+    id: tambahan
+    attributes:
+      label: Konteks tambahan
+      description: Mockup, referensi (lihat docs/design/bayu-shell-panel/), contoh di desktop lain, atau tautan issue terkait (mis. #58).
+      render: markdown
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: cek
+    attributes:
+      label: Pemeriksaan awal
+      options:
+        - label: Saya sudah mencari issue/diskusi serupa.
+        - label: Usulan ini sesuai dengan lingkup Bayu (Wayland DE di IGOS Nusantara 26 / AlmaLinux 10).
