@@ -61,6 +61,15 @@ and ISOs needs `sudo` for loop devices; running them needs KVM.
 
 ## Building
 
+`make` runs every build step below; [docs/building.md](docs/building.md)
+describes the targets, their outputs and variables, and how releases are made.
+
+```shell
+make all                                  # every package, then the live ISO
+make rpm iso                              # after a desktop change
+make iso-vm                               # boot the ISO
+```
+
 ### Packages
 
 ```shell

@@ -37,3 +37,6 @@ CONFIG_CARL9170_LEDS=y
 CONFIG_CARL9170_WPC=y
 # CONFIG_CARL9170_HWRNG is not set
 CONFIG_ATH10K_USB=m
+# The keyboard and touchpad of the MacBooks and MacBook Pros of 2015-2017,
+# on SPI (issue #104): AlmaLinux leaves applespi out.
+CONFIG_KEYBOARD_APPLESPI=m
