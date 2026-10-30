@@ -47,6 +47,12 @@ podman run --rm --network host -v "$KERNEL_DIR":/kernel:ro,Z -v "$WL_DIR":/wl:ro
   [ $missing = 0 ] || fail "wireless drivers missing"
   echo "ok: $(grep -cv "^#" /work/wireless-modules.txt) wireless drivers"
 
+  # MacBook Pro 2016-2017 (issue #104): applespi, and the CS8409 with the Apple code.
+  modinfo -k "$kver" -F filename applespi >/dev/null 2>&1 || fail "applespi missing"
+  cs8409=$(modinfo -k "$kver" -F filename snd-hda-codec-cs8409 2>/dev/null) || fail "snd-hda-codec-cs8409 missing"
+  xzcat -f "$cs8409" | grep -aq "NOT FOUND trying APPLE" || fail "snd-hda-codec-cs8409 without the MacBook Pro code"
+  echo "ok: MacBook Pro keyboard, touchpad and sound"
+
   dnf -y -q install kmodtool akmods elfutils-libelf-devel >/tmp/dnf.log 2>&1 || { tail /tmp/dnf.log; fail "akmods"; }
   rpm -i --nodeps /wl/akmod-wl-*.rpm
   srpm=$(ls /usr/src/akmods/wl-kmod-*.src.rpm | head -1)
