@@ -26,7 +26,8 @@ if ! compgen -G "$CACHE/usb_modeswitch-data-*.rpm" >/dev/null; then
       rpmbuild --rebuild "$srpm" --define "_topdir /tmp/top" --define "dist .el10.bayu" --define "debug_package %{nil}"
     done
     cp /tmp/top/RPMS/*/*.rpm /work/'
-  cp "$work"/*.x86_64.rpm "$work"/*.noarch.rpm "$CACHE/"
+  # Binary RPMs (arch-specific plus noarch data); never the .src.rpm.
+  find "$work" -maxdepth 1 -name '*.rpm' ! -name '*.src.rpm' -exec cp -t "$CACHE/" {} +
 fi
 cp "$CACHE"/*.rpm "$ROOT/out/repo/"
 podman run --rm -v "$ROOT/out/repo":/repo:Z bayu-builder createrepo_c -q --update /repo

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Builds a bootable disk image (qcow2, BIOS/GPT) of a profile in
-# builder/profiles/: PROFILE=igos (default) or PROFILE=almalinux.
+# Builds a bootable disk image (qcow2, BIOS/GPT on x86_64, UEFI/GPT on aarch64)
+# of a profile in builder/profiles/: PROFILE=igos (default) or PROFILE=almalinux.
 # Output: out/<IMAGE_NAME>.qcow2. See lib.sh for CONFIG and REPOS.
 set -Eeuo pipefail
 source "$(dirname "$0")/lib.sh"
@@ -8,32 +8,55 @@ source "$(dirname "$0")/lib.sh"
 
 # --- inside the container ---------------------------------------------------
 source /profile.conf
-dnf -y -q install qemu-img gdisk xfsprogs util-linux >/dev/null
+NATIVE_ARCH=${ARCH:-$(uname -m)}
+dnf -y -q install qemu-img gdisk xfsprogs util-linux dosfstools >/dev/null
 
 RAW=/out/$IMAGE_NAME.raw
 MNT=/mnt/image
 cleanup() {
   release_root "$MNT"
   # The image is only consistent once its filesystem is cleanly unmounted.
+  if mountpoint -q "$MNT/boot/efi"; then umount "$MNT/boot/efi" || return 1; fi
   if mountpoint -q "$MNT"; then umount "$MNT" || return 1; fi
   if [[ -n ${LOOP:-} ]]; then losetup -d "$LOOP" || true; LOOP=; fi
 }
 trap cleanup EXIT
 
 rm -f "$RAW" && truncate -s "$IMAGE_SIZE" "$RAW"
-sgdisk -o -n 1:0:+1M -t 1:EF02 -c 1:bios -n 2:0:0 -t 2:8300 -c 2:root "$RAW"
-LOOP=$(losetup -P --find --show "$RAW")
-for _ in 1 2 3 4 5; do [[ -b ${LOOP}p2 ]] && break; sleep 1; done
-# Inside a container udev may not create the partition nodes.
-[[ -b ${LOOP}p2 ]] || mknod "${LOOP}p2" b "$(cat /sys/block/${LOOP#/dev/}/${LOOP#/dev/}p2/dev | tr : ' ')"
-mkfs.xfs -q -L root "${LOOP}p2"
-UUID=$(blkid -s UUID -o value "${LOOP}p2")
-mkdir -p "$MNT" && mount "${LOOP}p2" "$MNT"
+mkpart() {
+  for _ in 1 2 3 4 5; do [[ -b ${LOOP}p2 ]] && break; sleep 1; done
+  # Inside a container udev may not create the partition nodes.
+  for n in 1 2; do
+    [[ -b ${LOOP}p$n ]] || mknod "${LOOP}p$n" b "$(cat /sys/block/${LOOP#/dev/}/${LOOP#/dev/}p$n/dev | tr : ' ')"
+  done
+}
+if [[ $NATIVE_ARCH == aarch64 || $NATIVE_ARCH == arm64 ]]; then
+  # UEFI only: no BIOS boot partition, an ESP instead of MBR gap embedding.
+  sgdisk -o -n 1:0:+512M -t 1:EF00 -c 1:efi -n 2:0:0 -t 2:8300 -c 2:root "$RAW"
+  LOOP=$(losetup -P --find --show "$RAW")
+  mkpart
+  mkfs.vfat -F 32 -n EFI "${LOOP}p1"
+  mkfs.xfs -q -L root "${LOOP}p2"
+  UUID=$(blkid -s UUID -o value "${LOOP}p2")
+  ESP_UUID=$(blkid -s UUID -o value "${LOOP}p1")
+  mkdir -p "$MNT" && mount "${LOOP}p2" "$MNT"
+  mkdir -p "$MNT/boot/efi" && mount "${LOOP}p1" "$MNT/boot/efi"
+else
+  sgdisk -o -n 1:0:+1M -t 1:EF02 -c 1:bios -n 2:0:0 -t 2:8300 -c 2:root "$RAW"
+  LOOP=$(losetup -P --find --show "$RAW")
+  mkpart
+  mkfs.xfs -q -L root "${LOOP}p2"
+  UUID=$(blkid -s UUID -o value "${LOOP}p2")
+  mkdir -p "$MNT" && mount "${LOOP}p2" "$MNT"
+fi
 
 # psi=1: Android's lmkd (lapis) needs /proc/pressure, which EL kernels keep off.
 CMDLINE="root=UUID=$UUID ro console=tty0 console=ttyS0,115200 psi=1"
 mkdir -p "$MNT/etc/kernel" && echo "$CMDLINE" > "$MNT/etc/kernel/cmdline"
 echo "UUID=$UUID / xfs defaults 0 0" > "$MNT/etc/fstab"
+if [[ $NATIVE_ARCH == aarch64 || $NATIVE_ARCH == arm64 ]]; then
+  echo "UUID=$ESP_UUID /boot/efi vfat umask=0077,shortname=winnt 0 2" >> "$MNT/etc/fstab"
+fi
 install_root "$MNT"
 configure_root "$MNT"
 touch "$MNT/.autorelabel"
@@ -52,7 +75,11 @@ GRUB_CMDLINE_LINUX="$CMDLINE"
 GRUB_ENABLE_BLSCFG=true
 EOF
 chr dracut --force --no-hostonly --regenerate-all
-chr grub2-install --target=i386-pc "$LOOP"
+if [[ $NATIVE_ARCH == aarch64 || $NATIVE_ARCH == arm64 ]]; then
+  chr grub2-install --target=arm64-efi --efi-directory=/boot/efi --bootloader-id=bayu --recheck --no-floppy
+else
+  chr grub2-install --target=i386-pc "$LOOP"
+fi
 chr grub2-mkconfig -o /boot/grub2/grub.cfg
 # A fresh image has one kernel (dnf picks the highest, Bayu's binder kernel when
 # bayu.repo carries it); make it the saved default, which GRUB_DEFAULT=saved reads.

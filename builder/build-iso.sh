@@ -10,8 +10,18 @@ source "$(dirname "$0")/lib.sh"
 
 # --- inside the container ---------------------------------------------------
 source /profile.conf
-dnf -y -q install grub2-tools grub2-tools-extra grub2-efi-x64-modules grub2-pc-modules \
-  xorriso mtools squashfs-tools isomd5sum >/dev/null
+NATIVE_ARCH=${ARCH:-$(uname -m)}
+case "$NATIVE_ARCH" in
+  aarch64|arm64)
+    GRUB_MODS="grub2-efi-aa64-modules"
+    ;;
+  *)
+    GRUB_MODS="grub2-efi-x64-modules grub2-pc-modules"
+    ;;
+esac
+# shellcheck disable=SC2086
+dnf -y -q install grub2-tools grub2-tools-extra $GRUB_MODS \
+  xorriso mtools squashfs-tools isomd5sum dosfstools >/dev/null
 
 WORK=/var/tmp/live
 ROOTFS=$WORK/rootfs

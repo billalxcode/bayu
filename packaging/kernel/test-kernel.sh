@@ -11,9 +11,13 @@
 #   test-kernel.sh KERNEL_RPMS_DIR WL_RPMS_DIR
 set -Eeuo pipefail
 ROOT=$(realpath "$(dirname "$0")/../..")
+ARCH=$(uname -m)
 KERNEL_DIR=$(realpath "$1")
-WL_DIR=$(realpath "$2")
+# WL_DIR is optional on aarch64 (no wl driver there): `make kernel-test` passes
+# the cache dir whether or not it holds RPMs. Missing dirs mean "no wl".
+if [[ -n "${2:-}" && -d "$2" ]]; then WL_DIR=$(realpath "$2"); else WL_DIR=""; fi
 work=$(mktemp -d) && trap 'rm -rf "$work"' EXIT
+if [[ -z "$WL_DIR" ]]; then WL_DIR="$work/wl-empty"; mkdir -p "$WL_DIR"; fi
 cp "$ROOT/packaging/kernel/wireless-modules.txt" "$work/"
 
 # 1-3, and the initramfs of 4, in the builder.
@@ -47,27 +51,34 @@ podman run --rm --network host -v "$KERNEL_DIR":/kernel:ro,Z -v "$WL_DIR":/wl:ro
   [ $missing = 0 ] || fail "wireless drivers missing"
   echo "ok: $(grep -cv "^#" /work/wireless-modules.txt) wireless drivers"
 
-  # MacBook Pro 2016-2017 (issue #104): applespi, and the CS8409 with the Apple code.
-  modinfo -k "$kver" -F filename applespi >/dev/null 2>&1 || fail "applespi missing"
-  cs8409=$(modinfo -k "$kver" -F filename snd-hda-codec-cs8409 2>/dev/null) || fail "snd-hda-codec-cs8409 missing"
-  xzcat -f "$cs8409" | grep -aq "NOT FOUND trying APPLE" || fail "snd-hda-codec-cs8409 without the MacBook Pro code"
-  echo "ok: MacBook Pro keyboard, touchpad and sound"
+  if [[ $ARCH == x86_64 ]]; then
+    # MacBook Pro 2016-2017 (issue #104): applespi, and the CS8409 with the Apple code.
+    modinfo -k "$kver" -F filename applespi >/dev/null 2>&1 || fail "applespi missing"
+    cs8409=$(modinfo -k "$kver" -F filename snd-hda-codec-cs8409 2>/dev/null) || fail "snd-hda-codec-cs8409 missing"
+    xzcat -f "$cs8409" | grep -aq "NOT FOUND trying APPLE" || fail "snd-hda-codec-cs8409 without the MacBook Pro code"
+    echo "ok: MacBook Pro keyboard, touchpad and sound"
+  fi
 
-  dnf -y -q install kmodtool akmods elfutils-libelf-devel >/tmp/dnf.log 2>&1 || { tail /tmp/dnf.log; fail "akmods"; }
-  rpm -i --nodeps /wl/akmod-wl-*.rpm
-  srpm=$(ls /usr/src/akmods/wl-kmod-*.src.rpm | head -1)
-  # As akmods builds it on a machine: akmodsbuild refuses root.
-  useradd -m builder
-  mkdir -p /tmp/wl && chown builder /tmp/wl
-  su builder -c "/usr/sbin/akmodsbuild --kernels $kver --outputdir /tmp/wl $srpm" >/tmp/wl.log 2>&1 ||
-    { tail -30 /tmp/wl.log; fail "wl does not build"; }
-  rpm2cpio /tmp/wl/kmod-wl-*.rpm | (cd / && cpio -idm --quiet)
-  wl=$(ls $mods/extra/wl/wl.ko* | head -1)
-  modinfo -F vermagic "$wl" | grep -q "^$kver " || fail "wl vermagic: $(modinfo -F vermagic "$wl")"
-  echo "ok: wl builds ($(basename "$wl"))"
-  depmod "$kver"
+  if ls /wl/akmod-wl-*.rpm >/dev/null 2>&1; then
+    dnf -y -q install kmodtool akmods elfutils-libelf-devel >/tmp/dnf.log 2>&1 || { tail /tmp/dnf.log; fail "akmods"; }
+    rpm -i --nodeps /wl/akmod-wl-*.rpm
+    srpm=$(ls /usr/src/akmods/wl-kmod-*.src.rpm | head -1)
+    # As akmods builds it on a machine: akmodsbuild refuses root.
+    useradd -m builder
+    mkdir -p /tmp/wl && chown builder /tmp/wl
+    su builder -c "/usr/sbin/akmodsbuild --kernels $kver --outputdir /tmp/wl $srpm" >/tmp/wl.log 2>&1 ||
+      { tail -30 /tmp/wl.log; fail "wl does not build"; }
+    rpm2cpio /tmp/wl/kmod-wl-*.rpm | (cd / && cpio -idm --quiet)
+    wl=$(ls $mods/extra/wl/wl.ko* | head -1)
+    modinfo -F vermagic "$wl" | grep -q "^$kver " || fail "wl vermagic: $(modinfo -F vermagic "$wl")"
+    echo "ok: wl builds ($(basename "$wl"))"
+    depmod "$kver"
+  else
+    echo "ok: wl skipped (no akmod-wl for $ARCH)"
+  fi
 
   # The boot check: run by dracut before udev, its verdict on the console.
+  # wl is x86_64 only; elsewhere it is skipped instead of failing the boot.
   cat > /tmp/bayu-check.sh <<"CHECK"
 #!/bin/sh
 result() { echo "BAYU-CHECK $*" > /dev/console; }
@@ -76,8 +87,10 @@ mkdir -p /dev/binderfs
 if mount -t binder binder /dev/binderfs && [ -e /dev/binderfs/binder-control ]; then result "ok binderfs"; else result "FAIL binderfs"; fi
 if [ -r /proc/pressure/memory ]; then result "ok psi"; else result "FAIL psi"; fi
 if modprobe mac80211_hwsim radios=2 && [ -e /sys/class/ieee80211/phy0 ]; then result "ok wifi-stack"; else result "FAIL wifi-stack"; fi
+case "$(uname -m)" in aarch64|arm64) SKIP_WL=1 ;; *) SKIP_WL="" ;; esac
 for module in wl rtw89_8852be rtw89_8852ae rtw88_8822ce rtw88_8821ce rtl8xxxu brcmfmac iwlwifi ath9k ath10k_pci ath11k_pci mt7921e \
     rtw88_8821cu rtw88_8822cu rtw88_8812au rtw89_8852bu mt7921u mt7925u rt2800usb ath9k_htc; do
+  if [ -n "$SKIP_WL" ] && [ "$module" = wl ]; then result "ok skip $module"; continue; fi
   if modprobe "$module" 2>/dev/null; then result "ok load $module"; else result "FAIL load $module"; fi
 done
 result "done"
@@ -105,7 +118,19 @@ CHECK
 kver=$(cat "$work/kver")
 accel=tcg
 [ -w /dev/kvm ] && accel=kvm
-timeout 300 qemu-system-x86_64 -machine q35,accel=$accel -cpu max -m 2G -smp 2 -nographic -no-reboot \
+case "$ARCH" in
+  aarch64|arm64)
+    QEMU=qemu-system-aarch64
+    MACHINE="virt,accel=$accel"
+    CPU="max"
+    ;;
+  *)
+    QEMU=qemu-system-x86_64
+    MACHINE="q35,accel=$accel"
+    CPU="max"
+    ;;
+esac
+timeout 300 $QEMU -machine "$MACHINE" -cpu $CPU -m 2G -smp 2 -nographic -no-reboot \
   -kernel "$work/vmlinuz" -initrd "$work/initramfs.img" \
   -append "console=ttyS0 panic=-1 sysrq_always_enabled=1 rd.shell=0 quiet" > "$work/serial.log" 2>&1 || true
 grep "BAYU-CHECK" "$work/serial.log" | sed 's/^.*BAYU-CHECK /boot: /'

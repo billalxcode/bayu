@@ -51,7 +51,7 @@ while; later builds reuse it.
 
 | Target | Runs | Does |
 |---|---|---|
-| `make iso` | `builder/build-iso.sh` | The live ISO of `PROFILE` (`igos` by default, or `almalinux`), from `out/repo` and the profile's repositories. It boots on BIOS and UEFI, from a DVD or a USB stick written with `dd`, and carries its own checksum for the installer's media check. |
+| `make iso` | `builder/build-iso.sh` | The live ISO of `PROFILE` (`igos` by default, or `almalinux`), from `out/repo` and the profile's repositories. On x86_64 it boots BIOS and UEFI, from a DVD or a USB stick written with `dd`; on aarch64 UEFI only. It carries its own checksum for the installer's media check. |
 | `make image` | `builder/build-image.sh` | A bootable disk image of `PROFILE`. |
 | `make all` | | `packages`, then `iso`. |
 
@@ -83,6 +83,7 @@ while; later builds reuse it.
 | `KERNEL`, `BUILD` | in `build-kernel.sh` | `kernel`: another AlmaLinux kernel, or Bayu's build number of it |
 | `ALMA_MIRROR`, `EPEL_MIRROR` | | `rpm`: mirrors for the build container |
 | `BAYU_REPO_GPG_KEY` | | `sign` |
+| `ARCH` | `uname -m` | bootloader/driver selection in `profile.conf` and the builder: native builds only (an aarch64 host builds the aarch64 ISO, an x86_64 host the x86_64 one) |
 
 Variables go on the command line (`make iso PROFILE=almalinux`) or in the
 environment; the scripts read the same names.
@@ -99,8 +100,11 @@ environment; the scripts read the same names.
 - Add a check for it to `packaging/kernel/test-kernel.sh`, then
   `make kernel kernel-test`.
 - `make kernel` writes the build's whole config to
-  `packaging/kernel/config-x86_64`; commit it with the change, so the
-  difference to the last kernel shows in the diff.
+  `packaging/kernel/config-$(uname -m)` (`config-x86_64` on Intel, `config-aarch64`
+  on ARM); commit it with the change, so the difference to the last kernel
+  shows in the diff. The `cs8409-macbookpro.patch` and the `wl` driver apply to
+  x86_64 only; on aarch64 `build-wl.sh` skips and `test-kernel.sh` skips the
+  MacBook and `wl` checks and boots with `qemu-system-aarch64 -machine virt`.
 
 A workflow opens a pull request when AlmaLinux publishes a newer kernel,
 after building and testing it.
