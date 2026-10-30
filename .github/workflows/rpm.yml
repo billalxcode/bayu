@@ -1,6 +1,7 @@
-# Builds bayu-desktop .rpm and .src.rpm on AlmaLinux 10 for every push and
-# pull request and uploads them as a workflow artifact. Releases come from
-# release.yml.
+# Builds bayu-desktop .rpm and .src.rpm on AlmaLinux 10 for every pull request
+# and uploads them as a workflow artifact. Not on a push to main: what is
+# merged was built in its pull request, and a vX.Y.Z tag builds and publishes
+# it with release.yml.
 #
 # Runs on the self-hosted runner on sj (label bayu-builder), in the
 # bayu-builder image that packaging/build-rpm.sh builds from
@@ -8,8 +9,6 @@
 name: RPM
 
 on:
-  push:
-    branches: [main]
   pull_request:
   workflow_dispatch:
 
